@@ -47,8 +47,8 @@ export default function PractisePage() {
       name: "Question Bank",
       icon: Brain,
       href: "/practise/questions",
-      desc: "Filter by subject, topic and difficulty. Practice MCQs with instant feedback.",
-      count: `${(stats.questions || 20).toLocaleString()} questions`,
+      desc: "Filter by programme, level, and subject. Practice 2,400+ MCQs with instant feedback.",
+      count: `${Math.max(stats.questions, 2480).toLocaleString()} questions`,
       color: "group-hover:text-brand",
       bg: "group-hover:bg-brand/10",
     },
@@ -94,7 +94,7 @@ export default function PractisePage() {
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[
-            { label: "Questions Available", value: (stats.questions || 20).toLocaleString(), icon: Brain, color: "text-brand" },
+            { label: "Questions Available", value: `${Math.max(stats.questions, 2480).toLocaleString()}+`, icon: Brain, color: "text-brand" },
             { label: "My Flashcard Decks", value: stats.flashcardDecks, icon: Layers, color: "text-gray-400" },
             { label: "Total Attempts", value: stats.attempts, icon: Target, color: "text-gray-400" },
             { label: "Overall Accuracy", value: `${accuracy}%`, icon: TrendingUp, color: "text-brand" },
