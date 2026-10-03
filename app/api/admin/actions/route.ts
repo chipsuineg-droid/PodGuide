@@ -155,15 +155,74 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ success: true, question: qData })
       }
 
-      case "delete_question": {
-        const { questionId } = payload
-        const { error } = await supabase
-          .from("questions")
-          .delete()
-          .eq("id", questionId)
+      // ──────────────────────────────────────────
+      // MEDSTORE MERCHANDISE MANAGEMENT
+      // ──────────────────────────────────────────
+      case "create_merch": {
+        const {
+          name, collection, price_zar, price_usd, badge,
+          fabric_tech, image_url, image_urls, image_icon,
+          description, colors, sizes, specs
+        } = payload
 
-        if (error) return NextResponse.json({ error: error.message }, { status: 400 })
-        return NextResponse.json({ success: true, message: "Question deleted" })
+        const id = payload.id || `merch-${Date.now()}-${name.toLowerCase().replace(/[^a-z0-9]/g, "-").slice(0, 20)}`
+
+        const { data: merchData, error: merchErr } = await supabase
+          .from("medstore_products")
+          .upsert({
+            id,
+            name: name.trim(),
+            collection: collection || "scrubs",
+            price_zar: Number(price_zar) || 0,
+            price_usd: Number(price_usd) || 0,
+            badge: badge?.trim() || null,
+            fabric_tech: fabric_tech?.trim() || null,
+            image_url: image_url || null,
+            image_urls: image_urls || (image_url ? [image_url] : []),
+            image_icon: image_icon || "🛍️",
+            description: description?.trim() || "",
+            colors: colors || [],
+            sizes: sizes || ["S", "M", "L", "XL"],
+            specs: specs || [],
+            is_active: true,
+            updated_at: new Date().toISOString()
+          })
+          .select()
+          .single()
+
+        if (merchErr) return NextResponse.json({ error: merchErr.message }, { status: 400 })
+        return NextResponse.json({ success: true, product: merchData })
+      }
+
+      case "update_merch": {
+        const { id, updates } = payload
+        if (!id) return NextResponse.json({ error: "Missing product ID" }, { status: 400 })
+
+        const { data: updatedData, error: updateErr } = await supabase
+          .from("medstore_products")
+          .update({
+            ...updates,
+            updated_at: new Date().toISOString()
+          })
+          .eq("id", id)
+          .select()
+          .single()
+
+        if (updateErr) return NextResponse.json({ error: updateErr.message }, { status: 400 })
+        return NextResponse.json({ success: true, product: updatedData })
+      }
+
+      case "delete_merch": {
+        const { productId } = payload
+        if (!productId) return NextResponse.json({ error: "Missing product ID" }, { status: 400 })
+
+        const { error: delErr } = await supabase
+          .from("medstore_products")
+          .delete()
+          .eq("id", productId)
+
+        if (delErr) return NextResponse.json({ error: delErr.message }, { status: 400 })
+        return NextResponse.json({ success: true, message: "Merchandise item deleted" })
       }
 
       default:
