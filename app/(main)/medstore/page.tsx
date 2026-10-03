@@ -279,7 +279,7 @@ export default function MedStorePage({ isAdmin = false }: MedStorePageProps) {
     }])
     setActiveModalProduct(null)
     toast.success(`Added to cart`, {
-      description: `${product.name} — ${modalColor.name} · Size ${modalSize}`
+      description: `${product.name}, ${modalColor.name}, Size ${modalSize}`
     })
   }
 
@@ -663,7 +663,7 @@ export default function MedStorePage({ isAdmin = false }: MedStorePageProps) {
               {/* Color Selection */}
               <div>
                 <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-3">
-                  Color — <span className="text-gray-300">{modalColor.name}</span>
+                  Color: <span className="text-gray-300">{modalColor.name}</span>
                 </label>
                 <div className="flex items-center gap-2.5 flex-wrap">
                   {activeModalProduct.colors.map(color => (
@@ -885,7 +885,7 @@ export default function MedStorePage({ isAdmin = false }: MedStorePageProps) {
             <div className="flex items-center justify-between mb-6">
               <div>
                 <span className="text-[10px] font-bold uppercase tracking-widest text-brand block mb-1">
-                  Admin — MedStore
+                  Admin: MedStore
                 </span>
                 <h3 className="text-base font-black text-white">Add New Product</h3>
               </div>

@@ -65,12 +65,12 @@ const opportunities = [
 ]
 
 const typeColors: Record<string, string> = {
-  Research: "bg-blue-500/10 text-blue-400 border-blue-500/20",
-  Internship: "bg-green-500/10 text-green-400 border-green-500/20",
-  Conference: "bg-purple-500/10 text-purple-400 border-purple-500/20",
-  Course: "bg-yellow-500/10 text-yellow-400 border-yellow-500/20",
+  Research:   "bg-[#1a1a1a] text-gray-300 border-[#2a2a2a]",
+  Internship: "bg-[#1a1a1a] text-gray-300 border-[#2a2a2a]",
+  Conference: "bg-[#1a1a1a] text-gray-300 border-[#2a2a2a]",
+  Course:     "bg-[#1a1a1a] text-gray-300 border-[#2a2a2a]",
   Fellowship: "bg-brand/10 text-brand border-brand/20",
-  Award: "bg-orange-500/10 text-orange-400 border-orange-500/20",
+  Award:      "bg-brand/10 text-brand border-brand/20",
 }
 
 export default function GrowPage() {
@@ -130,9 +130,9 @@ export default function GrowPage() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {[
               { label: "Study Streak", value: `${stats.streak} days`, icon: Flame, color: "text-brand" },
-              { label: "Questions Attempted", value: stats.totalQ, icon: Brain, color: "text-blue-400" },
-              { label: "Accuracy", value: `${accuracy}%`, icon: Target, color: "text-green-400" },
-              { label: "Flashcard Reviews", value: stats.flashcardReviews, icon: BookOpen, color: "text-purple-400" },
+              { label: "Questions Attempted", value: stats.totalQ, icon: Brain, color: "text-gray-400" },
+              { label: "Accuracy", value: `${accuracy}%`, icon: Target, color: "text-gray-400" },
+              { label: "Flashcard Reviews", value: stats.flashcardReviews, icon: BookOpen, color: "text-gray-400" },
             ].map(s => (
               <div key={s.label} className="bg-[#111] border border-[#1f1f1f] rounded-xl p-4">
                 <s.icon size={16} className={`${s.color} mb-2`} />
@@ -163,7 +163,7 @@ export default function GrowPage() {
               <div className="text-3xl mb-2">{a.icon}</div>
               <p className={`text-xs font-bold ${a.earned ? "text-white" : "text-gray-600"}`}>{a.name}</p>
               <p className="text-[10px] text-gray-600 mt-0.5">{a.desc}</p>
-              {a.earned && <CheckCircle size={12} className="text-green-400 mx-auto mt-2" />}
+              {a.earned && <CheckCircle size={12} className="text-brand mx-auto mt-2" />}
             </div>
           ))}
         </div>

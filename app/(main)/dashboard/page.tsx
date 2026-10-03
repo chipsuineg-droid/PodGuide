@@ -363,7 +363,7 @@ function PreClinicalContent({ curriculum, materialCount }: { curriculum: any; ma
         <div className="bg-[#0f0a0a] border border-[#1a1a1a] rounded-xl p-4 space-y-2">
           <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">Pre-clinical Tip</p>
           <p className="text-xs text-gray-300 leading-relaxed">
-            The pre-clinical years are a race against forgetting. Use active recall (flashcards, MCQs) daily — not just passive reading.
+            The pre-clinical years are a race against forgetting. Use active recall daily through flashcards and MCQs, not just passive reading.
           </p>
         </div>
       </div>
@@ -473,11 +473,11 @@ function ClinicalContent({ curriculum, accuracy, attempts }: { curriculum: any; 
               </p>
               <p className="text-xs text-gray-500 mt-1">From {attempts} questions attempted</p>
               <div className="w-full bg-[#222] rounded-full h-2 mt-3">
-                <div className={`h-2 rounded-full transition-all ${accuracy >= 60 ? "bg-green-500" : accuracy >= 40 ? "bg-yellow-500" : "bg-brand"}`}
+                <div className={`h-2 rounded-full transition-all ${accuracy >= 60 ? "bg-brand" : accuracy >= 40 ? "bg-brand/60" : "bg-brand/30"}`}
                   style={{ width: `${accuracy}%` }} />
               </div>
               <p className="text-[10px] text-gray-600 mt-2">
-                {accuracy >= 60 ? "Great work — keep it up!" : accuracy >= 40 ? "Good start — aim for 60%+" : "Keep practising — you'll improve!"}
+                {accuracy >= 60 ? "Great work. Keep it up!" : accuracy >= 40 ? "Good start. Aim for 60% and above." : "Keep practising. You will improve."}
               </p>
             </>
           ) : (
@@ -494,7 +494,7 @@ function ClinicalContent({ curriculum, accuracy, attempts }: { curriculum: any; 
         <div className="bg-[#0f0a0a] border border-[#1a1a1a] rounded-xl p-4">
           <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Clinical Years Reminder</p>
           <p className="text-xs text-gray-300 leading-relaxed">
-            Clinical years are assessed differently — portfolios, OSCEs, and supervisor sign-offs matter as much as written exams. Practise your examinations on real patients every day.
+            Clinical years are assessed differently. Portfolios, OSCEs, and supervisor sign-offs matter as much as written exams. Practise clinical examinations on real patients every day.
           </p>
         </div>
       </div>
@@ -591,7 +591,7 @@ function FinalYearContent({ curriculum, qCount }: { curriculum: any; qCount: num
           </div>
           <p className="text-4xl font-bold text-white">{qCount.toLocaleString()}</p>
           <p className="text-xs text-gray-500 mt-1">Questions available</p>
-          <p className="text-xs text-gray-600 mt-2">Target: 20–30 questions per day in final year</p>
+          <p className="text-xs text-gray-600 mt-2">Target: 20 to 30 questions per day in final year</p>
           <Link href="/practise/questions"
             className="flex items-center gap-1 text-xs text-brand font-bold mt-4 hover:text-white transition-colors">
             Open Question Bank <ChevronRight size={12} />
@@ -712,7 +712,7 @@ function InternContent({ curriculum }: { curriculum: any }) {
               { rule: "Always check allergies before prescribing", icon: "⚠️" },
               { rule: "Know your escalation chain. Call your registrar when unsure", icon: "📞" },
               { rule: "Document everything you do and why", icon: "📋" },
-              { rule: "Rest when you can — fatigue kills clinical judgement", icon: "😴" },
+              { rule: "Rest when you can. Fatigue kills clinical judgement.", icon: "😴" },
               { rule: "5 Rights: Right patient, drug, dose, route, time", icon: "✅" },
             ].map(r => (
               <li key={r.rule} className="flex items-start gap-2 text-xs text-gray-300">

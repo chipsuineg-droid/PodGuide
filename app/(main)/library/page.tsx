@@ -143,7 +143,7 @@ export default function LibraryPage() {
     const newFolder: DriveFolder = {
       id: crypto.randomUUID(),
       title: folderTitle.trim(),
-      description: folderDesc.trim() || "Curated faculty Google Drive collection.",
+      description: folderDesc.trim() || "Curated Google Drive collection.",
       drive_url: folderUrl.trim(),
       folder_id: folderId,
       programme: folderProgramme,
@@ -177,7 +177,7 @@ export default function LibraryPage() {
     // Optimistic UI update
     setFolders(prev => [newFolder, ...prev])
     toast.success("Google Drive Folder Connected!", {
-      description: `${newFolder.title} is now available in your faculty library.`
+      description: `${newFolder.title} is now available in your library.`
     })
 
     // Reset Form
@@ -219,14 +219,14 @@ export default function LibraryPage() {
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-[11px] font-bold uppercase tracking-widest text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-[11px] font-bold uppercase tracking-widest text-brand bg-brand/10 px-3 py-1 rounded-full border border-brand/20 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-brand animate-pulse" />
               Google Drive Cloud Sync
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-display font-bold text-white">Faculty Library</h1>
+          <h1 className="text-3xl sm:text-4xl font-display font-bold text-white">Library</h1>
           <p className="text-gray-400 mt-1 text-sm max-w-xl">
-            Curated Google Drive cloud drives containing high-yield textbooks, OSCE video manuals, slide decks, and question archives.
+            Curated Google Drive collections with high-yield textbooks, OSCE video guides, lecture slide decks, and question archives.
           </p>
         </div>
 
@@ -256,12 +256,12 @@ export default function LibraryPage() {
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 <h3 className="text-base font-bold text-white">Google Drive Cloud Repository Active</h3>
-                <span className="text-[10px] font-bold uppercase text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                <span className="text-[10px] font-bold uppercase text-brand bg-brand/10 px-2 py-0.5 rounded-full border border-brand/20">
                   {folders.length} Folders Linked
                 </span>
               </div>
               <p className="text-xs text-gray-400 leading-relaxed max-w-xl">
-                All folders open seamlessly in Google Drive or directly inside your PodGuide workspace. You can organize folders by specialty, rotation, or academic part.
+                All folders open seamlessly in Google Drive or directly inside your PodGuide workspace. Organise folders by specialty, rotation, or academic year.
               </p>
             </div>
           </div>
@@ -269,9 +269,9 @@ export default function LibraryPage() {
           <div className="flex items-center gap-2 w-full md:w-auto">
             <button
               onClick={() => setShowAddModal(true)}
-              className="w-full md:w-auto px-4 py-2.5 bg-[#1a1f2c] hover:bg-[#252c3f] border border-[#2d374d] text-white text-xs font-semibold rounded-xl transition-all flex items-center justify-center gap-2"
+              className="w-full md:w-auto px-4 py-2.5 bg-[#1a1a1a] hover:bg-[#252525] border border-[#2a2a2a] text-white text-xs font-semibold rounded-xl transition-all flex items-center justify-center gap-2"
             >
-              <Plus size={14} className="text-blue-400" /> Upload Curated Folder
+              <Plus size={14} className="text-brand" /> Upload Curated Folder
             </button>
           </div>
         </div>
@@ -329,7 +329,7 @@ export default function LibraryPage() {
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full border border-blue-500/20 flex items-center gap-1">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-brand bg-brand/10 px-2 py-0.5 rounded-full border border-brand/20 flex items-center gap-1">
                         <HardDrive size={10} /> Google Drive
                       </span>
                       <span className="text-[10px] font-semibold text-gray-500">
@@ -408,12 +408,12 @@ export default function LibraryPage() {
             </button>
 
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-xl">
+              <div className="w-12 h-12 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center text-xl">
                 📁
               </div>
               <div>
                 <h3 className="text-lg font-bold text-white">Connect Google Drive Folder</h3>
-                <p className="text-xs text-gray-400">Link a shared Google Drive folder to your faculty library catalog.</p>
+                <p className="text-xs text-gray-400">Link a shared Google Drive folder to your library catalog.</p>
               </div>
             </div>
 
@@ -573,7 +573,7 @@ export default function LibraryPage() {
                 {previewFolder.icon || "📁"}
               </div>
               <div className="space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 px-2.5 py-0.5 rounded-full border border-blue-500/20">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-brand bg-brand/10 px-2.5 py-0.5 rounded-full border border-brand/20">
                   Google Drive Folder
                 </span>
                 <h2 className="text-xl font-bold text-white leading-tight mt-1">
