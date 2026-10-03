@@ -19,9 +19,38 @@ export default function LoginPage() {
     setError("")
     if (!email || !password) { setError("Please fill in all fields."); return }
     setLoading(true)
-    const { error: err } = await supabase.auth.signInWithPassword({ email, password })
-    if (err) { setError(err.message); setLoading(false) }
-    else { router.push("/dashboard"); router.refresh() }
+
+    try {
+      const { data, error: err } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password,
+      })
+
+      if (err) {
+        if (err.message.toLowerCase().includes("email not confirmed")) {
+          setError("Email not confirmed. Please check your inbox for the confirmation link, or disable email confirmation in your Supabase Auth settings.")
+        } else if (err.message.toLowerCase().includes("invalid login credentials")) {
+          setError("Invalid email or password. Please check your credentials.")
+        } else {
+          setError(err.message)
+        }
+        setLoading(false)
+        return
+      }
+
+      const user = data.user
+      const isOnboarded = user?.user_metadata?.onboarding_complete
+
+      if (isOnboarded) {
+        router.push("/dashboard")
+      } else {
+        router.push("/onboarding")
+      }
+      router.refresh()
+    } catch (e: any) {
+      setError(e.message || "An unexpected error occurred.")
+      setLoading(false)
+    }
   }
 
   return (

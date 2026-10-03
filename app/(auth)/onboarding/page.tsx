@@ -1,53 +1,86 @@
 "use client"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
+import { Loader2, LogIn } from "lucide-react"
+import Link from "next/link"
 import { deriveProgramId, deriveAcademicLevel } from "@/lib/curriculum-engine"
-import { Building2, GraduationCap, BookOpen, ChevronRight, Loader2 } from "lucide-react"
 
-const universities = [
-  "University of Cape Town (UCT)","University of the Witwatersrand (Wits)","University of Pretoria",
-  "Stellenbosch University","University of KwaZulu-Natal","University of the Free State",
-  "Makerere University","Mbarara University of Science and Technology",
-  "University of Nairobi (UoN)","Kenyatta University","Moi University",
-  "University of Ghana","Kwame Nkrumah University of Science and Technology (KNUST)",
-  "University of Ibadan (UI)","University of Lagos (UNILAG)","Ahmadu Bello University (ABU)",
-  "Obafemi Awolowo University (OAU)","University of Benin","Bayero University Kano",
-  "Addis Ababa University","University of Gondar","Jimma University",
-  "Cairo University","Alexandria University","Ain Shams University",
-  "University of Rwanda","University of Zambia (UNZA)","University of Zimbabwe",
-  "University of Botswana","University of Malawi (College of Medicine)",
-  "Muhimbili University of Health and Allied Sciences (MUHAS)",
-  "University of Dar es Salaam","Kilimanjaro Christian Medical University College",
-  "University of Auckland","University of Otago","AUT",
-].sort()
-
-const programmes = [
-  "Medicine (MBChB / MBBS)","Nursing (BSc Nursing / BNurs)",
-  "Pharmacy (BPharm / PharmD)","Dentistry (BDS / BChD)",
-  "Physiotherapy (BSc / BPT)","Occupational Therapy",
-  "Public Health (BSc / MPH)","Medical Laboratory Science (BMLS)",
-  "Radiography / Medical Imaging","Biomedical Science (BSc)",
-  "Clinical Officer / Medical Assistant","Midwifery","Nutrition & Dietetics",
-  "Optometry","Veterinary Medicine (DVM)",
+const INSTITUTIONS = [
+  "University of Cape Town (UCT)",
+  "University of the Witwatersrand (Wits)",
+  "Stellenbosch University",
+  "University of KwaZulu-Natal (UKZN)",
+  "University of Pretoria",
+  "University of the Free State",
+  "Walter Sisulu University",
+  "Sefako Makgatho Health Sciences University",
+  "University of Zimbabwe",
+  "University of Nairobi",
+  "Makerere University",
+  "University of Auckland",
+  "University of Otago",
+  "other"
 ]
 
-const levels = [
-  "Year 1 (Pre-clinical / Basic Sciences)","Year 2","Year 3 (Pre-clinical)",
-  "Year 4 (Clinical Rotations)","Year 5","Year 6 (Final Year)",
-  "Year 7","Internship / Housemanship","Post-graduate / Residency",
+const PROGRAMMES = [
+  "Medicine (MBChB / MBBS)",
+  "Dental Surgery (BDS)",
+  "Nursing Science (BNurs / BSc)",
+  "Pharmacy (BPharm)",
+  "Physiotherapy (BSc)",
+  "Occupational Therapy (BSc)",
+  "Medical Laboratory Science (BMLS)",
+  "Radiography (BSc)",
+  "Clinical Medicine / Associate (BSc)",
+  "Biomedical Science (BSc)",
+  "Public Health (BPH / MPH)",
+  "other"
+]
+
+const LEVELS = [
+  "Year 1 (Pre-clinical / Basic Sciences)",
+  "Year 2 (Pre-clinical)",
+  "Year 3 (Pre-clinical)",
+  "Year 4 (Clinical Rotations)",
+  "Year 5 (Clinical Rotations)",
+  "Year 6 (Final Year / Senior Clerkship)",
+  "Internship / Housemanship",
+  "Post-graduate / Residency",
 ]
 
 export default function OnboardingPage() {
   const router = useRouter()
   const supabase = createClient()
-  const [institution, setInstitution] = useState("")
+
+  const [institution, setInstitution] = useState(INSTITUTIONS[0])
   const [customInstitution, setCustomInstitution] = useState("")
-  const [programme, setProgramme] = useState("")
+  const [programme, setProgramme] = useState(PROGRAMMES[0])
   const [customProgramme, setCustomProgramme] = useState("")
-  const [level, setLevel] = useState("")
+  const [level, setLevel] = useState(LEVELS[0])
   const [loading, setLoading] = useState(false)
+  const [checkingAuth, setCheckingAuth] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [error, setError] = useState("")
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (user) {
+        setIsAuthenticated(true)
+      } else {
+        const { data: { session } } = await supabase.auth.getSession()
+        if (session?.user) {
+          setIsAuthenticated(true)
+        } else {
+          setIsAuthenticated(false)
+          setError("No active session found. Please sign in to complete your profile.")
+        }
+      }
+      setCheckingAuth(false)
+    }
+    checkUser()
+  }, [])
 
   const finalInstitution = institution === "other" ? customInstitution.trim() : institution
   const finalProgramme = programme === "other" ? customProgramme.trim() : programme
@@ -59,30 +92,58 @@ export default function OnboardingPage() {
     setError("")
     setLoading(true)
 
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) { setError("User not found. Please log in."); setLoading(false); return }
+    let currentUser = null
+    const { data: userData } = await supabase.auth.getUser()
+    currentUser = userData.user
+
+    if (!currentUser) {
+      const { data: sessionData } = await supabase.auth.getSession()
+      currentUser = sessionData.session?.user || null
+    }
+
+    if (!currentUser) {
+      setError("Session expired or user not logged in. Please sign in.")
+      setLoading(false)
+      return
+    }
+
     const program_id = deriveProgramId(finalProgramme)
     const academic_level = deriveAcademicLevel(level)
 
-    await supabase.auth.updateUser({
-      data: {
-        institution: finalInstitution,
-        programme: finalProgramme,
-        level,
+    try {
+      await supabase.auth.updateUser({
+        data: {
+          institution: finalInstitution,
+          programme: finalProgramme,
+          level,
+          program_id,
+          academic_level,
+          onboarding_complete: true,
+        }
+      })
+
+      await supabase.from("student_profiles").upsert({
+        user_id: currentUser.id,
+        onboarding_complete: true,
         program_id,
         academic_level,
-        onboarding_complete: true,
-      }
-    })
+        updated_at: new Date().toISOString(),
+      }, { onConflict: "user_id" })
 
-    await supabase.from("student_profiles").update({
-      onboarding_complete: true,
-      program_id,
-      academic_level,
-    }).eq("user_id", user.id)
+      router.push("/dashboard")
+      router.refresh()
+    } catch (err: any) {
+      setError(err.message || "Failed to save profile. Please try again.")
+      setLoading(false)
+    }
+  }
 
-    router.push("/dashboard")
-    router.refresh()
+  if (checkingAuth) {
+    return (
+      <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4">
+        <Loader2 className="animate-spin text-brand" size={32} />
+      </div>
+    )
   }
 
   return (
@@ -96,57 +157,92 @@ export default function OnboardingPage() {
         </div>
 
         <div className="bg-[#0d0d0d] border border-[#222] rounded-2xl p-6 sm:p-8 shadow-2xl">
-          {error && <div className="mb-4 p-3 bg-brand/10 border border-brand/30 rounded-lg text-sm text-brand">{error}</div>}
+          {error && (
+            <div className="mb-6 p-4 bg-brand/10 border border-brand/30 rounded-xl text-sm text-brand flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <span>{error}</span>
+              {!isAuthenticated && (
+                <Link
+                  href="/login"
+                  className="bg-brand text-white px-3.5 py-1.5 rounded-lg text-xs font-bold hover:bg-red-700 transition-colors flex items-center gap-1.5 whitespace-nowrap"
+                >
+                  <LogIn size={13} /> Sign In
+                </Link>
+              )}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-2">
-              <label className="flex items-center gap-2 text-sm font-semibold text-white">
-                <Building2 size={16} className="text-brand" /> University or College
+            <div>
+              <label className="block text-sm font-semibold text-gray-300 mb-2 flex items-center gap-2">
+                <span className="text-brand">🏛️</span> University or College
               </label>
-              <select value={institution} onChange={e => setInstitution(e.target.value)} required
-                className="w-full bg-[#111] border border-[#333] focus:border-brand rounded-xl px-4 py-3 text-white outline-none transition-colors">
-                <option value="" disabled>Select your institution...</option>
-                {universities.map(u => <option key={u} value={u}>{u}</option>)}
-                <option value="other">Other — add your own</option>
+              <select
+                value={institution}
+                onChange={e => setInstitution(e.target.value)}
+                className="w-full bg-[#161616] border border-[#333] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand transition-colors text-sm"
+              >
+                {INSTITUTIONS.map(inst => (
+                  <option key={inst} value={inst}>{inst === "other" ? "Other Institution..." : inst}</option>
+                ))}
               </select>
               {institution === "other" && (
-                <input type="text" placeholder="Type your university name" value={customInstitution}
-                  onChange={e => setCustomInstitution(e.target.value)} autoFocus
-                  className="w-full bg-[#111] border border-[#333] focus:border-brand rounded-xl px-4 py-3 text-white outline-none transition-colors" />
+                <input
+                  type="text"
+                  required
+                  placeholder="Enter your university or college name"
+                  value={customInstitution}
+                  onChange={e => setCustomInstitution(e.target.value)}
+                  className="mt-3 w-full bg-[#161616] border border-[#333] rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-brand transition-colors text-sm"
+                />
               )}
             </div>
 
-            <div className="space-y-2">
-              <label className="flex items-center gap-2 text-sm font-semibold text-white">
-                <GraduationCap size={16} className="text-brand" /> Programme of Study
+            <div>
+              <label className="block text-sm font-semibold text-gray-300 mb-2 flex items-center gap-2">
+                <span className="text-brand">🎓</span> Programme of Study
               </label>
-              <select value={programme} onChange={e => setProgramme(e.target.value)} required
-                className="w-full bg-[#111] border border-[#333] focus:border-brand rounded-xl px-4 py-3 text-white outline-none transition-colors">
-                <option value="" disabled>Select your programme...</option>
-                {programmes.map(p => <option key={p} value={p}>{p}</option>)}
-                <option value="other">Other — add your own</option>
+              <select
+                value={programme}
+                onChange={e => setProgramme(e.target.value)}
+                className="w-full bg-[#161616] border border-[#333] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand transition-colors text-sm"
+              >
+                {PROGRAMMES.map(prog => (
+                  <option key={prog} value={prog}>{prog === "other" ? "Other Programme..." : prog}</option>
+                ))}
               </select>
               {programme === "other" && (
-                <input type="text" placeholder="Type your degree name" value={customProgramme}
-                  onChange={e => setCustomProgramme(e.target.value)} autoFocus
-                  className="w-full bg-[#111] border border-[#333] focus:border-brand rounded-xl px-4 py-3 text-white outline-none transition-colors" />
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Clinical Nutrition, Audiology"
+                  value={customProgramme}
+                  onChange={e => setCustomProgramme(e.target.value)}
+                  className="mt-3 w-full bg-[#161616] border border-[#333] rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-brand transition-colors text-sm"
+                />
               )}
             </div>
 
-            <div className="space-y-2">
-              <label className="flex items-center gap-2 text-sm font-semibold text-white">
-                <BookOpen size={16} className="text-brand" /> Year / Level
+            <div>
+              <label className="block text-sm font-semibold text-gray-300 mb-2 flex items-center gap-2">
+                <span className="text-brand">📖</span> Year / Level
               </label>
-              <select value={level} onChange={e => setLevel(e.target.value)} required
-                className="w-full bg-[#111] border border-[#333] focus:border-brand rounded-xl px-4 py-3 text-white outline-none transition-colors">
-                <option value="" disabled>Select your current year...</option>
-                {levels.map(l => <option key={l} value={l}>{l}</option>)}
+              <select
+                value={level}
+                onChange={e => setLevel(e.target.value)}
+                className="w-full bg-[#161616] border border-[#333] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand transition-colors text-sm"
+              >
+                {LEVELS.map(lvl => (
+                  <option key={lvl} value={lvl}>{lvl}</option>
+                ))}
               </select>
             </div>
 
-            <button type="submit" disabled={loading || !isValid}
-              className="w-full bg-brand hover:bg-red-700 text-white font-bold py-3.5 rounded-xl transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed mt-2">
-              {loading ? <Loader2 className="animate-spin" size={20} /> : (<>Complete Setup <ChevronRight size={18} /></>)}
+            <button
+              type="submit"
+              disabled={loading || !isValid}
+              className="w-full bg-brand hover:bg-red-700 text-white font-bold py-3.5 rounded-xl transition-all shadow-lg shadow-brand/20 flex items-center justify-center gap-2 disabled:opacity-50 text-sm mt-4"
+            >
+              {loading ? <Loader2 className="animate-spin" size={18} /> : "Complete Setup & Enter Dashboard"}
             </button>
           </form>
         </div>

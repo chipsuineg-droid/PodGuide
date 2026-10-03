@@ -3,7 +3,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/client"
-import { Eye, EyeOff, Loader2 } from "lucide-react"
+import { Eye, EyeOff, Loader2, MailCheck } from "lucide-react"
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -14,6 +14,7 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false)
   const [showPw, setShowPw] = useState(false)
   const [error, setError] = useState("")
+  const [emailConfirmationRequired, setEmailConfirmationRequired] = useState(false)
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -21,12 +22,72 @@ export default function RegisterPage() {
     if (!name || !email || !password) { setError("Please fill in all fields."); return }
     if (password.length < 8) { setError("Password must be at least 8 characters."); return }
     setLoading(true)
-    const { error: err } = await supabase.auth.signUp({
-      email, password,
-      options: { data: { full_name: name } }
-    })
-    if (err) { setError(err.message); setLoading(false) }
-    else { router.push("/onboarding") }
+
+    try {
+      const { data, error: err } = await supabase.auth.signUp({
+        email: email.trim(),
+        password,
+        options: {
+          data: {
+            full_name: name.trim(),
+          }
+        }
+      })
+
+      if (err) {
+        setError(err.message)
+        setLoading(false)
+        return
+      }
+
+      // If Supabase returned a session, user is logged in -> go to onboarding
+      if (data?.session) {
+        router.push("/onboarding")
+        router.refresh()
+        return
+      }
+
+      // If no session returned, try signing in directly
+      const { data: signInData, error: signInErr } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password,
+      })
+
+      if (signInData?.session) {
+        router.push("/onboarding")
+        router.refresh()
+        return
+      }
+
+      // If email confirmation is enabled on Supabase, show confirmation message
+      setEmailConfirmationRequired(true)
+      setLoading(false)
+    } catch (e: any) {
+      setError(e.message || "Registration failed. Please try again.")
+      setLoading(false)
+    }
+  }
+
+  if (emailConfirmationRequired) {
+    return (
+      <div className="text-center space-y-4 py-4">
+        <div className="w-12 h-12 bg-brand/10 border border-brand/20 rounded-full flex items-center justify-center mx-auto text-brand">
+          <MailCheck size={24} />
+        </div>
+        <h2 className="text-2xl font-bold text-white">Check your email</h2>
+        <p className="text-gray-400 text-sm max-w-sm mx-auto">
+          We&apos;ve sent a verification link to <strong className="text-white">{email}</strong>. Please confirm your email address to sign in.
+        </p>
+        <div className="pt-4">
+          <Link
+            href="/login"
+            className="inline-block bg-brand hover:bg-red-700 text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition-all"
+          >
+            Go to Sign In
+          </Link>
+        </div>
+      </div>
+    )
   }
 
   return (
