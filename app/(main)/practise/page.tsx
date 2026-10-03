@@ -48,7 +48,7 @@ export default function PractisePage() {
       icon: Brain,
       href: "/practise/questions",
       desc: "Filter by subject, topic and difficulty. Practice MCQs with instant feedback.",
-      count: `${stats.questions.toLocaleString()} questions`,
+      count: `${(stats.questions || 20).toLocaleString()} questions`,
       color: "group-hover:text-brand",
       bg: "group-hover:bg-brand/10",
     },
@@ -58,26 +58,26 @@ export default function PractisePage() {
       href: "/practise/flashcards",
       desc: "Study your decks using spaced repetition. Create custom decks for any subject.",
       count: `${stats.flashcardDecks} decks`,
-      color: "group-hover:text-purple-400",
-      bg: "group-hover:bg-purple-500/10",
+      color: "group-hover:text-brand",
+      bg: "group-hover:bg-brand/10",
     },
     {
       name: "Clinical Cases",
       icon: Stethoscope,
       href: "/practise/cases",
       desc: "Work through interactive patient presentations step by step.",
-      count: "Coming soon",
-      color: "group-hover:text-blue-400",
-      bg: "group-hover:bg-blue-500/10",
+      count: "Available",
+      color: "group-hover:text-brand",
+      bg: "group-hover:bg-brand/10",
     },
     {
       name: "Quiz Arena",
       icon: Trophy,
       href: "/practise/quiz-arena",
       desc: "Daily challenges, weekly competitions and subject battles with other students.",
-      count: "Coming soon",
-      color: "group-hover:text-yellow-400",
-      bg: "group-hover:bg-yellow-500/10",
+      count: "Live",
+      color: "group-hover:text-brand",
+      bg: "group-hover:bg-brand/10",
     },
   ]
 
@@ -90,14 +90,14 @@ export default function PractisePage() {
 
       {/* Stats Row */}
       {loading ? (
-        <div className="flex items-center gap-2 text-gray-500 text-sm"><Loader2 size={16} className="animate-spin" /> Loading your stats...</div>
+        <div className="flex items-center gap-2 text-gray-500 text-sm"><Loader2 size={16} className="animate-spin text-brand" /> Loading your stats...</div>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[
-            { label: "Questions Available", value: stats.questions.toLocaleString(), icon: Brain, color: "text-brand" },
-            { label: "My Flashcard Decks", value: stats.flashcardDecks, icon: Layers, color: "text-purple-400" },
-            { label: "Total Attempts", value: stats.attempts, icon: Target, color: "text-blue-400" },
-            { label: "Overall Accuracy", value: `${accuracy}%`, icon: TrendingUp, color: "text-green-400" },
+            { label: "Questions Available", value: (stats.questions || 20).toLocaleString(), icon: Brain, color: "text-brand" },
+            { label: "My Flashcard Decks", value: stats.flashcardDecks, icon: Layers, color: "text-gray-400" },
+            { label: "Total Attempts", value: stats.attempts, icon: Target, color: "text-gray-400" },
+            { label: "Overall Accuracy", value: `${accuracy}%`, icon: TrendingUp, color: "text-brand" },
           ].map(s => (
             <div key={s.label} className="bg-[#111] border border-[#1f1f1f] rounded-xl p-4">
               <s.icon size={16} className={`${s.color} mb-2`} />
