@@ -13,9 +13,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     "badge": "Hospital Bestseller",
     "fabricTech": "HydroShield™ Fleece-Lined",
     "imageIcon": "🧥",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Tanc-Hero_Mobile_Banner.avif",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dr-Jacket_Long-Sleeve_Women_01.avif",
     "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Tanc-Hero_Mobile_Banner.avif"
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dr-Jacket_Long-Sleeve_Women_01.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dr-Jacket_Long-Sleeve_Men_01.avif"
     ],
     "description": "Windproof and water-resistant bonded soft-shell designed for hospital air conditioning and cold night ward calls. Features pen arm-slot and zippered stethoscope pockets.",
     "colors": [
@@ -62,9 +63,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     "badge": "Student Bundle Deal",
     "fabricTech": "LABx™ 4-Way Stretch + SilvaLab™",
     "imageIcon": "🥼",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/TANC-Hero-Desktop_Banner.avif",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
     "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/TANC-Hero-Desktop_Banner.avif"
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
     ],
     "description": "Full scrub suit including the Three-Pocket V-Neck Top and Cleo™ Cargo Jogger Pants. Engineered with SilvaLab™ antimicrobial silver-ion technology.",
     "colors": [
@@ -115,9 +117,11 @@ export const INITIAL_PRODUCTS: Product[] = [
     "badge": "Popular Top",
     "fabricTech": "LABx™ Ultra-Flex",
     "imageIcon": "👕",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/TANC-Hero-Desktop_Banner.avif",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
     "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/TANC-Hero-Desktop_Banner.avif"
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
     ],
     "description": "Fitted feminine cut with double front drop-in pockets, dedicated pen divider, and side seam slits for unrestricted patient transfers and CPR.",
     "colors": [
@@ -162,9 +166,11 @@ export const INITIAL_PRODUCTS: Product[] = [
     "reviewsCount": 165,
     "fabricTech": "LABx™ Ultra-Flex",
     "imageIcon": "👕",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/TANC-Hero-Desktop_Banner.avif",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
     "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/TANC-Hero-Desktop_Banner.avif"
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
     ],
     "description": "Athletic cut V-neck top with deep chest pocket and reinforced side splits. Tailored for comfort under consultation coats or theatre gowns.",
     "colors": [
@@ -210,9 +216,11 @@ export const INITIAL_PRODUCTS: Product[] = [
     "badge": "High Demand",
     "fabricTech": "LABx™ Stretch Weave",
     "imageIcon": "👖",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/TANC-Hero-Desktop_Banner.avif",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
     "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/TANC-Hero-Desktop_Banner.avif"
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
     ],
     "description": "Modern tapered jogger scrub pants with double cargo zippered pockets, ribbed knit ankle cuffs, and high-tenacity waistband cord.",
     "colors": [
@@ -259,9 +267,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     "badge": "Clinical Standard",
     "fabricTech": "Poly-Cotton Crisp Shield",
     "imageIcon": "🥼",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/TANC-Hero-Desktop_Banner.avif",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lab-Coats_Women_01.avif",
     "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/TANC-Hero-Desktop_Banner.avif"
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lab-Coats_Women_01.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lab-Coats_Mens_01.avif"
     ],
     "description": "Crisp hospital consultation coat tailored for clinical rounds, ward presentations, and OSCE exams. Side slit access to trouser pockets.",
     "colors": [

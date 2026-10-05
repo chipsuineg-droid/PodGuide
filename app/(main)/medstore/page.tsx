@@ -11,6 +11,7 @@ import { createClient } from "@/lib/supabase/client"
 export type { Product, ProductColor } from "@/types/medstore"
 import type { Product, ProductColor } from "@/types/medstore"
 import { INITIAL_PRODUCTS } from "@/lib/data/medstoreProducts"
+import { ProductImage } from "@/components/medstore/ProductImage"
 
 interface CartItem {
   product: Product
@@ -515,30 +516,24 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
               className="bg-[#0a0a0a] border border-[#1a1a1a] hover:border-brand/40 rounded-2xl overflow-hidden transition-all duration-300 flex flex-col justify-between group cursor-pointer relative shadow-lg"
             >
               <div>
-                {/* Image / Icon container */}
+                {/* Image / Icon container with ProductImage */}
                 <div className="relative w-full aspect-square bg-[#0e0e0e] flex items-center justify-center overflow-hidden">
-                  {coverImg ? (
-                    <img
-                      src={coverImg}
-                      alt={product.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  ) : (
-                    <span className="text-6xl select-none group-hover:scale-110 transition-transform duration-300">
-                      {product.imageIcon}
-                    </span>
-                  )}
+                  <ProductImage
+                    src={coverImg}
+                    alt={product.name}
+                    fallbackIcon={product.imageIcon}
+                  />
 
                   {/* Multi-picture badge */}
                   {allImgs.length > 1 && (
-                    <span className="absolute bottom-2.5 right-2.5 text-[9px] font-bold text-white bg-black/80 backdrop-blur-md px-2 py-0.5 rounded-md border border-white/10 flex items-center gap-1">
+                    <span className="absolute bottom-2.5 right-2.5 text-[9px] font-bold text-white bg-black/80 backdrop-blur-md px-2 py-0.5 rounded-md border border-white/10 flex items-center gap-1 z-10 pointer-events-none">
                       <ImageIcon size={10} /> {allImgs.length}
                     </span>
                   )}
 
                   {/* Badge */}
                   {product.badge && (
-                    <div className="absolute top-3 left-3">
+                    <div className="absolute top-3 left-3 z-10 pointer-events-none">
                       <span className="text-[9px] font-black uppercase tracking-wider text-white bg-brand px-2.5 py-1 rounded-md shadow-md">
                         {product.badge}
                       </span>
@@ -547,7 +542,7 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
 
                   {/* Admin Quick Action Controls */}
                   {isAdmin && (
-                    <div className="absolute top-3 right-3 flex items-center gap-1 bg-black/80 backdrop-blur-md p-1 rounded-xl border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="absolute top-3 right-3 flex items-center gap-1 bg-black/80 backdrop-blur-md p-1 rounded-xl border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity z-10">
                       <button
                         onClick={e => openEditProductModal(product, e)}
                         className="p-1.5 text-gray-300 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
@@ -649,16 +644,14 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
 
               return (
                 <div className="relative">
-                  <div className="w-full h-64 bg-[#0d0d0d] flex items-center justify-center overflow-hidden relative">
-                    {currentImg ? (
-                      <img
-                        src={currentImg}
-                        alt={activeModalProduct.name}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <span className="text-7xl">{activeModalProduct.imageIcon}</span>
-                    )}
+                  <div className="w-full h-72 sm:h-80 bg-gradient-to-b from-[#141414] to-[#0a0a0a] flex items-center justify-center overflow-hidden relative">
+                    <ProductImage
+                      src={currentImg}
+                      alt={activeModalProduct.name}
+                      fallbackIcon={activeModalProduct.imageIcon}
+                      containerClassName="w-full h-full flex items-center justify-center relative"
+                      className="w-full h-full object-contain p-4"
+                    />
 
                     {/* Left/Right gallery arrows if multiple pictures */}
                     {modalImages.length > 1 && (
@@ -666,14 +659,14 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
                         <button
                           type="button"
                           onClick={() => setActiveModalImageIdx(prev => (prev > 0 ? prev - 1 : modalImages.length - 1))}
-                          className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/70 border border-white/20 flex items-center justify-center text-white hover:bg-brand transition-colors"
+                          className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/70 border border-white/20 flex items-center justify-center text-white hover:bg-brand transition-colors z-10"
                         >
                           <ChevronLeft size={16} />
                         </button>
                         <button
                           type="button"
                           onClick={() => setActiveModalImageIdx(prev => (prev < modalImages.length - 1 ? prev + 1 : 0))}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/70 border border-white/20 flex items-center justify-center text-white hover:bg-brand transition-colors"
+                          className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/70 border border-white/20 flex items-center justify-center text-white hover:bg-brand transition-colors z-10"
                         >
                           <ChevronRight size={16} />
                         </button>
@@ -689,7 +682,7 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
                   </button>
 
                   {activeModalProduct.badge && (
-                    <div className="absolute top-4 left-4 z-10">
+                    <div className="absolute top-4 left-4 z-10 pointer-events-none">
                       <span className="text-[9px] font-black uppercase tracking-wider text-white bg-brand px-2.5 py-1 rounded-md shadow">
                         {activeModalProduct.badge}
                       </span>
@@ -698,17 +691,23 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
 
                   {/* Miniature Thumbnail strip if multiple images */}
                   {modalImages.length > 1 && (
-                    <div className="flex items-center gap-1.5 p-2 bg-black/60 backdrop-blur-md justify-center">
+                    <div className="flex items-center gap-2 p-2 bg-black/80 backdrop-blur-md justify-center border-t border-white/5 overflow-x-auto">
                       {modalImages.map((img, i) => (
                         <button
                           key={i}
                           type="button"
                           onClick={() => setActiveModalImageIdx(i)}
-                          className={`w-12 h-8 rounded-lg overflow-hidden border transition-all ${
-                            activeModalImageIdx === i ? "border-brand scale-105" : "border-white/20 opacity-60 hover:opacity-100"
+                          className={`w-12 h-10 rounded-lg overflow-hidden border transition-all flex items-center justify-center bg-[#141414] flex-shrink-0 ${
+                            activeModalImageIdx === i ? "border-brand scale-105 shadow-sm shadow-brand/30" : "border-white/20 opacity-60 hover:opacity-100"
                           }`}
                         >
-                          <img src={img} alt="thumb" className="w-full h-full object-cover" />
+                          <img
+                            src={img}
+                            alt="thumb"
+                            referrerPolicy="no-referrer"
+                            loading="lazy"
+                            className="w-full h-full object-contain p-0.5"
+                          />
                         </button>
                       ))}
                     </div>

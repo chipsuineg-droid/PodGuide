@@ -36,6 +36,7 @@ export interface AdminProduct {
 }
 
 import { DEFAULT_PRODUCTS } from "@/lib/data/medstoreProducts"
+import { ProductImage } from "@/components/medstore/ProductImage"
 
 interface Profile {
   id: string
@@ -1162,16 +1163,14 @@ export function IntegratedAdminDashboard({
                   >
                     <div className="space-y-4">
                       {/* Thumbnail & Badges */}
-                      <div className="relative aspect-video rounded-xl overflow-hidden bg-[#141414] border border-[#242424] flex items-center justify-center">
-                        {primaryImg ? (
-                          <img
-                            src={primaryImg}
-                            alt={prod.name}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
-                        ) : (
-                          <div className="text-4xl">{prod.imageIcon || "🛍️"}</div>
-                        )}
+                      <div className="relative aspect-video rounded-xl overflow-hidden bg-gradient-to-b from-[#141414] to-[#0a0a0a] border border-[#242424] flex items-center justify-center">
+                        <ProductImage
+                          src={primaryImg}
+                          alt={prod.name}
+                          fallbackIcon={prod.imageIcon}
+                          containerClassName="w-full h-full flex items-center justify-center relative overflow-hidden"
+                          className="w-full h-full object-contain p-2.5 group-hover:scale-105 transition-transform duration-300"
+                        />
 
                         {/* Top Badges */}
                         <div className="absolute top-2 left-2 flex items-center gap-1.5 flex-wrap">
@@ -1729,11 +1728,13 @@ export function IntegratedAdminDashboard({
                           idx === 0 ? "border-brand/60 shadow-lg shadow-brand/10" : "border-[#242424]"
                         }`}
                       >
-                        <div className="relative aspect-video w-full bg-black/40 overflow-hidden">
+                        <div className="relative aspect-video w-full bg-gradient-to-b from-[#141414] to-[#0a0a0a] overflow-hidden flex items-center justify-center">
                           <img
                             src={imgUrl}
                             alt={`Preview ${idx + 1}`}
-                            className="w-full h-full object-cover"
+                            referrerPolicy="no-referrer"
+                            loading="lazy"
+                            className="w-full h-full object-contain p-2"
                           />
                           {idx === 0 && (
                             <span className="absolute top-1.5 left-1.5 bg-brand text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
