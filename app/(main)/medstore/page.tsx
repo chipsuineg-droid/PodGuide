@@ -22,15 +22,83 @@ interface CartItem {
   quantity: number
 }
 
-const COLLECTIONS = [
+export const TANC_CATEGORIES = [
   { id: "all", label: "All Items" },
+  { id: "scrubs", label: "Scrubs & Tops" },
+  { id: "sets", label: "Scrub Sets" },
+  { id: "pants", label: "Joggers & Pants" },
   { id: "jackets", label: "Doctor's Jackets" },
-  { id: "sets", label: "ScrubLab Sets" },
-  { id: "scrubs", label: "Tops" },
-  { id: "pants", label: "Joggers & Cargo" },
-  { id: "coats", label: "Lab Coats" },
-  { id: "accessories", label: "Accessories" },
+  { id: "coats", label: "Lab Coats & Gowns" },
+  { id: "stethoscopes", label: "Stethoscopes" },
+  { id: "caps", label: "Scrub Caps" },
+  { id: "accessories", label: "Socks & Gear" },
 ]
+
+export const POPULAR_COLORS = [
+  { name: "All Colours", hex: "#374151", key: "all" },
+  { name: "Navy Blue", hex: "#1e3a8a", key: "navy" },
+  { name: "Midnight Black", hex: "#111827", key: "black" },
+  { name: "Olive Green", hex: "#3f4d38", key: "olive" },
+  { name: "Ceil Blue", hex: "#87ceeb", key: "ceil" },
+  { name: "Burgundy", hex: "#831843", key: "burgundy" },
+  { name: "Raspberry", hex: "#b53360", key: "raspberry" },
+  { name: "Petrol / Teal", hex: "#0e5a60", key: "petrol" },
+  { name: "Powder Blue", hex: "#a0c4e2", key: "powder" },
+  { name: "Hunter Green", hex: "#14532d", key: "green" },
+  { name: "Royal Blue", hex: "#1d4ed8", key: "royal" },
+]
+
+export function matchCategory(product: Product, catId: string): boolean {
+  if (catId === "all") return true
+  const nameLower = product.name.toLowerCase()
+  if (catId === "stethoscopes") {
+    return nameLower.includes("stethoscope") || nameLower.includes("littmann")
+  }
+  if (catId === "caps") {
+    return nameLower.includes("cap") || nameLower.includes("headwear")
+  }
+  if (catId === "accessories") {
+    return (
+      product.collection === "accessories" &&
+      !nameLower.includes("stethoscope") &&
+      !nameLower.includes("littmann") &&
+      !nameLower.includes("cap")
+    )
+  }
+  if (catId === "scrubs") {
+    return product.collection === "scrubs" && !nameLower.includes("cap")
+  }
+  if (catId === "sets") return product.collection === "sets"
+  if (catId === "pants") return product.collection === "pants"
+  if (catId === "jackets") return product.collection === "jackets"
+  if (catId === "coats") return product.collection === "coats"
+  return product.collection === catId
+}
+
+export function getProductColorImage(product: Product, color?: ProductColor | null): string {
+  const allImgs = product.imageUrls && product.imageUrls.length > 0
+    ? product.imageUrls
+    : (product.imageUrl ? [product.imageUrl] : [])
+  if (!color) return allImgs[0] || ""
+  if (color.imageUrl) return color.imageUrl
+
+  const cleanColorWords = color.name
+    .toLowerCase()
+    .split(/[\s\-_/]+/)
+    .filter(w => w.length > 2 && !["and", "the", "dark", "deep", "light"].includes(w))
+
+  if (cleanColorWords.length > 0) {
+    const matched = allImgs.find(url => {
+      const u = url.toLowerCase()
+      return cleanColorWords.some(w => u.includes(w))
+    })
+    if (matched) return matched
+  }
+
+  return allImgs[0] || ""
+}
+
+const COLLECTIONS = TANC_CATEGORIES
 
 interface MedStorePageProps {
   isAdmin?: boolean
@@ -42,8 +110,10 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
   const [products, setProducts] = useState<Product[]>(INITIAL_PRODUCTS)
   const [currency, setCurrency] = useState<"ZAR" | "USD">("ZAR")
   const [selectedCollection, setSelectedCollection] = useState<string>("all")
+  const [selectedColorFilter, setSelectedColorFilter] = useState<string>("all")
   const [search, setSearch] = useState<string>("")
   const [colorSelections, setColorSelections] = useState<Record<string, ProductColor>>({})
+  const [hoveredColors, setHoveredColors] = useState<Record<string, ProductColor | null>>({})
   
   // Product Detail Modal
   const [activeModalProduct, setActiveModalProduct] = useState<Product | null>(null)
@@ -144,11 +214,33 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
 
   const openProductModal = (product: Product) => {
     setActiveModalProduct(product)
-    setActiveModalImageIdx(0)
-    setModalColor(getActiveColor(product))
+    const activeColor = getActiveColor(product)
+    setModalColor(activeColor)
     setModalSize(product.sizes[0] || "M")
     setWithEmbroidery(false)
     setEmbroideryName("")
+
+    const allImgs = product.imageUrls && product.imageUrls.length > 0
+      ? product.imageUrls
+      : (product.imageUrl ? [product.imageUrl] : [])
+    const colorImg = getProductColorImage(product, activeColor)
+    const idx = allImgs.findIndex(img => img === colorImg)
+    setActiveModalImageIdx(idx !== -1 ? idx : 0)
+  }
+
+  const handleModalColorSelect = (color: ProductColor) => {
+    setModalColor(color)
+    if (activeModalProduct) {
+      setColorSelections(prev => ({ ...prev, [activeModalProduct.id]: color }))
+      const allImgs = activeModalProduct.imageUrls && activeModalProduct.imageUrls.length > 0
+        ? activeModalProduct.imageUrls
+        : (activeModalProduct.imageUrl ? [activeModalProduct.imageUrl] : [])
+      const colorImg = getProductColorImage(activeModalProduct, color)
+      const idx = allImgs.findIndex(img => img === colorImg)
+      if (idx !== -1) {
+        setActiveModalImageIdx(idx)
+      }
+    }
   }
 
   const formatPrice = (zar: number, usd: number) =>
@@ -377,13 +469,42 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
   }
 
   const filteredProducts = products.filter(product => {
-    const matchesCollection = selectedCollection === "all" || product.collection === selectedCollection
-    const matchesSearch =
-      product.name.toLowerCase().includes(search.toLowerCase()) ||
-      product.description.toLowerCase().includes(search.toLowerCase()) ||
-      (product.fabricTech && product.fabricTech.toLowerCase().includes(search.toLowerCase()))
-    return matchesCollection && matchesSearch
+    // Category filter
+    const matchesCollection = matchCategory(product, selectedCollection)
+
+    // Color filter
+    let matchesColor = true
+    if (selectedColorFilter !== "all") {
+      const cKey = selectedColorFilter.toLowerCase()
+      matchesColor =
+        product.colors.some(c => c.name.toLowerCase().includes(cKey)) ||
+        product.name.toLowerCase().includes(cKey) ||
+        product.description.toLowerCase().includes(cKey)
+    }
+
+    // Search query matching
+    let matchesSearch = true
+    if (search.trim()) {
+      const terms = search.toLowerCase().trim().split(/\s+/).filter(Boolean)
+      matchesSearch = terms.every(term => {
+        return (
+          product.name.toLowerCase().includes(term) ||
+          product.description.toLowerCase().includes(term) ||
+          (product.fabricTech && product.fabricTech.toLowerCase().includes(term)) ||
+          (product.badge && product.badge.toLowerCase().includes(term)) ||
+          (product.collection && product.collection.toLowerCase().includes(term)) ||
+          (product.specs && product.specs.some(s => s.toLowerCase().includes(term))) ||
+          (product.colors && product.colors.some(c => c.name.toLowerCase().includes(term)))
+        )
+      })
+    }
+
+    return matchesCollection && matchesColor && matchesSearch
   })
+
+  const getCategoryCount = (catId: string) => {
+    return products.filter(p => matchCategory(p, catId)).length
+  }
 
   return (
     <div className="max-w-7xl mx-auto pb-24 space-y-0">
@@ -405,7 +526,7 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
             </h1>
             <p className="text-sm text-gray-400 max-w-xl leading-relaxed">
               LABx™ 4-way stretch scrubs, HydroShield™ doctor's jackets, and Littmann stethoscopes.
-              Custom faculty embroidery available on all apparel.
+              Custom medical embroidery available on all apparel.
             </p>
           </div>
 
@@ -473,157 +594,329 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
       </div>
 
       {/* ── FILTERS & SEARCH ── */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-8">
-        <div className="relative flex-1 max-w-sm">
-          <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-600" />
-          <input
-            type="text"
-            placeholder="Search products, collections, fabrics..."
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            className="w-full bg-[#0d0d0d] border border-[#1a1a1a] focus:border-[#333] rounded-xl pl-10 pr-4 py-3 text-xs text-white placeholder:text-gray-700 outline-none transition-colors"
-          />
+      <div className="space-y-4 mb-8">
+        {/* Search input + Quick tags */}
+        <div className="flex flex-col md:flex-row md:items-center gap-3">
+          <div className="relative flex-1">
+            <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500" />
+            <input
+              type="text"
+              placeholder="Search scrubs, colors (e.g. olive, navy), fabrics, stethoscopes..."
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              className="w-full bg-[#0d0d0d] border border-[#1f1f1f] focus:border-brand/60 rounded-xl pl-10 pr-10 py-3 text-xs text-white placeholder:text-gray-600 outline-none transition-all shadow-inner"
+            />
+            {search && (
+              <button
+                onClick={() => setSearch("")}
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-white/10 hover:bg-white/20 text-gray-400 hover:text-white flex items-center justify-center transition-colors"
+                title="Clear search"
+              >
+                <X size={13} />
+              </button>
+            )}
+          </div>
+
+          {/* Quick search suggestions */}
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none text-[11px]">
+            <span className="text-gray-600 font-bold uppercase tracking-wider text-[10px] whitespace-nowrap pl-1">
+              Popular:
+            </span>
+            {["Doctor's Jacket", "Scrub Sets", "Littmann", "Joggers", "Olive Green", "Raspberry"].map(tag => (
+              <button
+                key={tag}
+                onClick={() => setSearch(tag)}
+                className={`px-2.5 py-1 rounded-lg border text-[11px] font-medium transition-all whitespace-nowrap ${
+                  search === tag
+                    ? "bg-brand/20 border-brand text-brand"
+                    : "bg-[#0d0d0d] border-[#1f1f1f] text-gray-400 hover:text-white hover:border-[#333]"
+                }`}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-          {COLLECTIONS.map(col => (
-            <button
-              key={col.id}
-              onClick={() => setSelectedCollection(col.id)}
-              className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
-                selectedCollection === col.id
-                  ? "bg-brand text-white shadow-lg shadow-brand/20"
-                  : "bg-[#0d0d0d] border border-[#1a1a1a] text-gray-500 hover:text-white hover:border-[#333]"
-              }`}
-            >
-              {col.label}
-            </button>
-          ))}
+        {/* TANC Category Pill Tabs */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+          {TANC_CATEGORIES.map(cat => {
+            const count = getCategoryCount(cat.id)
+            const isSelected = selectedCollection === cat.id
+            return (
+              <button
+                key={cat.id}
+                onClick={() => setSelectedCollection(cat.id)}
+                className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap flex items-center gap-2 ${
+                  isSelected
+                    ? "bg-brand text-white shadow-lg shadow-brand/20 border border-brand"
+                    : "bg-[#0d0d0d] border border-[#1a1a1a] text-gray-400 hover:text-white hover:border-[#333]"
+                }`}
+              >
+                <span>{cat.label}</span>
+                <span
+                  className={`px-1.5 py-0.5 rounded-md text-[10px] font-black ${
+                    isSelected
+                      ? "bg-white/20 text-white"
+                      : "bg-[#161616] text-gray-500"
+                  }`}
+                >
+                  {count}
+                </span>
+              </button>
+            )
+          })}
+        </div>
+
+        {/* Shop by Colour Swatches Bar */}
+        <div className="bg-[#0b0b0b] border border-[#181818] rounded-xl p-3 flex items-center gap-2 overflow-x-auto scrollbar-none">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500 flex-shrink-0 px-1">
+            Shop by Colour:
+          </span>
+          <div className="flex items-center gap-1.5 flex-nowrap">
+            {POPULAR_COLORS.map(c => {
+              const isActive = selectedColorFilter === c.key
+              return (
+                <button
+                  key={c.key}
+                  onClick={() => setSelectedColorFilter(c.key)}
+                  className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-[11px] font-semibold transition-all whitespace-nowrap ${
+                    isActive
+                      ? "bg-white/10 border-brand text-white shadow-sm ring-1 ring-brand/40"
+                      : "bg-[#111] border-[#222] text-gray-400 hover:text-white hover:border-[#333]"
+                  }`}
+                >
+                  {c.key !== "all" && (
+                    <span
+                      className="w-2.5 h-2.5 rounded-full border border-white/20 flex-shrink-0"
+                      style={{ backgroundColor: c.hex }}
+                    />
+                  )}
+                  <span>{c.name}</span>
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* Active filter badges & results count */}
+        <div className="flex flex-wrap items-center justify-between gap-2 text-xs pt-1">
+          <div className="flex items-center gap-2 flex-wrap text-gray-400">
+            <span>
+              Showing <strong className="text-white">{filteredProducts.length}</strong> of {products.length} products
+            </span>
+            {(search || selectedCollection !== "all" || selectedColorFilter !== "all") && (
+              <>
+                <span className="text-gray-600">&bull;</span>
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  {selectedCollection !== "all" && (
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#161616] border border-[#2a2a2a] text-[11px] text-gray-300">
+                      Category: {TANC_CATEGORIES.find(c => c.id === selectedCollection)?.label}
+                      <button onClick={() => setSelectedCollection("all")} className="text-gray-500 hover:text-white">
+                        <X size={10} />
+                      </button>
+                    </span>
+                  )}
+                  {selectedColorFilter !== "all" && (
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#161616] border border-[#2a2a2a] text-[11px] text-gray-300">
+                      Colour: {POPULAR_COLORS.find(c => c.key === selectedColorFilter)?.name}
+                      <button onClick={() => setSelectedColorFilter("all")} className="text-gray-500 hover:text-white">
+                        <X size={10} />
+                      </button>
+                    </span>
+                  )}
+                  {search && (
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#161616] border border-[#2a2a2a] text-[11px] text-gray-300">
+                      Query: "{search}"
+                      <button onClick={() => setSearch("")} className="text-gray-500 hover:text-white">
+                        <X size={10} />
+                      </button>
+                    </span>
+                  )}
+                  <button
+                    onClick={() => {
+                      setSearch("")
+                      setSelectedCollection("all")
+                      setSelectedColorFilter("all")
+                    }}
+                    className="text-[11px] text-brand hover:underline font-bold ml-1"
+                  >
+                    Reset all
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
 
       {/* ── PRODUCTS GRID ── */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {filteredProducts.map(product => {
-          const activeColor = getActiveColor(product)
-          const allImgs = product.imageUrls && product.imageUrls.length > 0 ? product.imageUrls : (product.imageUrl ? [product.imageUrl] : [])
-          const coverImg = allImgs[0]
+      {filteredProducts.length === 0 ? (
+        <div className="bg-[#0b0b0b] border border-[#1a1a1a] rounded-2xl p-12 text-center max-w-xl mx-auto my-12 space-y-4">
+          <div className="w-16 h-16 rounded-2xl bg-brand/10 border border-brand/20 flex items-center justify-center text-brand mx-auto">
+            <ShoppingBag size={28} />
+          </div>
+          <div className="space-y-1">
+            <h3 className="text-lg font-bold text-white">No medical wear matches found</h3>
+            <p className="text-xs text-gray-400">
+              We couldn't find any items matching your active category, colour, or search terms.
+            </p>
+          </div>
+          <button
+            onClick={() => {
+              setSearch("")
+              setSelectedCollection("all")
+              setSelectedColorFilter("all")
+            }}
+            className="px-5 py-2.5 bg-brand hover:bg-red-700 text-white font-bold rounded-xl text-xs transition-all shadow-md shadow-brand/20"
+          >
+            Clear All Filters
+          </button>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {filteredProducts.map(product => {
+            const activeColor = getActiveColor(product)
+            const previewColor = hoveredColors[product.id] || activeColor
+            const allImgs = product.imageUrls && product.imageUrls.length > 0 ? product.imageUrls : (product.imageUrl ? [product.imageUrl] : [])
+            const coverImg = getProductColorImage(product, previewColor)
 
-          return (
-            <div
-              key={product.id}
-              onClick={() => openProductModal(product)}
-              className="bg-[#0a0a0a] border border-[#1a1a1a] hover:border-brand/40 rounded-2xl overflow-hidden transition-all duration-300 flex flex-col justify-between group cursor-pointer relative shadow-lg"
-            >
-              <div>
-                {/* Image / Icon container with ProductImage */}
-                <div className="relative w-full aspect-square bg-[#0e0e0e] flex items-center justify-center overflow-hidden">
-                  <ProductImage
-                    src={coverImg}
-                    alt={product.name}
-                    fallbackIcon={product.imageIcon}
-                  />
+            return (
+              <div
+                key={product.id}
+                onClick={() => openProductModal(product)}
+                className="bg-[#0a0a0a] border border-[#1a1a1a] hover:border-brand/40 rounded-2xl overflow-hidden transition-all duration-300 flex flex-col justify-between group cursor-pointer relative shadow-lg"
+              >
+                <div>
+                  {/* Image / Icon container with ProductImage and live colour shifting */}
+                  <div className="relative w-full aspect-square bg-[#0e0e0e] flex items-center justify-center overflow-hidden">
+                    <ProductImage
+                      key={coverImg}
+                      src={coverImg}
+                      alt={`${product.name} - ${previewColor?.name || ""}`}
+                      fallbackIcon={product.imageIcon}
+                    />
 
-                  {/* Multi-picture badge */}
-                  {allImgs.length > 1 && (
-                    <span className="absolute bottom-2.5 right-2.5 text-[9px] font-bold text-white bg-black/80 backdrop-blur-md px-2 py-0.5 rounded-md border border-white/10 flex items-center gap-1 z-10 pointer-events-none">
-                      <ImageIcon size={10} /> {allImgs.length}
-                    </span>
-                  )}
-
-                  {/* Badge */}
-                  {product.badge && (
-                    <div className="absolute top-3 left-3 z-10 pointer-events-none">
-                      <span className="text-[9px] font-black uppercase tracking-wider text-white bg-brand px-2.5 py-1 rounded-md shadow-md">
-                        {product.badge}
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Admin Quick Action Controls */}
-                  {isAdmin && (
-                    <div className="absolute top-3 right-3 flex items-center gap-1 bg-black/80 backdrop-blur-md p-1 rounded-xl border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity z-10">
-                      <button
-                        onClick={e => openEditProductModal(product, e)}
-                        className="p-1.5 text-gray-300 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
-                        title="Edit product"
-                      >
-                        <Edit3 size={13} />
-                      </button>
-                      <button
-                        onClick={e => handleDeleteProduct(product.id, product.name, e)}
-                        className="p-1.5 text-gray-400 hover:text-brand rounded-lg hover:bg-brand/10 transition-colors"
-                        title="Delete product"
-                      >
-                        <Trash2 size={13} />
-                      </button>
-                    </div>
-                  )}
-                </div>
-
-                {/* Info block */}
-                <div className="p-5 space-y-3">
-                  <div className="space-y-1">
-                    {product.fabricTech && (
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-brand block">
-                        {product.fabricTech}
+                    {/* Multi-picture badge */}
+                    {allImgs.length > 1 && (
+                      <span className="absolute bottom-2.5 right-2.5 text-[9px] font-bold text-white bg-black/80 backdrop-blur-md px-2 py-0.5 rounded-md border border-white/10 flex items-center gap-1 z-10 pointer-events-none">
+                        <ImageIcon size={10} /> {allImgs.length}
                       </span>
                     )}
-                    <h3 className="text-sm font-bold text-white leading-snug group-hover:text-brand transition-colors line-clamp-1">
-                      {product.name}
-                    </h3>
-                    <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed">
-                      {product.description}
-                    </p>
+
+                    {/* Badge */}
+                    {product.badge && (
+                      <div className="absolute top-3 left-3 z-10 pointer-events-none">
+                        <span className="text-[9px] font-black uppercase tracking-wider text-white bg-brand px-2.5 py-1 rounded-md shadow-md">
+                          {product.badge}
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Admin Quick Action Controls */}
+                    {isAdmin && (
+                      <div className="absolute top-3 right-3 flex items-center gap-1 bg-black/80 backdrop-blur-md p-1 rounded-xl border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                        <button
+                          onClick={e => openEditProductModal(product, e)}
+                          className="p-1.5 text-gray-300 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
+                          title="Edit product"
+                        >
+                          <Edit3 size={13} />
+                        </button>
+                        <button
+                          onClick={e => handleDeleteProduct(product.id, product.name, e)}
+                          className="p-1.5 text-gray-400 hover:text-brand rounded-lg hover:bg-brand/10 transition-colors"
+                          title="Delete product"
+                        >
+                          <Trash2 size={13} />
+                        </button>
+                      </div>
+                    )}
                   </div>
 
-                  {/* Color dots */}
-                  {product.colors && product.colors.length > 0 && (
-                    <div className="flex items-center gap-1.5 pt-1">
-                      {product.colors.map(color => (
-                        <button
-                          key={color.name}
-                          onClick={e => handleColorSelect(product.id, color, e)}
-                          title={color.name}
-                          className={`w-3.5 h-3.5 rounded-full border transition-all ${
-                            activeColor.name === color.name
-                              ? "scale-125 border-brand shadow-sm shadow-brand/40"
-                              : "border-white/20 hover:scale-110"
-                          }`}
-                          style={{ backgroundColor: color.hex }}
-                        />
-                      ))}
-                      <span className="text-[10px] text-gray-500 ml-1 font-medium truncate">
-                        {activeColor.name}
-                      </span>
+                  {/* Info block */}
+                  <div className="p-5 space-y-3">
+                    <div className="space-y-1">
+                      {product.fabricTech && (
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-brand block">
+                          {product.fabricTech}
+                        </span>
+                      )}
+                      <h3 className="text-sm font-bold text-white leading-snug group-hover:text-brand transition-colors line-clamp-1">
+                        {product.name}
+                      </h3>
+                      <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed">
+                        {product.description}
+                      </p>
                     </div>
-                  )}
-                </div>
-              </div>
 
-              {/* Price + CTA */}
-              <div className="px-5 pb-5 pt-2 flex items-center justify-between border-t border-[#141414]">
-                <div>
-                  <span className="text-base font-black text-white block leading-tight">
-                    {formatPrice(product.priceZAR, product.priceUSD)}
-                  </span>
-                  <span className="text-[10px] text-gray-600">Free campus drop</span>
+                    {/* Colour shifting swatches with hover and selection */}
+                    {product.colors && product.colors.length > 0 && (
+                      <div className="space-y-1.5 pt-1">
+                        <div className="flex items-center justify-between text-[11px]">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500">
+                            Colour
+                          </span>
+                          <span className="text-[10px] text-gray-300 font-semibold truncate max-w-[130px]">
+                            {previewColor?.name || "Standard"}
+                          </span>
+                        </div>
+                        <div
+                          className="flex items-center gap-1.5 flex-wrap"
+                          onMouseLeave={() => setHoveredColors(prev => ({ ...prev, [product.id]: null }))}
+                        >
+                          {product.colors.map(color => {
+                            const isCurrent = previewColor?.name === color.name
+                            return (
+                              <button
+                                key={color.name}
+                                type="button"
+                                onMouseEnter={() => setHoveredColors(prev => ({ ...prev, [product.id]: color }))}
+                                onClick={e => handleColorSelect(product.id, color, e)}
+                                title={`${color.name} (Hover to shift image, click to select)`}
+                                className={`w-4 h-4 rounded-full border transition-all duration-150 relative ${
+                                  isCurrent
+                                    ? "scale-125 border-brand ring-2 ring-brand/40 shadow-sm"
+                                    : "border-white/20 hover:scale-110 opacity-75 hover:opacity-100"
+                                }`}
+                                style={{ backgroundColor: color.hex }}
+                              >
+                                {isCurrent && (
+                                  <span className="absolute inset-0 m-auto w-1 h-1 rounded-full bg-white shadow" />
+                                )}
+                              </button>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <button
-                  onClick={e => {
-                    e.stopPropagation()
-                    openProductModal(product)
-                  }}
-                  className="px-3.5 py-2 bg-brand hover:bg-red-700 text-white font-bold rounded-xl text-xs transition-all shadow-md shadow-brand/20 flex items-center gap-1"
-                >
-                  <span>Select</span>
-                  <ArrowRight size={12} />
-                </button>
+
+                {/* Price + CTA */}
+                <div className="px-5 pb-5 pt-2 flex items-center justify-between border-t border-[#141414]">
+                  <div>
+                    <span className="text-base font-black text-white block leading-tight">
+                      {formatPrice(product.priceZAR, product.priceUSD)}
+                    </span>
+                    <span className="text-[10px] text-gray-600">Free campus drop</span>
+                  </div>
+                  <button
+                    onClick={e => {
+                      e.stopPropagation()
+                      openProductModal(product)
+                    }}
+                    className="px-3.5 py-2 bg-brand hover:bg-red-700 text-white font-bold rounded-xl text-xs transition-all shadow-md shadow-brand/20 flex items-center gap-1"
+                  >
+                    <span>Select</span>
+                    <ArrowRight size={12} />
+                  </button>
+                </div>
               </div>
-            </div>
-          )
-        })}
-      </div>
+            )
+          })}
+        </div>
+      )}
 
       {/* ── PRODUCT DETAIL MODAL ── */}
       {activeModalProduct && (
@@ -640,14 +933,15 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
               const modalImages = activeModalProduct.imageUrls && activeModalProduct.imageUrls.length > 0
                 ? activeModalProduct.imageUrls
                 : (activeModalProduct.imageUrl ? [activeModalProduct.imageUrl] : [])
-              const currentImg = modalImages[activeModalImageIdx] || modalImages[0]
+              const currentImg = modalImages[activeModalImageIdx] || getProductColorImage(activeModalProduct, modalColor) || modalImages[0]
 
               return (
                 <div className="relative">
                   <div className="w-full h-72 sm:h-80 bg-gradient-to-b from-[#141414] to-[#0a0a0a] flex items-center justify-center overflow-hidden relative">
                     <ProductImage
+                      key={currentImg}
                       src={currentImg}
-                      alt={activeModalProduct.name}
+                      alt={`${activeModalProduct.name} - ${modalColor.name}`}
                       fallbackIcon={activeModalProduct.imageIcon}
                       containerClassName="w-full h-full flex items-center justify-center relative"
                       className="w-full h-full object-contain p-4"
@@ -764,10 +1058,10 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
                     {activeModalProduct.colors.map(color => (
                       <button
                         key={color.name}
-                        onClick={() => setModalColor(color)}
+                        onClick={() => handleModalColorSelect(color)}
                         className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-semibold transition-all ${
                           modalColor.name === color.name
-                            ? "bg-white/10 border-brand text-white shadow-sm"
+                            ? "bg-white/10 border-brand text-white shadow-sm ring-1 ring-brand/40"
                             : "bg-[#0d0d0d] border-[#222] text-gray-400 hover:text-white"
                         }`}
                       >
@@ -812,8 +1106,8 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
                   <div className="flex items-center gap-2">
                     <Scissors size={14} className="text-brand" />
                     <div>
-                      <p className="text-xs font-bold text-white">Custom Faculty Embroidery</p>
-                      <p className="text-[10px] text-gray-500">+R65 / +$4.00 · Name + Title</p>
+                      <p className="text-xs font-bold text-white">Custom Medical Embroidery</p>
+                      <p className="text-[10px] text-gray-500">+R65 / +$4.00 &bull; Name + Title</p>
                     </div>
                   </div>
                   <input

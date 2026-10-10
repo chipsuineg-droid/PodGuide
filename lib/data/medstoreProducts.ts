@@ -21,12 +21,14 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Windproof and water-resistant bonded soft-shell designed for hospital air conditioning and cold night ward calls. Features pen arm-slot and zippered stethoscope pockets.",
     "colors": [
       {
-        "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "name": "Deep Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dr-Jacket_Long-Sleeve_Women_01.avif"
       },
       {
         "name": "Charcoal Black",
-        "hex": "#1f2937"
+        "hex": "#1f2937",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dr-Jacket_Long-Sleeve_Men_01.avif"
       },
       {
         "name": "Hunter Green",
@@ -71,8 +73,14 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Full scrub suit including the Three-Pocket V-Neck Top and Cleo™ Cargo Jogger Pants. Engineered with SilvaLab™ antimicrobial silver-ion technology.",
     "colors": [
       {
-        "name": "Ceil Blue",
-        "hex": "#60a5fa"
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
       },
       {
         "name": "Hunter Green",
@@ -85,10 +93,6 @@ export const INITIAL_PRODUCTS: Product[] = [
       {
         "name": "Burgundy Wine",
         "hex": "#831843"
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827"
       }
     ],
     "sizes": [
@@ -126,20 +130,27 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Fitted feminine cut with double front drop-in pockets, dedicated pen divider, and side seam slits for unrestricted patient transfers and CPR.",
     "colors": [
       {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#e11d48",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+      },
+      {
         "name": "Navy Blue",
         "hex": "#1e3a8a"
       },
       {
-        "name": "Hunter Green",
-        "hex": "#14532d"
-      },
-      {
         "name": "Dusty Rose",
         "hex": "#db2777"
-      },
-      {
-        "name": "Ceil Blue",
-        "hex": "#60a5fa"
       }
     ],
     "sizes": [
@@ -175,6 +186,21 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Athletic cut V-neck top with deep chest pocket and reinforced side splits. Tailored for comfort under consultation coats or theatre gowns.",
     "colors": [
       {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+      },
+      {
+        "name": "Petrol Blue",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif"
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#e11d48",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+      },
+      {
         "name": "Midnight Black",
         "hex": "#111827"
       },
@@ -185,10 +211,6 @@ export const INITIAL_PRODUCTS: Product[] = [
       {
         "name": "Forest Green",
         "hex": "#14532d"
-      },
-      {
-        "name": "Royal Blue",
-        "hex": "#2563eb"
       }
     ],
     "sizes": [
@@ -226,7 +248,18 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Midnight Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif"
+      },
+      {
+        "name": "Petrol Blue",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif"
+      },
+      {
+        "name": "Maroon Wine",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
       },
       {
         "name": "Hunter Green",
@@ -316,7 +349,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Caribbean Blue",
-        "hex": "#0284c7"
+        "hex": "#0284c7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/09/4.png"
       }
     ],
     "sizes": [
@@ -351,7 +385,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/TANC-Stethoscope-Black-1.avif"
       }
     ],
     "sizes": [
@@ -386,7 +421,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/TANC-Stethoscope-Navy-Blue-1.avif"
+      },
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/TANC-Stethoscope-Navy-Blue-1.avif"
       }
     ],
     "sizes": [
@@ -420,11 +461,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Astro-Animals-ScrubLab_Men_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Astro-Animals-ScrubLab_Men_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -458,11 +501,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Wild-Aid-ScrubLab_Women_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Wild-Aid-ScrubLab_Women_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -496,11 +541,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Paw-Print-ScrubLab_Women_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Paw-Print-ScrubLab_Women_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -534,11 +581,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Molar-Magic-ScrubLab_Women_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Molar-Magic-ScrubLab_Women_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -572,11 +621,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Mighty-Meds-ScrubLab_Women_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Mighty-Meds-ScrubLab_Women_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -610,11 +661,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Meow-Magic-ScrubLab_Women_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Meow-Magic-ScrubLab_Women_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -648,11 +701,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Medic-Mix-ScrubLab_Women_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Medic-Mix-ScrubLab_Women_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -686,11 +741,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Jingle-Dino-ScrubLab_Women_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Jingle-Dino-ScrubLab_Women_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -724,11 +781,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Healing-Hub-ScrubLab_Women_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Healing-Hub-ScrubLab_Women_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -762,7 +821,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Pink",
-        "hex": "#ec4899"
+        "hex": "#ec4899",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Frosty-Pink-ScrubLab_Women_Caps_01.avif"
+      },
+      {
+        "name": "Frosty Pink",
+        "hex": "#f472b6",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Frosty-Pink-ScrubLab_Women_Caps_01.avif"
       }
     ],
     "sizes": [
@@ -796,11 +861,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Balloon-Buds-ScrubLab_Women_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Balloon-Buds-ScrubLab_Women_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -834,11 +901,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Astro-Animals-ScrubLab_Women_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Astro-Animals-ScrubLab_Women_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -872,11 +941,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Aid-Arcade-ScrubLab_Women_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Aid-Arcade-ScrubLab_Women_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -910,11 +981,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Wild-Aid-ScrubLab_Men_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Wild-Aid-ScrubLab_Men_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -948,11 +1021,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Paw-Print-ScrubLab_Men_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Paw-Print-ScrubLab_Men_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -986,11 +1061,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Molar-Magic-ScrubLab_Men_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Molar-Magic-ScrubLab_Men_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -1024,11 +1101,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Mighty-Meds-ScrubLab_Men_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Mighty-Meds-ScrubLab_Men_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -1062,11 +1141,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Meow-Magic-ScrubLab_Men_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Meow-Magic-ScrubLab_Men_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -1100,11 +1181,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Medic-Mix-ScrubLab_Men_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Medic-Mix-ScrubLab_Men_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -1138,11 +1221,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Jingle-Dino-ScrubLab_Men_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Jingle-Dino-ScrubLab_Men_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -1176,11 +1261,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Healing-Hub-ScrubLab_Men_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Healing-Hub-ScrubLab_Men_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -1214,7 +1301,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Pink",
-        "hex": "#ec4899"
+        "hex": "#ec4899",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Frosty-Pink-ScrubLab_Men_Caps_01.avif"
+      },
+      {
+        "name": "Frosty Pink",
+        "hex": "#f472b6",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Frosty-Pink-ScrubLab_Men_Caps_01.avif"
       }
     ],
     "sizes": [
@@ -1248,11 +1341,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Balloon-Buds-ScrubLab_Men_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Balloon-Buds-ScrubLab_Men_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -1286,11 +1381,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Aid-Arcade-ScrubLab_Men_Caps_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/08/Aid-Arcade-ScrubLab_Men_Caps_02.avif"
       }
     ],
     "sizes": [
@@ -1321,7 +1418,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mens-Short-Sleeve-Button-up-shirt.avif"
       },
       {
         "name": "Hunter Green",
@@ -1332,7 +1430,7 @@ export const INITIAL_PRODUCTS: Product[] = [
         "hex": "#60a5fa"
       },
       {
-        "name": "Black",
+        "name": "Midnight Black",
         "hex": "#111827"
       }
     ],
@@ -1371,7 +1469,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mens-Long-Sleeve-Button-up-shirt.avif"
       },
       {
         "name": "Hunter Green",
@@ -1382,7 +1481,7 @@ export const INITIAL_PRODUCTS: Product[] = [
         "hex": "#60a5fa"
       },
       {
-        "name": "Black",
+        "name": "Midnight Black",
         "hex": "#111827"
       }
     ],
@@ -1421,7 +1520,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ladies-Long-Sleeve-Button-up-Shirt.avif"
       },
       {
         "name": "Hunter Green",
@@ -1432,7 +1532,7 @@ export const INITIAL_PRODUCTS: Product[] = [
         "hex": "#60a5fa"
       },
       {
-        "name": "Black",
+        "name": "Midnight Black",
         "hex": "#111827"
       }
     ],
@@ -1472,18 +1572,20 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/4-Sleeve-Button-up-Shirt_01.avif"
       },
       {
         "name": "Hunter Green",
-        "hex": "#14532d"
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/4-Sleeve-Button-up-Shirt_02.avif"
       },
       {
         "name": "Ceil Blue",
         "hex": "#60a5fa"
       },
       {
-        "name": "Black",
+        "name": "Midnight Black",
         "hex": "#111827"
       }
     ],
@@ -1546,6 +1648,22 @@ export const INITIAL_PRODUCTS: Product[] = [
       {
         "name": "Brown",
         "hex": "#78350f"
+      },
+      {
+        "name": "Camo",
+        "hex": "#4d5338"
+      },
+      {
+        "name": "Cerise",
+        "hex": "#e11d48"
+      },
+      {
+        "name": "Charcoal",
+        "hex": "#374151"
+      },
+      {
+        "name": "Coral",
+        "hex": "#fb7185"
       }
     ],
     "sizes": [
@@ -1652,6 +1770,22 @@ export const INITIAL_PRODUCTS: Product[] = [
       {
         "name": "Bottle Green",
         "hex": "#4b5563"
+      },
+      {
+        "name": "Brown",
+        "hex": "#78350f"
+      },
+      {
+        "name": "Camo",
+        "hex": "#4d5338"
+      },
+      {
+        "name": "Cerise",
+        "hex": "#e11d48"
+      },
+      {
+        "name": "Charcoal",
+        "hex": "#374151"
       }
     ],
     "sizes": [
@@ -1713,6 +1847,22 @@ export const INITIAL_PRODUCTS: Product[] = [
       {
         "name": "Bottle Green",
         "hex": "#4b5563"
+      },
+      {
+        "name": "Brown",
+        "hex": "#78350f"
+      },
+      {
+        "name": "Camo",
+        "hex": "#4d5338"
+      },
+      {
+        "name": "Cerise",
+        "hex": "#e11d48"
+      },
+      {
+        "name": "Charcoal",
+        "hex": "#374151"
       }
     ],
     "sizes": [
@@ -1772,6 +1922,22 @@ export const INITIAL_PRODUCTS: Product[] = [
       {
         "name": "Bottle Green",
         "hex": "#4b5563"
+      },
+      {
+        "name": "Brown",
+        "hex": "#78350f"
+      },
+      {
+        "name": "Camo",
+        "hex": "#4d5338"
+      },
+      {
+        "name": "Cerise",
+        "hex": "#e11d48"
+      },
+      {
+        "name": "Charcoal",
+        "hex": "#374151"
       }
     ],
     "sizes": [
@@ -1834,6 +2000,22 @@ export const INITIAL_PRODUCTS: Product[] = [
       {
         "name": "Bottle Green",
         "hex": "#4b5563"
+      },
+      {
+        "name": "Brown",
+        "hex": "#78350f"
+      },
+      {
+        "name": "Camo",
+        "hex": "#4d5338"
+      },
+      {
+        "name": "Cerise",
+        "hex": "#e11d48"
+      },
+      {
+        "name": "Charcoal",
+        "hex": "#374151"
       }
     ],
     "sizes": [
@@ -1897,6 +2079,22 @@ export const INITIAL_PRODUCTS: Product[] = [
       {
         "name": "Bottle Green",
         "hex": "#4b5563"
+      },
+      {
+        "name": "Brown",
+        "hex": "#78350f"
+      },
+      {
+        "name": "Camo",
+        "hex": "#4d5338"
+      },
+      {
+        "name": "Cerise",
+        "hex": "#e11d48"
+      },
+      {
+        "name": "Charcoal",
+        "hex": "#374151"
       }
     ],
     "sizes": [
@@ -1960,6 +2158,22 @@ export const INITIAL_PRODUCTS: Product[] = [
       {
         "name": "Bottle Green",
         "hex": "#4b5563"
+      },
+      {
+        "name": "Brown",
+        "hex": "#78350f"
+      },
+      {
+        "name": "Camo",
+        "hex": "#4d5338"
+      },
+      {
+        "name": "Cerise",
+        "hex": "#e11d48"
+      },
+      {
+        "name": "Charcoal",
+        "hex": "#374151"
       }
     ],
     "sizes": [
@@ -2003,27 +2217,52 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Tanc-Underscrubs_Men_02.avif"
       },
       {
         "name": "Cerise",
-        "hex": "#e11d48"
+        "hex": "#e11d48",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Tanc-Underscrubs_Men_02.avif"
+      },
+      {
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Tanc-Underscrubs_Men_02.avif"
+      },
+      {
+        "name": "Mauve",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mauve_Tanc-Underscrubs_Men_02.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Tanc-Underscrubs_Men_02.avif"
+      },
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Tanc-Underscrubs_Mens_02.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Petrol_Tanc-Underscrubs_Men_02.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Tanc-Underscrubs_Mens_02.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Tanc-Underscrubs_Mens_02.avif"
       },
       {
         "name": "Coral",
         "hex": "#fb7185"
-      },
-      {
-        "name": "Lavender",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Maroon",
-        "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
       }
     ],
     "sizes": [
@@ -2065,28 +2304,52 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "All-day comfort starts beneath the scrubs. Ultra-soft cotton with 4-way stretch delivers flexibility and support through every shift. Available in 13+ colours for versatile layering options.",
     "colors": [
       {
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Tanc-Underscrubs_Women_03.avif"
+      },
+      {
+        "name": "Mauve",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mauve_Tanc-Underscrubs_Women_03.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Tanc-Underscrubs_Women_02.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Tanc-Underscrubs_Women_03.avif"
+      },
+      {
+        "name": "Slate/Graphite Grey",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Graphite-Grey_Tanc-Underscrubs_Women_03.avif"
+      },
+      {
+        "name": "White",
+        "hex": "#ffffff",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/White_Tanc-Underscrubs_Women_03.avif"
+      },
+      {
+        "name": "Graphite",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Graphite-Grey_Tanc-Underscrubs_Women_03.avif"
+      },
+      {
+        "name": "Slate",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Graphite-Grey_Tanc-Underscrubs_Women_03.avif"
+      },
+      {
         "name": "Black",
         "hex": "#111827"
       },
       {
         "name": "Cerise",
         "hex": "#e11d48"
-      },
-      {
-        "name": "Coral",
-        "hex": "#fb7185"
-      },
-      {
-        "name": "Lavender",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Maroon",
-        "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
       }
     ],
     "sizes": [
@@ -2130,15 +2393,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Black_01.avif"
       },
       {
         "name": "Charcoal",
-        "hex": "#374151"
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Charcoal_01.avif"
       },
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Navy-Blue_01.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Navy-Blue_01.avif"
       }
     ],
     "sizes": [
@@ -2202,6 +2473,22 @@ export const INITIAL_PRODUCTS: Product[] = [
       {
         "name": "Bottle Green",
         "hex": "#4b5563"
+      },
+      {
+        "name": "Bright Yellow",
+        "hex": "#eab308"
+      },
+      {
+        "name": "Brown",
+        "hex": "#78350f"
+      },
+      {
+        "name": "Camo",
+        "hex": "#4d5338"
+      },
+      {
+        "name": "Cerise",
+        "hex": "#e11d48"
       }
     ],
     "sizes": [
@@ -2242,15 +2529,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Men_Water-Resistent_01.avif"
       },
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Women_Water-Resistent_01.avif"
       },
       {
         "name": "Powder Blue",
-        "hex": "#93c5fd"
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Women_Water-Resistent_01.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Women_Water-Resistent_01.avif"
       }
     ],
     "sizes": [
@@ -2293,6 +2588,41 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Our TANC Lite scrubs are made from a lightweight polycotton blend that is 50% cotton, 50% polyester. It is softer, lighter, and more breathable than our Core range. Classic Medical Scrubs Bottom Only",
     "colors": [
       {
+        "name": "Bottle Green",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif"
+      },
+      {
+        "name": "Maroon",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_04.avif"
+      },
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif"
+      },
+      {
+        "name": "Royal Blue",
+        "hex": "#1d4ed8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+      },
+      {
         "name": "Airforce BlueGrey",
         "hex": "#4b5563"
       },
@@ -2303,18 +2633,6 @@ export const INITIAL_PRODUCTS: Product[] = [
       {
         "name": "Black",
         "hex": "#111827"
-      },
-      {
-        "name": "Bottle Green",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Brown",
-        "hex": "#78350f"
-      },
-      {
-        "name": "Charcoal",
-        "hex": "#374151"
       }
     ],
     "sizes": [
@@ -2357,28 +2675,53 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Our TANC Lite scrubs are made from a lightweight polycotton blend that is 50% cotton, 50% polyester. It is softer, lighter, and more breathable than our Core range. Classic unisex Medical Scrubs Top Only.",
     "colors": [
       {
-        "name": "Airforce BlueGrey",
-        "hex": "#4b5563"
-      },
-      {
         "name": "Baby Pink",
-        "hex": "#fbcfe8"
+        "hex": "#fbcfe8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
       },
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif"
       },
       {
-        "name": "Bottle Green",
+        "name": "Maroon",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_02.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_02.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Teal_Lite-Scrubs_Women_04.avif"
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Raspberry_Lite-Scrubs_Men_03.avif"
+      },
+      {
+        "name": "Slate",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+      },
+      {
+        "name": "Teal",
+        "hex": "#0f766e",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Teal_Lite-Scrubs_Women_04.avif"
+      },
+      {
+        "name": "Pink",
+        "hex": "#ec4899",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
+      },
+      {
+        "name": "Airforce BlueGrey",
         "hex": "#4b5563"
-      },
-      {
-        "name": "Brown",
-        "hex": "#78350f"
-      },
-      {
-        "name": "Charcoal",
-        "hex": "#374151"
       }
     ],
     "sizes": [
@@ -2422,28 +2765,54 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Our TANC Lite scrubs are made from a lightweight polycotton blend that is 50% cotton, 50% polyester. It is softer, lighter, and more breathable than our Core range.",
     "colors": [
       {
-        "name": "Airforce BlueGrey",
-        "hex": "#4b5563"
-      },
-      {
         "name": "Baby Pink",
-        "hex": "#fbcfe8"
-      },
-      {
-        "name": "Black",
-        "hex": "#111827"
+        "hex": "#fbcfe8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
       },
       {
         "name": "Bottle Green",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Brown",
-        "hex": "#78350f"
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Men_01.avif"
       },
       {
         "name": "Charcoal",
-        "hex": "#374151"
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Lite-Scrubs_Women_09.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_01.avif"
+      },
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif"
+      },
+      {
+        "name": "Royal Blue",
+        "hex": "#1d4ed8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif"
+      },
+      {
+        "name": "Slate",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Women_01.avif"
+      },
+      {
+        "name": "Pink",
+        "hex": "#ec4899",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif"
       }
     ],
     "sizes": [
@@ -2488,27 +2857,53 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Airforce BlueGrey",
-        "hex": "#4b5563"
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
       },
       {
         "name": "Baby Blue",
-        "hex": "#bfdbfe"
+        "hex": "#bfdbfe",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif"
       },
       {
-        "name": "Baby Pink",
-        "hex": "#fbcfe8"
+        "name": "Camo",
+        "hex": "#4d5338",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Camo_Core_Men_02-1.avif"
       },
       {
-        "name": "Beige",
-        "hex": "#d6d3d1"
+        "name": "Cerise",
+        "hex": "#e11d48",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
+        "name": "Coral",
+        "hex": "#fb7185",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif"
       },
       {
-        "name": "Bottle Green",
-        "hex": "#4b5563"
+        "name": "Mustard",
+        "hex": "#ca8a04",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif"
+      },
+      {
+        "name": "Purple",
+        "hex": "#7e22ce",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif"
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif"
+      },
+      {
+        "name": "Royal Blue",
+        "hex": "#1d4ed8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif"
       }
     ],
     "sizes": [
@@ -2551,28 +2946,54 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Classic Medical Scrubs Bottom Only",
     "colors": [
       {
-        "name": "Airforce BlueGrey",
-        "hex": "#4b5563"
-      },
-      {
         "name": "Baby Blue",
-        "hex": "#bfdbfe"
+        "hex": "#bfdbfe",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif"
       },
       {
         "name": "Baby Pink",
-        "hex": "#fbcfe8"
-      },
-      {
-        "name": "Beige",
-        "hex": "#d6d3d1"
-      },
-      {
-        "name": "Black",
-        "hex": "#111827"
+        "hex": "#fbcfe8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif"
       },
       {
         "name": "Bottle Green",
-        "hex": "#4b5563"
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+      },
+      {
+        "name": "Camo",
+        "hex": "#4d5338",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Camo_Core_Men_06-1.avif"
+      },
+      {
+        "name": "Cerise",
+        "hex": "#e11d48",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif"
+      },
+      {
+        "name": "Coral",
+        "hex": "#fb7185",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_06.avif"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif"
+      },
+      {
+        "name": "Royal Blue",
+        "hex": "#1d4ed8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif"
+      },
+      {
+        "name": "Pink",
+        "hex": "#ec4899",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif"
       }
     ],
     "sizes": [
@@ -2615,27 +3036,53 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Airforce BlueGrey",
-        "hex": "#4b5563"
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
       },
       {
         "name": "Baby Blue",
-        "hex": "#bfdbfe"
+        "hex": "#bfdbfe",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
       },
       {
         "name": "Baby Pink",
-        "hex": "#fbcfe8"
+        "hex": "#fbcfe8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_02.avif"
       },
       {
-        "name": "Beige",
-        "hex": "#d6d3d1"
+        "name": "Camo",
+        "hex": "#4d5338",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Camo_Core_Women_02.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
+        "name": "Cerise",
+        "hex": "#e11d48",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_02.avif"
       },
       {
-        "name": "Bottle Green",
-        "hex": "#4b5563"
+        "name": "Lilac",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+      },
+      {
+        "name": "Purple",
+        "hex": "#7e22ce",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif"
+      },
+      {
+        "name": "Royal Blue",
+        "hex": "#1d4ed8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+      },
+      {
+        "name": "Slate",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
       }
     ],
     "sizes": [
@@ -2678,19 +3125,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Men_Merry-Christmas_01.avif"
       },
       {
         "name": "Hunter Green",
-        "hex": "#14532d"
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Women_Merry-Christmas_01.avif"
       },
       {
         "name": "Ceil Blue",
-        "hex": "#60a5fa"
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Men_Merry-Christmas_02.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Women_Merry-Christmas_02.avif"
       }
     ],
     "sizes": [
@@ -2735,7 +3186,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Baby Blue",
-        "hex": "#bfdbfe"
+        "hex": "#bfdbfe",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Women_Baby-Blue-Sunflowers_02.avif"
       }
     ],
     "sizes": [
@@ -2778,19 +3230,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Men_Hot-Air-Balloons_01.avif"
       },
       {
         "name": "Hunter Green",
-        "hex": "#14532d"
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Women_Hot-Air-Balloons_01.avif"
       },
       {
         "name": "Ceil Blue",
-        "hex": "#60a5fa"
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Men_Hot-Air-Balloons_02.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Women_Hot-Air-Balloons_02.avif"
       }
     ],
     "sizes": [
@@ -2833,19 +3289,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Women_Space-Odyssey_01.avif"
       },
       {
         "name": "Hunter Green",
-        "hex": "#14532d"
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Men_Space-Odyssey_01.avif"
       },
       {
         "name": "Ceil Blue",
-        "hex": "#60a5fa"
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Women_Space-Odyssey_02.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Men_Space-Odyssey_02.avif"
       }
     ],
     "sizes": [
@@ -2888,19 +3348,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Women_Watermelon-Fun_01.avif"
       },
       {
         "name": "Hunter Green",
-        "hex": "#14532d"
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Men_Watermelon-Fun_01-1.avif"
       },
       {
         "name": "Ceil Blue",
-        "hex": "#60a5fa"
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Women_Watermelon-Fun_02.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Men_Watermelon-Fun_02.avif"
       }
     ],
     "sizes": [
@@ -2944,15 +3408,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Navy-Blue_02.avif"
       },
       {
         "name": "Charcoal",
-        "hex": "#374151"
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Charcoal_03.avif"
       },
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Navy-Blue_02.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Navy-Blue_02.avif"
       }
     ],
     "sizes": [
@@ -2996,15 +3468,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Black_Men_01.avif"
       },
       {
         "name": "Charcoal",
-        "hex": "#374151"
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Charcoal_Men_01.avif"
       },
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Navy-Blue_Women_01.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Navy-Blue_Women_01.avif"
       }
     ],
     "sizes": [
@@ -3048,19 +3528,28 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Triacetate_Women_Black_02.avif"
       },
       {
         "name": "Charcoal",
-        "hex": "#374151"
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Triacetate_Men_Charcoal_02.avif"
       },
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Triacetate_Women_Navy-Blue_02.avif"
       },
       {
         "name": "Powder Blue",
-        "hex": "#93c5fd"
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Triacetate_Men_Powder-Blue_02.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Triacetate_Women_Navy-Blue_02.avif"
       }
     ],
     "sizes": [
@@ -3106,11 +3595,18 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Power-Prime-Walk-300_Black_Women_01.avif"
       },
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Power-Prime-Walk-300_Navy-Blue_Women_04.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Power-Prime-Walk-300_Navy_Men_04.avif"
       }
     ],
     "sizes": [
@@ -3155,27 +3651,53 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Airforce BlueGrey",
-        "hex": "#4b5563"
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Female.avif"
       },
       {
         "name": "Baby Blue",
-        "hex": "#bfdbfe"
-      },
-      {
-        "name": "Baby Pink",
-        "hex": "#fbcfe8"
+        "hex": "#bfdbfe",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-blue-male.avif"
       },
       {
         "name": "Beige",
-        "hex": "#d6d3d1"
-      },
-      {
-        "name": "Black",
-        "hex": "#111827"
+        "hex": "#d6d3d1",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Beige-Male.avif"
       },
       {
         "name": "Bottle Green",
-        "hex": "#4b5563"
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Female.avif"
+      },
+      {
+        "name": "Coral",
+        "hex": "#fb7185",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Female.avif"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Female.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-blue-male.avif"
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Raspberry-male.avif"
+      },
+      {
+        "name": "Royal Blue",
+        "hex": "#1d4ed8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-blue-male.avif"
+      },
+      {
+        "name": "Slate",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Female.avif"
       }
     ],
     "sizes": [
@@ -3213,27 +3735,53 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Airforce BlueGrey",
-        "hex": "#4b5563"
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Female_Chef-Style-Theatre.avif"
       },
       {
         "name": "Baby Blue",
-        "hex": "#bfdbfe"
+        "hex": "#bfdbfe",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Female_Chef-Style-Theatre.avif"
       },
       {
-        "name": "Baby Pink",
-        "hex": "#fbcfe8"
+        "name": "Coral",
+        "hex": "#fb7185",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Female_Chef-Style-Theatre.avif"
       },
       {
-        "name": "Beige",
-        "hex": "#d6d3d1"
+        "name": "Maroon",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Female_Chef-Style-Theatre.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Olive-Green_Female_Chef-Style-Theatre.avif"
       },
       {
-        "name": "Bottle Green",
-        "hex": "#4b5563"
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Female_Chef-Style-Theatre.avif"
+      },
+      {
+        "name": "Purple",
+        "hex": "#7e22ce",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Men_Chef-Style-Cap.avif"
+      },
+      {
+        "name": "Royal Blue",
+        "hex": "#1d4ed8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Female_Chef-Style-Theatre.avif"
+      },
+      {
+        "name": "Slate",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Female_Chef-Style-Theatre.avif"
+      },
+      {
+        "name": "True Blue",
+        "hex": "#2563eb",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Men_Chef-Style-Cap.avif"
       }
     ],
     "sizes": [
@@ -3287,6 +3835,22 @@ export const INITIAL_PRODUCTS: Product[] = [
       {
         "name": "Bottle Green",
         "hex": "#4b5563"
+      },
+      {
+        "name": "Brown",
+        "hex": "#78350f"
+      },
+      {
+        "name": "Camo",
+        "hex": "#4d5338"
+      },
+      {
+        "name": "Cerise",
+        "hex": "#e11d48"
+      },
+      {
+        "name": "Charcoal",
+        "hex": "#374151"
       }
     ],
     "sizes": [
@@ -3322,28 +3886,54 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Available in 30+ colours, so you'll find exactly what you need. Add embroidery or an institutional badge to make it part of your official theatre identity. A cap for professionals who know that consistency and reliability are non-negotiable. Avail...",
     "colors": [
       {
-        "name": "Airforce BlueGrey",
-        "hex": "#4b5563"
-      },
-      {
         "name": "Baby Blue",
-        "hex": "#bfdbfe"
+        "hex": "#bfdbfe",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-blue_Men_Core-Caps_01.avif"
       },
       {
-        "name": "Baby Pink",
-        "hex": "#fbcfe8"
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-blue_Men_Core-Caps_01.avif"
       },
       {
-        "name": "Beige",
-        "hex": "#d6d3d1"
+        "name": "Purple",
+        "hex": "#7e22ce",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Men_Core-Caps_01.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
+        "name": "Raspberry",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Raspberry_Women_Core-Caps_01.avif"
       },
       {
-        "name": "Bottle Green",
-        "hex": "#4b5563"
+        "name": "Royal Blue",
+        "hex": "#1d4ed8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-blue_Men_Core-Caps_01.avif"
+      },
+      {
+        "name": "Slate",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Men_Core-Caps_01.avif"
+      },
+      {
+        "name": "Teal",
+        "hex": "#0f766e",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Petrol_Women_Core-Caps_01.avif"
+      },
+      {
+        "name": "True Blue",
+        "hex": "#2563eb",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-blue_Men_Core-Caps_01.avif"
+      },
+      {
+        "name": "Violet",
+        "hex": "#8b5cf6",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Men_Core-Caps_01.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Petrol_Women_Core-Caps_01.avif"
       }
     ],
     "sizes": [
@@ -3380,19 +3970,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/ScrubLab-Sox_Socks_02.avif"
       },
       {
         "name": "Hunter Green",
-        "hex": "#14532d"
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/ScrubLab-Sox_Socks_04.avif"
       },
       {
         "name": "Ceil Blue",
-        "hex": "#60a5fa"
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/ScrubLab-Sox_Socks_03.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/ScrubLab-Sox_Socks_05.avif"
       }
     ],
     "sizes": [
@@ -3429,11 +4023,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Wild-About-Wildlife_Socks_03.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Wild-About-Wildlife_Socks_05.avif"
       }
     ],
     "sizes": [
@@ -3469,11 +4065,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Pet-Pals_Socks_03.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Pet-Pals_Socks_01.avif"
       }
     ],
     "sizes": [
@@ -3509,11 +4107,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Healing-Heals_Socks_03.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Healing-Heals_Socks_06.avif"
       }
     ],
     "sizes": [
@@ -3551,11 +4151,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Chew-Crew_Socks_04.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Chew-Crew_Socks_02.avif"
       }
     ],
     "sizes": [
@@ -3592,11 +4194,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Vital-Vibes_Socks_02.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Vital-Vibes_Socks_06.avif"
       }
     ],
     "sizes": [
@@ -3633,11 +4237,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Skeletal-Strides_Socks_02.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Skeletal-Strides_Socks_01.avif"
       }
     ],
     "sizes": [
@@ -3674,11 +4280,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Stethosocks_Socks_02.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Stethosocks_Socks_04.avif"
       }
     ],
     "sizes": [
@@ -3716,7 +4324,38 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Mint_05.avif"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Olive-Green_02.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Petrol_04.avif"
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Raspberry_03.avif"
+      },
+      {
+        "name": "Slate",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Slate_01.avif"
+      },
+      {
+        "name": "Olive",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Olive-Green_02.avif"
       },
       {
         "name": "Coral",
@@ -3724,19 +4363,11 @@ export const INITIAL_PRODUCTS: Product[] = [
       },
       {
         "name": "Graphite",
-        "hex": "#4b5563"
+        "hex": "#374151"
       },
       {
         "name": "Lavender",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Maroon",
-        "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
+        "hex": "#c084fc"
       }
     ],
     "sizes": [
@@ -3778,28 +4409,52 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Designed with performance in mind, the Jess™ Scrub Golfer is crafted from premium, breathable fabric to keep you feeling fresh and focused during those long shifts.",
     "colors": [
       {
+        "name": "Coral",
+        "hex": "#fb7185",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jess_Coral_01.avif"
+      },
+      {
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jess_Mauve_03.avif"
+      },
+      {
+        "name": "Mauve",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jess_Mauve_03.avif"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jess_Olive-Green_05.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jess_Powder-Blue_03.avif"
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jess_Raspberry_01.avif"
+      },
+      {
+        "name": "Slate",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jess_Slate_02.avif"
+      },
+      {
+        "name": "Olive",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jess_Olive-Green_05.avif"
+      },
+      {
         "name": "Black",
         "hex": "#111827"
       },
       {
-        "name": "Coral",
-        "hex": "#fb7185"
-      },
-      {
         "name": "Graphite",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Lavender",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Maroon",
-        "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
+        "hex": "#374151"
       }
     ],
     "sizes": [
@@ -3840,6 +4495,36 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Discover unparalleled comfort and style with our Lerato™ maternity pants featuring a specialised ribbing section designed to gently cradle and support your growing belly. Embrace the journey of motherhood in fashion-forward attire that combines pr...",
     "colors": [
       {
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Lavender_01.avif"
+      },
+      {
+        "name": "Mauve",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Lavender_01.avif"
+      },
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Navy_01.avif"
+      },
+      {
+        "name": "Optic White",
+        "hex": "#ffffff",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Navy_01.avif"
+      },
+      {
+        "name": "White",
+        "hex": "#ffffff",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif"
+      },
+      {
         "name": "Black",
         "hex": "#111827"
       },
@@ -3849,19 +4534,11 @@ export const INITIAL_PRODUCTS: Product[] = [
       },
       {
         "name": "Graphite",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Lavender",
-        "hex": "#4b5563"
+        "hex": "#374151"
       },
       {
         "name": "Maroon",
         "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
       }
     ],
     "sizes": [
@@ -3905,28 +4582,52 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "With a focus on both style and practicality, the James™ Jogger Cargo scrub pants boasts numerous details. It includes an elastic waistband, seven pockets for ample storage, knit rib ankle cuffs for a comfortable fit and our exclusive LABx™ four-wa...",
     "colors": [
       {
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Lavender_02.avif"
+      },
+      {
+        "name": "Maroon",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Maroon_04.avif"
+      },
+      {
+        "name": "Mauve",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Lavender_02.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Mint_01.avif"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
+      },
+      {
+        "name": "Slate",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Slate_04.avif"
+      },
+      {
+        "name": "Olive",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif"
+      },
+      {
         "name": "Black",
         "hex": "#111827"
       },
       {
         "name": "Coral",
         "hex": "#fb7185"
-      },
-      {
-        "name": "Graphite",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Lavender",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Maroon",
-        "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
       }
     ],
     "sizes": [
@@ -3969,7 +4670,38 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jen_Black_03.avif"
+      },
+      {
+        "name": "Maroon",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jen_Maroon_02.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jen_Mint_02.avif"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jen_Olive-Green_02.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jen_Petrol_04.avif"
+      },
+      {
+        "name": "Slate",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jen_Slate_02.avif"
+      },
+      {
+        "name": "Olive",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jen_Olive-Green_02.avif"
       },
       {
         "name": "Coral",
@@ -3977,19 +4709,11 @@ export const INITIAL_PRODUCTS: Product[] = [
       },
       {
         "name": "Graphite",
-        "hex": "#4b5563"
+        "hex": "#374151"
       },
       {
         "name": "Lavender",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Maroon",
-        "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
+        "hex": "#c084fc"
       }
     ],
     "sizes": [
@@ -4031,6 +4755,41 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Designed with performance in mind, the Paul™ Scrub Golfer is crafted from premium, breathable fabric to keep you feeling fresh and focused during those long shifts.",
     "colors": [
       {
+        "name": "Graphite",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Paul_Graphite_03.avif"
+      },
+      {
+        "name": "Maroon",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Paul_Maroon_04.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Paul_Mint_04.avif"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Paul_Olive-Green_02.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Paul_Petrol_03.avif"
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Paul_Raspberry_01.avif"
+      },
+      {
+        "name": "Olive",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Paul_Olive-Green_02.avif"
+      },
+      {
         "name": "Black",
         "hex": "#111827"
       },
@@ -4039,20 +4798,8 @@ export const INITIAL_PRODUCTS: Product[] = [
         "hex": "#fb7185"
       },
       {
-        "name": "Graphite",
-        "hex": "#4b5563"
-      },
-      {
         "name": "Lavender",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Maroon",
-        "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
+        "hex": "#c084fc"
       }
     ],
     "sizes": [
@@ -4093,6 +4840,41 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "The Susie™ maternity top features elasticated sides to ensure the tops are both comfortable and practical. Made from our exclusive LABx™ four-way stretch material.",
     "colors": [
       {
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Susie_Lavender_01.avif"
+      },
+      {
+        "name": "Mauve",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Susie_Lavender_01.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_02.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Susie_Powder-Blue_02.avif"
+      },
+      {
+        "name": "Olive",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
+      },
+      {
         "name": "Black",
         "hex": "#111827"
       },
@@ -4102,19 +4884,7 @@ export const INITIAL_PRODUCTS: Product[] = [
       },
       {
         "name": "Graphite",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Lavender",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Maroon",
-        "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
+        "hex": "#374151"
       }
     ],
     "sizes": [
@@ -4156,28 +4926,52 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "The Thabo™ Straight Leg scrub pants are a perfect blend of style and practicality. Featuring an elastic drawstring waistband, these pants offer a touch of flair. Equipped with 4 standard pockets for convenience, they are crafted from our exclusive...",
     "colors": [
       {
+        "name": "Coral",
+        "hex": "#fb7185",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thabo_Corals_03.avif"
+      },
+      {
+        "name": "Graphite",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thabo_Graphite_04.avif"
+      },
+      {
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thabo_Mauve_02.avif"
+      },
+      {
+        "name": "Mauve",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thabo_Mauve_02.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thabo_Mint_03.avif"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thabo_Olive-Green_04.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thabo_Petrol_02.avif"
+      },
+      {
+        "name": "Olive",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thabo_Olive-Green_04.avif"
+      },
+      {
         "name": "Black",
         "hex": "#111827"
       },
       {
-        "name": "Coral",
-        "hex": "#fb7185"
-      },
-      {
-        "name": "Graphite",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Lavender",
-        "hex": "#4b5563"
-      },
-      {
         "name": "Maroon",
         "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
       }
     ],
     "sizes": [
@@ -4220,7 +5014,43 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jeff_Black_01.avif"
+      },
+      {
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jeff_Lavender_03.avif"
+      },
+      {
+        "name": "Maroon",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jeff_Maroon_05.avif"
+      },
+      {
+        "name": "Mauve",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jeff_Lavender_03.avif"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jeff_Olive-Green_02.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jeff-_Petrol_02.avif"
+      },
+      {
+        "name": "Slate",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jeff_Slate_02.avif"
+      },
+      {
+        "name": "Olive",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jeff_Olive-Green_02.avif"
       },
       {
         "name": "Coral",
@@ -4228,19 +5058,7 @@ export const INITIAL_PRODUCTS: Product[] = [
       },
       {
         "name": "Graphite",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Lavender",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Maroon",
-        "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
+        "hex": "#374151"
       }
     ],
     "sizes": [
@@ -4282,6 +5100,36 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "The Leo™ boasts an elegant V-neckline, with three pockets, a timeless cut, and our exclusive LABx™ four-way stretch material, making it simple yet sophisticated.",
     "colors": [
       {
+        "name": "Graphite",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Graphite_02.avif"
+      },
+      {
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif"
+      },
+      {
+        "name": "Mauve",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+      },
+      {
         "name": "Black",
         "hex": "#111827"
       },
@@ -4290,20 +5138,12 @@ export const INITIAL_PRODUCTS: Product[] = [
         "hex": "#fb7185"
       },
       {
-        "name": "Graphite",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Lavender",
-        "hex": "#4b5563"
-      },
-      {
         "name": "Maroon",
         "hex": "#831843"
       },
       {
-        "name": "Mauve",
-        "hex": "#4b5563"
+        "name": "Mint",
+        "hex": "#6ee7b7"
       }
     ],
     "sizes": [
@@ -4346,7 +5186,33 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Nick_Black_02.avif"
+      },
+      {
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Nick_Lavender_02.avif"
+      },
+      {
+        "name": "Maroon",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Nick_Maroon_04.avif"
+      },
+      {
+        "name": "Mauve",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Nick_Mauve_04.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Nick_Mint_01.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Nick_Petrol_01.avif"
       },
       {
         "name": "Coral",
@@ -4354,19 +5220,15 @@ export const INITIAL_PRODUCTS: Product[] = [
       },
       {
         "name": "Graphite",
-        "hex": "#4b5563"
+        "hex": "#374151"
       },
       {
-        "name": "Lavender",
-        "hex": "#4b5563"
+        "name": "Navy Blue",
+        "hex": "#1e3a8a"
       },
       {
-        "name": "Maroon",
-        "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
+        "name": "Olive Green",
+        "hex": "#3f6212"
       }
     ],
     "sizes": [
@@ -4409,6 +5271,41 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "With a focus on both style and practicality, the Ben™ Jogger boasts numerous details. It includes an elastic waistband with delicate ruffles, four pockets for ample storage, knit rib ankle cuffs for a comfortable fit and our exclusive LABx™ four-w...",
     "colors": [
       {
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Lavender_02.avif"
+      },
+      {
+        "name": "Maroon",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Maroon_03.avif"
+      },
+      {
+        "name": "Mauve",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Mauve_03.avif"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Olive-Green_03.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Powder-Blue_02.avif"
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Raspberry_03.avif"
+      },
+      {
+        "name": "Olive",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Olive-Green_03.avif"
+      },
+      {
         "name": "Black",
         "hex": "#111827"
       },
@@ -4418,19 +5315,7 @@ export const INITIAL_PRODUCTS: Product[] = [
       },
       {
         "name": "Graphite",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Lavender",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Maroon",
-        "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
+        "hex": "#374151"
       }
     ],
     "sizes": [
@@ -4473,27 +5358,50 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif"
       },
       {
         "name": "Coral",
-        "hex": "#fb7185"
-      },
-      {
-        "name": "Graphite",
-        "hex": "#4b5563"
+        "hex": "#fb7185",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Coral_03.avif"
       },
       {
         "name": "Lavender",
-        "hex": "#4b5563"
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Mauve_02.avif"
       },
       {
         "name": "Maroon",
-        "hex": "#831843"
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Maroon_01.avif"
       },
       {
         "name": "Mauve",
-        "hex": "#4b5563"
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Mauve_02.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Mint_02.avif"
+      },
+      {
+        "name": "Slate",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Slate_03.avif"
+      },
+      {
+        "name": "Graphite",
+        "hex": "#374151"
+      },
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212"
       }
     ],
     "sizes": [
@@ -4536,28 +5444,52 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "The Meg™ Pants are made from our exclusive LABx™ four-way stretch material, offering a comfortable waistband, seven pockets, and a timeless straight leg design.",
     "colors": [
       {
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Meg_Lavender_03.avif"
+      },
+      {
+        "name": "Maroon",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Meg_Maroon_02.avif"
+      },
+      {
+        "name": "Mauve",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Meg_Mauve_02.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Meg_Mint_05.avif"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Meg_Olive-Green_01.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Meg_Petrol_03.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Meg_Powder-Blue_01.avif"
+      },
+      {
+        "name": "Olive",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Meg_Olive-Green_01.avif"
+      },
+      {
         "name": "Black",
         "hex": "#111827"
       },
       {
         "name": "Coral",
         "hex": "#fb7185"
-      },
-      {
-        "name": "Graphite",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Lavender",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Maroon",
-        "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
       }
     ],
     "sizes": [
@@ -4601,7 +5533,43 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif"
+      },
+      {
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jess_Lavender_04.avif"
+      },
+      {
+        "name": "Maroon",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+      },
+      {
+        "name": "Mauve",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jess_Lavender_04.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Mint_04-1.avif"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jess_Olive-Green_05.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif"
+      },
+      {
+        "name": "Olive",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jess_Olive-Green_05.avif"
       },
       {
         "name": "Coral",
@@ -4609,19 +5577,7 @@ export const INITIAL_PRODUCTS: Product[] = [
       },
       {
         "name": "Graphite",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Lavender",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Maroon",
-        "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
+        "hex": "#374151"
       }
     ],
     "sizes": [
@@ -4663,28 +5619,51 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "If you require more than a single pocket, the Lily™ is the perfect solution, featuring a contemporary neckline, 3 pockets, and our exclusive LABx™ four-way stretch material.",
     "colors": [
       {
+        "name": "Coral",
+        "hex": "#fb7185",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Coral_05.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_05.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif"
+      },
+      {
+        "name": "Olive",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
+      },
+      {
         "name": "Black",
         "hex": "#111827"
       },
       {
-        "name": "Coral",
-        "hex": "#fb7185"
-      },
-      {
         "name": "Graphite",
-        "hex": "#4b5563"
+        "hex": "#374151"
       },
       {
         "name": "Lavender",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Maroon",
-        "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
+        "hex": "#c084fc"
       }
     ],
     "sizes": [
@@ -4726,28 +5705,51 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "The Josie™ boasts an elegant V-neckline, a solitary chest pocket, a timeless cut, and our exclusive LABx™ four-way stretch material, making it simple yet sophisticated.",
     "colors": [
       {
+        "name": "Coral",
+        "hex": "#fb7185",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Josie_Coral_03.avif"
+      },
+      {
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Josie_Lavender_02.avif"
+      },
+      {
+        "name": "Maroon",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Josie_Maroon_02.avif"
+      },
+      {
+        "name": "Mauve",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Josie_Mauve_01.avif"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Josie_Olive-Green_02.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Josie_Petrol_02.avif"
+      },
+      {
+        "name": "Olive",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Josie_Olive-Green_02.avif"
+      },
+      {
         "name": "Black",
         "hex": "#111827"
       },
       {
-        "name": "Coral",
-        "hex": "#fb7185"
-      },
-      {
         "name": "Graphite",
-        "hex": "#4b5563"
+        "hex": "#374151"
       },
       {
-        "name": "Lavender",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Maroon",
-        "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
+        "name": "Mint",
+        "hex": "#6ee7b7"
       }
     ],
     "sizes": [
@@ -4790,27 +5792,51 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Male_Underscrubs_04.avif"
+      },
+      {
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Male_Underscrubs_02.avif"
+      },
+      {
+        "name": "Mauve",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Male_Underscrubs_02.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Male_Underscrubs_01.avif"
+      },
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Male_Underscrubs_03.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Male_Underscrubs_02.avif"
+      },
+      {
+        "name": "White",
+        "hex": "#ffffff",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/White_Male_Underscrubs_03.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Male_Underscrubs_03.avif"
       },
       {
         "name": "Coral",
         "hex": "#fb7185"
       },
       {
-        "name": "Lavender",
-        "hex": "#4b5563"
-      },
-      {
         "name": "Maroon",
         "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Mint",
-        "hex": "#6ee7b7"
       }
     ],
     "sizes": [
@@ -4856,19 +5882,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Women_01.avif"
       },
       {
         "name": "Hunter Green",
-        "hex": "#14532d"
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Men_01.avif"
       },
       {
         "name": "Ceil Blue",
-        "hex": "#60a5fa"
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Women_02.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Men_02.avif"
       }
     ],
     "sizes": [
@@ -4900,7 +5930,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Male-Underscrub.avif"
       },
       {
         "name": "Hunter Green",
@@ -4911,7 +5942,7 @@ export const INITIAL_PRODUCTS: Product[] = [
         "hex": "#60a5fa"
       },
       {
-        "name": "Black",
+        "name": "Midnight Black",
         "hex": "#111827"
       }
     ],
@@ -4951,7 +5982,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub-Sets-Assistant-with-No-Piping.avif"
       },
       {
         "name": "Hunter Green",
@@ -4962,7 +5994,7 @@ export const INITIAL_PRODUCTS: Product[] = [
         "hex": "#60a5fa"
       },
       {
-        "name": "Black",
+        "name": "Midnight Black",
         "hex": "#111827"
       }
     ],
@@ -5002,7 +6034,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Lilac",
-        "hex": "#c084fc"
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Hairbar-Logo-with-Lilac-Piping.avif"
       }
     ],
     "sizes": [
@@ -5041,7 +6074,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Yellow",
-        "hex": "#eab308"
+        "hex": "#eab308",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Sorbet-Man-with-yellow-piping.avif"
       }
     ],
     "sizes": [
@@ -5080,7 +6114,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Salon-with-Raspberry-piping.avif"
       },
       {
         "name": "Hunter Green",
@@ -5091,7 +6126,7 @@ export const INITIAL_PRODUCTS: Product[] = [
         "hex": "#60a5fa"
       },
       {
-        "name": "Black",
+        "name": "Midnight Black",
         "hex": "#111827"
       }
     ],
@@ -5131,7 +6166,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Mint",
-        "hex": "#6ee7b7"
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_-Salon-with-Mint-piping.avif"
       }
     ],
     "sizes": [
@@ -5169,7 +6205,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Lilac",
-        "hex": "#c084fc"
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Hairbar-Logo-with-Lilac-Piping.avif"
       }
     ],
     "sizes": [
@@ -5207,7 +6244,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Yellow",
-        "hex": "#eab308"
+        "hex": "#eab308",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Sorbet-Man-with-yellow-piping.avif"
       }
     ],
     "sizes": [
@@ -5245,7 +6283,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Salon-with-Raspberry-piping.avif"
       },
       {
         "name": "Hunter Green",
@@ -5256,7 +6295,7 @@ export const INITIAL_PRODUCTS: Product[] = [
         "hex": "#60a5fa"
       },
       {
-        "name": "Black",
+        "name": "Midnight Black",
         "hex": "#111827"
       }
     ],
@@ -5295,7 +6334,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Mint",
-        "hex": "#6ee7b7"
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_-Salon-with-Mint-piping.avif"
       }
     ],
     "sizes": [
@@ -5333,7 +6373,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Female-Underscrub.avif"
       },
       {
         "name": "Hunter Green",
@@ -5344,7 +6385,7 @@ export const INITIAL_PRODUCTS: Product[] = [
         "hex": "#60a5fa"
       },
       {
-        "name": "Black",
+        "name": "Midnight Black",
         "hex": "#111827"
       }
     ],
@@ -5384,7 +6425,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Male-Softshell-Jacket_01.avif"
       },
       {
         "name": "Black",
@@ -5433,15 +6475,18 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Female-Softshell-Jacket_01.avif"
       },
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Female-Softshell-Jacket_02.avif"
       },
       {
         "name": "Charcoal",
-        "hex": "#374151"
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Female-Softshell-Jacket_03.avif"
       }
     ],
     "sizes": [
@@ -5479,7 +6524,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub-pants.avif"
       },
       {
         "name": "Hunter Green",
@@ -5490,7 +6536,7 @@ export const INITIAL_PRODUCTS: Product[] = [
         "hex": "#60a5fa"
       },
       {
-        "name": "Black",
+        "name": "Midnight Black",
         "hex": "#111827"
       }
     ],
@@ -5537,27 +6583,53 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Airforce BlueGrey",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Baby Pink",
-        "hex": "#fbcfe8"
-      },
-      {
-        "name": "Black",
-        "hex": "#111827"
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Women_Lite-Caps_01.avif"
       },
       {
         "name": "Bottle Green",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Brown",
-        "hex": "#78350f"
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Men_Lite-Caps_01.avif"
       },
       {
         "name": "Charcoal",
-        "hex": "#374151"
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Women_Lite-Caps_01.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Women_Lite-Caps_01.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Petrol_Women_Lite-Caps_01.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Men_Lite-Caps_01.avif"
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Raspberry_Men_Lite-Caps_01.avif"
+      },
+      {
+        "name": "Royal Blue",
+        "hex": "#1d4ed8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Women_Lite-Caps_01.avif"
+      },
+      {
+        "name": "Slate",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Women_Lite-Caps_01.avif"
+      },
+      {
+        "name": "Teal",
+        "hex": "#0f766e",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Petrol_Women_Lite-Caps_01.avif"
       }
     ],
     "sizes": [
@@ -5592,6 +6664,36 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Our TANC Lite Scrub Caps are made from the same lightweight polycotton blend - 50% cotton, 50% polyester as our Lite Scrubs. They’re soft, breathable, and super comfortable for all-day wear, perfectly matching our TANC Lite scrubs.",
     "colors": [
       {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Men_Lite-Caps_01.avif"
+      },
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Men_Lite-Caps_01.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Men_Lite-Caps_01.avif"
+      },
+      {
+        "name": "Royal Blue",
+        "hex": "#1d4ed8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Men_Lite-Caps_01.avif"
+      },
+      {
+        "name": "Slate",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Men_Lite-Caps_01.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Men_Lite-Caps_01.avif"
+      },
+      {
         "name": "Airforce BlueGrey",
         "hex": "#4b5563"
       },
@@ -5606,14 +6708,6 @@ export const INITIAL_PRODUCTS: Product[] = [
       {
         "name": "Bottle Green",
         "hex": "#4b5563"
-      },
-      {
-        "name": "Brown",
-        "hex": "#78350f"
-      },
-      {
-        "name": "Charcoal",
-        "hex": "#374151"
       }
     ],
     "sizes": [
@@ -5666,6 +6760,22 @@ export const INITIAL_PRODUCTS: Product[] = [
       {
         "name": "Bottle Green",
         "hex": "#4b5563"
+      },
+      {
+        "name": "Brown",
+        "hex": "#78350f"
+      },
+      {
+        "name": "Camo",
+        "hex": "#4d5338"
+      },
+      {
+        "name": "Cerise",
+        "hex": "#e11d48"
+      },
+      {
+        "name": "Charcoal",
+        "hex": "#374151"
       }
     ],
     "sizes": [
@@ -5700,28 +6810,52 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Chef Style Theatre Only Please note: we do not have a preview image for all colours, but if the colour circle is able to be selected we do have stock:",
     "colors": [
       {
+        "name": "Camo",
+        "hex": "#4d5338",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Camo_Male_Chef-Style-Theatre.avif"
+      },
+      {
+        "name": "Lilac",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lilac_Male_Chef-Style-Theatre.avif"
+      },
+      {
+        "name": "Maroon",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Male_Chef-Style-Theatre.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Male_Chef-Style-Theatre.avif"
+      },
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Male_Chef-Style-Theatre.avif"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Olive-Green_Male_Chef-Style-Theatre.avif"
+      },
+      {
+        "name": "Olive",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Olive-Green_Male_Chef-Style-Theatre.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Male_Chef-Style-Theatre.avif"
+      },
+      {
         "name": "Airforce BlueGrey",
         "hex": "#4b5563"
       },
       {
         "name": "Baby Blue",
         "hex": "#bfdbfe"
-      },
-      {
-        "name": "Baby Pink",
-        "hex": "#fbcfe8"
-      },
-      {
-        "name": "Beige",
-        "hex": "#d6d3d1"
-      },
-      {
-        "name": "Black",
-        "hex": "#111827"
-      },
-      {
-        "name": "Bottle Green",
-        "hex": "#4b5563"
       }
     ],
     "sizes": [
@@ -5756,27 +6890,52 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Shower Style Theatre Only Please note: we do not have a preview image for all colours, but if the colour circle is able to be selected we do have stock:",
     "colors": [
       {
-        "name": "Airforce BlueGrey",
-        "hex": "#4b5563"
-      },
-      {
         "name": "Baby Blue",
-        "hex": "#bfdbfe"
+        "hex": "#bfdbfe",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-blue-male.avif"
       },
       {
-        "name": "Baby Pink",
-        "hex": "#fbcfe8"
+        "name": "Cerise",
+        "hex": "#e11d48",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise-male.avif"
       },
       {
-        "name": "Beige",
-        "hex": "#d6d3d1"
+        "name": "Maroon",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon-Male.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint-male.avif"
       },
       {
-        "name": "Bottle Green",
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Olive-green-male.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-blue-male.avif"
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise-male.avif"
+      },
+      {
+        "name": "Royal Blue",
+        "hex": "#1d4ed8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-blue-male.avif"
+      },
+      {
+        "name": "Olive",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Olive-green-male.avif"
+      },
+      {
+        "name": "Airforce BlueGrey",
         "hex": "#4b5563"
       }
     ],
@@ -5811,11 +6970,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Skull-Scalpel_Men_Polycotton_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Skull-Scalpel_Men_Polycotton_02.avif"
       }
     ],
     "sizes": [
@@ -5856,11 +7017,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Safari-Tots_Men_Polycotton_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Safari-Tots_Men_Polycotton_02.avif"
       }
     ],
     "sizes": [
@@ -5901,11 +7064,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Merry-Christmas_Men_Polycotton_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Merry-Christmas_Men_Polycotton_02.avif"
       }
     ],
     "sizes": [
@@ -5946,11 +7111,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Eff-Cancer_Men_Polycotton_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Eff-Cancer_Men_Polycotton_02.avif"
       }
     ],
     "sizes": [
@@ -5994,11 +7161,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jungle-Buccaneers_Women_Polycotton_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jungle-Buccaneers_Men_Polycotton_01.avif"
       }
     ],
     "sizes": [
@@ -6035,11 +7204,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/You-Scream-Ice-Cream_Women_Polycotton_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/You-Scream-Ice-Cream_Men_Polycotton_01.avif"
       }
     ],
     "sizes": [
@@ -6073,11 +7244,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jungle-Buccaneers_Men_Polycotton_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jungle-Buccaneers_Men_Polycotton_02.avif"
       }
     ],
     "sizes": [
@@ -6118,11 +7291,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/You-Scream-Ice-Cream_Men_Polycotton_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/You-Scream-Ice-Cream_Men_Polycotton_02.avif"
       }
     ],
     "sizes": [
@@ -6166,11 +7341,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Skull-Scalpel_Men_Polycotton_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Skull-Scalpel_Women_Polycotton_01.avif"
       }
     ],
     "sizes": [
@@ -6207,11 +7384,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Merry-Christmas_Men_Polycotton_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Merry-Christmas_Women_Polycotton_01.avif"
       }
     ],
     "sizes": [
@@ -6248,11 +7427,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Safari-Tots_Women_Polycotton_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Safari-Tots_Men_Polycotton_01.avif"
       }
     ],
     "sizes": [
@@ -6289,11 +7470,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Eff-Cancer_Men_Polycotton_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Eff-Cancer_Women_Polycotton_01.avif"
       }
     ],
     "sizes": [
@@ -6327,11 +7510,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Doggy-Parlour_Men_Cotton-Spandex_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Doggy-Parlour_Men_Cotton-Spandex_02.avif"
       }
     ],
     "sizes": [
@@ -6372,7 +7557,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Baby Blue",
-        "hex": "#bfdbfe"
+        "hex": "#bfdbfe",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue-Sunflowers_Cotton-Spandex_Polycotton_01.avif"
       }
     ],
     "sizes": [
@@ -6413,11 +7599,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Watermelon-Fun_Men_Cotton-Spandex_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Watermelon-Fun_Men_Cotton-Spandex_02.avif"
       }
     ],
     "sizes": [
@@ -6458,11 +7646,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Unicorn-Dreamland_Men_Cotton-Spandex_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Unicorn-Dreamland_Men_Cotton-Spandex_02.avif"
       }
     ],
     "sizes": [
@@ -6503,11 +7693,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Space-Odyssey_Men_Cotton-Spandex_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Space-Odyssey_Men_Cotton-Spandex_02.avif"
       }
     ],
     "sizes": [
@@ -6548,7 +7740,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Pink",
-        "hex": "#ec4899"
+        "hex": "#ec4899",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Pink-Flamingos_Men_Cotton-Spandex_01.avif"
       }
     ],
     "sizes": [
@@ -6589,11 +7782,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Island-Vibes_Men_Cotton-Spandex_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Island-Vibes_Men_Cotton-Spandex_02.avif"
       }
     ],
     "sizes": [
@@ -6634,11 +7829,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Hot-Air-Ballons_Men_Cotton-Spandex_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Hot-Air-Ballons_Men_Cotton-Spandex_02.avif"
       }
     ],
     "sizes": [
@@ -6679,11 +7876,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dino-Friends_Men_Cotton-Spandex_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dino-Friends_Men_Cotton-Spandex_02.avif"
       }
     ],
     "sizes": [
@@ -6726,19 +7925,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Watermelon-Fun_Women_Cotton-Spandex_01.avif"
       },
       {
         "name": "Hunter Green",
-        "hex": "#14532d"
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Watermelon-Fun_Men_Cotton-Spandex_01.avif"
       },
       {
         "name": "Ceil Blue",
-        "hex": "#60a5fa"
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Watermelon-Fun_Women_Cotton-Spandex_02.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Watermelon-Fun_Men_Cotton-Spandex_02.avif"
       }
     ],
     "sizes": [
@@ -6780,11 +7983,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Unicorn-Dreamland_Women_Cotton-Spandex_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Unicorn-Dreamland_Men_Cotton-Spandex_01.avif"
       }
     ],
     "sizes": [
@@ -6828,11 +8033,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Space-Odyssey_Women_Cotton-Spandex_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Space-Odyssey_Men_Cotton-Spandex_01.avif"
       }
     ],
     "sizes": [
@@ -6876,7 +8083,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Pink",
-        "hex": "#ec4899"
+        "hex": "#ec4899",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Pink-Flamingos_Women_Cotton-Spandex_01.avif"
       }
     ],
     "sizes": [
@@ -6913,11 +8121,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Island-Vibes_Men_Cotton-Spandex_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Island-Vibes_Women_Cotton-Spandex_01.avif"
       }
     ],
     "sizes": [
@@ -6954,11 +8164,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Hot-Air-Ballons_Women_Cotton-Spandex_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Hot-Air-Ballons_Men_Cotton-Spandex_01.avif"
       }
     ],
     "sizes": [
@@ -6995,11 +8207,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Doggy-Parlour_Men_Cotton-Spandex_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Doggy-Parlour_Women_Cotton-Spandex_01.avif"
       }
     ],
     "sizes": [
@@ -7036,11 +8250,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dino-Friends_Women_Cotton-Spandex_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dino-Friends_Men_Cotton-Spandex_01.avif"
       }
     ],
     "sizes": [
@@ -7077,7 +8293,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Baby Blue",
-        "hex": "#bfdbfe"
+        "hex": "#bfdbfe",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue-Sunflowers_Cotton-Spandex_Polycotton_01.avif"
       }
     ],
     "sizes": [
@@ -7113,19 +8330,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Women_Ef-Cancer_01.avif"
       },
       {
         "name": "Hunter Green",
-        "hex": "#14532d"
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Men_Ef-Cancer_01.avif"
       },
       {
         "name": "Ceil Blue",
-        "hex": "#60a5fa"
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Women_Ef-Cancer_02.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Men_Ef-Cancer_02.avif"
       }
     ],
     "sizes": [
@@ -7167,28 +8388,52 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Each piece in our Modest collection is meticulously made to order, from the choice of fabric to the precision of the stitching, we prioritise quality and attention to detail in every step of the process. Please note that because each item is speci...",
     "colors": [
       {
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jasmine_Modest_Lavender_03.avif"
+      },
+      {
+        "name": "Mauve",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jasmine_Modest_Lavender_03.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jasmine_Modest_Mint_01.avif"
+      },
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jasmine_Modest_Navy_03.avif"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jasmine_Modest_Olive-Green_01.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jasmine_Modest_Powder-Blue_03.avif"
+      },
+      {
+        "name": "Olive",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jasmine_Modest_Olive-Green_01.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jasmine_Modest_Navy_03.avif"
+      },
+      {
         "name": "Black",
         "hex": "#111827"
       },
       {
         "name": "Coral",
         "hex": "#fb7185"
-      },
-      {
-        "name": "Graphite",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Lavender",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Maroon",
-        "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
       }
     ],
     "sizes": [
@@ -7231,19 +8476,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Men_Skull-Scalpel_01.avif"
       },
       {
         "name": "Hunter Green",
-        "hex": "#14532d"
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Women_Skull-Scalpel_01.avif"
       },
       {
         "name": "Ceil Blue",
-        "hex": "#60a5fa"
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Men_Skull-Scalpel_02.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Women_Skull-Scalpel_02.avif"
       }
     ],
     "sizes": [
@@ -7286,19 +8535,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Women_Jungle-Buccaneers_01.avif"
       },
       {
         "name": "Hunter Green",
-        "hex": "#14532d"
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Men_Jungle-Buccaneers_01.avif"
       },
       {
         "name": "Ceil Blue",
-        "hex": "#60a5fa"
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Women_Jungle-Buccaneers_02.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Men_Jungle-Buccaneers_02.avif"
       }
     ],
     "sizes": [
@@ -7338,11 +8591,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Men_Merry-Christmas_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Men_Merry-Christmas_02.avif"
       }
     ],
     "sizes": [
@@ -7385,19 +8640,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Men_Safari-Tots_01.avif"
       },
       {
         "name": "Hunter Green",
-        "hex": "#14532d"
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Women_Safari-Tots_01.avif"
       },
       {
         "name": "Ceil Blue",
-        "hex": "#60a5fa"
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Men_Safari-Tots_02.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Women_Safari-Tots_02.avif"
       }
     ],
     "sizes": [
@@ -7440,7 +8699,38 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+      },
+      {
+        "name": "Maroon",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Maroon_02.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Mint_02.avif"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Olive-Green_01.avif"
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Raspberry_01.avif"
+      },
+      {
+        "name": "Slate",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Slate_02.avif"
+      },
+      {
+        "name": "Olive",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Olive-Green_01.avif"
       },
       {
         "name": "Coral",
@@ -7448,19 +8738,11 @@ export const INITIAL_PRODUCTS: Product[] = [
       },
       {
         "name": "Graphite",
-        "hex": "#4b5563"
+        "hex": "#374151"
       },
       {
         "name": "Lavender",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Maroon",
-        "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
+        "hex": "#c084fc"
       }
     ],
     "sizes": [
@@ -7502,28 +8784,52 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Each piece in our Modest collection is meticulously made to order, from the choice of fabric to the precision of the stitching, we prioritise quality and attention to detail in every step of the process. Please note that because each item is speci...",
     "colors": [
       {
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Zara_Modest_Lavender_04.avif"
+      },
+      {
+        "name": "Mauve",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Zara_Modest_Lavender_04.avif"
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Zara_Modest_Mint_01.avif"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Zara_Modest_Olive-Green_01.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Zara_Modest_Petrol_02.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Zara_Modest_Powder-Blue_02.avif"
+      },
+      {
+        "name": "Slate",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Zara_Modest_Slate_01.avif"
+      },
+      {
+        "name": "Olive",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Zara_Modest_Olive-Green_01.avif"
+      },
+      {
         "name": "Black",
         "hex": "#111827"
       },
       {
         "name": "Coral",
         "hex": "#fb7185"
-      },
-      {
-        "name": "Graphite",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Lavender",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Maroon",
-        "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
       }
     ],
     "sizes": [
@@ -7566,19 +8872,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Women_You-Scream-Ice-Cream_01.avif"
       },
       {
         "name": "Hunter Green",
-        "hex": "#14532d"
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Men_You-Scream-Ice-Cream_01.avif"
       },
       {
         "name": "Ceil Blue",
-        "hex": "#60a5fa"
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Men_You-Scream-Ice-Cream_02.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Polycotton_Women_You-Scream-Ice-Cream_02.avif"
       }
     ],
     "sizes": [
@@ -7622,15 +8932,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Polar-Fleece_Men_01.avif"
       },
       {
         "name": "Charcoal",
-        "hex": "#374151"
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Polar-Fleece_Men_02.avif"
       },
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Men_02.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Men_02.avif"
       }
     ],
     "sizes": [
@@ -7672,7 +8990,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Stainless",
-        "hex": "#94a3b8"
+        "hex": "#94a3b8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Limited-Edition_Midnight-Blue_05.avif"
       }
     ],
     "sizes": [
@@ -7707,7 +9026,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Limited-Edition_Alabaster_04.avif"
       }
     ],
     "sizes": [
@@ -7743,11 +9063,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Limited-Edition_Marine-Blue-Satin-Finish_04.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Limited-Edition_Marine-Blue-Satin-Finish_03.avif"
       }
     ],
     "sizes": [
@@ -7782,7 +9104,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Champagne",
-        "hex": "#d4af37"
+        "hex": "#d4af37",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Limited-Edition_Champagne-Rose-Satin-Finish_01.avif"
       }
     ],
     "sizes": [
@@ -7817,11 +9140,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Raspberry-Tube_02.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Raspberry-Tube_01.avif"
       }
     ],
     "sizes": [
@@ -7856,7 +9181,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Master-Cardiology_Navy-Blue_01.avif"
+      },
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Master-Cardiology_Navy-Blue_01.avif"
       }
     ],
     "sizes": [
@@ -7891,7 +9222,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Master-Cardiology_Black-Smoke-Finish_01.avif"
+      },
+      {
+        "name": "Smoke",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Master-Cardiology_Black-Smoke-Finish_01.avif"
       }
     ],
     "sizes": [
@@ -7926,7 +9263,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Master-Cardiology_Black-Stainless-Steel_01.avif"
+      },
+      {
+        "name": "Stainless",
+        "hex": "#94a3b8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Master-Cardiology_Black-Stainless-Steel_01.avif"
       }
     ],
     "sizes": [
@@ -7961,7 +9304,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Master-Cardiology_All-Black_01.avif"
       }
     ],
     "sizes": [
@@ -7996,7 +9340,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Red",
-        "hex": "#dc2626"
+        "hex": "#dc2626",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-II-Paediatric_Red-Tube_01.avif"
       }
     ],
     "sizes": [
@@ -8030,7 +9375,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Caribbean Blue",
-        "hex": "#0284c7"
+        "hex": "#0284c7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-II-Paediatric_Caribbean-Blue-Tube_01.avif"
       }
     ],
     "sizes": [
@@ -8066,7 +9412,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Black-Tube_Stainless_02.avif"
+      },
+      {
+        "name": "Stainless",
+        "hex": "#94a3b8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Black-Tube_Stainless_02.avif"
       }
     ],
     "sizes": [
@@ -8107,7 +9459,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Stainless",
-        "hex": "#94a3b8"
+        "hex": "#94a3b8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Plum-Tube_02.avif"
       }
     ],
     "sizes": [
@@ -8149,7 +9502,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Caribbean Blue",
-        "hex": "#0284c7"
+        "hex": "#0284c7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Caribbean-Blue-Tube_02.avif"
       }
     ],
     "sizes": [
@@ -8190,7 +9544,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Burgundy",
-        "hex": "#831843"
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Burgundy-Tube_02.avif"
       }
     ],
     "sizes": [
@@ -8231,7 +9586,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Stainless",
-        "hex": "#94a3b8"
+        "hex": "#94a3b8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Raspberry-Tube_02.avif"
       }
     ],
     "sizes": [
@@ -8272,7 +9628,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Navy-Blue-Tube_02.avif"
+      },
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Navy-Blue-Tube_02.avif"
       }
     ],
     "sizes": [
@@ -8312,7 +9674,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-II-Paediatric_Black-Tube_01.avif"
       }
     ],
     "sizes": [
@@ -8347,11 +9710,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-II-Paediatric_Raspberry-Tube_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-II-Paediatric_Raspberry-Tube_02.avif"
       }
     ],
     "sizes": [
@@ -8386,7 +9751,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Caribbean Blue",
-        "hex": "#0284c7"
+        "hex": "#0284c7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-II-Paediatric_Caribbean-Blue-Tube_Rainbow-finish-Chestpiece_01.avif"
+      },
+      {
+        "name": "Rainbow",
+        "hex": "#8b5cf6",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-II-Paediatric_Caribbean-Blue-Tube_Rainbow-finish-Chestpiece_01.avif"
       }
     ],
     "sizes": [
@@ -8422,7 +9793,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Rainbow",
-        "hex": "#8b5cf6"
+        "hex": "#8b5cf6",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_-Raspberry-Tube_Rainbow-Finish_01.avif"
       }
     ],
     "sizes": [
@@ -8458,7 +9830,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Pink",
-        "hex": "#ec4899"
+        "hex": "#ec4899",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Pearl-Pink-Tube_02.avif"
       }
     ],
     "sizes": [
@@ -8494,7 +9867,18 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Navy-Blue-Tube_Mirror-Chestpiece_Smoke-StemHeadset_02.avif"
+      },
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Navy-Blue-Tube_Mirror-Chestpiece_Smoke-StemHeadset_02.avif"
+      },
+      {
+        "name": "Smoke",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Navy-Blue-Tube_Mirror-Chestpiece_Smoke-StemHeadset_02.avif"
       }
     ],
     "sizes": [
@@ -8536,7 +9920,18 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Lime Green",
-        "hex": "#84cc16"
+        "hex": "#84cc16",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Lime-Green-Tube_Smoke-Chestpiece_Blue-Stem_Smoke-Headset_02.avif"
+      },
+      {
+        "name": "Lime",
+        "hex": "#84cc16",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Lime-Green-Tube_Smoke-Chestpiece_Blue-Stem_Smoke-Headset_02.avif"
+      },
+      {
+        "name": "Smoke",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Lime-Green-Tube_Smoke-Chestpiece_Blue-Stem_Smoke-Headset_02.avif"
       }
     ],
     "sizes": [
@@ -8577,11 +9972,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Chocolate-Tube_Copper-Finish-Chestpiece_02.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Chocolate-Tube_Copper-Finish-Chestpiece_01.avif"
       }
     ],
     "sizes": [
@@ -8618,7 +10015,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Ceil Blue",
-        "hex": "#60a5fa"
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Littmann®-Classic-III™-Ceil-Blue-Tube-Mirror-Chestpiece-Smoke-Stem-and-Smoke-Headset_01.avif"
+      },
+      {
+        "name": "Smoke",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Littmann®-Classic-III™-Ceil-Blue-Tube-Mirror-Chestpiece-Smoke-Stem-and-Smoke-Headset_01.avif"
       }
     ],
     "sizes": [
@@ -8659,7 +10062,18 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Burgundy",
-        "hex": "#831843"
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Burgundy-Tube_Champagne-Finish-Chestpiece_Smoke-stemheadset_02.avif"
+      },
+      {
+        "name": "Smoke",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Burgundy-Tube_Champagne-Finish-Chestpiece_Smoke-stemheadset_02.avif"
+      },
+      {
+        "name": "Champagne",
+        "hex": "#d4af37",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Burgundy-Tube_Champagne-Finish-Chestpiece_Smoke-stemheadset_02.avif"
       }
     ],
     "sizes": [
@@ -8700,7 +10114,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Black-Tube_Smoke-Finish_02.avif"
+      },
+      {
+        "name": "Smoke",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Black-Tube_Smoke-Finish_02.avif"
       }
     ],
     "sizes": [
@@ -8736,7 +10156,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Black-Tube_Rainbow-Finish-Chestpiece_Black-stemheadset_02.avif"
+      },
+      {
+        "name": "Rainbow",
+        "hex": "#8b5cf6",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Black-Tube_Rainbow-Finish-Chestpiece_Black-stemheadset_02.avif"
       }
     ],
     "sizes": [
@@ -8776,7 +10202,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Master-Cardiology_Black-Tube_Brass-Finish-Chestpiece_01.avif"
       }
     ],
     "sizes": [
@@ -8811,8 +10238,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "The compact and sensitive Littmann Classic III stethoscope is the perfect instrument for clinicians who monitor and assess children or adults in non-critical environments. Manufactured with strong yet lightweight materials for hours of comfortable...",
     "colors": [
       {
-        "name": "Turquoise",
-        "hex": "#06b6d4"
+        "name": "Burgundy",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Burgundy-Tube_02-1.avif"
       }
     ],
     "sizes": [
@@ -8848,7 +10276,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Caribbean Blue",
-        "hex": "#0284c7"
+        "hex": "#0284c7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Littmann®-Classic-III™-–-Caribbean-Blue-Tube_01.avif"
       }
     ],
     "sizes": [
@@ -8884,7 +10313,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Caribbean Blue",
-        "hex": "#0284c7"
+        "hex": "#0284c7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Caribbean-Blue-Tube_Rainbow-Finish_02.avif"
+      },
+      {
+        "name": "Rainbow",
+        "hex": "#8b5cf6",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Caribbean-Blue-Tube_Rainbow-Finish_02.avif"
       }
     ],
     "sizes": [
@@ -8920,11 +10355,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Plum-Tube_02.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Plum-Tube_01.avif"
       }
     ],
     "sizes": [
@@ -8960,7 +10397,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Navy-Blue-Tube_02.avif"
+      },
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Navy-Blue-Tube_02.avif"
       }
     ],
     "sizes": [
@@ -8994,7 +10437,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Ceil Blue",
-        "hex": "#60a5fa"
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
       }
     ],
     "sizes": [
@@ -9028,7 +10472,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Caribbean Blue",
-        "hex": "#0284c7"
+        "hex": "#0284c7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Caribbean-Blue-Tube_01.avif"
       }
     ],
     "sizes": [
@@ -9062,7 +10507,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Burgundy",
-        "hex": "#831843"
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Burgundy-Tube_01.avif"
       }
     ],
     "sizes": [
@@ -9096,7 +10542,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Black-Tube_01.avif"
       }
     ],
     "sizes": [
@@ -9133,7 +10580,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Pink",
-        "hex": "#ec4899"
+        "hex": "#ec4899",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Plum-Tube_Mirror-Chestpiece_Pink-Stem_Smoke-Headset_02.avif"
+      },
+      {
+        "name": "Smoke",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Plum-Tube_Mirror-Chestpiece_Pink-Stem_Smoke-Headset_02.avif"
       }
     ],
     "sizes": [
@@ -9174,7 +10627,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Pink",
-        "hex": "#ec4899"
+        "hex": "#ec4899",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Pearl-Pink-Tube_Mirror-Chestpiece_Pink-Stem_Smoke-Headset_02.avif"
+      },
+      {
+        "name": "Smoke",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Pearl-Pink-Tube_Mirror-Chestpiece_Pink-Stem_Smoke-Headset_02.avif"
       }
     ],
     "sizes": [
@@ -9215,7 +10674,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Lime",
-        "hex": "#84cc16"
+        "hex": "#84cc16",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Lemon-Lime-Tube_02.avif"
       }
     ],
     "sizes": [
@@ -9250,12 +10710,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "The compact and sensitive Littmann Classic III stethoscope is the perfect instrument for clinicians who monitor and assess children or adults in non-critical environments. Manufactured with strong yet lightweight materials for hours of comfortable...",
     "colors": [
       {
-        "name": "Standard Edition",
-        "hex": "#1e3a8a"
-      },
-      {
-        "name": "Black Edition",
-        "hex": "#111827"
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Lavender-Tube_02.avif"
       }
     ],
     "sizes": [
@@ -9291,11 +10748,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Grey-Tube_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Grey-Tube_02.avif"
       }
     ],
     "sizes": [
@@ -9331,7 +10790,18 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Black-Tube_Champagne-Finish-Chestpiece_Smoke-stemheadset_02.avif"
+      },
+      {
+        "name": "Smoke",
+        "hex": "#4b5563",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Black-Tube_Champagne-Finish-Chestpiece_Smoke-stemheadset_02.avif"
+      },
+      {
+        "name": "Champagne",
+        "hex": "#d4af37",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Black-Tube_Champagne-Finish-Chestpiece_Smoke-stemheadset_02.avif"
       }
     ],
     "sizes": [
@@ -9372,7 +10842,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Ceil Blue",
-        "hex": "#60a5fa"
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Littmann®-Classic-III™-Ceil-Blue-Tube_01.avif"
       }
     ],
     "sizes": [
@@ -9408,7 +10879,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Burgundy",
-        "hex": "#831843"
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Burgundy-Tube_02.avif"
       }
     ],
     "sizes": [
@@ -9444,7 +10916,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Littmann®-Classic-III™-Black-Tube_01.avif"
       }
     ],
     "sizes": [
@@ -9480,7 +10953,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Burgundy-Tube_Black-Finish-Chestpiece_02-1.avif"
+      },
+      {
+        "name": "Burgundy",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Burgundy-Tube_Black-Finish-Chestpiece_02-1.avif"
       }
     ],
     "sizes": [
@@ -9521,7 +11000,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-III_Black-Tube_Black-Edition-Chestpiece_02.avif"
       }
     ],
     "sizes": [
@@ -9556,7 +11036,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Classic-II-Infant_Black-Tube_01.avif"
       }
     ],
     "sizes": [
@@ -9592,7 +11073,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Black-Finish-Chestpiece_Black-Tube_Black-Stem_Black-Headset_02.avif"
       }
     ],
     "sizes": [
@@ -9634,7 +11116,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Black-Finish-Chestpiece_Black-Tube_Red-Stem_Black-Headset_02.avif"
+      },
+      {
+        "name": "Red",
+        "hex": "#dc2626",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Black-Finish-Chestpiece_Black-Tube_Red-Stem_Black-Headset_02.avif"
       }
     ],
     "sizes": [
@@ -9676,15 +11164,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Polar-Fleece_Women_03.avif"
       },
       {
         "name": "Charcoal",
-        "hex": "#374151"
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Polar-Fleece_Women_04.avif"
       },
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Women_01.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Women_01.avif"
       }
     ],
     "sizes": [
@@ -9729,27 +11225,53 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Female_Underscrubs_04.avif"
       },
       {
         "name": "Coral",
-        "hex": "#fb7185"
-      },
-      {
-        "name": "Lavender",
-        "hex": "#4b5563"
+        "hex": "#fb7185",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Female_Underscrubs_03.avif"
       },
       {
         "name": "Maroon",
-        "hex": "#831843"
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Female_Underscrubs_02.avif"
       },
       {
-        "name": "Mauve",
-        "hex": "#4b5563"
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Female_Underscrubs_02.avif"
       },
       {
-        "name": "Mint",
-        "hex": "#6ee7b7"
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Olive-Green_Female_Underscrubs_03.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Petrol_Female_Underscrubs_02.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Female_Underscrubs_02.avif"
+      },
+      {
+        "name": "Slate",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Graphite-Grey_Female_Underscrubs_01.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Female_Underscrubs_02.avif"
+      },
+      {
+        "name": "Graphite",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Graphite-Grey_Female_Underscrubs_01.avif"
       }
     ],
     "sizes": [
@@ -9790,11 +11312,18 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Power-Prime-Walk-300_Black_Men_01.avif"
       },
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Power-Prime-Walk-300_Navy_Men_03.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Power-Prime-Walk-300_Navy_Men_03.avif"
       }
     ],
     "sizes": [
@@ -9837,11 +11366,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/REBEL-Cruiza-Work-Pro-Clog_Women_04.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/REBEL-Cruiza-Work-Pro-Clog_Men_02.avif"
       }
     ],
     "sizes": [
@@ -9884,19 +11415,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Women_Island-Vibes_01.avif"
       },
       {
         "name": "Hunter Green",
-        "hex": "#14532d"
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Men_Island-Vibes_02.avif"
       },
       {
         "name": "Ceil Blue",
-        "hex": "#60a5fa"
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Women_Island-Vibes_02.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Men_Island-Vibes_0.avif"
       }
     ],
     "sizes": [
@@ -9938,19 +11473,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Men_Unicorn-Dreamland_01.avif"
       },
       {
         "name": "Hunter Green",
-        "hex": "#14532d"
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Women_Unicorn-Dreamland_01.avif"
       },
       {
         "name": "Ceil Blue",
-        "hex": "#60a5fa"
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Men_Unicorn-Dreamland_03.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Women_Unicorn-Dreamland_02.avif"
       }
     ],
     "sizes": [
@@ -9993,7 +11532,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Pink",
-        "hex": "#ec4899"
+        "hex": "#ec4899",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Men_Pink-Flamingos_02.avif"
       }
     ],
     "sizes": [
@@ -10033,11 +11573,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Men_Space-Odyssey_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Men_Space-Odyssey_02.avif"
       }
     ],
     "sizes": [
@@ -10077,11 +11619,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Men_Hot-Air-Balloons_01.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Men_Hot-Air-Balloons_02.avif"
       }
     ],
     "sizes": [
@@ -10124,19 +11668,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Women_Doggy-Parlour_01.avif"
       },
       {
         "name": "Hunter Green",
-        "hex": "#14532d"
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Women_Doggy-Parlour_02.avif"
       },
       {
         "name": "Ceil Blue",
-        "hex": "#60a5fa"
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Men_Doggy-Parlour_01.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Men_Doggy-Parlour_02.avif"
       }
     ],
     "sizes": [
@@ -10179,19 +11727,23 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dino-Friends_Men_Cotton-Spandex_01.avif"
       },
       {
         "name": "Hunter Green",
-        "hex": "#14532d"
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dino-Friends_Women_Cotton-Spandex_01.avif"
       },
       {
         "name": "Ceil Blue",
-        "hex": "#60a5fa"
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dino-Friends_Men_Cotton-Spandex_02.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dino-Friends_Women_Cotton-Spandex_02.avif"
       }
     ],
     "sizes": [
@@ -10232,7 +11784,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Baby Blue",
-        "hex": "#bfdbfe"
+        "hex": "#bfdbfe",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Men_Baby-Blue-Sunflowers_02.avif"
       }
     ],
     "sizes": [
@@ -10272,11 +11825,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Men_Watermelon-Fun_01-1.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/PT_Cotton-Spandex_Men_Watermelon-Fun_02.avif"
       }
     ],
     "sizes": [
@@ -10316,11 +11871,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Skeletal-Strides_Tanc-Socks_02.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Skeletal-Strides_Tanc-Socks_01.avif"
       }
     ],
     "sizes": [
@@ -10354,11 +11911,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Healing-Heels_Tanc-Socks_02.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Healing-Heels_Tanc-Socks_01.avif"
       }
     ],
     "sizes": [
@@ -10392,11 +11951,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Pet-Pals_Tanc-Socks_02.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Pet-Pals_Tanc-Socks_01.avif"
       }
     ],
     "sizes": [
@@ -10430,11 +11991,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Wild-About-Wildlife_Tanc-Socks_02.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Wild-About-Wildlife_Tanc-Socks_01.avif"
       }
     ],
     "sizes": [
@@ -10468,11 +12031,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Chew-Crew_Tanc-Socks_03.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Chew-Crew_Tanc-Socks_01.avif"
       }
     ],
     "sizes": [
@@ -10506,11 +12071,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Stethosocks_Tanc-Socks_02.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Stethosocks_Tanc-Socks_01.avif"
       }
     ],
     "sizes": [
@@ -10544,11 +12111,13 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Vital-Vibes_Tanc-Socks_02.avif"
       },
       {
         "name": "Black Edition",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Vital-Vibes_Tanc-Socks_01.avif"
       }
     ],
     "sizes": [
@@ -10588,19 +12157,33 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Scrub-Lab_Black_Water-Bottle.avif"
       },
       {
         "name": "Lavender",
-        "hex": "#4b5563"
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender-Water-Bottle-Lifestyle.avif"
       },
       {
         "name": "Mint",
-        "hex": "#6ee7b7"
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint-Water-Bottle-Lifestyle.avif"
       },
       {
         "name": "Optic White",
-        "hex": "#ffffff"
+        "hex": "#ffffff",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Optic-White-Water-Bottle-Lifestyle.avif"
+      },
+      {
+        "name": "Purple",
+        "hex": "#7e22ce",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/TANC-PURPLE-JESSICA.avif"
+      },
+      {
+        "name": "White",
+        "hex": "#ffffff",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Scrub-Lab_White_Water-Bottle.avif"
       }
     ],
     "sizes": [
@@ -10642,27 +12225,51 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Female_ScrubLab-Caps_02.avif"
+      },
+      {
+        "name": "Graphite",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Graphite_Female_ScrubLab-Caps_01.avif"
+      },
+      {
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Female_ScrubLab-Caps_02.avif"
+      },
+      {
+        "name": "Mauve",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Female_ScrubLab-Caps_02.avif"
+      },
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Female_ScrubLab-Caps_01.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Petrol_Female_ScrubLab-Caps_01.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Female_ScrubLab-Caps_01.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Female_ScrubLab-Caps_01.avif"
       },
       {
         "name": "Coral",
         "hex": "#fb7185"
       },
       {
-        "name": "Graphite",
-        "hex": "#4b5563"
-      },
-      {
-        "name": "Lavender",
-        "hex": "#4b5563"
-      },
-      {
         "name": "Maroon",
         "hex": "#831843"
-      },
-      {
-        "name": "Mauve",
-        "hex": "#4b5563"
       }
     ],
     "sizes": [
@@ -10699,27 +12306,50 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Male_ScrubLab-Caps_01.avif"
       },
       {
         "name": "Coral",
-        "hex": "#fb7185"
+        "hex": "#fb7185",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Male_ScrubLab-Caps_02.avif"
       },
       {
         "name": "Graphite",
-        "hex": "#4b5563"
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Graphite-Mens-Cap3.avif"
       },
       {
         "name": "Lavender",
-        "hex": "#4b5563"
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Male_ScrubLab-Caps_01.avif"
+      },
+      {
+        "name": "Mauve",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Male_ScrubLab-Caps_01.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Petrol_Male_ScrubLab-Caps_01.avif"
+      },
+      {
+        "name": "White",
+        "hex": "#ffffff",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/White_Male_ScrubLab-Caps_02.avif"
       },
       {
         "name": "Maroon",
         "hex": "#831843"
       },
       {
-        "name": "Mauve",
-        "hex": "#4b5563"
+        "name": "Mint",
+        "hex": "#6ee7b7"
+      },
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a"
       }
     ],
     "sizes": [
@@ -10772,6 +12402,22 @@ export const INITIAL_PRODUCTS: Product[] = [
       {
         "name": "Bottle Green",
         "hex": "#4b5563"
+      },
+      {
+        "name": "Brown",
+        "hex": "#78350f"
+      },
+      {
+        "name": "Camo",
+        "hex": "#4d5338"
+      },
+      {
+        "name": "Cerise",
+        "hex": "#e11d48"
+      },
+      {
+        "name": "Charcoal",
+        "hex": "#374151"
       }
     ],
     "sizes": [
@@ -10823,6 +12469,22 @@ export const INITIAL_PRODUCTS: Product[] = [
       {
         "name": "Bottle Green",
         "hex": "#4b5563"
+      },
+      {
+        "name": "Brown",
+        "hex": "#78350f"
+      },
+      {
+        "name": "Camo",
+        "hex": "#4d5338"
+      },
+      {
+        "name": "Cerise",
+        "hex": "#e11d48"
+      },
+      {
+        "name": "Charcoal",
+        "hex": "#374151"
       }
     ],
     "sizes": [
@@ -10853,7 +12515,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2025/07/Classic-II-S.E.-Spare-Kit_-Black.avif"
       }
     ],
     "sizes": [
@@ -10884,7 +12547,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2025/07/Classic-II-S.E.-Spare-Kit_Grey.avif"
       },
       {
         "name": "Black Edition",
@@ -10920,7 +12584,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2025/07/Stethoscope-Spare-Parts-Kit_Master-Cardiology.avif"
       },
       {
         "name": "Black Edition",
@@ -10956,7 +12621,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Standard Edition",
-        "hex": "#1e3a8a"
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2025/07/Stethoscope-Spare-Parts-Kit_Classic-III-Cardiology-IV_Grey.avif"
       },
       {
         "name": "Black Edition",
@@ -10992,7 +12658,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2025/07/3m_littmann®_stethoscope_spare_parts_kit_model_40016.avif"
       }
     ],
     "sizes": [
