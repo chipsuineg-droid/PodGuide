@@ -9392,7 +9392,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   {
     "id": "tanc-littmann-cardiology-iv-black-tube-standard-finish-chestpiece-stainless-stem-and-headset",
     "name": "Littmann® Cardiology IV™ - Black Tube, Standard-Finish Chestpiece, Stainless Stem and Headset",
-    "collection": "sets",
+    "collection": "accessories",
     "priceZAR": 4549,
     "priceUSD": 115,
     "rating": 5,
@@ -9439,7 +9439,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   {
     "id": "tanc-littmann-cardiology-iv-plum-tube-standard-finish-chestpiece-stainless-stem-and-headset",
     "name": "Littmann® Cardiology IV™ - Plum Tube, Standard-Finish Chestpiece, Stainless Stem and Headset",
-    "collection": "sets",
+    "collection": "accessories",
     "priceZAR": 4549,
     "priceUSD": 115,
     "rating": 5,
@@ -9481,7 +9481,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   {
     "id": "tanc-littmann-cardiology-iv-caribbean-blue-tube-high-polish-smoke-finish-chestpiece-mirror-stem-and-smoke-headset",
     "name": "Littmann® Cardiology IV™ - Caribbean Blue Tube, High Polish Smoke-Finish Chestpiece, Mirror Stem and Smoke Headset",
-    "collection": "sets",
+    "collection": "accessories",
     "priceZAR": 4549,
     "priceUSD": 115,
     "rating": 4.9,
@@ -9524,7 +9524,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   {
     "id": "tanc-littmann-cardiology-iv-burgundy-tube-mirror-finish-chestpiece-and-stem-stainless-headset",
     "name": "Littmann® Cardiology IV™ - Burgundy Tube, Mirror-Finish Chestpiece and Stem, Stainless Headset",
-    "collection": "sets",
+    "collection": "accessories",
     "priceZAR": 4549,
     "priceUSD": 115,
     "rating": 4.8,
@@ -9566,7 +9566,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   {
     "id": "tanc-littmann-cardiology-iv-raspberry-tube-standard-finish-chestpiece-stainless-stem-and-headset",
     "name": "Littmann® Cardiology IV™ - Raspberry Tube, Standard-Finish Chestpiece, Stainless Stem and Headset",
-    "collection": "sets",
+    "collection": "accessories",
     "priceZAR": 4549,
     "priceUSD": 115,
     "rating": 4.8,
@@ -9608,7 +9608,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   {
     "id": "tanc-littmann-cardiology-iv-navy-blue-tube-standard-finish-chestpiece-stainless-stem-and-headset",
     "name": "Littmann® Cardiology IV™ - Navy Blue Tube, Standard-Finish Chestpiece, Stainless Stem and Headset",
-    "collection": "sets",
+    "collection": "accessories",
     "priceZAR": 4549,
     "priceUSD": 115,
     "rating": 5,
@@ -9847,7 +9847,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   {
     "id": "tanc-littmann-classic-iii-navy-blue-tube-mirror-finish-chestpiece-smoke-stem-and-headset",
     "name": "Littmann® Classic III™- Navy Blue Tube, Mirror - Finish Chestpiece, Smoke Stem and Headset",
-    "collection": "sets",
+    "collection": "accessories",
     "priceZAR": 2499,
     "priceUSD": 115,
     "rating": 4.8,
@@ -9899,7 +9899,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   {
     "id": "tanc-littmann-classic-iii-lime-green-tube-smoke-chestpiece-blue-stem-and-smoke-headset",
     "name": "Littmann® Classic III™- Lime Green Tube, Smoke Chestpiece, Blue Stem and Smoke Headset",
-    "collection": "sets",
+    "collection": "accessories",
     "priceZAR": 2499,
     "priceUSD": 115,
     "rating": 4.8,
@@ -9994,7 +9994,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   {
     "id": "tanc-littmann-classic-iii-ceil-blue-tube-mirror-chestpiece-smoke-stem-and-smoke-headset",
     "name": "Littmann® Classic III™- Ceil Blue Tube, Mirror Chestpiece, Smoke Stem and Smoke Headset",
-    "collection": "sets",
+    "collection": "accessories",
     "priceZAR": 2499,
     "priceUSD": 115,
     "rating": 4.9,
@@ -10042,7 +10042,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   {
     "id": "tanc-littmann-classic-iii-burgundy-tube-champagne-finish-chestpiece-smoke-stem-and-headset",
     "name": "Littmann® Classic III™ - Burgundy Tube, Champagne-Finish Chestpiece, Smoke Stem and Headset",
-    "collection": "sets",
+    "collection": "accessories",
     "priceZAR": 2499,
     "priceUSD": 115,
     "rating": 5,
@@ -10136,7 +10136,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   {
     "id": "tanc-littmann-classic-iii-black-tube-rainbow-finish-chestpiece-black-stem-and-headset",
     "name": "Littmann® Classic III™- Black Tube, Rainbow-Finish Chestpiece, Black stem and headset",
-    "collection": "sets",
+    "collection": "accessories",
     "priceZAR": 2499,
     "priceUSD": 115,
     "rating": 5,
@@ -10559,7 +10559,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   {
     "id": "tanc-littmann-classic-iii-plum-tube-mirror-chestpiece-pink-stem-smoke-headset",
     "name": "Littmann® Classic III™- Plum Tube, Mirror Chestpiece, Pink Stem & Smoke Headset",
-    "collection": "sets",
+    "collection": "accessories",
     "priceZAR": 2499,
     "priceUSD": 115,
     "rating": 4.9,
@@ -10607,7 +10607,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   {
     "id": "tanc-littmann-classic-iii-pearl-pink-tube-mirror-chestpiece-pink-stem-smoke-headset",
     "name": "Littmann® Classic III™- Pearl Pink Tube, Mirror Chestpiece, Pink Stem & Smoke Headset",
-    "collection": "sets",
+    "collection": "accessories",
     "priceZAR": 2499,
     "priceUSD": 115,
     "rating": 4.8,
@@ -10770,7 +10770,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   {
     "id": "tanc-littmann-classic-iii-black-tube-champagne-finish-chestpiece-smoke-stem-and-headset",
     "name": "Littmann® Classic III™- Black Tube, Champagne - Finish Chestpiece, Smoke Stem and Headset",
-    "collection": "sets",
+    "collection": "accessories",
     "priceZAR": 2499,
     "priceUSD": 115,
     "rating": 4.8,
@@ -10933,7 +10933,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   {
     "id": "tanc-littmann-classic-iii-burgundy-tube-black-finish-chestpiece-stem-and-headset",
     "name": "Littmann® Classic III™- Burgundy Tube, Black-Finish Chestpiece, stem and headset",
-    "collection": "sets",
+    "collection": "accessories",
     "priceZAR": 2499,
     "priceUSD": 115,
     "rating": 5,
@@ -11053,7 +11053,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   {
     "id": "tanc-littmann-cardiology-iv-black-finish-chestpiece-black-tube-stem-and-headset",
     "name": "Littmann® Cardiology IV™- Black-Finish Chestpiece, Black Tube, Stem and Headset",
-    "collection": "sets",
+    "collection": "accessories",
     "priceZAR": 4749,
     "priceUSD": 115,
     "rating": 4.9,
@@ -11095,7 +11095,7 @@ export const INITIAL_PRODUCTS: Product[] = [
   {
     "id": "tanc-littmann-cardiology-iv-black-finish-chestpiece-black-tube-red-stem-and-black-headset",
     "name": "Littmann® Cardiology IV™- Black-Finish Chestpiece, Black Tube, Red Stem and Black Headset",
-    "collection": "sets",
+    "collection": "accessories",
     "priceZAR": 4749,
     "priceUSD": 115,
     "rating": 4.9,

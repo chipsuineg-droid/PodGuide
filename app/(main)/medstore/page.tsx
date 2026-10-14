@@ -48,30 +48,89 @@ export const POPULAR_COLORS = [
   { name: "Royal Blue", hex: "#1d4ed8", key: "royal" },
 ]
 
+export function getCategoryTitle(catId: string): string {
+  const titles: Record<string, string> = {
+    "all": "All Items",
+    "tanc-scrubs-all": "TANC Scrubs",
+    "core-scrubs": "Core Scrubs",
+    "lite-scrubs": "LITE Scrubs",
+    "sets": "Scrub Sets",
+    "scrubs": "Scrub Tops",
+    "pants": "Scrub Pants",
+    "jackets": "Doctor's Jackets",
+    "coats": "Lab Coats & Gowns",
+    "scrublab": "ScrubLab",
+    "scrublab-women": "ScrubLab Women",
+    "scrublab-men": "ScrubLab Men",
+    "printed-tops": "Printed Scrub Tops",
+    "printed-caps": "Printed Scrub Caps",
+    "all-accessories": "All Accessories",
+    "stethoscopes": "Stethoscopes",
+    "caps": "Scrub Caps",
+    "accessories": "Accessories & Gear",
+  }
+  return titles[catId] || catId
+}
+
 export function matchCategory(product: Product, catId: string): boolean {
   if (catId === "all") return true
   const nameLower = product.name.toLowerCase()
+  const techLower = (product.fabricTech || "").toLowerCase()
+  const descLower = (product.description || "").toLowerCase()
+
   if (catId === "stethoscopes") {
     return nameLower.includes("stethoscope") || nameLower.includes("littmann")
   }
   if (catId === "caps") {
-    return nameLower.includes("cap") || nameLower.includes("headwear")
+    return (nameLower.includes("cap") || nameLower.includes("headwear")) && !nameLower.includes("stethoscope")
   }
   if (catId === "accessories") {
-    return (
-      product.collection === "accessories" &&
-      !nameLower.includes("stethoscope") &&
-      !nameLower.includes("littmann") &&
-      !nameLower.includes("cap")
-    )
+    return product.collection === "accessories" && !nameLower.includes("stethoscope") && !nameLower.includes("littmann") && !nameLower.includes("cap")
+  }
+  if (catId === "all-accessories") {
+    return product.collection === "accessories" || nameLower.includes("stethoscope") || nameLower.includes("littmann") || nameLower.includes("cap")
+  }
+  if (catId === "core-scrubs") {
+    const isApparel = ["scrubs", "sets", "pants"].includes(product.collection)
+    return isApparel && (nameLower.includes("core") || techLower.includes("core") || (!nameLower.includes("lite") && !nameLower.includes("scrublab")))
+  }
+  if (catId === "lite-scrubs") {
+    const isApparel = ["scrubs", "sets", "pants"].includes(product.collection)
+    return isApparel && (nameLower.includes("lite") || techLower.includes("lite") || descLower.includes("lite"))
+  }
+  if (catId === "scrublab") {
+    return nameLower.includes("scrublab") || techLower.includes("silvalab") || descLower.includes("scrublab")
+  }
+  if (catId === "scrublab-women") {
+    return (nameLower.includes("women") || nameLower.includes("female") || nameLower.includes("lily") || nameLower.includes("cleo")) && !nameLower.includes("stethoscope")
+  }
+  if (catId === "scrublab-men") {
+    return (nameLower.includes("men") || nameLower.includes("male") || nameLower.includes("leo")) && !nameLower.includes("women") && !nameLower.includes("female") && !nameLower.includes("stethoscope")
+  }
+  if (catId === "printed-tops") {
+    return product.collection === "scrubs" && (nameLower.includes("print") || descLower.includes("print"))
+  }
+  if (catId === "printed-caps") {
+    return (nameLower.includes("cap") || nameLower.includes("headwear")) && (nameLower.includes("print") || nameLower.includes("animals") || nameLower.includes("aid") || nameLower.includes("buds") || nameLower.includes("dino"))
+  }
+  if (catId === "sets") {
+    return product.collection === "sets" && !nameLower.includes("stethoscope") && !nameLower.includes("littmann")
   }
   if (catId === "scrubs") {
-    return product.collection === "scrubs" && !nameLower.includes("cap")
+    return product.collection === "scrubs" && !nameLower.includes("cap") && !nameLower.includes("stethoscope")
   }
-  if (catId === "sets") return product.collection === "sets"
-  if (catId === "pants") return product.collection === "pants"
-  if (catId === "jackets") return product.collection === "jackets"
-  if (catId === "coats") return product.collection === "coats"
+  if (catId === "pants") {
+    return product.collection === "pants" && !nameLower.includes("stethoscope")
+  }
+  if (catId === "jackets") {
+    return product.collection === "jackets" && !nameLower.includes("stethoscope")
+  }
+  if (catId === "coats") {
+    return product.collection === "coats" && !nameLower.includes("stethoscope")
+  }
+  if (catId === "tanc-scrubs-all") {
+    return ["scrubs", "sets", "pants", "jackets", "coats"].includes(product.collection) && !nameLower.includes("stethoscope")
+  }
   return product.collection === catId
 }
 
@@ -531,9 +590,10 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
 
       {/* ── TANC MEGA NAV ── */}
       {(() => {
-        const navFilter = (filter: string, searchTerm?: string) => {
+        const navFilter = (filter: string) => {
           setSelectedCollection(filter)
-          setSearch(searchTerm || "")
+          setSearch("")
+          setSelectedColorFilter("all")
           setOpenDropdown(null)
           setShowMobileNav(false)
           document.getElementById("medstore-grid")?.scrollIntoView({ behavior: "smooth", block: "start" })
@@ -545,39 +605,21 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
             key: "tanc-scrubs",
             columns: [
               {
-                heading: "Highlights",
+                heading: "Scrubs Range",
                 items: [
-                  { label: "Best Sellers", filter: "all" },
-                  { label: "New Arrivals", filter: "all" },
-                ],
-              },
-              {
-                heading: "Scrubs",
-                items: [
-                  { label: "Shop All Scrubs", filter: "scrubs" },
-                  { label: "Core Scrubs", filter: "scrubs", search: "core" },
-                  { label: "LITE Scrubs", filter: "scrubs", search: "lite" },
+                  { label: "Shop All TANC Scrubs", filter: "tanc-scrubs-all" },
+                  { label: "Core Scrubs", filter: "core-scrubs" },
+                  { label: "LITE Scrubs", filter: "lite-scrubs" },
                   { label: "Scrub Sets", filter: "sets" },
                   { label: "Scrub Tops", filter: "scrubs" },
                   { label: "Scrub Pants", filter: "pants" },
-                  { label: "Printed Tops", filter: "scrubs", search: "print" },
                 ],
               },
               {
-                heading: "Dr's Jackets & More",
+                heading: "Outerwear & Lab",
                 items: [
                   { label: "Doctor's Jackets", filter: "jackets" },
-                  { label: "Lab Coats", filter: "coats" },
-                  { label: "Gowns & Wraps", filter: "coats", search: "gown" },
-                ],
-              },
-              {
-                heading: "Equipment & Accessories",
-                items: [
-                  { label: "Stethoscopes", filter: "stethoscopes" },
-                  { label: "Active Socks", filter: "accessories", search: "sock" },
-                  { label: "Scrub Caps", filter: "caps" },
-                  { label: "Accessories", filter: "accessories" },
+                  { label: "Lab Coats & Gowns", filter: "coats" },
                 ],
               },
             ],
@@ -589,44 +631,35 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
               {
                 heading: "Women",
                 items: [
-                  { label: "Shop All Women", filter: "scrubs" },
-                  { label: "Scrub Tops", filter: "scrubs", search: "women" },
-                  { label: "Scrub Pants", filter: "pants", search: "women" },
-                  { label: "Printed Scrub Tops", filter: "scrubs", search: "print" },
-                  { label: "Printed Scrub Caps", filter: "caps", search: "women" },
-                  { label: "Caps", filter: "caps" },
+                  { label: "Shop All Women", filter: "scrublab-women" },
+                  { label: "Scrub Tops", filter: "scrublab-women" },
+                  { label: "Scrub Pants", filter: "pants" },
+                  { label: "Printed Scrub Tops", filter: "printed-tops" },
+                  { label: "Printed Scrub Caps", filter: "printed-caps" },
                 ],
               },
               {
                 heading: "Men",
                 items: [
-                  { label: "Shop All Men", filter: "scrubs" },
-                  { label: "Scrub Tops", filter: "scrubs", search: "men" },
-                  { label: "Scrub Pants", filter: "pants", search: "men" },
-                  { label: "Printed Scrub Tops", filter: "scrubs", search: "print" },
-                  { label: "Printed Scrub Caps", filter: "caps", search: "men" },
-                  { label: "Caps", filter: "caps" },
-                ],
-              },
-              {
-                heading: "Gear",
-                items: [
-                  { label: "Active Socks", filter: "accessories", search: "sock" },
-                  { label: "Water Bottles", filter: "accessories", search: "bottle" },
-                  { label: "Stethoscopes", filter: "stethoscopes" },
+                  { label: "Shop All Men", filter: "scrublab-men" },
+                  { label: "Scrub Tops", filter: "scrublab-men" },
+                  { label: "Scrub Pants", filter: "pants" },
+                  { label: "Printed Scrub Tops", filter: "printed-tops" },
                 ],
               },
             ],
           },
           {
-            label: "Guides",
-            key: "guides",
+            label: "Accessories",
+            key: "accessories",
             columns: [
               {
-                heading: "Reference",
+                heading: "Diagnostics & Gear",
                 items: [
-                  { label: "Colour Guide", filter: "colour-guide" },
-                  { label: "Pricing Guide", filter: "pricing-guide" },
+                  { label: "All Accessories", filter: "all-accessories" },
+                  { label: "Stethoscopes", filter: "stethoscopes" },
+                  { label: "Scrub Caps", filter: "caps" },
+                  { label: "Active Socks & Gear", filter: "accessories" },
                 ],
               },
             ],
@@ -636,66 +669,75 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
         return (
           <>
             {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-1 border-b border-[#1a1a1a] mb-8 -mx-4 px-4 bg-[#0A0F1C]/95 backdrop-blur sticky top-0 z-40">
-              {navSections.map(section => (
-                <div
-                  key={section.key}
-                  className="relative"
-                  onMouseEnter={() => setOpenDropdown(section.key)}
-                  onMouseLeave={() => setOpenDropdown(null)}
+            <nav className="hidden md:flex items-center justify-between border-b border-[#1a1a1a] mb-8 -mx-4 px-4 bg-[#0A0F1C]/95 backdrop-blur sticky top-0 z-40">
+              <div className="flex items-center gap-1">
+                {navSections.map(section => (
+                  <div
+                    key={section.key}
+                    className="relative"
+                    onMouseEnter={() => setOpenDropdown(section.key)}
+                    onMouseLeave={() => setOpenDropdown(null)}
+                  >
+                    <button className={`flex items-center gap-1.5 px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors ${openDropdown === section.key ? "text-brand" : "text-gray-400 hover:text-white"}`}>
+                      {section.label}
+                      <ChevronDown size={11} className={`transition-transform ${openDropdown === section.key ? "rotate-180" : ""}`} />
+                    </button>
+                    {openDropdown === section.key && (
+                      <div className="absolute top-full left-0 z-50 mt-0 flex gap-6 bg-[#0d0d0d] border border-[#1f1f1f] rounded-xl shadow-2xl shadow-black/60 p-5 min-w-[340px]">
+                        {section.columns.map(col => (
+                          <div key={col.heading} className="min-w-[130px]">
+                            <p className="text-[9px] font-black uppercase tracking-[0.2em] text-brand mb-2.5">{col.heading}</p>
+                            <ul className="space-y-2">
+                              {col.items.map(item => (
+                                <li key={item.label}>
+                                  <button
+                                    onClick={() => navFilter(item.filter)}
+                                    className="text-xs text-gray-400 hover:text-white transition-colors text-left whitespace-nowrap block"
+                                  >
+                                    {item.label}
+                                  </button>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+                {/* Direct link to Colour Guide */}
+                <button
+                  onClick={() => document.getElementById("colour-guide")?.scrollIntoView({ behavior: "smooth" })}
+                  className="px-4 py-3 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white transition-colors"
                 >
-                  <button className={`flex items-center gap-1 px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors ${openDropdown === section.key ? "text-brand" : "text-gray-400 hover:text-white"}`}>
-                    {section.label}
-                    <ChevronDown size={11} className={`transition-transform ${openDropdown === section.key ? "rotate-180" : ""}`} />
-                  </button>
-                  {openDropdown === section.key && (
-                    <div className="absolute top-full left-0 z-50 mt-0 flex gap-6 bg-[#0d0d0d] border border-[#1f1f1f] rounded-xl shadow-2xl shadow-black/60 p-5 min-w-[340px]">
-                      {section.columns.map(col => (
-                        <div key={col.heading} className="min-w-[120px]">
-                          <p className="text-[9px] font-black uppercase tracking-[0.2em] text-brand mb-2">{col.heading}</p>
-                          <ul className="space-y-1.5">
-                            {col.items.map(item => (
-                              <li key={item.label}>
-                                <button
-                                  onClick={() => {
-                                    if (item.filter === "colour-guide") {
-                                      document.getElementById("colour-guide")?.scrollIntoView({ behavior: "smooth" })
-                                      setOpenDropdown(null)
-                                    } else if (item.filter === "pricing-guide") {
-                                      document.getElementById("pricing-guide")?.scrollIntoView({ behavior: "smooth" })
-                                      setOpenDropdown(null)
-                                    } else {
-                                      navFilter(item.filter, (item as any).search)
-                                    }
-                                  }}
-                                  className="text-xs text-gray-400 hover:text-white transition-colors text-left whitespace-nowrap"
-                                >
-                                  {item.label}
-                                </button>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
+                  Colour Guide
+                </button>
+              </div>
+
+              {selectedCollection !== "all" && (
+                <button
+                  onClick={() => setSelectedCollection("all")}
+                  className="text-xs font-bold text-brand hover:underline flex items-center gap-1"
+                >
+                  <span>Reset to All</span>
+                  <X size={12} />
+                </button>
+              )}
             </nav>
 
             {/* Mobile nav toggle */}
             <div className="md:hidden flex items-center justify-between border-b border-[#1a1a1a] mb-6 pb-3">
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand">Browse</span>
-              <button onClick={() => setShowMobileNav(v => !v)} className="flex items-center gap-2 text-xs font-bold text-gray-300 hover:text-white">
-                <Menu size={16} /> Categories
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand">Browse Collection</span>
+              <button onClick={() => setShowMobileNav(v => !v)} className="flex items-center gap-2 text-xs font-bold text-gray-300 hover:text-white bg-[#111] px-3 py-1.5 rounded-lg border border-[#222]">
+                <Menu size={15} /> Categories
               </button>
             </div>
 
             {/* Mobile nav drawer */}
             {showMobileNav && (
-              <div className="md:hidden fixed inset-0 z-50 bg-black/70" onClick={() => setShowMobileNav(false)}>
+              <div className="md:hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm" onClick={() => setShowMobileNav(false)}>
                 <div className="absolute right-0 top-0 h-full w-72 bg-[#0d0d0d] border-l border-[#1f1f1f] overflow-y-auto p-5" onClick={e => e.stopPropagation()}>
-                  <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center justify-between mb-6 pb-3 border-b border-[#1f1f1f]">
                     <span className="text-sm font-black text-white uppercase tracking-widest">Categories</span>
                     <button onClick={() => setShowMobileNav(false)}><X size={18} className="text-gray-400" /></button>
                   </div>
@@ -703,7 +745,7 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
                     <div key={section.key} className="mb-4">
                       <button
                         onClick={() => setOpenMobileSection(openMobileSection === section.key ? null : section.key)}
-                        className="flex items-center justify-between w-full text-xs font-black uppercase tracking-widest text-white py-2 border-b border-[#1f1f1f]"
+                        className="flex items-center justify-between w-full text-xs font-black uppercase tracking-widest text-white py-2.5 border-b border-[#1f1f1f]"
                       >
                         {section.label}
                         <ChevronDown size={12} className={`transition-transform ${openMobileSection === section.key ? "rotate-180" : ""}`} />
@@ -717,18 +759,8 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
                                 {col.items.map(item => (
                                   <li key={item.label}>
                                     <button
-                                      onClick={() => {
-                                        if (item.filter === "colour-guide") {
-                                          setShowMobileNav(false)
-                                          setTimeout(() => document.getElementById("colour-guide")?.scrollIntoView({ behavior: "smooth" }), 100)
-                                        } else if (item.filter === "pricing-guide") {
-                                          setShowMobileNav(false)
-                                          setTimeout(() => document.getElementById("pricing-guide")?.scrollIntoView({ behavior: "smooth" }), 100)
-                                        } else {
-                                          navFilter(item.filter, (item as any).search)
-                                        }
-                                      }}
-                                      className="text-xs text-gray-400 hover:text-white transition-colors text-left"
+                                      onClick={() => navFilter(item.filter)}
+                                      className="text-xs text-gray-400 hover:text-white transition-colors text-left block w-full py-0.5"
                                     >
                                       {item.label}
                                     </button>
@@ -741,6 +773,18 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
                       )}
                     </div>
                   ))}
+                  {/* Colour Guide link in mobile drawer */}
+                  <div className="pt-2">
+                    <button
+                      onClick={() => {
+                        setShowMobileNav(false)
+                        setTimeout(() => document.getElementById("colour-guide")?.scrollIntoView({ behavior: "smooth" }), 100)
+                      }}
+                      className="w-full text-left text-xs font-black uppercase tracking-widest text-gray-300 hover:text-white py-2.5 border-b border-[#1f1f1f]"
+                    >
+                      Colour Guide
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
@@ -819,160 +863,70 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
         ))}
       </div>
 
-      {/* ── FILTERS & SEARCH ── */}
+      {/* ── SEARCH & ACTIVE CATEGORY ── */}
       <div className="space-y-4 mb-8">
-        {/* Search input + Quick tags */}
-        <div className="flex flex-col md:flex-row md:items-center gap-3">
-          <div className="relative flex-1">
-            <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500" />
-            <input
-              type="text"
-              placeholder="Search scrubs, colors (e.g. olive, navy), fabrics, stethoscopes..."
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-              className="w-full bg-[#0d0d0d] border border-[#1f1f1f] focus:border-brand/60 rounded-xl pl-10 pr-10 py-3 text-xs text-white placeholder:text-gray-600 outline-none transition-all shadow-inner"
-            />
-            {search && (
-              <button
-                onClick={() => setSearch("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-white/10 hover:bg-white/20 text-gray-400 hover:text-white flex items-center justify-center transition-colors"
-                title="Clear search"
-              >
-                <X size={13} />
-              </button>
-            )}
-          </div>
-
-          {/* Quick search suggestions */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none text-[11px]">
-            <span className="text-gray-600 font-bold uppercase tracking-wider text-[10px] whitespace-nowrap pl-1">
-              Popular:
-            </span>
-            {["Doctor's Jacket", "Scrub Sets", "Littmann", "Joggers", "Olive Green", "Raspberry"].map(tag => (
-              <button
-                key={tag}
-                onClick={() => setSearch(tag)}
-                className={`px-2.5 py-1 rounded-lg border text-[11px] font-medium transition-all whitespace-nowrap ${
-                  search === tag
-                    ? "bg-brand/20 border-brand text-brand"
-                    : "bg-[#0d0d0d] border-[#1f1f1f] text-gray-400 hover:text-white hover:border-[#333]"
-                }`}
-              >
-                {tag}
-              </button>
-            ))}
-          </div>
+        <div className="relative">
+          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500" />
+          <input
+            type="text"
+            placeholder="Search within catalog (e.g. Cleo, Lily, Littmann, Doctor's Jacket)..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            className="w-full bg-[#0d0d0d] border border-[#1f1f1f] focus:border-brand/60 rounded-xl pl-10 pr-10 py-3 text-xs text-white placeholder:text-gray-600 outline-none transition-all shadow-inner"
+          />
+          {search && (
+            <button
+              onClick={() => setSearch("")}
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-white/10 hover:bg-white/20 text-gray-400 hover:text-white flex items-center justify-center transition-colors"
+              title="Clear search"
+            >
+              <X size={13} />
+            </button>
+          )}
         </div>
 
-        {/* TANC Category Pill Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-          {TANC_CATEGORIES.map(cat => {
-            const count = getCategoryCount(cat.id)
-            const isSelected = selectedCollection === cat.id
-            return (
-              <button
-                key={cat.id}
-                onClick={() => setSelectedCollection(cat.id)}
-                className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap flex items-center gap-2 ${
-                  isSelected
-                    ? "bg-brand text-white shadow-lg shadow-brand/20 border border-brand"
-                    : "bg-[#0d0d0d] border border-[#1a1a1a] text-gray-400 hover:text-white hover:border-[#333]"
-                }`}
-              >
-                <span>{cat.label}</span>
-                <span
-                  className={`px-1.5 py-0.5 rounded-md text-[10px] font-black ${
-                    isSelected
-                      ? "bg-white/20 text-white"
-                      : "bg-[#161616] text-gray-500"
-                  }`}
-                >
-                  {count}
-                </span>
-              </button>
-            )
-          })}
-        </div>
-
-        {/* Shop by Colour Swatches Bar */}
-        <div className="bg-[#0b0b0b] border border-[#181818] rounded-xl p-3 flex items-center gap-2 overflow-x-auto scrollbar-none">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500 flex-shrink-0 px-1">
-            Shop by Colour:
-          </span>
-          <div className="flex items-center gap-1.5 flex-nowrap">
-            {POPULAR_COLORS.map(c => {
-              const isActive = selectedColorFilter === c.key
-              return (
-                <button
-                  key={c.key}
-                  onClick={() => setSelectedColorFilter(c.key)}
-                  className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-[11px] font-semibold transition-all whitespace-nowrap ${
-                    isActive
-                      ? "bg-white/10 border-brand text-white shadow-sm ring-1 ring-brand/40"
-                      : "bg-[#111] border-[#222] text-gray-400 hover:text-white hover:border-[#333]"
-                  }`}
-                >
-                  {c.key !== "all" && (
-                    <span
-                      className="w-2.5 h-2.5 rounded-full border border-white/20 flex-shrink-0"
-                      style={{ backgroundColor: c.hex }}
-                    />
-                  )}
-                  <span>{c.name}</span>
-                </button>
-              )
-            })}
-          </div>
-        </div>
-
-        {/* Active filter badges & results count */}
+        {/* Active collection label & results count */}
         <div className="flex flex-wrap items-center justify-between gap-2 text-xs pt-1">
           <div className="flex items-center gap-2 flex-wrap text-gray-400">
             <span>
               Showing <strong className="text-white">{filteredProducts.length}</strong> of {products.length} products
             </span>
-            {(search || selectedCollection !== "all" || selectedColorFilter !== "all") && (
+            {(selectedCollection !== "all" || search) && (
               <>
                 <span className="text-gray-600">&bull;</span>
                 <div className="flex items-center gap-1.5 flex-wrap">
                   {selectedCollection !== "all" && (
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#161616] border border-[#2a2a2a] text-[11px] text-gray-300">
-                      Category: {TANC_CATEGORIES.find(c => c.id === selectedCollection)?.label}
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#161616] border border-[#2a2a2a] text-[11px] text-brand font-bold">
+                      <span>{getCategoryTitle(selectedCollection)}</span>
                       <button onClick={() => setSelectedCollection("all")} className="text-gray-500 hover:text-white">
-                        <X size={10} />
-                      </button>
-                    </span>
-                  )}
-                  {selectedColorFilter !== "all" && (
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#161616] border border-[#2a2a2a] text-[11px] text-gray-300">
-                      Colour: {POPULAR_COLORS.find(c => c.key === selectedColorFilter)?.name}
-                      <button onClick={() => setSelectedColorFilter("all")} className="text-gray-500 hover:text-white">
-                        <X size={10} />
+                        <X size={11} />
                       </button>
                     </span>
                   )}
                   {search && (
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#161616] border border-[#2a2a2a] text-[11px] text-gray-300">
-                      Query: "{search}"
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#161616] border border-[#2a2a2a] text-[11px] text-gray-300">
+                      <span>&ldquo;{search}&rdquo;</span>
                       <button onClick={() => setSearch("")} className="text-gray-500 hover:text-white">
-                        <X size={10} />
+                        <X size={11} />
                       </button>
                     </span>
                   )}
-                  <button
-                    onClick={() => {
-                      setSearch("")
-                      setSelectedCollection("all")
-                      setSelectedColorFilter("all")
-                    }}
-                    className="text-[11px] text-brand hover:underline font-bold ml-1"
-                  >
-                    Reset all
-                  </button>
                 </div>
               </>
             )}
           </div>
+
+          {(selectedCollection !== "all" || search) && (
+            <button
+              onClick={() => {
+                setSelectedCollection("all")
+                setSearch("")
+              }}
+              className="text-[11px] text-brand hover:underline font-bold"
+            >
+              View All Products
+            </button>
+          )}
         </div>
       </div>
 
@@ -1184,45 +1138,7 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
         </div>
       </div>
 
-      {/* ── PRICING GUIDE ── */}
-      <div id="pricing-guide" className="mt-16 border-t border-[#1a1a1a] pt-12 pb-8">
-        <div className="mb-6">
-          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand">Reference</span>
-          <h2 className="text-2xl font-black text-white mt-1">Pricing Guide</h2>
-          <p className="text-xs text-gray-400 mt-1">All prices are in USD. Custom embroidery (name + title) adds $4.00 per item.</p>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-xs border-collapse">
-            <thead>
-              <tr className="border-b border-[#1f1f1f]">
-                <th className="text-left py-3 pr-6 text-[10px] font-black uppercase tracking-widest text-gray-500">Product Type</th>
-                <th className="text-right py-3 text-[10px] font-black uppercase tracking-widest text-gray-500">Price (USD)</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#111]">
-              {[
-                { type: "Scrub Sets (Top + Pants)", price: "$60.00" },
-                { type: "Scrub Tops", price: "$30.00" },
-                { type: "Scrub Pants / Joggers", price: "$30.00" },
-                { type: "Lab Coats", price: "$20.00" },
-                { type: "Doctor's Jackets", price: "$40.00" },
-                { type: "Scrub Caps (Plain)", price: "$12.00" },
-                { type: "Printed Scrub Caps", price: "$12.00" },
-                { type: "TANC Classic Stethoscope", price: "$115.00" },
-                { type: "Littmann Classic II Paediatric", price: "$120.00" },
-                { type: "Active Socks", price: "$8.00" },
-                { type: "Water Bottle (500 ml)", price: "$15.00" },
-                { type: "Custom Embroidery Add-on", price: "+$4.00" },
-              ].map(row => (
-                <tr key={row.type} className="hover:bg-[#0f0f0f] transition-colors">
-                  <td className="py-3 pr-6 text-gray-300">{row.type}</td>
-                  <td className="py-3 text-right font-bold text-white">{row.price}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+
 
       {/* ── PRODUCT DETAIL MODAL ── */}
       {activeModalProduct && (
