@@ -34,11 +34,15 @@ interface CartItem {
 export const TANC_CATEGORIES = [
   { id: "all", label: "All Items" },
   { id: "sets", label: "Scrub Sets" },
+  { id: "core", label: "Core Scrubs" },
+  { id: "lite", label: "TANC LITE™" },
+  { id: "scrublab", label: "ScrubLab™" },
+  { id: "underscrubs", label: "Underscrubs" },
+  { id: "coats", label: "Lab Coats & Gowns" },
+  { id: "jackets", label: "Doctor's & Soft-Shell" },
+  { id: "disposable", label: "Disposable Scrubs" },
   { id: "scrubs", label: "Scrub Tops" },
   { id: "pants", label: "Joggers & Pants" },
-  { id: "coats", label: "Lab Coats & Gowns" },
-  { id: "jackets", label: "Doctor's Jackets" },
-  { id: "underscrubs", label: "Underscrubs" },
   { id: "stethoscopes", label: "Stethoscopes" },
   { id: "caps", label: "Scrub Caps" },
   { id: "accessories", label: "Accessories" },
@@ -64,14 +68,18 @@ export function getCategoryTitle(catId: string): string {
   const titles: Record<string, string> = {
     "all": "All Items",
     "tanc-scrubs-all": "TANC Scrubs",
+    "core": "Core Scrubs",
     "core-scrubs": "Core Scrubs",
-    "lite-scrubs": "LITE Scrubs",
+    "lite": "TANC LITE™ Scrubs",
+    "lite-scrubs": "TANC LITE™ Scrubs",
     "sets": "Scrub Sets",
+    "scrublab": "ScrubLab™ Collections",
     "scrubs": "Scrub Tops",
     "pants": "Scrub Pants",
-    "jackets": "Doctor's Jackets",
+    "underscrubs": "Underscrubs",
     "coats": "Lab Coats & Gowns",
-    "scrublab": "ScrubLab",
+    "jackets": "Doctor's & Soft-Shell Jackets",
+    "disposable": "Disposable Scrubs",
     "scrublab-women": "ScrubLab Women",
     "scrublab-men": "ScrubLab Men",
     "printed-tops": "Printed Scrub Tops",
@@ -80,7 +88,6 @@ export function getCategoryTitle(catId: string): string {
     "stethoscopes": "Stethoscopes",
     "caps": "Scrub Caps",
     "accessories": "Accessories & Gear",
-    "underscrubs": "Underscrubs",
   }
   return titles[catId] || catId
 }
@@ -103,16 +110,28 @@ export function matchCategory(product: Product, catId: string): boolean {
   if (catId === "all-accessories") {
     return product.collection === "accessories" || nameLower.includes("stethoscope") || nameLower.includes("littmann") || nameLower.includes("cap")
   }
-  if (catId === "core-scrubs") {
+  if (catId === "core" || catId === "core-scrubs") {
     const isApparel = ["scrubs", "sets", "pants"].includes(product.collection)
-    return isApparel && (nameLower.includes("core") || techLower.includes("core") || (!nameLower.includes("lite") && !nameLower.includes("scrublab")))
+    return isApparel && (nameLower.includes("core") || techLower.includes("twill") || (!nameLower.includes("lite") && !nameLower.includes("scrublab") && !nameLower.includes("sorbet") && !nameLower.includes("dispos")))
   }
-  if (catId === "lite-scrubs") {
+  if (catId === "lite" || catId === "lite-scrubs") {
     const isApparel = ["scrubs", "sets", "pants"].includes(product.collection)
-    return isApparel && (nameLower.includes("lite") || techLower.includes("lite") || descLower.includes("lite"))
+    return isApparel && (nameLower.includes("lite") || techLower.includes("litex") || descLower.includes("featherlight"))
   }
   if (catId === "scrublab") {
-    return nameLower.includes("scrublab") || techLower.includes("silvalab") || descLower.includes("scrublab")
+    return nameLower.includes("scrublab") || nameLower.includes("scrub lab") || techLower.includes("silvalab") || descLower.includes("scrublab") || nameLower.includes("print")
+  }
+  if (catId === "underscrubs") {
+    return product.collection === "underscrubs" || nameLower.includes("underscrub")
+  }
+  if (catId === "coats") {
+    return (product.collection === "coats" || nameLower.includes("lab coat") || nameLower.includes("consultation") || nameLower.includes("theatre gown") || nameLower.includes("gown")) && !nameLower.includes("stethoscope")
+  }
+  if (catId === "jackets") {
+    return (product.collection === "jackets" || nameLower.includes("jacket") || nameLower.includes("soft-shell") || nameLower.includes("soft shell") || nameLower.includes("fleece")) && !nameLower.includes("stethoscope")
+  }
+  if (catId === "disposable") {
+    return nameLower.includes("dispos") || descLower.includes("dispos")
   }
   if (catId === "scrublab-women") {
     return (nameLower.includes("women") || nameLower.includes("female") || nameLower.includes("lily") || nameLower.includes("cleo")) && !nameLower.includes("stethoscope")
@@ -134,12 +153,6 @@ export function matchCategory(product: Product, catId: string): boolean {
   }
   if (catId === "pants") {
     return product.collection === "pants" && !nameLower.includes("stethoscope")
-  }
-  if (catId === "jackets") {
-    return product.collection === "jackets" && !nameLower.includes("stethoscope")
-  }
-  if (catId === "coats") {
-    return product.collection === "coats" && !nameLower.includes("stethoscope")
   }
   if (catId === "tanc-scrubs-all") {
     return ["scrubs", "sets", "pants", "jackets", "coats", "underscrubs"].includes(product.collection) && !nameLower.includes("stethoscope")
@@ -698,28 +711,36 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
     return matchesCollection && matchesColor && matchesSearch
   }).sort((a, b) => {
     const getProductRank = (product: Product): number => {
-  const name = product.name.toLowerCase();
-  const col = product.collection;
-  // Core sets (best sellers)
-  if (col === "sets" || name.includes("set") || name.includes("suit")) return 1;
-  // TANC Lite scrubs (lite) next priority
-  if (col === "scrubs" && name.includes("lite")) return 2;
-  // Lab coats next
-  if (col === "coats" || name.includes("lab coat") || name.includes("consultation coat")) return 3;
-  // Jackets (soft‑shell & Doctor's) next
-  if (col === "jackets" || name.includes("jacket") || name.includes("fleece")) return 4;
-  // Underscrubs after jackets
-  if (col === "underscrubs") return 5;
-  // Generic scrubs after underscrubs
-  if (col === "scrubs") return 6;
-  // Pants next
-  if (col === "pants" || name.includes("pant") || name.includes("jogger") || name.includes("trouser")) return 7;
-  // Stethoscopes
-  if (name.includes("stethoscope") || name.includes("littmann")) return 8;
-  // Caps / headwear
-  if (name.includes("cap") || name.includes("headwear")) return 9;
-  // Other accessories and items
-  return 10;
+      const name = product.name.toLowerCase()
+      const col = product.collection
+      const id = product.id.toLowerCase()
+
+      // 1. TANC Core Complete Set FIRST ($30)
+      if (id === "tanc-core-set" || (col === "sets" && name.includes("core"))) return 1
+      // 2. TANC LITE Complete Set SECOND ($35)
+      if (id === "tanc-lite-set" || (col === "sets" && name.includes("lite"))) return 2
+      // 3. TANC ScrubLab Complete Set THIRD ($60)
+      if (id === "tanc-scrublab-set" || (col === "sets" && (name.includes("scrublab") || name.includes("scrub lab")))) return 3
+      // 4. Core separates (Tops & Pants)
+      if ((col === "scrubs" || col === "pants") && name.includes("core")) return 4
+      // 5. LITE separates (Tops & Pants)
+      if ((col === "scrubs" || col === "pants") && name.includes("lite")) return 5
+      // 6. Disposable Scrub Sets and other sets
+      if (col === "sets") return 6
+      // 7. Underscrubs (bestseller)
+      if (col === "underscrubs" || id.includes("underscrub") || name.includes("underscrub")) return 7
+      // 8. Lab coats & gowns (bestseller)
+      if (col === "coats" || name.includes("lab coat") || name.includes("consultation") || name.includes("gown")) return 8
+      // 9. Soft-shell jackets & Doctor's jackets (bestseller)
+      if (col === "jackets" || name.includes("soft-shell") || name.includes("soft shell") || name.includes("jacket") || name.includes("fleece")) return 9
+      // 10. Other scrub tops & pants
+      if (col === "scrubs") return 10
+      if (col === "pants") return 11
+      // 11. Stethoscopes
+      if (name.includes("stethoscope") || name.includes("littmann")) return 12
+      // 12. Caps / headwear & accessories
+      if (name.includes("cap") || name.includes("headwear")) return 13
+      return 14
     }
     const rankDiff = getProductRank(a) - getProductRank(b)
     if (rankDiff !== 0) return rankDiff
@@ -753,19 +774,20 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
                 heading: "Scrubs Range",
                 items: [
                   { label: "Shop All TANC Scrubs", filter: "tanc-scrubs-all" },
-                  { label: "Core Scrubs", filter: "core-scrubs" },
-                  { label: "LITE Scrubs", filter: "lite-scrubs" },
+                  { label: "Core Scrubs ($30)", filter: "core" },
+                  { label: "TANC LITE™ ($35)", filter: "lite" },
                   { label: "Scrub Sets", filter: "sets" },
                   { label: "Scrub Tops", filter: "scrubs" },
                   { label: "Scrub Pants", filter: "pants" },
                 ],
               },
               {
-                heading: "Outerwear & Lab",
+                heading: "Outerwear & Clinical",
                 items: [
-                  { label: "Doctor's Jackets", filter: "jackets" },
-                  { label: "Lab Coats & Gowns", filter: "coats" },
                   { label: "Underscrubs", filter: "underscrubs" },
+                  { label: "Lab Coats & Gowns", filter: "coats" },
+                  { label: "Doctor's & Soft-Shell", filter: "jackets" },
+                  { label: "Disposable Scrubs", filter: "disposable" },
                 ],
               },
             ],
