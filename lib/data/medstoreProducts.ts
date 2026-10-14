@@ -6702,11 +6702,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     "id": "tanc-core-scrub-sets-women",
     "name": "Core Scrub Sets",
     "collection": "sets",
-    "priceZAR": 290,
-    "priceUSD": 35,
+    "priceZAR": 550,
+    "priceUSD": 30,
     "rating": 4.8,
     "reviewsCount": 319,
-    "badge": "Value Set",
     "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
     "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
     "imageUrls": [

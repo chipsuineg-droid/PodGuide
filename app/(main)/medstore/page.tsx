@@ -1055,6 +1055,36 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
           )}
         </div>
 
+        {/* Category Pills (Direct TANC site collections navigation) */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none -mx-1 px-1">
+          {TANC_CATEGORIES.map(cat => {
+            const isSelected = selectedCollection === cat.id
+            const count = getCategoryCount(cat.id)
+            return (
+              <button
+                key={cat.id}
+                type="button"
+                onClick={() => {
+                  setSelectedCollection(cat.id)
+                  setSearch("")
+                }}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 flex-shrink-0 cursor-pointer ${
+                  isSelected
+                    ? "bg-brand text-white shadow-md shadow-brand/25 scale-[1.02]"
+                    : "bg-[#0f0f0f] border border-[#1f1f1f] text-gray-400 hover:text-white hover:border-[#333]"
+                }`}
+              >
+                <span>{cat.label}</span>
+                <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-black ${
+                  isSelected ? "bg-white/20 text-white" : "bg-[#181818] text-gray-500"
+                }`}>
+                  {count}
+                </span>
+              </button>
+            )
+          })}
+        </div>
+
         {/* Active collection label & results count */}
         <div className="flex flex-wrap items-center justify-between gap-2 text-xs pt-1">
           <div className="flex items-center gap-2 flex-wrap text-gray-400">
