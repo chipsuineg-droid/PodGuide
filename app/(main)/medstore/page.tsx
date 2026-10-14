@@ -1,9 +1,9 @@
 "use client"
 import { useState, useEffect, useRef } from "react"
 import {
-  ShoppingBag, Search, X, Plus, Check, Scissors, Truck,
+  ShoppingBag, Search, X, Plus, Check, Scissors, Truck, Menu,
   Star, Trash2, Package, ArrowRight, Upload, Image as ImageIcon,
-  MoveLeft, MoveRight, Edit3, Loader2, ChevronLeft, ChevronRight
+  MoveLeft, MoveRight, Edit3, Loader2, ChevronLeft, ChevronRight, ChevronDown
 } from "lucide-react"
 import { toast } from "sonner"
 import { createClient } from "@/lib/supabase/client"
@@ -24,14 +24,14 @@ interface CartItem {
 
 export const TANC_CATEGORIES = [
   { id: "all", label: "All Items" },
-  { id: "scrubs", label: "Scrubs & Tops" },
   { id: "sets", label: "Scrub Sets" },
+  { id: "scrubs", label: "Scrub Tops" },
   { id: "pants", label: "Joggers & Pants" },
-  { id: "jackets", label: "Doctor's Jackets" },
   { id: "coats", label: "Lab Coats & Gowns" },
+  { id: "jackets", label: "Doctor's Jackets" },
   { id: "stethoscopes", label: "Stethoscopes" },
   { id: "caps", label: "Scrub Caps" },
-  { id: "accessories", label: "Socks & Gear" },
+  { id: "accessories", label: "Accessories" },
 ]
 
 export const POPULAR_COLORS = [
@@ -108,13 +108,18 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
   const supabase = createClient()
   const [isAdmin, setIsAdmin] = useState(initialIsAdmin)
   const [products, setProducts] = useState<Product[]>(INITIAL_PRODUCTS)
-  const [currency, setCurrency] = useState<"ZAR" | "USD">("ZAR")
+
   const [selectedCollection, setSelectedCollection] = useState<string>("all")
   const [selectedColorFilter, setSelectedColorFilter] = useState<string>("all")
   const [search, setSearch] = useState<string>("")
   const [colorSelections, setColorSelections] = useState<Record<string, ProductColor>>({})
   const [hoveredColors, setHoveredColors] = useState<Record<string, ProductColor | null>>({})
-  
+
+  // Mega nav state
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+  const [showMobileNav, setShowMobileNav] = useState(false)
+  const [openMobileSection, setOpenMobileSection] = useState<string | null>(null)
+
   // Product Detail Modal
   const [activeModalProduct, setActiveModalProduct] = useState<Product | null>(null)
   const [activeModalImageIdx, setActiveModalImageIdx] = useState(0)
@@ -243,8 +248,7 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
     }
   }
 
-  const formatPrice = (zar: number, usd: number) =>
-    currency === "ZAR" ? `R${zar.toLocaleString()}` : `$${usd.toFixed(2)}`
+  const formatPrice = (zar: number, usd: number) => `$${usd.toFixed(2)}`;
 
   const addToCart = (product: Product) => {
     setCart(prev => [...prev, {
@@ -500,6 +504,22 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
     }
 
     return matchesCollection && matchesColor && matchesSearch
+  }).sort((a, b) => {
+    const getProductRank = (product: Product): number => {
+      const name = product.name.toLowerCase()
+      const col = product.collection
+      if (col === "sets" || name.includes("set") || name.includes("suit")) return 1
+      if (col === "scrubs" || name.includes("top") || name.includes("shirt") || name.includes("v-neck")) return 2
+      if (col === "pants" || name.includes("pant") || name.includes("jogger") || name.includes("trouser")) return 3
+      if (col === "coats" || name.includes("lab coat") || name.includes("consultation coat")) return 4
+      if (col === "jackets" || name.includes("jacket") || name.includes("fleece")) return 5
+      if (name.includes("stethoscope") || name.includes("littmann")) return 6
+      if (name.includes("cap") || name.includes("headwear")) return 7
+      return 8
+    }
+    const rankDiff = getProductRank(a) - getProductRank(b)
+    if (rankDiff !== 0) return rankDiff
+    return (b.reviewsCount || 0) - (a.reviewsCount || 0)
   })
 
   const getCategoryCount = (catId: string) => {
@@ -508,6 +528,226 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
 
   return (
     <div className="max-w-7xl mx-auto pb-24 space-y-0">
+
+      {/* ── TANC MEGA NAV ── */}
+      {(() => {
+        const navFilter = (filter: string, searchTerm?: string) => {
+          setSelectedCollection(filter)
+          setSearch(searchTerm || "")
+          setOpenDropdown(null)
+          setShowMobileNav(false)
+          document.getElementById("medstore-grid")?.scrollIntoView({ behavior: "smooth", block: "start" })
+        }
+
+        const navSections = [
+          {
+            label: "TANC Scrubs",
+            key: "tanc-scrubs",
+            columns: [
+              {
+                heading: "Highlights",
+                items: [
+                  { label: "Best Sellers", filter: "all" },
+                  { label: "New Arrivals", filter: "all" },
+                ],
+              },
+              {
+                heading: "Scrubs",
+                items: [
+                  { label: "Shop All Scrubs", filter: "scrubs" },
+                  { label: "Core Scrubs", filter: "scrubs", search: "core" },
+                  { label: "LITE Scrubs", filter: "scrubs", search: "lite" },
+                  { label: "Scrub Sets", filter: "sets" },
+                  { label: "Scrub Tops", filter: "scrubs" },
+                  { label: "Scrub Pants", filter: "pants" },
+                  { label: "Printed Tops", filter: "scrubs", search: "print" },
+                ],
+              },
+              {
+                heading: "Dr's Jackets & More",
+                items: [
+                  { label: "Doctor's Jackets", filter: "jackets" },
+                  { label: "Lab Coats", filter: "coats" },
+                  { label: "Gowns & Wraps", filter: "coats", search: "gown" },
+                ],
+              },
+              {
+                heading: "Equipment & Accessories",
+                items: [
+                  { label: "Stethoscopes", filter: "stethoscopes" },
+                  { label: "Active Socks", filter: "accessories", search: "sock" },
+                  { label: "Scrub Caps", filter: "caps" },
+                  { label: "Accessories", filter: "accessories" },
+                ],
+              },
+            ],
+          },
+          {
+            label: "ScrubLab",
+            key: "scrublab",
+            columns: [
+              {
+                heading: "Women",
+                items: [
+                  { label: "Shop All Women", filter: "scrubs" },
+                  { label: "Scrub Tops", filter: "scrubs", search: "women" },
+                  { label: "Scrub Pants", filter: "pants", search: "women" },
+                  { label: "Printed Scrub Tops", filter: "scrubs", search: "print" },
+                  { label: "Printed Scrub Caps", filter: "caps", search: "women" },
+                  { label: "Caps", filter: "caps" },
+                ],
+              },
+              {
+                heading: "Men",
+                items: [
+                  { label: "Shop All Men", filter: "scrubs" },
+                  { label: "Scrub Tops", filter: "scrubs", search: "men" },
+                  { label: "Scrub Pants", filter: "pants", search: "men" },
+                  { label: "Printed Scrub Tops", filter: "scrubs", search: "print" },
+                  { label: "Printed Scrub Caps", filter: "caps", search: "men" },
+                  { label: "Caps", filter: "caps" },
+                ],
+              },
+              {
+                heading: "Gear",
+                items: [
+                  { label: "Active Socks", filter: "accessories", search: "sock" },
+                  { label: "Water Bottles", filter: "accessories", search: "bottle" },
+                  { label: "Stethoscopes", filter: "stethoscopes" },
+                ],
+              },
+            ],
+          },
+          {
+            label: "Guides",
+            key: "guides",
+            columns: [
+              {
+                heading: "Reference",
+                items: [
+                  { label: "Colour Guide", filter: "colour-guide" },
+                  { label: "Pricing Guide", filter: "pricing-guide" },
+                ],
+              },
+            ],
+          },
+        ]
+
+        return (
+          <>
+            {/* Desktop nav */}
+            <nav className="hidden md:flex items-center gap-1 border-b border-[#1a1a1a] mb-8 -mx-4 px-4 bg-[#0A0F1C]/95 backdrop-blur sticky top-0 z-40">
+              {navSections.map(section => (
+                <div
+                  key={section.key}
+                  className="relative"
+                  onMouseEnter={() => setOpenDropdown(section.key)}
+                  onMouseLeave={() => setOpenDropdown(null)}
+                >
+                  <button className={`flex items-center gap-1 px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors ${openDropdown === section.key ? "text-brand" : "text-gray-400 hover:text-white"}`}>
+                    {section.label}
+                    <ChevronDown size={11} className={`transition-transform ${openDropdown === section.key ? "rotate-180" : ""}`} />
+                  </button>
+                  {openDropdown === section.key && (
+                    <div className="absolute top-full left-0 z-50 mt-0 flex gap-6 bg-[#0d0d0d] border border-[#1f1f1f] rounded-xl shadow-2xl shadow-black/60 p-5 min-w-[340px]">
+                      {section.columns.map(col => (
+                        <div key={col.heading} className="min-w-[120px]">
+                          <p className="text-[9px] font-black uppercase tracking-[0.2em] text-brand mb-2">{col.heading}</p>
+                          <ul className="space-y-1.5">
+                            {col.items.map(item => (
+                              <li key={item.label}>
+                                <button
+                                  onClick={() => {
+                                    if (item.filter === "colour-guide") {
+                                      document.getElementById("colour-guide")?.scrollIntoView({ behavior: "smooth" })
+                                      setOpenDropdown(null)
+                                    } else if (item.filter === "pricing-guide") {
+                                      document.getElementById("pricing-guide")?.scrollIntoView({ behavior: "smooth" })
+                                      setOpenDropdown(null)
+                                    } else {
+                                      navFilter(item.filter, (item as any).search)
+                                    }
+                                  }}
+                                  className="text-xs text-gray-400 hover:text-white transition-colors text-left whitespace-nowrap"
+                                >
+                                  {item.label}
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </nav>
+
+            {/* Mobile nav toggle */}
+            <div className="md:hidden flex items-center justify-between border-b border-[#1a1a1a] mb-6 pb-3">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand">Browse</span>
+              <button onClick={() => setShowMobileNav(v => !v)} className="flex items-center gap-2 text-xs font-bold text-gray-300 hover:text-white">
+                <Menu size={16} /> Categories
+              </button>
+            </div>
+
+            {/* Mobile nav drawer */}
+            {showMobileNav && (
+              <div className="md:hidden fixed inset-0 z-50 bg-black/70" onClick={() => setShowMobileNav(false)}>
+                <div className="absolute right-0 top-0 h-full w-72 bg-[#0d0d0d] border-l border-[#1f1f1f] overflow-y-auto p-5" onClick={e => e.stopPropagation()}>
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="text-sm font-black text-white uppercase tracking-widest">Categories</span>
+                    <button onClick={() => setShowMobileNav(false)}><X size={18} className="text-gray-400" /></button>
+                  </div>
+                  {navSections.map(section => (
+                    <div key={section.key} className="mb-4">
+                      <button
+                        onClick={() => setOpenMobileSection(openMobileSection === section.key ? null : section.key)}
+                        className="flex items-center justify-between w-full text-xs font-black uppercase tracking-widest text-white py-2 border-b border-[#1f1f1f]"
+                      >
+                        {section.label}
+                        <ChevronDown size={12} className={`transition-transform ${openMobileSection === section.key ? "rotate-180" : ""}`} />
+                      </button>
+                      {openMobileSection === section.key && (
+                        <div className="pt-3 pl-2 space-y-4">
+                          {section.columns.map(col => (
+                            <div key={col.heading}>
+                              <p className="text-[9px] font-black uppercase tracking-[0.2em] text-brand mb-2">{col.heading}</p>
+                              <ul className="space-y-2">
+                                {col.items.map(item => (
+                                  <li key={item.label}>
+                                    <button
+                                      onClick={() => {
+                                        if (item.filter === "colour-guide") {
+                                          setShowMobileNav(false)
+                                          setTimeout(() => document.getElementById("colour-guide")?.scrollIntoView({ behavior: "smooth" }), 100)
+                                        } else if (item.filter === "pricing-guide") {
+                                          setShowMobileNav(false)
+                                          setTimeout(() => document.getElementById("pricing-guide")?.scrollIntoView({ behavior: "smooth" }), 100)
+                                        } else {
+                                          navFilter(item.filter, (item as any).search)
+                                        }
+                                      }}
+                                      className="text-xs text-gray-400 hover:text-white transition-colors text-left"
+                                    >
+                                      {item.label}
+                                    </button>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </>
+        )
+      })()}
+
       {/* ── STORE HERO HEADER ── */}
       <div className="border-b border-[#1a1a1a] pb-8 mb-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -531,22 +771,8 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
           </div>
 
           <div className="flex items-center gap-3 flex-shrink-0 flex-wrap">
-            {/* Currency toggle */}
-            <div className="flex items-center bg-[#0f0f0f] border border-[#1f1f1f] rounded-xl p-1">
-              {(["ZAR", "USD"] as const).map(cur => (
-                <button
-                  key={cur}
-                  onClick={() => setCurrency(cur)}
-                  className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                    currency === cur
-                      ? "bg-brand text-white shadow"
-                      : "text-gray-500 hover:text-white"
-                  }`}
-                >
-                  {cur === "ZAR" ? "ZAR (R)" : "USD ($)"}
-                </button>
-              ))}
-            </div>
+            {/* USD-only badge */}
+            <span className="px-3 py-1.5 bg-[#0f0f0f] border border-[#1f1f1f] rounded-xl text-xs font-bold text-green-400">USD ($)</span>
 
             {/* Admin Add Merch Button */}
             {isAdmin && (
@@ -774,7 +1000,7 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div id="medstore-grid" className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {filteredProducts.map(product => {
             const activeColor = getActiveColor(product)
             const previewColor = hoveredColors[product.id] || activeColor
@@ -835,37 +1061,37 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
                   </div>
 
                   {/* Info block */}
-                  <div className="p-5 space-y-3">
+                  <div className="p-3.5 sm:p-5 space-y-2.5 sm:space-y-3">
                     <div className="space-y-1">
                       {product.fabricTech && (
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-brand block">
+                        <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-brand block truncate">
                           {product.fabricTech}
                         </span>
                       )}
-                      <h3 className="text-sm font-bold text-white leading-snug group-hover:text-brand transition-colors line-clamp-1">
+                      <h3 className="text-xs sm:text-sm font-bold text-white leading-snug group-hover:text-brand transition-colors line-clamp-1">
                         {product.name}
                       </h3>
-                      <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed">
+                      <p className="text-[11px] sm:text-xs text-gray-500 line-clamp-2 leading-relaxed hidden sm:block">
                         {product.description}
                       </p>
                     </div>
 
                     {/* Colour shifting swatches with hover and selection */}
                     {product.colors && product.colors.length > 0 && (
-                      <div className="space-y-1.5 pt-1">
-                        <div className="flex items-center justify-between text-[11px]">
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500">
+                      <div className="space-y-1 pt-0.5 sm:pt-1">
+                        <div className="flex items-center justify-between text-[10px] sm:text-[11px]">
+                          <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-gray-500">
                             Colour
                           </span>
-                          <span className="text-[10px] text-gray-300 font-semibold truncate max-w-[130px]">
+                          <span className="text-[9px] sm:text-[10px] text-gray-300 font-semibold truncate max-w-[90px] sm:max-w-[130px]">
                             {previewColor?.name || "Standard"}
                           </span>
                         </div>
                         <div
-                          className="flex items-center gap-1.5 flex-wrap"
+                          className="flex items-center gap-1 sm:gap-1.5 flex-wrap"
                           onMouseLeave={() => setHoveredColors(prev => ({ ...prev, [product.id]: null }))}
                         >
-                          {product.colors.map(color => {
+                          {product.colors.slice(0, 5).map(color => {
                             const isCurrent = previewColor?.name === color.name
                             return (
                               <button
@@ -873,8 +1099,8 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
                                 type="button"
                                 onMouseEnter={() => setHoveredColors(prev => ({ ...prev, [product.id]: color }))}
                                 onClick={e => handleColorSelect(product.id, color, e)}
-                                title={`${color.name} (Hover to shift image, click to select)`}
-                                className={`w-4 h-4 rounded-full border transition-all duration-150 relative ${
+                                title={`${color.name} (Hover to preview, click to select)`}
+                                className={`w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full border transition-all duration-150 relative ${
                                   isCurrent
                                     ? "scale-125 border-brand ring-2 ring-brand/40 shadow-sm"
                                     : "border-white/20 hover:scale-110 opacity-75 hover:opacity-100"
@@ -887,6 +1113,11 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
                               </button>
                             )
                           })}
+                          {product.colors.length > 5 && (
+                            <span className="text-[9px] text-gray-500 font-bold self-center">
+                              +{product.colors.length - 5}
+                            </span>
+                          )}
                         </div>
                       </div>
                     )}
@@ -894,22 +1125,22 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
                 </div>
 
                 {/* Price + CTA */}
-                <div className="px-5 pb-5 pt-2 flex items-center justify-between border-t border-[#141414]">
+                <div className="px-3.5 sm:px-5 pb-3.5 sm:pb-5 pt-2 flex items-center justify-between border-t border-[#141414]">
                   <div>
-                    <span className="text-base font-black text-white block leading-tight">
+                    <span className="text-sm sm:text-base font-black text-white block leading-tight">
                       {formatPrice(product.priceZAR, product.priceUSD)}
                     </span>
-                    <span className="text-[10px] text-gray-600">Free campus drop</span>
+                    <span className="text-[9px] sm:text-[10px] text-gray-600">Free drop</span>
                   </div>
                   <button
                     onClick={e => {
                       e.stopPropagation()
                       openProductModal(product)
                     }}
-                    className="px-3.5 py-2 bg-brand hover:bg-red-700 text-white font-bold rounded-xl text-xs transition-all shadow-md shadow-brand/20 flex items-center gap-1"
+                    className="px-2.5 sm:px-3.5 py-1.5 sm:py-2 bg-brand hover:bg-red-700 text-white font-bold rounded-xl text-[11px] sm:text-xs transition-all shadow-md shadow-brand/20 flex items-center gap-1"
                   >
                     <span>Select</span>
-                    <ArrowRight size={12} />
+                    <ArrowRight size={11} />
                   </button>
                 </div>
               </div>
@@ -917,6 +1148,81 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
           })}
         </div>
       )}
+
+      {/* ── COLOUR GUIDE ── */}
+      <div id="colour-guide" className="mt-16 border-t border-[#1a1a1a] pt-12">
+        <div className="mb-6">
+          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand">Reference</span>
+          <h2 className="text-2xl font-black text-white mt-1">Colour Guide</h2>
+          <p className="text-xs text-gray-400 mt-1">All available colours across the TANC collection. Exact shades may vary on screen.</p>
+        </div>
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+          {[
+            { name: "Midnight Black", hex: "#111827" },
+            { name: "Deep Navy", hex: "#1e3a8a" },
+            { name: "Powder Blue", hex: "#93c5fd" },
+            { name: "Petrol Blue", hex: "#0e7490" },
+            { name: "Ceil Blue", hex: "#60a5fa" },
+            { name: "Olive Green", hex: "#3f6212" },
+            { name: "Hunter Green", hex: "#14532d" },
+            { name: "Forest Green", hex: "#14532d" },
+            { name: "Raspberry", hex: "#e11d48" },
+            { name: "Burgundy Wine", hex: "#831843" },
+            { name: "Deep Burgundy", hex: "#831843" },
+            { name: "Dusty Rose", hex: "#db2777" },
+            { name: "Crisp White", hex: "#ffffff" },
+            { name: "Caribbean Blue", hex: "#0284c7" },
+          ].filter((c, i, arr) => arr.findIndex(x => x.hex === c.hex) === i).map(colour => (
+            <div key={colour.name} className="flex flex-col items-center gap-2">
+              <div
+                className="w-12 h-12 rounded-xl border border-[#2a2a2a] shadow-inner"
+                style={{ backgroundColor: colour.hex }}
+              />
+              <span className="text-[10px] text-gray-400 text-center leading-tight">{colour.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── PRICING GUIDE ── */}
+      <div id="pricing-guide" className="mt-16 border-t border-[#1a1a1a] pt-12 pb-8">
+        <div className="mb-6">
+          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand">Reference</span>
+          <h2 className="text-2xl font-black text-white mt-1">Pricing Guide</h2>
+          <p className="text-xs text-gray-400 mt-1">All prices are in USD. Custom embroidery (name + title) adds $4.00 per item.</p>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-xs border-collapse">
+            <thead>
+              <tr className="border-b border-[#1f1f1f]">
+                <th className="text-left py-3 pr-6 text-[10px] font-black uppercase tracking-widest text-gray-500">Product Type</th>
+                <th className="text-right py-3 text-[10px] font-black uppercase tracking-widest text-gray-500">Price (USD)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#111]">
+              {[
+                { type: "Scrub Sets (Top + Pants)", price: "$60.00" },
+                { type: "Scrub Tops", price: "$30.00" },
+                { type: "Scrub Pants / Joggers", price: "$30.00" },
+                { type: "Lab Coats", price: "$20.00" },
+                { type: "Doctor's Jackets", price: "$40.00" },
+                { type: "Scrub Caps (Plain)", price: "$12.00" },
+                { type: "Printed Scrub Caps", price: "$12.00" },
+                { type: "TANC Classic Stethoscope", price: "$115.00" },
+                { type: "Littmann Classic II Paediatric", price: "$120.00" },
+                { type: "Active Socks", price: "$8.00" },
+                { type: "Water Bottle (500 ml)", price: "$15.00" },
+                { type: "Custom Embroidery Add-on", price: "+$4.00" },
+              ].map(row => (
+                <tr key={row.type} className="hover:bg-[#0f0f0f] transition-colors">
+                  <td className="py-3 pr-6 text-gray-300">{row.type}</td>
+                  <td className="py-3 text-right font-bold text-white">{row.price}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
       {/* ── PRODUCT DETAIL MODAL ── */}
       {activeModalProduct && (
@@ -1107,7 +1413,7 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
                     <Scissors size={14} className="text-brand" />
                     <div>
                       <p className="text-xs font-bold text-white">Custom Medical Embroidery</p>
-                      <p className="text-[10px] text-gray-500">+R65 / +$4.00 &bull; Name + Title</p>
+                      <p className="text-[10px] text-gray-500">+$4.00 &bull; Name + Title</p>
                     </div>
                   </div>
                   <input
@@ -1207,7 +1513,7 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 <div>
                   <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-1.5">
-                    Price (ZAR) *
+                    Price (ZAR - Internal) *
                   </label>
                   <input
                     type="number"

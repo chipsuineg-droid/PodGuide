@@ -22,4 +22,7 @@ export interface Product {
   sizes: string[]
   specs: string[]
   isAdminAdded?: boolean
+  tancLine?: "tanc_scrubs" | "scrublab" | "accessories"
+  subcategory?: string
+  gender?: "women" | "men" | "unisex"
 }
