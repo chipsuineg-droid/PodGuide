@@ -18,7 +18,7 @@ export interface ProductColor {
 export interface AdminProduct {
   id: string
   name: string
-  collection: "jackets" | "scrubs" | "pants" | "sets" | "coats" | "accessories"
+  collection: "jackets" | "scrubs" | "pants" | "sets" | "coats" | "accessories" | "underscrubs"
   priceZAR: number
   priceUSD: number
   rating?: number

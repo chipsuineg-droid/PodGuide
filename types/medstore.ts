@@ -2,12 +2,13 @@ export interface ProductColor {
   name: string
   hex: string
   imageUrl?: string
+  imageUrls?: string[]
 }
 
 export interface Product {
   id: string
   name: string
-  collection: "jackets" | "scrubs" | "pants" | "sets" | "coats" | "accessories"
+  collection: "jackets" | "scrubs" | "pants" | "sets" | "coats" | "accessories" | "underscrubs"
   priceZAR: number
   priceUSD: number
   rating: number

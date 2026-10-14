@@ -3,6 +3,2138 @@ import type { Product } from "@/types/medstore"
 
 export const INITIAL_PRODUCTS: Product[] = [
   {
+    "id": "tanc-lite-set",
+    "name": "TANC LITE™ Complete 4-Way Stretch Scrub Set",
+    "collection": "sets",
+    "priceZAR": 640,
+    "priceUSD": 60,
+    "rating": 4.9,
+    "reviewsCount": 395,
+    "badge": "Featherlight Tech",
+    "fabricTech": "LITEx™ Featherlight 4-Way Stretch",
+    "imageIcon": "🥼",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+    "imageUrls": [
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_04.avif"
+    ],
+    "description": "Ultra-breathable lightweight performance scrub set crafted for hot hospital shifts, long theatre hours, and high-intensity clinical rounds. Moisture-wicking, wrinkle-free, and rapid-dry.",
+    "colors": [
+      {
+        "name": "Deep Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Royal Blue",
+        "hex": "#1d4ed8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Ceil Blue",
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Caribbean Blue",
+        "hex": "#0284c7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Petrol Blue",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Summit Blue",
+        "hex": "#3b82f6",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "True Blue",
+        "hex": "#2563eb",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Baby Blue",
+        "hex": "#bae6fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Airforce Blue",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif"
+        ]
+      },
+      {
+        "name": "Sky Blue",
+        "hex": "#38bdf8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Steel Blue",
+        "hex": "#64748b",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Bottle Green",
+        "hex": "#064e3b",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Men_01.avif"
+        ]
+      },
+      {
+        "name": "Hunter Green",
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Forest Green",
+        "hex": "#166534",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "OT Green",
+        "hex": "#047857",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Emerald Green",
+        "hex": "#059669",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Sage Green",
+        "hex": "#84a98c",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Mint Green",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Men_01.avif"
+        ]
+      },
+      {
+        "name": "Burgundy Wine",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Maroon",
+        "hex": "#701a2e",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#e11d48",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Raspberry_Lite-Scrubs_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Raspberry_Lite-Scrubs_Men_03.avif"
+        ]
+      },
+      {
+        "name": "Cerise",
+        "hex": "#be185d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Dusty Rose",
+        "hex": "#db2777",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Baby Pink",
+        "hex": "#fbcfe8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Coral",
+        "hex": "#f97316",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Mustard",
+        "hex": "#d97706",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Violet",
+        "hex": "#7c3aed",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Purple",
+        "hex": "#6b21a8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Lavender",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Mauve",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Crisp White",
+        "hex": "#ffffff",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Charcoal Grey",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Lite-Scrubs_Women_09.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Lite-Scrubs_Women_09.avif"
+        ]
+      },
+      {
+        "name": "Slate Grey",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Women_01.avif"
+        ]
+      }
+    ],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL"
+    ],
+    "specs": [
+      "Ultralight breathable performance fabric",
+      "True 4-way mechanical stretch mobility",
+      "Rapid moisture-wicking and quick dry",
+      "Anti-wrinkle wash and wear finish"
+    ],
+    "tancLine": "tanc_scrubs",
+    "subcategory": "lite_scrubs"
+  },
+  {
+    "id": "tanc-lite-top",
+    "name": "TANC LITE™ Featherlight 4-Way Stretch Scrub Top",
+    "collection": "scrubs",
+    "priceZAR": 320,
+    "priceUSD": 30,
+    "rating": 4.8,
+    "reviewsCount": 220,
+    "badge": "Ultra-Lightweight",
+    "fabricTech": "LITEx™ Featherlight Stretch",
+    "imageIcon": "👕",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+    "imageUrls": [
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Men_01.avif"
+    ],
+    "description": "Engineered with featherweight LITEx fabric to maximize airflow and prevent heat retention under surgical gowns. Features chest pocket and reinforced side vents.",
+    "colors": [
+      {
+        "name": "Deep Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Royal Blue",
+        "hex": "#1d4ed8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Ceil Blue",
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Caribbean Blue",
+        "hex": "#0284c7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Petrol Blue",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Summit Blue",
+        "hex": "#3b82f6",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "True Blue",
+        "hex": "#2563eb",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Baby Blue",
+        "hex": "#bae6fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Airforce Blue",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif"
+        ]
+      },
+      {
+        "name": "Sky Blue",
+        "hex": "#38bdf8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Steel Blue",
+        "hex": "#64748b",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Bottle Green",
+        "hex": "#064e3b",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Men_01.avif"
+        ]
+      },
+      {
+        "name": "Hunter Green",
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Forest Green",
+        "hex": "#166534",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "OT Green",
+        "hex": "#047857",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Emerald Green",
+        "hex": "#059669",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Sage Green",
+        "hex": "#84a98c",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Mint Green",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Men_01.avif"
+        ]
+      },
+      {
+        "name": "Burgundy Wine",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Maroon",
+        "hex": "#701a2e",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#e11d48",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Raspberry_Lite-Scrubs_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Raspberry_Lite-Scrubs_Men_03.avif"
+        ]
+      },
+      {
+        "name": "Cerise",
+        "hex": "#be185d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Dusty Rose",
+        "hex": "#db2777",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Baby Pink",
+        "hex": "#fbcfe8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Coral",
+        "hex": "#f97316",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Mustard",
+        "hex": "#d97706",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Violet",
+        "hex": "#7c3aed",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Purple",
+        "hex": "#6b21a8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Lavender",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Mauve",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Crisp White",
+        "hex": "#ffffff",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Charcoal Grey",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Lite-Scrubs_Women_09.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Lite-Scrubs_Women_09.avif"
+        ]
+      },
+      {
+        "name": "Slate Grey",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Women_01.avif"
+        ]
+      }
+    ],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "specs": [
+      "Targeted ventilation side slits",
+      "Deep chest drop pocket",
+      "Featherlight fabric feel",
+      "Anti-odor treatment"
+    ],
+    "tancLine": "tanc_scrubs",
+    "subcategory": "lite_scrubs"
+  },
+  {
+    "id": "tanc-lite-pant",
+    "name": "TANC LITE™ Flex-Motion Cargo Scrub Pants",
+    "collection": "pants",
+    "priceZAR": 320,
+    "priceUSD": 30,
+    "rating": 4.9,
+    "reviewsCount": 280,
+    "badge": "Flex Motion",
+    "fabricTech": "LITEx™ 4-Way Stretch",
+    "imageIcon": "👖",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+    "imageUrls": [
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+    ],
+    "description": "Featherlight cargo scrub pants with elastic drawstring waistband, dual secure cargo pockets, and tapered leg opening. Zero drag movement throughout demanding 24-hour shifts.",
+    "colors": [
+      {
+        "name": "Deep Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Royal Blue",
+        "hex": "#1d4ed8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
+        ]
+      },
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Ceil Blue",
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Caribbean Blue",
+        "hex": "#0284c7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Petrol Blue",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Summit Blue",
+        "hex": "#3b82f6",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "True Blue",
+        "hex": "#2563eb",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Baby Blue",
+        "hex": "#bae6fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Airforce Blue",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif"
+        ]
+      },
+      {
+        "name": "Sky Blue",
+        "hex": "#38bdf8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Steel Blue",
+        "hex": "#64748b",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Bottle Green",
+        "hex": "#064e3b",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Men_01.avif"
+        ]
+      },
+      {
+        "name": "Hunter Green",
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Forest Green",
+        "hex": "#166534",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "OT Green",
+        "hex": "#047857",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Emerald Green",
+        "hex": "#059669",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Sage Green",
+        "hex": "#84a98c",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Mint Green",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Men_01.avif"
+        ]
+      },
+      {
+        "name": "Burgundy Wine",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Maroon",
+        "hex": "#701a2e",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#e11d48",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Raspberry_Lite-Scrubs_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Raspberry_Lite-Scrubs_Men_03.avif"
+        ]
+      },
+      {
+        "name": "Cerise",
+        "hex": "#be185d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Dusty Rose",
+        "hex": "#db2777",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Baby Pink",
+        "hex": "#fbcfe8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Coral",
+        "hex": "#f97316",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Mustard",
+        "hex": "#d97706",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Violet",
+        "hex": "#7c3aed",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Purple",
+        "hex": "#6b21a8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Lavender",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Mauve",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Crisp White",
+        "hex": "#ffffff",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Charcoal Grey",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Lite-Scrubs_Women_09.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Lite-Scrubs_Women_09.avif"
+        ]
+      },
+      {
+        "name": "Slate Grey",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Women_01.avif"
+        ]
+      }
+    ],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "specs": [
+      "Comfort knit flex waistband",
+      "Dual zip-security cargo pockets",
+      "Quick dry anti-stain technology",
+      "Tapered ergonomic ankle"
+    ],
+    "tancLine": "tanc_scrubs",
+    "subcategory": "lite_scrubs"
+  },
+  {
+    "id": "tanc-core-set",
+    "name": "TANC Core™ Complete Tailored Scrub Set",
+    "collection": "sets",
+    "priceZAR": 640,
+    "priceUSD": 60,
+    "rating": 4.9,
+    "reviewsCount": 520,
+    "badge": "Official Hospital Core",
+    "fabricTech": "TANC-Tech™ Heavy-Duty Twill",
+    "imageIcon": "🥼",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+    "imageUrls": [
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif"
+    ],
+    "description": "The benchmark hospital standard scrub suit. Constructed from resilient poly-viscose twill that withstands industrial autoclave washing while retaining vibrant hospital-grade color.",
+    "colors": [
+      {
+        "name": "Deep Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Royal Blue",
+        "hex": "#1d4ed8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Ceil Blue",
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Caribbean Blue",
+        "hex": "#0284c7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Petrol Blue",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Summit Blue",
+        "hex": "#3b82f6",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_02.avif"
+        ]
+      },
+      {
+        "name": "True Blue",
+        "hex": "#2563eb",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif"
+        ]
+      },
+      {
+        "name": "Baby Blue",
+        "hex": "#bae6fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif"
+        ]
+      },
+      {
+        "name": "Airforce Blue",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Sky Blue",
+        "hex": "#38bdf8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Steel Blue",
+        "hex": "#64748b",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Bottle Green",
+        "hex": "#064e3b",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Hunter Green",
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Forest Green",
+        "hex": "#166534",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "OT Green",
+        "hex": "#047857",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Emerald Green",
+        "hex": "#059669",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Sage Green",
+        "hex": "#84a98c",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Mint Green",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Burgundy Wine",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Maroon",
+        "hex": "#701a2e",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#e11d48",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Cerise",
+        "hex": "#be185d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif"
+        ]
+      },
+      {
+        "name": "Dusty Rose",
+        "hex": "#db2777",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Baby Pink",
+        "hex": "#fbcfe8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Coral",
+        "hex": "#f97316",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Mustard",
+        "hex": "#d97706",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif"
+        ]
+      },
+      {
+        "name": "Violet",
+        "hex": "#7c3aed",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif"
+        ]
+      },
+      {
+        "name": "Purple",
+        "hex": "#6b21a8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Lavender",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Mauve",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Crisp White",
+        "hex": "#ffffff",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Charcoal Grey",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Slate Grey",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      }
+    ],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL"
+    ],
+    "specs": [
+      "Heavy-duty hospital autoclave resistant",
+      "Triple reinforced stress-point stitching",
+      "Vibrant fade-proof clinical dyeing",
+      "Traditional roomy surgical cut"
+    ],
+    "tancLine": "tanc_scrubs",
+    "subcategory": "core_scrubs"
+  },
+  {
+    "id": "tanc-core-top",
+    "name": "TANC Core™ Tailored Scrub Top",
+    "collection": "scrubs",
+    "priceZAR": 320,
+    "priceUSD": 30,
+    "rating": 4.8,
+    "reviewsCount": 260,
+    "badge": "Core Essential",
+    "fabricTech": "TANC-Tech™ Heavy-Duty Twill",
+    "imageIcon": "👕",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+    "imageUrls": [
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif"
+    ],
+    "description": "Timeless hospital V-neck tailored top with twin reinforced hip patch pockets, pen stall, and durable wash-and-wear weave.",
+    "colors": [
+      {
+        "name": "Deep Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Royal Blue",
+        "hex": "#1d4ed8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Ceil Blue",
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Caribbean Blue",
+        "hex": "#0284c7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Petrol Blue",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Summit Blue",
+        "hex": "#3b82f6",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_02.avif"
+        ]
+      },
+      {
+        "name": "True Blue",
+        "hex": "#2563eb",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif"
+        ]
+      },
+      {
+        "name": "Baby Blue",
+        "hex": "#bae6fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif"
+        ]
+      },
+      {
+        "name": "Airforce Blue",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Sky Blue",
+        "hex": "#38bdf8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Steel Blue",
+        "hex": "#64748b",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Bottle Green",
+        "hex": "#064e3b",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Hunter Green",
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Forest Green",
+        "hex": "#166534",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "OT Green",
+        "hex": "#047857",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Emerald Green",
+        "hex": "#059669",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Sage Green",
+        "hex": "#84a98c",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Mint Green",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Burgundy Wine",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Maroon",
+        "hex": "#701a2e",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#e11d48",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Cerise",
+        "hex": "#be185d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif"
+        ]
+      },
+      {
+        "name": "Dusty Rose",
+        "hex": "#db2777",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Baby Pink",
+        "hex": "#fbcfe8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Coral",
+        "hex": "#f97316",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Mustard",
+        "hex": "#d97706",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif"
+        ]
+      },
+      {
+        "name": "Violet",
+        "hex": "#7c3aed",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif"
+        ]
+      },
+      {
+        "name": "Purple",
+        "hex": "#6b21a8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Lavender",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Mauve",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Crisp White",
+        "hex": "#ffffff",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Charcoal Grey",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Slate Grey",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      }
+    ],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "specs": [
+      "Twin bottom patch pockets with divider",
+      "Reinforced V-neck collar",
+      "Durable poly-viscose construction",
+      "Classic room-to-move cut"
+    ],
+    "tancLine": "tanc_scrubs",
+    "subcategory": "core_scrubs"
+  },
+  {
+    "id": "tanc-core-pant",
+    "name": "TANC Core™ Classic Cargo Scrub Pants",
+    "collection": "pants",
+    "priceZAR": 320,
+    "priceUSD": 30,
+    "rating": 4.8,
+    "reviewsCount": 310,
+    "badge": "Core Essential",
+    "fabricTech": "TANC-Tech™ Heavy-Duty Twill",
+    "imageIcon": "👖",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+    "imageUrls": [
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+    ],
+    "description": "Traditional straight-leg hospital scrub trousers with full drawstring waist, double back pocket, and instrument side pocket.",
+    "colors": [
+      {
+        "name": "Deep Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Royal Blue",
+        "hex": "#1d4ed8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Ceil Blue",
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Caribbean Blue",
+        "hex": "#0284c7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Petrol Blue",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Summit Blue",
+        "hex": "#3b82f6",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_02.avif"
+        ]
+      },
+      {
+        "name": "True Blue",
+        "hex": "#2563eb",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif"
+        ]
+      },
+      {
+        "name": "Baby Blue",
+        "hex": "#bae6fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif"
+        ]
+      },
+      {
+        "name": "Airforce Blue",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Sky Blue",
+        "hex": "#38bdf8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Steel Blue",
+        "hex": "#64748b",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Bottle Green",
+        "hex": "#064e3b",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Hunter Green",
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Forest Green",
+        "hex": "#166534",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "OT Green",
+        "hex": "#047857",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
+        ]
+      },
+      {
+        "name": "Emerald Green",
+        "hex": "#059669",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Sage Green",
+        "hex": "#84a98c",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Mint Green",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Burgundy Wine",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Maroon",
+        "hex": "#701a2e",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#e11d48",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Cerise",
+        "hex": "#be185d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif"
+        ]
+      },
+      {
+        "name": "Dusty Rose",
+        "hex": "#db2777",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Baby Pink",
+        "hex": "#fbcfe8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_02.avif"
+        ]
+      },
+      {
+        "name": "Coral",
+        "hex": "#f97316",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_06.avif"
+        ]
+      },
+      {
+        "name": "Mustard",
+        "hex": "#d97706",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif"
+        ]
+      },
+      {
+        "name": "Violet",
+        "hex": "#7c3aed",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif"
+        ]
+      },
+      {
+        "name": "Purple",
+        "hex": "#6b21a8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Lavender",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Mauve",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Crisp White",
+        "hex": "#ffffff",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Charcoal Grey",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      },
+      {
+        "name": "Slate Grey",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif"
+        ]
+      }
+    ],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "specs": [
+      "Full perimeter drawstring waistband",
+      "Instrument and scissor cargo pocket",
+      "Straight classic leg silhouette",
+      "Tear-resistant double needle seams"
+    ],
+    "tancLine": "tanc_scrubs",
+    "subcategory": "core_scrubs"
+  },
+  {
     "id": "tanc-dr-jacket",
     "name": "TANC Signature Doctor's Soft-Shell Jacket",
     "collection": "jackets",
@@ -73,26 +2205,323 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Full scrub suit including the Three-Pocket V-Neck Top and Cleo™ Cargo Jogger Pants. Engineered with SilvaLab™ antimicrobial silver-ion technology.",
     "colors": [
       {
+        "name": "Deep Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Royal Blue",
+        "hex": "#1d4ed8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
         "name": "Midnight Black",
         "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif"
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif"
+        ]
+      },
+      {
+        "name": "Ceil Blue",
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Caribbean Blue",
+        "hex": "#0284c7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Petrol Blue",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif"
+        ]
+      },
+      {
+        "name": "Summit Blue",
+        "hex": "#3b82f6",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "True Blue",
+        "hex": "#2563eb",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Baby Blue",
+        "hex": "#bae6fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Airforce Blue",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
       },
       {
         "name": "Powder Blue",
-        "hex": "#93c5fa",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Sky Blue",
+        "hex": "#38bdf8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Steel Blue",
+        "hex": "#64748b",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Bottle Green",
+        "hex": "#064e3b",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
       },
       {
         "name": "Hunter Green",
-        "hex": "#14532d"
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
       },
       {
-        "name": "Deep Navy",
-        "hex": "#1e3a8a"
+        "name": "Forest Green",
+        "hex": "#166534",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
+        ]
+      },
+      {
+        "name": "OT Green",
+        "hex": "#047857",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Emerald Green",
+        "hex": "#059669",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Sage Green",
+        "hex": "#84a98c",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Mint Green",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Mint_04-1.avif"
+        ]
       },
       {
         "name": "Burgundy Wine",
-        "hex": "#831843"
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Maroon",
+        "hex": "#701a2e",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#e11d48",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Cerise",
+        "hex": "#be185d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Dusty Rose",
+        "hex": "#db2777",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Baby Pink",
+        "hex": "#fbcfe8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Coral",
+        "hex": "#f97316",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Coral_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Coral_05.avif"
+        ]
+      },
+      {
+        "name": "Mustard",
+        "hex": "#d97706",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Violet",
+        "hex": "#7c3aed",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Purple",
+        "hex": "#6b21a8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Lavender",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif"
+        ]
+      },
+      {
+        "name": "Mauve",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif"
+        ]
+      },
+      {
+        "name": "Crisp White",
+        "hex": "#ffffff",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Charcoal Grey",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Graphite_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Graphite_02.avif"
+        ]
+      },
+      {
+        "name": "Slate Grey",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
       }
     ],
     "sizes": [
@@ -130,27 +2559,348 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Fitted feminine cut with double front drop-in pockets, dedicated pen divider, and side seam slits for unrestricted patient transfers and CPR.",
     "colors": [
       {
-        "name": "Olive Green",
-        "hex": "#3f6212",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
+        "name": "Deep Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
       },
       {
-        "name": "Raspberry",
-        "hex": "#e11d48",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif"
+        "name": "Royal Blue",
+        "hex": "#1d4ed8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif"
+        ]
+      },
+      {
+        "name": "Ceil Blue",
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Caribbean Blue",
+        "hex": "#0284c7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Petrol Blue",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif"
+        ]
+      },
+      {
+        "name": "Summit Blue",
+        "hex": "#3b82f6",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "True Blue",
+        "hex": "#2563eb",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Baby Blue",
+        "hex": "#bae6fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Airforce Blue",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
       },
       {
         "name": "Powder Blue",
         "hex": "#93c5fd",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
       },
       {
-        "name": "Navy Blue",
-        "hex": "#1e3a8a"
+        "name": "Sky Blue",
+        "hex": "#38bdf8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Steel Blue",
+        "hex": "#64748b",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Bottle Green",
+        "hex": "#064e3b",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Hunter Green",
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Forest Green",
+        "hex": "#166534",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
+        ]
+      },
+      {
+        "name": "OT Green",
+        "hex": "#047857",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Emerald Green",
+        "hex": "#059669",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Sage Green",
+        "hex": "#84a98c",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Mint Green",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Mint_04-1.avif"
+        ]
+      },
+      {
+        "name": "Burgundy Wine",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Maroon",
+        "hex": "#701a2e",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#e11d48",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Cerise",
+        "hex": "#be185d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
       },
       {
         "name": "Dusty Rose",
-        "hex": "#db2777"
+        "hex": "#db2777",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Baby Pink",
+        "hex": "#fbcfe8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Coral",
+        "hex": "#f97316",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Coral_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Coral_05.avif"
+        ]
+      },
+      {
+        "name": "Mustard",
+        "hex": "#d97706",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Violet",
+        "hex": "#7c3aed",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Purple",
+        "hex": "#6b21a8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Lavender",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif"
+        ]
+      },
+      {
+        "name": "Mauve",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif"
+        ]
+      },
+      {
+        "name": "Crisp White",
+        "hex": "#ffffff",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Charcoal Grey",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Graphite_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Graphite_02.avif"
+        ]
+      },
+      {
+        "name": "Slate Grey",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif"
+        ]
       }
     ],
     "sizes": [
@@ -186,31 +2936,348 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Athletic cut V-neck top with deep chest pocket and reinforced side splits. Tailored for comfort under consultation coats or theatre gowns.",
     "colors": [
       {
-        "name": "Powder Blue",
-        "hex": "#93c5fd",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        "name": "Deep Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Royal Blue",
+        "hex": "#1d4ed8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif"
+        ]
+      },
+      {
+        "name": "Ceil Blue",
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Caribbean Blue",
+        "hex": "#0284c7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
       },
       {
         "name": "Petrol Blue",
         "hex": "#0e7490",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif"
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif"
+        ]
+      },
+      {
+        "name": "Summit Blue",
+        "hex": "#3b82f6",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "True Blue",
+        "hex": "#2563eb",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Baby Blue",
+        "hex": "#bae6fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Airforce Blue",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Sky Blue",
+        "hex": "#38bdf8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Steel Blue",
+        "hex": "#64748b",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Bottle Green",
+        "hex": "#064e3b",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Hunter Green",
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Forest Green",
+        "hex": "#166534",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
+        ]
+      },
+      {
+        "name": "OT Green",
+        "hex": "#047857",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Emerald Green",
+        "hex": "#059669",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Sage Green",
+        "hex": "#84a98c",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Mint Green",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Mint_04-1.avif"
+        ]
+      },
+      {
+        "name": "Burgundy Wine",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Maroon",
+        "hex": "#701a2e",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
       },
       {
         "name": "Raspberry",
         "hex": "#e11d48",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
       },
       {
-        "name": "Midnight Black",
-        "hex": "#111827"
+        "name": "Cerise",
+        "hex": "#be185d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
       },
       {
-        "name": "Deep Navy",
-        "hex": "#1e3a8a"
+        "name": "Dusty Rose",
+        "hex": "#db2777",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
       },
       {
-        "name": "Forest Green",
-        "hex": "#14532d"
+        "name": "Baby Pink",
+        "hex": "#fbcfe8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Coral",
+        "hex": "#f97316",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Coral_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Coral_05.avif"
+        ]
+      },
+      {
+        "name": "Mustard",
+        "hex": "#d97706",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Violet",
+        "hex": "#7c3aed",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Purple",
+        "hex": "#6b21a8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Lavender",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif"
+        ]
+      },
+      {
+        "name": "Mauve",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif"
+        ]
+      },
+      {
+        "name": "Crisp White",
+        "hex": "#ffffff",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Charcoal Grey",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Graphite_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Graphite_02.avif"
+        ]
+      },
+      {
+        "name": "Slate Grey",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
       }
     ],
     "sizes": [
@@ -247,31 +3314,348 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Modern tapered jogger scrub pants with double cargo zippered pockets, ribbed knit ankle cuffs, and high-tenacity waistband cord.",
     "colors": [
       {
+        "name": "Deep Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "Royal Blue",
+        "hex": "#1d4ed8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
         "name": "Midnight Black",
         "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif"
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif"
+        ]
+      },
+      {
+        "name": "Ceil Blue",
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "Caribbean Blue",
+        "hex": "#0284c7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
       },
       {
         "name": "Petrol Blue",
         "hex": "#0e7490",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif"
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif"
+        ]
       },
       {
-        "name": "Maroon Wine",
-        "hex": "#831843",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        "name": "Summit Blue",
+        "hex": "#3b82f6",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "True Blue",
+        "hex": "#2563eb",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "Baby Blue",
+        "hex": "#bae6fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "Airforce Blue",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Sky Blue",
+        "hex": "#38bdf8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "Steel Blue",
+        "hex": "#64748b",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "Bottle Green",
+        "hex": "#064e3b",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
       },
       {
         "name": "Hunter Green",
-        "hex": "#14532d"
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
       },
       {
-        "name": "Deep Navy",
-        "hex": "#1e3a8a"
+        "name": "Forest Green",
+        "hex": "#166534",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
       },
       {
-        "name": "Ceil Blue",
-        "hex": "#60a5fa"
+        "name": "Olive Green",
+        "hex": "#3f6212",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
+        ]
+      },
+      {
+        "name": "OT Green",
+        "hex": "#047857",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "Emerald Green",
+        "hex": "#059669",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "Sage Green",
+        "hex": "#84a98c",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "Mint Green",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Mint_04-1.avif"
+        ]
+      },
+      {
+        "name": "Burgundy Wine",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "Maroon",
+        "hex": "#701a2e",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "Raspberry",
+        "hex": "#e11d48",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Raspberry_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Raspberry_02.avif"
+        ]
+      },
+      {
+        "name": "Cerise",
+        "hex": "#be185d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "Dusty Rose",
+        "hex": "#db2777",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "Baby Pink",
+        "hex": "#fbcfe8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "Coral",
+        "hex": "#f97316",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Coral_05.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Coral_05.avif"
+        ]
+      },
+      {
+        "name": "Mustard",
+        "hex": "#d97706",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "Violet",
+        "hex": "#7c3aed",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "Purple",
+        "hex": "#6b21a8",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "Lavender",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif"
+        ]
+      },
+      {
+        "name": "Mauve",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif"
+        ]
+      },
+      {
+        "name": "Crisp White",
+        "hex": "#ffffff",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
+      },
+      {
+        "name": "Charcoal Grey",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Graphite_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Graphite_02.avif"
+        ]
+      },
+      {
+        "name": "Slate Grey",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Maroon_05-1.avif"
+        ]
       }
     ],
     "sizes": [
@@ -12673,4 +16057,5 @@ export const INITIAL_PRODUCTS: Product[] = [
     ]
   }
 ];
+
 export const DEFAULT_PRODUCTS: Product[] = INITIAL_PRODUCTS;

@@ -29,6 +29,7 @@ export const TANC_CATEGORIES = [
   { id: "pants", label: "Joggers & Pants" },
   { id: "coats", label: "Lab Coats & Gowns" },
   { id: "jackets", label: "Doctor's Jackets" },
+  { id: "underscrubs", label: "Underscrubs" },
   { id: "stethoscopes", label: "Stethoscopes" },
   { id: "caps", label: "Scrub Caps" },
   { id: "accessories", label: "Accessories" },
@@ -68,6 +69,7 @@ export function getCategoryTitle(catId: string): string {
     "stethoscopes": "Stethoscopes",
     "caps": "Scrub Caps",
     "accessories": "Accessories & Gear",
+    "underscrubs": "Underscrubs",
   }
   return titles[catId] || catId
 }
@@ -129,7 +131,7 @@ export function matchCategory(product: Product, catId: string): boolean {
     return product.collection === "coats" && !nameLower.includes("stethoscope")
   }
   if (catId === "tanc-scrubs-all") {
-    return ["scrubs", "sets", "pants", "jackets", "coats"].includes(product.collection) && !nameLower.includes("stethoscope")
+    return ["scrubs", "sets", "pants", "jackets", "coats", "underscrubs"].includes(product.collection) && !nameLower.includes("stethoscope")
   }
   return product.collection === catId
 }
@@ -565,16 +567,28 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
     return matchesCollection && matchesColor && matchesSearch
   }).sort((a, b) => {
     const getProductRank = (product: Product): number => {
-      const name = product.name.toLowerCase()
-      const col = product.collection
-      if (col === "sets" || name.includes("set") || name.includes("suit")) return 1
-      if (col === "scrubs" || name.includes("top") || name.includes("shirt") || name.includes("v-neck")) return 2
-      if (col === "pants" || name.includes("pant") || name.includes("jogger") || name.includes("trouser")) return 3
-      if (col === "coats" || name.includes("lab coat") || name.includes("consultation coat")) return 4
-      if (col === "jackets" || name.includes("jacket") || name.includes("fleece")) return 5
-      if (name.includes("stethoscope") || name.includes("littmann")) return 6
-      if (name.includes("cap") || name.includes("headwear")) return 7
-      return 8
+  const name = product.name.toLowerCase();
+  const col = product.collection;
+  // Core sets (best sellers)
+  if (col === "sets" || name.includes("set") || name.includes("suit")) return 1;
+  // TANC Lite scrubs (lite) next priority
+  if (col === "scrubs" && name.includes("lite")) return 2;
+  // Lab coats next
+  if (col === "coats" || name.includes("lab coat") || name.includes("consultation coat")) return 3;
+  // Jackets (soft‑shell & Doctor's) next
+  if (col === "jackets" || name.includes("jacket") || name.includes("fleece")) return 4;
+  // Underscrubs after jackets
+  if (col === "underscrubs") return 5;
+  // Generic scrubs after underscrubs
+  if (col === "scrubs") return 6;
+  // Pants next
+  if (col === "pants" || name.includes("pant") || name.includes("jogger") || name.includes("trouser")) return 7;
+  // Stethoscopes
+  if (name.includes("stethoscope") || name.includes("littmann")) return 8;
+  // Caps / headwear
+  if (name.includes("cap") || name.includes("headwear")) return 9;
+  // Other accessories and items
+  return 10;
     }
     const rankDiff = getProductRank(a) - getProductRank(b)
     if (rankDiff !== 0) return rankDiff
@@ -620,6 +634,7 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
                 items: [
                   { label: "Doctor's Jackets", filter: "jackets" },
                   { label: "Lab Coats & Gowns", filter: "coats" },
+                  { label: "Underscrubs", filter: "underscrubs" },
                 ],
               },
             ],
