@@ -12,17 +12,25 @@ export const INITIAL_PRODUCTS: Product[] = [
     "reviewsCount": 520,
     "fabricTech": "TANC-Tech™ Heavy-Duty Twill",
     "imageIcon": "🥼",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
     "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
       "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
       "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
       "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
       "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif"
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
     ],
     "description": "The benchmark hospital standard scrub suit. Constructed from resilient poly-viscose twill that withstands industrial autoclave washing while retaining vibrant hospital-grade color.",
     "colors": [
+      {
+        "name": "Summit Blue",
+        "hex": "#3b82f6",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif"
+        ]
+      },
       {
         "name": "Midnight Black",
         "hex": "#111827",
@@ -69,14 +77,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
         "imageUrls": [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif"
-        ]
-      },
-      {
-        "name": "Summit Blue",
-        "hex": "#3b82f6",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif"
         ]
       },
       {
@@ -1001,6 +1001,433 @@ export const INITIAL_PRODUCTS: Product[] = [
     ]
   },
   {
+    "id": "tanc-consult-lab-coat",
+    "name": "TANC White Coat Consultation Lab Coat",
+    "collection": "coats",
+    "priceZAR": 360,
+    "priceUSD": 20,
+    "rating": 4.9,
+    "reviewsCount": 156,
+    "badge": "Clinical Standard",
+    "fabricTech": "Poly-Cotton Crisp Shield",
+    "imageIcon": "🥼",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lab-Coats_Mens_01.avif",
+    "imageUrls": [
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lab-Coats_Mens_01.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lab-Coats_Women_01.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lab-Coats_Men_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lab-Coats_Women_02.avif"
+    ],
+    "description": "Crisp hospital consultation coat tailored for clinical rounds, ward presentations, and OSCE exams. Side slit access to trouser pockets.",
+    "colors": [
+      {
+        "name": "Crisp White",
+        "hex": "#ffffff",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lab-Coats_Mens_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lab-Coats_Mens_01.avif"
+        ]
+      }
+    ],
+    "sizes": [
+      "XXS",
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "5XL",
+      "6XL",
+      "7XL",
+      "8XL"
+    ],
+    "specs": [
+      "Stethoscope loop at collar",
+      "Tablet sized lower pockets",
+      "Left chest pen divider",
+      "Wrinkle-resistant heavy poplin"
+    ]
+  },
+  {
+    "id": "tanc-dr-jacket",
+    "name": "TANC Signature Doctor's Soft-Shell Jacket",
+    "collection": "jackets",
+    "priceZAR": 640,
+    "priceUSD": 35,
+    "rating": 4.9,
+    "reviewsCount": 284,
+    "badge": "Hospital Bestseller",
+    "fabricTech": "HydroShield™ Fleece-Lined",
+    "imageIcon": "🧥",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Black_01.avif",
+    "imageUrls": [
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Black_01.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Navy-Blue_01.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dr-Jacket_Long-Sleeve_Men_01.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dr-Jacket_Long-Sleeve_Women_01.avif"
+    ],
+    "description": "Windproof and water-resistant bonded soft-shell designed for hospital air conditioning and cold night ward calls. Features pen arm-slot and zippered stethoscope pockets.",
+    "colors": [
+      {
+        "name": "Deep Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Navy-Blue_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Navy-Blue_01.avif"
+        ]
+      },
+      {
+        "name": "Charcoal Black",
+        "hex": "#1f2937",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Charcoal_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Charcoal_01.avif"
+        ]
+      },
+      {
+        "name": "Hunter Green",
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Black_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Black_01.avif"
+        ]
+      },
+      {
+        "name": "Deep Burgundy",
+        "hex": "#831843",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Black_01.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Black_01.avif"
+        ]
+      }
+    ],
+    "sizes": [
+      "XXS",
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "5XL",
+      "6XL",
+      "7XL",
+      "8XL"
+    ],
+    "specs": [
+      "Thermal fleece micro-lining",
+      "Zipped chest & side pockets",
+      "Pen pocket on left sleeve",
+      "Anti-pill outer shell"
+    ]
+  },
+  {
+    "id": "tanc-polar-fleece",
+    "name": "Polar Fleece",
+    "collection": "jackets",
+    "priceZAR": 450,
+    "priceUSD": 25,
+    "rating": 4.8,
+    "reviewsCount": 196,
+    "badge": "Thermal Shield",
+    "fabricTech": "Anti-Pill Thermal Fleece",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Black_Men_01.avif",
+    "imageUrls": [
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Navy-Blue_Women_01.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Black_Men_01.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Black_Women_01.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Navy-Blue_Men_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Charcoal_Men_01.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Charcoal_Women_01.avif"
+    ],
+    "imageIcon": "🧥",
+    "description": "Premium warmth without the weight. This polar fleece layer keeps you cosy through unpredictable temperatures while maintaining movement and mobility. Soft, durable, and easy to care for in 3 professional colours. Please note: we do try and ensure...",
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Black_Men_01.avif"
+      },
+      {
+        "name": "Charcoal",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Charcoal_Men_01.avif"
+      },
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Navy-Blue_Women_01.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Navy-Blue_Women_01.avif"
+      }
+    ],
+    "sizes": [
+      "XXS",
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "5XL",
+      "6XL",
+      "7XL",
+      "8XL"
+    ],
+    "specs": [
+      "Thermal micro-fleece lining for temperature regulation",
+      "Zippered chest and side pockets for diagnostic tools",
+      "Dedicated pen and penlight slot on sleeve",
+      "Water-repellent and windproof bonded outer layer"
+    ]
+  },
+  {
+    "id": "tanc-supersoft-underscrub-men",
+    "name": "Men's Supersoft Underscrub",
+    "collection": "underscrubs",
+    "priceZAR": 360,
+    "priceUSD": 20,
+    "rating": 5,
+    "reviewsCount": 108,
+    "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Tanc-Underscrubs_Men_02.avif",
+    "imageUrls": [
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mauve_Tanc-Underscrubs_Men_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Petrol_Tanc-Underscrubs_Men_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Tanc-Underscrubs_Men_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Tanc-Underscrubs_Men_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Tanc-Underscrubs_Men_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Tanc-Underscrubs_Men_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Tanc-Underscrubs_Mens_02.avif"
+    ],
+    "imageIcon": "👕",
+    "description": "All-day comfort built into your base layer. Ultra-soft cotton with 4-way stretch delivers flexibility and support through demanding shifts. Available in 13+ colours to match your scrub collection.",
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Tanc-Underscrubs_Men_02.avif"
+      },
+      {
+        "name": "Cerise",
+        "hex": "#e11d48",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Tanc-Underscrubs_Men_02.avif"
+        ]
+      },
+      {
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Lavender_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Lavender_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Tanc-Underscrubs_Women_03.avif"
+        ]
+      },
+      {
+        "name": "Mauve",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Mauve_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Mauve_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mauve_Tanc-Underscrubs_Women_03.avif"
+        ]
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Tanc-Underscrubs_Men_02.avif"
+      },
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Tanc-Underscrubs_Mens_02.avif"
+      },
+      {
+        "name": "Petrol",
+        "hex": "#0e7490",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Petrol_Tanc-Underscrubs_Men_02.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Powder-Blue_02.avif"
+        ]
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Tanc-Underscrubs_Mens_02.avif"
+      },
+      {
+        "name": "Coral",
+        "hex": "#fb7185",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_06.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Coral_05.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Coral_03.avif"
+        ]
+      }
+    ],
+    "sizes": [
+      "XXS",
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "5XL",
+      "6XL",
+      "7XL",
+      "8XL"
+    ],
+    "specs": [
+      "Multi-compartment pocket design for instruments and pens",
+      "Comfort V-neckline or collar with tagless neck label",
+      "Side seam vents for breathability and mobility",
+      "Fade-resistant and bleach-safe hospital laundering"
+    ]
+  },
+  {
+    "id": "tanc-supersoft-under-scrub-women",
+    "name": "Women's Supersoft Underscrub",
+    "collection": "underscrubs",
+    "priceZAR": 360,
+    "priceUSD": 20,
+    "rating": 5,
+    "reviewsCount": 91,
+    "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
+    "imageUrls": [
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Lavender_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Lavender_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Tanc-Underscrubs_Women_03.avif"
+    ],
+    "imageIcon": "👕",
+    "description": "All-day comfort starts beneath the scrubs. Ultra-soft cotton with 4-way stretch delivers flexibility and support through every shift. Available in 13+ colours for versatile layering options.",
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#111827"
+      },
+      {
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Lavender_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Lavender_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Tanc-Underscrubs_Women_03.avif"
+        ]
+      },
+      {
+        "name": "Mauve",
+        "hex": "#a855f7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Mauve_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Mauve_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mauve_Tanc-Underscrubs_Women_03.avif"
+        ]
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Tanc-Underscrubs_Women_02.avif"
+      },
+      {
+        "name": "Powder Blue",
+        "hex": "#93c5fd",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Powder-Blue_02.avif"
+        ]
+      },
+      {
+        "name": "Slate/Graphite Grey",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Graphite-Grey_Tanc-Underscrubs_Women_03.avif"
+      },
+      {
+        "name": "White",
+        "hex": "#ffffff",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/White_Tanc-Underscrubs_Women_03.avif"
+      },
+      {
+        "name": "Graphite",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Graphite-Grey_Tanc-Underscrubs_Women_03.avif"
+      },
+      {
+        "name": "Slate",
+        "hex": "#475569",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Graphite-Grey_Tanc-Underscrubs_Women_03.avif"
+      },
+      {
+        "name": "Cerise",
+        "hex": "#e11d48",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Tanc-Underscrubs_Men_02.avif"
+        ]
+      }
+    ],
+    "sizes": [
+      "XXS",
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "5XL",
+      "6XL",
+      "7XL",
+      "8XL"
+    ],
+    "specs": [
+      "Multi-compartment pocket design for instruments and pens",
+      "Comfort V-neckline or collar with tagless neck label",
+      "Side seam vents for breathability and mobility",
+      "Fade-resistant and bleach-safe hospital laundering"
+    ]
+  },
+  {
     "id": "tanc-core-top",
     "name": "TANC Core™ Tailored Scrub Top",
     "collection": "scrubs",
@@ -1359,317 +1786,302 @@ export const INITIAL_PRODUCTS: Product[] = [
     "reviewsCount": 310,
     "fabricTech": "TANC-Tech™ Heavy-Duty Twill",
     "imageIcon": "👖",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
     "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Petrol_04.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Slate_01.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Olive-Green_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Mint_05.avif"
     ],
     "description": "Traditional straight-leg hospital scrub trousers with full drawstring waist, double back pocket, and instrument side pocket.",
     "colors": [
       {
         "name": "Midnight Black",
         "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Deep Navy",
         "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jasmine_Modest_Navy_03.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jasmine_Modest_Navy_03.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Royal Blue",
         "hex": "#1d4ed8",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Ceil Blue",
         "hex": "#60a5fa",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Caribbean Blue",
         "hex": "#0284c7",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Caribbean-Blue-Tube_01.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Petrol Blue",
         "hex": "#0e7490",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Petrol_04.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Petrol_04.avif"
         ]
       },
       {
         "name": "Summit Blue",
         "hex": "#3b82f6",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "True Blue",
         "hex": "#2563eb",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Baby Blue",
         "hex": "#bae6fd",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue-Sunflowers_Cotton-Spandex_Polycotton_01.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Airforce Blue",
         "hex": "#475569",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Powder Blue",
         "hex": "#93c5fd",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Sky Blue",
         "hex": "#38bdf8",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_02.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Steel Blue",
         "hex": "#64748b",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Bottle Green",
         "hex": "#064e3b",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Olive-Green_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Olive-Green_02.avif"
         ]
       },
       {
         "name": "Hunter Green",
         "hex": "#14532d",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Olive-Green_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Olive-Green_02.avif"
         ]
       },
       {
         "name": "Forest Green",
         "hex": "#166534",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Olive-Green_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Olive-Green_02.avif"
         ]
       },
       {
         "name": "Olive Green",
         "hex": "#3f6212",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Olive-Green_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Olive-Green_02.avif"
         ]
       },
       {
         "name": "OT Green",
         "hex": "#047857",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Olive-Green_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Olive-Green_02.avif"
         ]
       },
       {
         "name": "Emerald Green",
         "hex": "#059669",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Olive-Green_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Olive-Green_02.avif"
         ]
       },
       {
         "name": "Sage Green",
         "hex": "#84a98c",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Olive-Green_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Olive-Green_02.avif"
         ]
       },
       {
         "name": "Mint Green",
         "hex": "#6ee7b7",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Olive-Green_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Olive-Green_02.avif"
         ]
       },
       {
         "name": "Burgundy Wine",
         "hex": "#831843",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Maroon",
         "hex": "#701a2e",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Raspberry",
         "hex": "#e11d48",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Cerise",
         "hex": "#be185d",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Dusty Rose",
         "hex": "#db2777",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Baby Pink",
         "hex": "#fbcfe8",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Coral",
         "hex": "#f97316",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Mustard",
         "hex": "#d97706",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Violet",
         "hex": "#7c3aed",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Purple",
         "hex": "#6b21a8",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Lavender",
         "hex": "#a855f7",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Tanc-Underscrubs_Women_03.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Mauve",
         "hex": "#c084fc",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Mauve_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mauve_Tanc-Underscrubs_Women_03.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Crisp White",
         "hex": "#ffffff",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Black_03.avif"
         ]
       },
       {
         "name": "Charcoal Grey",
         "hex": "#374151",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Slate_01.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Slate_01.avif"
         ]
       },
       {
         "name": "Slate Grey",
         "hex": "#475569",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Slate_01.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thoko_Slate_01.avif"
         ]
       }
     ],
@@ -2067,333 +2479,304 @@ export const INITIAL_PRODUCTS: Product[] = [
     "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 280,
-    "badge": "Flex Motion",
+    "badge": "Flex-Motion",
     "fabricTech": "LITEx™ 4-Way Stretch",
     "imageIcon": "👖",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
     "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jasmine_Modest_Navy_03.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Navy_01.avif"
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Slate_04.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thabo_Graphite_04.avif"
     ],
     "description": "Featherlight cargo scrub pants with elastic drawstring waistband, dual secure cargo pockets, and tapered leg opening. Zero drag movement throughout demanding 24-hour shifts.",
     "colors": [
       {
         "name": "Midnight Black",
         "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Deep Navy",
         "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Royal Blue",
         "hex": "#1d4ed8",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Ceil Blue",
         "hex": "#60a5fa",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Caribbean Blue",
         "hex": "#0284c7",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Caribbean-Blue-Tube_01.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Petrol Blue",
         "hex": "#0e7490",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Summit Blue",
         "hex": "#3b82f6",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_02.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "True Blue",
         "hex": "#2563eb",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Baby Blue",
         "hex": "#bae6fd",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue-Sunflowers_Cotton-Spandex_Polycotton_01.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Airforce Blue",
         "hex": "#475569",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Powder Blue",
         "hex": "#93c5fd",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Sky Blue",
         "hex": "#38bdf8",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_02.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Steel Blue",
         "hex": "#64748b",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Bottle Green",
         "hex": "#064e3b",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif"
         ]
       },
       {
         "name": "Hunter Green",
         "hex": "#14532d",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif"
         ]
       },
       {
         "name": "Forest Green",
         "hex": "#166534",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif"
         ]
       },
       {
         "name": "Olive Green",
         "hex": "#3f6212",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Olive-Green_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Olive-Green_01.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif"
         ]
       },
       {
         "name": "OT Green",
         "hex": "#047857",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif"
         ]
       },
       {
         "name": "Emerald Green",
         "hex": "#059669",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif"
         ]
       },
       {
         "name": "Sage Green",
         "hex": "#84a98c",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif"
         ]
       },
       {
         "name": "Mint Green",
         "hex": "#6ee7b7",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_04.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_04.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif"
         ]
       },
       {
         "name": "Burgundy Wine",
         "hex": "#831843",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Maroon",
         "hex": "#701a2e",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Raspberry",
         "hex": "#e11d48",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Raspberry_Lite-Scrubs_Men_03.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Raspberry_Lite-Scrubs_Men_03.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Cerise",
         "hex": "#be185d",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Tanc-Underscrubs_Men_02.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Dusty Rose",
         "hex": "#db2777",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Baby Pink",
         "hex": "#fbcfe8",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Coral",
         "hex": "#f97316",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Coral_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Coral_03.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Mustard",
         "hex": "#d97706",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Violet",
         "hex": "#7c3aed",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Purple",
         "hex": "#6b21a8",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Lavender",
         "hex": "#a855f7",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Tanc-Underscrubs_Women_03.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Mauve",
         "hex": "#c084fc",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Mauve_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mauve_Tanc-Underscrubs_Women_03.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Crisp White",
         "hex": "#ffffff",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/White_Tanc-Underscrubs_Women_03.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif"
         ]
       },
       {
         "name": "Charcoal Grey",
         "hex": "#374151",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Lite-Scrubs_Women_09.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Slate_04.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Lite-Scrubs_Women_09.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Slate_04.avif"
         ]
       },
       {
         "name": "Slate Grey",
         "hex": "#475569",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Slate_04.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Slate_04.avif"
         ]
       }
     ],
@@ -2422,104 +2805,46 @@ export const INITIAL_PRODUCTS: Product[] = [
     "subcategory": "lite_scrubs"
   },
   {
-    "id": "tanc-supersoft-underscrub-men",
-    "name": "Men's Supersoft Underscrub",
-    "collection": "underscrubs",
-    "priceZAR": 360,
-    "priceUSD": 20,
-    "rating": 5,
-    "reviewsCount": 108,
-    "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Tanc-Underscrubs_Men_02.avif",
+    "id": "tanc-soft-shell-jacket-women",
+    "name": "Women's Soft Shell Jacket",
+    "collection": "jackets",
+    "priceZAR": 640,
+    "priceUSD": 35,
+    "rating": 4.8,
+    "reviewsCount": 213,
+    "badge": "Thermal Shield",
+    "fabricTech": "Hospital Grade Medical Textile",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Navy-Blue_02.avif",
     "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mauve_Tanc-Underscrubs_Men_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Petrol_Tanc-Underscrubs_Men_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Tanc-Underscrubs_Men_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Tanc-Underscrubs_Men_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Tanc-Underscrubs_Men_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Tanc-Underscrubs_Men_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Tanc-Underscrubs_Mens_02.avif"
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Navy-Blue_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Navy-Blue_03.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Charcoal_03.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Charcoal_04.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Women_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Women_03.avif"
     ],
-    "imageIcon": "👕",
-    "description": "All-day comfort built into your base layer. Ultra-soft cotton with 4-way stretch delivers flexibility and support through demanding shifts. Available in 13+ colours to match your scrub collection.",
+    "imageIcon": "🧥",
+    "description": "Practical outerwear built for unpredictable shifts. Soft shell fabric moves with you and shields against wind and light moisture without bulk. Available in 3 professional colours, customizable with embroidery.",
     "colors": [
       {
         "name": "Black",
         "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Tanc-Underscrubs_Men_02.avif"
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Navy-Blue_02.avif"
       },
       {
-        "name": "Cerise",
-        "hex": "#e11d48",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Tanc-Underscrubs_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Lavender",
-        "hex": "#c084fc",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Tanc-Underscrubs_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Mauve",
-        "hex": "#a855f7",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Mauve_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mauve_Tanc-Underscrubs_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Mint",
-        "hex": "#6ee7b7",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Tanc-Underscrubs_Men_02.avif"
+        "name": "Charcoal",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Charcoal_03.avif"
       },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Tanc-Underscrubs_Mens_02.avif"
-      },
-      {
-        "name": "Petrol",
-        "hex": "#0e7490",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Petrol_Tanc-Underscrubs_Men_02.avif"
-      },
-      {
-        "name": "Powder Blue",
-        "hex": "#93c5fd",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Powder-Blue_02.avif"
-        ]
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Navy-Blue_02.avif"
       },
       {
         "name": "Navy",
         "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Tanc-Underscrubs_Mens_02.avif"
-      },
-      {
-        "name": "Coral",
-        "hex": "#fb7185",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Coral_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Coral_03.avif"
-        ]
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Navy-Blue_02.avif"
       }
     ],
     "sizes": [
@@ -2538,100 +2863,265 @@ export const INITIAL_PRODUCTS: Product[] = [
       "8XL"
     ],
     "specs": [
-      "Multi-compartment pocket design for instruments and pens",
-      "Comfort V-neckline or collar with tagless neck label",
-      "Side seam vents for breathability and mobility",
-      "Fade-resistant and bleach-safe hospital laundering"
+      "Thermal micro-fleece lining for temperature regulation",
+      "Zippered chest and side pockets for diagnostic tools",
+      "Dedicated pen and penlight slot on sleeve",
+      "Water-repellent and windproof bonded outer layer"
     ]
   },
   {
-    "id": "tanc-supersoft-under-scrub-women",
-    "name": "Women's Supersoft Underscrub",
-    "collection": "underscrubs",
-    "priceZAR": 360,
-    "priceUSD": 20,
-    "rating": 5,
-    "reviewsCount": 91,
-    "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
+    "id": "tanc-soft-shell-jacket-men",
+    "name": "Men's Soft Shell Jacket",
+    "collection": "jackets",
+    "priceZAR": 640,
+    "priceUSD": 35,
+    "rating": 4.9,
+    "reviewsCount": 283,
+    "badge": "Thermal Shield",
+    "fabricTech": "Hospital Grade Medical Textile",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Black_01.avif",
     "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Lavender_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Lavender_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Tanc-Underscrubs_Women_03.avif"
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Navy-Blue_01.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Navy-Blue_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Charcoal_01.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Charcoal_03.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Black_01.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Black_02.avif"
     ],
-    "imageIcon": "👕",
-    "description": "All-day comfort starts beneath the scrubs. Ultra-soft cotton with 4-way stretch delivers flexibility and support through every shift. Available in 13+ colours for versatile layering options.",
+    "imageIcon": "🧥",
+    "description": "Reliable outerwear built for demanding shifts. Soft shell fabric shields against wind and light moisture while maintaining freedom of movement. Available in 3 professional colours, customizable with embroidery.",
     "colors": [
       {
         "name": "Black",
-        "hex": "#111827"
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Black_01.avif"
       },
       {
-        "name": "Lavender",
-        "hex": "#c084fc",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
+        "name": "Charcoal",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Charcoal_01.avif"
+      },
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Navy-Blue_01.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Navy-Blue_01.avif"
+      }
+    ],
+    "sizes": [
+      "XXS",
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "5XL",
+      "6XL",
+      "7XL",
+      "8XL"
+    ],
+    "specs": [
+      "Thermal micro-fleece lining for temperature regulation",
+      "Zippered chest and side pockets for diagnostic tools",
+      "Dedicated pen and penlight slot on sleeve",
+      "Water-repellent and windproof bonded outer layer"
+    ]
+  },
+  {
+    "id": "tanc-pablo-polar-fleece",
+    "name": "Pablo™ Polar Fleece",
+    "collection": "jackets",
+    "priceZAR": 450,
+    "priceUSD": 25,
+    "rating": 4.9,
+    "reviewsCount": 292,
+    "badge": "Thermal Shield",
+    "fabricTech": "Anti-Pill Thermal Fleece",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Polar-Fleece_Men_01.avif",
+    "imageUrls": [
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Polar-Fleece_Men_01.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Polar-Fleece_Men_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Men_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Polar-Fleece_Men_05.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Men_04.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Polar-Fleece_Men_05.avif"
+    ],
+    "imageIcon": "🧥",
+    "description": "Stay warm and comfortable with the Pablo™ Polar Fleece - the perfect layer for busy professionals on their feet all day. Crafted from a premium blend of, polyester, rayon, and spandex, this fleece offers exceptional warmth without sacrificing mobi...",
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Polar-Fleece_Men_01.avif"
+      },
+      {
+        "name": "Charcoal",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Polar-Fleece_Men_02.avif"
+      },
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Men_02.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Men_02.avif"
+      }
+    ],
+    "sizes": [
+      "XXS",
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "5XL",
+      "6XL",
+      "7XL",
+      "8XL"
+    ],
+    "specs": [
+      "Thermal micro-fleece lining for temperature regulation",
+      "Zippered chest and side pockets for diagnostic tools",
+      "Dedicated pen and penlight slot on sleeve",
+      "Water-repellent and windproof bonded outer layer"
+    ]
+  },
+  {
+    "id": "tanc-wendy-polar-fleece",
+    "name": "Wendy™ Polar Fleece",
+    "collection": "jackets",
+    "priceZAR": 450,
+    "priceUSD": 25,
+    "rating": 4.9,
+    "reviewsCount": 129,
+    "badge": "Thermal Shield",
+    "fabricTech": "Anti-Pill Thermal Fleece",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Polar-Fleece_Women_03.avif",
+    "imageUrls": [
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Women_01.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Polar-Fleece_Women_03.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Women_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Women_05.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Polar-Fleece_Women_05.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Polar-Fleece_Women_04.avif"
+    ],
+    "imageIcon": "🧥",
+    "description": "Stay warm and comfortable with the Wendy™ Polar Fleece - the perfect layer for busy professionals on their feet all day. Crafted from a premium blend of, polyester, rayon, and spandex, this fleece offers exceptional warmth without sacrificing mobi...",
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Polar-Fleece_Women_03.avif"
+      },
+      {
+        "name": "Charcoal",
+        "hex": "#374151",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Polar-Fleece_Women_04.avif"
+      },
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Women_01.avif"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Women_01.avif"
+      }
+    ],
+    "sizes": [
+      "XXS",
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "5XL",
+      "6XL",
+      "7XL",
+      "8XL"
+    ],
+    "specs": [
+      "Thermal micro-fleece lining for temperature regulation",
+      "Zippered chest and side pockets for diagnostic tools",
+      "Dedicated pen and penlight slot on sleeve",
+      "Water-repellent and windproof bonded outer layer"
+    ]
+  },
+  {
+    "id": "tanc-disposable-scrub-sets",
+    "name": "Disposable Scrub Sets",
+    "collection": "sets",
+    "priceZAR": 65,
+    "priceUSD": 35,
+    "rating": 5,
+    "reviewsCount": 271,
+    "badge": "Value Set",
+    "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Women_01.avif",
+    "imageUrls": [
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Women_01.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Men_01.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Women_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Men_02.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Women_03.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Women_04.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Men_03.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Men_04.avif"
+    ],
+    "imageIcon": "🥼",
+    "description": "50gsm non-woven Spunbond polypropylene Unisex Design Comes as a set, top and pants",
+    "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Tanc-Underscrubs_Women_03.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       },
       {
-        "name": "Mauve",
-        "hex": "#a855f7",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Women_01.avif"
+      },
+      {
+        "name": "Hunter Green",
+        "hex": "#14532d",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Mauve_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mauve_Tanc-Underscrubs_Women_03.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Men_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
         ]
       },
       {
-        "name": "Mint",
-        "hex": "#6ee7b7",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Tanc-Underscrubs_Women_02.avif"
-      },
-      {
-        "name": "Powder Blue",
-        "hex": "#93c5fd",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif",
+        "name": "Ceil Blue",
+        "hex": "#60a5fa",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
         "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Powder-Blue_01.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Powder-Blue_02.avif"
-        ]
-      },
-      {
-        "name": "Slate/Graphite Grey",
-        "hex": "#374151",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Graphite-Grey_Tanc-Underscrubs_Women_03.avif"
-      },
-      {
-        "name": "White",
-        "hex": "#ffffff",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/White_Tanc-Underscrubs_Women_03.avif"
-      },
-      {
-        "name": "Graphite",
-        "hex": "#374151",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Graphite-Grey_Tanc-Underscrubs_Women_03.avif"
-      },
-      {
-        "name": "Slate",
-        "hex": "#475569",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Graphite-Grey_Tanc-Underscrubs_Women_03.avif"
-      },
-      {
-        "name": "Cerise",
-        "hex": "#e11d48",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Tanc-Underscrubs_Men_02.avif"
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
         ]
       }
     ],
@@ -2651,10 +3141,10 @@ export const INITIAL_PRODUCTS: Product[] = [
       "8XL"
     ],
     "specs": [
-      "Multi-compartment pocket design for instruments and pens",
-      "Comfort V-neckline or collar with tagless neck label",
-      "Side seam vents for breathability and mobility",
-      "Fade-resistant and bleach-safe hospital laundering"
+      "Includes ergonomic scrub top and multi-pocket pants",
+      "4-way stretch fabric for unhindered mobility on rounds",
+      "SilvaLab antimicrobial finish inhibits odor-causing bacteria",
+      "Elastic waistband with heavy-duty reinforced drawstring"
     ]
   },
   {
@@ -2902,63 +3392,11 @@ export const INITIAL_PRODUCTS: Product[] = [
     ]
   },
   {
-    "id": "tanc-consult-lab-coat",
-    "name": "TANC White Coat Consultation Lab Coat",
-    "collection": "coats",
-    "priceZAR": 480,
-    "priceUSD": 20,
-    "rating": 4.9,
-    "reviewsCount": 156,
-    "badge": "Clinical Standard",
-    "fabricTech": "Poly-Cotton Crisp Shield",
-    "imageIcon": "🥼",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_04.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/White_Tanc-Underscrubs_Women_03.avif"
-    ],
-    "description": "Crisp hospital consultation coat tailored for clinical rounds, ward presentations, and OSCE exams. Side slit access to trouser pockets.",
-    "colors": [
-      {
-        "name": "Crisp White",
-        "hex": "#ffffff",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/White_Tanc-Underscrubs_Women_03.avif"
-        ]
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Stethoscope loop at collar",
-      "Tablet sized lower pockets",
-      "Left chest pen divider",
-      "Wrinkle-resistant heavy poplin"
-    ]
-  },
-  {
     "id": "tanc-theatre-gowns-polycotton",
     "name": "Theatre Gowns - PolyCotton",
     "collection": "coats",
-    "priceZAR": 340,
-    "priceUSD": 19,
+    "priceZAR": 360,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 131,
     "fabricTech": "Durable Surgical Polycotton",
@@ -3062,8 +3500,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "id": "tanc-theatre-gowns-surgical-grade-cotton",
     "name": "Theatre Gowns - Surgical Grade Cotton",
     "collection": "coats",
-    "priceZAR": 450,
-    "priceUSD": 25,
+    "priceZAR": 360,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 114,
     "fabricTech": "Fluid-Resistant Twill",
@@ -3109,84 +3547,11 @@ export const INITIAL_PRODUCTS: Product[] = [
     ]
   },
   {
-    "id": "tanc-dr-jacket",
-    "name": "TANC Signature Doctor's Soft-Shell Jacket",
-    "collection": "jackets",
-    "priceZAR": 750,
-    "priceUSD": 40,
-    "rating": 4.9,
-    "reviewsCount": 284,
-    "badge": "Hospital Bestseller",
-    "fabricTech": "HydroShield™ Fleece-Lined",
-    "imageIcon": "🧥",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jasmine_Modest_Navy_03.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Navy_01.avif"
-    ],
-    "description": "Windproof and water-resistant bonded soft-shell designed for hospital air conditioning and cold night ward calls. Features pen arm-slot and zippered stethoscope pockets.",
-    "colors": [
-      {
-        "name": "Deep Navy",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jasmine_Modest_Navy_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Navy_01.avif"
-        ]
-      },
-      {
-        "name": "Charcoal Black",
-        "hex": "#1f2937",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dr-Jacket_Long-Sleeve_Men_01.avif"
-      },
-      {
-        "name": "Hunter Green",
-        "hex": "#14532d",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Men_01.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
-        ]
-      },
-      {
-        "name": "Deep Burgundy",
-        "hex": "#831843"
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Thermal fleece micro-lining",
-      "Zipped chest & side pockets",
-      "Pen pocket on left sleeve",
-      "Anti-pill outer shell"
-    ]
-  },
-  {
     "id": "tanc-long-sleeve-doctors-jackets",
     "name": "Long Sleeve Doctors Jackets",
     "collection": "jackets",
-    "priceZAR": 220,
-    "priceUSD": 40,
+    "priceZAR": 640,
+    "priceUSD": 35,
     "rating": 5,
     "reviewsCount": 211,
     "badge": "Doctor Choice",
@@ -3290,8 +3655,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "id": "tanc-short-sleeve-doctors-jackets",
     "name": "Short Sleeve Doctors Jackets",
     "collection": "jackets",
-    "priceZAR": 210,
-    "priceUSD": 40,
+    "priceZAR": 640,
+    "priceUSD": 35,
     "rating": 5,
     "reviewsCount": 194,
     "badge": "Doctor Choice",
@@ -3390,89 +3755,6 @@ export const INITIAL_PRODUCTS: Product[] = [
       "Zippered chest and side pockets for diagnostic tools",
       "Dedicated pen and penlight slot on sleeve",
       "Water-repellent and windproof bonded outer layer"
-    ]
-  },
-  {
-    "id": "tanc-disposable-scrub-sets",
-    "name": "Disposable Scrub Sets",
-    "collection": "sets",
-    "priceZAR": 65,
-    "priceUSD": 35,
-    "rating": 5,
-    "reviewsCount": 271,
-    "badge": "Value Set",
-    "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Women_01.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Women_01.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Men_01.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Women_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Men_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Women_03.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Women_04.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Men_03.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Men_04.avif"
-    ],
-    "imageIcon": "🥼",
-    "description": "50gsm non-woven Spunbond polypropylene Unisex Design Comes as a set, top and pants",
-    "colors": [
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
-        ]
-      },
-      {
-        "name": "Navy Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Dispossable-Scrubs_Women_01.avif"
-      },
-      {
-        "name": "Hunter Green",
-        "hex": "#14532d",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Men_01.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
-        ]
-      },
-      {
-        "name": "Ceil Blue",
-        "hex": "#60a5fa",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Includes ergonomic scrub top and multi-pocket pants",
-      "4-way stretch fabric for unhindered mobility on rounds",
-      "SilvaLab antimicrobial finish inhibits odor-causing bacteria",
-      "Elastic waistband with heavy-duty reinforced drawstring"
     ]
   },
   {
@@ -4967,8 +5249,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "id": "tanc-doula-pinnafore",
     "name": "Doula Pinnafore",
     "collection": "coats",
-    "priceZAR": 210,
-    "priceUSD": 12,
+    "priceZAR": 360,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 97,
     "fabricTech": "Fluid-Resistant Twill",
@@ -5071,8 +5353,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "id": "tanc-patients-gowns",
     "name": "Patients Gowns",
     "collection": "coats",
-    "priceZAR": 230,
-    "priceUSD": 13,
+    "priceZAR": 360,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 80,
     "fabricTech": "Fluid-Resistant Twill",
@@ -5175,8 +5457,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "id": "tanc-nurses-wrap",
     "name": "Nurses Wrap",
     "collection": "coats",
-    "priceZAR": 290,
-    "priceUSD": 16,
+    "priceZAR": 360,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 63,
     "fabricTech": "Fluid-Resistant Twill",
@@ -5279,8 +5561,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "id": "tanc-lab-coat",
     "name": "Lab Coats",
     "collection": "jackets",
-    "priceZAR": 220,
-    "priceUSD": 20,
+    "priceZAR": 640,
+    "priceUSD": 35,
     "rating": 5,
     "reviewsCount": 177,
     "badge": "Thermal Shield",
@@ -5357,71 +5639,6 @@ export const INITIAL_PRODUCTS: Product[] = [
       {
         "name": "Charcoal",
         "hex": "#374151"
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Thermal micro-fleece lining for temperature regulation",
-      "Zippered chest and side pockets for diagnostic tools",
-      "Dedicated pen and penlight slot on sleeve",
-      "Water-repellent and windproof bonded outer layer"
-    ]
-  },
-  {
-    "id": "tanc-soft-shell-jacket-men",
-    "name": "Men's Soft Shell Jacket",
-    "collection": "jackets",
-    "priceZAR": 450,
-    "priceUSD": 40,
-    "rating": 4.9,
-    "reviewsCount": 283,
-    "badge": "Thermal Shield",
-    "fabricTech": "Hospital Grade Medical Textile",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Black_01.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Navy-Blue_01.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Navy-Blue_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Charcoal_01.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Charcoal_03.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Black_01.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Black_02.avif"
-    ],
-    "imageIcon": "🧥",
-    "description": "Reliable outerwear built for demanding shifts. Soft shell fabric shields against wind and light moisture while maintaining freedom of movement. Available in 3 professional colours, customizable with embroidery.",
-    "colors": [
-      {
-        "name": "Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Black_01.avif"
-      },
-      {
-        "name": "Charcoal",
-        "hex": "#374151",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Charcoal_01.avif"
-      },
-      {
-        "name": "Navy Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Navy-Blue_01.avif"
-      },
-      {
-        "name": "Navy",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Soft-Shell_Men_Navy-Blue_01.avif"
       }
     ],
     "sizes": [
@@ -5599,2128 +5816,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "name": "Navy",
         "hex": "#1e3a8a",
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Women_Water-Resistent_01.avif"
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Multi-compartment pocket design for instruments and pens",
-      "Comfort V-neckline or collar with tagless neck label",
-      "Side seam vents for breathability and mobility",
-      "Fade-resistant and bleach-safe hospital laundering"
-    ]
-  },
-  {
-    "id": "tanc-lite-scrub-bottoms",
-    "name": "LITE Scrub Bottoms",
-    "collection": "pants",
-    "priceZAR": 220,
-    "priceUSD": 20,
-    "rating": 4.9,
-    "reviewsCount": 141,
-    "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Men_01.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
-    ],
-    "imageIcon": "👖",
-    "description": "Our TANC Lite scrubs are made from a lightweight polycotton blend that is 50% cotton, 50% polyester. It is softer, lighter, and more breathable than our Core range. Classic Medical Scrubs Bottom Only",
-    "colors": [
-      {
-        "name": "Midnight Black",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Deep Navy",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
-        ]
-      },
-      {
-        "name": "Royal Blue",
-        "hex": "#1d4ed8",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif"
-        ]
-      },
-      {
-        "name": "Ceil Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif"
-        ]
-      },
-      {
-        "name": "Caribbean Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Caribbean-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Petrol Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif"
-        ]
-      },
-      {
-        "name": "Summit Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_02.avif"
-        ]
-      },
-      {
-        "name": "True Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Baby Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue-Sunflowers_Cotton-Spandex_Polycotton_01.avif"
-        ]
-      },
-      {
-        "name": "Airforce Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Powder Blue",
-        "hex": "#93c5fd",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif"
-        ]
-      },
-      {
-        "name": "Sky Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Steel Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Bottle Green",
-        "hex": "#4b5563",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Hunter Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Forest Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Olive Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Olive-Green_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Olive-Green_01.avif"
-        ]
-      },
-      {
-        "name": "OT Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
-        ]
-      },
-      {
-        "name": "Emerald Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
-        ]
-      },
-      {
-        "name": "Sage Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
-        ]
-      },
-      {
-        "name": "Mint Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_04.avif"
-        ]
-      },
-      {
-        "name": "Burgundy Wine",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif"
-        ]
-      },
-      {
-        "name": "Maroon",
-        "hex": "#831843",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif"
-        ]
-      },
-      {
-        "name": "Raspberry",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Raspberry_Lite-Scrubs_Men_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Raspberry_Lite-Scrubs_Men_03.avif"
-        ]
-      },
-      {
-        "name": "Cerise",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Tanc-Underscrubs_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Dusty Rose",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
-        ]
-      },
-      {
-        "name": "Baby Pink",
-        "hex": "#fbcfe8",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
-        ]
-      },
-      {
-        "name": "Coral",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Coral_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Coral_03.avif"
-        ]
-      },
-      {
-        "name": "Mustard",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif"
-        ]
-      },
-      {
-        "name": "Violet",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif"
-        ]
-      },
-      {
-        "name": "Purple",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Lavender",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Tanc-Underscrubs_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Mauve",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Mauve_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mauve_Tanc-Underscrubs_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Crisp White",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/White_Tanc-Underscrubs_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Charcoal Grey",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Lite-Scrubs_Women_09.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Lite-Scrubs_Women_09.avif"
-        ]
-      },
-      {
-        "name": "Slate Grey",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
-        ]
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Deep cargo pockets with zip closures for hospital shears and phone",
-      "Reinforced gusset and knee seams for durability",
-      "Soft ribbed ankle cuff or straight leg comfort finish",
-      "Breathable, moisture-wicking weave"
-    ]
-  },
-  {
-    "id": "tanc-lite-scrub-tops",
-    "name": "LITE Scrub Tops",
-    "collection": "scrubs",
-    "priceZAR": 220,
-    "priceUSD": 20,
-    "rating": 4.9,
-    "reviewsCount": 124,
-    "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_02.avif"
-    ],
-    "imageIcon": "👕",
-    "description": "Our TANC Lite scrubs are made from a lightweight polycotton blend that is 50% cotton, 50% polyester. It is softer, lighter, and more breathable than our Core range. Classic unisex Medical Scrubs Top Only.",
-    "colors": [
-      {
-        "name": "Midnight Black",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Deep Navy",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
-        ]
-      },
-      {
-        "name": "Royal Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif"
-        ]
-      },
-      {
-        "name": "Ceil Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif"
-        ]
-      },
-      {
-        "name": "Caribbean Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Caribbean-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Petrol Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif"
-        ]
-      },
-      {
-        "name": "Summit Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_02.avif"
-        ]
-      },
-      {
-        "name": "True Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Baby Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue-Sunflowers_Cotton-Spandex_Polycotton_01.avif"
-        ]
-      },
-      {
-        "name": "Airforce Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Powder Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif"
-        ]
-      },
-      {
-        "name": "Sky Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Steel Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Bottle Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Hunter Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Forest Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Olive Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Olive-Green_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Olive-Green_01.avif"
-        ]
-      },
-      {
-        "name": "OT Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
-        ]
-      },
-      {
-        "name": "Emerald Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
-        ]
-      },
-      {
-        "name": "Sage Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
-        ]
-      },
-      {
-        "name": "Mint Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_04.avif"
-        ]
-      },
-      {
-        "name": "Burgundy Wine",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif"
-        ]
-      },
-      {
-        "name": "Maroon",
-        "hex": "#831843",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif"
-        ]
-      },
-      {
-        "name": "Raspberry",
-        "hex": "#4b5563",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Raspberry_Lite-Scrubs_Men_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Raspberry_Lite-Scrubs_Men_03.avif"
-        ]
-      },
-      {
-        "name": "Cerise",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Tanc-Underscrubs_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Dusty Rose",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
-        ]
-      },
-      {
-        "name": "Baby Pink",
-        "hex": "#fbcfe8",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
-        ]
-      },
-      {
-        "name": "Coral",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Coral_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Coral_03.avif"
-        ]
-      },
-      {
-        "name": "Mustard",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif"
-        ]
-      },
-      {
-        "name": "Violet",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif"
-        ]
-      },
-      {
-        "name": "Purple",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Lavender",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Tanc-Underscrubs_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Mauve",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Mauve_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mauve_Tanc-Underscrubs_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Crisp White",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/White_Tanc-Underscrubs_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Charcoal Grey",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Lite-Scrubs_Women_09.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Lite-Scrubs_Women_09.avif"
-        ]
-      },
-      {
-        "name": "Slate Grey",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
-        ]
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Multi-compartment pocket design for instruments and pens",
-      "Comfort V-neckline or collar with tagless neck label",
-      "Side seam vents for breathability and mobility",
-      "Fade-resistant and bleach-safe hospital laundering"
-    ]
-  },
-  {
-    "id": "tanc-lite-scrub-sets",
-    "name": "LITE Scrub Sets",
-    "collection": "sets",
-    "priceZAR": 350,
-    "priceUSD": 35,
-    "rating": 4.9,
-    "reviewsCount": 107,
-    "badge": "Value Set",
-    "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_02.avif"
-    ],
-    "imageIcon": "🥼",
-    "description": "Our TANC Lite scrubs are made from a lightweight polycotton blend that is 50% cotton, 50% polyester. It is softer, lighter, and more breathable than our Core range.",
-    "colors": [
-      {
-        "name": "Midnight Black",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Deep Navy",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
-        ]
-      },
-      {
-        "name": "Royal Blue",
-        "hex": "#1d4ed8",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif"
-        ]
-      },
-      {
-        "name": "Ceil Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif"
-        ]
-      },
-      {
-        "name": "Caribbean Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Caribbean-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Petrol Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif"
-        ]
-      },
-      {
-        "name": "Summit Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_02.avif"
-        ]
-      },
-      {
-        "name": "True Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Baby Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue-Sunflowers_Cotton-Spandex_Polycotton_01.avif"
-        ]
-      },
-      {
-        "name": "Airforce Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Powder Blue",
-        "hex": "#93c5fd",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif"
-        ]
-      },
-      {
-        "name": "Sky Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Steel Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Bottle Green",
-        "hex": "#4b5563",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Hunter Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Forest Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Olive Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Olive-Green_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Olive-Green_01.avif"
-        ]
-      },
-      {
-        "name": "OT Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
-        ]
-      },
-      {
-        "name": "Emerald Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
-        ]
-      },
-      {
-        "name": "Sage Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
-        ]
-      },
-      {
-        "name": "Mint Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_04.avif"
-        ]
-      },
-      {
-        "name": "Burgundy Wine",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif"
-        ]
-      },
-      {
-        "name": "Maroon",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif"
-        ]
-      },
-      {
-        "name": "Raspberry",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Raspberry_Lite-Scrubs_Men_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Raspberry_Lite-Scrubs_Men_03.avif"
-        ]
-      },
-      {
-        "name": "Cerise",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Tanc-Underscrubs_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Dusty Rose",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
-        ]
-      },
-      {
-        "name": "Baby Pink",
-        "hex": "#fbcfe8",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
-        ]
-      },
-      {
-        "name": "Coral",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Coral_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Coral_03.avif"
-        ]
-      },
-      {
-        "name": "Mustard",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif"
-        ]
-      },
-      {
-        "name": "Violet",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif"
-        ]
-      },
-      {
-        "name": "Purple",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Lavender",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Tanc-Underscrubs_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Mauve",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Mauve_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mauve_Tanc-Underscrubs_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Crisp White",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/White_Tanc-Underscrubs_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Charcoal Grey",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Lite-Scrubs_Women_09.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Lite-Scrubs_Women_09.avif"
-        ]
-      },
-      {
-        "name": "Slate Grey",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
-        ]
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Includes ergonomic scrub top and multi-pocket pants",
-      "4-way stretch fabric for unhindered mobility on rounds",
-      "SilvaLab antimicrobial finish inhibits odor-causing bacteria",
-      "Elastic waistband with heavy-duty reinforced drawstring"
-    ]
-  },
-  {
-    "id": "tanc-core-scrub-sets-women",
-    "name": "Core Scrub Sets",
-    "collection": "sets",
-    "priceZAR": 550,
-    "priceUSD": 30,
-    "rating": 4.8,
-    "reviewsCount": 319,
-    "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Camo_Core_Men_02-1.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
-    ],
-    "imageIcon": "🥼",
-    "description": "Built for long shifts and everyday demands, our Core Scrub Sets deliver reliable comfort without compromise. Designed for women who need scrubs that work as hard as they do, these sets feature durable fabric, practical pocket placement, and a fit...",
-    "colors": [
-      {
-        "name": "Midnight Black",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
-        ]
-      },
-      {
-        "name": "Deep Navy",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jasmine_Modest_Navy_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jasmine_Modest_Navy_03.avif"
-        ]
-      },
-      {
-        "name": "Royal Blue",
-        "hex": "#1d4ed8",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif"
-        ]
-      },
-      {
-        "name": "Ceil Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif"
-        ]
-      },
-      {
-        "name": "Caribbean Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Caribbean-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Petrol Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif"
-        ]
-      },
-      {
-        "name": "Summit Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif"
-        ]
-      },
-      {
-        "name": "True Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Baby Blue",
-        "hex": "#bfdbfe",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue-Sunflowers_Cotton-Spandex_Polycotton_01.avif"
-        ]
-      },
-      {
-        "name": "Airforce Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Powder Blue",
-        "hex": "#93c5fd",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif"
-        ]
-      },
-      {
-        "name": "Sky Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Steel Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Bottle Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
-        ]
-      },
-      {
-        "name": "Hunter Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
-        ]
-      },
-      {
-        "name": "Forest Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
-        ]
-      },
-      {
-        "name": "Olive Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
-        ]
-      },
-      {
-        "name": "OT Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
-        ]
-      },
-      {
-        "name": "Emerald Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
-        ]
-      },
-      {
-        "name": "Sage Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
-        ]
-      },
-      {
-        "name": "Mint Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
-        ]
-      },
-      {
-        "name": "Burgundy Wine",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Maroon",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Raspberry",
-        "hex": "#4b5563",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Cerise",
-        "hex": "#e11d48",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Dusty Rose",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
-        ]
-      },
-      {
-        "name": "Baby Pink",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif"
-        ]
-      },
-      {
-        "name": "Coral",
-        "hex": "#fb7185",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Mustard",
-        "hex": "#ca8a04",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif"
-        ]
-      },
-      {
-        "name": "Violet",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif"
-        ]
-      },
-      {
-        "name": "Purple",
-        "hex": "#7e22ce",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Lavender",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Tanc-Underscrubs_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Mauve",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Mauve_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mauve_Tanc-Underscrubs_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Crisp White",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif"
-        ]
-      },
-      {
-        "name": "Charcoal Grey",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Slate Grey",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
-        ]
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Includes ergonomic scrub top and multi-pocket pants",
-      "4-way stretch fabric for unhindered mobility on rounds",
-      "SilvaLab antimicrobial finish inhibits odor-causing bacteria",
-      "Elastic waistband with heavy-duty reinforced drawstring"
-    ]
-  },
-  {
-    "id": "tanc-core-scrub-bottoms",
-    "name": "Core Scrub Bottoms",
-    "collection": "pants",
-    "priceZAR": 190,
-    "priceUSD": 20,
-    "rating": 4.8,
-    "reviewsCount": 302,
-    "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue-Sunflowers_Cotton-Spandex_Polycotton_01.avif"
-    ],
-    "imageIcon": "👖",
-    "description": "Classic Medical Scrubs Bottom Only",
-    "colors": [
-      {
-        "name": "Midnight Black",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
-        ]
-      },
-      {
-        "name": "Deep Navy",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jasmine_Modest_Navy_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jasmine_Modest_Navy_03.avif"
-        ]
-      },
-      {
-        "name": "Royal Blue",
-        "hex": "#1d4ed8",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif"
-        ]
-      },
-      {
-        "name": "Ceil Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif"
-        ]
-      },
-      {
-        "name": "Caribbean Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Caribbean-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Petrol Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif"
-        ]
-      },
-      {
-        "name": "Summit Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif"
-        ]
-      },
-      {
-        "name": "True Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Baby Blue",
-        "hex": "#bfdbfe",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue-Sunflowers_Cotton-Spandex_Polycotton_01.avif"
-        ]
-      },
-      {
-        "name": "Airforce Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Powder Blue",
-        "hex": "#93c5fd",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif"
-        ]
-      },
-      {
-        "name": "Sky Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Steel Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Bottle Green",
-        "hex": "#4b5563",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
-        ]
-      },
-      {
-        "name": "Hunter Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
-        ]
-      },
-      {
-        "name": "Forest Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
-        ]
-      },
-      {
-        "name": "Olive Green",
-        "hex": "#3f6212",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
-        ]
-      },
-      {
-        "name": "OT Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
-        ]
-      },
-      {
-        "name": "Emerald Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
-        ]
-      },
-      {
-        "name": "Sage Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
-        ]
-      },
-      {
-        "name": "Mint Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
-        ]
-      },
-      {
-        "name": "Burgundy Wine",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Maroon",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Raspberry",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Cerise",
-        "hex": "#e11d48",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Dusty Rose",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
-        ]
-      },
-      {
-        "name": "Baby Pink",
-        "hex": "#fbcfe8",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif"
-        ]
-      },
-      {
-        "name": "Coral",
-        "hex": "#fb7185",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Mustard",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif"
-        ]
-      },
-      {
-        "name": "Violet",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif"
-        ]
-      },
-      {
-        "name": "Purple",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Lavender",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Tanc-Underscrubs_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Mauve",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Mauve_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mauve_Tanc-Underscrubs_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Crisp White",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif"
-        ]
-      },
-      {
-        "name": "Charcoal Grey",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Slate Grey",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
-        ]
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Deep cargo pockets with zip closures for hospital shears and phone",
-      "Reinforced gusset and knee seams for durability",
-      "Soft ribbed ankle cuff or straight leg comfort finish",
-      "Breathable, moisture-wicking weave"
-    ]
-  },
-  {
-    "id": "tanc-core-scrub-tops",
-    "name": "Core Scrub Tops",
-    "collection": "scrubs",
-    "priceZAR": 190,
-    "priceUSD": 20,
-    "rating": 4.8,
-    "reviewsCount": 285,
-    "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Camo_Core_Women_02.avif"
-    ],
-    "imageIcon": "👕",
-    "description": "Classic unisex Medical Scrubs Top Only.",
-    "colors": [
-      {
-        "name": "Midnight Black",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
-        ]
-      },
-      {
-        "name": "Deep Navy",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jasmine_Modest_Navy_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jasmine_Modest_Navy_03.avif"
-        ]
-      },
-      {
-        "name": "Royal Blue",
-        "hex": "#1d4ed8",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif"
-        ]
-      },
-      {
-        "name": "Ceil Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif"
-        ]
-      },
-      {
-        "name": "Caribbean Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Caribbean-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Petrol Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif"
-        ]
-      },
-      {
-        "name": "Summit Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif"
-        ]
-      },
-      {
-        "name": "True Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Baby Blue",
-        "hex": "#bfdbfe",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue-Sunflowers_Cotton-Spandex_Polycotton_01.avif"
-        ]
-      },
-      {
-        "name": "Airforce Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Powder Blue",
-        "hex": "#93c5fd",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif"
-        ]
-      },
-      {
-        "name": "Sky Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Steel Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Bottle Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
-        ]
-      },
-      {
-        "name": "Hunter Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
-        ]
-      },
-      {
-        "name": "Forest Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif"
-        ]
-      },
-      {
-        "name": "Olive Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
-        ]
-      },
-      {
-        "name": "OT Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
-        ]
-      },
-      {
-        "name": "Emerald Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
-        ]
-      },
-      {
-        "name": "Sage Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
-        ]
-      },
-      {
-        "name": "Mint Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
-        ]
-      },
-      {
-        "name": "Burgundy Wine",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Maroon",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Raspberry",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Cerise",
-        "hex": "#e11d48",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Dusty Rose",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
-        ]
-      },
-      {
-        "name": "Baby Pink",
-        "hex": "#fbcfe8",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif"
-        ]
-      },
-      {
-        "name": "Coral",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Mustard",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif"
-        ]
-      },
-      {
-        "name": "Violet",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif"
-        ]
-      },
-      {
-        "name": "Purple",
-        "hex": "#7e22ce",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Lavender",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Tanc-Underscrubs_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Mauve",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Mauve_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mauve_Tanc-Underscrubs_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Crisp White",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif"
-        ]
-      },
-      {
-        "name": "Charcoal Grey",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Slate Grey",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
-        ]
       }
     ],
     "sizes": [
@@ -8112,136 +6207,6 @@ export const INITIAL_PRODUCTS: Product[] = [
       "Comfort V-neckline or collar with tagless neck label",
       "Side seam vents for breathability and mobility",
       "Fade-resistant and bleach-safe hospital laundering"
-    ]
-  },
-  {
-    "id": "tanc-soft-shell-jacket-women",
-    "name": "Women's Soft Shell Jacket",
-    "collection": "jackets",
-    "priceZAR": 450,
-    "priceUSD": 40,
-    "rating": 4.8,
-    "reviewsCount": 213,
-    "badge": "Thermal Shield",
-    "fabricTech": "Hospital Grade Medical Textile",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Navy-Blue_02.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Navy-Blue_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Navy-Blue_03.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Charcoal_03.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Charcoal_04.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Women_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Women_03.avif"
-    ],
-    "imageIcon": "🧥",
-    "description": "Practical outerwear built for unpredictable shifts. Soft shell fabric moves with you and shields against wind and light moisture without bulk. Available in 3 professional colours, customizable with embroidery.",
-    "colors": [
-      {
-        "name": "Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Navy-Blue_02.avif"
-      },
-      {
-        "name": "Charcoal",
-        "hex": "#374151",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Charcoal_03.avif"
-      },
-      {
-        "name": "Navy Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Navy-Blue_02.avif"
-      },
-      {
-        "name": "Navy",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Softshell_Black_Navy-Blue_02.avif"
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Thermal micro-fleece lining for temperature regulation",
-      "Zippered chest and side pockets for diagnostic tools",
-      "Dedicated pen and penlight slot on sleeve",
-      "Water-repellent and windproof bonded outer layer"
-    ]
-  },
-  {
-    "id": "tanc-polar-fleece",
-    "name": "Polar Fleece",
-    "collection": "jackets",
-    "priceZAR": 270,
-    "priceUSD": 15,
-    "rating": 4.8,
-    "reviewsCount": 196,
-    "badge": "Thermal Shield",
-    "fabricTech": "Anti-Pill Thermal Fleece",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Black_Men_01.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Navy-Blue_Women_01.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Black_Men_01.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Black_Women_01.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Navy-Blue_Men_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Charcoal_Men_01.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Charcoal_Women_01.avif"
-    ],
-    "imageIcon": "🧥",
-    "description": "Premium warmth without the weight. This polar fleece layer keeps you cosy through unpredictable temperatures while maintaining movement and mobility. Soft, durable, and easy to care for in 3 professional colours. Please note: we do try and ensure...",
-    "colors": [
-      {
-        "name": "Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Black_Men_01.avif"
-      },
-      {
-        "name": "Charcoal",
-        "hex": "#374151",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Charcoal_Men_01.avif"
-      },
-      {
-        "name": "Navy Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Navy-Blue_Women_01.avif"
-      },
-      {
-        "name": "Navy",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Polar-Fleeces_Navy-Blue_Women_01.avif"
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Thermal micro-fleece lining for temperature regulation",
-      "Zippered chest and side pockets for diagnostic tools",
-      "Dedicated pen and penlight slot on sleeve",
-      "Water-repellent and windproof bonded outer layer"
     ]
   },
   {
@@ -10400,835 +8365,6 @@ export const INITIAL_PRODUCTS: Product[] = [
     ]
   },
   {
-    "id": "tanc-sorbet-male-underscrub",
-    "name": "Sorbet Male Underscrub",
-    "collection": "underscrubs",
-    "priceZAR": 360,
-    "priceUSD": 20,
-    "rating": 5,
-    "reviewsCount": 254,
-    "fabricTech": "Sorbet Ultra-Stretch Weave",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Male-Underscrub.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Male-Underscrub.avif"
-    ],
-    "imageIcon": "👕",
-    "description": "Available in Black",
-    "colors": [
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
-        ]
-      },
-      {
-        "name": "Navy Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Male-Underscrub.avif"
-      },
-      {
-        "name": "Hunter Green",
-        "hex": "#14532d",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Men_01.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
-        ]
-      },
-      {
-        "name": "Ceil Blue",
-        "hex": "#60a5fa",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Multi-compartment pocket design for instruments and pens",
-      "Comfort V-neckline or collar with tagless neck label",
-      "Side seam vents for breathability and mobility",
-      "Fade-resistant and bleach-safe hospital laundering"
-    ]
-  },
-  {
-    "id": "tanc-sorbet-scrub-sets-assistant-with-no-piping",
-    "name": "Sorbet Scrub Sets Assistant with No Piping",
-    "collection": "sets",
-    "priceZAR": 403,
-    "priceUSD": 35,
-    "rating": 5,
-    "reviewsCount": 237,
-    "badge": "Value Set",
-    "fabricTech": "Sorbet Ultra-Stretch Weave",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub-Sets-Assistant-with-No-Piping.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub-Sets-Assistant-with-No-Piping.avif"
-    ],
-    "imageIcon": "🥼",
-    "description": "Black top with no piping Please choose logo required",
-    "colors": [
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
-        ]
-      },
-      {
-        "name": "Navy Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub-Sets-Assistant-with-No-Piping.avif"
-      },
-      {
-        "name": "Hunter Green",
-        "hex": "#14532d",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Men_01.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
-        ]
-      },
-      {
-        "name": "Ceil Blue",
-        "hex": "#60a5fa",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Includes ergonomic scrub top and multi-pocket pants",
-      "4-way stretch fabric for unhindered mobility on rounds",
-      "SilvaLab antimicrobial finish inhibits odor-causing bacteria",
-      "Elastic waistband with heavy-duty reinforced drawstring"
-    ]
-  },
-  {
-    "id": "tanc-sorbet-scrub-sets-hairbar-logo-with-lilac-piping",
-    "name": "Sorbet Scrub Sets - Hairbar Logo with Lilac Piping",
-    "collection": "sets",
-    "priceZAR": 403,
-    "priceUSD": 35,
-    "rating": 5,
-    "reviewsCount": 220,
-    "badge": "Value Set",
-    "fabricTech": "Sorbet Ultra-Stretch Weave",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Hairbar-Logo-with-Lilac-Piping.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Hairbar-Logo-with-Lilac-Piping.avif"
-    ],
-    "imageIcon": "🥼",
-    "description": "Sorbet Hairbar logo embroidery left chest",
-    "colors": [
-      {
-        "name": "Lilac",
-        "hex": "#c084fc",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Hairbar-Logo-with-Lilac-Piping.avif"
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Includes ergonomic scrub top and multi-pocket pants",
-      "4-way stretch fabric for unhindered mobility on rounds",
-      "SilvaLab antimicrobial finish inhibits odor-causing bacteria",
-      "Elastic waistband with heavy-duty reinforced drawstring"
-    ]
-  },
-  {
-    "id": "tanc-sorbet-scrub-sets-sorbet-man-with-yellow-piping",
-    "name": "Sorbet Scrub Sets - Sorbet Man with yellow piping",
-    "collection": "sets",
-    "priceZAR": 403,
-    "priceUSD": 35,
-    "rating": 4.9,
-    "reviewsCount": 203,
-    "badge": "Value Set",
-    "fabricTech": "Sorbet Ultra-Stretch Weave",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Sorbet-Man-with-yellow-piping.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Sorbet-Man-with-yellow-piping.avif"
-    ],
-    "imageIcon": "🥼",
-    "description": "Available in black Sorbet logo embroidery left chest",
-    "colors": [
-      {
-        "name": "Yellow",
-        "hex": "#eab308",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Sorbet-Man-with-yellow-piping.avif"
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Includes ergonomic scrub top and multi-pocket pants",
-      "4-way stretch fabric for unhindered mobility on rounds",
-      "SilvaLab antimicrobial finish inhibits odor-causing bacteria",
-      "Elastic waistband with heavy-duty reinforced drawstring"
-    ]
-  },
-  {
-    "id": "tanc-sorbet-scrub-sets-salon-with-raspberry-piping",
-    "name": "Sorbet Scrub Sets - Salon with Raspberry piping",
-    "collection": "sets",
-    "priceZAR": 403,
-    "priceUSD": 35,
-    "rating": 4.9,
-    "reviewsCount": 186,
-    "badge": "Value Set",
-    "fabricTech": "Sorbet Ultra-Stretch Weave",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Salon-with-Raspberry-piping.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Salon-with-Raspberry-piping.avif"
-    ],
-    "imageIcon": "🥼",
-    "description": "Available in black Sorbet logo embroidery left chest",
-    "colors": [
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
-        ]
-      },
-      {
-        "name": "Navy Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Salon-with-Raspberry-piping.avif"
-      },
-      {
-        "name": "Hunter Green",
-        "hex": "#14532d",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Men_01.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
-        ]
-      },
-      {
-        "name": "Ceil Blue",
-        "hex": "#60a5fa",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Includes ergonomic scrub top and multi-pocket pants",
-      "4-way stretch fabric for unhindered mobility on rounds",
-      "SilvaLab antimicrobial finish inhibits odor-causing bacteria",
-      "Elastic waistband with heavy-duty reinforced drawstring"
-    ]
-  },
-  {
-    "id": "tanc-sorbet-scrub-sets-salon-with-mint-piping",
-    "name": "Sorbet Scrub Sets - Salon with Mint piping",
-    "collection": "sets",
-    "priceZAR": 403,
-    "priceUSD": 35,
-    "rating": 4.9,
-    "reviewsCount": 169,
-    "badge": "Value Set",
-    "fabricTech": "Sorbet Ultra-Stretch Weave",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_-Salon-with-Mint-piping.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_-Salon-with-Mint-piping.avif"
-    ],
-    "imageIcon": "🥼",
-    "description": "Available in black Sorbet logo embroidery left chest",
-    "colors": [
-      {
-        "name": "Mint",
-        "hex": "#6ee7b7",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_-Salon-with-Mint-piping.avif"
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Includes ergonomic scrub top and multi-pocket pants",
-      "4-way stretch fabric for unhindered mobility on rounds",
-      "SilvaLab antimicrobial finish inhibits odor-causing bacteria",
-      "Elastic waistband with heavy-duty reinforced drawstring"
-    ]
-  },
-  {
-    "id": "tanc-sorbet-scrub-tops-hairbar-logo-with-lilac",
-    "name": "Sorbet Scrub Tops - Hairbar Logo with Lilac",
-    "collection": "scrubs",
-    "priceZAR": 254,
-    "priceUSD": 20,
-    "rating": 4.9,
-    "reviewsCount": 152,
-    "fabricTech": "Sorbet Ultra-Stretch Weave",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Hairbar-Logo-with-Lilac-Piping.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Hairbar-Logo-with-Lilac-Piping.avif"
-    ],
-    "imageIcon": "👕",
-    "description": "Available in black Sorbet logo embroidery left chest",
-    "colors": [
-      {
-        "name": "Lilac",
-        "hex": "#c084fc",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Hairbar-Logo-with-Lilac-Piping.avif"
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Multi-compartment pocket design for instruments and pens",
-      "Comfort V-neckline or collar with tagless neck label",
-      "Side seam vents for breathability and mobility",
-      "Fade-resistant and bleach-safe hospital laundering"
-    ]
-  },
-  {
-    "id": "tanc-sorbet-scrub-tops-sorbet-man-with-yellow-piping",
-    "name": "Sorbet Scrub Tops - Sorbet Man with Yellow Piping",
-    "collection": "scrubs",
-    "priceZAR": 254,
-    "priceUSD": 20,
-    "rating": 4.9,
-    "reviewsCount": 135,
-    "fabricTech": "Sorbet Ultra-Stretch Weave",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Sorbet-Man-with-yellow-piping.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Sorbet-Man-with-yellow-piping.avif"
-    ],
-    "imageIcon": "👕",
-    "description": "Available in black Sorbet logo embroidery left chest",
-    "colors": [
-      {
-        "name": "Yellow",
-        "hex": "#eab308",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Sorbet-Man-with-yellow-piping.avif"
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Multi-compartment pocket design for instruments and pens",
-      "Comfort V-neckline or collar with tagless neck label",
-      "Side seam vents for breathability and mobility",
-      "Fade-resistant and bleach-safe hospital laundering"
-    ]
-  },
-  {
-    "id": "tanc-sorbet-scrub-tops-salon-with-raspberry-piping",
-    "name": "Sorbet Scrub Tops - Salon with Raspberry Piping",
-    "collection": "scrubs",
-    "priceZAR": 254,
-    "priceUSD": 20,
-    "rating": 4.9,
-    "reviewsCount": 118,
-    "fabricTech": "Sorbet Ultra-Stretch Weave",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Salon-with-Raspberry-piping.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Salon-with-Raspberry-piping.avif"
-    ],
-    "imageIcon": "👕",
-    "description": "Available in black Sorbet logo embroidery left chest",
-    "colors": [
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
-        ]
-      },
-      {
-        "name": "Navy Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_Salon-with-Raspberry-piping.avif"
-      },
-      {
-        "name": "Hunter Green",
-        "hex": "#14532d",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Men_01.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
-        ]
-      },
-      {
-        "name": "Ceil Blue",
-        "hex": "#60a5fa",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Multi-compartment pocket design for instruments and pens",
-      "Comfort V-neckline or collar with tagless neck label",
-      "Side seam vents for breathability and mobility",
-      "Fade-resistant and bleach-safe hospital laundering"
-    ]
-  },
-  {
-    "id": "tanc-sorbet-scrub-tops-salon-with-mint-piping",
-    "name": "Sorbet Scrub Tops - Salon with Mint Piping",
-    "collection": "scrubs",
-    "priceZAR": 254,
-    "priceUSD": 20,
-    "rating": 4.9,
-    "reviewsCount": 101,
-    "fabricTech": "Sorbet Ultra-Stretch Weave",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_-Salon-with-Mint-piping.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_-Salon-with-Mint-piping.avif"
-    ],
-    "imageIcon": "👕",
-    "description": "Available in black Sorbet logo embroidery left chest",
-    "colors": [
-      {
-        "name": "Mint",
-        "hex": "#6ee7b7",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub_-Salon-with-Mint-piping.avif"
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Multi-compartment pocket design for instruments and pens",
-      "Comfort V-neckline or collar with tagless neck label",
-      "Side seam vents for breathability and mobility",
-      "Fade-resistant and bleach-safe hospital laundering"
-    ]
-  },
-  {
-    "id": "tanc-sorbet-female-underscrub",
-    "name": "Sorbet Female Underscrub",
-    "collection": "underscrubs",
-    "priceZAR": 360,
-    "priceUSD": 20,
-    "rating": 4.9,
-    "reviewsCount": 84,
-    "fabricTech": "Sorbet Ultra-Stretch Weave",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Female-Underscrub.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Female-Underscrub.avif"
-    ],
-    "imageIcon": "👕",
-    "description": "Available in Black",
-    "colors": [
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
-        ]
-      },
-      {
-        "name": "Navy Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Female-Underscrub.avif"
-      },
-      {
-        "name": "Hunter Green",
-        "hex": "#14532d",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Men_01.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
-        ]
-      },
-      {
-        "name": "Ceil Blue",
-        "hex": "#60a5fa",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Multi-compartment pocket design for instruments and pens",
-      "Comfort V-neckline or collar with tagless neck label",
-      "Side seam vents for breathability and mobility",
-      "Fade-resistant and bleach-safe hospital laundering"
-    ]
-  },
-  {
-    "id": "tanc-sorbet-male-softshell-jacket",
-    "name": "Sorbet Male Softshell Jacket",
-    "collection": "jackets",
-    "priceZAR": 648,
-    "priceUSD": 40,
-    "rating": 4.9,
-    "reviewsCount": 67,
-    "badge": "Thermal Shield",
-    "fabricTech": "HydroShield™ Bonded Shell",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Male-Softshell-Jacket_01.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Male-Softshell-Jacket_01.avif"
-    ],
-    "imageIcon": "🧥",
-    "description": "Includes sorbet logo - left chest",
-    "colors": [
-      {
-        "name": "Navy Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Male-Softshell-Jacket_01.avif"
-      },
-      {
-        "name": "Black",
-        "hex": "#111827"
-      },
-      {
-        "name": "Charcoal",
-        "hex": "#374151"
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Thermal micro-fleece lining for temperature regulation",
-      "Zippered chest and side pockets for diagnostic tools",
-      "Dedicated pen and penlight slot on sleeve",
-      "Water-repellent and windproof bonded outer layer"
-    ]
-  },
-  {
-    "id": "tanc-sorbet-female-softshell-jacket",
-    "name": "Sorbet Female Softshell Jacket",
-    "collection": "jackets",
-    "priceZAR": 648,
-    "priceUSD": 40,
-    "rating": 4.8,
-    "reviewsCount": 50,
-    "badge": "Thermal Shield",
-    "fabricTech": "HydroShield™ Bonded Shell",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Female-Softshell-Jacket_01.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Female-Softshell-Jacket_01.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Female-Softshell-Jacket_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Female-Softshell-Jacket_03.avif"
-    ],
-    "imageIcon": "🧥",
-    "description": "Includes sorbet logo - left chest",
-    "colors": [
-      {
-        "name": "Navy Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Female-Softshell-Jacket_01.avif"
-      },
-      {
-        "name": "Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Female-Softshell-Jacket_02.avif"
-      },
-      {
-        "name": "Charcoal",
-        "hex": "#374151",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Female-Softshell-Jacket_03.avif"
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Thermal micro-fleece lining for temperature regulation",
-      "Zippered chest and side pockets for diagnostic tools",
-      "Dedicated pen and penlight slot on sleeve",
-      "Water-repellent and windproof bonded outer layer"
-    ]
-  },
-  {
-    "id": "tanc-sorbet-scrub-pants",
-    "name": "Sorbet Scrub pants",
-    "collection": "pants",
-    "priceZAR": 254,
-    "priceUSD": 20,
-    "rating": 4.8,
-    "reviewsCount": 313,
-    "fabricTech": "Sorbet Ultra-Stretch Weave",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub-pants.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub-pants.avif"
-    ],
-    "imageIcon": "👖",
-    "description": "Premium quality Sorbet Scrub pants from official TANC medical collection. Custom engineered for superior clinical durability, breathability, and hospital shifts.",
-    "colors": [
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
-        ]
-      },
-      {
-        "name": "Navy Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Sorbet-Scrub-pants.avif"
-      },
-      {
-        "name": "Hunter Green",
-        "hex": "#14532d",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Men_01.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
-        ]
-      },
-      {
-        "name": "Ceil Blue",
-        "hex": "#60a5fa",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Deep cargo pockets with zip closures for hospital shears and phone",
-      "Reinforced gusset and knee seams for durability",
-      "Soft ribbed ankle cuff or straight leg comfort finish",
-      "Breathable, moisture-wicking weave"
-    ]
-  },
-  {
     "id": "tanc-watermelon-fun-cap",
     "name": "Watermelon Fun",
     "collection": "scrubs",
@@ -12074,136 +9210,6 @@ export const INITIAL_PRODUCTS: Product[] = [
     ]
   },
   {
-    "id": "tanc-pablo-polar-fleece",
-    "name": "Pablo™ Polar Fleece",
-    "collection": "jackets",
-    "priceZAR": 350,
-    "priceUSD": 19,
-    "rating": 4.9,
-    "reviewsCount": 292,
-    "badge": "Thermal Shield",
-    "fabricTech": "Anti-Pill Thermal Fleece",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Polar-Fleece_Men_01.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Polar-Fleece_Men_01.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Polar-Fleece_Men_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Men_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Polar-Fleece_Men_05.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Men_04.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Polar-Fleece_Men_05.avif"
-    ],
-    "imageIcon": "🧥",
-    "description": "Stay warm and comfortable with the Pablo™ Polar Fleece - the perfect layer for busy professionals on their feet all day. Crafted from a premium blend of, polyester, rayon, and spandex, this fleece offers exceptional warmth without sacrificing mobi...",
-    "colors": [
-      {
-        "name": "Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Polar-Fleece_Men_01.avif"
-      },
-      {
-        "name": "Charcoal",
-        "hex": "#374151",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Polar-Fleece_Men_02.avif"
-      },
-      {
-        "name": "Navy Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Men_02.avif"
-      },
-      {
-        "name": "Navy",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Men_02.avif"
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Thermal micro-fleece lining for temperature regulation",
-      "Zippered chest and side pockets for diagnostic tools",
-      "Dedicated pen and penlight slot on sleeve",
-      "Water-repellent and windproof bonded outer layer"
-    ]
-  },
-  {
-    "id": "tanc-wendy-polar-fleece",
-    "name": "Wendy™ Polar Fleece",
-    "collection": "jackets",
-    "priceZAR": 350,
-    "priceUSD": 19,
-    "rating": 4.9,
-    "reviewsCount": 129,
-    "badge": "Thermal Shield",
-    "fabricTech": "Anti-Pill Thermal Fleece",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Polar-Fleece_Women_03.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Women_01.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Polar-Fleece_Women_03.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Women_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Women_05.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Polar-Fleece_Women_05.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Polar-Fleece_Women_04.avif"
-    ],
-    "imageIcon": "🧥",
-    "description": "Stay warm and comfortable with the Wendy™ Polar Fleece - the perfect layer for busy professionals on their feet all day. Crafted from a premium blend of, polyester, rayon, and spandex, this fleece offers exceptional warmth without sacrificing mobi...",
-    "colors": [
-      {
-        "name": "Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Polar-Fleece_Women_03.avif"
-      },
-      {
-        "name": "Charcoal",
-        "hex": "#374151",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Polar-Fleece_Women_04.avif"
-      },
-      {
-        "name": "Navy Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Women_01.avif"
-      },
-      {
-        "name": "Navy",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy_Polar-Fleece_Women_01.avif"
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Thermal micro-fleece lining for temperature regulation",
-      "Zippered chest and side pockets for diagnostic tools",
-      "Dedicated pen and penlight slot on sleeve",
-      "Water-repellent and windproof bonded outer layer"
-    ]
-  },
-  {
     "id": "tanc-island-vibes-women",
     "name": "Island Vibes",
     "collection": "scrubs",
@@ -12572,39 +9578,89 @@ export const INITIAL_PRODUCTS: Product[] = [
     ]
   },
   {
-    "id": "tanc-littmann-classic-ii-paediatric-caribbean-blue-tube-rainbow-finish-chestpiece-2",
-    "name": "Littmann® Classic II Paediatric - Caribbean Blue Tube, Rainbow-finish Chestpiece",
-    "collection": "accessories",
-    "priceZAR": 2199,
-    "priceUSD": 120,
+    "id": "tanc-scrublab-water-bottle-500ml",
+    "name": "ScrubLab Water Bottle - 500ml",
+    "collection": "scrubs",
+    "priceZAR": 190,
+    "priceUSD": 20,
     "rating": 4.9,
-    "reviewsCount": 181,
-    "badge": "Professional Grade",
-    "fabricTech": "Acoustic Tunable Stainless Steel",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/09/4.png",
+    "reviewsCount": 266,
+    "badge": "Ultra-Flex 4-Way",
+    "fabricTech": "LABx™ 4-Way Stretch + SilvaLab™",
+    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Scrub-Lab_Black_Water-Bottle.avif",
     "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/09/4.png",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/09/2.png",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/09/3.png",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/09/1.png"
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Scrub-Lab_Black_Water-Bottle.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/TANC-PURPLE-JESSICA.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Scrub-Lab_White_Water-Bottle.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/TANC-GREEN-PABALO.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/TANC-BLACK-THABO.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Optic-White-Water-Bottle-Lifestyle.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint-Water-Bottle-Lifestyle.avif",
+      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender-Water-Bottle-Lifestyle.avif"
     ],
-    "imageIcon": "🎒",
-    "description": "All the quality of the ‘industry standard’ Classic II SE but with a child sized chestpiece - larger than the ‘infant’ but smaller than the standard Classic II SE - featuring both a standard bell on one side and a diaphragm on the other.",
+    "imageIcon": "👕",
+    "description": "Stay hydrated through even the busiest shifts with the ScrubLab 500ml Water Bottle - designed with healthcare professionals in mind. Combining durability, safety, and style, this bottle is the perfect everyday essential for work and beyond. Crafte...",
     "colors": [
       {
-        "name": "Caribbean Blue",
-        "hex": "#0284c7",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/09/4.png"
+        "name": "Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Scrub-Lab_Black_Water-Bottle.avif"
+      },
+      {
+        "name": "Lavender",
+        "hex": "#c084fc",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Lavender_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Lavender_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Tanc-Underscrubs_Women_03.avif"
+        ]
+      },
+      {
+        "name": "Mint",
+        "hex": "#6ee7b7",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint-Water-Bottle-Lifestyle.avif"
+      },
+      {
+        "name": "Optic White",
+        "hex": "#ffffff",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Optic-White-Water-Bottle-Lifestyle.avif"
+      },
+      {
+        "name": "Purple",
+        "hex": "#7e22ce",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif"
+        ]
+      },
+      {
+        "name": "White",
+        "hex": "#ffffff",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Scrub-Lab_White_Water-Bottle.avif"
       }
     ],
     "sizes": [
-      "Standard"
+      "XXS",
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "5XL",
+      "6XL",
+      "7XL",
+      "8XL"
     ],
     "specs": [
-      "Hospital-grade clinical durability",
-      "Easy machine wash and quick-dry finish",
-      "Tested for demanding healthcare environments",
-      "Ergonomic medical fit"
+      "Multi-compartment pocket design for instruments and pens",
+      "Comfort V-neckline or collar with tagless neck label",
+      "Side seam vents for breathability and mobility",
+      "Fade-resistant and bleach-safe hospital laundering"
     ]
   },
   {
@@ -13645,63 +10701,6 @@ export const INITIAL_PRODUCTS: Product[] = [
     ]
   },
   {
-    "id": "tanc-power-prime-walk-300-2",
-    "name": "Power Prime Walk 300",
-    "collection": "accessories",
-    "priceZAR": 650,
-    "priceUSD": 36,
-    "rating": 4.9,
-    "reviewsCount": 263,
-    "fabricTech": "Hospital Grade Medical Textile",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Power-Prime-Walk-300_Black_Women_01.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Power-Prime-Walk-300_Black_Women_01.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Power-Prime-Walk-300_Black_Men_01.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Power-Prime-Walk-300_Black_Women_04.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Power-Prime-Walk-300_Black_Men_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Power-Prime-Walk-300_Black_Men_04.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Power-Prime-Walk-300_Black_Women_02.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Power-Prime-Walk-300_Navy_Men_04.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Power-Prime-Walk-300_Navy-Blue_Women_04.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Power-Prime-Walk-300_Navy-Blue_Women_03.avif"
-    ],
-    "imageIcon": "🎒",
-    "description": "Built for performance and ease, the Power Prime Walk 300 delivers all-day comfort with every step. The breathable airmesh upper keeps your feet cool, while memory foam and 2x cushioning absorb impact. With slip-resistant rubber inserts for reliabl...",
-    "colors": [
-      {
-        "name": "Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Power-Prime-Walk-300_Black_Women_01.avif"
-      },
-      {
-        "name": "Navy Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Power-Prime-Walk-300_Navy-Blue_Women_04.avif"
-      },
-      {
-        "name": "Navy",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Power-Prime-Walk-300_Navy_Men_04.avif"
-      }
-    ],
-    "sizes": [
-      "10",
-      "11",
-      "12",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7"
-    ],
-    "specs": [
-      "Hospital-grade clinical durability",
-      "Easy machine wash and quick-dry finish",
-      "Tested for demanding healthcare environments",
-      "Ergonomic medical fit"
-    ]
-  },
-  {
     "id": "tanc-shower-style-theatre",
     "name": "Shower Style Theatre",
     "collection": "accessories",
@@ -14655,355 +11654,6 @@ export const INITIAL_PRODUCTS: Product[] = [
       {
         "name": "Baby Pink",
         "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
-        ]
-      },
-      {
-        "name": "Coral",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Coral_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Coral_03.avif"
-        ]
-      },
-      {
-        "name": "Mustard",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mustard_Core_Women_01.avif"
-        ]
-      },
-      {
-        "name": "Violet",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Violet_Core_Men_03.avif"
-        ]
-      },
-      {
-        "name": "Purple",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Lavender",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Tanc-Underscrubs_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Mauve",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Mauve_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Mauve_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mauve_Tanc-Underscrubs_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Crisp White",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/White_Tanc-Underscrubs_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Charcoal Grey",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Lite-Scrubs_Women_09.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Charcoal_Lite-Scrubs_Women_09.avif"
-        ]
-      },
-      {
-        "name": "Slate Grey",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
-        ]
-      }
-    ],
-    "sizes": [
-      "Standard"
-    ],
-    "specs": [
-      "Breathable all-day theatre comfort with soft forehead sweatband",
-      "Adjustable tie-back cords for a secure ergonomic fit",
-      "Designed to accommodate all hair volumes and styles",
-      "Colorfast vibrant medical print"
-    ]
-  },
-  {
-    "id": "tanc-tanc-lite-caps-mens",
-    "name": "TANC Lite Caps",
-    "collection": "accessories",
-    "priceZAR": 50,
-    "priceUSD": 12,
-    "rating": 4.9,
-    "reviewsCount": 289,
-    "badge": "Printed Scrub Cap",
-    "fabricTech": "Hospital Grade Medical Textile",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Men_Lite-Caps_01.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Men_Lite-Caps_01.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Men_Lite-Caps_01.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Men_Lite-Caps_01.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Men_Lite-Caps_01.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Men_Lite-Caps_01.avif"
-    ],
-    "imageIcon": "🧢",
-    "description": "Our TANC Lite Scrub Caps are made from the same lightweight polycotton blend - 50% cotton, 50% polyester as our Lite Scrubs. They’re soft, breathable, and super comfortable for all-day wear, perfectly matching our TANC Lite scrubs.",
-    "colors": [
-      {
-        "name": "Deep Navy",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif"
-        ]
-      },
-      {
-        "name": "Royal Blue",
-        "hex": "#1d4ed8",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Ceil Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif"
-        ]
-      },
-      {
-        "name": "Caribbean Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cardiology-IV_Caribbean-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Petrol Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Petrol_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Petrol_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Petrol_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Petrol_05.avif"
-        ]
-      },
-      {
-        "name": "Summit Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_09.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_02.avif"
-        ]
-      },
-      {
-        "name": "True Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/True-Blue_Core_Men_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Baby Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue-Sunflowers_Cotton-Spandex_Polycotton_01.avif"
-        ]
-      },
-      {
-        "name": "Airforce Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Airforce-Blue-Grey_Core_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Powder Blue",
-        "hex": "#93c5fd",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Powder-Blue_Lite-Scrubs_Men_07-1.avif"
-        ]
-      },
-      {
-        "name": "Sky Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Steel Blue",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Lite-Scrubs_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Bottle Green",
-        "hex": "#4b5563",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Hunter Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Forest Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Lite-Scrubs_Women_02.avif"
-        ]
-      },
-      {
-        "name": "Olive Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Olive-Green_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Olive-Green_01.avif"
-        ]
-      },
-      {
-        "name": "OT Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
-        ]
-      },
-      {
-        "name": "Emerald Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Bottle-Green_Core_Women_06.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/OT-Green_Core_Men_05.avif"
-        ]
-      },
-      {
-        "name": "Sage Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Mint_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
-        ]
-      },
-      {
-        "name": "Mint Green",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint_Lite-Scrubs_Women_04.avif"
-        ]
-      },
-      {
-        "name": "Burgundy Wine",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif"
-        ]
-      },
-      {
-        "name": "Maroon",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif"
-        ]
-      },
-      {
-        "name": "Raspberry",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Raspberry_Lite-Scrubs_Men_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Raspberry_Lite-Scrubs_Men_03.avif"
-        ]
-      },
-      {
-        "name": "Cerise",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Core_Women_03.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cerise_Tanc-Underscrubs_Men_02.avif"
-        ]
-      },
-      {
-        "name": "Dusty Rose",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Core_Women_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
-        ]
-      },
-      {
-        "name": "Baby Pink",
-        "hex": "#fbcfe8",
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif",
         "imageUrls": [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Pink_Lite-Scrubs_Women_06.avif"
@@ -19410,92 +16060,6 @@ export const INITIAL_PRODUCTS: Product[] = [
       "Cushioned sole to absorb impact on hard hospital floors",
       "Moisture-wicking yarn keeps feet dry and cool",
       "Seamless toe prevents blisters during emergency calls"
-    ]
-  },
-  {
-    "id": "tanc-scrublab-water-bottle-500ml",
-    "name": "ScrubLab Water Bottle - 500ml",
-    "collection": "scrubs",
-    "priceZAR": 190,
-    "priceUSD": 20,
-    "rating": 4.9,
-    "reviewsCount": 266,
-    "badge": "Ultra-Flex 4-Way",
-    "fabricTech": "LABx™ 4-Way Stretch + SilvaLab™",
-    "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Scrub-Lab_Black_Water-Bottle.avif",
-    "imageUrls": [
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Scrub-Lab_Black_Water-Bottle.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/TANC-PURPLE-JESSICA.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Scrub-Lab_White_Water-Bottle.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/TANC-GREEN-PABALO.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/TANC-BLACK-THABO.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Optic-White-Water-Bottle-Lifestyle.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint-Water-Bottle-Lifestyle.avif",
-      "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender-Water-Bottle-Lifestyle.avif"
-    ],
-    "imageIcon": "👕",
-    "description": "Stay hydrated through even the busiest shifts with the ScrubLab 500ml Water Bottle - designed with healthcare professionals in mind. Combining durability, safety, and style, this bottle is the perfect everyday essential for work and beyond. Crafte...",
-    "colors": [
-      {
-        "name": "Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Scrub-Lab_Black_Water-Bottle.avif"
-      },
-      {
-        "name": "Lavender",
-        "hex": "#c084fc",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Lavender_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Lavender_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lavender_Tanc-Underscrubs_Women_03.avif"
-        ]
-      },
-      {
-        "name": "Mint",
-        "hex": "#6ee7b7",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Mint-Water-Bottle-Lifestyle.avif"
-      },
-      {
-        "name": "Optic White",
-        "hex": "#ffffff",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Optic-White-Water-Bottle-Lifestyle.avif"
-      },
-      {
-        "name": "Purple",
-        "hex": "#7e22ce",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Purple_Core_Men_02.avif"
-        ]
-      },
-      {
-        "name": "White",
-        "hex": "#ffffff",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Scrub-Lab_White_Water-Bottle.avif"
-      }
-    ],
-    "sizes": [
-      "XXS",
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL",
-      "6XL",
-      "7XL",
-      "8XL"
-    ],
-    "specs": [
-      "Multi-compartment pocket design for instruments and pens",
-      "Comfort V-neckline or collar with tagless neck label",
-      "Side seam vents for breathability and mobility",
-      "Fade-resistant and bleach-safe hospital laundering"
     ]
   },
   {

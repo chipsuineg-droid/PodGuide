@@ -715,32 +715,34 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
       const col = product.collection
       const id = product.id.toLowerCase()
 
-      // 1. TANC Core Complete Set FIRST ($30)
-      if (id === "tanc-core-set" || (col === "sets" && name.includes("core"))) return 1
-      // 2. TANC LITE Complete Set SECOND ($35)
-      if (id === "tanc-lite-set" || (col === "sets" && name.includes("lite"))) return 2
-      // 3. TANC ScrubLab Complete Set THIRD ($60)
-      if (id === "tanc-scrublab-set" || (col === "sets" && (name.includes("scrublab") || name.includes("scrub lab")))) return 3
-      // 4. Core separates (Tops & Pants)
-      if ((col === "scrubs" || col === "pants") && name.includes("core")) return 4
-      // 5. LITE separates (Tops & Pants)
-      if ((col === "scrubs" || col === "pants") && name.includes("lite")) return 5
-      // 6. Disposable Scrub Sets and other sets
-      if (col === "sets") return 6
-      // 7. Underscrubs (bestseller)
+      // 1. TANC Core Complete Set ($30)
+      if (id === "tanc-core-set") return 1
+      // 2. TANC LITE Complete Set ($35)
+      if (id === "tanc-lite-set") return 2
+      // 3. TANC ScrubLab Complete Set ($60)
+      if (id === "tanc-scrublab-set") return 3
+      // 4. Lab Coats & Consultation Coats ($20) - UP THERE!
+      if (id === "tanc-consult-lab-coat" || col === "coats" || name.includes("lab coat") || name.includes("consultation")) return 4
+      // 5. Doctor's Soft-Shell Jackets ($35) - UP THERE!
+      if (id === "tanc-dr-jacket" || name.includes("soft-shell") || name.includes("soft shell") || (col === "jackets" && !name.includes("fleece"))) return 5
+      // 6. Polar Fleece Jackets ($25) - UP THERE!
+      if (name.includes("fleece") || name.includes("polar")) return 6
+      // 7. Underscrubs ($20)
       if (col === "underscrubs" || id.includes("underscrub") || name.includes("underscrub")) return 7
-      // 8. Lab coats & gowns (bestseller)
-      if (col === "coats" || name.includes("lab coat") || name.includes("consultation") || name.includes("gown")) return 8
-      // 9. Soft-shell jackets & Doctor's jackets (bestseller)
-      if (col === "jackets" || name.includes("soft-shell") || name.includes("soft shell") || name.includes("jacket") || name.includes("fleece")) return 9
-      // 10. Other scrub tops & pants
-      if (col === "scrubs") return 10
-      if (col === "pants") return 11
-      // 11. Stethoscopes
-      if (name.includes("stethoscope") || name.includes("littmann")) return 12
-      // 12. Caps / headwear & accessories
-      if (name.includes("cap") || name.includes("headwear")) return 13
-      return 14
+      // 8. Core Separates (Tops & Cargo Pants $18)
+      if ((col === "scrubs" || col === "pants") && name.includes("core")) return 8
+      // 9. LITE Separates (Tops & Cargo Pants $20)
+      if ((col === "scrubs" || col === "pants") && name.includes("lite")) return 9
+      // 10. Disposable Scrub Sets & other sets
+      if (col === "sets") return 10
+      // 11. Other scrub tops & pants
+      if (col === "scrubs") return 11
+      if (col === "pants") return 12
+      // 12. Stethoscopes
+      if (name.includes("stethoscope") || name.includes("littmann")) return 13
+      // 13. Caps & accessories
+      if (name.includes("cap") || name.includes("headwear")) return 14
+      return 15
     }
     const rankDiff = getProductRank(a) - getProductRank(b)
     if (rankDiff !== 0) return rankDiff
