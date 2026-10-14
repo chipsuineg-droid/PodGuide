@@ -7,7 +7,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "TANC LITE™ Complete 4-Way Stretch Scrub Set",
     "collection": "sets",
     "priceZAR": 640,
-    "priceUSD": 60,
+    "priceUSD": 35,
     "rating": 4.9,
     "reviewsCount": 395,
     "badge": "Featherlight Tech",
@@ -22,6 +22,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     ],
     "description": "Ultra-breathable lightweight performance scrub set crafted for hot hospital shifts, long theatre hours, and high-intensity clinical rounds. Moisture-wicking, wrinkle-free, and rapid-dry.",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Deep Navy",
         "hex": "#1e3a8a",
@@ -40,17 +51,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrls": [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       },
       {
@@ -405,7 +405,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "TANC LITE™ Featherlight 4-Way Stretch Scrub Top",
     "collection": "scrubs",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 220,
     "badge": "Ultra-Lightweight",
@@ -420,6 +420,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     ],
     "description": "Engineered with featherweight LITEx fabric to maximize airflow and prevent heat retention under surgical gowns. Features chest pocket and reinforced side vents.",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Deep Navy",
         "hex": "#1e3a8a",
@@ -438,17 +449,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrls": [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       },
       {
@@ -803,7 +803,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "TANC LITE™ Flex-Motion Cargo Scrub Pants",
     "collection": "pants",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 280,
     "badge": "Flex Motion",
@@ -818,6 +818,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     ],
     "description": "Featherlight cargo scrub pants with elastic drawstring waistband, dual secure cargo pockets, and tapered leg opening. Zero drag movement throughout demanding 24-hour shifts.",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Deep Navy",
         "hex": "#1e3a8a",
@@ -836,17 +847,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrls": [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       },
       {
@@ -1201,7 +1201,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "TANC Core™ Complete Tailored Scrub Set",
     "collection": "sets",
     "priceZAR": 640,
-    "priceUSD": 60,
+    "priceUSD": 35,
     "rating": 4.9,
     "reviewsCount": 520,
     "badge": "Official Hospital Core",
@@ -1216,6 +1216,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     ],
     "description": "The benchmark hospital standard scrub suit. Constructed from resilient poly-viscose twill that withstands industrial autoclave washing while retaining vibrant hospital-grade color.",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Deep Navy",
         "hex": "#1e3a8a",
@@ -1234,17 +1245,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrls": [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       },
       {
@@ -1599,7 +1599,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "TANC Core™ Tailored Scrub Top",
     "collection": "scrubs",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 260,
     "badge": "Core Essential",
@@ -1614,6 +1614,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     ],
     "description": "Timeless hospital V-neck tailored top with twin reinforced hip patch pockets, pen stall, and durable wash-and-wear weave.",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Deep Navy",
         "hex": "#1e3a8a",
@@ -1632,17 +1643,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrls": [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       },
       {
@@ -1997,7 +1997,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "TANC Core™ Classic Cargo Scrub Pants",
     "collection": "pants",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 310,
     "badge": "Core Essential",
@@ -2012,6 +2012,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     ],
     "description": "Traditional straight-leg hospital scrub trousers with full drawstring waist, double back pocket, and instrument side pocket.",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Deep Navy",
         "hex": "#1e3a8a",
@@ -2030,17 +2041,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrls": [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       },
       {
@@ -2468,7 +2468,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "TANC ScrubLab™ Complete 4-Way Stretch Set",
     "collection": "sets",
     "priceZAR": 640,
-    "priceUSD": 60,
+    "priceUSD": 35,
     "rating": 4.9,
     "reviewsCount": 412,
     "badge": "Student Bundle Deal",
@@ -2483,6 +2483,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     ],
     "description": "Full scrub suit including the Three-Pocket V-Neck Top and Cleo™ Cargo Jogger Pants. Engineered with SilvaLab™ antimicrobial silver-ion technology.",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Deep Navy",
         "hex": "#1e3a8a",
@@ -2501,17 +2512,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrls": [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       },
       {
@@ -2864,7 +2864,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "TANC Lily™ Three-Pocket Tailored Scrub Top",
     "collection": "scrubs",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 198,
     "badge": "Popular Top",
@@ -2879,6 +2879,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     ],
     "description": "Fitted feminine cut with double front drop-in pockets, dedicated pen divider, and side seam slits for unrestricted patient transfers and CPR.",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Deep Navy",
         "hex": "#1e3a8a",
@@ -2897,17 +2908,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrls": [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       },
       {
@@ -3260,7 +3260,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "TANC Leo™ Classic Men's Athletic Scrub Top",
     "collection": "scrubs",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 165,
     "fabricTech": "LABx™ Ultra-Flex",
@@ -3274,6 +3274,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     ],
     "description": "Athletic cut V-neck top with deep chest pocket and reinforced side splits. Tailored for comfort under consultation coats or theatre gowns.",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Deep Navy",
         "hex": "#1e3a8a",
@@ -3292,17 +3303,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrls": [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       },
       {
@@ -3655,7 +3655,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "TANC Cleo™ Six-Pocket Cargo Scrub Joggers",
     "collection": "pants",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 340,
     "badge": "High Demand",
@@ -3670,6 +3670,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     ],
     "description": "Modern tapered jogger scrub pants with double cargo zippered pockets, ribbed knit ankle cuffs, and high-tenacity waistband cord.",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Deep Navy",
         "hex": "#1e3a8a",
@@ -3688,17 +3699,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrls": [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       },
       {
@@ -5176,7 +5176,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Mens Short Sleeve Button-up shirt",
     "collection": "scrubs",
     "priceZAR": 351,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 300,
     "fabricTech": "Sorbet Ultra-Stretch Weave",
@@ -5187,6 +5187,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Available in black",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -5210,17 +5221,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -5251,7 +5251,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Mens Long Sleeve Button-up shirt",
     "collection": "scrubs",
     "priceZAR": 351,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 283,
     "fabricTech": "Sorbet Ultra-Stretch Weave",
@@ -5262,6 +5262,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Available in black",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -5285,17 +5296,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -5326,7 +5326,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Ladies Long Sleeve Button-up Shirt",
     "collection": "scrubs",
     "priceZAR": 331,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 266,
     "fabricTech": "Sorbet Ultra-Stretch Weave",
@@ -5337,6 +5337,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Available in black",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -5360,17 +5371,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -5401,7 +5401,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Ladies 3/4 Sleeve Button-up Shirt",
     "collection": "scrubs",
     "priceZAR": 351,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 113,
     "fabricTech": "Sorbet Ultra-Stretch Weave",
@@ -5413,6 +5413,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Available in black",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -5436,17 +5447,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -6261,7 +6261,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Men's Supersoft Underscrub",
     "collection": "scrubs",
     "priceZAR": 200,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 108,
     "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
@@ -6384,7 +6384,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Women's Supersoft Underscrub",
     "collection": "scrubs",
     "priceZAR": 200,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 91,
     "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
@@ -6398,6 +6398,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "All-day comfort starts beneath the scrubs. Ultra-soft cotton with 4-way stretch delivers flexibility and support through every shift. Available in 13+ colours for versatile layering options.",
     "colors": [
+      {
+        "name": "Black",
+        "hex": "#111827"
+      },
       {
         "name": "Lavender",
         "hex": "#c084fc",
@@ -6455,10 +6459,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "name": "Slate",
         "hex": "#475569",
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Slate_Graphite-Grey_Tanc-Underscrubs_Women_03.avif"
-      },
-      {
-        "name": "Black",
-        "hex": "#111827"
       },
       {
         "name": "Cerise",
@@ -6562,7 +6562,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Kids Scrub Set",
     "collection": "sets",
     "priceZAR": 250,
-    "priceUSD": 60,
+    "priceUSD": 35,
     "rating": 5,
     "reviewsCount": 277,
     "badge": "Value Set",
@@ -6578,6 +6578,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "🥼",
     "description": "Perfect for little ones who love pretend play or career days. Durable, colourful, and custom-made to fit ages 2-8. Made to order - expect delivery in 10-14 working days. Each set includes a scrub top, matching pants, and a scrub cap.",
     "colors": [
+      {
+        "name": "Black",
+        "hex": "#111827"
+      },
       {
         "name": "Airforce BlueGrey",
         "hex": "#4b5563"
@@ -6604,10 +6608,6 @@ export const INITIAL_PRODUCTS: Product[] = [
       {
         "name": "Beige",
         "hex": "#d6d3d1"
-      },
-      {
-        "name": "Black",
-        "hex": "#111827"
       },
       {
         "name": "Bottle Green",
@@ -6668,7 +6668,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Water Resistant Scrubs",
     "collection": "scrubs",
     "priceZAR": 350,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 158,
     "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
@@ -6739,7 +6739,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "LITE Scrub Bottoms",
     "collection": "pants",
     "priceZAR": 220,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 141,
     "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
@@ -6752,6 +6752,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👖",
     "description": "Our TANC Lite scrubs are made from a lightweight polycotton blend that is 50% cotton, 50% polyester. It is softer, lighter, and more breathable than our Core range. Classic Medical Scrubs Bottom Only",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Deep Navy",
         "hex": "#1e3a8a",
@@ -6770,17 +6781,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrls": [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       },
       {
@@ -7133,7 +7133,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "LITE Scrub Tops",
     "collection": "scrubs",
     "priceZAR": 220,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 124,
     "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
@@ -7146,6 +7146,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Our TANC Lite scrubs are made from a lightweight polycotton blend that is 50% cotton, 50% polyester. It is softer, lighter, and more breathable than our Core range. Classic unisex Medical Scrubs Top Only.",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Deep Navy",
         "hex": "#1e3a8a",
@@ -7164,17 +7175,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrls": [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       },
       {
@@ -7527,7 +7527,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "LITE Scrub Sets",
     "collection": "sets",
     "priceZAR": 350,
-    "priceUSD": 60,
+    "priceUSD": 35,
     "rating": 4.9,
     "reviewsCount": 107,
     "badge": "Value Set",
@@ -7541,6 +7541,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "🥼",
     "description": "Our TANC Lite scrubs are made from a lightweight polycotton blend that is 50% cotton, 50% polyester. It is softer, lighter, and more breathable than our Core range.",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Deep Navy",
         "hex": "#1e3a8a",
@@ -7559,17 +7570,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrls": [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       },
       {
@@ -7922,7 +7922,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Core Scrub Sets",
     "collection": "sets",
     "priceZAR": 290,
-    "priceUSD": 60,
+    "priceUSD": 35,
     "rating": 4.8,
     "reviewsCount": 319,
     "badge": "Value Set",
@@ -7941,6 +7941,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "description": "Built for long shifts and everyday demands, our Core Scrub Sets deliver reliable comfort without compromise. Designed for women who need scrubs that work as hard as they do, these sets feature durable fabric, practical pocket placement, and a fit...",
     "colors": [
       {
+        "name": "Midnight Black",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
+      {
         "name": "Deep Navy",
         "hex": "#1e3a8a",
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Navy-Blue_Lite-Scrubs_Men_05.avif",
@@ -7958,17 +7969,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrls": [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       },
       {
@@ -8321,7 +8321,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Core Scrub Bottoms",
     "collection": "pants",
     "priceZAR": 190,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 302,
     "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
@@ -8333,6 +8333,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👖",
     "description": "Classic Medical Scrubs Bottom Only",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Deep Navy",
         "hex": "#1e3a8a",
@@ -8351,17 +8362,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrls": [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       },
       {
@@ -8714,7 +8714,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Core Scrub Tops",
     "collection": "scrubs",
     "priceZAR": 190,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 285,
     "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
@@ -8730,6 +8730,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Classic unisex Medical Scrubs Top Only.",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#1e3a8a",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Deep Navy",
         "hex": "#1e3a8a",
@@ -8748,17 +8759,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrls": [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Women_04.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Royal-Blue_Lite-Scrubs_Men_04.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#1e3a8a",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       },
       {
@@ -9111,7 +9111,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Merry Christmas",
     "collection": "scrubs",
     "priceZAR": 230,
-    "priceUSD": 13,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 275,
     "fabricTech": "Durable Surgical Polycotton",
@@ -9127,6 +9127,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Our TANC Printed Scrub top range are made from a reengineered polycotton, unique yet practical! The printed scrubs are made to order, as we will bring out new prints and patterns periodically. Stock is limited, make sure you place your order now.",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -9150,17 +9161,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -9191,7 +9191,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Baby Blue Sunflowers",
     "collection": "scrubs",
     "priceZAR": 270,
-    "priceUSD": 15,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 79,
     "fabricTech": "Cotton Spandex Flex Weave",
@@ -9240,7 +9240,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Hot Air Balloons",
     "collection": "scrubs",
     "priceZAR": 270,
-    "priceUSD": 15,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 70,
     "fabricTech": "Cotton Spandex Flex Weave",
@@ -9256,6 +9256,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Our TANC Limited Edition Printed Scrub tops are made from a lightweight cotton-spandex blend that is 97% cotton and 3% spandex. It is softer, lighter, and more breathable than most other scrubs out there! The printed scrubs are LIMITED EDITION as...",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -9279,17 +9290,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -9320,7 +9320,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Space Odyssey",
     "collection": "scrubs",
     "priceZAR": 270,
-    "priceUSD": 15,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 213,
     "fabricTech": "Cotton Spandex Flex Weave",
@@ -9336,6 +9336,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Our TANC Limited Edition Printed Scrub tops are made from a lightweight cotton-spandex blend that is 97% cotton and 3% spandex. It is softer, lighter, and more breathable than most other scrubs out there! The printed scrubs are LIMITED EDITION as...",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -9359,17 +9370,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -9400,7 +9400,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Watermelon Fun",
     "collection": "scrubs",
     "priceZAR": 270,
-    "priceUSD": 15,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 136,
     "fabricTech": "Cotton Spandex Flex Weave",
@@ -9416,6 +9416,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Our TANC Limited Edition Printed Scrub tops are made from a lightweight cotton-spandex blend that is 97% cotton and 3% spandex. It is softer, lighter, and more breathable than most other scrubs out there! The printed scrubs are LIMITED EDITION as...",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -9439,17 +9450,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -10063,7 +10063,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "ScrubLab Sox",
     "collection": "scrubs",
     "priceZAR": 159,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 189,
     "badge": "Ultra-Flex 4-Way",
@@ -10080,6 +10080,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "ScrubLab has teamed up with Versus to take your comfort game to the next level with ScrubLab Sox . Designed with moisture-wicking (96% Nylon | 4% Elastane) properties, seamless toes for blister-free comfort, and cushioned heels and toes for all-da...",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -10103,17 +10114,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -10444,7 +10444,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Thoko™ Jogger Pants",
     "collection": "pants",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 85,
     "badge": "Ward Favorite",
@@ -10562,7 +10562,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Jess™ Scrub Golfer",
     "collection": "scrubs",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 68,
     "fabricTech": "LABx™ 4-Way Stretch + SilvaLab™",
@@ -10576,6 +10576,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Designed with performance in mind, the Jess™ Scrub Golfer is crafted from premium, breathable fabric to keep you feeling fresh and focused during those long shifts.",
     "colors": [
+      {
+        "name": "Black",
+        "hex": "#111827"
+      },
       {
         "name": "Coral",
         "hex": "#fb7185",
@@ -10653,10 +10657,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jess_Olive-Green_05.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
-      },
-      {
         "name": "Graphite",
         "hex": "#374151"
       }
@@ -10688,7 +10688,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Lerato™ Maternity Pants",
     "collection": "pants",
     "priceZAR": 370,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 51,
     "fabricTech": "LABx™ 4-Way Stretch + SilvaLab™",
@@ -10702,6 +10702,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👖",
     "description": "Discover unparalleled comfort and style with our Lerato™ maternity pants featuring a specialised ribbing section designed to gently cradle and support your growing belly. Embrace the journey of motherhood in fashion-forward attire that combines pr...",
     "colors": [
+      {
+        "name": "Black",
+        "hex": "#111827"
+      },
       {
         "name": "Lavender",
         "hex": "#c084fc",
@@ -10743,10 +10747,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "name": "White",
         "hex": "#ffffff",
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Optic-White_03.avif"
-      },
-      {
-        "name": "Black",
-        "hex": "#111827"
       },
       {
         "name": "Coral",
@@ -10802,7 +10802,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "James™ Jogger Cargo Pants",
     "collection": "pants",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 297,
     "badge": "Ward Favorite",
@@ -10817,6 +10817,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👖",
     "description": "With a focus on both style and practicality, the James™ Jogger Cargo scrub pants boasts numerous details. It includes an elastic waistband, seven pockets for ample storage, knit rib ankle cuffs for a comfortable fit and our exclusive LABx™ four-wa...",
     "colors": [
+      {
+        "name": "Black",
+        "hex": "#111827"
+      },
       {
         "name": "Lavender",
         "hex": "#c084fc",
@@ -10882,10 +10886,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/James_Olive-Green_02.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
-      },
-      {
         "name": "Coral",
         "hex": "#fb7185",
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
@@ -10924,7 +10924,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Jen™ Straight Leg Pants",
     "collection": "pants",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 280,
     "fabricTech": "LABx™ 4-Way Stretch + SilvaLab™",
@@ -11041,7 +11041,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Paul™ Scrub Golfer",
     "collection": "scrubs",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 246,
     "fabricTech": "LABx™ 4-Way Stretch + SilvaLab™",
@@ -11057,6 +11057,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Designed with performance in mind, the Paul™ Scrub Golfer is crafted from premium, breathable fabric to keep you feeling fresh and focused during those long shifts.",
     "colors": [
+      {
+        "name": "Black",
+        "hex": "#111827"
+      },
       {
         "name": "Graphite",
         "hex": "#374151",
@@ -11111,10 +11115,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Paul_Olive-Green_02.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
-      },
-      {
         "name": "Coral",
         "hex": "#fb7185",
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
@@ -11164,7 +11164,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Susie™ Maternity Top",
     "collection": "scrubs",
     "priceZAR": 350,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 212,
     "fabricTech": "LABx™ 4-Way Stretch + SilvaLab™",
@@ -11178,6 +11178,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "The Susie™ maternity top features elasticated sides to ensure the tops are both comfortable and practical. Made from our exclusive LABx™ four-way stretch material.",
     "colors": [
+      {
+        "name": "Black",
+        "hex": "#111827"
+      },
       {
         "name": "Lavender",
         "hex": "#c084fc",
@@ -11238,10 +11242,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
-      },
-      {
         "name": "Coral",
         "hex": "#fb7185",
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
@@ -11284,7 +11284,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Thabo™ Straight Leg Pants",
     "collection": "pants",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 195,
     "fabricTech": "LABx™ 4-Way Stretch + SilvaLab™",
@@ -11298,6 +11298,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👖",
     "description": "The Thabo™ Straight Leg scrub pants are a perfect blend of style and practicality. Featuring an elastic drawstring waistband, these pants offer a touch of flair. Equipped with 4 standard pockets for convenience, they are crafted from our exclusive...",
     "colors": [
+      {
+        "name": "Black",
+        "hex": "#111827"
+      },
       {
         "name": "Coral",
         "hex": "#fb7185",
@@ -11363,10 +11367,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Thabo_Olive-Green_04.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
-      },
-      {
         "name": "Maroon",
         "hex": "#831843",
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Maroon_Lite-Scrubs_Women_04.avif",
@@ -11405,7 +11405,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Jeff™ Double Pocket Scrub Top",
     "collection": "scrubs",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 161,
     "fabricTech": "LABx™ 4-Way Stretch + SilvaLab™",
@@ -11528,7 +11528,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Leo™ Three Pocket Scrub Top",
     "collection": "scrubs",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 127,
     "fabricTech": "LABx™ 4-Way Stretch + SilvaLab™",
@@ -11544,6 +11544,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "The Leo™ boasts an elegant V-neckline, with three pockets, a timeless cut, and our exclusive LABx™ four-way stretch material, making it simple yet sophisticated.",
     "colors": [
+      {
+        "name": "Black",
+        "hex": "#111827"
+      },
       {
         "name": "Graphite",
         "hex": "#374151",
@@ -11599,10 +11603,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         ]
       },
       {
-        "name": "Black",
-        "hex": "#111827"
-      },
-      {
         "name": "Coral",
         "hex": "#fb7185",
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
@@ -11656,7 +11656,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Nick™ One Pocket Scrub Top",
     "collection": "scrubs",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 110,
     "fabricTech": "LABx™ 4-Way Stretch + SilvaLab™",
@@ -11778,7 +11778,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Ben™ Jogger Pants",
     "collection": "pants",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 93,
     "badge": "Ward Favorite",
@@ -11793,6 +11793,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👖",
     "description": "With a focus on both style and practicality, the Ben™ Jogger boasts numerous details. It includes an elastic waistband with delicate ruffles, four pockets for ample storage, knit rib ankle cuffs for a comfortable fit and our exclusive LABx™ four-w...",
     "colors": [
+      {
+        "name": "Black",
+        "hex": "#111827"
+      },
       {
         "name": "Lavender",
         "hex": "#c084fc",
@@ -11865,10 +11869,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Ben_Olive-Green_03.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
-      },
-      {
         "name": "Coral",
         "hex": "#fb7185",
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
@@ -11911,7 +11911,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Craig™ Straight Leg Cargo Pants",
     "collection": "pants",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 76,
     "fabricTech": "LABx™ 4-Way Stretch + SilvaLab™",
@@ -12033,7 +12033,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Meg™ Straight Leg Cargo Pants",
     "collection": "pants",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 59,
     "fabricTech": "LABx™ 4-Way Stretch + SilvaLab™",
@@ -12047,6 +12047,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👖",
     "description": "The Meg™ Pants are made from our exclusive LABx™ four-way stretch material, offering a comfortable waistband, seven pockets, and a timeless straight leg design.",
     "colors": [
+      {
+        "name": "Black",
+        "hex": "#111827"
+      },
       {
         "name": "Lavender",
         "hex": "#c084fc",
@@ -12118,10 +12122,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Meg_Olive-Green_01.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
-      },
-      {
         "name": "Coral",
         "hex": "#fb7185",
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
@@ -12160,7 +12160,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Cleo™ Jogger Cargo Pants",
     "collection": "pants",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 322,
     "badge": "Ward Favorite",
@@ -12284,7 +12284,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Lily™ Three Pocket Scrub Top",
     "collection": "scrubs",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 305,
     "fabricTech": "LABx™ 4-Way Stretch + SilvaLab™",
@@ -12298,6 +12298,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "If you require more than a single pocket, the Lily™ is the perfect solution, featuring a contemporary neckline, 3 pockets, and our exclusive LABx™ four-way stretch material.",
     "colors": [
+      {
+        "name": "Black",
+        "hex": "#111827"
+      },
       {
         "name": "Coral",
         "hex": "#fb7185",
@@ -12358,10 +12362,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lily_Olive-Green_03.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
-      },
-      {
         "name": "Graphite",
         "hex": "#374151"
       },
@@ -12404,7 +12404,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Josie™ One Pocket Scrub Top",
     "collection": "scrubs",
     "priceZAR": 320,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 288,
     "fabricTech": "LABx™ 4-Way Stretch + SilvaLab™",
@@ -12418,6 +12418,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "The Josie™ boasts an elegant V-neckline, a solitary chest pocket, a timeless cut, and our exclusive LABx™ four-way stretch material, making it simple yet sophisticated.",
     "colors": [
+      {
+        "name": "Black",
+        "hex": "#111827"
+      },
       {
         "name": "Coral",
         "hex": "#fb7185",
@@ -12484,10 +12488,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Josie_Olive-Green_02.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
-      },
-      {
         "name": "Graphite",
         "hex": "#374151"
       },
@@ -12523,7 +12523,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Scrub Lab Male Underscrubs",
     "collection": "scrubs",
     "priceZAR": 240,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 288,
     "fabricTech": "LABx™ 4-Way Stretch + SilvaLab™",
@@ -12647,7 +12647,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Disposable Scrub Sets",
     "collection": "sets",
     "priceZAR": 65,
-    "priceUSD": 60,
+    "priceUSD": 35,
     "rating": 5,
     "reviewsCount": 271,
     "badge": "Value Set",
@@ -12666,6 +12666,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "🥼",
     "description": "50gsm non-woven Spunbond polypropylene Unisex Design Comes as a set, top and pants",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -12689,17 +12700,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -12730,7 +12730,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Sorbet Male Underscrub",
     "collection": "scrubs",
     "priceZAR": 246,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 254,
     "fabricTech": "Sorbet Ultra-Stretch Weave",
@@ -12741,6 +12741,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Available in Black",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -12764,17 +12775,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -12805,7 +12805,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Sorbet Scrub Sets Assistant with No Piping",
     "collection": "sets",
     "priceZAR": 403,
-    "priceUSD": 60,
+    "priceUSD": 35,
     "rating": 5,
     "reviewsCount": 237,
     "badge": "Value Set",
@@ -12817,6 +12817,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "🥼",
     "description": "Black top with no piping Please choose logo required",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -12840,17 +12851,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -12881,7 +12881,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Sorbet Scrub Sets - Hairbar Logo with Lilac Piping",
     "collection": "sets",
     "priceZAR": 403,
-    "priceUSD": 60,
+    "priceUSD": 35,
     "rating": 5,
     "reviewsCount": 220,
     "badge": "Value Set",
@@ -12926,7 +12926,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Sorbet Scrub Sets - Sorbet Man with yellow piping",
     "collection": "sets",
     "priceZAR": 403,
-    "priceUSD": 60,
+    "priceUSD": 35,
     "rating": 4.9,
     "reviewsCount": 203,
     "badge": "Value Set",
@@ -12971,7 +12971,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Sorbet Scrub Sets - Salon with Raspberry piping",
     "collection": "sets",
     "priceZAR": 403,
-    "priceUSD": 60,
+    "priceUSD": 35,
     "rating": 4.9,
     "reviewsCount": 186,
     "badge": "Value Set",
@@ -12983,6 +12983,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "🥼",
     "description": "Available in black Sorbet logo embroidery left chest",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -13006,17 +13017,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -13047,7 +13047,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Sorbet Scrub Sets - Salon with Mint piping",
     "collection": "sets",
     "priceZAR": 403,
-    "priceUSD": 60,
+    "priceUSD": 35,
     "rating": 4.9,
     "reviewsCount": 169,
     "badge": "Value Set",
@@ -13092,7 +13092,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Sorbet Scrub Tops - Hairbar Logo with Lilac",
     "collection": "scrubs",
     "priceZAR": 254,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 152,
     "fabricTech": "Sorbet Ultra-Stretch Weave",
@@ -13136,7 +13136,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Sorbet Scrub Tops - Sorbet Man with Yellow Piping",
     "collection": "scrubs",
     "priceZAR": 254,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 135,
     "fabricTech": "Sorbet Ultra-Stretch Weave",
@@ -13180,7 +13180,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Sorbet Scrub Tops - Salon with Raspberry Piping",
     "collection": "scrubs",
     "priceZAR": 254,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 118,
     "fabricTech": "Sorbet Ultra-Stretch Weave",
@@ -13191,6 +13191,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Available in black Sorbet logo embroidery left chest",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -13214,17 +13225,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -13255,7 +13255,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Sorbet Scrub Tops - Salon with Mint Piping",
     "collection": "scrubs",
     "priceZAR": 254,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 101,
     "fabricTech": "Sorbet Ultra-Stretch Weave",
@@ -13299,7 +13299,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Sorbet Female Underscrub",
     "collection": "scrubs",
     "priceZAR": 246,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 84,
     "fabricTech": "Sorbet Ultra-Stretch Weave",
@@ -13310,6 +13310,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Available in Black",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -13333,17 +13344,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -13484,7 +13484,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Sorbet Scrub pants",
     "collection": "pants",
     "priceZAR": 254,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 313,
     "fabricTech": "Sorbet Ultra-Stretch Weave",
@@ -13495,6 +13495,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👖",
     "description": "Premium quality Sorbet Scrub pants from official TANC medical collection. Custom engineered for superior clinical durability, breathability, and hospital shifts.",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -13518,17 +13529,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -15514,7 +15514,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Watermelon Fun",
     "collection": "scrubs",
     "priceZAR": 50,
-    "priceUSD": 3,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 200,
     "fabricTech": "Cotton Spandex Flex Weave",
@@ -15530,6 +15530,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Premium quality Watermelon Fun from official TANC medical collection. Custom engineered for superior clinical durability, breathability, and hospital shifts.",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -15553,17 +15564,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -15942,7 +15942,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Ef Cancer!",
     "collection": "scrubs",
     "priceZAR": 230,
-    "priceUSD": 13,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 319,
     "fabricTech": "Durable Surgical Polycotton",
@@ -15958,6 +15958,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Our TANC Printed Scrub top range are made from a reengineered polycotton, unique yet practical! The printed scrubs are made to order, as we will bring out new prints and patterns periodically. Stock is limited, make sure you place your order now.",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -15981,17 +15992,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -16022,7 +16022,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Jasmine™ Modest Scrub Dress",
     "collection": "scrubs",
     "priceZAR": 590,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.8,
     "reviewsCount": 285,
     "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
@@ -16036,6 +16036,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Each piece in our Modest collection is meticulously made to order, from the choice of fabric to the precision of the stitching, we prioritise quality and attention to detail in every step of the process. Please note that because each item is speci...",
     "colors": [
+      {
+        "name": "Black",
+        "hex": "#111827"
+      },
       {
         "name": "Lavender",
         "hex": "#c084fc",
@@ -16101,10 +16105,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Jasmine_Modest_Navy_03.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
-      },
-      {
         "name": "Coral",
         "hex": "#fb7185",
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
@@ -16143,7 +16143,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Skull & Scalpel",
     "collection": "scrubs",
     "priceZAR": 230,
-    "priceUSD": 13,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 268,
     "fabricTech": "Durable Surgical Polycotton",
@@ -16159,6 +16159,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Our TANC Printed Scrub top range are made from a reengineered polycotton, unique yet practical! The printed scrubs are made to order, as we will bring out new prints and patterns periodically. Stock is limited, make sure you place your order now.",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -16182,17 +16193,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -16223,7 +16223,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Jungle Buccaneers",
     "collection": "scrubs",
     "priceZAR": 230,
-    "priceUSD": 13,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 251,
     "fabricTech": "Durable Surgical Polycotton",
@@ -16239,6 +16239,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Our TANC Printed Scrub top range are made from a reengineered polycotton, unique yet practical! The printed scrubs are made to order, as we will bring out new prints and patterns periodically. Stock is limited, make sure you place your order now.",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -16262,17 +16273,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -16349,7 +16349,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Safari Tots",
     "collection": "scrubs",
     "priceZAR": 230,
-    "priceUSD": 13,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 217,
     "fabricTech": "Durable Surgical Polycotton",
@@ -16365,6 +16365,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Our TANC Printed Scrub top range are made from a reengineered polycotton, unique yet practical! The printed scrubs are made to order, as we will bring out new prints and patterns periodically. Stock is limited, make sure you place your order now.",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -16388,17 +16399,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -16429,7 +16429,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Farrah™ Modest Straight Scrub",
     "collection": "scrubs",
     "priceZAR": 450,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 200,
     "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
@@ -16552,7 +16552,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Zara™ Modest Split Scrub",
     "collection": "scrubs",
     "priceZAR": 450,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 183,
     "fabricTech": "LABx™ Antimicrobial Breathable Stretch",
@@ -16566,6 +16566,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Each piece in our Modest collection is meticulously made to order, from the choice of fabric to the precision of the stitching, we prioritise quality and attention to detail in every step of the process. Please note that because each item is speci...",
     "colors": [
+      {
+        "name": "Black",
+        "hex": "#111827"
+      },
       {
         "name": "Lavender",
         "hex": "#c084fc",
@@ -16631,10 +16635,6 @@ export const INITIAL_PRODUCTS: Product[] = [
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Zara_Modest_Olive-Green_01.avif"
       },
       {
-        "name": "Black",
-        "hex": "#111827"
-      },
-      {
         "name": "Coral",
         "hex": "#fb7185",
         "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Coral_Core_Women_02.avif",
@@ -16673,7 +16673,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "You Scream Ice Cream",
     "collection": "scrubs",
     "priceZAR": 230,
-    "priceUSD": 13,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 166,
     "fabricTech": "Durable Surgical Polycotton",
@@ -16689,6 +16689,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Our TANC Printed Scrub top range are made from a reengineered polycotton, unique yet practical! The printed scrubs are made to order, as we will bring out new prints and patterns periodically. Stock is limited, make sure you place your order now.",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -16712,17 +16723,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -19055,7 +19055,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "ScrubLab Female Underscrubs",
     "collection": "scrubs",
     "priceZAR": 240,
-    "priceUSD": 30,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 112,
     "badge": "Ultra-Flex 4-Way",
@@ -19276,7 +19276,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Island Vibes",
     "collection": "scrubs",
     "priceZAR": 270,
-    "priceUSD": 15,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 154,
     "fabricTech": "Cotton Spandex Flex Weave",
@@ -19292,6 +19292,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Our TANC Limited Edition Printed Scrub tops are made from a lightweight cotton-spandex blend that is 97% cotton and 3% spandex. It is softer, lighter, and more breathable than most other scrubs out there! The printed scrubs are LIMITED EDITION as...",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -19315,17 +19326,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -19356,7 +19356,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Unicorn Dreamland",
     "collection": "scrubs",
     "priceZAR": 270,
-    "priceUSD": 15,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 137,
     "fabricTech": "Cotton Spandex Flex Weave",
@@ -19371,6 +19371,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Our TANC Limited Edition Printed Scrub tops are made from a lightweight cotton-spandex blend that is 97% cotton and 3% spandex. It is softer, lighter, and more breathable than most other scrubs out there! The printed scrubs are LIMITED EDITION as...",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -19394,17 +19405,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -19435,7 +19435,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Pink Flamingos",
     "collection": "scrubs",
     "priceZAR": 270,
-    "priceUSD": 15,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 120,
     "fabricTech": "Cotton Spandex Flex Weave",
@@ -19576,7 +19576,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Doggy Parlour",
     "collection": "scrubs",
     "priceZAR": 270,
-    "priceUSD": 15,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 264,
     "fabricTech": "Cotton Spandex Flex Weave",
@@ -19592,6 +19592,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Our TANC Limited Edition Printed Scrub tops are made from a lightweight cotton-spandex blend that is 97% cotton and 3% spandex. It is softer, lighter, and more breathable than most other scrubs out there! The printed scrubs are LIMITED EDITION as...",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -19615,17 +19626,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -19656,7 +19656,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "Dino Friends",
     "collection": "scrubs",
     "priceZAR": 270,
-    "priceUSD": 15,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 247,
     "fabricTech": "Cotton Spandex Flex Weave",
@@ -19672,6 +19672,17 @@ export const INITIAL_PRODUCTS: Product[] = [
     "imageIcon": "👕",
     "description": "Our TANC Limited Edition Printed Scrub tops are made from a lightweight cotton-spandex blend that is 97% cotton and 3% spandex. It is softer, lighter, and more breathable than most other scrubs out there! The printed scrubs are LIMITED EDITION as...",
     "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+        "imageUrls": [
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
+          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
+        ]
+      },
       {
         "name": "Navy Blue",
         "hex": "#1e3a8a",
@@ -19695,17 +19706,6 @@ export const INITIAL_PRODUCTS: Product[] = [
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Baby-Blue_Core_Women_05.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Leo_Powder-Blue_01.avif",
           "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lightweight-II_Ceil-Blue-Tube_01.avif"
-        ]
-      },
-      {
-        "name": "Midnight Black",
-        "hex": "#111827",
-        "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-        "imageUrls": [
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Black_Lite-Scrubs_Men_02.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Cleo_Black_01-1.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Craig_Black_04.avif",
-          "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Farrah_Modest_Black_01.avif"
         ]
       }
     ],
@@ -20104,7 +20104,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "name": "ScrubLab Water Bottle - 500ml",
     "collection": "scrubs",
     "priceZAR": 190,
-    "priceUSD": 15,
+    "priceUSD": 20,
     "rating": 4.9,
     "reviewsCount": 266,
     "badge": "Ultra-Flex 4-Way",
@@ -20658,5 +20658,4 @@ export const INITIAL_PRODUCTS: Product[] = [
   }
 ]
 
-export const DEFAULT_PRODUCTS: Product[] = INITIAL_PRODUCTS
-
+export const DEFAULT_PRODUCTS: Product[] = INITIAL_PRODUCTS;

@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react"
 import {
   ShoppingBag, Search, X, Plus, Check, Scissors, Truck, Menu,
   Star, Trash2, Package, ArrowRight, Upload, Image as ImageIcon,
-  MoveLeft, MoveRight, Edit3, Loader2, ChevronLeft, ChevronRight, ChevronDown,
+  MoveLeft, MoveRight, Edit3, Loader2, ChevronLeft, ChevronRight, ChevronDown, ChevronUp,
   MessageCircle
 } from "lucide-react"
 import { toast } from "sonner"
@@ -46,19 +46,18 @@ export const TANC_CATEGORIES = [
 
 export const POPULAR_COLORS = [
   { name: "All Colours", hex: "#374151", key: "all" },
-  { name: "Deep Navy", hex: "#1e3a8a", key: "navy" },
   { name: "Midnight Black", hex: "#111827", key: "black" },
-  { name: "Hunter Green", hex: "#14532d", key: "hunter" },
-  { name: "Bottle Green", hex: "#064e3b", key: "bottle" },
-  { name: "Olive Green", hex: "#3f6212", key: "olive" },
+  { name: "Deep Navy", hex: "#1e3a8a", key: "navy" },
   { name: "Royal Blue", hex: "#1d4ed8", key: "royal" },
+  { name: "Hunter Green", hex: "#14532d", key: "hunter" },
   { name: "Ceil Blue", hex: "#60a5fa", key: "ceil" },
   { name: "Burgundy Wine", hex: "#831843", key: "burgundy" },
+  { name: "Olive Green", hex: "#3f6212", key: "olive" },
+  { name: "Charcoal Grey", hex: "#374151", key: "charcoal" },
   { name: "Raspberry", hex: "#e11d48", key: "raspberry" },
   { name: "Petrol Blue", hex: "#0e7490", key: "petrol" },
-  { name: "Powder Blue", hex: "#93c5fd", key: "powder" },
-  { name: "Mint Green", hex: "#6ee7b7", key: "mint" },
   { name: "Lavender", hex: "#a855f7", key: "lavender" },
+  { name: "Crisp White", hex: "#ffffff", key: "white" },
 ]
 
 export function getCategoryTitle(catId: string): string {
@@ -200,6 +199,7 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
   const [modalSize, setModalSize] = useState<string>("M")
   const [withEmbroidery, setWithEmbroidery] = useState<boolean>(false)
   const [embroideryName, setEmbroideryName] = useState<string>("")
+  const [showFullDesc, setShowFullDesc] = useState<boolean>(false)
 
   // Cart state
   const [cart, setCart] = useState<CartItem[]>([])
@@ -326,6 +326,7 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
     setModalSize(availableSizes.includes("M") ? "M" : availableSizes[0] || "M")
     setWithEmbroidery(false)
     setEmbroideryName("")
+    setShowFullDesc(false)
     setActiveModalImageIdx(0)
   }
 
@@ -1272,9 +1273,9 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
         </div>
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3 sm:gap-4">
           {[
+            { name: "Midnight Black", hex: "#111827", key: "black" },
             { name: "Deep Navy", hex: "#1e3a8a", key: "navy" },
             { name: "Royal Blue", hex: "#1d4ed8", key: "royal" },
-            { name: "Midnight Black", hex: "#111827", key: "black" },
             { name: "Hunter Green", hex: "#14532d", key: "hunter" },
             { name: "Bottle Green", hex: "#064e3b", key: "bottle" },
             { name: "Olive Green", hex: "#3f6212", key: "olive" },
@@ -1353,14 +1354,14 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
       {/* ── PRODUCT DETAIL MODAL ── */}
       {activeModalProduct && (
         <div
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto"
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 md:p-6 overflow-y-auto"
           onClick={() => setActiveModalProduct(null)}
         >
           <div
-            className="bg-[#0a0a0a] border border-[#1f1f1f] rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl my-8 max-h-[90vh] overflow-y-auto"
+            className="bg-[#0c0c0c] border border-[#222] rounded-3xl w-full max-w-5xl overflow-hidden shadow-2xl my-auto flex flex-col md:flex-row max-h-[92vh] relative"
             onClick={e => e.stopPropagation()}
           >
-            {/* Modal Image Carousel / Header with authentic live color shifting */}
+            {/* Modal Image Carousel / Showcase (Left Column on Desktop) */}
             {(() => {
               const modalImages = (() => {
                 if (modalColor && modalColor.imageUrls && modalColor.imageUrls.length > 0) {
@@ -1380,15 +1381,50 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
               const currentImg = modalImages[activeModalImageIdx] || modalImages[0]
 
               return (
-                <div className="relative">
-                  <div className="w-full h-72 sm:h-80 bg-gradient-to-b from-[#141414] to-[#0a0a0a] flex items-center justify-center overflow-hidden relative">
+                <div className="w-full md:w-[58%] lg:w-[60%] bg-[#080808] border-b md:border-b-0 md:border-r border-[#1f1f1f] flex flex-col justify-between relative flex-shrink-0">
+                  {/* Close button for mobile inside image container */}
+                  <button
+                    onClick={() => setActiveModalProduct(null)}
+                    aria-label="Close dialog"
+                    className="md:hidden absolute top-3 right-3 w-8 h-8 rounded-full bg-black/70 border border-white/20 flex items-center justify-center text-gray-300 hover:text-white transition-colors z-20"
+                  >
+                    <X size={16} />
+                  </button>
+
+                  {/* Badges on image */}
+                  <div className="absolute top-4 left-4 z-10 flex flex-col gap-1.5 pointer-events-none">
+                    {activeModalProduct.badge && (
+                      <span className="text-[9px] font-black uppercase tracking-wider text-white bg-brand px-2.5 py-1 rounded-md shadow-md">
+                        {activeModalProduct.badge}
+                      </span>
+                    )}
+                    {activeModalProduct.fabricTech && (
+                      <span className="text-[9px] font-bold uppercase tracking-wider text-brand-light bg-black/80 backdrop-blur-md border border-brand/30 px-2 py-0.5 rounded-md shadow">
+                        {activeModalProduct.fabricTech}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Active Color Pill on image */}
+                  <div className="absolute bottom-4 left-4 z-10 hidden sm:flex items-center gap-2 bg-black/75 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-xl">
+                    <span
+                      className="w-3 h-3 rounded-full border border-white/20 shadow-sm"
+                      style={{ backgroundColor: modalColor.hex }}
+                    />
+                    <span className="text-[11px] font-bold text-white tracking-wide">
+                      {modalColor.name}
+                    </span>
+                  </div>
+
+                  {/* Main Large Image Container */}
+                  <div className="w-full h-80 sm:h-96 md:h-[480px] lg:h-[540px] flex items-center justify-center overflow-hidden relative p-4 sm:p-6">
                     <ProductImage
                       key={currentImg}
                       src={currentImg}
                       alt={`${activeModalProduct.name} - ${modalColor.name}`}
                       fallbackIcon={activeModalProduct.imageIcon}
                       containerClassName="w-full h-full flex items-center justify-center relative"
-                      className="w-full h-full object-contain p-4"
+                      className="w-full h-full object-contain drop-shadow-2xl transition-all duration-300"
                     />
 
                     {/* Left/Right gallery arrows if multiple pictures */}
@@ -1397,46 +1433,31 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
                         <button
                           type="button"
                           onClick={() => setActiveModalImageIdx(prev => (prev > 0 ? prev - 1 : modalImages.length - 1))}
-                          className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/70 border border-white/20 flex items-center justify-center text-white hover:bg-brand transition-colors z-10"
+                          className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/80 border border-white/20 flex items-center justify-center text-white hover:bg-brand transition-all z-10 shadow-lg"
                         >
-                          <ChevronLeft size={16} />
+                          <ChevronLeft size={18} />
                         </button>
                         <button
                           type="button"
                           onClick={() => setActiveModalImageIdx(prev => (prev < modalImages.length - 1 ? prev + 1 : 0))}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/70 border border-white/20 flex items-center justify-center text-white hover:bg-brand transition-colors z-10"
+                          className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/80 border border-white/20 flex items-center justify-center text-white hover:bg-brand transition-all z-10 shadow-lg"
                         >
-                          <ChevronRight size={16} />
+                          <ChevronRight size={18} />
                         </button>
                       </>
                     )}
                   </div>
 
-                  <button
-                    onClick={() => setActiveModalProduct(null)}
-                    className="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/70 border border-[#333] flex items-center justify-center text-gray-400 hover:text-white transition-colors z-10"
-                  >
-                    <X size={15} />
-                  </button>
-
-                  {activeModalProduct.badge && (
-                    <div className="absolute top-4 left-4 z-10 pointer-events-none">
-                      <span className="text-[9px] font-black uppercase tracking-wider text-white bg-brand px-2.5 py-1 rounded-md shadow">
-                        {activeModalProduct.badge}
-                      </span>
-                    </div>
-                  )}
-
                   {/* Miniature Thumbnail strip if multiple images */}
                   {modalImages.length > 1 && (
-                    <div className="flex items-center gap-2 p-2 bg-black/80 backdrop-blur-md justify-center border-t border-white/5 overflow-x-auto">
+                    <div className="flex items-center gap-2 px-4 py-2.5 bg-black/90 backdrop-blur-md justify-center border-t border-white/5 overflow-x-auto">
                       {modalImages.map((img, i) => (
                         <button
                           key={i}
                           type="button"
                           onClick={() => setActiveModalImageIdx(i)}
-                          className={`w-12 h-10 rounded-lg overflow-hidden border transition-all flex items-center justify-center bg-[#141414] flex-shrink-0 ${
-                            activeModalImageIdx === i ? "border-brand scale-105 shadow-sm shadow-brand/30" : "border-white/20 opacity-60 hover:opacity-100"
+                          className={`w-12 h-12 rounded-xl overflow-hidden border transition-all flex items-center justify-center bg-[#141414] flex-shrink-0 ${
+                            activeModalImageIdx === i ? "border-brand scale-105 shadow-md shadow-brand/40 ring-1 ring-brand" : "border-white/10 opacity-60 hover:opacity-100"
                           }`}
                         >
                           <img
@@ -1454,144 +1475,187 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
               )
             })()}
 
-            <div className="p-6 space-y-5">
-              {/* Title + Price */}
-              <div className="flex items-start justify-between gap-4">
-                <div className="space-y-1">
-                  {activeModalProduct.fabricTech && (
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-brand">
-                      {activeModalProduct.fabricTech}
-                    </span>
-                  )}
-                  <h2 className="text-base font-black text-white leading-tight">
+            {/* Modal Right Column: Details, Minimizable Description, Controls & CTA */}
+            <div className="w-full md:w-[42%] lg:w-[40%] flex flex-col justify-between p-5 sm:p-6 md:p-7 overflow-y-auto max-h-[50vh] md:max-h-[92vh] space-y-5">
+              <div className="space-y-4">
+                {/* Header: Collection + Close button (desktop) */}
+                <div className="flex items-center justify-between gap-3">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-brand">
+                    {activeModalProduct.collection ? `${activeModalProduct.collection} collection` : "Medical Wear"}
+                  </span>
+                  <button
+                    onClick={() => setActiveModalProduct(null)}
+                    aria-label="Close dialog"
+                    className="hidden md:flex w-8 h-8 rounded-full bg-white/5 border border-white/10 items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-colors"
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
+
+                {/* Title + Price */}
+                <div>
+                  <h2 className="text-lg sm:text-xl font-black text-white leading-tight">
                     {activeModalProduct.name}
                   </h2>
-                </div>
-                <div className="text-right flex-shrink-0">
-                  <span className="text-xl font-black text-white block">
-                    {formatPrice(activeModalProduct.priceZAR, activeModalProduct.priceUSD)}
-                  </span>
-                  <span className="text-[10px] text-gray-500">Student Rate</span>
-                </div>
-              </div>
-
-              {/* Description */}
-              <p className="text-xs text-gray-400 leading-relaxed border-l-2 border-brand/30 pl-3">
-                {activeModalProduct.description}
-              </p>
-
-              {/* Specs */}
-              {activeModalProduct.specs && activeModalProduct.specs.length > 0 && (
-                <div className="grid grid-cols-2 gap-1.5">
-                  {activeModalProduct.specs.map(spec => (
-                    <div key={spec} className="flex items-center gap-2 text-[11px] text-gray-400">
-                      <div className="w-1 h-1 rounded-full bg-brand flex-shrink-0" />
-                      {spec}
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* Color Selection */}
-              {activeModalProduct.colors && activeModalProduct.colors.length > 0 && (
-                <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-3">
-                    Color: <span className="text-gray-300">{modalColor.name}</span>
-                  </label>
-                  <div className="flex items-center gap-2.5 flex-wrap">
-                    {activeModalProduct.colors.map(color => (
-                      <button
-                        key={color.name}
-                        onClick={() => handleModalColorSelect(color)}
-                        className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-semibold transition-all ${
-                          modalColor.name === color.name
-                            ? "bg-white/10 border-brand text-white shadow-sm ring-1 ring-brand/40"
-                            : "bg-[#0d0d0d] border-[#222] text-gray-400 hover:text-white"
-                        }`}
-                      >
-                        <span
-                          className="w-3 h-3 rounded-full border border-white/20"
-                          style={{ backgroundColor: color.hex }}
-                        />
-                        <span>{color.name}</span>
-                      </button>
-                    ))}
+                  <div className="flex items-baseline gap-3 mt-2">
+                    <span className="text-2xl font-black text-white">
+                      {formatPrice(activeModalProduct.priceZAR, activeModalProduct.priceUSD)}
+                    </span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                      Medical Student Special
+                    </span>
                   </div>
                 </div>
-              )}
 
-              {/* Size Selection (XXS to 8XL) */}
-              {(() => {
-                const isApparel = ['sets', 'scrubs', 'pants', 'jackets', 'coats', 'underscrubs'].includes(activeModalProduct.collection)
-                const availableSizes = isApparel ? ALL_APPAREL_SIZES : activeModalProduct.sizes
-
-                if (!availableSizes || availableSizes.length === 0) return null
-
-                return (
-                  <div>
-                    <div className="flex items-center justify-between mb-2.5">
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
-                        Size: <span className="text-white font-bold">{modalSize}</span>
-                      </label>
-                      {isApparel && (
-                        <span className="text-[10px] text-gray-500 font-medium">All sizes XXS to 8XL</span>
+                {/* Minimizable / Collapsible Description */}
+                <div className="bg-[#111] border border-[#1f1f1f] rounded-xl p-3.5 space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                      Description
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setShowFullDesc(prev => !prev)}
+                      className="text-[11px] font-bold text-brand hover:underline inline-flex items-center gap-1"
+                    >
+                      {showFullDesc ? (
+                        <><span>Minimize</span><ChevronUp size={12} /></>
+                      ) : (
+                        <><span>Read more</span><ChevronDown size={12} /></>
                       )}
+                    </button>
+                  </div>
+                  <p className={`text-xs text-gray-400 leading-relaxed ${showFullDesc ? "" : "line-clamp-2"}`}>
+                    {activeModalProduct.description}
+                  </p>
+                </div>
+
+                {/* Specs / Features (Compact Chips) */}
+                {activeModalProduct.specs && activeModalProduct.specs.length > 0 && (
+                  <div className="space-y-1.5">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                      Key Highlights
+                    </span>
+                    <div className="grid grid-cols-2 gap-1.5">
+                      {activeModalProduct.specs.slice(0, 4).map(spec => (
+                        <div key={spec} className="flex items-center gap-1.5 text-[11px] text-gray-300 bg-white/5 border border-white/5 rounded-lg px-2 py-1">
+                          <div className="w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0" />
+                          <span className="truncate">{spec}</span>
+                        </div>
+                      ))}
                     </div>
-                    <div className="flex items-center gap-1.5 flex-wrap">
-                      {availableSizes.map(size => (
+                  </div>
+                )}
+
+                {/* Color Selection (Interactive Live Swatches) */}
+                {activeModalProduct.colors && activeModalProduct.colors.length > 0 && (
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                        Colour: <span className="text-white font-bold">{modalColor.name}</span>
+                      </label>
+                      <span className="text-[10px] text-gray-500">
+                        {activeModalProduct.colors.length} {activeModalProduct.colors.length === 1 ? "shade" : "shades"}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 flex-wrap max-h-32 overflow-y-auto pr-1">
+                      {activeModalProduct.colors.map(color => (
                         <button
-                          key={size}
+                          key={color.name}
                           type="button"
-                          onClick={() => setModalSize(size)}
-                          className={`min-w-[44px] px-2.5 py-1.5 rounded-xl border text-xs font-bold transition-all ${
-                            modalSize === size
-                              ? "bg-brand text-white border-brand shadow-sm shadow-brand/20 scale-105"
-                              : "bg-[#0d0d0d] border-[#222] text-gray-400 hover:text-white hover:border-[#333]"
+                          onClick={() => handleModalColorSelect(color)}
+                          className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border text-xs font-semibold transition-all ${
+                            modalColor.name === color.name
+                              ? "bg-white/10 border-brand text-white shadow-sm ring-1 ring-brand/50"
+                              : "bg-[#111] border-[#222] text-gray-400 hover:text-white hover:border-[#333]"
                           }`}
                         >
-                          {size}
+                          <span
+                            className="w-3 h-3 rounded-full border border-white/20 shadow-inner flex-shrink-0"
+                            style={{ backgroundColor: color.hex }}
+                          />
+                          <span className="text-[11px]">{color.name}</span>
                         </button>
                       ))}
                     </div>
                   </div>
-                )
-              })()}
-
-              {/* Custom Embroidery */}
-              <div className="bg-[#0d0d0d] border border-[#1f1f1f] rounded-xl p-4 space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Scissors size={14} className="text-brand" />
-                    <div>
-                      <p className="text-xs font-bold text-white">Custom Medical Embroidery</p>
-                      <p className="text-[10px] text-gray-500">+$4.00 &bull; Name + Title</p>
-                    </div>
-                  </div>
-                  <input
-                    type="checkbox"
-                    checked={withEmbroidery}
-                    onChange={e => setWithEmbroidery(e.target.checked)}
-                    className="w-4 h-4 accent-brand cursor-pointer"
-                  />
-                </div>
-                {withEmbroidery && (
-                  <input
-                    type="text"
-                    placeholder="e.g. Dr. T. Moyo, MBChB"
-                    value={embroideryName}
-                    onChange={e => setEmbroideryName(e.target.value)}
-                    className="w-full bg-[#141414] border border-[#2a2a2a] focus:border-brand rounded-xl px-3 py-2 text-xs text-white placeholder:text-gray-600 outline-none"
-                  />
                 )}
+
+                {/* Size Selection (XXS to 8XL) */}
+                {(() => {
+                  const isApparel = ['sets', 'scrubs', 'pants', 'jackets', 'coats', 'underscrubs'].includes(activeModalProduct.collection)
+                  const availableSizes = isApparel ? ALL_APPAREL_SIZES : activeModalProduct.sizes
+
+                  if (!availableSizes || availableSizes.length === 0) return null
+
+                  return (
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                          Size: <span className="text-white font-bold">{modalSize}</span>
+                        </label>
+                        {isApparel && (
+                          <span className="text-[10px] text-gray-500 font-medium">XXS to 8XL</span>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        {availableSizes.map(size => (
+                          <button
+                            key={size}
+                            type="button"
+                            onClick={() => setModalSize(size)}
+                            className={`min-w-[42px] px-2 py-1.5 rounded-xl border text-xs font-bold transition-all ${
+                              modalSize === size
+                                ? "bg-brand text-white border-brand shadow-sm shadow-brand/20 scale-105"
+                                : "bg-[#111] border-[#222] text-gray-400 hover:text-white hover:border-[#333]"
+                            }`}
+                          >
+                            {size}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )
+                })()}
+
+                {/* Custom Embroidery */}
+                <div className="bg-[#111] border border-[#1f1f1f] rounded-xl p-3.5 space-y-2.5">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Scissors size={14} className="text-brand" />
+                      <div>
+                        <p className="text-xs font-bold text-white">Custom Medical Embroidery</p>
+                        <p className="text-[10px] text-gray-500">+$4.00 &bull; Name + Title</p>
+                      </div>
+                    </div>
+                    <input
+                      type="checkbox"
+                      checked={withEmbroidery}
+                      onChange={e => setWithEmbroidery(e.target.checked)}
+                      className="w-4 h-4 accent-brand cursor-pointer"
+                    />
+                  </div>
+                  {withEmbroidery && (
+                    <input
+                      type="text"
+                      placeholder="e.g. Dr. T. Moyo, MBChB"
+                      value={embroideryName}
+                      onChange={e => setEmbroideryName(e.target.value)}
+                      className="w-full bg-[#181818] border border-[#2a2a2a] focus:border-brand rounded-xl px-3 py-2 text-xs text-white placeholder:text-gray-600 outline-none"
+                    />
+                  )}
+                </div>
               </div>
 
               {/* Add to Cart CTA */}
-              <button
-                onClick={() => addToCart(activeModalProduct)}
-                className="w-full py-3.5 bg-brand hover:bg-red-700 text-white font-black rounded-xl text-xs uppercase tracking-wider transition-all shadow-lg shadow-brand/25 flex items-center justify-center gap-2"
-              >
-                <ShoppingBag size={14} /> Add to Cart &bull; {formatPrice(activeModalProduct.priceZAR, activeModalProduct.priceUSD)}
-              </button>
+              <div className="pt-4 border-t border-[#1f1f1f] space-y-2">
+                <button
+                  onClick={() => addToCart(activeModalProduct)}
+                  className="w-full py-3.5 bg-brand hover:bg-red-700 text-white font-black rounded-xl text-xs uppercase tracking-wider transition-all shadow-lg shadow-brand/25 flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <ShoppingBag size={15} /> Add to Cart &bull; {formatPrice(activeModalProduct.priceZAR, activeModalProduct.priceUSD)}
+                </button>
+              </div>
             </div>
           </div>
         </div>
