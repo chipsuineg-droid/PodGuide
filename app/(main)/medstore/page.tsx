@@ -3,7 +3,8 @@ import { useState, useEffect, useRef } from "react"
 import {
   ShoppingBag, Search, X, Plus, Check, Scissors, Truck, Menu,
   Star, Trash2, Package, ArrowRight, Upload, Image as ImageIcon,
-  MoveLeft, MoveRight, Edit3, Loader2, ChevronLeft, ChevronRight, ChevronDown
+  MoveLeft, MoveRight, Edit3, Loader2, ChevronLeft, ChevronRight, ChevronDown,
+  MessageCircle
 } from "lucide-react"
 import { toast } from "sonner"
 import { createClient } from "@/lib/supabase/client"
@@ -12,6 +13,14 @@ export type { Product, ProductColor } from "@/types/medstore"
 import type { Product, ProductColor } from "@/types/medstore"
 import { INITIAL_PRODUCTS } from "@/lib/data/medstoreProducts"
 import { ProductImage } from "@/components/medstore/ProductImage"
+
+export const ALL_APPAREL_SIZES = [
+  "XXS", "XS", "S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL", "6XL", "7XL", "8XL"
+]
+
+export const CART_STORAGE_KEY = "podguide_medstore_cart"
+export const WHATSAPP_ORDER_NUMBER = "0784881010"
+export const WHATSAPP_INTL_NUMBER = "27784881010"
 
 interface CartItem {
   product: Product
@@ -37,16 +46,19 @@ export const TANC_CATEGORIES = [
 
 export const POPULAR_COLORS = [
   { name: "All Colours", hex: "#374151", key: "all" },
-  { name: "Navy Blue", hex: "#1e3a8a", key: "navy" },
+  { name: "Deep Navy", hex: "#1e3a8a", key: "navy" },
   { name: "Midnight Black", hex: "#111827", key: "black" },
-  { name: "Olive Green", hex: "#3f4d38", key: "olive" },
-  { name: "Ceil Blue", hex: "#87ceeb", key: "ceil" },
-  { name: "Burgundy", hex: "#831843", key: "burgundy" },
-  { name: "Raspberry", hex: "#b53360", key: "raspberry" },
-  { name: "Petrol / Teal", hex: "#0e5a60", key: "petrol" },
-  { name: "Powder Blue", hex: "#a0c4e2", key: "powder" },
-  { name: "Hunter Green", hex: "#14532d", key: "green" },
+  { name: "Hunter Green", hex: "#14532d", key: "hunter" },
+  { name: "Bottle Green", hex: "#064e3b", key: "bottle" },
+  { name: "Olive Green", hex: "#3f6212", key: "olive" },
   { name: "Royal Blue", hex: "#1d4ed8", key: "royal" },
+  { name: "Ceil Blue", hex: "#60a5fa", key: "ceil" },
+  { name: "Burgundy Wine", hex: "#831843", key: "burgundy" },
+  { name: "Raspberry", hex: "#e11d48", key: "raspberry" },
+  { name: "Petrol Blue", hex: "#0e7490", key: "petrol" },
+  { name: "Powder Blue", hex: "#93c5fd", key: "powder" },
+  { name: "Mint Green", hex: "#6ee7b7", key: "mint" },
+  { name: "Lavender", hex: "#a855f7", key: "lavender" },
 ]
 
 export function getCategoryTitle(catId: string): string {
@@ -268,7 +280,33 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
       }
     }
     init()
+
+    // 1. Load saved cart from localStorage
+    try {
+      if (typeof window !== "undefined") {
+        const savedCart = localStorage.getItem(CART_STORAGE_KEY)
+        if (savedCart) {
+          const parsed = JSON.parse(savedCart)
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setCart(parsed)
+          }
+        }
+      }
+    } catch (e) {
+      console.warn("Could not load cart from storage:", e)
+    }
   }, [])
+
+  // 2. Persist cart to localStorage whenever it changes
+  useEffect(() => {
+    try {
+      if (typeof window !== "undefined") {
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart))
+      }
+    } catch (e) {
+      console.warn("Could not save cart to storage:", e)
+    }
+  }, [cart])
 
   const getActiveColor = (product: Product) =>
     colorSelections[product.id] || product.colors[0] || { name: "Default", hex: "#111827" }
@@ -282,48 +320,140 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
     setActiveModalProduct(product)
     const activeColor = getActiveColor(product)
     setModalColor(activeColor)
-    setModalSize(product.sizes[0] || "M")
+
+    const isApparel = ['sets', 'scrubs', 'pants', 'jackets', 'coats', 'underscrubs'].includes(product.collection)
+    const availableSizes = isApparel ? ALL_APPAREL_SIZES : product.sizes
+    setModalSize(availableSizes.includes("M") ? "M" : availableSizes[0] || "M")
     setWithEmbroidery(false)
     setEmbroideryName("")
-
-    const allImgs = product.imageUrls && product.imageUrls.length > 0
-      ? product.imageUrls
-      : (product.imageUrl ? [product.imageUrl] : [])
-    const colorImg = getProductColorImage(product, activeColor)
-    const idx = allImgs.findIndex(img => img === colorImg)
-    setActiveModalImageIdx(idx !== -1 ? idx : 0)
+    setActiveModalImageIdx(0)
   }
 
   const handleModalColorSelect = (color: ProductColor) => {
     setModalColor(color)
+    setActiveModalImageIdx(0)
     if (activeModalProduct) {
       setColorSelections(prev => ({ ...prev, [activeModalProduct.id]: color }))
-      const allImgs = activeModalProduct.imageUrls && activeModalProduct.imageUrls.length > 0
-        ? activeModalProduct.imageUrls
-        : (activeModalProduct.imageUrl ? [activeModalProduct.imageUrl] : [])
-      const colorImg = getProductColorImage(activeModalProduct, color)
-      const idx = allImgs.findIndex(img => img === colorImg)
-      if (idx !== -1) {
-        setActiveModalImageIdx(idx)
-      }
     }
   }
 
-  const formatPrice = (zar: number, usd: number) => `$${usd.toFixed(2)}`;
+  const formatPrice = (zar: number, usd: number) => `$${usd.toFixed(2)}`
 
   const addToCart = (product: Product) => {
-    setCart(prev => [...prev, {
-      product,
-      selectedColor: modalColor,
-      selectedSize: modalSize,
-      withEmbroidery,
-      embroideryName: withEmbroidery ? embroideryName : "",
-      quantity: 1
-    }])
+    setCart(prev => {
+      // Check if duplicate item exists (same product, color, size, embroidery)
+      const existingIdx = prev.findIndex(item =>
+        item.product.id === product.id &&
+        item.selectedColor.name === modalColor.name &&
+        item.selectedSize === modalSize &&
+        item.withEmbroidery === withEmbroidery &&
+        item.embroideryName === (withEmbroidery ? embroideryName : "")
+      )
+      if (existingIdx !== -1) {
+        const next = [...prev]
+        next[existingIdx].quantity += 1
+        return next
+      }
+      return [...prev, {
+        product,
+        selectedColor: modalColor,
+        selectedSize: modalSize,
+        withEmbroidery,
+        embroideryName: withEmbroidery ? embroideryName : "",
+        quantity: 1
+      }]
+    })
     setActiveModalProduct(null)
     toast.success(`Added ${product.name} to cart`, {
       description: `${modalColor.name}, Size ${modalSize}${withEmbroidery ? ", Embroidered" : ""}`
     })
+    setShowCartDrawer(true)
+  }
+
+  const updateCartQuantity = (index: number, delta: number) => {
+    setCart(prev => {
+      const updated = [...prev]
+      const current = updated[index]
+      if (!current) return prev
+      const newQty = current.quantity + delta
+      if (newQty <= 0) {
+        return updated.filter((_, i) => i !== index)
+      }
+      updated[index] = { ...current, quantity: newQty }
+      return updated
+    })
+  }
+
+  const removeCartItem = (index: number) => {
+    setCart(prev => prev.filter((_, i) => i !== index))
+    toast.info("Item removed from cart")
+  }
+
+  const clearEntireCart = () => {
+    if (confirm("Are you sure you want to empty your cart?")) {
+      setCart([])
+      toast.info("Cart emptied")
+    }
+  }
+
+  const getCartSubtotal = () => {
+    return cart.reduce((sum, item) => sum + item.product.priceUSD * item.quantity, 0)
+  }
+
+  const getCartEmbroideryTotal = () => {
+    return cart.reduce((sum, item) => sum + (item.withEmbroidery ? 4 * item.quantity : 0), 0)
+  }
+
+  const getCartTotalAmount = () => {
+    return getCartSubtotal() + getCartEmbroideryTotal()
+  }
+
+  const handleWhatsAppCheckout = () => {
+    if (cart.length === 0) {
+      toast.error("Your cart is empty. Please select products first.")
+      return
+    }
+
+    const totalUSD = getCartTotalAmount()
+    const totalItemsCount = cart.reduce((acc, it) => acc + it.quantity, 0)
+
+    let message = `🩺 *NEW PODGUIDE / TANC ORDER*\n`
+    message += `────────────────────────────\n`
+    message += `📦 *Order Summary (${totalItemsCount} total item${totalItemsCount > 1 ? "s" : ""}):*\n\n`
+
+    cart.forEach((item, idx) => {
+      const embCost = item.withEmbroidery ? 4 : 0
+      const unitTotal = item.product.priceUSD + embCost
+      const itemSubtotal = unitTotal * item.quantity
+
+      message += `${idx + 1}️⃣ *${item.product.name}*\n`
+      message += `   • *Collection:* ${item.product.collection.toUpperCase()}\n`
+      message += `   • *Colour:* ${item.selectedColor.name}\n`
+      message += `   • *Size:* ${item.selectedSize}\n`
+      message += `   • *Quantity:* ${item.quantity}\n`
+      if (item.withEmbroidery && item.embroideryName) {
+        message += `   • *Custom Embroidery:* "${item.embroideryName}" (+$4.00)\n`
+      } else if (item.withEmbroidery) {
+        message += `   • *Custom Embroidery:* Medical Embroidery (+$4.00)\n`
+      }
+      message += `   • *Unit Price:* $${item.product.priceUSD.toFixed(2)} USD\n`
+      message += `   • *Item Total:* $${itemSubtotal.toFixed(2)} USD\n`
+      if (item.product.fabricTech) {
+        message += `   • *Material:* ${item.product.fabricTech}\n`
+      }
+      message += `\n`
+    })
+
+    message += `────────────────────────────\n`
+    message += `💰 *TOTAL AMOUNT:* $${totalUSD.toFixed(2)} USD\n`
+    message += `🚚 *Campus Delivery:* FREE Drop\n`
+    message += `📞 *Order Destination:* ${WHATSAPP_ORDER_NUMBER}\n`
+    message += `────────────────────────────\n`
+    message += `Hi! I would like to place this order from PodGuide MedStore. Please confirm stock availability and send payment details. Thank you!`
+
+    const encoded = encodeURIComponent(message)
+    const waUrl = `https://wa.me/${WHATSAPP_INTL_NUMBER}?text=${encoded}`
+    window.open(waUrl, "_blank")
   }
 
   // Open Admin Add Modal
@@ -846,13 +976,15 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
             {/* Cart Button */}
             <button
               onClick={() => setShowCartDrawer(true)}
-              className="relative px-4 py-2.5 bg-[#0f0f0f] border border-[#1f1f1f] hover:border-[#333] text-white font-bold rounded-xl text-xs transition-all flex items-center gap-2"
+              className="relative px-4 py-2.5 bg-[#0f0f0f] border border-[#1f1f1f] hover:border-brand/60 text-white font-bold rounded-xl text-xs transition-all flex items-center gap-2 shadow-lg"
             >
               <ShoppingBag size={14} className="text-brand" />
               <span>Cart</span>
               {cart.length > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-brand text-white font-black text-[10px] flex items-center justify-center shadow">
-                  {cart.length}
+                <span className="px-2 py-0.5 rounded-full bg-brand text-white font-black text-[10px] flex items-center gap-1 shadow">
+                  <span>{cart.reduce((a, b) => a + b.quantity, 0)}</span>
+                  <span>&bull;</span>
+                  <span>${getCartTotalAmount().toFixed(2)}</span>
                 </span>
               )}
             </button>
@@ -1118,42 +1250,105 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
         </div>
       )}
 
-      {/* ── COLOUR GUIDE ── */}
+      {/* ── COLOUR GUIDE (INTERACTIVE SHADE SHIFTER) ── */}
       <div id="colour-guide" className="mt-16 border-t border-[#1a1a1a] pt-12">
-        <div className="mb-6">
-          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand">Reference</span>
-          <h2 className="text-2xl font-black text-white mt-1">Colour Guide</h2>
-          <p className="text-xs text-gray-400 mt-1">All available colours across the TANC collection. Exact shades may vary on screen.</p>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+          <div>
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand">Reference & Filter</span>
+            <h2 className="text-2xl font-black text-white mt-1">Colour Guide (35 Shades)</h2>
+            <p className="text-xs text-gray-400 mt-1">
+              Click any colour swatch below to filter the catalog and shift all scrubs to that shade.
+            </p>
+          </div>
+          {selectedColorFilter !== "all" && (
+            <button
+              onClick={() => setSelectedColorFilter("all")}
+              className="text-xs font-bold text-brand hover:underline flex items-center gap-1 self-start sm:self-auto"
+            >
+              <span>Reset Colour Filter</span>
+              <X size={12} />
+            </button>
+          )}
         </div>
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3 sm:gap-4">
           {[
-            { name: "Midnight Black", hex: "#111827" },
-            { name: "Deep Navy", hex: "#1e3a8a" },
-            { name: "Powder Blue", hex: "#93c5fd" },
-            { name: "Petrol Blue", hex: "#0e7490" },
-            { name: "Ceil Blue", hex: "#60a5fa" },
-            { name: "Olive Green", hex: "#3f6212" },
-            { name: "Hunter Green", hex: "#14532d" },
-            { name: "Forest Green", hex: "#14532d" },
-            { name: "Raspberry", hex: "#e11d48" },
-            { name: "Burgundy Wine", hex: "#831843" },
-            { name: "Deep Burgundy", hex: "#831843" },
-            { name: "Dusty Rose", hex: "#db2777" },
-            { name: "Crisp White", hex: "#ffffff" },
-            { name: "Caribbean Blue", hex: "#0284c7" },
-          ].filter((c, i, arr) => arr.findIndex(x => x.hex === c.hex) === i).map(colour => (
-            <div key={colour.name} className="flex flex-col items-center gap-2">
-              <div
-                className="w-12 h-12 rounded-xl border border-[#2a2a2a] shadow-inner"
-                style={{ backgroundColor: colour.hex }}
-              />
-              <span className="text-[10px] text-gray-400 text-center leading-tight">{colour.name}</span>
-            </div>
-          ))}
+            { name: "Deep Navy", hex: "#1e3a8a", key: "navy" },
+            { name: "Royal Blue", hex: "#1d4ed8", key: "royal" },
+            { name: "Midnight Black", hex: "#111827", key: "black" },
+            { name: "Hunter Green", hex: "#14532d", key: "hunter" },
+            { name: "Bottle Green", hex: "#064e3b", key: "bottle" },
+            { name: "Olive Green", hex: "#3f6212", key: "olive" },
+            { name: "Forest Green", hex: "#166534", key: "forest" },
+            { name: "OT Green", hex: "#047857", key: "ot" },
+            { name: "Mint Green", hex: "#6ee7b7", key: "mint" },
+            { name: "Ceil Blue", hex: "#60a5fa", key: "ceil" },
+            { name: "Powder Blue", hex: "#93c5fd", key: "powder" },
+            { name: "Petrol Blue", hex: "#0e7490", key: "petrol" },
+            { name: "Caribbean Blue", hex: "#0284c7", key: "caribbean" },
+            { name: "Summit Blue", hex: "#3b82f6", key: "summit" },
+            { name: "True Blue", hex: "#2563eb", key: "true" },
+            { name: "Baby Blue", hex: "#bae6fd", key: "baby blue" },
+            { name: "Airforce Blue", hex: "#475569", key: "airforce" },
+            { name: "Burgundy Wine", hex: "#831843", key: "burgundy" },
+            { name: "Maroon", hex: "#701a2e", key: "maroon" },
+            { name: "Raspberry", hex: "#e11d48", key: "raspberry" },
+            { name: "Cerise", hex: "#be185d", key: "cerise" },
+            { name: "Baby Pink", hex: "#fbcfe8", key: "baby pink" },
+            { name: "Coral", hex: "#f97316", key: "coral" },
+            { name: "Mustard", hex: "#d97706", key: "mustard" },
+            { name: "Violet", hex: "#7c3aed", key: "violet" },
+            { name: "Purple", hex: "#6b21a8", key: "purple" },
+            { name: "Lavender", hex: "#a855f7", key: "lavender" },
+            { name: "Mauve", hex: "#c084fc", key: "mauve" },
+            { name: "Crisp White", hex: "#ffffff", key: "white" },
+            { name: "Charcoal Grey", hex: "#374151", key: "charcoal" },
+            { name: "Slate Grey", hex: "#475569", key: "slate" },
+          ].map(colour => {
+            const isSelected = selectedColorFilter.toLowerCase() === colour.key.toLowerCase()
+            return (
+              <button
+                key={colour.name}
+                type="button"
+                onClick={() => {
+                  setSelectedColorFilter(colour.key)
+                  // Shift matched products to this color
+                  const updatedSelections: Record<string, ProductColor> = {}
+                  products.forEach(p => {
+                    const match = p.colors?.find(c => c.name.toLowerCase().includes(colour.key.toLowerCase()) || colour.name.toLowerCase().includes(c.name.toLowerCase()))
+                    if (match) {
+                      updatedSelections[p.id] = match
+                    }
+                  })
+                  setColorSelections(prev => ({ ...prev, ...updatedSelections }))
+                  toast.success(`Filtering by ${colour.name}`, {
+                    description: "All matching scrubs shifted to this colour"
+                  })
+                  document.getElementById("medstore-grid")?.scrollIntoView({ behavior: "smooth" })
+                }}
+                className={`flex flex-col items-center gap-2 p-2.5 rounded-2xl border transition-all text-center group cursor-pointer ${
+                  isSelected
+                    ? "bg-white/10 border-brand ring-2 ring-brand/40 shadow-lg"
+                    : "bg-[#0d0d0d] border-[#1f1f1f] hover:border-white/20 hover:scale-105"
+                }`}
+              >
+                <div
+                  className="w-12 h-12 rounded-xl border border-white/10 shadow-inner group-hover:scale-110 transition-transform relative"
+                  style={{ backgroundColor: colour.hex }}
+                >
+                  {isSelected && (
+                    <span className="absolute inset-0 m-auto w-3 h-3 rounded-full bg-white shadow-md" />
+                  )}
+                </div>
+                <span className={`text-[10px] font-bold leading-tight group-hover:text-white transition-colors line-clamp-1 ${
+                  isSelected ? "text-brand" : "text-gray-400"
+                }`}>
+                  {colour.name}
+                </span>
+              </button>
+            )
+          })}
         </div>
       </div>
-
-
 
       {/* ── PRODUCT DETAIL MODAL ── */}
       {activeModalProduct && (
@@ -1165,12 +1360,24 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
             className="bg-[#0a0a0a] border border-[#1f1f1f] rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl my-8 max-h-[90vh] overflow-y-auto"
             onClick={e => e.stopPropagation()}
           >
-            {/* Modal Image Carousel / Header */}
+            {/* Modal Image Carousel / Header with authentic live color shifting */}
             {(() => {
-              const modalImages = activeModalProduct.imageUrls && activeModalProduct.imageUrls.length > 0
-                ? activeModalProduct.imageUrls
-                : (activeModalProduct.imageUrl ? [activeModalProduct.imageUrl] : [])
-              const currentImg = modalImages[activeModalImageIdx] || getProductColorImage(activeModalProduct, modalColor) || modalImages[0]
+              const modalImages = (() => {
+                if (modalColor && modalColor.imageUrls && modalColor.imageUrls.length > 0) {
+                  return modalColor.imageUrls
+                }
+                if (modalColor && modalColor.imageUrl) {
+                  return [modalColor.imageUrl]
+                }
+                const colorMatch = getProductColorImage(activeModalProduct, modalColor)
+                if (colorMatch) {
+                  return [colorMatch]
+                }
+                return activeModalProduct.imageUrls && activeModalProduct.imageUrls.length > 0
+                  ? activeModalProduct.imageUrls
+                  : (activeModalProduct.imageUrl ? [activeModalProduct.imageUrl] : [])
+              })()
+              const currentImg = modalImages[activeModalImageIdx] || modalImages[0]
 
               return (
                 <div className="relative">
@@ -1313,29 +1520,42 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
                 </div>
               )}
 
-              {/* Size Selection */}
-              {activeModalProduct.sizes && activeModalProduct.sizes.length > 0 && (
-                <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-3">
-                    Size: <span className="text-gray-300">{modalSize}</span>
-                  </label>
-                  <div className="flex items-center gap-2 flex-wrap">
-                    {activeModalProduct.sizes.map(size => (
-                      <button
-                        key={size}
-                        onClick={() => setModalSize(size)}
-                        className={`px-3 py-1.5 rounded-xl border text-xs font-bold transition-all ${
-                          modalSize === size
-                            ? "bg-brand text-white border-brand shadow-sm shadow-brand/20"
-                            : "bg-[#0d0d0d] border-[#222] text-gray-400 hover:text-white"
-                        }`}
-                      >
-                        {size}
-                      </button>
-                    ))}
+              {/* Size Selection (XXS to 8XL) */}
+              {(() => {
+                const isApparel = ['sets', 'scrubs', 'pants', 'jackets', 'coats', 'underscrubs'].includes(activeModalProduct.collection)
+                const availableSizes = isApparel ? ALL_APPAREL_SIZES : activeModalProduct.sizes
+
+                if (!availableSizes || availableSizes.length === 0) return null
+
+                return (
+                  <div>
+                    <div className="flex items-center justify-between mb-2.5">
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                        Size: <span className="text-white font-bold">{modalSize}</span>
+                      </label>
+                      {isApparel && (
+                        <span className="text-[10px] text-gray-500 font-medium">All sizes XXS to 8XL</span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      {availableSizes.map(size => (
+                        <button
+                          key={size}
+                          type="button"
+                          onClick={() => setModalSize(size)}
+                          className={`min-w-[44px] px-2.5 py-1.5 rounded-xl border text-xs font-bold transition-all ${
+                            modalSize === size
+                              ? "bg-brand text-white border-brand shadow-sm shadow-brand/20 scale-105"
+                              : "bg-[#0d0d0d] border-[#222] text-gray-400 hover:text-white hover:border-[#333]"
+                          }`}
+                        >
+                          {size}
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
+                )
+              })()}
 
               {/* Custom Embroidery */}
               <div className="bg-[#0d0d0d] border border-[#1f1f1f] rounded-xl p-4 space-y-3">
@@ -1717,6 +1937,220 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* ── CART DRAWER (LOCALSTORAGE PERSISTENT + WHATSAPP TO 0784881010) ── */}
+      {showCartDrawer && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex justify-end animate-in fade-in duration-200"
+          onClick={() => setShowCartDrawer(false)}
+        >
+          <div
+            className="w-full max-w-md bg-[#0a0a0a] border-l border-[#1f1f1f] h-full flex flex-col shadow-2xl animate-in slide-in-from-right duration-250"
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Drawer Header */}
+            <div className="p-5 border-b border-[#1a1a1a] flex items-center justify-between bg-[#0d0d0d]">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center text-brand">
+                  <ShoppingBag size={18} />
+                </div>
+                <div>
+                  <h3 className="text-sm font-black text-white uppercase tracking-wider">Your MedStore Cart</h3>
+                  <p className="text-[10px] text-gray-500 font-medium">
+                    {cart.length === 0
+                      ? "0 items"
+                      : `${cart.reduce((a, b) => a + b.quantity, 0)} item${cart.reduce((a, b) => a + b.quantity, 0) > 1 ? "s" : ""} saved in browser`}
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowCartDrawer(false)}
+                className="w-8 h-8 rounded-lg bg-[#141414] border border-[#222] flex items-center justify-center text-gray-400 hover:text-white transition-colors"
+                title="Close cart"
+              >
+                <X size={15} />
+              </button>
+            </div>
+
+            {/* Drawer Items Body */}
+            <div className="flex-1 overflow-y-auto p-5 space-y-4">
+              {cart.length === 0 ? (
+                <div className="text-center py-20 space-y-4">
+                  <div className="w-16 h-16 rounded-2xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-gray-600 mx-auto">
+                    <ShoppingBag size={28} />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm font-bold text-white">Your cart is empty</p>
+                    <p className="text-xs text-gray-500 max-w-xs mx-auto">
+                      Explore our official TANC scrubs, doctor's jackets, and Littmann stethoscopes.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setShowCartDrawer(false)}
+                    className="px-5 py-2.5 bg-brand hover:bg-red-700 text-white font-bold rounded-xl text-xs transition-all shadow-md shadow-brand/20"
+                  >
+                    Browse Catalog
+                  </button>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {cart.map((item, idx) => {
+                    const itemCover = getProductColorImage(item.product, item.selectedColor)
+                    const embroideryCost = item.withEmbroidery ? 4 : 0
+                    const unitPrice = item.product.priceUSD + embroideryCost
+                    const itemSubtotal = unitPrice * item.quantity
+
+                    return (
+                      <div
+                        key={idx}
+                        className="bg-[#0e0e0e] border border-[#1c1c1c] rounded-2xl p-3.5 flex gap-3 items-start relative group transition-colors hover:border-[#2a2a2a]"
+                      >
+                        {/* Thumbnail */}
+                        <div className="w-16 h-16 rounded-xl bg-[#141414] border border-white/5 flex-shrink-0 overflow-hidden flex items-center justify-center relative">
+                          {itemCover ? (
+                            <img
+                              src={itemCover}
+                              alt={item.product.name}
+                              className="w-full h-full object-contain p-1"
+                              referrerPolicy="no-referrer"
+                            />
+                          ) : (
+                            <span className="text-2xl">{item.product.imageIcon}</span>
+                          )}
+                        </div>
+
+                        {/* Details */}
+                        <div className="flex-1 min-w-0 space-y-1">
+                          <h4 className="text-xs font-bold text-white truncate leading-snug">
+                            {item.product.name}
+                          </h4>
+
+                          {/* Color + Size pills */}
+                          <div className="flex items-center gap-1.5 flex-wrap text-[10px]">
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#161616] border border-[#242424] text-gray-300">
+                              <span
+                                className="w-2 h-2 rounded-full border border-white/20"
+                                style={{ backgroundColor: item.selectedColor.hex }}
+                              />
+                              {item.selectedColor.name}
+                            </span>
+                            <span className="px-2 py-0.5 rounded-md bg-[#161616] border border-[#242424] text-gray-300 font-bold">
+                              Size {item.selectedSize}
+                            </span>
+                          </div>
+
+                          {/* Custom Embroidery badge */}
+                          {item.withEmbroidery && (
+                            <div className="text-[10px] text-amber-400 flex items-center gap-1 font-medium">
+                              <Scissors size={10} />
+                              <span className="truncate">
+                                {item.embroideryName ? `"${item.embroideryName}"` : "Medical Embroidery"} (+$4)
+                              </span>
+                            </div>
+                          )}
+
+                          {/* Quantity & Price */}
+                          <div className="flex items-center justify-between pt-1">
+                            <div className="flex items-center gap-1.5 bg-[#141414] border border-[#242424] rounded-lg p-0.5">
+                              <button
+                                type="button"
+                                onClick={() => updateCartQuantity(idx, -1)}
+                                className="w-5 h-5 rounded flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-colors text-xs font-bold"
+                                title="Decrease quantity"
+                              >
+                                -
+                              </button>
+                              <span className="text-xs font-black text-white px-1.5 min-w-[18px] text-center">
+                                {item.quantity}
+                              </span>
+                              <button
+                                type="button"
+                                onClick={() => updateCartQuantity(idx, 1)}
+                                className="w-5 h-5 rounded flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-colors text-xs font-bold"
+                                title="Increase quantity"
+                              >
+                                +
+                              </button>
+                            </div>
+
+                            <div className="text-right">
+                              <span className="text-xs font-black text-white block">
+                                ${itemSubtotal.toFixed(2)}
+                              </span>
+                              {item.quantity > 1 && (
+                                <span className="text-[9px] text-gray-500">
+                                  (${unitPrice.toFixed(2)} ea)
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Delete button */}
+                        <button
+                          type="button"
+                          onClick={() => removeCartItem(idx)}
+                          className="text-gray-600 hover:text-brand transition-colors p-1"
+                          title="Remove item from cart"
+                        >
+                          <Trash2 size={13} />
+                        </button>
+                      </div>
+                    )
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* Drawer Footer with Order Breakdown and WhatsApp */}
+            {cart.length > 0 && (
+              <div className="p-5 border-t border-[#1a1a1a] bg-[#0c0c0c] space-y-4">
+                <div className="space-y-1.5 text-xs">
+                  <div className="flex items-center justify-between text-gray-400">
+                    <span>Items Subtotal</span>
+                    <span className="text-white font-medium">${getCartSubtotal().toFixed(2)} USD</span>
+                  </div>
+                  {getCartEmbroideryTotal() > 0 && (
+                    <div className="flex items-center justify-between text-amber-400 text-[11px]">
+                      <span>Custom Embroidery</span>
+                      <span>+${getCartEmbroideryTotal().toFixed(2)} USD</span>
+                    </div>
+                  )}
+                  <div className="flex items-center justify-between text-gray-400">
+                    <span>Campus Delivery</span>
+                    <span className="text-green-400 font-bold text-[11px] uppercase">Free Drop</span>
+                  </div>
+                  <div className="border-t border-[#1f1f1f] pt-2 flex items-center justify-between">
+                    <span className="text-sm font-black text-white">Total Amount</span>
+                    <span className="text-xl font-black text-white">
+                      ${getCartTotalAmount().toFixed(2)} <span className="text-xs text-gray-500 font-normal">USD</span>
+                    </span>
+                  </div>
+                </div>
+
+                {/* WhatsApp Action Button */}
+                <button
+                  onClick={handleWhatsAppCheckout}
+                  className="w-full py-3.5 bg-[#25D366] hover:bg-[#20bd5a] text-black font-black rounded-xl text-xs uppercase tracking-wider transition-all shadow-lg shadow-[#25D366]/20 flex items-center justify-center gap-2 group cursor-pointer"
+                >
+                  <MessageCircle size={16} className="fill-black" />
+                  <span>Send Order via WhatsApp &bull; 0784881010</span>
+                </button>
+
+                <div className="flex items-center justify-between text-[10px] text-gray-500 pt-1">
+                  <span>Cart saved automatically &bull; Delete anytime</span>
+                  <button
+                    onClick={clearEntireCart}
+                    className="text-gray-500 hover:text-brand transition-colors font-bold"
+                  >
+                    Empty Cart
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
