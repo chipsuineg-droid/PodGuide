@@ -5560,12 +5560,12 @@ export const INITIAL_PRODUCTS: Product[] = [
   {
     "id": "tanc-lab-coat",
     "name": "Lab Coats",
-    "collection": "jackets",
-    "priceZAR": 640,
-    "priceUSD": 35,
+    "collection": "coats",
+    "priceZAR": 360,
+    "priceUSD": 20,
     "rating": 5,
     "reviewsCount": 177,
-    "badge": "Thermal Shield",
+    "badge": "Hospital Grade",
     "fabricTech": "Fluid-Resistant Twill",
     "imageUrl": "https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lab-Coats_Women_01.avif",
     "imageUrls": [
@@ -5657,10 +5657,10 @@ export const INITIAL_PRODUCTS: Product[] = [
       "8XL"
     ],
     "specs": [
-      "Thermal micro-fleece lining for temperature regulation",
-      "Zippered chest and side pockets for diagnostic tools",
-      "Dedicated pen and penlight slot on sleeve",
-      "Water-repellent and windproof bonded outer layer"
+      "Hospital-grade fluid-resistant twill fabric",
+      "Deep front pockets for stethoscope and diagnostic kit",
+      "Reinforced side slit access to trouser pockets",
+      "Professional notch lapel collar and durable button closure"
     ]
   },
   {

@@ -19,8 +19,8 @@ export const ALL_APPAREL_SIZES = [
 ]
 
 export const CART_STORAGE_KEY = "podguide_medstore_cart"
-export const WHATSAPP_ORDER_NUMBER = "0784881010"
-export const WHATSAPP_INTL_NUMBER = "27784881010"
+export const WHATSAPP_ORDER_NUMBER = "+263784881010"
+export const WHATSAPP_INTL_NUMBER = "263784881010"
 
 interface CartItem {
   product: Product
@@ -2059,7 +2059,7 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
         </div>
       )}
 
-      {/* ── CART DRAWER (LOCALSTORAGE PERSISTENT + WHATSAPP TO 0784881010) ── */}
+      {/* ── CART DRAWER (LOCALSTORAGE PERSISTENT + WHATSAPP TO +263784881010) ── */}
       {showCartDrawer && (
         <div
           className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex justify-end animate-in fade-in duration-200"
@@ -2255,7 +2255,7 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
                   className="w-full py-3.5 bg-[#25D366] hover:bg-[#20bd5a] text-black font-black rounded-xl text-xs uppercase tracking-wider transition-all shadow-lg shadow-[#25D366]/20 flex items-center justify-center gap-2 group cursor-pointer"
                 >
                   <MessageCircle size={16} className="fill-black" />
-                  <span>Send Order via WhatsApp &bull; 0784881010</span>
+                  <span>Send Order via WhatsApp &bull; +263784881010</span>
                 </button>
 
                 <div className="flex items-center justify-between text-[10px] text-gray-500 pt-1">
