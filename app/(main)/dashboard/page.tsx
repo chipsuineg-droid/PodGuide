@@ -20,16 +20,7 @@ function greeting() {
 }
 
 function sourceBadge(source: string) {
-  const s = source.toLowerCase()
-  if (s.includes("geeky")) return "bg-green-500/10 text-green-400 border-green-500/20"
-  if (s.includes("ninja")) return "bg-purple-500/10 text-purple-400 border-purple-500/20"
-  if (s.includes("osmosis")) return "bg-blue-500/10 text-blue-400 border-blue-500/20"
-  if (s.includes("amboss")) return "bg-yellow-500/10 text-yellow-400 border-yellow-500/20"
-  if (s.includes("registered") || s.includes("rn")) return "bg-pink-500/10 text-pink-400 border-pink-500/20"
-  if (s.includes("physiopedia")) return "bg-cyan-500/10 text-cyan-400 border-cyan-500/20"
-  if (s.includes("akpharm")) return "bg-orange-500/10 text-orange-400 border-orange-500/20"
-  if (s.includes("dentistry")) return "bg-teal-500/10 text-teal-400 border-teal-500/20"
-  return "bg-gray-500/10 text-gray-400 border-gray-500/20"
+  return "bg-white/5 text-gray-300 border-white/10"
 }
 
 function getYearGroup(level: string, programme: string) {
@@ -258,24 +249,24 @@ export default async function DashboardPage() {
 
 function PreClinicalBanner({ curriculum, qCount, deckCount }: { curriculum: any; qCount: number; deckCount: number }) {
   return (
-    <div className="bg-[#0d1117] border border-indigo-500/25 rounded-2xl p-5 sm:p-6">
+    <div className="bg-[#111] border border-[#222] border-l-4 border-l-brand rounded-2xl p-5 sm:p-6 shadow-sm">
       <div className="flex flex-col sm:flex-row gap-5 sm:items-start justify-between">
         <div className="flex-1 space-y-1">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-indigo-400">{curriculum.tagline}</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-brand">{curriculum.tagline}</p>
           <h2 className="text-base font-bold text-white leading-snug">{curriculum.focus}</h2>
-          <div className="flex items-start gap-2 mt-3 pt-3 border-t border-indigo-500/10">
-            <FlaskConical size={14} className="text-indigo-400 flex-shrink-0 mt-0.5" />
+          <div className="flex items-start gap-2 mt-3 pt-3 border-t border-[#1f1f1f]">
+            <FlaskConical size={14} className="text-brand flex-shrink-0 mt-0.5" />
             <p className="text-xs text-gray-300 leading-relaxed">{curriculum.todaysPriority}</p>
           </div>
         </div>
         <div className="flex sm:flex-col gap-3 sm:gap-2 flex-shrink-0">
-          <div className="text-center bg-indigo-500/8 border border-indigo-500/20 rounded-xl px-4 py-2">
+          <div className="text-center bg-[#161616] border border-[#222] rounded-xl px-4 py-2">
             <p className="text-lg font-bold text-white">{qCount.toLocaleString()}</p>
-            <p className="text-[10px] text-indigo-300">Questions available</p>
+            <p className="text-[10px] text-gray-400">Questions available</p>
           </div>
-          <div className="text-center bg-indigo-500/8 border border-indigo-500/20 rounded-xl px-4 py-2">
+          <div className="text-center bg-[#161616] border border-[#222] rounded-xl px-4 py-2">
             <p className="text-lg font-bold text-white">{deckCount}</p>
-            <p className="text-[10px] text-indigo-300">Flashcard decks</p>
+            <p className="text-[10px] text-gray-400">Flashcard decks</p>
           </div>
         </div>
       </div>
@@ -376,26 +367,26 @@ function PreClinicalContent({ curriculum, materialCount }: { curriculum: any; ma
 
 function ClinicalBanner({ curriculum, accuracy, attempts }: { curriculum: any; accuracy: number; attempts: number }) {
   return (
-    <div className="bg-[#071210] border border-teal-600/25 rounded-2xl p-5 sm:p-6">
+    <div className="bg-[#111] border border-[#222] border-l-4 border-l-brand rounded-2xl p-5 sm:p-6 shadow-sm">
       <div className="flex flex-col sm:flex-row gap-5 sm:items-start justify-between">
         <div className="flex-1 space-y-1">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-teal-400">{curriculum.tagline}</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-brand">{curriculum.tagline}</p>
           <h2 className="text-base font-bold text-white">{curriculum.focus}</h2>
-          <div className="flex items-start gap-2 mt-3 pt-3 border-t border-teal-600/10">
-            <Stethoscope size={14} className="text-teal-400 flex-shrink-0 mt-0.5" />
+          <div className="flex items-start gap-2 mt-3 pt-3 border-t border-[#1f1f1f]">
+            <Stethoscope size={14} className="text-brand flex-shrink-0 mt-0.5" />
             <p className="text-xs text-gray-300 leading-relaxed">{curriculum.todaysPriority}</p>
           </div>
         </div>
         <div className="flex sm:flex-col gap-3 sm:gap-2 flex-shrink-0">
-          <div className="text-center bg-teal-600/8 border border-teal-600/20 rounded-xl px-4 py-2">
+          <div className="text-center bg-[#161616] border border-[#222] rounded-xl px-4 py-2">
             <p className="text-lg font-bold text-white">{attempts}</p>
-            <p className="text-[10px] text-teal-300">Questions done</p>
+            <p className="text-[10px] text-gray-400">Questions done</p>
           </div>
-          <div className="text-center bg-teal-600/8 border border-teal-600/20 rounded-xl px-4 py-2">
-            <p className={`text-lg font-bold ${accuracy >= 60 ? "text-emerald-400" : accuracy >= 40 ? "text-amber-400" : "text-rose-400"}`}>
+          <div className="text-center bg-[#161616] border border-[#222] rounded-xl px-4 py-2">
+            <p className="text-lg font-bold text-white">
               {attempts > 0 ? `${accuracy}%` : "—"}
             </p>
-            <p className="text-[10px] text-teal-300">Accuracy</p>
+            <p className="text-[10px] text-gray-400">Accuracy</p>
           </div>
         </div>
       </div>
@@ -466,7 +457,7 @@ function ClinicalContent({ curriculum, accuracy, attempts }: { curriculum: any; 
           </div>
           {attempts > 0 ? (
             <>
-              <p className={`text-4xl font-bold ${accuracy >= 60 ? "text-green-400" : accuracy >= 40 ? "text-yellow-400" : "text-brand"}`}>
+              <p className="text-4xl font-bold text-white">
                 {accuracy}%
               </p>
               <p className="text-xs text-gray-500 mt-1">From {attempts} questions attempted</p>
@@ -507,19 +498,19 @@ function ClinicalContent({ curriculum, accuracy, attempts }: { curriculum: any; 
 
 function FinalYearBanner({ curriculum, accuracy }: { curriculum: any; accuracy: number }) {
   return (
-    <div className="bg-[#120e02] border border-amber-500/25 rounded-2xl p-5 sm:p-6">
+    <div className="bg-[#111] border border-[#222] border-l-4 border-l-brand rounded-2xl p-5 sm:p-6 shadow-sm">
       <div className="flex items-start gap-4">
-        <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center flex-shrink-0">
-          <GraduationCap size={18} className="text-amber-400" />
+        <div className="w-10 h-10 rounded-xl bg-[#161616] border border-[#222] flex items-center justify-center flex-shrink-0">
+          <GraduationCap size={18} className="text-brand" />
         </div>
         <div className="flex-1">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-amber-400">{curriculum.tagline}</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-brand">{curriculum.tagline}</p>
           <h2 className="text-lg font-bold text-white mt-1">The finish line is in sight.</h2>
           <p className="text-sm text-gray-400 mt-1 leading-relaxed">
             Final year is your most important. Every ward round, every OSCE, every MCQ bank you complete this year is building the doctor, nurse, or clinician you are about to become.
           </p>
-          <div className="flex items-start gap-2 mt-3 pt-3 border-t border-amber-500/10">
-            <GraduationCap size={14} className="text-amber-400 flex-shrink-0 mt-0.5" />
+          <div className="flex items-start gap-2 mt-3 pt-3 border-t border-[#1f1f1f]">
+            <GraduationCap size={14} className="text-brand flex-shrink-0 mt-0.5" />
             <p className="text-xs text-gray-300 leading-relaxed">{curriculum.todaysPriority}</p>
           </div>
         </div>
@@ -625,19 +616,19 @@ function FinalYearContent({ curriculum, qCount }: { curriculum: any; qCount: num
 
 function InternBanner({ curriculum }: { curriculum: any }) {
   return (
-    <div className="bg-[#020814] border border-blue-500/25 rounded-2xl p-5 sm:p-6">
+    <div className="bg-[#111] border border-[#222] border-l-4 border-l-brand rounded-2xl p-5 sm:p-6 shadow-sm">
       <div className="flex items-start gap-4">
-        <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center flex-shrink-0">
-          <Stethoscope size={18} className="text-blue-400" />
+        <div className="w-10 h-10 rounded-xl bg-[#161616] border border-[#222] flex items-center justify-center flex-shrink-0">
+          <Stethoscope size={18} className="text-brand" />
         </div>
         <div className="flex-1">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-blue-400">{curriculum.tagline}</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-brand">{curriculum.tagline}</p>
           <h2 className="text-lg font-bold text-white mt-1">You are a doctor now. Use this wisely.</h2>
           <p className="text-sm text-gray-400 mt-1 leading-relaxed">
             Internship is where theory meets real life. Every decision you make has consequences. Use PodGuide to look things up fast, refresh clinical knowledge, and stay sharp on-call.
           </p>
-          <div className="flex items-start gap-2 mt-3 pt-3 border-t border-blue-500/10">
-            <AlertCircle size={14} className="text-blue-400 flex-shrink-0 mt-0.5" />
+          <div className="flex items-start gap-2 mt-3 pt-3 border-t border-[#1f1f1f]">
+            <AlertCircle size={14} className="text-brand flex-shrink-0 mt-0.5" />
             <p className="text-xs text-gray-300 leading-relaxed">{curriculum.todaysPriority}</p>
           </div>
         </div>
