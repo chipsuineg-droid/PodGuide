@@ -18,6 +18,7 @@ import {
   FileText,
   Sparkles
 } from "lucide-react"
+import { ModuleIcon } from "@/components/curriculum/ModuleIcon"
 
 interface ModulePageProps {
   params: Promise<{ id: string }>
@@ -178,10 +179,13 @@ export default async function ModuleDetailPage({ params }: ModulePageProps) {
       {/* Hero Banner */}
       <div className="bg-[#111] border border-[#222] rounded-2xl p-6 sm:p-8 relative overflow-hidden">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-          <div className="flex items-start gap-4">
-            <div className="w-16 h-16 rounded-2xl bg-brand/10 border border-brand/20 flex items-center justify-center text-3xl flex-shrink-0">
-              {moduleData.icon || "📚"}
-            </div>
+          <div className="flex items-start gap-5">
+            <ModuleIcon
+              name={moduleData.title}
+              code={moduleData.code}
+              size={24}
+              containerClassName="w-16 h-16 rounded-2xl flex-shrink-0"
+            />
             <div className="space-y-1">
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-xs font-bold text-brand uppercase tracking-wider">{moduleData.code}</span>

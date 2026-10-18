@@ -10,6 +10,7 @@ import {
   Calendar, Trophy, FlaskConical, Microscope, Pill,
   HeartPulse, GraduationCap, Layers
 } from "lucide-react"
+import { ModuleIcon } from "@/components/curriculum/ModuleIcon"
 
 function greeting() {
   const h = new Date().getHours()
@@ -296,7 +297,7 @@ function PreClinicalContent({ curriculum, materialCount }: { curriculum: any; ma
             {curriculum.subjects.map((s: any, i: number) => {
               const cardInner = (
                 <>
-                  <span className="text-2xl flex-shrink-0">{s.icon}</span>
+                  <ModuleIcon name={s.name} code={s.code} />
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-semibold text-white group-hover:text-brand transition-colors truncate">{s.name}</p>
                     <p className="text-[10px] text-gray-600 mt-0.5">
@@ -416,8 +417,8 @@ function ClinicalContent({ curriculum, accuracy, attempts }: { curriculum: any; 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {rotations.map((s: any, i: number) => (
               <div key={s.name + i}
-                className="bg-[#111] border border-[#1f1f1f] hover:border-brand/30 rounded-xl p-4 flex items-center gap-3 transition-all group">
-                <span className="text-xl flex-shrink-0">{s.icon}</span>
+                className="bg-[#111] border border-[#1f1f1f] hover:border-brand/30 rounded-xl p-4 flex items-center gap-3.5 transition-all group">
+                <ModuleIcon name={s.name} code={s.code} />
                 <Link
                   href={s.id || s.code ? `/module/${s.id || s.code}` : "/practise/questions"}
                   className="flex-1 min-w-0"
@@ -544,8 +545,8 @@ function FinalYearContent({ curriculum, qCount }: { curriculum: any; qCount: num
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {curriculum.subjects.map((s: any, i: number) => (
               <div key={s.name + i}
-                className="bg-[#111] border border-[#1f1f1f] hover:border-brand/40 rounded-xl p-4 flex items-center gap-3 transition-all group">
-                <span className="text-xl flex-shrink-0">{s.icon}</span>
+                className="bg-[#111] border border-[#1f1f1f] hover:border-brand/40 rounded-xl p-4 flex items-center gap-3.5 transition-all group">
+                <ModuleIcon name={s.name} code={s.code} />
                 <Link
                   href={s.id || s.code ? `/module/${s.id || s.code}` : "/practise/questions"}
                   className="flex-1 min-w-0"
@@ -661,7 +662,7 @@ function InternContent({ curriculum }: { curriculum: any }) {
             {curriculum.subjects.map((s: any, i: number) => {
               const cardInner = (
                 <>
-                  <span className="text-xl flex-shrink-0">{s.icon}</span>
+                  <ModuleIcon name={s.name} code={s.code} />
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-semibold text-white group-hover:text-brand transition-colors truncate">{s.name}</p>
                     {s.code && <p className="text-[10px] text-gray-600 mt-0.5">{s.code}</p>}
