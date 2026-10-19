@@ -37,6 +37,19 @@ const DEFAULT_DRIVE_FOLDERS: DriveFolder[] = [
     icon: "🔬",
     item_count: 24,
     color: "brand"
+  },
+  {
+    id: "drive-bms-3",
+    title: "BioMedical Sciences 3",
+    description: "Official shared Google Drive repository containing advanced pathology, medical microbiology, clinical biochemistry, and haematology archives for Biomedical Sciences Part 3.",
+    drive_url: "https://drive.google.com/drive/folders/1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE?usp=drive_link",
+    folder_id: "1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE",
+    programme: "Biomedical Science (HBMLS / BSc)",
+    level: "Part 3",
+    category: "Biomedical Sciences",
+    icon: "🧬",
+    item_count: 18,
+    color: "brand"
   }
 ]
 
@@ -82,13 +95,13 @@ export default function LibraryPage() {
           .order("created_at", { ascending: false })
 
         if (!error && data && data.length > 0) {
-          const realData = data.filter((d: DriveFolder) => !d.folder_id?.includes("sample_") && d.id !== "drive-bms-3")
+          const realData = data.filter((d: DriveFolder) => !d.folder_id?.includes("sample_"))
           const remoteIds = new Set(realData.map((d: DriveFolder) => d.id))
-          const validLocal = localFolders.filter(f => !f.folder_id?.includes("sample_") && f.id !== "drive-bms-3")
+          const validLocal = localFolders.filter(f => !f.folder_id?.includes("sample_"))
           const merged = [...realData, ...validLocal.filter(f => !remoteIds.has(f.id))]
           setFolders(merged.length > 0 ? merged : DEFAULT_DRIVE_FOLDERS)
         } else if (localFolders.length > 0) {
-          const validLocal = localFolders.filter(f => !f.folder_id?.includes("sample_") && f.id !== "drive-bms-3")
+          const validLocal = localFolders.filter(f => !f.folder_id?.includes("sample_"))
           const localIds = new Set(validLocal.map(d => d.id))
           const merged = [...validLocal, ...DEFAULT_DRIVE_FOLDERS.filter(f => !localIds.has(f.id))]
           setFolders(merged.length > 0 ? merged : DEFAULT_DRIVE_FOLDERS)
