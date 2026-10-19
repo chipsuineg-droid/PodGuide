@@ -14,7 +14,8 @@ import {
   Maximize2, Minimize2, GitBranch, Brain, PenLine,
   BookOpen, FlaskConical, ChevronRight, ChevronDown, Wand2,
   HardDrive, ChevronUp, RotateCcw, ArrowRight, ArrowLeft,
-  Save, Clipboard, Table as TableIcon, FileText, Eye, CheckCircle2
+  Save, Clipboard, Table as TableIcon, FileText, Eye, CheckCircle2,
+  LockKeyhole, SplitSquareVertical
 } from "lucide-react"
 import { toast } from "sonner"
 
@@ -335,7 +336,7 @@ function FlashcardViewer({ text }: { text: string }) {
           style={{
             transformStyle: "preserve-3d",
             transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
-            minHeight: "170px"
+            minHeight: "180px"
           }}
         >
           {/* Front */}
@@ -345,7 +346,7 @@ function FlashcardViewer({ text }: { text: string }) {
           >
             <div>
               <span className="text-[9px] font-black uppercase tracking-widest text-gray-500 block mb-1">Clinical Question</span>
-              <p className="text-xs font-bold text-white leading-relaxed">{card.q}</p>
+              <p className="text-xs sm:text-sm font-bold text-white leading-relaxed">{card.q}</p>
             </div>
             <p className="text-[10px] text-gray-500 font-medium mt-3">Tap anywhere to flip card</p>
           </div>
@@ -356,8 +357,8 @@ function FlashcardViewer({ text }: { text: string }) {
             style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
           >
             <div>
-              <span className="text-[9px] font-black uppercase tracking-widest text-brand block mb-1">Answer & Rationale</span>
-              <p className="text-xs text-gray-200 leading-relaxed">{card.a}</p>
+              <span className="text-[9px] font-black uppercase tracking-widest text-brand block mb-1">Answer & Clinical Rationale</span>
+              <p className="text-xs sm:text-sm text-gray-200 leading-relaxed">{card.a}</p>
             </div>
             <p className="text-[10px] text-gray-500 font-medium mt-3">Tap to flip back</p>
           </div>
@@ -513,6 +514,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
 
   // Studio
   const [studioCollapsed, setStudioCollapsed] = useState(false)
+  const [studioExpanded, setStudioExpanded] = useState(false) // Expand studio to fill the interface
   const [activeTool, setActiveTool] = useState<StudioTool>("notes")
   const [studioLoading, setStudioLoading] = useState(false)
   const [studioOutput, setStudioOutput] = useState("")
@@ -642,17 +644,15 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
     handleNoteChange(noteContent + template)
   }
 
-  const insertClinicalPearl = () => {
-    const template = "\n\n> **Clinical Pearl:** Always consider underlying secondary etiologies before confirming idiopathic diagnosis.\n\n"
-    handleNoteChange(noteContent + template)
-  }
-
-  // ── Robust File Upload via Server API (PC & Phone) ──
+  // ── Bulletproof File Upload with Direct Client Fallback ──
   const uploadFiles = async (files: File[]) => {
     if (!files.length) return
     setUploading(true)
 
     for (const file of files) {
+      let registered = false
+
+      // 1. Try server API route first
       try {
         const formData = new FormData()
         formData.append("file", file)
@@ -662,31 +662,94 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
           method: "POST",
           body: formData,
         })
-        const data = await res.json()
 
-        if (!res.ok) {
-          toast.error(data.error || `Failed to upload ${file.name}`)
-          continue
+        const resText = await res.text()
+        let data: any = null
+        try {
+          data = JSON.parse(resText)
+        } catch {
+          console.warn("Server returned non-JSON, initiating direct upload fallback")
         }
 
-        const doc = data.doc
-        const docType = file.type.includes("pdf") || file.name.toLowerCase().endsWith(".pdf") ? "pdf" : "text"
-        const newSource: Source = {
-          id: doc?.id || `doc-${Date.now()}`,
-          name: file.name,
-          type: docType,
-          url: data.publicUrl || doc?.file_url || "",
-          content: doc?.text_content || data.extractedChars ? doc?.text_content : "",
-          size: file.size,
-          created_at: new Date().toISOString()
-        }
+        if (res.ok && data?.success && data?.doc) {
+          const doc = data.doc
+          const docType = file.type.includes("pdf") || file.name.toLowerCase().endsWith(".pdf") ? "pdf" : "text"
+          const newSource: Source = {
+            id: doc.id || `doc-${Date.now()}`,
+            name: file.name,
+            type: docType,
+            url: data.publicUrl || doc.file_url || "",
+            content: doc.text_content || "",
+            size: file.size,
+            created_at: new Date().toISOString()
+          }
 
-        setSources(prev => [newSource, ...prev])
-        const charsCount = data.extractedChars || doc?.text_content?.length || 0
-        const wordCount = charsCount ? Math.round(charsCount / 5) : 0
-        toast.success(`Uploaded "${file.name}"${wordCount > 0 ? ` (~${wordCount.toLocaleString()} words extracted)` : ""}`)
-      } catch (err: any) {
-        toast.error(`Upload error: ${err.message || "Network issue"}`)
+          setSources(prev => [newSource, ...prev])
+          const charsCount = data.extractedChars || doc.text_content?.length || 0
+          const wordCount = charsCount ? Math.round(charsCount / 5) : 0
+          toast.success(`Uploaded "${file.name}"${wordCount > 0 ? ` (~${wordCount.toLocaleString()} words indexed)` : ""}`)
+          registered = true
+        }
+      } catch (err) {
+        console.warn("API route upload error, attempting direct upload:", err)
+      }
+
+      // 2. Client-Side Direct Upload Fallback (Bypasses Vercel 4.5MB limits & network drops)
+      if (!registered) {
+        try {
+          const { data: { user } } = await supabase.auth.getUser()
+          const timestamp = Date.now()
+          const cleanName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_")
+          const storagePath = `${user?.id || "anon"}/${id}/${timestamp}_${cleanName}`
+
+          // Read text if it's a readable text file
+          let clientText = ""
+          const isText = file.type.startsWith("text/") ||
+                         file.name.endsWith(".txt") ||
+                         file.name.endsWith(".md") ||
+                         file.name.endsWith(".json")
+          if (isText) {
+            try { clientText = await file.text() } catch {}
+          }
+
+          // Direct upload to Supabase storage
+          let publicUrl = ""
+          const { data: uploadData } = await supabase.storage
+            .from("notebooks")
+            .upload(storagePath, file, { upsert: true })
+
+          if (uploadData) {
+            publicUrl = supabase.storage.from("notebooks").getPublicUrl(storagePath).data.publicUrl
+          }
+
+          const docType = file.type.includes("pdf") || file.name.toLowerCase().endsWith(".pdf") ? "pdf" : "text"
+
+          const { data: doc } = await supabase.from("notebook_documents").insert({
+            notebook_id: id,
+            file_name: file.name,
+            file_url: publicUrl,
+            file_type: docType,
+            file_size: file.size,
+            processing_status: "ready",
+            text_content: clientText ? clientText.slice(0, 150000) : null
+          }).select().single()
+
+          const fallbackSource: Source = {
+            id: doc?.id || `doc-${Date.now()}`,
+            name: file.name,
+            type: docType,
+            url: publicUrl,
+            content: clientText,
+            size: file.size,
+            created_at: new Date().toISOString()
+          }
+
+          setSources(prev => [fallbackSource, ...prev])
+          toast.success(`Uploaded "${file.name}" to sources`)
+          registered = true
+        } catch (err: any) {
+          toast.error(`Could not upload ${file.name}: ${err?.message || "Storage error"}`)
+        }
       }
     }
 
@@ -859,21 +922,29 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
   }
 
   // ── Studio Tools Grounded in Uploaded Sources ──
+  // STRICT RULE: Studio generation tools (flashcards, quiz, mindmap) require at least 1 uploaded source!
   const runStudioTool = async (tool: StudioTool) => {
     if (!tool || tool === "scholar" || tool === "notes") {
       setActiveTool(tool)
       setStudioOutput("")
       return
     }
+
+    // Require an uploaded source before running studio generation
+    if (sources.length === 0) {
+      toast.error("Upload at least one source first to generate study tools.")
+      setActiveTool(tool)
+      setStudioOutput("")
+      return
+    }
+
     setActiveTool(tool)
     setStudioOutput("")
     setStudioMode(tool)
     setStudioLoading(true)
 
     const sourceNames = sources.map(s => s.name).join(", ")
-    const sourceConstraint = sources.length > 0
-      ? `Base your generation strictly on the attached sources (${sourceNames}) and notes provided.`
-      : `Base your generation on the notebook topic "${noteTitle || "Clinical Medicine"}" using standard clinical guidelines.`
+    const sourceConstraint = `Base your generation strictly on the attached sources (${sourceNames}) and student notes provided in the context.`
 
     const prompts: Record<string, string> = {
       mindmap: `Create an extensive, structured hierarchical mind map outline based on: "${noteTitle || "the notebook content"}". ${sourceConstraint} Include clinical mechanisms, diagnostic criteria, and management algorithms.`,
@@ -986,7 +1057,7 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
     `Create a diagnostic & management comparison table from my sources`,
     `Quiz me with 3 high-yield questions on these materials`,
   ] : [
-    `Teach me the core concepts of ${noteTitle || "this topic"}`,
+    `Teach me the core principles of ${noteTitle || "this topic"}`,
     `Compare hallmark presentations and differential diagnoses`,
     `Generate an evidence-based clinical management protocol`,
     `Quiz me with 3 exam-style clinical scenarios`,
@@ -1094,14 +1165,14 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
         ))}
       </div>
 
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden relative">
 
         {/* ══════════════════════════════════════════ */}
         {/* LEFT — SOURCES PANEL                      */}
         {/* ══════════════════════════════════════════ */}
         <div className={`
           ${mobilePanel === "sources" ? "flex" : "hidden"} lg:flex flex-col border-r border-[#181818] bg-[#0a0a0a] flex-shrink-0 transition-all duration-200
-          ${sourcesCollapsed ? "w-0 lg:w-12 overflow-hidden" : "w-full lg:w-72"}
+          ${studioExpanded ? "hidden" : sourcesCollapsed ? "w-0 lg:w-12 overflow-hidden" : "w-full lg:w-72"}
         `}>
           <div className="flex items-center justify-between px-4 py-3 border-b border-[#181818] flex-shrink-0">
             {!sourcesCollapsed && (
@@ -1263,7 +1334,7 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
                     </div>
                     <p className="text-[11px] text-gray-500 leading-relaxed">
                       No sources uploaded yet.<br />
-                      Upload PDFs or lecture notes from your PC or phone to empower the AI mentor.
+                      Upload PDFs or lecture notes from your PC or phone to empower the AI mentor & unlock studio tools.
                     </p>
                   </div>
                 )}
@@ -1329,7 +1400,10 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
         {/* ══════════════════════════════════════════ */}
         {/* CENTER — CHAT CANVAS                      */}
         {/* ══════════════════════════════════════════ */}
-        <div className={`${mobilePanel === "chat" ? "flex" : "hidden"} lg:flex flex-1 flex-col min-w-0 bg-[#070707]`}>
+        <div className={`
+          ${mobilePanel === "chat" ? "flex" : "hidden"} lg:flex flex-1 flex-col min-w-0 bg-[#070707]
+          ${studioExpanded ? "hidden lg:hidden" : "flex"}
+        `}>
 
           {messages.length === 0 ? (
             <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 text-center max-w-xl mx-auto">
@@ -1463,58 +1537,125 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
         {/* ══════════════════════════════════════════ */}
         <div className={`
           ${mobilePanel === "studio" ? "flex" : "hidden"} lg:flex flex-col border-l border-[#181818] bg-[#0a0a0a] flex-shrink-0 transition-all duration-200
-          ${studioCollapsed ? "w-0 lg:w-12 overflow-hidden" : "w-full lg:w-80"}
+          ${studioExpanded
+            ? "flex-1 w-full z-20"
+            : studioCollapsed
+              ? "w-0 lg:w-12 overflow-hidden"
+              : "w-full lg:w-80"
+          }
         `}>
           <div className="flex items-center justify-between px-4 py-3 border-b border-[#181818] flex-shrink-0">
-            <button onClick={() => setStudioCollapsed(!studioCollapsed)} className="text-gray-500 hover:text-white transition-colors hidden lg:block">
-              {studioCollapsed ? <ChevronRight size={14} /> : <ChevronDown size={14} />}
-            </button>
-            {!studioCollapsed && (
-              <span className="text-xs font-black text-white uppercase tracking-widest">Studio & Notes</span>
-            )}
-            {!studioCollapsed && (
+            <div className="flex items-center gap-2">
               <button
-                onClick={manualSaveNotes}
-                disabled={saving}
-                className="text-[10px] font-bold text-brand hover:underline flex items-center gap-1"
+                onClick={() => setStudioCollapsed(!studioCollapsed)}
+                className="text-gray-500 hover:text-white transition-colors hidden lg:block"
+                title={studioCollapsed ? "Expand panel" : "Collapse panel"}
               >
-                <Save size={10} /> {saving ? "Saving..." : "Save"}
+                {studioCollapsed ? <ChevronRight size={14} /> : <ChevronDown size={14} />}
               </button>
+              {!studioCollapsed && (
+                <span className="text-xs font-black text-white uppercase tracking-widest">
+                  Studio & Notes {studioExpanded && <span className="text-brand ml-1">· Fullscreen Focus</span>}
+                </span>
+              )}
+            </div>
+
+            {!studioCollapsed && (
+              <div className="flex items-center gap-2">
+                {/* Expand / Minimize to fill interface button */}
+                <button
+                  onClick={() => setStudioExpanded(!studioExpanded)}
+                  className={`p-1.5 rounded-lg border transition-all flex items-center gap-1 text-[10px] font-bold ${
+                    studioExpanded
+                      ? "bg-brand text-white border-brand shadow-sm"
+                      : "bg-[#111] text-gray-400 hover:text-white border-[#1f1f1f]"
+                  }`}
+                  title={studioExpanded ? "Restore Split View" : "Expand Studio to Fill Interface"}
+                >
+                  {studioExpanded ? <Minimize2 size={12} /> : <Maximize2 size={12} />}
+                  <span className="hidden sm:inline">{studioExpanded ? "Collapse" : "Expand"}</span>
+                </button>
+
+                <button
+                  onClick={manualSaveNotes}
+                  disabled={saving}
+                  className="text-[10px] font-bold text-brand hover:underline flex items-center gap-1"
+                >
+                  <Save size={10} /> {saving ? "Saving..." : "Save"}
+                </button>
+              </div>
             )}
           </div>
 
           {!studioCollapsed && (
             <div className="flex-1 overflow-y-auto p-3 space-y-3">
+
               {/* Studio Tools Grid */}
-              <div className="grid grid-cols-2 gap-2">
+              <div className={`grid ${studioExpanded ? "grid-cols-5" : "grid-cols-2"} gap-2`}>
                 {[
-                  { id: "notes" as StudioTool, icon: <PenLine size={14} />, label: "My Notes" },
-                  { id: "flashcards" as StudioTool, icon: <Brain size={14} />, label: "Flashcards" },
-                  { id: "quiz" as StudioTool, icon: <FlaskConical size={14} />, label: "Quiz Arena" },
-                  { id: "mindmap" as StudioTool, icon: <GitBranch size={14} />, label: "Mind Map" },
-                  { id: "scholar" as StudioTool, icon: <BookOpen size={14} />, label: "NCBI Scholar" },
-                ].map(tool => (
-                  <button
-                    key={tool.id}
-                    onClick={() => runStudioTool(tool.id)}
-                    className={`flex flex-col items-center gap-1.5 p-2.5 rounded-xl border text-xs font-bold transition-all ${
-                      activeTool === tool.id
-                        ? "bg-brand/10 border-brand/40 text-brand shadow-sm"
-                        : "bg-[#0d0d0d] border-[#1a1a1a] text-gray-400 hover:text-white hover:border-[#2b2b2b]"
-                    }`}
-                  >
-                    <span className={activeTool === tool.id ? "text-brand" : "text-gray-500"}>{tool.icon}</span>
-                    {tool.label}
-                  </button>
-                ))}
+                  { id: "notes" as StudioTool, icon: <PenLine size={14} />, label: "My Notes", requiresSource: false },
+                  { id: "flashcards" as StudioTool, icon: <Brain size={14} />, label: "Flashcards", requiresSource: true },
+                  { id: "quiz" as StudioTool, icon: <FlaskConical size={14} />, label: "Quiz Arena", requiresSource: true },
+                  { id: "mindmap" as StudioTool, icon: <GitBranch size={14} />, label: "Mind Map", requiresSource: true },
+                  { id: "scholar" as StudioTool, icon: <BookOpen size={14} />, label: "NCBI Scholar", requiresSource: false },
+                ].map(tool => {
+                  const isLocked = tool.requiresSource && sources.length === 0
+                  return (
+                    <button
+                      key={tool.id}
+                      onClick={() => runStudioTool(tool.id)}
+                      className={`relative flex flex-col items-center gap-1.5 p-2.5 rounded-xl border text-xs font-bold transition-all ${
+                        activeTool === tool.id
+                          ? "bg-brand/10 border-brand/40 text-brand shadow-sm"
+                          : isLocked
+                            ? "bg-[#0a0a0a] border-[#181818] text-gray-600 hover:border-[#222]"
+                            : "bg-[#0d0d0d] border-[#1a1a1a] text-gray-400 hover:text-white hover:border-[#2b2b2b]"
+                      }`}
+                      title={isLocked ? "Upload a source first to unlock" : tool.label}
+                    >
+                      {isLocked && (
+                        <span className="absolute top-1.5 right-1.5 text-gray-600">
+                          <LockKeyhole size={10} />
+                        </span>
+                      )}
+                      <span className={activeTool === tool.id ? "text-brand" : isLocked ? "text-gray-600" : "text-gray-500"}>
+                        {tool.icon}
+                      </span>
+                      {tool.label}
+                    </button>
+                  )
+                })}
               </div>
+
+              {/* Notice when 0 sources are uploaded and an AI generation tool is selected */}
+              {sources.length === 0 && activeTool && activeTool !== "notes" && activeTool !== "scholar" && (
+                <div className="bg-[#0c0c0c] border border-brand/30 rounded-2xl p-5 text-center space-y-3 shadow-lg">
+                  <div className="w-10 h-10 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center mx-auto text-brand">
+                    <LockKeyhole size={18} />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+                      Upload Source Required
+                    </h4>
+                    <p className="text-[11px] text-gray-400 mt-1 leading-relaxed max-w-sm mx-auto">
+                      Studio tools (Flashcards, Quiz, Mind Maps) extract content directly from your uploaded lecture slides, PDFs, and notes. Upload at least one source to unlock!
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => fileInputRef.current?.click()}
+                    className="px-4 py-2 bg-brand hover:bg-red-700 text-white text-xs font-bold rounded-xl transition-all shadow-md inline-flex items-center gap-2"
+                  >
+                    <Upload size={13} /> Upload from PC / Phone
+                  </button>
+                </div>
+              )}
 
               {/* Studio Output Container */}
               <div className="space-y-3 pt-1">
                 {studioLoading && (
                   <div className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 flex items-center gap-2">
                     <Loader2 size={14} className="animate-spin text-brand flex-shrink-0" />
-                    <span className="text-xs text-gray-400">Generating based on uploaded materials…</span>
+                    <span className="text-xs text-gray-400">Generating study tool from your sources…</span>
                   </div>
                 )}
 
@@ -1535,7 +1676,7 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
                         </button>
                       </div>
                     </div>
-                    <div className="p-3 max-h-[50vh] overflow-auto">
+                    <div className={`p-3 overflow-auto ${studioExpanded ? "max-h-[75vh]" : "max-h-[50vh]"}`}>
                       <MindMapViewer text={studioOutput} />
                     </div>
                   </div>
@@ -1558,7 +1699,7 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
                         </button>
                       </div>
                     </div>
-                    <div className="p-3">
+                    <div className={`p-4 ${studioExpanded ? "max-w-2xl mx-auto" : ""}`}>
                       <FlashcardViewer text={studioOutput} />
                     </div>
                   </div>
@@ -1581,7 +1722,7 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
                         </button>
                       </div>
                     </div>
-                    <div className="p-3.5 max-h-[50vh] overflow-y-auto">
+                    <div className={`p-4 overflow-y-auto ${studioExpanded ? "max-h-[75vh] max-w-4xl mx-auto" : "max-h-[50vh]"}`}>
                       <RichMedicalMarkdown content={studioOutput} />
                     </div>
                   </div>
@@ -1624,11 +1765,13 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
                         value={noteContent}
                         onChange={e => handleNoteChange(e.target.value)}
                         placeholder={"Type your clinical notes here...\n\n## Pathophysiology\n- Key mechanism\n\n| Parameter | Normal | Finding |\n|---|---|---|\n| Diagnostic Marker | <1% | Elevated |"}
-                        className="w-full bg-transparent text-white text-xs leading-relaxed p-3.5 outline-none resize-none font-mono placeholder:text-gray-700"
-                        rows={16}
+                        className={`w-full bg-transparent text-white text-xs leading-relaxed p-3.5 outline-none resize-none font-mono placeholder:text-gray-700 ${
+                          studioExpanded ? "min-h-[55vh]" : ""
+                        }`}
+                        rows={studioExpanded ? 24 : 16}
                       />
                     ) : (
-                      <div className="p-3.5 max-h-[50vh] overflow-y-auto">
+                      <div className={`p-4 overflow-y-auto ${studioExpanded ? "min-h-[55vh] max-h-[70vh] max-w-4xl" : "max-h-[50vh]"}`}>
                         {noteContent ? (
                           <RichMedicalMarkdown content={noteContent} />
                         ) : (
@@ -1681,7 +1824,7 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
                       </button>
                     </div>
                     {scholarLoading && <div className="flex justify-center py-4"><Loader2 size={18} className="animate-spin text-brand" /></div>}
-                    <div className="space-y-2 max-h-[45vh] overflow-y-auto">
+                    <div className={`space-y-2 overflow-y-auto ${studioExpanded ? "max-h-[70vh]" : "max-h-[45vh]"}`}>
                       {scholarResults.map((item, i) => {
                         const title = item.title?.[0] || "NCBI Article"
                         const authors = item.author?.map((a: any) => a.family).slice(0, 2).join(", ") || "NLM"
