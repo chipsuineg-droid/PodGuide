@@ -36,7 +36,7 @@ const DEFAULT_DRIVE_FOLDERS: DriveFolder[] = [
     category: "Anatomy",
     icon: "🦴",
     item_count: 48,
-    color: "emerald"
+    color: "brand"
   },
   {
     id: "drive-2",
@@ -49,7 +49,7 @@ const DEFAULT_DRIVE_FOLDERS: DriveFolder[] = [
     category: "Pathology",
     icon: "🔬",
     item_count: 64,
-    color: "purple"
+    color: "brand"
   },
   {
     id: "drive-3",
@@ -62,7 +62,7 @@ const DEFAULT_DRIVE_FOLDERS: DriveFolder[] = [
     category: "Pharmacology",
     icon: "💊",
     item_count: 35,
-    color: "blue"
+    color: "brand"
   },
   {
     id: "drive-4",
@@ -75,7 +75,7 @@ const DEFAULT_DRIVE_FOLDERS: DriveFolder[] = [
     category: "Clinical Medicine",
     icon: "🏥",
     item_count: 52,
-    color: "amber"
+    color: "brand"
   }
 ]
 
@@ -106,7 +106,14 @@ export default function LibraryPage() {
       const { data: authData } = await supabase.auth.getUser()
       if (authData?.user) setUser(authData.user)
 
-      // Try fetching from database table curated_drive_folders
+      // 1. Load locally cached folders first
+      let localFolders: DriveFolder[] = []
+      try {
+        const stored = typeof window !== "undefined" ? localStorage.getItem("podguide_custom_drive_folders") : null
+        if (stored) localFolders = JSON.parse(stored)
+      } catch {}
+
+      // 2. Fetch from Supabase curated_drive_folders
       try {
         const { data, error } = await supabase
           .from("curated_drive_folders")
@@ -114,10 +121,19 @@ export default function LibraryPage() {
           .order("created_at", { ascending: false })
 
         if (!error && data && data.length > 0) {
-          setFolders(data)
+          const remoteIds = new Set(data.map(d => d.id))
+          const merged = [...data, ...localFolders.filter(f => !remoteIds.has(f.id))]
+          setFolders(merged)
+        } else if (localFolders.length > 0) {
+          const localIds = new Set(localFolders.map(d => d.id))
+          setFolders([...localFolders, ...DEFAULT_DRIVE_FOLDERS.filter(f => !localIds.has(f.id))])
         }
       } catch (err) {
         console.warn("curated_drive_folders table not queried:", err)
+        if (localFolders.length > 0) {
+          const localIds = new Set(localFolders.map(d => d.id))
+          setFolders([...localFolders, ...DEFAULT_DRIVE_FOLDERS.filter(f => !localIds.has(f.id))])
+        }
       } finally {
         setLoading(false)
       }
@@ -126,8 +142,14 @@ export default function LibraryPage() {
   }, [])
 
   const extractFolderId = (url: string) => {
-    const match = url.match(/folders\/([a-zA-Z0-9_-]+)/)
-    return match ? match[1] : url.trim()
+    const trimmed = url.trim()
+    const folderMatch = trimmed.match(/folders\/([a-zA-Z0-9_-]+)/)
+    if (folderMatch) return folderMatch[1]
+    const idMatch = trimmed.match(/[?&]id=([a-zA-Z0-9_-]+)/)
+    if (idMatch) return idMatch[1]
+    const fileMatch = trimmed.match(/file\/d\/([a-zA-Z0-9_-]+)/)
+    if (fileMatch) return fileMatch[1]
+    return trimmed
   }
 
   const handleAddFolder = async (e: React.FormEvent) => {
@@ -153,6 +175,13 @@ export default function LibraryPage() {
       item_count: 12,
       color: "brand"
     }
+
+    // Save to localStorage immediately
+    try {
+      const stored = localStorage.getItem("podguide_custom_drive_folders")
+      const list: DriveFolder[] = stored ? JSON.parse(stored) : []
+      localStorage.setItem("podguide_custom_drive_folders", JSON.stringify([newFolder, ...list.filter(f => f.id !== newFolder.id)]))
+    } catch {}
 
     // Try saving to Supabase
     try {
@@ -191,6 +220,15 @@ export default function LibraryPage() {
   const handleDeleteFolder = async (id: string, e: React.MouseEvent) => {
     e.stopPropagation()
     if (!confirm("Remove this Google Drive folder from the library?")) return
+
+    // Remove from localStorage
+    try {
+      const stored = localStorage.getItem("podguide_custom_drive_folders")
+      if (stored) {
+        const list: DriveFolder[] = JSON.parse(stored)
+        localStorage.setItem("podguide_custom_drive_folders", JSON.stringify(list.filter(f => f.id !== id)))
+      }
+    } catch {}
 
     try {
       await supabase.from("curated_drive_folders").delete().eq("id", id)
@@ -557,10 +595,10 @@ export default function LibraryPage() {
         </div>
       )}
 
-      {/* Modal: Folder Preview & Direct Access */}
+      {/* Modal: Folder Preview & Direct In-App Access */}
       {previewFolder && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#111] border border-[#222] rounded-2xl w-full max-w-2xl p-6 sm:p-8 space-y-6 relative shadow-2xl animate-in fade-in zoom-in-95 duration-150">
+        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+          <div className="bg-[#0e0e0e] border border-[#222] rounded-2xl w-full max-w-3xl my-6 p-6 sm:p-7 space-y-5 relative shadow-2xl animate-in fade-in zoom-in-95 duration-150">
             <button
               onClick={() => setPreviewFolder(null)}
               className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
@@ -568,52 +606,67 @@ export default function LibraryPage() {
               <X size={18} />
             </button>
 
-            <div className="flex items-start gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-[#161616] border border-[#262626] flex items-center justify-center text-3xl flex-shrink-0">
+            <div className="flex items-start gap-4 pr-8">
+              <div className="w-12 h-12 rounded-xl bg-[#161616] border border-[#262626] flex items-center justify-center text-2xl flex-shrink-0">
                 {previewFolder.icon || "📁"}
               </div>
               <div className="space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-brand bg-brand/10 px-2.5 py-0.5 rounded-full border border-brand/20">
-                  Google Drive Folder
+                <span className="text-[10px] font-bold uppercase tracking-wider text-brand bg-brand/10 px-2.5 py-0.5 rounded border border-brand/20">
+                  Google Drive Cloud Folder
                 </span>
                 <h2 className="text-xl font-bold text-white leading-tight mt-1">
                   {previewFolder.title}
                 </h2>
                 <p className="text-xs text-gray-400">
-                  {previewFolder.programme} &bull; {previewFolder.level}
+                  {previewFolder.programme} &bull; {previewFolder.level} &bull; {previewFolder.category}
                 </p>
               </div>
             </div>
 
-            <div className="bg-[#0c0c0c] border border-[#1f1f1f] rounded-xl p-4 text-xs text-gray-300 leading-relaxed space-y-3">
-              <h4 className="font-bold text-white uppercase text-[11px] tracking-wider">Curated Summary</h4>
-              <p>{previewFolder.description}</p>
-              <div className="flex items-center gap-2 pt-2 border-t border-white/5 text-[11px] text-gray-500">
+            {/* Embedded Live Google Drive View */}
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400 flex items-center gap-1.5">
+                  <Eye size={12} className="text-brand" /> Live Folder Contents Preview
+                </span>
+                <span className="text-[10px] text-gray-500">Google Drive Embedded Viewer</span>
+              </div>
+              <div className="w-full h-80 rounded-xl overflow-hidden border border-[#222] bg-[#080808]">
+                <iframe
+                  src={`https://drive.google.com/embeddedfolderview?id=${previewFolder.folder_id}#grid`}
+                  className="w-full h-full border-0"
+                  title={previewFolder.title}
+                  allow="fullscreen"
+                />
+              </div>
+            </div>
+
+            <div className="bg-[#0c0c0c] border border-[#1f1f1f] rounded-xl p-3.5 text-xs text-gray-300 space-y-1.5">
+              <p className="text-gray-400">{previewFolder.description}</p>
+              <div className="flex items-center gap-2 pt-1 border-t border-white/5 text-[11px] text-gray-500">
                 <span>Google Drive Folder ID:</span>
-                <code className="text-gray-300 font-mono bg-[#161616] px-2 py-0.5 rounded">
+                <code className="text-gray-300 font-mono bg-[#161616] px-1.5 py-0.5 rounded text-[10px]">
                   {previewFolder.folder_id}
                 </code>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-3">
+            <div className="flex flex-col sm:flex-row items-center gap-3 pt-1">
               <a
                 href={previewFolder.drive_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:flex-1 py-3 bg-brand hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-lg shadow-brand/25"
+                className="w-full sm:flex-1 py-2.5 bg-brand hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-md shadow-brand/25"
               >
                 <ExternalLink size={14} /> Open in Google Drive
               </a>
-
-              <a
-                href={`https://drive.google.com/embeddedfolderview?id=${previewFolder.folder_id}#list`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto px-5 py-3 bg-[#181818] hover:bg-[#222] border border-[#333] text-gray-300 hover:text-white rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-2"
+              <button
+                type="button"
+                onClick={() => setPreviewFolder(null)}
+                className="w-full sm:w-auto px-5 py-2.5 bg-[#181818] hover:bg-[#222] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-xl text-xs font-bold transition-colors"
               >
-                <Eye size={14} /> Open Embedded Drive View
-              </a>
+                Close
+              </button>
             </div>
           </div>
         </div>
