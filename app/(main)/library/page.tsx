@@ -37,71 +37,6 @@ const DEFAULT_DRIVE_FOLDERS: DriveFolder[] = [
     icon: "🔬",
     item_count: 24,
     color: "brand"
-  },
-  {
-    id: "drive-bms-3",
-    title: "BioMedical Sciences 3",
-    description: "Official shared Google Drive repository containing advanced pathology, medical microbiology, clinical biochemistry, and haematology resources for Biomedical Sciences Part 3.",
-    drive_url: "https://drive.google.com/drive/folders/1ZIXfs0gKrlpsXa3l-BSu9ze7v7zh1Mos?usp=drive_link",
-    folder_id: "1ZIXfs0gKrlpsXa3l-BSu9ze7v7zh1Mos",
-    programme: "Biomedical Science (HBMLS / BSc)",
-    level: "Part 3",
-    category: "Biomedical Sciences",
-    icon: "🧬",
-    item_count: 18,
-    color: "brand"
-  },
-  {
-    id: "drive-1",
-    title: "Gross Anatomy 3D Atlases & Cadaveric Dissections",
-    description: "High-resolution Netter anatomical cross-sections, osteology scans, and regional dissection video manuals.",
-    drive_url: "https://drive.google.com/drive/folders/1sample_anatomy_drive_folder",
-    folder_id: "1sample_anatomy_drive_folder",
-    programme: "Medicine (MBChB / MBBS)",
-    level: "Year 1 (Pre-clinical / Basic Sciences)",
-    category: "Anatomy",
-    icon: "🦴",
-    item_count: 48,
-    color: "brand"
-  },
-  {
-    id: "drive-2",
-    title: "Robbins Pathology Slides & CPC Case Vignettes",
-    description: "Microscopic histopathology tissue slides, cellular injury cases, and clinical pathology CPC conference reviews.",
-    drive_url: "https://drive.google.com/drive/folders/1sample_pathology_drive_folder",
-    folder_id: "1sample_pathology_drive_folder",
-    programme: "Biomedical Science (BSc)",
-    level: "Part 3",
-    category: "Pathology",
-    icon: "🔬",
-    item_count: 64,
-    color: "brand"
-  },
-  {
-    id: "drive-3",
-    title: "Clinical Pharmacology Formularies & Monograph Sheets",
-    description: "Hospital formularies, renal adjustment calculators, antimicrobial stewardship guidelines, and dosing protocols.",
-    drive_url: "https://drive.google.com/drive/folders/1sample_pharmacology_drive_folder",
-    folder_id: "1sample_pharmacology_drive_folder",
-    programme: "Pharmacy (BPharm / PharmD)",
-    level: "Part 3",
-    category: "Pharmacology",
-    icon: "💊",
-    item_count: 35,
-    color: "brand"
-  },
-  {
-    id: "drive-4",
-    title: "Internal Medicine & Surgery Ward Round Handbooks",
-    description: "Oxford Clinical Medicine pocket summaries, acute medical on-call algorithms, and surgical emergency flowcharts.",
-    drive_url: "https://drive.google.com/drive/folders/1sample_clinical_drive_folder",
-    folder_id: "1sample_clinical_drive_folder",
-    programme: "Medicine (MBChB / MBBS)",
-    level: "Year 4 (Clinical Rotations)",
-    category: "Clinical Medicine",
-    icon: "🏥",
-    item_count: 52,
-    color: "brand"
   }
 ]
 
@@ -147,19 +82,21 @@ export default function LibraryPage() {
           .order("created_at", { ascending: false })
 
         if (!error && data && data.length > 0) {
-          const remoteIds = new Set(data.map(d => d.id))
-          const merged = [...data, ...localFolders.filter(f => !remoteIds.has(f.id))]
-          setFolders(merged)
+          const realData = data.filter((d: DriveFolder) => !d.folder_id?.includes("sample_") && d.id !== "drive-bms-3")
+          const remoteIds = new Set(realData.map((d: DriveFolder) => d.id))
+          const validLocal = localFolders.filter(f => !f.folder_id?.includes("sample_") && f.id !== "drive-bms-3")
+          const merged = [...realData, ...validLocal.filter(f => !remoteIds.has(f.id))]
+          setFolders(merged.length > 0 ? merged : DEFAULT_DRIVE_FOLDERS)
         } else if (localFolders.length > 0) {
-          const localIds = new Set(localFolders.map(d => d.id))
-          setFolders([...localFolders, ...DEFAULT_DRIVE_FOLDERS.filter(f => !localIds.has(f.id))])
+          const validLocal = localFolders.filter(f => !f.folder_id?.includes("sample_") && f.id !== "drive-bms-3")
+          const localIds = new Set(validLocal.map(d => d.id))
+          const merged = [...validLocal, ...DEFAULT_DRIVE_FOLDERS.filter(f => !localIds.has(f.id))]
+          setFolders(merged.length > 0 ? merged : DEFAULT_DRIVE_FOLDERS)
+        } else {
+          setFolders(DEFAULT_DRIVE_FOLDERS)
         }
       } catch (err) {
-        console.warn("curated_drive_folders table not queried:", err)
-        if (localFolders.length > 0) {
-          const localIds = new Set(localFolders.map(d => d.id))
-          setFolders([...localFolders, ...DEFAULT_DRIVE_FOLDERS.filter(f => !localIds.has(f.id))])
-        }
+        setFolders(DEFAULT_DRIVE_FOLDERS)
       } finally {
         setLoading(false)
       }
@@ -357,11 +294,12 @@ export default function LibraryPage() {
         <div className="flex gap-1.5 overflow-x-auto pb-1 sm:pb-0">
           {[
             { id: "all", label: "All Folders" },
-            { id: "biomedical sciences", label: "🧬 Biomedical" },
-            { id: "anatomy", label: "🦴 Anatomy" },
-            { id: "pathology", label: "🔬 Pathology" },
-            { id: "pharmacology", label: "💊 Pharmacology" },
-            { id: "clinical medicine", label: "🏥 Clinical" },
+            ...Array.from(new Set(folders.map(f => f.category)))
+              .filter(Boolean)
+              .map(cat => ({
+                id: cat.toLowerCase(),
+                label: cat.toLowerCase().includes("biomedical") ? `🔬 ${cat}` : `📁 ${cat}`
+              }))
           ].map(cat => (
             <button
               key={cat.id}
