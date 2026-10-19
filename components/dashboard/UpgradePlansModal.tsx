@@ -87,13 +87,13 @@ export function UpgradePlansModal({ variant = "hero" }: { variant?: "hero" | "si
         /* ── SIDEBAR UPGRADE BUTTON ── */
         <button
           onClick={() => setOpen(true)}
-          className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg mt-2 border border-brand/40 bg-[#0f0f0f] hover:bg-[#181818] hover:border-brand text-white transition-all group"
+          className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg mb-1 text-gray-400 hover:text-white hover:bg-[#1a1a1a] transition-colors group"
         >
           <div className="flex items-center gap-3">
-            <Sparkles size={18} className="text-brand group-hover:rotate-12 transition-transform" />
-            <span className="font-semibold text-sm text-white">Upgrade</span>
+            <Sparkles size={18} />
+            <span className="font-semibold text-sm">Upgrade</span>
           </div>
-          <span className="text-[10px] font-bold uppercase tracking-wider bg-brand text-white px-1.5 py-0.5 rounded">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 group-hover:text-gray-300 bg-[#151515] px-1.5 py-0.5 rounded border border-[#222]">
             Soon
           </span>
         </button>
