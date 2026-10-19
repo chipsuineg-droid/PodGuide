@@ -7,6 +7,7 @@ import {
 } from "lucide-react"
 import { useEffect, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
+import { UpgradePlansModal } from "@/components/dashboard/UpgradePlansModal"
 
 const items = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -64,6 +65,7 @@ export function Sidebar() {
               <span className="font-semibold text-sm">{item.name}</span>
             </Link>
           ))}
+          <UpgradePlansModal variant="sidebar" />
         </nav>
       </div>
 

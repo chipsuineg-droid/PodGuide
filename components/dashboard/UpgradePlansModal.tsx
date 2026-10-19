@@ -78,22 +78,38 @@ const PLANS: Plan[] = [
   },
 ]
 
-export function UpgradePlansModal() {
+export function UpgradePlansModal({ variant = "hero" }: { variant?: "hero" | "sidebar" } = {}) {
   const [open, setOpen] = useState(false)
 
   return (
     <>
-      {/* ── HERO UPGRADE BUTTON ── */}
-      <button
-        onClick={() => setOpen(true)}
-        className="flex items-center gap-2 px-3.5 py-2 bg-brand hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-brand/20 active:scale-95 group"
-      >
-        <Sparkles size={14} className="text-white group-hover:rotate-12 transition-transform" />
-        <span>Upgrade</span>
-        <span className="text-[10px] font-bold uppercase tracking-wider bg-black/40 px-1.5 py-0.5 rounded border border-white/20">
-          Soon
-        </span>
-      </button>
+      {variant === "sidebar" ? (
+        /* ── SIDEBAR UPGRADE BUTTON ── */
+        <button
+          onClick={() => setOpen(true)}
+          className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg mt-2 border border-brand/40 bg-[#0f0f0f] hover:bg-[#181818] hover:border-brand text-white transition-all group"
+        >
+          <div className="flex items-center gap-3">
+            <Sparkles size={18} className="text-brand group-hover:rotate-12 transition-transform" />
+            <span className="font-semibold text-sm text-white">Upgrade</span>
+          </div>
+          <span className="text-[10px] font-bold uppercase tracking-wider bg-brand text-white px-1.5 py-0.5 rounded">
+            Soon
+          </span>
+        </button>
+      ) : (
+        /* ── HERO UPGRADE BUTTON ── */
+        <button
+          onClick={() => setOpen(true)}
+          className="flex items-center gap-2 px-3.5 py-2 bg-brand hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-brand/20 active:scale-95 group"
+        >
+          <Sparkles size={14} className="text-white group-hover:rotate-12 transition-transform" />
+          <span>Upgrade</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider bg-black/40 px-1.5 py-0.5 rounded border border-white/20">
+            Soon
+          </span>
+        </button>
+      )}
 
       {/* ── MODAL DIALOG ── */}
       {open && (
