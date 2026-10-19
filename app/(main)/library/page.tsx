@@ -26,6 +26,32 @@ interface DriveFolder {
 
 const DEFAULT_DRIVE_FOLDERS: DriveFolder[] = [
   {
+    id: "drive-bms-1-2",
+    title: "BioMedical Sciences 1 & 2",
+    description: "Official shared Google Drive repository containing lecture slide archives, laboratory practical guides, and examination materials for Biomedical Sciences Parts 1 & 2.",
+    drive_url: "https://drive.google.com/drive/folders/1ZIXfs0gKrlpsXa3l-BSu9ze7v7zh1Mos?usp=drive_link",
+    folder_id: "1ZIXfs0gKrlpsXa3l-BSu9ze7v7zh1Mos",
+    programme: "Biomedical Science (HBMLS / BSc)",
+    level: "Part 1 & 2",
+    category: "Biomedical Sciences",
+    icon: "🔬",
+    item_count: 24,
+    color: "brand"
+  },
+  {
+    id: "drive-bms-3",
+    title: "BioMedical Sciences 3",
+    description: "Official shared Google Drive repository containing advanced pathology, medical microbiology, clinical biochemistry, and haematology resources for Biomedical Sciences Part 3.",
+    drive_url: "https://drive.google.com/drive/folders/1ZIXfs0gKrlpsXa3l-BSu9ze7v7zh1Mos?usp=drive_link",
+    folder_id: "1ZIXfs0gKrlpsXa3l-BSu9ze7v7zh1Mos",
+    programme: "Biomedical Science (HBMLS / BSc)",
+    level: "Part 3",
+    category: "Biomedical Sciences",
+    icon: "🧬",
+    item_count: 18,
+    color: "brand"
+  },
+  {
     id: "drive-1",
     title: "Gross Anatomy 3D Atlases & Cadaveric Dissections",
     description: "High-resolution Netter anatomical cross-sections, osteology scans, and regional dissection video manuals.",
@@ -331,6 +357,7 @@ export default function LibraryPage() {
         <div className="flex gap-1.5 overflow-x-auto pb-1 sm:pb-0">
           {[
             { id: "all", label: "All Folders" },
+            { id: "biomedical sciences", label: "🧬 Biomedical" },
             { id: "anatomy", label: "🦴 Anatomy" },
             { id: "pathology", label: "🔬 Pathology" },
             { id: "pharmacology", label: "💊 Pharmacology" },
@@ -497,6 +524,7 @@ export default function LibraryPage() {
                     onChange={e => setFolderCategory(e.target.value)}
                     className="w-full bg-[#0c0c0c] border border-[#2b2b2b] focus:border-brand rounded-xl px-3 py-2.5 text-xs text-white outline-none"
                   >
+                    <option value="Biomedical Sciences">Biomedical Sciences</option>
                     <option value="Anatomy">Anatomy</option>
                     <option value="Pathology">Pathology</option>
                     <option value="Pharmacology">Pharmacology</option>
