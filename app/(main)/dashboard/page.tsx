@@ -11,7 +11,6 @@ import {
   HeartPulse, GraduationCap, Layers
 } from "lucide-react"
 import { ModuleIcon } from "@/components/curriculum/ModuleIcon"
-import { UpgradePlansModal } from "@/components/dashboard/UpgradePlansModal"
 
 function greeting() {
   const h = new Date().getHours()
@@ -139,15 +138,12 @@ export default async function DashboardPage() {
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest">{greeting()}</p>
           <h1 className="text-4xl font-display font-bold mt-1 text-white">{firstName}.</h1>
         </div>
-        <div className="flex items-center gap-2.5 self-start sm:self-auto flex-wrap">
-          <UpgradePlansModal />
-          {streak > 0 && (
-            <div className="flex items-center gap-2 bg-[#111] border border-brand/20 px-4 py-2 rounded-xl">
-              <Flame size={16} className="text-brand" />
-              <span className="font-bold text-white text-sm">{streak} day streak</span>
-            </div>
-          )}
-        </div>
+        {streak > 0 && (
+          <div className="flex items-center gap-2 bg-[#111] border border-brand/20 px-4 py-2 rounded-xl self-start sm:self-auto">
+            <Flame size={16} className="text-brand" />
+            <span className="font-bold text-white text-sm">{streak} day streak</span>
+          </div>
+        )}
       </div>
 
       {/* ── YEAR-GROUP SPECIFIC BANNER ── */}
