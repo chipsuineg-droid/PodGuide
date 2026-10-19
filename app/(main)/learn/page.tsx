@@ -15,10 +15,10 @@ const TYPE_ICONS: Record<string, string> = {
 }
 
 const TYPE_COLORS: Record<string, string> = {
-  pdf: "bg-red-500/10 text-red-400 border-red-500/20",
-  video: "bg-purple-500/10 text-purple-400 border-purple-500/20",
-  past_paper: "bg-blue-500/10 text-blue-400 border-blue-500/20",
-  other: "bg-gray-500/10 text-gray-400 border-gray-500/20",
+  pdf: "bg-brand/10 text-brand border-brand/20",
+  video: "bg-[#181818] text-gray-300 border-[#2b2b2b]",
+  past_paper: "bg-[#181818] text-gray-300 border-[#2b2b2b]",
+  other: "bg-[#181818] text-gray-400 border-[#222]",
 }
 
 export default function LearnPage() {

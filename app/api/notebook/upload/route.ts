@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { createClient } from "@/lib/supabase/server"
+import { PDFParse } from "pdf-parse"
 
 export const runtime = "nodejs"
 
@@ -7,9 +8,11 @@ export async function POST(req: NextRequest) {
   try {
     const supabase = await createClient()
 
-    // Verify auth
+    // Verify authentication
     const { data: { user } } = await supabase.auth.getUser()
-    if (!user) return NextResponse.json({ error: "Unauthorized. Please log in." }, { status: 401 })
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized. Please log in." }, { status: 401 })
+    }
 
     const formData = await req.formData()
     const file = formData.get("file") as File | null
@@ -23,24 +26,48 @@ export async function POST(req: NextRequest) {
     const fileType = file.type || "application/octet-stream"
     const fileSize = file.size
     const timestamp = Date.now()
-    const storagePath = `${user.id}/${notebookId}/${timestamp}_${fileName}`
+    const cleanFileName = fileName.replace(/[^a-zA-Z0-9._-]/g, "_")
+    const storagePath = `${user.id}/${notebookId}/${timestamp}_${cleanFileName}`
 
-    // Read file as buffer
+    // Read file buffer
     const arrayBuffer = await file.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
 
     let publicUrl: string = ""
     let textContent: string = ""
 
-    // Extract text for text-based files
-    const isText = fileType.startsWith("text/") || fileName.endsWith(".md") || fileName.endsWith(".txt") || fileName.endsWith(".json")
-    if (isText) {
+    // ── 1. Text Extraction Based on File Type ──
+    const lowerName = fileName.toLowerCase()
+    const isPdf = fileType.includes("pdf") || lowerName.endsWith(".pdf")
+    const isText = fileType.startsWith("text/") ||
+                   lowerName.endsWith(".txt") ||
+                   lowerName.endsWith(".md") ||
+                   lowerName.endsWith(".json") ||
+                   lowerName.endsWith(".csv")
+
+    if (isPdf) {
+      let parser: any = null
+      try {
+        parser = new PDFParse({ data: buffer })
+        await parser.load()
+        const parsed = await parser.getText()
+        textContent = typeof parsed === "string" ? parsed : (parsed?.text || "")
+      } catch (err: any) {
+        console.warn("PDF extraction warning:", err?.message)
+      } finally {
+        if (parser) {
+          try { await parser.destroy() } catch {}
+        }
+      }
+    } else if (isText) {
       try {
         textContent = new TextDecoder("utf-8").decode(buffer)
-      } catch {}
+      } catch (err: any) {
+        console.warn("Text decode warning:", err?.message)
+      }
     }
 
-    // 1. Try uploading to Supabase storage (notebooks or materials bucket)
+    // ── 2. Storage Upload (Supabase Storage) ──
     let uploadedSuccessfully = false
     const bucketsToTry = ["notebooks", "materials"]
 
@@ -60,29 +87,32 @@ export async function POST(req: NextRequest) {
           break
         }
       } catch (err) {
-        console.warn(`Bucket ${bucketName} upload attempt failed:`, err)
+        console.warn(`Bucket ${bucketName} upload failed:`, err)
       }
     }
 
-    // 2. Fallback: If storage bucket isn't available, store as Base64 Data URL so upload ALWAYS works
+    // Fallback: If storage bucket isn't active, store base64 data URL for small files
     if (!uploadedSuccessfully) {
-      const base64 = buffer.toString("base64")
-      publicUrl = `data:${fileType};base64,${base64}`
+      if (fileSize < 2 * 1024 * 1024) {
+        const base64 = buffer.toString("base64")
+        publicUrl = `data:${fileType};base64,${base64}`
+      } else {
+        publicUrl = ""
+      }
     }
 
-    // 3. Save document record in notebook_documents
+    // ── 3. Normalized Document Type ──
+    const normalizedType: "pdf" | "text" = isPdf ? "pdf" : "text"
+
+    // ── 4. Save Record in Supabase notebook_documents ──
     const docPayload: any = {
       notebook_id: notebookId,
       file_name: fileName,
-      file_url: publicUrl.length > 500000 ? "" : publicUrl, // Keep DB payload safe if huge
-      file_type: fileType.includes("pdf") ? "pdf" : fileType.includes("image") ? "pdf" : "text",
+      file_url: publicUrl.length > 250000 ? "" : publicUrl,
+      file_type: normalizedType,
       file_size: fileSize,
       processing_status: "ready",
-    }
-
-    // If we have text content extracted, save it
-    if (textContent) {
-      docPayload.text_content = textContent.slice(0, 100000)
+      text_content: textContent ? textContent.slice(0, 150000) : null,
     }
 
     const { data: doc, error: dbError } = await supabase
@@ -99,19 +129,24 @@ export async function POST(req: NextRequest) {
           notebook_id: notebookId,
           file_name: fileName,
           file_url: publicUrl,
-          file_type: docPayload.file_type,
+          file_type: normalizedType,
           file_size: fileSize,
           created_at: new Date().toISOString(),
-          text_content: textContent,
+          text_content: textContent ? textContent.slice(0, 150000) : "",
         },
         publicUrl,
-        message: "Document registered",
+        extractedChars: textContent.length,
+        message: "Document registered in memory",
       })
     }
 
     return NextResponse.json({
-      doc,
+      doc: {
+        ...doc,
+        text_content: textContent ? textContent.slice(0, 150000) : doc.text_content,
+      },
       publicUrl,
+      extractedChars: textContent.length,
       success: true,
     })
   } catch (err: any) {

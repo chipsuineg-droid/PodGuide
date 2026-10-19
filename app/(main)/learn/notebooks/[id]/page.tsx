@@ -14,7 +14,7 @@ import {
   Maximize2, Minimize2, GitBranch, Brain, PenLine,
   BookOpen, FlaskConical, ChevronRight, ChevronDown, Wand2,
   HardDrive, ChevronUp, RotateCcw, ArrowRight, ArrowLeft,
-  Save, Clipboard, Table as TableIcon, FileText
+  Save, Clipboard, Table as TableIcon, FileText, Eye, CheckCircle2
 } from "lucide-react"
 import { toast } from "sonner"
 
@@ -24,6 +24,7 @@ type Message = {
   content: string
   id: string
 }
+
 type Source = {
   id: string
   name: string
@@ -31,7 +32,9 @@ type Source = {
   url?: string
   content?: string
   created_at: string
+  size?: number
 }
+
 type Collaborator = { email: string; access: "view" | "edit" }
 type StudioTool = "mindmap" | "flashcards" | "quiz" | "notes" | "scholar" | null
 type AddSourceMode = "file" | "link" | "paste" | "drive" | null
@@ -133,7 +136,7 @@ function RichMedicalMarkdown({ content }: { content: string }) {
           ),
           h2: ({ children }) => (
             <div className="mt-5 mb-2.5 pb-1 border-b border-[#1a1a1a] flex items-center gap-2">
-              <span className="w-1 h-4 bg-brand/80 rounded-full inline-block" />
+              <span className="w-1 h-4 bg-brand rounded-full inline-block" />
               <h2 className="text-sm font-bold text-white tracking-wide uppercase text-xs m-0">{children}</h2>
             </div>
           ),
@@ -156,7 +159,7 @@ function RichMedicalMarkdown({ content }: { content: string }) {
             <li className="leading-relaxed pl-1">{children}</li>
           ),
           blockquote: ({ children }) => (
-            <div className="my-3 p-3.5 bg-[#0f0f0f] border-l-2 border-brand rounded-r-xl text-xs text-gray-300 italic shadow-sm">
+            <div className="my-3 p-3.5 bg-[#0d0d0d] border-l-2 border-brand rounded-r-xl text-xs text-gray-300 italic shadow-sm">
               {children}
             </div>
           ),
@@ -264,7 +267,7 @@ function MindMapViewer({ text }: { text: string }) {
 
   if (nodes.length === 0) {
     return (
-      <div className="text-center py-6 text-xs text-gray-600">
+      <div className="text-center py-6 text-xs text-gray-500">
         Could not parse mind map. Try generating again.
       </div>
     )
@@ -273,10 +276,10 @@ function MindMapViewer({ text }: { text: string }) {
   return (
     <div>
       <div className="flex items-center gap-2 mb-3">
-        <button onClick={expandAll} className="text-[10px] font-bold text-gray-500 hover:text-white px-2.5 py-1 rounded-lg bg-[#111] border border-[#1f1f1f] transition-colors">
+        <button onClick={expandAll} className="text-[10px] font-bold text-gray-400 hover:text-white px-2.5 py-1 rounded-lg bg-[#111] border border-[#1f1f1f] transition-colors">
           Expand All
         </button>
-        <button onClick={collapseAll} className="text-[10px] font-bold text-gray-500 hover:text-white px-2.5 py-1 rounded-lg bg-[#111] border border-[#1f1f1f] transition-colors">
+        <button onClick={collapseAll} className="text-[10px] font-bold text-gray-400 hover:text-white px-2.5 py-1 rounded-lg bg-[#111] border border-[#1f1f1f] transition-colors">
           Collapse All
         </button>
       </div>
@@ -300,7 +303,7 @@ function FlashcardViewer({ text }: { text: string }) {
 
   if (cards.length === 0) {
     return (
-      <div className="text-center py-6 text-xs text-gray-600">
+      <div className="text-center py-6 text-xs text-gray-500">
         No flashcards found. Try generating again.
       </div>
     )
@@ -311,7 +314,7 @@ function FlashcardViewer({ text }: { text: string }) {
 
   return (
     <div className="space-y-3">
-      <div className="flex items-center justify-between text-[10px] font-bold text-gray-600">
+      <div className="flex items-center justify-between text-[10px] font-bold text-gray-500">
         <span>CARD {current + 1} OF {cards.length}</span>
         <span className="text-brand">{mastered.size} MASTERED</span>
       </div>
@@ -344,7 +347,7 @@ function FlashcardViewer({ text }: { text: string }) {
               <span className="text-[9px] font-black uppercase tracking-widest text-gray-500 block mb-1">Clinical Question</span>
               <p className="text-xs font-bold text-white leading-relaxed">{card.q}</p>
             </div>
-            <p className="text-[10px] text-gray-600 font-medium mt-3">Tap anywhere to flip card</p>
+            <p className="text-[10px] text-gray-500 font-medium mt-3">Tap anywhere to flip card</p>
           </div>
 
           {/* Back */}
@@ -356,7 +359,7 @@ function FlashcardViewer({ text }: { text: string }) {
               <span className="text-[9px] font-black uppercase tracking-widest text-brand block mb-1">Answer & Rationale</span>
               <p className="text-xs text-gray-200 leading-relaxed">{card.a}</p>
             </div>
-            <p className="text-[10px] text-gray-600 font-medium mt-3">Tap to flip back</p>
+            <p className="text-[10px] text-gray-500 font-medium mt-3">Tap to flip back</p>
           </div>
         </div>
       </div>
@@ -382,14 +385,14 @@ function FlashcardViewer({ text }: { text: string }) {
             className={`text-[10px] font-bold px-3 py-1.5 rounded-xl border transition-colors ${
               isMastered
                 ? "bg-brand/10 border-brand/30 text-brand"
-                : "bg-[#111] border-[#1f1f1f] text-gray-600 hover:text-white"
+                : "bg-[#111] border-[#1f1f1f] text-gray-500 hover:text-white"
             }`}
           >
             {isMastered ? "✓ Mastered" : "Mark Mastered"}
           </button>
           <button
             onClick={() => { setFlipped(false); setCurrent(0); setMastered(new Set()) }}
-            className="p-1.5 text-gray-600 hover:text-white transition-colors"
+            className="p-1.5 text-gray-500 hover:text-white transition-colors"
             title="Restart"
           >
             <RotateCcw size={12} />
@@ -436,8 +439,8 @@ function AIMessage({
       <div className="flex-1 min-w-0 bg-[#0d0d0d] border border-[#1a1a1a] rounded-2xl p-5 shadow-sm">
         <div className="flex items-center justify-between mb-3 border-b border-[#181818] pb-2">
           <div className="flex items-center gap-2">
-            <span className="text-[10px] font-black uppercase tracking-widest text-brand">PodGuide AI</span>
-            <span className="text-[10px] text-gray-600">· NCBI & UpToDate Synthesis</span>
+            <span className="text-[10px] font-black uppercase tracking-widest text-brand">PodGuide AI Mentor</span>
+            <span className="text-[10px] text-gray-500">· Evidence & Source Synthesis</span>
           </div>
         </div>
 
@@ -447,24 +450,24 @@ function AIMessage({
         <div className="flex items-center gap-3 mt-4 pt-3 border-t border-[#181818]">
           <button
             onClick={handleCopy}
-            className="flex items-center gap-1.5 text-[10px] font-bold text-gray-500 hover:text-white transition-colors"
+            className="flex items-center gap-1.5 text-[10px] font-bold text-gray-400 hover:text-white transition-colors"
           >
             {copiedMsg ? <Check size={11} className="text-brand" /> : <Clipboard size={11} />}
             {copiedMsg ? "Copied" : "Copy Text"}
           </button>
           <span className="text-[#252525]">·</span>
           <button
-            onClick={() => onSaveAsSource(message.content)}
-            className="flex items-center gap-1.5 text-[10px] font-bold text-gray-500 hover:text-brand transition-colors"
+            onClick={() => onSendToNotes(message.content)}
+            className="flex items-center gap-1.5 text-[10px] font-bold text-gray-400 hover:text-white transition-colors"
           >
-            <Save size={11} /> Save as Source
+            <PenLine size={11} /> Add to Notes
           </button>
           <span className="text-[#252525]">·</span>
           <button
-            onClick={() => onSendToNotes(message.content)}
-            className="flex items-center gap-1.5 text-[10px] font-bold text-gray-500 hover:text-white transition-colors"
+            onClick={() => onSaveAsSource(message.content)}
+            className="flex items-center gap-1.5 text-[10px] font-bold text-gray-400 hover:text-brand transition-colors"
           >
-            <PenLine size={11} /> Add to Notes
+            <Save size={11} /> Save as Source
           </button>
         </div>
       </div>
@@ -472,7 +475,7 @@ function AIMessage({
   )
 }
 
-// ─── Main Component ──────────────────────────────────────────
+// ─── Main Notebook Page ──────────────────────────────────────
 export default function NotebookPage({ params }: { params: Promise<{ id: string }> }) {
   const supabase = createClient()
   const searchParams = useSearchParams()
@@ -486,8 +489,9 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
   const [noteContent, setNoteContent] = useState("")
   const [noteTitle, setNoteTitle] = useState("")
   const [saving, setSaving] = useState(false)
+  const [lastSavedTime, setLastSavedTime] = useState<string>("")
   const [isPublic, setIsPublic] = useState(false)
-  const [notePreview, setNotePreview] = useState(true) // Default to formatted preview mode
+  const [notePreview, setNotePreview] = useState(true)
   const saveTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   // Sources
@@ -498,6 +502,8 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
   const [driveUrl, setDriveUrl] = useState("")
   const [addingSource, setAddingSource] = useState<AddSourceMode>(null)
   const [sourcesCollapsed, setSourcesCollapsed] = useState(false)
+  const [viewingSource, setViewingSource] = useState<Source | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   // Chat
   const [messages, setMessages] = useState<Message[]>([])
@@ -507,7 +513,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
 
   // Studio
   const [studioCollapsed, setStudioCollapsed] = useState(false)
-  const [activeTool, setActiveTool] = useState<StudioTool>(null)
+  const [activeTool, setActiveTool] = useState<StudioTool>("notes")
   const [studioLoading, setStudioLoading] = useState(false)
   const [studioOutput, setStudioOutput] = useState("")
   const [studioMode, setStudioMode] = useState<string>("")
@@ -550,6 +556,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
           type: d.file_type === "link" ? "link" : d.file_type === "drive" ? "drive" : d.file_type === "text" ? "text" : "pdf",
           url: d.file_url,
           content: d.text_content,
+          size: d.file_size,
           created_at: d.created_at
         })))
       }
@@ -564,20 +571,23 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
   const autoSave = useCallback(async (content: string, title: string) => {
     if (!id) return
     setSaving(true)
-    await supabase.from("notebooks").update({ content, title, updated_at: new Date().toISOString() }).eq("id", id)
+    const { error } = await supabase.from("notebooks").update({ content, title, updated_at: new Date().toISOString() }).eq("id", id)
     setSaving(false)
+    if (!error) {
+      setLastSavedTime(new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }))
+    }
   }, [id])
 
   const handleNoteChange = (val: string) => {
     setNoteContent(val)
     if (saveTimeout.current) clearTimeout(saveTimeout.current)
-    saveTimeout.current = setTimeout(() => autoSave(val, noteTitle), 1500)
+    saveTimeout.current = setTimeout(() => autoSave(val, noteTitle), 1200)
   }
 
   const handleTitleChange = (val: string) => {
     setNoteTitle(val)
     if (saveTimeout.current) clearTimeout(saveTimeout.current)
-    saveTimeout.current = setTimeout(() => autoSave(noteContent, val), 1500)
+    saveTimeout.current = setTimeout(() => autoSave(noteContent, val), 1200)
   }
 
   const manualSaveNotes = async () => {
@@ -592,13 +602,15 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
     if (error) {
       toast.error("Failed to save notes: " + error.message)
     } else {
-      toast.success("Notes saved to your Learn dashboard")
+      const timeStr = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+      setLastSavedTime(timeStr)
+      toast.success(`Notes saved successfully (${timeStr})`)
     }
   }
 
   const downloadNotesFile = () => {
-    const filename = `${noteTitle.trim() || "PodGuide_Notebook"}.md`
-    const blob = new Blob([noteContent || `# ${noteTitle}\n\nNo content written yet.`], { type: "text/markdown;charset=utf-8;" })
+    const filename = `${noteTitle.trim() || "PodGuide_Notes"}.md`
+    const blob = new Blob([noteContent || `# ${noteTitle}\n\nNo notes recorded yet.`], { type: "text/markdown;charset=utf-8;" })
     const url = URL.createObjectURL(blob)
     const a = document.createElement("a")
     a.href = url
@@ -607,7 +619,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
     a.click()
     document.body.removeChild(a)
     URL.revokeObjectURL(url)
-    toast.success(`Downloaded "${filename}" to your PC`)
+    toast.success(`Downloaded "${filename}"`)
   }
 
   const insertFormatting = (syntax: string, wrap = false) => {
@@ -625,40 +637,22 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
     }, 0)
   }
 
-  // ── Sharing ──
-  const togglePublic = async () => {
-    const newVal = !isPublic
-    setIsPublic(newVal)
-    await supabase.from("notebooks").update({ is_shared: newVal }).eq("id", id)
-    toast.success(newVal ? "Published to community" : "Set to private")
+  const insertTableTemplate = () => {
+    const template = "\n\n| Parameter | Finding | Clinical Significance |\n|---|---|---|\n| Diagnostic Marker | Value | Interpretation |\n\n"
+    handleNoteChange(noteContent + template)
   }
 
-  const handleDelete = async () => {
-    if (!confirm("Delete this notebook permanently?")) return
-    setDeleting(true)
-    await supabase.from("notebooks").delete().eq("id", id)
-    window.location.href = "/learn"
+  const insertClinicalPearl = () => {
+    const template = "\n\n> **Clinical Pearl:** Always consider underlying secondary etiologies before confirming idiopathic diagnosis.\n\n"
+    handleNoteChange(noteContent + template)
   }
 
-  const copyShareLink = () => {
-    navigator.clipboard.writeText(window.location.href.replace("?fullscreen=true", ""))
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
-
-  const inviteCollaborator = () => {
-    if (!inviteEmail.trim()) return
-    setCollaborators(prev => [...prev, { email: inviteEmail.trim(), access: "view" }])
-    setInviteEmail("")
-    toast.success(`Invite sent to ${inviteEmail}`)
-  }
-
-  // ── Robust File Upload via Server API ──
-  const onDrop = useCallback(async (acceptedFiles: File[]) => {
-    if (!acceptedFiles.length) return
+  // ── Robust File Upload via Server API (PC & Phone) ──
+  const uploadFiles = async (files: File[]) => {
+    if (!files.length) return
     setUploading(true)
 
-    for (const file of acceptedFiles) {
+    for (const file of files) {
       try {
         const formData = new FormData()
         formData.append("file", file)
@@ -676,25 +670,40 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
         }
 
         const doc = data.doc
-        const docType = file.type.includes("pdf") ? "pdf" : file.type.includes("image") ? "pdf" : "text"
-        setSources(prev => [{
+        const docType = file.type.includes("pdf") || file.name.toLowerCase().endsWith(".pdf") ? "pdf" : "text"
+        const newSource: Source = {
           id: doc?.id || `doc-${Date.now()}`,
           name: file.name,
           type: docType,
           url: data.publicUrl || doc?.file_url || "",
-          content: doc?.text_content || "",
+          content: doc?.text_content || data.extractedChars ? doc?.text_content : "",
+          size: file.size,
           created_at: new Date().toISOString()
-        }, ...prev])
+        }
 
-        toast.success(`Uploaded: ${file.name}`)
+        setSources(prev => [newSource, ...prev])
+        const charsCount = data.extractedChars || doc?.text_content?.length || 0
+        const wordCount = charsCount ? Math.round(charsCount / 5) : 0
+        toast.success(`Uploaded "${file.name}"${wordCount > 0 ? ` (~${wordCount.toLocaleString()} words extracted)` : ""}`)
       } catch (err: any) {
-        toast.error(`Upload failed: ${err.message || "Network error"}`)
+        toast.error(`Upload error: ${err.message || "Network issue"}`)
       }
     }
 
     setUploading(false)
     setAddingSource(null)
+  }
+
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    uploadFiles(acceptedFiles)
   }, [id])
+
+  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      uploadFiles(Array.from(e.target.files))
+      e.target.value = ""
+    }
+  }
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -732,13 +741,13 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
 
   const addPasteSource = async () => {
     if (!pasteText.trim()) return
-    const title = "Notes Excerpt — " + pasteText.slice(0, 25).replace(/\n/g, " ") + "…"
+    const title = "Pasted Notes — " + pasteText.slice(0, 25).replace(/\n/g, " ") + "…"
     const { data: doc } = await supabase.from("notebook_documents").insert({
       notebook_id: id, file_name: title, file_url: "", file_type: "text",
       file_size: pasteText.length, processing_status: "ready", text_content: pasteText
     }).select().single()
     if (doc) setSources(prev => [{
-      id: doc.id, name: title, type: "paste", content: pasteText, created_at: doc.created_at
+      id: doc.id, name: title, type: "paste", content: pasteText, size: pasteText.length, created_at: doc.created_at
     }, ...prev])
     setPasteText("")
     setAddingSource(null)
@@ -768,10 +777,11 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
       name: title,
       type: "paste",
       content,
+      size: content.length,
       created_at: doc.created_at
     }, ...prev])
 
-    toast.success("Saved to your Sources panel")
+    toast.success("Saved into your Sources panel")
     if (window.innerWidth < 1024) setMobilePanel("sources")
   }
 
@@ -785,7 +795,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
     handleNoteChange(updated)
     setActiveTool("notes")
     if (window.innerWidth < 1024) setMobilePanel("studio")
-    toast.success("Appended to notes and saved")
+    toast.success("Appended to your notes")
   }
 
   const deleteSource = async (sourceId: string) => {
@@ -794,9 +804,23 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
     toast.success("Source removed")
   }
 
+  // ── Build Context with Full Extracted Source Text ──
+  const buildContext = (): string => {
+    const sourcesSummary = sources.map(s => {
+      const contentSnippet = s.content ? s.content.slice(0, 15000) : (s.url ? `URL: ${s.url}` : "")
+      return `=== SOURCE: ${s.name} (${s.type.toUpperCase()}) ===\n${contentSnippet}`
+    }).join("\n\n")
+
+    return `NOTEBOOK TITLE: "${noteTitle || "Medical Study Notebook"}"
+SUBJECT AREA: "${notebook?.subject_area || "Clinical Medicine"}"
+
+${noteContent ? `STUDENT'S EXISTING NOTES:\n${noteContent.slice(0, 10000)}\n\n` : ""}
+${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummary}` : "No uploaded source files attached yet."}`
+  }
+
   // ── AI Request ──
   const callAI = async (prompt: string, mode?: string): Promise<string> => {
-    const context = `Notebook: "${noteTitle}"\nContent:\n${noteContent}\n\nSources:\n${sources.map(s => `- ${s.name}: ${s.content?.slice(0, 300) || s.url || ""}`).join("\n") || "No external sources attached."}`
+    const context = buildContext()
     const res = await fetch("/api/notebook-ai", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -815,22 +839,26 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
     const userMessage: Message = { role: "user", content: userMsg, id: nextId() }
     setMessages(m => [...m, userMessage])
     setAiLoading(true)
+
     try {
-      const context = `Notebook: "${noteTitle}"\nContent:\n${noteContent}\n\nSources:\n${sources.map(s => `- ${s.name}: ${s.content?.slice(0, 300) || s.url || ""}`).join("\n") || "No external sources."}`
+      const context = buildContext()
       const res = await fetch("/api/notebook-ai", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: [...messages, userMessage].map(m => ({ role: m.role, content: m.content })), context })
+        body: JSON.stringify({
+          messages: [...messages, userMessage].map(m => ({ role: m.role, content: m.content })),
+          context
+        })
       })
       const { text } = await res.json()
-      setMessages(m => [...m, { role: "assistant", content: text, id: nextId() }])
+      setMessages(m => [...m, { role: "assistant", content: text || "Ready to assist.", id: nextId() }])
     } catch {
-      setMessages(m => [...m, { role: "assistant", content: "I'm having trouble connecting. Please check your network and try again.", id: nextId() }])
+      setMessages(m => [...m, { role: "assistant", content: "I'm having trouble connecting to the medical AI service. Please verify your connection and try again.", id: nextId() }])
     }
     setAiLoading(false)
   }
 
-  // ── Studio Tools ──
+  // ── Studio Tools Grounded in Uploaded Sources ──
   const runStudioTool = async (tool: StudioTool) => {
     if (!tool || tool === "scholar" || tool === "notes") {
       setActiveTool(tool)
@@ -842,17 +870,22 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
     setStudioMode(tool)
     setStudioLoading(true)
 
+    const sourceNames = sources.map(s => s.name).join(", ")
+    const sourceConstraint = sources.length > 0
+      ? `Base your generation strictly on the attached sources (${sourceNames}) and notes provided.`
+      : `Base your generation on the notebook topic "${noteTitle || "Clinical Medicine"}" using standard clinical guidelines.`
+
     const prompts: Record<string, string> = {
-      mindmap: `Create an extensive, structured mind map based on: "${noteTitle || "the notebook content"}". Include clinical mechanisms, diagnostic criteria, and management algorithms.`,
-      flashcards: `Generate 10 high-yield clinical flashcards from the notebook content regarding "${noteTitle || "this topic"}".`,
-      quiz: `Generate 5 clinical MCQ exam questions with rationale referencing standard textbooks and NCBI for "${noteTitle || "this topic"}".`,
+      mindmap: `Create an extensive, structured hierarchical mind map outline based on: "${noteTitle || "the notebook content"}". ${sourceConstraint} Include clinical mechanisms, diagnostic criteria, and management algorithms.`,
+      flashcards: `Generate 10 high-yield clinical flashcards directly testing the content in the uploaded sources and notes on "${noteTitle || "this topic"}". ${sourceConstraint} Provide clear question and answer pairs.`,
+      quiz: `Generate 5 clinical MCQ exam questions with full explanations directly based on the uploaded sources and notes on "${noteTitle || "this topic"}". ${sourceConstraint}`,
     }
 
     try {
       const result = await callAI(prompts[tool], tool)
       setStudioOutput(result)
     } catch {
-      setStudioOutput("Failed to generate. Please check your AI connection.")
+      setStudioOutput("Failed to generate study tool. Please verify your connection and retry.")
     }
     setStudioLoading(false)
   }
@@ -891,6 +924,33 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
     toast.success("Citation appended to notes")
   }
 
+  const togglePublic = async () => {
+    const newVal = !isPublic
+    setIsPublic(newVal)
+    await supabase.from("notebooks").update({ is_shared: newVal }).eq("id", id)
+    toast.success(newVal ? "Published to community" : "Set to private")
+  }
+
+  const handleDelete = async () => {
+    if (!confirm("Delete this notebook permanently?")) return
+    setDeleting(true)
+    await supabase.from("notebooks").delete().eq("id", id)
+    window.location.href = "/learn"
+  }
+
+  const copyShareLink = () => {
+    navigator.clipboard.writeText(window.location.href.replace("?fullscreen=true", ""))
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  const inviteCollaborator = () => {
+    if (!inviteEmail.trim()) return
+    setCollaborators(prev => [...prev, { email: inviteEmail.trim(), access: "view" }])
+    setInviteEmail("")
+    toast.success(`Invite sent to ${inviteEmail}`)
+  }
+
   const toggleFullscreen = () => {
     window.location.href = isFullscreen
       ? `/learn/notebooks/${id}`
@@ -919,8 +979,33 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
   const sourceIcon = (type: Source["type"]) =>
     type === "pdf" ? "📄" : type === "link" ? "🔗" : type === "drive" ? "📁" : "📝"
 
+  // Dynamic starter prompts based on notebook and sources
+  const dynamicWorkflowPrompts = sources.length > 0 ? [
+    `Summarise "${sources[0].name.slice(0, 28)}" for high-yield revision`,
+    `What are the core clinical pearls and mechanisms in my uploaded materials?`,
+    `Create a diagnostic & management comparison table from my sources`,
+    `Quiz me with 3 high-yield questions on these materials`,
+  ] : [
+    `Teach me the core concepts of ${noteTitle || "this topic"}`,
+    `Compare hallmark presentations and differential diagnoses`,
+    `Generate an evidence-based clinical management protocol`,
+    `Quiz me with 3 exam-style clinical scenarios`,
+  ]
+
+  const noteWordCount = noteContent.trim() ? noteContent.trim().split(/\s+/).length : 0
+
   return (
     <div className={`flex flex-col bg-[#0a0a0a] ${isFullscreen ? "fixed inset-0 z-[200]" : "h-[calc(100vh-4rem)] -mx-4 lg:-mx-8 -mt-4 lg:-mt-8"}`}>
+
+      {/* Hidden Native File Input for 100% Reliable Mobile & PC Upload */}
+      <input
+        type="file"
+        ref={fileInputRef}
+        multiple
+        accept=".pdf,.doc,.docx,.txt,.md,.png,.jpg,.jpeg,.webp"
+        onChange={handleFileInputChange}
+        className="hidden"
+      />
 
       {/* ── TOP NAV BAR ── */}
       <div className="h-12 bg-[#0a0a0a] border-b border-[#181818] flex items-center px-4 gap-3 flex-shrink-0">
@@ -937,16 +1022,21 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
           placeholder="Untitled Notebook"
         />
 
-        {saving && (
-          <span className="text-[10px] text-gray-500 flex-shrink-0 flex items-center gap-1">
+        {saving ? (
+          <span className="text-[10px] text-gray-400 flex-shrink-0 flex items-center gap-1">
             <Loader2 size={10} className="animate-spin text-brand" /> auto-saving
           </span>
-        )}
+        ) : lastSavedTime ? (
+          <span className="text-[10px] text-gray-500 flex-shrink-0 hidden sm:inline">
+            Saved {lastSavedTime}
+          </span>
+        ) : null}
 
         <div className="flex items-center gap-2 flex-shrink-0">
           <button
             onClick={manualSaveNotes}
-            className="flex items-center gap-1.5 text-[10px] font-bold px-3 py-1.5 rounded-xl bg-brand/10 border border-brand/30 text-brand hover:bg-brand hover:text-white transition-all shadow-sm"
+            disabled={saving}
+            className="flex items-center gap-1.5 text-[10px] font-bold px-3 py-1.5 rounded-xl bg-brand text-white hover:bg-red-700 transition-all shadow-sm"
           >
             <Save size={11} /> Save Notes
           </button>
@@ -975,11 +1065,11 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
             <Share2 size={11} /> Share
           </button>
 
-          <button onClick={handleDelete} disabled={deleting} className="p-1.5 text-gray-600 hover:text-brand transition-colors" title="Delete notebook">
+          <button onClick={handleDelete} disabled={deleting} className="p-1.5 text-gray-500 hover:text-brand transition-colors" title="Delete notebook">
             {deleting ? <Loader2 size={13} className="animate-spin" /> : <Trash2 size={13} />}
           </button>
 
-          <button onClick={toggleFullscreen} className="p-1.5 text-gray-600 hover:text-white transition-colors" title={isFullscreen ? "Exit Fullscreen" : "Fullscreen Focus"}>
+          <button onClick={toggleFullscreen} className="p-1.5 text-gray-500 hover:text-white transition-colors" title={isFullscreen ? "Exit Fullscreen" : "Fullscreen Focus"}>
             {isFullscreen ? <Minimize2 size={13} /> : <Maximize2 size={13} />}
           </button>
         </div>
@@ -990,13 +1080,13 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
         {([
           { id: "sources" as const, label: "Sources", count: sources.length as number | undefined },
           { id: "chat" as const, label: "AI Mentor", count: undefined as number | undefined },
-          { id: "studio" as const, label: "Studio Tools", count: undefined as number | undefined },
+          { id: "studio" as const, label: "Studio & Notes", count: undefined as number | undefined },
         ]).map(p => (
           <button
             key={p.id}
             onClick={() => setMobilePanel(p.id)}
             className={`flex-1 py-2.5 text-xs font-bold transition-colors border-b-2 ${
-              mobilePanel === p.id ? "text-white border-brand" : "text-gray-600 border-transparent"
+              mobilePanel === p.id ? "text-white border-brand" : "text-gray-500 border-transparent"
             }`}
           >
             {p.label}{p.count !== undefined ? ` (${p.count})` : ""}
@@ -1011,41 +1101,58 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
         {/* ══════════════════════════════════════════ */}
         <div className={`
           ${mobilePanel === "sources" ? "flex" : "hidden"} lg:flex flex-col border-r border-[#181818] bg-[#0a0a0a] flex-shrink-0 transition-all duration-200
-          ${sourcesCollapsed ? "w-0 lg:w-12 overflow-hidden" : "w-full lg:w-64"}
+          ${sourcesCollapsed ? "w-0 lg:w-12 overflow-hidden" : "w-full lg:w-72"}
         `}>
           <div className="flex items-center justify-between px-4 py-3 border-b border-[#181818] flex-shrink-0">
             {!sourcesCollapsed && (
-              <span className="text-xs font-black text-white uppercase tracking-widest">
-                Sources <span className="text-gray-600 font-normal text-[10px]">({sources.length})</span>
+              <span className="text-xs font-black text-white uppercase tracking-widest flex items-center gap-2">
+                Sources <span className="text-gray-500 font-normal text-[10px]">({sources.length})</span>
               </span>
             )}
-            <button onClick={() => setSourcesCollapsed(!sourcesCollapsed)} className="ml-auto text-gray-600 hover:text-white transition-colors hidden lg:block">
+            <button onClick={() => setSourcesCollapsed(!sourcesCollapsed)} className="ml-auto text-gray-500 hover:text-white transition-colors hidden lg:block">
               {sourcesCollapsed ? <ChevronRight size={14} /> : <ChevronDown size={14} />}
             </button>
           </div>
 
           {!sourcesCollapsed && (
             <div className="flex-1 overflow-y-auto">
-              <div className="px-3 pt-3 pb-2">
+              <div className="px-3 pt-3 pb-2 space-y-2">
+                {/* Primary Upload Button that triggers native file picker */}
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploading}
+                  className="w-full flex items-center justify-center gap-2 px-3 py-2.5 bg-brand hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-brand/10 disabled:opacity-60"
+                >
+                  {uploading ? <Loader2 size={13} className="animate-spin" /> : <Upload size={13} />}
+                  Upload from PC / Phone
+                </button>
+
+                {/* Additional Source Formats Toggle */}
                 <button
                   onClick={() => setAddingSource(addingSource ? null : "file")}
-                  className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-brand/10 border border-brand/30 hover:bg-brand hover:text-white rounded-xl text-xs font-bold text-brand transition-all shadow-sm"
+                  className="w-full flex items-center justify-center gap-1.5 px-3 py-1.5 bg-[#111] border border-[#1f1f1f] hover:border-[#333] text-gray-400 hover:text-white rounded-xl text-[11px] font-semibold transition-all"
                 >
-                  <Plus size={13} />
-                  Add Sources
+                  <Plus size={12} />
+                  More Options (Drive, URL, Paste)
                 </button>
 
                 {addingSource && (
                   <div className="mt-2 bg-[#0c0c0c] border border-[#1f1f1f] rounded-xl overflow-hidden shadow-lg">
                     {[
-                      { key: "file" as const, icon: <Upload size={12} />, label: "Upload from PC / Phone" },
-                      { key: "drive" as const, icon: <HardDrive size={12} />, label: "Google Drive link" },
-                      { key: "link" as const, icon: <Link2 size={12} />, label: "Paste Website / NCBI URL" },
+                      { key: "file" as const, icon: <Upload size={12} />, label: "Browse Files (PDF / Docs)" },
                       { key: "paste" as const, icon: <Clipboard size={12} />, label: "Paste Text Excerpt" },
+                      { key: "link" as const, icon: <Link2 size={12} />, label: "Paste Website / NCBI URL" },
+                      { key: "drive" as const, icon: <HardDrive size={12} />, label: "Google Drive Link" },
                     ].map(opt => (
                       <button
                         key={opt.key}
-                        onClick={() => setAddingSource(opt.key)}
+                        onClick={() => {
+                          if (opt.key === "file") {
+                            fileInputRef.current?.click()
+                          } else {
+                            setAddingSource(opt.key)
+                          }
+                        }}
                         className={`w-full flex items-center gap-2.5 px-3 py-2.5 text-xs font-medium transition-colors border-b border-[#181818] last:border-0 ${
                           addingSource === opt.key ? "text-brand bg-brand/5" : "text-gray-400 hover:text-white hover:bg-[#141414]"
                         }`}
@@ -1059,30 +1166,30 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
               </div>
 
               {/* Upload Dropzone */}
-              {addingSource === "file" && (
-                <div className="px-3 pb-3">
-                  <div
-                    {...getRootProps()}
-                    className={`border border-dashed rounded-xl p-5 text-center cursor-pointer transition-colors ${
-                      isDragActive ? "border-brand bg-brand/5" : "border-[#2b2b2b] hover:border-brand/50"
-                    }`}
-                  >
-                    <input {...getInputProps()} />
-                    {uploading ? (
-                      <div className="flex items-center justify-center gap-2 text-xs text-gray-400">
-                        <Loader2 size={14} className="animate-spin text-brand" /> Uploading & Processing…
-                      </div>
-                    ) : (
-                      <>
-                        <Upload size={22} className="text-brand mx-auto mb-2" />
-                        <p className="text-xs text-white font-bold">Tap to Browse or Drop Files</p>
-                        <p className="text-[10px] text-gray-500 mt-1">PDF · Word (.docx) · Text · Images</p>
-                        <p className="text-[10px] text-gray-600 mt-0.5">Works directly from your PC or phone</p>
-                      </>
-                    )}
-                  </div>
+              <div className="px-3 pb-3">
+                <div
+                  {...getRootProps()}
+                  className={`border border-dashed rounded-xl p-4 text-center cursor-pointer transition-colors ${
+                    isDragActive ? "border-brand bg-brand/5" : "border-[#222] hover:border-brand/40 bg-[#0c0c0c]"
+                  }`}
+                >
+                  <input {...getInputProps()} />
+                  {uploading ? (
+                    <div className="flex flex-col items-center justify-center gap-2 py-2 text-xs text-gray-400">
+                      <Loader2 size={18} className="animate-spin text-brand" />
+                      <p className="font-bold text-white">Extracting & indexing text…</p>
+                      <p className="text-[10px] text-gray-500">Processing document for AI mentor</p>
+                    </div>
+                  ) : (
+                    <>
+                      <FileUp size={18} className="text-brand mx-auto mb-1.5" />
+                      <p className="text-xs text-white font-bold">Drag & Drop or Click to Upload</p>
+                      <p className="text-[10px] text-gray-500 mt-1">PDF · Word (.docx) · Text · Images</p>
+                      <p className="text-[9px] text-gray-600 mt-0.5">Works on PC, Android & iPhone</p>
+                    </>
+                  )}
                 </div>
-              )}
+              </div>
 
               {/* Google Drive Link */}
               {addingSource === "drive" && (
@@ -1148,41 +1255,72 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
               )}
 
               {/* Source List */}
-              <div className="px-3 pb-4 space-y-1.5">
+              <div className="px-3 pb-4 space-y-2">
                 {sources.length === 0 && !addingSource && (
-                  <div className="text-center py-10 space-y-2">
-                    <div className="w-9 h-9 rounded-xl bg-[#111] border border-[#1f1f1f] flex items-center justify-center mx-auto text-sm">
+                  <div className="text-center py-8 space-y-2">
+                    <div className="w-8 h-8 rounded-xl bg-[#111] border border-[#1f1f1f] flex items-center justify-center mx-auto text-sm">
                       📚
                     </div>
                     <p className="text-[11px] text-gray-500 leading-relaxed">
-                      No sources added yet.<br />
-                      Upload PDFs from your PC or{" "}
-                      <button onClick={() => setAddingSource("file")} className="text-brand hover:underline font-bold">
-                        add files
-                      </button>
+                      No sources uploaded yet.<br />
+                      Upload PDFs or lecture notes from your PC or phone to empower the AI mentor.
                     </p>
                   </div>
                 )}
 
-                {sources.map(s => (
-                  <div key={s.id} className="flex items-center gap-2 px-2.5 py-2 bg-[#0c0c0c] border border-[#1a1a1a] rounded-xl group hover:border-[#2b2b2b] transition-colors">
-                    <span className="text-sm flex-shrink-0">{sourceIcon(s.type)}</span>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-[11px] font-medium text-gray-300 truncate">{s.name}</p>
-                      <p className="text-[9px] text-gray-600 uppercase tracking-wider">{s.type}</p>
+                {sources.map(s => {
+                  const hasContent = Boolean(s.content && s.content.trim().length > 0)
+                  const wordCount = hasContent ? Math.round(s.content!.trim().split(/\s+/).length) : 0
+
+                  return (
+                    <div key={s.id} className="p-2.5 bg-[#0c0c0c] border border-[#1a1a1a] rounded-xl hover:border-[#2b2b2b] transition-colors space-y-1.5">
+                      <div className="flex items-start gap-2">
+                        <span className="text-sm flex-shrink-0 mt-0.5">{sourceIcon(s.type)}</span>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-[11px] font-bold text-white truncate" title={s.name}>{s.name}</p>
+                          <div className="flex items-center gap-1.5 mt-0.5">
+                            <span className="text-[9px] font-bold text-brand uppercase tracking-wider">{s.type}</span>
+                            {hasContent ? (
+                              <span className="text-[9px] text-gray-500">· {wordCount.toLocaleString()} words</span>
+                            ) : s.size ? (
+                              <span className="text-[9px] text-gray-500">· {Math.round(s.size / 1024)} KB</span>
+                            ) : null}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between pt-1 border-t border-[#181818] text-[10px]">
+                        {hasContent ? (
+                          <button
+                            onClick={() => setViewingSource(s)}
+                            className="text-gray-400 hover:text-white flex items-center gap-1 font-semibold transition-colors"
+                          >
+                            <Eye size={10} /> View Extracted Text
+                          </button>
+                        ) : s.url ? (
+                          <a
+                            href={s.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-gray-400 hover:text-white flex items-center gap-1 transition-colors"
+                          >
+                            <ExternalLink size={10} /> Open Link
+                          </a>
+                        ) : (
+                          <span className="text-gray-600">Indexed for AI</span>
+                        )}
+
+                        <button
+                          onClick={() => deleteSource(s.id)}
+                          className="text-gray-600 hover:text-brand transition-colors p-0.5"
+                          title="Remove source"
+                        >
+                          <Trash2 size={11} />
+                        </button>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
-                      {s.url && s.type !== "paste" && (
-                        <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white p-1">
-                          <ExternalLink size={11} />
-                        </a>
-                      )}
-                      <button onClick={() => deleteSource(s.id)} className="text-gray-500 hover:text-brand p-1">
-                        <Trash2 size={11} />
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </div>
           )}
@@ -1198,19 +1336,23 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
               <div className="w-12 h-12 rounded-2xl bg-brand/10 border border-brand/20 flex items-center justify-center mb-4 text-brand">
                 <Sparkles size={24} />
               </div>
-              <h2 className="text-xl font-bold text-white mb-2 leading-tight">PodGuide Medical Notebook</h2>
+              <h2 className="text-xl font-bold text-white mb-2 leading-tight">
+                PodGuide AI Academic Mentor
+              </h2>
               <p className="text-xs text-gray-400 leading-relaxed mb-6 max-w-md">
-                Synthesises evidence from <strong>NCBI / PubMed</strong>, <strong>UpToDate</strong>, and your recommended core textbooks (Snell, Junqueira, Langman, SRB, Materials, Ghai).
+                {sources.length > 0 ? (
+                  <>Ready to synthesize and answer questions directly from your <strong>{sources.length} uploaded source{sources.length > 1 ? "s" : ""}</strong> and standard clinical textbooks.</>
+                ) : (
+                  <>Upload lecture slides, notes, or PDFs to ground your AI mentor, or ask any clinical and medical question freely.</>
+                )}
               </p>
-              <div className="space-y-2 w-full max-w-xs">
-                <p className="text-[10px] font-bold text-gray-600 uppercase tracking-widest text-left mb-2">
-                  Recommended Study Workflows
+
+              {/* Dynamic Suggested Workflows */}
+              <div className="space-y-2 w-full max-w-sm">
+                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest text-left mb-2">
+                  {sources.length > 0 ? "Suggested Actions for Your Sources" : "Recommended Study Inquiries"}
                 </p>
-                {[
-                  "Teach me about Acute Kidney Injury",
-                  "Compare Pre-renal vs Intrinsic ATN",
-                  "Generate KDIGO Management Protocol",
-                ].map(prompt => (
+                {dynamicWorkflowPrompts.map(prompt => (
                   <button
                     key={prompt}
                     onClick={() => sendMessage(prompt)}
@@ -1229,7 +1371,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
                     <div className="flex gap-3 flex-row-reverse">
                       <div className="w-7 h-7 rounded-full bg-[#181818] border border-[#2b2b2b] text-gray-300 flex-shrink-0 flex items-center justify-center font-bold text-[10px]">ME</div>
                       <div className="flex justify-end flex-1">
-                        <div className="bg-[#121212] border border-[#222] rounded-2xl rounded-tr-sm px-4 py-3 max-w-[80%] text-xs text-white leading-relaxed">
+                        <div className="bg-[#121212] border border-[#222] rounded-2xl rounded-tr-sm px-4 py-3 max-w-[85%] text-xs text-white leading-relaxed">
                           {m.content}
                         </div>
                       </div>
@@ -1251,7 +1393,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
                     <Loader2 size={12} className="text-white animate-spin" />
                   </div>
                   <div className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-2xl px-4 py-3 flex items-center gap-2">
-                    <span className="text-xs text-gray-400">Synthesizing NCBI & UpToDate evidence…</span>
+                    <span className="text-xs text-gray-400">Synthesizing clinical knowledge & sources…</span>
                     <div className="flex items-center gap-1">
                       {[0, 150, 300].map(d => (
                         <div key={d} className="w-1.5 h-1.5 bg-brand rounded-full animate-bounce" style={{ animationDelay: `${d}ms` }} />
@@ -1266,19 +1408,24 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
 
           {/* Chat Input Bar */}
           <div className="border-t border-[#181818] bg-[#0a0a0a] flex-shrink-0">
-            {messages.length > 0 && (
-              <div className="flex items-center gap-2 px-4 pt-2.5 pb-1 overflow-x-auto">
-                {["Summarise my notes", "Generate flashcards", "Quiz me", "Comparison table", "NCBI citations"].map(q => (
-                  <button
-                    key={q}
-                    onClick={() => sendMessage(q)}
-                    className="flex-shrink-0 text-[10px] font-bold text-gray-500 hover:text-gray-200 bg-[#111] hover:bg-[#181818] border border-[#1f1f1f] px-2.5 py-1 rounded-full transition-colors"
-                  >
-                    {q}
-                  </button>
-                ))}
-              </div>
-            )}
+            <div className="flex items-center gap-2 px-4 pt-2.5 pb-1 overflow-x-auto">
+              {[
+                "Summarise my materials",
+                "Explain core mechanisms",
+                "Generate clinical flashcards",
+                "Quiz me on this topic",
+                "Differential diagnosis table",
+                "High-yield exam pearls"
+              ].map(q => (
+                <button
+                  key={q}
+                  onClick={() => sendMessage(q)}
+                  className="flex-shrink-0 text-[10px] font-bold text-gray-400 hover:text-white bg-[#111] hover:bg-[#181818] border border-[#1f1f1f] px-2.5 py-1 rounded-full transition-colors"
+                >
+                  {q}
+                </button>
+              ))}
+            </div>
 
             <div className="p-3.5">
               <div className="relative flex items-end bg-[#0f0f0f] border border-[#1f1f1f] focus-within:border-brand/60 rounded-2xl shadow-inner">
@@ -1286,13 +1433,15 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
                   value={input}
                   onChange={e => setInput(e.target.value)}
                   onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage() } }}
-                  placeholder="Ask any medical question or request a clinical breakdown…"
+                  placeholder="Ask any medical question, request a summary, or quiz yourself…"
                   rows={1}
-                  className="flex-1 bg-transparent py-3 pl-4 pr-20 text-xs text-white placeholder:text-gray-600 outline-none resize-none leading-relaxed"
+                  className="flex-1 bg-transparent py-3 pl-4 pr-24 text-xs text-white placeholder:text-gray-600 outline-none resize-none leading-relaxed"
                   style={{ minHeight: "46px", maxHeight: "150px" }}
                 />
                 <div className="absolute right-2 bottom-2 flex items-center gap-2">
-                  <span className="text-[10px] text-gray-600 font-mono">{sources.length} sources</span>
+                  <span className="text-[10px] text-gray-500 font-mono hidden sm:inline">
+                    {sources.length} source{sources.length === 1 ? "" : "s"}
+                  </span>
                   <button
                     onClick={() => sendMessage()}
                     disabled={!input.trim() || aiLoading}
@@ -1303,7 +1452,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
                 </div>
               </div>
               <p className="text-center text-[10px] text-gray-600 mt-2">
-                Referenced with Snell Anatomy, Junqueira, Langman, SRB Surgery, Materials, Ghai Pediatrics & NCBI / UpToDate.
+                Referenced with standard medical textbooks (Snell, Guyton, Robbins, Katzung, SRB, Materials) & NCBI / UpToDate.
               </p>
             </div>
           </div>
@@ -1317,29 +1466,33 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
           ${studioCollapsed ? "w-0 lg:w-12 overflow-hidden" : "w-full lg:w-80"}
         `}>
           <div className="flex items-center justify-between px-4 py-3 border-b border-[#181818] flex-shrink-0">
-            <button onClick={() => setStudioCollapsed(!studioCollapsed)} className="text-gray-600 hover:text-white transition-colors hidden lg:block">
+            <button onClick={() => setStudioCollapsed(!studioCollapsed)} className="text-gray-500 hover:text-white transition-colors hidden lg:block">
               {studioCollapsed ? <ChevronRight size={14} /> : <ChevronDown size={14} />}
             </button>
             {!studioCollapsed && (
               <span className="text-xs font-black text-white uppercase tracking-widest">Studio & Notes</span>
             )}
             {!studioCollapsed && (
-              <button onClick={manualSaveNotes} className="text-[10px] font-bold text-brand hover:underline flex items-center gap-1">
-                <Save size={10} /> Save
+              <button
+                onClick={manualSaveNotes}
+                disabled={saving}
+                className="text-[10px] font-bold text-brand hover:underline flex items-center gap-1"
+              >
+                <Save size={10} /> {saving ? "Saving..." : "Save"}
               </button>
             )}
           </div>
 
           {!studioCollapsed && (
             <div className="flex-1 overflow-y-auto p-3 space-y-3">
-              {/* Tool Grid */}
+              {/* Studio Tools Grid */}
               <div className="grid grid-cols-2 gap-2">
                 {[
-                  { id: "mindmap" as StudioTool, icon: <GitBranch size={15} />, label: "Mind Map" },
-                  { id: "flashcards" as StudioTool, icon: <Brain size={15} />, label: "Flashcards" },
-                  { id: "quiz" as StudioTool, icon: <FlaskConical size={15} />, label: "Quiz Arena" },
-                  { id: "notes" as StudioTool, icon: <PenLine size={15} />, label: "My Notes" },
-                  { id: "scholar" as StudioTool, icon: <BookOpen size={15} />, label: "NCBI Scholar" },
+                  { id: "notes" as StudioTool, icon: <PenLine size={14} />, label: "My Notes" },
+                  { id: "flashcards" as StudioTool, icon: <Brain size={14} />, label: "Flashcards" },
+                  { id: "quiz" as StudioTool, icon: <FlaskConical size={14} />, label: "Quiz Arena" },
+                  { id: "mindmap" as StudioTool, icon: <GitBranch size={14} />, label: "Mind Map" },
+                  { id: "scholar" as StudioTool, icon: <BookOpen size={14} />, label: "NCBI Scholar" },
                 ].map(tool => (
                   <button
                     key={tool.id}
@@ -1361,7 +1514,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
                 {studioLoading && (
                   <div className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-4 flex items-center gap-2">
                     <Loader2 size={14} className="animate-spin text-brand flex-shrink-0" />
-                    <span className="text-xs text-gray-400">Generating study tool…</span>
+                    <span className="text-xs text-gray-400">Generating based on uploaded materials…</span>
                   </div>
                 )}
 
@@ -1377,7 +1530,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
                         <button onClick={() => addToNotes(studioOutput)} className="text-[10px] font-bold text-gray-400 hover:text-white flex items-center gap-1">
                           <PenLine size={10} /> Notes
                         </button>
-                        <button onClick={() => { setStudioOutput(""); setActiveTool(null) }} className="text-gray-600 hover:text-white">
+                        <button onClick={() => { setStudioOutput(""); setActiveTool("notes") }} className="text-gray-500 hover:text-white">
                           <X size={12} />
                         </button>
                       </div>
@@ -1392,12 +1545,15 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
                 {!studioLoading && studioOutput && studioMode === "flashcards" && (
                   <div className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl overflow-hidden shadow-lg">
                     <div className="flex items-center justify-between px-3 py-2 border-b border-[#181818] bg-[#0f0f0f]">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-brand">Interactive Cards</span>
+                      <span className="text-[10px] font-black uppercase tracking-widest text-brand">Source Flashcards</span>
                       <div className="flex items-center gap-2">
                         <button onClick={() => saveAsSource(studioOutput)} className="text-[10px] font-bold text-gray-400 hover:text-brand flex items-center gap-1">
                           <Save size={10} /> Source
                         </button>
-                        <button onClick={() => { setStudioOutput(""); setActiveTool(null) }} className="text-gray-600 hover:text-white">
+                        <button onClick={() => addToNotes(studioOutput)} className="text-[10px] font-bold text-gray-400 hover:text-white flex items-center gap-1">
+                          <PenLine size={10} /> Notes
+                        </button>
+                        <button onClick={() => { setStudioOutput(""); setActiveTool("notes") }} className="text-gray-500 hover:text-white">
                           <X size={12} />
                         </button>
                       </div>
@@ -1412,7 +1568,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
                 {!studioLoading && studioOutput && studioMode === "quiz" && (
                   <div className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl overflow-hidden shadow-lg">
                     <div className="flex items-center justify-between px-3 py-2 border-b border-[#181818] bg-[#0f0f0f]">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-brand">MCQ Assessment</span>
+                      <span className="text-[10px] font-black uppercase tracking-widest text-brand">Source MCQs</span>
                       <div className="flex items-center gap-2">
                         <button onClick={() => copyText(studioOutput)} className="text-[10px] font-bold text-gray-400 hover:text-white flex items-center gap-1">
                           <Clipboard size={10} /> Copy
@@ -1420,7 +1576,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
                         <button onClick={() => addToNotes(studioOutput)} className="text-[10px] font-bold text-gray-400 hover:text-white flex items-center gap-1">
                           <PenLine size={10} /> Notes
                         </button>
-                        <button onClick={() => { setStudioOutput(""); setActiveTool(null) }} className="text-gray-600 hover:text-white">
+                        <button onClick={() => { setStudioOutput(""); setActiveTool("notes") }} className="text-gray-500 hover:text-white">
                           <X size={12} />
                         </button>
                       </div>
@@ -1431,7 +1587,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
                   </div>
                 )}
 
-                {/* Dedicated Notes Editor */}
+                {/* Dedicated Notes Editor (Editable & Savable) */}
                 {activeTool === "notes" && (
                   <div className="bg-[#0d0d0d] border border-[#1a1a1a] rounded-2xl overflow-hidden shadow-xl">
                     <div className="flex items-center justify-between px-3 py-2 border-b border-[#181818] bg-[#0f0f0f]">
@@ -1442,20 +1598,22 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
                           { icon: <Italic size={11} />, action: () => insertFormatting("_", true), label: "Italic" },
                           { icon: <List size={11} />, action: () => insertFormatting("- ", false), label: "List" },
                         ].map((t, i) => (
-                          <button key={i} onClick={t.action} className="p-1.5 text-gray-500 hover:text-white hover:bg-[#1c1c1c] rounded-lg transition-colors">
+                          <button key={i} onClick={t.action} className="p-1.5 text-gray-400 hover:text-white hover:bg-[#1c1c1c] rounded-lg transition-colors" title={t.label}>
                             {t.icon}
                           </button>
                         ))}
+                        <button onClick={insertTableTemplate} className="p-1.5 text-gray-400 hover:text-white hover:bg-[#1c1c1c] rounded-lg transition-colors" title="Insert Table">
+                          <TableIcon size={11} />
+                        </button>
                       </div>
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => setNotePreview(!notePreview)}
-                          className={`text-[10px] font-bold px-2.5 py-1 rounded-lg transition-colors ${notePreview ? "bg-brand text-white" : "text-gray-500 hover:text-white bg-[#181818]"}`}
+                          className={`text-[10px] font-bold px-2.5 py-1 rounded-lg transition-colors ${
+                            notePreview ? "bg-brand text-white" : "text-gray-400 hover:text-white bg-[#181818]"
+                          }`}
                         >
-                          {notePreview ? "Edit Mode" : "Preview Mode"}
-                        </button>
-                        <button onClick={() => setActiveTool(null)} className="text-gray-600 hover:text-white">
-                          <X size={12} />
+                          {notePreview ? "Edit Mode" : "Preview"}
                         </button>
                       </div>
                     </div>
@@ -1465,7 +1623,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
                         id="note-editor"
                         value={noteContent}
                         onChange={e => handleNoteChange(e.target.value)}
-                        placeholder={"Type your medical notes here...\n\n## Pathophysiology\n- Key mechanism\n\n| Parameter | Normal | Finding |\n|---|---|---|\n| FeNa | <1% | >2% |"}
+                        placeholder={"Type your clinical notes here...\n\n## Pathophysiology\n- Key mechanism\n\n| Parameter | Normal | Finding |\n|---|---|---|\n| Diagnostic Marker | <1% | Elevated |"}
                         className="w-full bg-transparent text-white text-xs leading-relaxed p-3.5 outline-none resize-none font-mono placeholder:text-gray-700"
                         rows={16}
                       />
@@ -1474,21 +1632,28 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
                         {noteContent ? (
                           <RichMedicalMarkdown content={noteContent} />
                         ) : (
-                          <p className="text-xs text-gray-600 italic">No notes written yet. Switch to Edit Mode to begin.</p>
+                          <div className="py-8 text-center text-gray-600 text-xs italic">
+                            No notes recorded yet.<br />
+                            Switch to Edit Mode to write, or click &quot;Add to Notes&quot; on any AI answer.
+                          </div>
                         )}
                       </div>
                     )}
 
                     <div className="px-3.5 py-2.5 border-t border-[#181818] bg-[#0c0c0c] flex items-center justify-between">
-                      <button
-                        onClick={manualSaveNotes}
-                        className="text-[10px] font-bold text-brand hover:underline flex items-center gap-1"
-                      >
-                        <Save size={10} /> Save to Dashboard
-                      </button>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={manualSaveNotes}
+                          disabled={saving}
+                          className="text-[10px] font-bold text-brand hover:underline flex items-center gap-1"
+                        >
+                          <Save size={10} /> {saving ? "Saving…" : "Save Now"}
+                        </button>
+                        <span className="text-[10px] text-gray-600">· {noteWordCount} words</span>
+                      </div>
                       <button
                         onClick={downloadNotesFile}
-                        className="text-[10px] text-gray-500 hover:text-white flex items-center gap-1 transition-colors"
+                        className="text-[10px] text-gray-400 hover:text-white flex items-center gap-1 transition-colors"
                       >
                         <Download size={10} /> Download .md
                       </button>
@@ -1536,23 +1701,67 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
                     </div>
                   </div>
                 )}
-
-                {/* Default Empty State */}
-                {!activeTool && !studioOutput && !studioLoading && (
-                  <div className="text-center py-8 px-2">
-                    <div className="w-8 h-8 rounded-xl bg-[#111] border border-[#1f1f1f] flex items-center justify-center mx-auto mb-3 text-gray-600">
-                      <Wand2 size={14} />
-                    </div>
-                    <p className="text-[11px] text-gray-500 leading-relaxed">
-                      Select a studio tool above to generate interactive mind maps, flashcards, or write notes.
-                    </p>
-                  </div>
-                )}
               </div>
             </div>
           )}
         </div>
       </div>
+
+      {/* ── VIEW SOURCE EXTRACTED TEXT MODAL ── */}
+      {viewingSource && (
+        <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-[300] flex items-center justify-center p-4" onClick={() => setViewingSource(null)}>
+          <div className="bg-[#0a0a0a] border border-[#1f1f1f] rounded-2xl w-full max-w-2xl max-h-[85vh] flex flex-col shadow-2xl" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between p-4 border-b border-[#181818]">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-brand block mb-0.5">Extracted Document Text</span>
+                <h3 className="text-sm font-black text-white truncate max-w-md">{viewingSource.name}</h3>
+              </div>
+              <button onClick={() => setViewingSource(null)} className="w-7 h-7 rounded-lg bg-[#111] border border-[#1f1f1f] flex items-center justify-center text-gray-500 hover:text-white">
+                <X size={14} />
+              </button>
+            </div>
+            <div className="p-4 flex-1 overflow-y-auto">
+              {viewingSource.content ? (
+                <div className="bg-[#0d0d0d] border border-[#181818] rounded-xl p-4 text-xs text-gray-300 font-mono whitespace-pre-wrap leading-relaxed">
+                  {viewingSource.content}
+                </div>
+              ) : (
+                <div className="text-center py-10 text-xs text-gray-500">
+                  No extracted text found for this source.
+                </div>
+              )}
+            </div>
+            <div className="p-4 border-t border-[#181818] bg-[#0c0c0c] flex items-center justify-between">
+              <span className="text-[10px] text-gray-500 font-mono">
+                {viewingSource.content ? `${viewingSource.content.length.toLocaleString()} characters indexed for AI` : "No text"}
+              </span>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => {
+                    if (viewingSource.content) {
+                      addToNotes(viewingSource.content)
+                      setViewingSource(null)
+                    }
+                  }}
+                  className="px-3 py-1.5 bg-[#111] border border-[#1f1f1f] text-gray-300 hover:text-white text-xs font-bold rounded-xl transition-colors"
+                >
+                  Send to Notes
+                </button>
+                <button
+                  onClick={() => {
+                    if (viewingSource.content) {
+                      copyText(viewingSource.content)
+                    }
+                  }}
+                  className="px-3 py-1.5 bg-brand text-white text-xs font-bold rounded-xl hover:bg-red-700 transition-colors"
+                >
+                  Copy All Text
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── SHARE MODAL ── */}
       {shareModal && (
@@ -1578,7 +1787,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
                 </button>
               </div>
               <div>
-                <p className="text-[10px] font-bold text-gray-600 uppercase tracking-widest mb-2">Notebook URL</p>
+                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Notebook URL</p>
                 <div className="flex gap-2">
                   <input readOnly value={typeof window !== "undefined" ? window.location.href.replace("?fullscreen=true", "") : ""} className={inputCls + " flex-1"} />
                   <button onClick={copyShareLink} className="flex items-center gap-1.5 bg-brand text-white text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-red-700 transition-colors">
@@ -1588,7 +1797,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
                 </div>
               </div>
               <div>
-                <p className="text-[10px] font-bold text-gray-600 uppercase tracking-widest mb-2">Invite Student</p>
+                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Invite Student</p>
                 <div className="flex gap-2">
                   <input value={inviteEmail} onChange={e => setInviteEmail(e.target.value)} type="email" placeholder="classmate@university.ac.za" className={inputCls + " flex-1"} />
                   <button onClick={inviteCollaborator} disabled={!inviteEmail} className="flex items-center gap-1.5 bg-[#111] text-white text-xs font-bold px-3.5 py-2.5 rounded-xl border border-[#1f1f1f] hover:border-[#2b2b2b] transition-colors disabled:opacity-50">
