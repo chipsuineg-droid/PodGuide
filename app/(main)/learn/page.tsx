@@ -152,23 +152,40 @@ export default function LearnPage() {
       {/* Academic Library */}
       <section className="space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <h2 className="text-lg font-bold flex items-center gap-2 text-white">
-            <FolderOpen className="text-brand" size={20} /> Academic Library
-          </h2>
+          <div className="flex items-center gap-3">
+            <h2 className="text-lg font-bold flex items-center gap-2 text-white">
+              <FolderOpen className="text-brand" size={20} /> Academic Library
+            </h2>
+            <Link
+              href="/library"
+              className="inline-flex items-center gap-1.5 px-3 py-1 bg-brand hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-brand/20"
+            >
+              <FolderOpen size={13} /> Main Library ↗
+            </Link>
+          </div>
 
-          {/* Type filter */}
           <div className="flex items-center gap-2 flex-wrap">
-            <Filter size={14} className="text-gray-500" />
-            {["all", "pdf", "video", "past_paper"].map(t => (
-              <button key={t} onClick={() => setTypeFilter(t)}
-                className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-colors ${
-                  typeFilter === t
-                    ? "bg-brand text-white border-brand"
-                    : "bg-[#111] text-gray-400 border-[#333] hover:text-white hover:border-[#555]"
-                }`}>
-                {t === "all" ? "All" : t === "past_paper" ? "Past Papers" : t.charAt(0).toUpperCase() + t.slice(1)}
-              </button>
-            ))}
+            <Link
+              href="/create"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#161616] hover:bg-[#202020] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-xl text-xs font-bold transition-colors"
+            >
+              <Plus size={14} className="text-brand" /> Contribute to the PodGuide library upload
+            </Link>
+
+            {/* Type filter */}
+            <div className="flex items-center gap-1.5">
+              <Filter size={14} className="text-gray-500" />
+              {["all", "pdf", "video", "past_paper"].map(t => (
+                <button key={t} onClick={() => setTypeFilter(t)}
+                  className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-colors ${
+                    typeFilter === t
+                      ? "bg-brand text-white border-brand"
+                      : "bg-[#111] text-gray-400 border-[#333] hover:text-white hover:border-[#555]"
+                  }`}>
+                  {t === "all" ? "All" : t === "past_paper" ? "Past Papers" : t.charAt(0).toUpperCase() + t.slice(1)}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -177,16 +194,30 @@ export default function LearnPage() {
             <Loader2 size={24} className="animate-spin text-brand" />
           </div>
         ) : filteredMaterials.length === 0 ? (
-          <div className="bg-[#111] border border-[#1f1f1f] rounded-2xl p-12 text-center space-y-3">
-            <FolderOpen size={40} className="text-gray-600 mx-auto" />
-            <h3 className="font-bold text-gray-400">
-              {search ? "No materials match your search" : "Library is being built"}
-            </h3>
-            <p className="text-sm text-gray-600 max-w-sm mx-auto">
-              {search
-                ? "Try a different search term or clear the filter."
-                : "Materials are uploaded by the admin. Check back soon — this library will be filled with PDFs, videos, and past papers for your programme."}
-            </p>
+          <div className="bg-[#111] border border-[#1f1f1f] rounded-2xl p-10 text-center space-y-4">
+            <div className="w-12 h-12 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center mx-auto text-brand">
+              <FolderOpen size={24} />
+            </div>
+            <div className="space-y-1">
+              <h3 className="font-bold text-white text-base">Academic Library Palette</h3>
+              <p className="text-xs text-gray-400 max-w-md mx-auto leading-relaxed">
+                Explore the complete subject shelves in our main library, or contribute notes and slides for your cohort.
+              </p>
+            </div>
+            <div className="flex items-center justify-center gap-3 pt-2 flex-wrap">
+              <Link
+                href="/library"
+                className="inline-flex items-center gap-2 px-4 py-2.5 bg-brand hover:bg-red-700 text-white font-bold rounded-xl text-xs transition-all shadow-md shadow-brand/20"
+              >
+                <FolderOpen size={14} /> Open Main Library ↗
+              </Link>
+              <Link
+                href="/create"
+                className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#161616] hover:bg-[#202020] border border-[#2b2b2b] text-gray-300 hover:text-white font-bold rounded-xl text-xs transition-colors"
+              >
+                <Plus size={14} className="text-brand" /> Contribute to the PodGuide library upload
+              </Link>
+            </div>
           </div>
         ) : (
           <div className="space-y-6">

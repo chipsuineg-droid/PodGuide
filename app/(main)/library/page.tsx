@@ -2,7 +2,7 @@
 import { useEffect, useState, useMemo } from "react"
 import { createClient } from "@/lib/supabase/client"
 import {
-  Search, ExternalLink, Eye, X, Check, Folder, Link2, HardDrive, Sparkles
+  Search, ExternalLink, Eye, X, Check, Folder, Link2, HardDrive, Sparkles, RotateCcw
 } from "lucide-react"
 import { toast } from "sonner"
 
@@ -23,7 +23,7 @@ const INITIAL_SHELVES: LibraryShelf[] = [
     id: "internal-medicine",
     name: "Internal Medicine",
     icon: "🫀",
-    itemCount: 185,
+    itemCount: 0,
     description: "Cardiology, pulmonology, endocrinology, gastroenterology, nephrology, and acute medical admissions.",
     programme: "Medicine (MBChB / MBBS)",
     level: "Year 4 & 5"
@@ -32,7 +32,7 @@ const INITIAL_SHELVES: LibraryShelf[] = [
     id: "paediatrics",
     name: "Paediatrics",
     icon: "👶",
-    itemCount: 86,
+    itemCount: 0,
     description: "Neonatal resuscitation, developmental milestones, paediatric infectious disease, and IMCI guidelines.",
     programme: "Medicine (MBChB / MBBS)",
     level: "Year 4 & 5"
@@ -41,7 +41,7 @@ const INITIAL_SHELVES: LibraryShelf[] = [
     id: "surgery",
     name: "Surgery",
     icon: "🔪",
-    itemCount: 319,
+    itemCount: 0,
     description: "General surgery operative manuals, acute abdomen algorithms, trauma ATLS protocols, and surgical oncology.",
     programme: "Medicine (MBChB / MBBS)",
     level: "Year 4 & 5"
@@ -50,7 +50,7 @@ const INITIAL_SHELVES: LibraryShelf[] = [
     id: "obs-gyn",
     name: "Obstetrics & Gynecology",
     icon: "🤰",
-    itemCount: 69,
+    itemCount: 0,
     description: "Antenatal care, intrapartum management, obstetric emergencies, gynaecological oncology, and family planning.",
     programme: "Medicine (MBChB / MBBS)",
     level: "Year 4 & 5"
@@ -68,7 +68,7 @@ const INITIAL_SHELVES: LibraryShelf[] = [
     id: "community-medicine",
     name: "Community Medicine",
     icon: "🏥",
-    itemCount: 44,
+    itemCount: 0,
     description: "Public health epidemiology, biostatistics, primary healthcare delivery, maternal & child health outreach.",
     programme: "Medicine & Health Sciences",
     level: "All Levels"
@@ -77,7 +77,7 @@ const INITIAL_SHELVES: LibraryShelf[] = [
     id: "psychiatry",
     name: "Psychiatry",
     icon: "🧠",
-    itemCount: 152,
+    itemCount: 0,
     description: "DSM-5 diagnostic criteria, mood and psychotic disorders, psychopharmacology, and psychiatric emergencies.",
     programme: "Medicine (MBChB / MBBS)",
     level: "Year 4"
@@ -86,7 +86,7 @@ const INITIAL_SHELVES: LibraryShelf[] = [
     id: "pharmacology",
     name: "Pharmacology",
     icon: "💊",
-    itemCount: 75,
+    itemCount: 0,
     description: "Pharmacokinetics, pharmacodynamics, clinical toxicology, antimicrobial regimens, and hospital formularies.",
     programme: "All Programmes",
     level: "Parts 2 & 3"
@@ -95,9 +95,7 @@ const INITIAL_SHELVES: LibraryShelf[] = [
     id: "anatomy",
     name: "Anatomy",
     icon: "🦴",
-    itemCount: 15,
-    driveUrl: "https://drive.google.com/drive/folders/1ZIXfs0gKrlpsXa3l-BSu9ze7v7zh1Mos?usp=drive_link",
-    folderId: "1ZIXfs0gKrlpsXa3l-BSu9ze7v7zh1Mos",
+    itemCount: 0,
     description: "Gross anatomy, cadaveric dissection manuals, regional osteology, histology, and embryology archives.",
     programme: "Biomedical & Medicine",
     level: "Parts 1 & 2"
@@ -106,9 +104,7 @@ const INITIAL_SHELVES: LibraryShelf[] = [
     id: "physiology",
     name: "Physiology",
     icon: "⚡",
-    itemCount: 10,
-    driveUrl: "https://drive.google.com/drive/folders/1ZIXfs0gKrlpsXa3l-BSu9ze7v7zh1Mos?usp=drive_link",
-    folderId: "1ZIXfs0gKrlpsXa3l-BSu9ze7v7zh1Mos",
+    itemCount: 0,
     description: "Cell physiology, cardiovascular haemodynamics, renal clearance, respiratory mechanics, and neurophysiology.",
     programme: "Biomedical & Medicine",
     level: "Parts 1 & 2"
@@ -118,8 +114,6 @@ const INITIAL_SHELVES: LibraryShelf[] = [
     name: "Histopathology",
     icon: "🔬",
     itemCount: 0,
-    driveUrl: "https://drive.google.com/drive/folders/1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE?usp=drive_link",
-    folderId: "1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE",
     description: "Microscopic slide atlases, cell injury, inflammation, neoplasia, and diagnostic biopsy specimens.",
     programme: "Biomedical Science (HBMLS)",
     level: "Parts 2 & 3"
@@ -128,7 +122,7 @@ const INITIAL_SHELVES: LibraryShelf[] = [
     id: "radiology",
     name: "Radiology",
     icon: "💀",
-    itemCount: 45,
+    itemCount: 0,
     description: "Systematic chest X-ray interpretation, emergency CT head scans, abdominal ultrasonography, and MRI basics.",
     programme: "Medicine (MBChB / MBBS)",
     level: "Clinical Years"
@@ -156,8 +150,6 @@ const INITIAL_SHELVES: LibraryShelf[] = [
     name: "Haematology",
     icon: "🩸",
     itemCount: 0,
-    driveUrl: "https://drive.google.com/drive/folders/1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE?usp=drive_link",
-    folderId: "1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE",
     description: "Blood film morphology, anaemia workups, leukaemia classification, coagulation cascades, and blood transfusion.",
     programme: "Biomedical Science (HBMLS)",
     level: "Part 3"
@@ -167,8 +159,6 @@ const INITIAL_SHELVES: LibraryShelf[] = [
     name: "Chemical Pathology",
     icon: "🧪",
     itemCount: 0,
-    driveUrl: "https://drive.google.com/drive/folders/1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE?usp=drive_link",
-    folderId: "1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE",
     description: "Electrolytes & blood gases, liver & renal function test interpretation, endocrinology assays, and laboratory QA.",
     programme: "Biomedical Science (HBMLS)",
     level: "Part 3"
@@ -298,9 +288,9 @@ export default function LibraryPage() {
       const { data: authData } = await supabase.auth.getUser()
       if (authData?.user) setUser(authData.user)
 
-      // Load cached customized shelves from localStorage
+      // Load cached customized shelves from localStorage (clean slate v2)
       try {
-        const stored = localStorage.getItem("podguide_library_shelves")
+        const stored = localStorage.getItem("podguide_library_shelves_v2")
         if (stored) {
           const parsed: Record<string, Partial<LibraryShelf>> = JSON.parse(stored)
           setShelves(prev =>
@@ -348,7 +338,7 @@ export default function LibraryPage() {
         folderId: updatedShelf.folderId,
         itemCount: updatedShelf.itemCount
       }
-      localStorage.setItem("podguide_library_shelves", JSON.stringify(currentMap))
+      localStorage.setItem("podguide_library_shelves_v2", JSON.stringify(currentMap))
     } catch {}
 
     // Save to Supabase curated_drive_folders if user is authenticated
@@ -388,6 +378,17 @@ export default function LibraryPage() {
     )
   }, [shelves, search])
 
+  const handleResetToZero = () => {
+    if (!confirm("Wipe all connected drive links and start clean from zero?")) return
+    try {
+      localStorage.removeItem("podguide_library_shelves_v2")
+      localStorage.removeItem("podguide_library_shelves")
+      localStorage.removeItem("podguide_custom_drive_folders")
+    } catch {}
+    setShelves(INITIAL_SHELVES)
+    toast.success("All folders reset to zero. Ready for fresh connections.")
+  }
+
   const openShelf = (shelf: LibraryShelf) => {
     if (shelf.folderId && shelf.driveUrl) {
       setSelectedShelf(shelf)
@@ -417,8 +418,8 @@ export default function LibraryPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
-          <div className="relative w-full sm:w-72">
+        <div className="flex items-center gap-2.5 flex-wrap sm:flex-nowrap">
+          <div className="relative w-full sm:w-64">
             <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500" />
             <input
               type="text"
@@ -431,6 +432,13 @@ export default function LibraryPage() {
           <div className="px-3 py-2 bg-[#111] border border-[#222] rounded-xl text-xs font-bold text-gray-400 whitespace-nowrap">
             {totalFiles} files total
           </div>
+          <button
+            onClick={handleResetToZero}
+            title="Wipe connections & start clean from zero"
+            className="flex items-center gap-1.5 px-3 py-2 bg-[#141414] hover:bg-[#1f1f1f] border border-[#222] hover:border-brand/40 text-gray-400 hover:text-white rounded-xl text-xs font-semibold transition-colors whitespace-nowrap"
+          >
+            <RotateCcw size={12} className="text-brand" /> Wipe & Start Zero
+          </button>
         </div>
       </div>
 
