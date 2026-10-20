@@ -58,7 +58,7 @@ const INITIAL_SHELVES: LibraryShelf[] = [
   {
     id: "dermatology",
     name: "Dermatology",
-    icon: "🧴",
+    icon: "💊",
     itemCount: 0,
     description: "Primary and secondary skin lesions, inflammatory dermatoses, skin infections, and melanoma screening.",
     programme: "Medicine (MBChB / MBBS)",
@@ -95,7 +95,7 @@ const INITIAL_SHELVES: LibraryShelf[] = [
     id: "anatomy",
     name: "Anatomy",
     icon: "🦴",
-    itemCount: 24,
+    itemCount: 15,
     driveUrl: "https://drive.google.com/drive/folders/1ZIXfs0gKrlpsXa3l-BSu9ze7v7zh1Mos?usp=drive_link",
     folderId: "1ZIXfs0gKrlpsXa3l-BSu9ze7v7zh1Mos",
     description: "Gross anatomy, cadaveric dissection manuals, regional osteology, histology, and embryology archives.",
@@ -106,7 +106,7 @@ const INITIAL_SHELVES: LibraryShelf[] = [
     id: "physiology",
     name: "Physiology",
     icon: "⚡",
-    itemCount: 18,
+    itemCount: 10,
     driveUrl: "https://drive.google.com/drive/folders/1ZIXfs0gKrlpsXa3l-BSu9ze7v7zh1Mos?usp=drive_link",
     folderId: "1ZIXfs0gKrlpsXa3l-BSu9ze7v7zh1Mos",
     description: "Cell physiology, cardiovascular haemodynamics, renal clearance, respiratory mechanics, and neurophysiology.",
@@ -117,7 +117,7 @@ const INITIAL_SHELVES: LibraryShelf[] = [
     id: "histopathology",
     name: "Histopathology",
     icon: "🔬",
-    itemCount: 22,
+    itemCount: 0,
     driveUrl: "https://drive.google.com/drive/folders/1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE?usp=drive_link",
     folderId: "1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE",
     description: "Microscopic slide atlases, cell injury, inflammation, neoplasia, and diagnostic biopsy specimens.",
@@ -127,7 +127,7 @@ const INITIAL_SHELVES: LibraryShelf[] = [
   {
     id: "radiology",
     name: "Radiology",
-    icon: "🩻",
+    icon: "💀",
     itemCount: 45,
     description: "Systematic chest X-ray interpretation, emergency CT head scans, abdominal ultrasonography, and MRI basics.",
     programme: "Medicine (MBChB / MBBS)",
@@ -155,7 +155,7 @@ const INITIAL_SHELVES: LibraryShelf[] = [
     id: "haematology",
     name: "Haematology",
     icon: "🩸",
-    itemCount: 16,
+    itemCount: 0,
     driveUrl: "https://drive.google.com/drive/folders/1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE?usp=drive_link",
     folderId: "1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE",
     description: "Blood film morphology, anaemia workups, leukaemia classification, coagulation cascades, and blood transfusion.",
@@ -166,7 +166,7 @@ const INITIAL_SHELVES: LibraryShelf[] = [
     id: "chemical-pathology",
     name: "Chemical Pathology",
     icon: "🧪",
-    itemCount: 18,
+    itemCount: 0,
     driveUrl: "https://drive.google.com/drive/folders/1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE?usp=drive_link",
     folderId: "1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE",
     description: "Electrolytes & blood gases, liver & renal function test interpretation, endocrinology assays, and laboratory QA.",
@@ -177,16 +177,34 @@ const INITIAL_SHELVES: LibraryShelf[] = [
     id: "medical-microbiology",
     name: "Medical Microbiology",
     icon: "🦠",
-    itemCount: 32,
+    itemCount: 0,
     description: "Bacteriology, virology, mycology, parasitology, antimicrobial sensitivity testing, and infection control.",
     programme: "All Programmes",
     level: "Parts 2 & 3"
   },
   {
+    id: "immunology",
+    name: "Immunology",
+    icon: "🛡️",
+    itemCount: 0,
+    description: "Innate & adaptive immunity, hypersensitivity reactions, autoimmune disorders, and immunodeficiency workups.",
+    programme: "All Programmes",
+    level: "Parts 2 & 3"
+  },
+  {
+    id: "behavioural-sciences",
+    name: "Behavioural Sciences",
+    icon: "🧩",
+    itemCount: 0,
+    description: "Medical sociology, doctor-patient communication, health psychology, and behavioural determinants of health.",
+    programme: "Medicine & Health Sciences",
+    level: "Parts 1 & 2"
+  },
+  {
     id: "ophthalmology",
     name: "Ophthalmology",
     icon: "👁️",
-    itemCount: 12,
+    itemCount: 0,
     description: "Slit-lamp examination, red eye differentials, cataracts, glaucoma, retinal emergencies, and visual acuity.",
     programme: "Medicine (MBChB / MBBS)",
     level: "Year 4"
@@ -195,19 +213,73 @@ const INITIAL_SHELVES: LibraryShelf[] = [
     id: "ent",
     name: "ENT / Otorhinolaryngology",
     icon: "👂",
-    itemCount: 14,
+    itemCount: 0,
     description: "Otoscopy, epistaxis management, hearing loss evaluation, tonsillitis, and head & neck emergencies.",
     programme: "Medicine (MBChB / MBBS)",
     level: "Year 4"
   },
   {
+    id: "orthopaedics",
+    name: "Orthopaedics & Trauma",
+    icon: "🦿",
+    itemCount: 0,
+    description: "Fracture classifications, reduction and splinting, joint dislocations, compartment syndrome, and sports injuries.",
+    programme: "Medicine (MBChB / MBBS)",
+    level: "Year 4 & 5"
+  },
+  {
+    id: "oncology",
+    name: "Clinical Oncology",
+    icon: "🎗️",
+    itemCount: 0,
+    description: "TNM staging, chemotherapy protocols, radiotherapy principles, palliative care, and cancer biology.",
+    programme: "Medicine (MBChB / MBBS)",
+    level: "Year 4 & 5"
+  },
+  {
+    id: "medical-genetics",
+    name: "Medical Genetics",
+    icon: "🧬",
+    itemCount: 0,
+    description: "Mendelian inheritance, chromosomal anomalies, cytogenetics, pedigree analysis, and genetic counselling.",
+    programme: "Biomedical & Medicine",
+    level: "Parts 1 & 2"
+  },
+  {
+    id: "forensic-medicine",
+    name: "Forensic Medicine & Toxicology",
+    icon: "🔍",
+    itemCount: 0,
+    description: "Post-mortem examination, wound ballistics, asphyxial deaths, clinical forensic examination, and court testimony.",
+    programme: "Medicine (MBChB / MBBS)",
+    level: "Year 3 & 4"
+  },
+  {
+    id: "critical-care",
+    name: "Critical Care & ICU",
+    icon: "🩺",
+    itemCount: 0,
+    description: "Mechanical ventilation, inotropic support, sepsis resuscitation protocols, and arterial line monitoring.",
+    programme: "Medicine (MBChB / MBBS)",
+    level: "Year 5 / Final Year"
+  },
+  {
     id: "medical-ethics",
     name: "Medical Ethics & Law",
     icon: "⚖️",
-    itemCount: 8,
+    itemCount: 0,
     description: "Informed consent, patient confidentiality, medical negligence, Zimbabwean health laws, and ethical dilemmas.",
     programme: "All Programmes",
     level: "All Levels"
+  },
+  {
+    id: "epidemiology",
+    name: "Epidemiology & Biostatistics",
+    icon: "📊",
+    itemCount: 0,
+    description: "Study designs, odds ratios & relative risks, outbreak investigations, diagnostic testing validity, and p-values.",
+    programme: "All Programmes",
+    level: "Parts 1 & 2"
   }
 ]
 
@@ -218,6 +290,7 @@ export default function LibraryPage() {
   const [selectedShelf, setSelectedShelf] = useState<LibraryShelf | null>(null)
   const [editingShelf, setEditingShelf] = useState<LibraryShelf | null>(null)
   const [driveUrlInput, setDriveUrlInput] = useState("")
+  const [itemCountInput, setItemCountInput] = useState<number | string>("")
   const [user, setUser] = useState<any>(null)
 
   useEffect(() => {
@@ -255,11 +328,12 @@ export default function LibraryPage() {
     if (!editingShelf || !driveUrlInput.trim()) return
 
     const folderId = extractFolderId(driveUrlInput)
+    const count = itemCountInput !== "" ? parseInt(itemCountInput.toString(), 10) : editingShelf.itemCount
     const updatedShelf: LibraryShelf = {
       ...editingShelf,
       driveUrl: driveUrlInput.trim(),
       folderId: folderId,
-      itemCount: editingShelf.itemCount === 0 ? 12 : editingShelf.itemCount
+      itemCount: isNaN(count) ? 0 : Math.max(0, count)
     }
 
     // Update state
@@ -320,6 +394,7 @@ export default function LibraryPage() {
     } else {
       setEditingShelf(shelf)
       setDriveUrlInput("")
+      setItemCountInput(shelf.itemCount > 0 ? shelf.itemCount : "")
     }
   }
 
@@ -388,6 +463,7 @@ export default function LibraryPage() {
                       e.stopPropagation()
                       setEditingShelf(shelf)
                       setDriveUrlInput(shelf.driveUrl || "")
+                      setItemCountInput(shelf.itemCount > 0 ? shelf.itemCount : "")
                     }}
                     title={isConnected ? "Edit Google Drive Link" : "Connect Google Drive Link"}
                     className="p-1.5 text-gray-500 hover:text-white rounded-lg transition-colors"
@@ -488,6 +564,7 @@ export default function LibraryPage() {
                 onClick={() => {
                   setEditingShelf(selectedShelf)
                   setDriveUrlInput(selectedShelf.driveUrl || "")
+                  setItemCountInput(selectedShelf.itemCount > 0 ? selectedShelf.itemCount : "")
                   setSelectedShelf(null)
                 }}
                 className="w-full sm:w-auto px-4 py-2.5 bg-[#161616] hover:bg-[#202020] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-xl text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
@@ -547,6 +624,20 @@ export default function LibraryPage() {
                   placeholder="https://drive.google.com/drive/folders/1aBcD_XyZ..."
                   value={driveUrlInput}
                   onChange={e => setDriveUrlInput(e.target.value)}
+                  className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-brand rounded-xl px-4 py-2.5 text-xs text-white placeholder:text-gray-600 outline-none transition-colors"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
+                  Actual File Count (Optional)
+                </label>
+                <input
+                  type="number"
+                  min="0"
+                  placeholder="e.g. 15 (leave empty or 0 if empty)"
+                  value={itemCountInput}
+                  onChange={e => setItemCountInput(e.target.value)}
                   className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-brand rounded-xl px-4 py-2.5 text-xs text-white placeholder:text-gray-600 outline-none transition-colors"
                 />
               </div>
