@@ -1,120 +1,242 @@
 "use client"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import { createClient } from "@/lib/supabase/client"
-import Link from "next/link"
 import {
-  Library, Search, FileText, Download, ExternalLink,
-  BookOpen, Filter, Sparkles, FolderOpen, Award, CheckCircle2,
-  FolderPlus, Plus, Trash2, Folder, HardDrive, Eye, X, Check
+  Search, ExternalLink, Eye, X, Check, Folder, Link2, HardDrive, Sparkles
 } from "lucide-react"
 import { toast } from "sonner"
 
-interface DriveFolder {
+export interface LibraryShelf {
   id: string
-  title: string
-  description: string
-  drive_url: string
-  folder_id: string
-  programme: string
-  level: string
-  category: string
+  name: string
   icon: string
-  item_count: number
-  color?: string
-  created_at?: string
+  itemCount: number
+  driveUrl?: string
+  folderId?: string
+  description?: string
+  programme?: string
+  level?: string
 }
 
-const DEFAULT_DRIVE_FOLDERS: DriveFolder[] = [
+const INITIAL_SHELVES: LibraryShelf[] = [
   {
-    id: "drive-bms-1-2",
-    title: "BioMedical Sciences 1 & 2",
-    description: "Official shared Google Drive repository containing lecture slide archives, laboratory practical guides, and examination materials for Biomedical Sciences Parts 1 & 2.",
-    drive_url: "https://drive.google.com/drive/folders/1ZIXfs0gKrlpsXa3l-BSu9ze7v7zh1Mos?usp=drive_link",
-    folder_id: "1ZIXfs0gKrlpsXa3l-BSu9ze7v7zh1Mos",
-    programme: "Biomedical Science (HBMLS / BSc)",
-    level: "Part 1 & 2",
-    category: "Biomedical Sciences",
-    icon: "🔬",
-    item_count: 24,
-    color: "brand"
+    id: "internal-medicine",
+    name: "Internal Medicine",
+    icon: "🫀",
+    itemCount: 185,
+    description: "Cardiology, pulmonology, endocrinology, gastroenterology, nephrology, and acute medical admissions.",
+    programme: "Medicine (MBChB / MBBS)",
+    level: "Year 4 & 5"
   },
   {
-    id: "drive-bms-3",
-    title: "BioMedical Sciences 3",
-    description: "Official shared Google Drive repository containing advanced pathology, medical microbiology, clinical biochemistry, and haematology archives for Biomedical Sciences Part 3.",
-    drive_url: "https://drive.google.com/drive/folders/1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE?usp=drive_link",
-    folder_id: "1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE",
-    programme: "Biomedical Science (HBMLS / BSc)",
-    level: "Part 3",
-    category: "Biomedical Sciences",
-    icon: "🧬",
-    item_count: 18,
-    color: "brand"
+    id: "paediatrics",
+    name: "Paediatrics",
+    icon: "👶",
+    itemCount: 86,
+    description: "Neonatal resuscitation, developmental milestones, paediatric infectious disease, and IMCI guidelines.",
+    programme: "Medicine (MBChB / MBBS)",
+    level: "Year 4 & 5"
+  },
+  {
+    id: "surgery",
+    name: "Surgery",
+    icon: "🔪",
+    itemCount: 319,
+    description: "General surgery operative manuals, acute abdomen algorithms, trauma ATLS protocols, and surgical oncology.",
+    programme: "Medicine (MBChB / MBBS)",
+    level: "Year 4 & 5"
+  },
+  {
+    id: "obs-gyn",
+    name: "Obstetrics & Gynecology",
+    icon: "🤰",
+    itemCount: 69,
+    description: "Antenatal care, intrapartum management, obstetric emergencies, gynaecological oncology, and family planning.",
+    programme: "Medicine (MBChB / MBBS)",
+    level: "Year 4 & 5"
+  },
+  {
+    id: "dermatology",
+    name: "Dermatology",
+    icon: "🧴",
+    itemCount: 0,
+    description: "Primary and secondary skin lesions, inflammatory dermatoses, skin infections, and melanoma screening.",
+    programme: "Medicine (MBChB / MBBS)",
+    level: "Year 4"
+  },
+  {
+    id: "community-medicine",
+    name: "Community Medicine",
+    icon: "🏥",
+    itemCount: 44,
+    description: "Public health epidemiology, biostatistics, primary healthcare delivery, maternal & child health outreach.",
+    programme: "Medicine & Health Sciences",
+    level: "All Levels"
+  },
+  {
+    id: "psychiatry",
+    name: "Psychiatry",
+    icon: "🧠",
+    itemCount: 152,
+    description: "DSM-5 diagnostic criteria, mood and psychotic disorders, psychopharmacology, and psychiatric emergencies.",
+    programme: "Medicine (MBChB / MBBS)",
+    level: "Year 4"
+  },
+  {
+    id: "pharmacology",
+    name: "Pharmacology",
+    icon: "💊",
+    itemCount: 75,
+    description: "Pharmacokinetics, pharmacodynamics, clinical toxicology, antimicrobial regimens, and hospital formularies.",
+    programme: "All Programmes",
+    level: "Parts 2 & 3"
+  },
+  {
+    id: "anatomy",
+    name: "Anatomy",
+    icon: "🦴",
+    itemCount: 24,
+    driveUrl: "https://drive.google.com/drive/folders/1ZIXfs0gKrlpsXa3l-BSu9ze7v7zh1Mos?usp=drive_link",
+    folderId: "1ZIXfs0gKrlpsXa3l-BSu9ze7v7zh1Mos",
+    description: "Gross anatomy, cadaveric dissection manuals, regional osteology, histology, and embryology archives.",
+    programme: "Biomedical & Medicine",
+    level: "Parts 1 & 2"
+  },
+  {
+    id: "physiology",
+    name: "Physiology",
+    icon: "⚡",
+    itemCount: 18,
+    driveUrl: "https://drive.google.com/drive/folders/1ZIXfs0gKrlpsXa3l-BSu9ze7v7zh1Mos?usp=drive_link",
+    folderId: "1ZIXfs0gKrlpsXa3l-BSu9ze7v7zh1Mos",
+    description: "Cell physiology, cardiovascular haemodynamics, renal clearance, respiratory mechanics, and neurophysiology.",
+    programme: "Biomedical & Medicine",
+    level: "Parts 1 & 2"
+  },
+  {
+    id: "histopathology",
+    name: "Histopathology",
+    icon: "🔬",
+    itemCount: 22,
+    driveUrl: "https://drive.google.com/drive/folders/1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE?usp=drive_link",
+    folderId: "1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE",
+    description: "Microscopic slide atlases, cell injury, inflammation, neoplasia, and diagnostic biopsy specimens.",
+    programme: "Biomedical Science (HBMLS)",
+    level: "Parts 2 & 3"
+  },
+  {
+    id: "radiology",
+    name: "Radiology",
+    icon: "🩻",
+    itemCount: 45,
+    description: "Systematic chest X-ray interpretation, emergency CT head scans, abdominal ultrasonography, and MRI basics.",
+    programme: "Medicine (MBChB / MBBS)",
+    level: "Clinical Years"
+  },
+  {
+    id: "anaesthetics",
+    name: "Anaesthetics",
+    icon: "💉",
+    itemCount: 0,
+    description: "Pre-operative evaluation, airway management, general & regional anaesthesia, and post-op recovery.",
+    programme: "Medicine (MBChB / MBBS)",
+    level: "Year 5"
+  },
+  {
+    id: "emergency-medicine",
+    name: "Emergency Medicine",
+    icon: "🚑",
+    itemCount: 0,
+    description: "Advanced cardiac life support (ACLS), major trauma management, toxicology triage, and shock resuscitation.",
+    programme: "Medicine (MBChB / MBBS)",
+    level: "Year 5 / Final Year"
+  },
+  {
+    id: "haematology",
+    name: "Haematology",
+    icon: "🩸",
+    itemCount: 16,
+    driveUrl: "https://drive.google.com/drive/folders/1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE?usp=drive_link",
+    folderId: "1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE",
+    description: "Blood film morphology, anaemia workups, leukaemia classification, coagulation cascades, and blood transfusion.",
+    programme: "Biomedical Science (HBMLS)",
+    level: "Part 3"
+  },
+  {
+    id: "chemical-pathology",
+    name: "Chemical Pathology",
+    icon: "🧪",
+    itemCount: 18,
+    driveUrl: "https://drive.google.com/drive/folders/1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE?usp=drive_link",
+    folderId: "1bZsbvIxeH_-hnq0xviuV73cX1oa7RbAE",
+    description: "Electrolytes & blood gases, liver & renal function test interpretation, endocrinology assays, and laboratory QA.",
+    programme: "Biomedical Science (HBMLS)",
+    level: "Part 3"
+  },
+  {
+    id: "medical-microbiology",
+    name: "Medical Microbiology",
+    icon: "🦠",
+    itemCount: 32,
+    description: "Bacteriology, virology, mycology, parasitology, antimicrobial sensitivity testing, and infection control.",
+    programme: "All Programmes",
+    level: "Parts 2 & 3"
+  },
+  {
+    id: "ophthalmology",
+    name: "Ophthalmology",
+    icon: "👁️",
+    itemCount: 12,
+    description: "Slit-lamp examination, red eye differentials, cataracts, glaucoma, retinal emergencies, and visual acuity.",
+    programme: "Medicine (MBChB / MBBS)",
+    level: "Year 4"
+  },
+  {
+    id: "ent",
+    name: "ENT / Otorhinolaryngology",
+    icon: "👂",
+    itemCount: 14,
+    description: "Otoscopy, epistaxis management, hearing loss evaluation, tonsillitis, and head & neck emergencies.",
+    programme: "Medicine (MBChB / MBBS)",
+    level: "Year 4"
+  },
+  {
+    id: "medical-ethics",
+    name: "Medical Ethics & Law",
+    icon: "⚖️",
+    itemCount: 8,
+    description: "Informed consent, patient confidentiality, medical negligence, Zimbabwean health laws, and ethical dilemmas.",
+    programme: "All Programmes",
+    level: "All Levels"
   }
 ]
 
 export default function LibraryPage() {
   const supabase = createClient()
-  const [folders, setFolders] = useState<DriveFolder[]>(DEFAULT_DRIVE_FOLDERS)
-  const [loading, setLoading] = useState(true)
+  const [shelves, setShelves] = useState<LibraryShelf[]>(INITIAL_SHELVES)
   const [search, setSearch] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState("all")
+  const [selectedShelf, setSelectedShelf] = useState<LibraryShelf | null>(null)
+  const [editingShelf, setEditingShelf] = useState<LibraryShelf | null>(null)
+  const [driveUrlInput, setDriveUrlInput] = useState("")
   const [user, setUser] = useState<any>(null)
 
-  // Add Folder Modal State
-  const [showAddModal, setShowAddModal] = useState(false)
-  const [folderTitle, setFolderTitle] = useState("")
-  const [folderUrl, setFolderUrl] = useState("")
-  const [folderCategory, setFolderCategory] = useState("Core Clinical")
-  const [folderProgramme, setFolderProgramme] = useState("Medicine (MBChB / MBBS)")
-  const [folderLevel, setFolderLevel] = useState("All Levels")
-  const [folderDesc, setFolderDesc] = useState("")
-  const [folderIcon, setFolderIcon] = useState("📁")
-  const [submitting, setSubmitting] = useState(false)
-
-  // Preview Modal
-  const [previewFolder, setPreviewFolder] = useState<DriveFolder | null>(null)
-
   useEffect(() => {
-    const load = async () => {
+    const init = async () => {
       const { data: authData } = await supabase.auth.getUser()
       if (authData?.user) setUser(authData.user)
 
-      // 1. Load locally cached folders first
-      let localFolders: DriveFolder[] = []
+      // Load cached customized shelves from localStorage
       try {
-        const stored = typeof window !== "undefined" ? localStorage.getItem("podguide_custom_drive_folders") : null
-        if (stored) localFolders = JSON.parse(stored)
-      } catch {}
-
-      // 2. Fetch from Supabase curated_drive_folders
-      try {
-        const { data, error } = await supabase
-          .from("curated_drive_folders")
-          .select("*")
-          .order("created_at", { ascending: false })
-
-        if (!error && data && data.length > 0) {
-          const realData = data.filter((d: DriveFolder) => !d.folder_id?.includes("sample_"))
-          const remoteIds = new Set(realData.map((d: DriveFolder) => d.id))
-          const validLocal = localFolders.filter(f => !f.folder_id?.includes("sample_"))
-          const merged = [...realData, ...validLocal.filter(f => !remoteIds.has(f.id))]
-          setFolders(merged.length > 0 ? merged : DEFAULT_DRIVE_FOLDERS)
-        } else if (localFolders.length > 0) {
-          const validLocal = localFolders.filter(f => !f.folder_id?.includes("sample_"))
-          const localIds = new Set(validLocal.map(d => d.id))
-          const merged = [...validLocal, ...DEFAULT_DRIVE_FOLDERS.filter(f => !localIds.has(f.id))]
-          setFolders(merged.length > 0 ? merged : DEFAULT_DRIVE_FOLDERS)
-        } else {
-          setFolders(DEFAULT_DRIVE_FOLDERS)
+        const stored = localStorage.getItem("podguide_library_shelves")
+        if (stored) {
+          const parsed: Record<string, Partial<LibraryShelf>> = JSON.parse(stored)
+          setShelves(prev =>
+            prev.map(shelf => (parsed[shelf.id] ? { ...shelf, ...parsed[shelf.id] } : shelf))
+          )
         }
-      } catch (err) {
-        setFolders(DEFAULT_DRIVE_FOLDERS)
-      } finally {
-        setLoading(false)
-      }
+      } catch {}
     }
-    load()
+    init()
   }, [])
 
   const extractFolderId = (url: string) => {
@@ -128,458 +250,187 @@ export default function LibraryPage() {
     return trimmed
   }
 
-  const handleAddFolder = async (e: React.FormEvent) => {
+  const handleSaveDriveLink = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!folderTitle.trim() || !folderUrl.trim()) {
-      toast.error("Please provide both a title and Google Drive link")
-      return
+    if (!editingShelf || !driveUrlInput.trim()) return
+
+    const folderId = extractFolderId(driveUrlInput)
+    const updatedShelf: LibraryShelf = {
+      ...editingShelf,
+      driveUrl: driveUrlInput.trim(),
+      folderId: folderId,
+      itemCount: editingShelf.itemCount === 0 ? 12 : editingShelf.itemCount
     }
 
-    setSubmitting(true)
-    const folderId = extractFolderId(folderUrl)
+    // Update state
+    setShelves(prev => prev.map(s => (s.id === updatedShelf.id ? updatedShelf : s)))
 
-    const newFolder: DriveFolder = {
-      id: crypto.randomUUID(),
-      title: folderTitle.trim(),
-      description: folderDesc.trim() || "Curated Google Drive collection.",
-      drive_url: folderUrl.trim(),
-      folder_id: folderId,
-      programme: folderProgramme,
-      level: folderLevel,
-      category: folderCategory,
-      icon: folderIcon,
-      item_count: 12,
-      color: "brand"
-    }
-
-    // Save to localStorage immediately
+    // Save to localStorage
     try {
-      const stored = localStorage.getItem("podguide_custom_drive_folders")
-      const list: DriveFolder[] = stored ? JSON.parse(stored) : []
-      localStorage.setItem("podguide_custom_drive_folders", JSON.stringify([newFolder, ...list.filter(f => f.id !== newFolder.id)]))
+      const stored = localStorage.getItem("podguide_library_shelves")
+      const currentMap: Record<string, any> = stored ? JSON.parse(stored) : {}
+      currentMap[updatedShelf.id] = {
+        driveUrl: updatedShelf.driveUrl,
+        folderId: updatedShelf.folderId,
+        itemCount: updatedShelf.itemCount
+      }
+      localStorage.setItem("podguide_library_shelves", JSON.stringify(currentMap))
     } catch {}
 
-    // Try saving to Supabase
+    // Save to Supabase curated_drive_folders if user is authenticated
     try {
       if (user) {
-        await supabase.from("curated_drive_folders").insert({
-          title: newFolder.title,
-          description: newFolder.description,
-          drive_url: newFolder.drive_url,
-          folder_id: newFolder.folder_id,
-          programme: newFolder.programme,
-          level: newFolder.level,
-          category: newFolder.category,
-          icon: newFolder.icon,
-          item_count: newFolder.item_count,
+        await supabase.from("curated_drive_folders").upsert({
+          title: updatedShelf.name,
+          drive_url: updatedShelf.driveUrl,
+          folder_id: updatedShelf.folderId,
+          category: updatedShelf.name,
+          programme: updatedShelf.programme || "All",
+          level: updatedShelf.level || "All",
+          description: updatedShelf.description || "",
+          icon: updatedShelf.icon,
+          item_count: updatedShelf.itemCount,
           created_by: user.id
         })
       }
     } catch (err) {
-      console.warn("Could not insert to DB, updating locally:", err)
+      console.warn("Supabase drive shelf sync notice:", err)
     }
 
-    // Optimistic UI update
-    setFolders(prev => [newFolder, ...prev])
-    toast.success("Google Drive Folder Connected!", {
-      description: `${newFolder.title} is now available in your library.`
-    })
-
-    // Reset Form
-    setFolderTitle("")
-    setFolderUrl("")
-    setFolderDesc("")
-    setShowAddModal(false)
-    setSubmitting(false)
+    toast.success(`${updatedShelf.name} Google Drive connected!`)
+    setEditingShelf(null)
+    setDriveUrlInput("")
   }
 
-  const handleDeleteFolder = async (id: string, e: React.MouseEvent) => {
-    e.stopPropagation()
-    if (!confirm("Remove this Google Drive folder from the library?")) return
+  const totalFiles = useMemo(() => {
+    return shelves.reduce((acc, curr) => acc + (curr.itemCount || 0), 0)
+  }, [shelves])
 
-    // Remove from localStorage
-    try {
-      const stored = localStorage.getItem("podguide_custom_drive_folders")
-      if (stored) {
-        const list: DriveFolder[] = JSON.parse(stored)
-        localStorage.setItem("podguide_custom_drive_folders", JSON.stringify(list.filter(f => f.id !== id)))
-      }
-    } catch {}
+  const filteredShelves = useMemo(() => {
+    if (!search.trim()) return shelves
+    const q = search.toLowerCase()
+    return shelves.filter(
+      s => s.name.toLowerCase().includes(q) || s.description?.toLowerCase().includes(q)
+    )
+  }, [shelves, search])
 
-    try {
-      await supabase.from("curated_drive_folders").delete().eq("id", id)
-    } catch (err) {
-      console.warn("Delete DB error:", err)
+  const openShelf = (shelf: LibraryShelf) => {
+    if (shelf.folderId && shelf.driveUrl) {
+      setSelectedShelf(shelf)
+    } else {
+      setEditingShelf(shelf)
+      setDriveUrlInput("")
     }
-
-    setFolders(prev => prev.filter(f => f.id !== id))
-    toast.success("Folder removed from library")
   }
-
-  const filteredFolders = folders.filter(f => {
-    const matchSearch =
-      search === "" ||
-      f.title.toLowerCase().includes(search.toLowerCase()) ||
-      f.description.toLowerCase().includes(search.toLowerCase()) ||
-      f.category.toLowerCase().includes(search.toLowerCase())
-
-    const matchCategory = selectedCategory === "all" || f.category.toLowerCase() === selectedCategory.toLowerCase()
-    return matchSearch && matchCategory
-  })
 
   return (
-    <div className="max-w-6xl mx-auto space-y-8 pb-16">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+    <div className="max-w-7xl mx-auto space-y-6 pb-20">
+      {/* ── TOP HEADER BAR ── */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#181818] pb-5">
         <div>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-[11px] font-bold uppercase tracking-widest text-brand bg-brand/10 px-3 py-1 rounded-full border border-brand/20 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-brand animate-pulse" />
-              Google Drive Cloud Sync
+          <div className="flex items-center gap-2">
+            <h1 className="text-xs font-black uppercase tracking-[0.2em] text-gray-400">
+              LIBRARY SHELVES
+            </h1>
+            <span className="w-1 h-1 rounded-full bg-brand" />
+            <span className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider">
+              Subject Folders
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-display font-bold text-white">Library</h1>
-          <p className="text-gray-400 mt-1 text-sm max-w-xl">
-            Curated Google Drive collections with high-yield textbooks, OSCE video guides, lecture slide decks, and question archives.
+          <p className="text-xl sm:text-2xl font-display font-bold text-white mt-1">
+            Curated Academic Shelves
           </p>
         </div>
 
-        <button
-          onClick={() => setShowAddModal(true)}
-          className="inline-flex items-center gap-2 px-5 py-3 bg-brand hover:bg-red-700 text-white font-bold rounded-xl text-xs transition-all shadow-lg shadow-brand/20 self-start sm:self-auto"
-        >
-          <FolderPlus size={16} /> Connect Google Drive Folder
-        </button>
-      </div>
-
-      {/* Google Drive Status Banner */}
-      <div className="bg-[#0f1115] border border-[#232936] rounded-2xl p-6 sm:p-7 relative overflow-hidden">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
-              {/* Google Drive SVG Logo */}
-              <svg width="24" height="24" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
-                <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
-                <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44c-.8 1.4-1.2 2.95-1.2 4.5h27.5z" fill="#00ac47"/>
-                <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/>
-                <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.25z" fill="#00832d"/>
-                <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.25z" fill="#2684fc"/>
-                <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
-              </svg>
-            </div>
-            <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <h3 className="text-base font-bold text-white">Google Drive Cloud Repository Active</h3>
-                <span className="text-[10px] font-bold uppercase text-brand bg-brand/10 px-2 py-0.5 rounded-full border border-brand/20">
-                  {folders.length} Folders Linked
-                </span>
-              </div>
-              <p className="text-xs text-gray-400 leading-relaxed max-w-xl">
-                All folders open seamlessly in Google Drive or directly inside your PodGuide workspace. Organise folders by specialty, rotation, or academic year.
-              </p>
-            </div>
+        <div className="flex items-center gap-3">
+          <div className="relative w-full sm:w-72">
+            <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500" />
+            <input
+              type="text"
+              placeholder="Filter shelves..."
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              className="w-full bg-[#0d0d0d] border border-[#222] focus:border-brand rounded-xl pl-9 pr-3.5 py-2 text-xs text-white placeholder:text-gray-600 outline-none transition-colors"
+            />
           </div>
-
-          <div className="flex items-center gap-2 w-full md:w-auto">
-            <button
-              onClick={() => setShowAddModal(true)}
-              className="w-full md:w-auto px-4 py-2.5 bg-[#1a1a1a] hover:bg-[#252525] border border-[#2a2a2a] text-white text-xs font-semibold rounded-xl transition-all flex items-center justify-center gap-2"
-            >
-              <Plus size={14} className="text-brand" /> Upload Curated Folder
-            </button>
+          <div className="px-3 py-2 bg-[#111] border border-[#222] rounded-xl text-xs font-bold text-gray-400 whitespace-nowrap">
+            {totalFiles} files total
           </div>
         </div>
       </div>
 
-      {/* Search and Category Filters */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-        <div className="relative flex-1">
-          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500" />
-          <input
-            type="text"
-            placeholder="Search curated folders by specialty, part, or keywords..."
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            className="w-full bg-[#111] border border-[#222] focus:border-brand rounded-xl pl-10 pr-4 py-3 text-sm text-white placeholder:text-gray-600 outline-none transition-colors"
-          />
-        </div>
+      {/* ── SHELVES GRID ── */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {filteredShelves.map(shelf => {
+          const isConnected = Boolean(shelf.folderId && shelf.driveUrl)
 
-        <div className="flex gap-1.5 overflow-x-auto pb-1 sm:pb-0">
-          {[
-            { id: "all", label: "All Folders" },
-            ...Array.from(new Set(folders.map(f => f.category)))
-              .filter(Boolean)
-              .map(cat => ({
-                id: cat.toLowerCase(),
-                label: cat.toLowerCase().includes("biomedical") ? `🔬 ${cat}` : `📁 ${cat}`
-              }))
-          ].map(cat => (
-            <button
-              key={cat.id}
-              onClick={() => setSelectedCategory(cat.id)}
-              className={`px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap border ${
-                selectedCategory === cat.id
-                  ? "bg-brand text-white border-brand shadow-lg shadow-brand/20"
-                  : "bg-[#111] text-gray-400 border-[#222] hover:text-white hover:border-[#333]"
-              }`}
+          return (
+            <div
+              key={shelf.id}
+              onClick={() => openShelf(shelf)}
+              className="bg-[#0c0c0c] border border-[#1a1a1a] hover:border-brand/40 hover:bg-[#121212] rounded-2xl p-5 flex flex-col justify-between transition-all duration-150 cursor-pointer group shadow-sm relative overflow-hidden"
             >
-              {cat.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Google Drive Curated Folders Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {filteredFolders.map(folder => (
-          <div
-            key={folder.id}
-            onClick={() => setPreviewFolder(folder)}
-            className="bg-[#111] border border-[#1f1f1f] hover:border-brand/40 rounded-2xl p-6 flex flex-col justify-between transition-all group hover:shadow-xl hover:shadow-brand/5 cursor-pointer relative"
-          >
-            <div className="space-y-4">
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-[#161616] border border-[#262626] flex items-center justify-center text-2xl group-hover:scale-105 transition-transform">
-                    {folder.icon || "📁"}
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-brand bg-brand/10 px-2 py-0.5 rounded-full border border-brand/20 flex items-center gap-1">
-                        <HardDrive size={10} /> Google Drive
-                      </span>
-                      <span className="text-[10px] font-semibold text-gray-500">
-                        {folder.item_count} files
-                      </span>
-                    </div>
-                    <h3 className="text-base font-bold text-white group-hover:text-brand transition-colors mt-1 line-clamp-1">
-                      {folder.title}
-                    </h3>
-                  </div>
+              {/* Top Row: Icon on Left, Folder Icon on Right */}
+              <div className="flex items-start justify-between">
+                <div className="w-10 h-10 rounded-xl bg-[#161616] border border-[#262626] flex items-center justify-center text-xl flex-shrink-0 group-hover:scale-105 transition-transform">
+                  {shelf.icon}
                 </div>
 
-                <button
-                  onClick={(e) => handleDeleteFolder(folder.id, e)}
-                  className="opacity-0 group-hover:opacity-100 p-2 text-gray-500 hover:text-brand transition-all rounded-lg"
-                  title="Remove folder"
-                >
-                  <Trash2 size={14} />
-                </button>
+                <div className="flex items-center gap-1.5">
+                  {isConnected && (
+                    <span
+                      title="Google Drive connected"
+                      className="w-2 h-2 rounded-full bg-brand animate-pulse"
+                    />
+                  )}
+                  <button
+                    onClick={e => {
+                      e.stopPropagation()
+                      setEditingShelf(shelf)
+                      setDriveUrlInput(shelf.driveUrl || "")
+                    }}
+                    title={isConnected ? "Edit Google Drive Link" : "Connect Google Drive Link"}
+                    className="p-1.5 text-gray-500 hover:text-white rounded-lg transition-colors"
+                  >
+                    <Folder
+                      size={18}
+                      className={
+                        isConnected
+                          ? "text-brand group-hover:text-red-400"
+                          : "text-gray-500 group-hover:text-gray-300"
+                      }
+                    />
+                  </button>
+                </div>
               </div>
 
-              <p className="text-xs text-gray-400 leading-relaxed line-clamp-2">
-                {folder.description}
-              </p>
-
-              <div className="flex items-center gap-2 flex-wrap text-[11px] text-gray-500">
-                <span className="bg-[#161616] border border-[#222] px-2.5 py-1 rounded-lg text-gray-300 font-medium">
-                  {folder.programme}
-                </span>
-                <span className="bg-[#161616] border border-[#222] px-2.5 py-1 rounded-lg text-gray-400">
-                  {folder.level}
-                </span>
+              {/* Bottom: Shelf Name & Item Count */}
+              <div className="mt-5">
+                <h3 className="text-sm font-bold text-white group-hover:text-brand transition-colors line-clamp-1">
+                  {shelf.name}
+                </h3>
+                <p className="text-xs text-gray-500 mt-1 font-medium">
+                  {shelf.itemCount} items
+                </p>
               </div>
             </div>
-
-            <div className="pt-5 mt-5 border-t border-[#1a1a1a] flex items-center justify-between">
-              <span className="text-xs font-semibold text-gray-400 group-hover:text-white flex items-center gap-1.5 transition-colors">
-                <Eye size={13} className="text-brand" /> View Curated Contents
-              </span>
-
-              <a
-                href={folder.drive_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={e => e.stopPropagation()}
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-brand hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-brand/20 flex-shrink-0"
-              >
-                Open in Drive <ExternalLink size={12} />
-              </a>
-            </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
 
-      {filteredFolders.length === 0 && (
-        <div className="text-center py-20 bg-[#0d0d0d] border border-[#1a1a1a] rounded-2xl space-y-3">
-          <div className="w-14 h-14 rounded-2xl bg-[#141414] border border-[#222] flex items-center justify-center mx-auto text-2xl">
-            📁
-          </div>
-          <h3 className="text-white font-bold text-base">No Matching Folders</h3>
-          <p className="text-xs text-gray-500 max-w-sm mx-auto">
-            Connect a new Google Drive folder with the button above.
-          </p>
+      {filteredShelves.length === 0 && (
+        <div className="text-center py-16 bg-[#0c0c0c] border border-[#1a1a1a] rounded-2xl space-y-2">
+          <p className="text-sm font-bold text-white">No matching shelves found</p>
+          <p className="text-xs text-gray-500">Try searching with a different term.</p>
         </div>
       )}
 
-      {/* Modal: Connect Google Drive Folder */}
-      {showAddModal && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#111] border border-[#222] rounded-2xl w-full max-w-lg p-6 sm:p-7 space-y-5 relative shadow-2xl animate-in fade-in zoom-in-95 duration-150">
-            <button
-              onClick={() => setShowAddModal(false)}
-              className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
-            >
-              <X size={18} />
-            </button>
-
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center text-xl">
-                📁
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-white">Connect Google Drive Folder</h3>
-                <p className="text-xs text-gray-400">Link a shared Google Drive folder to your library catalog.</p>
-              </div>
-            </div>
-
-            <form onSubmit={handleAddFolder} className="space-y-4">
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                  Folder Title
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Cardiorespiratory Clinical OSCE Video Guides"
-                  value={folderTitle}
-                  onChange={e => setFolderTitle(e.target.value)}
-                  className="w-full bg-[#0c0c0c] border border-[#2b2b2b] focus:border-brand rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-gray-600 outline-none transition-colors"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                  Google Drive Share Link
-                </label>
-                <input
-                  type="url"
-                  required
-                  placeholder="https://drive.google.com/drive/folders/1aBcD_XyZ..."
-                  value={folderUrl}
-                  onChange={e => setFolderUrl(e.target.value)}
-                  className="w-full bg-[#0c0c0c] border border-[#2b2b2b] focus:border-brand rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-gray-600 outline-none transition-colors"
-                />
-                <span className="text-[10px] text-gray-500 mt-1 block">
-                  Ensure the folder sharing permission in Google Drive is set to <strong>"Anyone with the link can view"</strong>.
-                </span>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                    Category / Specialty
-                  </label>
-                  <select
-                    value={folderCategory}
-                    onChange={e => setFolderCategory(e.target.value)}
-                    className="w-full bg-[#0c0c0c] border border-[#2b2b2b] focus:border-brand rounded-xl px-3 py-2.5 text-xs text-white outline-none"
-                  >
-                    <option value="Biomedical Sciences">Biomedical Sciences</option>
-                    <option value="Anatomy">Anatomy</option>
-                    <option value="Pathology">Pathology</option>
-                    <option value="Pharmacology">Pharmacology</option>
-                    <option value="Clinical Medicine">Clinical Medicine</option>
-                    <option value="Surgery">Surgery</option>
-                    <option value="Paediatrics">Paediatrics</option>
-                    <option value="Obstetrics & Gynae">Obstetrics & Gynae</option>
-                    <option value="Past Papers">Past Papers</option>
-                    <option value="General">General Reference</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                    Emoji Icon
-                  </label>
-                  <input
-                    type="text"
-                    value={folderIcon}
-                    onChange={e => setFolderIcon(e.target.value)}
-                    className="w-full bg-[#0c0c0c] border border-[#2b2b2b] focus:border-brand rounded-xl px-3 py-2.5 text-sm text-white outline-none text-center"
-                    maxLength={2}
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                    Programme
-                  </label>
-                  <select
-                    value={folderProgramme}
-                    onChange={e => setFolderProgramme(e.target.value)}
-                    className="w-full bg-[#0c0c0c] border border-[#2b2b2b] focus:border-brand rounded-xl px-3 py-2.5 text-xs text-white outline-none"
-                  >
-                    <option value="Medicine (MBChB / MBBS)">Medicine (MBChB)</option>
-                    <option value="Biomedical Science (BSc)">Biomedical Science (BMS)</option>
-                    <option value="Pharmacy (BPharm / PharmD)">Pharmacy</option>
-                    <option value="Nursing (BSc Nursing / BNurs)">Nursing</option>
-                    <option value="All Programmes">All Programmes</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                    Level
-                  </label>
-                  <select
-                    value={folderLevel}
-                    onChange={e => setFolderLevel(e.target.value)}
-                    className="w-full bg-[#0c0c0c] border border-[#2b2b2b] focus:border-brand rounded-xl px-3 py-2.5 text-xs text-white outline-none"
-                  >
-                    <option value="All Levels">All Levels</option>
-                    <option value="Part 1">Part 1 / Year 1</option>
-                    <option value="Part 2">Part 2 / Year 2</option>
-                    <option value="Part 3">Part 3 / Year 3</option>
-                    <option value="Year 4">Year 4 (Clinical)</option>
-                    <option value="Year 5">Year 5 (Clinical)</option>
-                    <option value="Year 6">Year 6 (Finals)</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                  Description / Folder Contents
-                </label>
-                <textarea
-                  rows={2}
-                  placeholder="Outline the high-yield topics, guidelines, or materials included in this drive folder..."
-                  value={folderDesc}
-                  onChange={e => setFolderDesc(e.target.value)}
-                  className="w-full bg-[#0c0c0c] border border-[#2b2b2b] focus:border-brand rounded-xl px-4 py-2 text-xs text-white placeholder:text-gray-600 outline-none transition-colors resize-none"
-                />
-              </div>
-
-              <div className="flex gap-3 pt-2">
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="flex-1 py-3 bg-brand hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-lg shadow-brand/25 disabled:opacity-50"
-                >
-                  <Check size={14} /> Connect Folder to Library
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setShowAddModal(false)}
-                  className="px-4 py-3 bg-[#1a1a1a] hover:bg-[#252525] text-gray-400 hover:text-white rounded-xl text-xs font-bold transition-colors"
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {/* Modal: Folder Preview & Direct In-App Access */}
-      {previewFolder && (
+      {/* ── MODAL: PREVIEW CONNECTED SHELF ── */}
+      {selectedShelf && (
         <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
           <div className="bg-[#0e0e0e] border border-[#222] rounded-2xl w-full max-w-3xl my-6 p-6 sm:p-7 space-y-5 relative shadow-2xl animate-in fade-in zoom-in-95 duration-150">
             <button
-              onClick={() => setPreviewFolder(null)}
+              onClick={() => setSelectedShelf(null)}
               className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
             >
               <X size={18} />
@@ -587,18 +438,21 @@ export default function LibraryPage() {
 
             <div className="flex items-start gap-4 pr-8">
               <div className="w-12 h-12 rounded-xl bg-[#161616] border border-[#262626] flex items-center justify-center text-2xl flex-shrink-0">
-                {previewFolder.icon || "📁"}
+                {selectedShelf.icon}
               </div>
               <div className="space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-brand bg-brand/10 px-2.5 py-0.5 rounded border border-brand/20">
-                  Google Drive Cloud Folder
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-brand bg-brand/10 px-2.5 py-0.5 rounded border border-brand/20">
+                    Live Shelf
+                  </span>
+                  <span className="text-[10px] font-semibold text-gray-400">
+                    {selectedShelf.itemCount} items
+                  </span>
+                </div>
                 <h2 className="text-xl font-bold text-white leading-tight mt-1">
-                  {previewFolder.title}
+                  {selectedShelf.name}
                 </h2>
-                <p className="text-xs text-gray-400">
-                  {previewFolder.programme} &bull; {previewFolder.level} &bull; {previewFolder.category}
-                </p>
+                <p className="text-xs text-gray-400">{selectedShelf.description}</p>
               </div>
             </div>
 
@@ -612,27 +466,17 @@ export default function LibraryPage() {
               </div>
               <div className="w-full h-80 rounded-xl overflow-hidden border border-[#222] bg-[#080808]">
                 <iframe
-                  src={`https://drive.google.com/embeddedfolderview?id=${previewFolder.folder_id}#grid`}
+                  src={`https://drive.google.com/embeddedfolderview?id=${selectedShelf.folderId}#grid`}
                   className="w-full h-full border-0"
-                  title={previewFolder.title}
+                  title={selectedShelf.name}
                   allow="fullscreen"
                 />
               </div>
             </div>
 
-            <div className="bg-[#0c0c0c] border border-[#1f1f1f] rounded-xl p-3.5 text-xs text-gray-300 space-y-1.5">
-              <p className="text-gray-400">{previewFolder.description}</p>
-              <div className="flex items-center gap-2 pt-1 border-t border-white/5 text-[11px] text-gray-500">
-                <span>Google Drive Folder ID:</span>
-                <code className="text-gray-300 font-mono bg-[#161616] px-1.5 py-0.5 rounded text-[10px]">
-                  {previewFolder.folder_id}
-                </code>
-              </div>
-            </div>
-
             <div className="flex flex-col sm:flex-row items-center gap-3 pt-1">
               <a
-                href={previewFolder.drive_url}
+                href={selectedShelf.driveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:flex-1 py-2.5 bg-brand hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-md shadow-brand/25"
@@ -641,12 +485,91 @@ export default function LibraryPage() {
               </a>
               <button
                 type="button"
-                onClick={() => setPreviewFolder(null)}
+                onClick={() => {
+                  setEditingShelf(selectedShelf)
+                  setDriveUrlInput(selectedShelf.driveUrl || "")
+                  setSelectedShelf(null)
+                }}
+                className="w-full sm:w-auto px-4 py-2.5 bg-[#161616] hover:bg-[#202020] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-xl text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
+              >
+                <Link2 size={13} /> Update Drive Link
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedShelf(null)}
                 className="w-full sm:w-auto px-5 py-2.5 bg-[#181818] hover:bg-[#222] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-xl text-xs font-bold transition-colors"
               >
                 Close
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── MODAL: CONNECT / EDIT DRIVE LINK ── */}
+      {editingShelf && (
+        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+          <div className="bg-[#0e0e0e] border border-[#222] rounded-2xl w-full max-w-lg p-6 sm:p-7 space-y-5 relative shadow-2xl animate-in fade-in zoom-in-95 duration-150">
+            <button
+              onClick={() => {
+                setEditingShelf(null)
+                setDriveUrlInput("")
+              }}
+              className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
+            >
+              <X size={18} />
+            </button>
+
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-xl bg-[#161616] border border-[#262626] flex items-center justify-center text-2xl flex-shrink-0">
+                {editingShelf.icon}
+              </div>
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-widest text-brand">
+                  Connect Library Shelf
+                </span>
+                <h3 className="text-lg font-bold text-white mt-0.5">{editingShelf.name}</h3>
+              </div>
+            </div>
+
+            <p className="text-xs text-gray-400 leading-relaxed">
+              Paste the Google Drive folder share link for this subject. Ensure the sharing settings in Google Drive are set to <strong>&quot;Anyone with the link can view&quot;</strong>.
+            </p>
+
+            <form onSubmit={handleSaveDriveLink} className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
+                  Google Drive Folder Link
+                </label>
+                <input
+                  type="url"
+                  required
+                  placeholder="https://drive.google.com/drive/folders/1aBcD_XyZ..."
+                  value={driveUrlInput}
+                  onChange={e => setDriveUrlInput(e.target.value)}
+                  className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-brand rounded-xl px-4 py-2.5 text-xs text-white placeholder:text-gray-600 outline-none transition-colors"
+                />
+              </div>
+
+              <div className="flex gap-3 pt-2">
+                <button
+                  type="submit"
+                  className="flex-1 py-2.5 bg-brand hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-md shadow-brand/25"
+                >
+                  <Check size={14} /> Save Shelf Link
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEditingShelf(null)
+                    setDriveUrlInput("")
+                  }}
+                  className="px-4 py-2.5 bg-[#181818] hover:bg-[#222] border border-[#2b2b2b] text-gray-400 hover:text-white rounded-xl text-xs font-bold transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}
