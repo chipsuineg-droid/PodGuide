@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
@@ -88,7 +88,7 @@ export default function LoginPage() {
         if (err.message.toLowerCase().includes("email not confirmed")) {
           setError("Please confirm your email address to continue. Check your inbox for a verification link.")
         } else if (err.message.toLowerCase().includes("invalid login credentials")) {
-          setError("Invalid email or password. Please check your credentials.")
+          setError("Invalid email or password. If you signed up with Google, please use 'Continue with Google' above, or click 'Forgot password?' to set a password.")
         } else {
           setError(err.message)
         }
@@ -185,7 +185,7 @@ export default function LoginPage() {
             value={email}
             onChange={e => setEmail(e.target.value)}
             className="w-full bg-[#111] border border-[#333] rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-brand transition-colors"
-            placeholder="student@university.edu"
+            placeholder="e.g. name@gmail.com, university email..."
           />
         </div>
         <div>

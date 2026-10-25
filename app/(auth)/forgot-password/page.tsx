@@ -42,7 +42,7 @@ export default function ForgotPasswordPage() {
           <label className="block text-sm font-medium text-gray-300 mb-1">Email</label>
           <input type="email" required value={email} onChange={e => setEmail(e.target.value)}
             className="w-full bg-[#111] border border-[#333] rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-brand transition-colors"
-            placeholder="student@university.edu" />
+            placeholder="e.g. name@gmail.com, university email..." />
         </div>
         <button type="submit" disabled={loading}
           className="w-full bg-brand hover:bg-red-700 text-white font-semibold py-2.5 rounded-lg transition-colors flex items-center justify-center disabled:opacity-50">
