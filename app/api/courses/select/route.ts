@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
-import { getCourseBySlug } from '@/lib/courses-data'
 
 export async function POST(request: Request) {
   try {
@@ -14,15 +13,11 @@ export async function POST(request: Request) {
     const body = await request.json()
     const courseSlugs: string[] = Array.isArray(body.courseSlugs) ? body.courseSlugs : []
 
-    if (courseSlugs.length === 0) {
-      return NextResponse.json({ error: 'No courses provided' }, { status: 400 })
-    }
-
-    // Prepare rows for upsert into user_courses
     const now = new Date().toISOString()
-    const rows = courseSlugs.map(slug => {
-      const course = getCourseBySlug(slug)
-      return {
+
+    if (courseSlugs.length > 0) {
+      // 1. Prepare rows to upsert
+      const rows = courseSlugs.map((slug) => ({
         user_id: user.id,
         course_slug: slug,
         status: 'in_progress',
@@ -30,22 +25,38 @@ export async function POST(request: Request) {
         completed_modules: 0,
         last_accessed_at: now,
         enrolled_at: now,
+      }))
+
+      const { error: upsertErr } = await supabase
+        .from('user_courses')
+        .upsert(rows, { onConflict: 'user_id,course_slug', ignoreDuplicates: true })
+
+      if (upsertErr) {
+        console.error('Error upserting courses:', upsertErr)
       }
-    })
 
-    const { error: upsertErr } = await supabase
-      .from('user_courses')
-      .upsert(rows, { onConflict: 'user_id,course_slug' })
+      // 2. Remove any courses that the user unselected in the modal
+      const { error: deleteErr } = await supabase
+        .from('user_courses')
+        .delete()
+        .eq('user_id', user.id)
+        .not('course_slug', 'in', `(${courseSlugs.join(',')})`)
 
-    if (upsertErr) {
-      console.error('Error selecting courses:', upsertErr)
-      return NextResponse.json({ error: upsertErr.message }, { status: 500 })
+      if (deleteErr) {
+        console.error('Error syncing unselected courses:', deleteErr)
+      }
+    } else {
+      // User cleared all selections
+      await supabase
+        .from('user_courses')
+        .delete()
+        .eq('user_id', user.id)
     }
 
     return NextResponse.json({
       success: true,
-      enrolledCount: courseSlugs.length,
-      message: 'Courses added to your dashboard successfully',
+      selectedCount: courseSlugs.length,
+      message: 'Course selections updated successfully',
     })
   } catch (err: any) {
     console.error('API Error in /api/courses/select:', err)
