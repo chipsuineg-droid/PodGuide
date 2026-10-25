@@ -5,6 +5,17 @@ const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://bltbfrgfsj
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJsdGJmcmdmc2pwcHdocmV2bHFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgyODQ4MTQsImV4cCI6MjEwMzg2MDgxNH0.GU5mkT3O5Iuru2Hbl6hvc8ZpGlRJiGy0UoDymhKQL1E'
 
 export async function proxy(request: NextRequest) {
+  const host = request.headers.get('host') || ''
+
+  // Automatically redirect any traffic on *.vercel.app to the canonical domain www.podguide.org.zw
+  if (host.includes('.vercel.app')) {
+    const url = request.nextUrl.clone()
+    url.host = 'www.podguide.org.zw'
+    url.protocol = 'https'
+    url.port = ''
+    return NextResponse.redirect(url, 308)
+  }
+
   let supabaseResponse = NextResponse.next({ request })
 
   const supabase = createServerClient(

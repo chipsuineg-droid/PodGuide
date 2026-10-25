@@ -16,8 +16,12 @@ export default function ForgotPasswordPage() {
     setError("")
     if (!email) { setError("Please enter your email."); return }
     setLoading(true)
+    const isLocal = typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+    const redirectUrl = isLocal
+      ? `${window.location.origin}/login`
+      : "https://www.podguide.org.zw/login"
     const { error: err } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/login`,
+      redirectTo: redirectUrl,
     })
     if (err) { setError(err.message); setLoading(false) }
     else { setSent(true); setLoading(false) }

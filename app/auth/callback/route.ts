@@ -1,10 +1,14 @@
-﻿import { createClient } from '@/lib/supabase/server'
+import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get('code')
   const next = searchParams.get('next') ?? '/dashboard'
+
+  const host = request.headers.get('x-forwarded-host') || request.headers.get('host') || ''
+  const isLocal = host.includes('localhost') || host.includes('127.0.0.1')
+  const baseUrl = isLocal ? origin : 'https://www.podguide.org.zw'
 
   if (code) {
     const supabase = await createClient()
@@ -19,11 +23,11 @@ export async function GET(request: Request) {
         .single()
 
       if (!profile?.onboarding_complete) {
-        return NextResponse.redirect(`${origin}/onboarding`)
+        return NextResponse.redirect(`${baseUrl}/onboarding`)
       }
-      return NextResponse.redirect(`${origin}${next}`)
+      return NextResponse.redirect(`${baseUrl}${next}`)
     }
   }
 
-  return NextResponse.redirect(`${origin}/login?error=auth_failed`)
+  return NextResponse.redirect(`${baseUrl}/login?error=auth_failed`)
 }
