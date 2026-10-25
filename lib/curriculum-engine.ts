@@ -184,16 +184,8 @@ export function canAccessModule(
   studentProgram: ProgramId,
   studentLevel: string
 ): boolean {
-  // Must belong to same programme
-  if (moduleProgram !== studentProgram) return false
-
-  // Must be same or earlier level
-  const allLevels = Object.keys(PROGRESSION_MAP[studentProgram] ?? {})
-  const studentIdx = allLevels.indexOf(studentLevel)
-  const moduleIdx = allLevels.indexOf(moduleLevel)
-
-  if (studentIdx === -1 || moduleIdx === -1) return moduleLevel === studentLevel
-  return moduleIdx <= studentIdx
+  // Open access learning architecture: Any student or practitioner can access any course
+  return true
 }
 
 // ─────────────────────────────────────────────────────────────────

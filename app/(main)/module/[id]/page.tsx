@@ -1,22 +1,17 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
-import {
-  deriveProgramId,
-  deriveAcademicLevel,
-  canAccessModule,
-  type ProgramId
-} from "@/lib/curriculum-engine"
+import { getCourseBySlug } from "@/lib/courses-data"
 import {
   ChevronLeft,
   BookOpen,
   Brain,
-  ShieldAlert,
-  Clock,
   Award,
-  Layers,
+  Sparkles,
+  CheckCircle,
   FileText,
-  Sparkles
+  Clock,
+  Layers,
 } from "lucide-react"
 import { ModuleIcon } from "@/components/curriculum/ModuleIcon"
 
@@ -38,31 +33,42 @@ export default async function ModuleDetailPage({ params }: ModulePageProps) {
     redirect("/login")
   }
 
-  // 2. Fetch User Profile & Academic Credentials
+  // 2. Fetch User Profile
   const { data: profile } = await supabase
     .from("student_profiles")
-    .select("program_id, academic_level, programme, level")
+    .select("program_id, academic_level, programme, level, full_name")
     .eq("user_id", user.id)
     .single()
 
   const meta = user.user_metadata ?? {}
-  const studentProgram: ProgramId =
-    (profile?.program_id as ProgramId) ||
-    deriveProgramId(profile?.programme || meta.programme || "")
-  const studentLevel: string =
-    profile?.academic_level ||
-    deriveAcademicLevel(profile?.level || meta.level || "")
+  const studentLevel: string = profile?.level || meta.level || "Self-Paced Learner"
 
-  // 3. Fetch Module Details & its Associated ProgramModule entry
-  // Match either by UUID or by course code (e.g. /module/BMS101 or /module/<uuid>)
+  // 3. Fetch Module Details:
+  // Match either by UUID or course code in Supabase, or fallback to the rich Course Catalog
   const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)
 
   const moduleQuery = supabase.from("modules").select("*")
-  const { data: moduleData, error: modError } = isUUID
+  const { data: dbModule } = isUUID
     ? await moduleQuery.eq("id", id).maybeSingle()
     : await moduleQuery.ilike("code", id).maybeSingle()
 
-  if (modError || !moduleData) {
+  // If not found in DB modules table, look in the central Course Catalog
+  const catalogCourse = !dbModule ? getCourseBySlug(id) : null
+
+  const moduleData = dbModule || (catalogCourse ? {
+    id: catalogCourse.id,
+    code: catalogCourse.code,
+    title: catalogCourse.title,
+    description: catalogCourse.description,
+    icon: catalogCourse.icon,
+    credits: 10,
+    category: catalogCourse.category,
+    academicYears: catalogCourse.academicYears,
+    estimatedHours: catalogCourse.estimatedHours,
+    units: catalogCourse.units,
+  } : null)
+
+  if (!moduleData) {
     return (
       <div className="max-w-4xl mx-auto py-16 px-4 text-center space-y-4">
         <div className="w-16 h-16 rounded-full bg-red-500/10 text-red-500 flex items-center justify-center mx-auto">
@@ -70,7 +76,7 @@ export default async function ModuleDetailPage({ params }: ModulePageProps) {
         </div>
         <h1 className="text-2xl font-bold text-white">Module Not Found</h1>
         <p className="text-gray-400 text-sm max-w-md mx-auto">
-          The requested curriculum subject could not be located in the faculty database catalog.
+          The requested subject or course could not be located in the catalog.
         </p>
         <Link
           href="/dashboard"
@@ -82,85 +88,23 @@ export default async function ModuleDetailPage({ params }: ModulePageProps) {
     )
   }
 
-  // 4. Fetch the program_modules entry to determine access authorization
-  const { data: pmData } = await supabase
-    .from("program_modules")
-    .select("program_id, academic_level, is_core")
-    .eq("module_id", moduleData.id)
-
-  // Check if any mapping allows access to this student
-  let isAuthorized = false
-  let requiredProgram = "Authorized Programs"
-  let requiredLevel = "Advanced Level"
-
-  if (pmData && pmData.length > 0) {
-    for (const pm of pmData) {
-      requiredProgram = pm.program_id
-      requiredLevel = pm.academic_level
-      if (
-        canAccessModule(
-          pm.program_id as ProgramId,
-          pm.academic_level,
-          studentProgram,
-          studentLevel
-        )
-      ) {
-        isAuthorized = true
-        break
-      }
-    }
-  } else {
-    // If no junction entry yet (or unlinked), default to accessible if student matches
-    isAuthorized = true
+  // 4. Record/Update user course access timestamp in user_courses
+  if (user) {
+    const slug = catalogCourse?.slug || moduleData.code?.toLowerCase() || id
+    await supabase
+      .from("user_courses")
+      .upsert(
+        {
+          user_id: user.id,
+          course_slug: slug,
+          last_accessed_at: new Date().toISOString(),
+        },
+        { onConflict: "user_id,course_slug" }
+      )
+      .select()
   }
 
-  // 5. Security Route Guard: 403 Forbidden State if unauthorized
-  if (!isAuthorized) {
-    return (
-      <div className="max-w-2xl mx-auto py-16 px-4 space-y-6">
-        <div className="bg-[#120808] border border-red-500/30 rounded-2xl p-8 text-center space-y-5 shadow-2xl">
-          <div className="w-16 h-16 rounded-2xl bg-red-500/10 text-red-500 flex items-center justify-center mx-auto border border-red-500/20">
-            <ShieldAlert size={32} />
-          </div>
-
-          <div className="space-y-2">
-            <span className="text-[11px] font-bold uppercase tracking-widest text-red-500 bg-red-500/10 px-3 py-1 rounded-full border border-red-500/20">
-              403 Unauthorized
-            </span>
-            <h1 className="text-2xl font-bold text-white tracking-tight">Access Restricted</h1>
-            <p className="text-sm text-gray-300 max-w-lg mx-auto leading-relaxed">
-              You do not have academic clearance to view <strong className="text-white">{moduleData.title} ({moduleData.code})</strong>.
-            </p>
-          </div>
-
-          <div className="bg-black/60 border border-red-500/10 rounded-xl p-4 text-xs text-left space-y-2 text-gray-400">
-            <div className="flex justify-between">
-              <span className="text-gray-500">Your Program & Level:</span>
-              <span className="font-semibold text-white uppercase">{studentProgram} &bull; {studentLevel}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-500">Required Clearance:</span>
-              <span className="font-semibold text-red-400 uppercase">{requiredProgram} &bull; {requiredLevel}</span>
-            </div>
-            <p className="text-[11px] text-gray-500 pt-2 border-t border-white/5">
-              Access is strictly governed by the Faculty Curriculum Engine. If you have progressed or transitioned programs, please request an academic promotion.
-            </p>
-          </div>
-
-          <div className="pt-2">
-            <Link
-              href="/dashboard"
-              className="inline-flex items-center gap-2 px-6 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all shadow-lg shadow-red-950/40"
-            >
-              <ChevronLeft size={16} /> Return to Your Authorized Dashboard
-            </Link>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  // 6. Authorized: Render Subject Details
+  // 5. Render Course / Module Details
   return (
     <div className="max-w-5xl mx-auto space-y-8 pb-16">
       {/* Breadcrumb & Navigation */}
@@ -171,8 +115,8 @@ export default async function ModuleDetailPage({ params }: ModulePageProps) {
         >
           <ChevronLeft size={16} /> Back to Dashboard
         </Link>
-        <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full">
-          Authorized Subject &bull; {studentLevel}
+        <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full flex items-center gap-1">
+          <CheckCircle size={11} /> Open Access Learning &bull; {studentLevel}
         </span>
       </div>
 
@@ -180,19 +124,24 @@ export default async function ModuleDetailPage({ params }: ModulePageProps) {
       <div className="bg-[#111] border border-[#222] rounded-2xl p-6 sm:p-8 relative overflow-hidden">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="flex items-start gap-5">
-            <ModuleIcon
-              name={moduleData.title}
-              code={moduleData.code}
-              size={24}
-              containerClassName="w-16 h-16 rounded-2xl flex-shrink-0"
-            />
+            <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-3xl flex-shrink-0">
+              {moduleData.icon || "📚"}
+            </div>
             <div className="space-y-1">
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-xs font-bold text-brand uppercase tracking-wider">{moduleData.code}</span>
                 <span className="text-gray-600">&bull;</span>
                 <span className="text-xs text-gray-400 flex items-center gap-1">
-                  <Award size={13} className="text-amber-400" /> {moduleData.credits} Credits
+                  <Award size={13} className="text-amber-400" /> {moduleData.credits ?? 10} Credits
                 </span>
+                {catalogCourse && (
+                  <>
+                    <span className="text-gray-600">&bull;</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border bg-brand/10 text-brand border-brand/20">
+                      {catalogCourse.category}
+                    </span>
+                  </>
+                )}
               </div>
               <h1 className="text-2xl sm:text-3xl font-display font-bold text-white">{moduleData.title}</h1>
               <p className="text-sm text-gray-400 max-w-2xl leading-relaxed mt-2">{moduleData.description}</p>
@@ -216,12 +165,61 @@ export default async function ModuleDetailPage({ params }: ModulePageProps) {
         </div>
       </div>
 
+      {/* Course Units / Modules Breakdown if available */}
+      {catalogCourse?.units && catalogCourse.units.length > 0 && (
+        <div className="bg-[#111] border border-[#1f1f1f] rounded-2xl p-6 space-y-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-base font-bold text-white flex items-center gap-2">
+                <Layers size={18} className="text-brand" /> Learning Units &amp; Competencies
+              </h3>
+              <p className="text-xs text-gray-400">
+                Structured topics and learning objectives covered in {moduleData.title}.
+              </p>
+            </div>
+            <span className="text-xs font-semibold text-gray-400">
+              {catalogCourse.units.length} Units
+            </span>
+          </div>
+
+          <div className="space-y-2.5">
+            {catalogCourse.units.map((unit, idx) => (
+              <div
+                key={unit.id}
+                className="p-4 bg-[#141414] border border-[#222] rounded-xl flex items-center justify-between gap-3 group hover:border-[#333] transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="w-6 h-6 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-xs font-bold text-gray-400">
+                    {idx + 1}
+                  </span>
+                  <div>
+                    <h4 className="text-xs sm:text-sm font-semibold text-white group-hover:text-brand transition-colors">
+                      {unit.title}
+                    </h4>
+                    <span className="text-[10px] text-gray-500 flex items-center gap-1 mt-0.5">
+                      <Clock size={10} /> ~{unit.estimatedMinutes} mins
+                    </span>
+                  </div>
+                </div>
+
+                <Link
+                  href="/practise/questions"
+                  className="px-3 py-1.5 bg-[#1f1f1f] hover:bg-brand text-gray-300 hover:text-white rounded-lg text-xs font-medium transition-colors"
+                >
+                  Review
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Module Curriculum Pillars */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         <div className="bg-[#111] border border-[#1f1f1f] rounded-xl p-5 space-y-3">
           <div className="flex items-center gap-2 text-brand">
             <Brain size={18} />
-            <h3 className="text-sm font-bold text-white">Active Recall & Flashcards</h3>
+            <h3 className="text-sm font-bold text-white">Active Recall &amp; Flashcards</h3>
           </div>
           <p className="text-xs text-gray-400 leading-relaxed">
             Spaced repetition decks structured around {moduleData.title} core competencies and high-yield testable points.
@@ -237,7 +235,7 @@ export default async function ModuleDetailPage({ params }: ModulePageProps) {
         <div className="bg-[#111] border border-[#1f1f1f] rounded-xl p-5 space-y-3">
           <div className="flex items-center gap-2 text-brand">
             <BookOpen size={18} />
-            <h3 className="text-sm font-bold text-white">Lecture Notes & Library</h3>
+            <h3 className="text-sm font-bold text-white">Lecture Notes &amp; Library</h3>
           </div>
           <p className="text-xs text-gray-400 leading-relaxed">
             Faculty-approved reference texts, lecture slides, and past papers uploaded for {moduleData.code}.
@@ -253,16 +251,16 @@ export default async function ModuleDetailPage({ params }: ModulePageProps) {
         <div className="bg-[#111] border border-[#1f1f1f] rounded-xl p-5 space-y-3">
           <div className="flex items-center gap-2 text-brand">
             <Sparkles size={18} />
-            <h3 className="text-sm font-bold text-white">AI Study Companion</h3>
+            <h3 className="text-sm font-bold text-white">AI Medical Tutor</h3>
           </div>
           <p className="text-xs text-gray-400 leading-relaxed">
-            Ask questions, synthesize difficult mechanisms, or generate OSCE scenarios tailored specifically to {moduleData.title}.
+            Generate customized synthesis notes, ask complex clinical questions, and test your diagnostic reasoning.
           </p>
           <Link
-            href="/learn"
+            href="/learn/notebooks/new"
             className="inline-flex items-center gap-1 text-xs font-semibold text-brand hover:text-white transition-colors pt-2"
           >
-            Launch Notebook AI &rarr;
+            Launch Tutor &rarr;
           </Link>
         </div>
       </div>
