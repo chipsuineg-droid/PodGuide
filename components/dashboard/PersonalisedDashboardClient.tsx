@@ -140,18 +140,14 @@ export function PersonalisedDashboardClient({
       {/* ── HEADER ── */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#1a1a1a] pb-6">
         <div>
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
             Dashboard
-          </p>
-          <h1 className="text-3xl sm:text-4xl font-bold mt-1 text-white tracking-tight">
-            {userName}.
           </h1>
-          {hasCourses && (
-            <p className="text-xs text-gray-400 mt-1">
-              {enrolledCourses.length} {enrolledCourses.length === 1 ? "course" : "courses"} on your dashboard
-              {" "}({academicCourses.length} Academic, {selfDevCourses.length} Self-Development)
-            </p>
-          )}
+          <p className="text-xs text-gray-400 mt-1">
+            {hasCourses
+              ? `${enrolledCourses.length} ${enrolledCourses.length === 1 ? "course" : "courses"} selected (${academicCourses.length} Academic, ${selfDevCourses.length} Self-Development)`
+              : "Manage and track your enrolled courses."}
+          </p>
         </div>
 
         <div className="flex items-center gap-3">
