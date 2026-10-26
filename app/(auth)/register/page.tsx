@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/client"
 import { Eye, EyeOff, Loader2, MailCheck } from "lucide-react"
+import { HEALTH_PROGRAMMES, ACADEMIC_LEVELS, deriveProgramId, deriveAcademicLevel } from "@/lib/curriculum-engine"
 
 function getPasswordStrength(pw: string): { score: number; label: string; color: string } {
   if (pw.length === 0) return { score: 0, label: "", color: "" }
@@ -25,6 +26,8 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
+  const [programme, setProgramme] = useState(HEALTH_PROGRAMMES[0])
+  const [level, setLevel] = useState("Year 1")
   const [loading, setLoading] = useState(false)
   const [googleLoading, setGoogleLoading] = useState(false)
   const [showPw, setShowPw] = useState(false)
@@ -44,12 +47,19 @@ export default function RegisterPage() {
     setLoading(true)
 
     try {
+      const program_id = deriveProgramId(programme)
+      const academic_level = deriveAcademicLevel(level)
+
       const { data, error: err } = await supabase.auth.signUp({
         email: email.trim(),
         password,
         options: {
           data: {
             full_name: name.trim(),
+            programme,
+            level,
+            program_id,
+            academic_level,
           }
         }
       })
@@ -62,6 +72,21 @@ export default function RegisterPage() {
 
       const userId = data?.user?.id
       const userEmail = email.trim()
+
+      if (userId) {
+        try {
+          await supabase.from("student_profiles").upsert({
+            user_id: userId,
+            full_name: name.trim(),
+            programme,
+            level,
+            program_id,
+            academic_level,
+          }, { onConflict: "user_id" })
+        } catch (profileErr) {
+          console.error("Profile save error:", profileErr)
+        }
+      }
 
       // Handle mailing list subscription
       if (mailingList && userId) {
@@ -273,6 +298,34 @@ export default function RegisterPage() {
           {confirmPassword && password !== confirmPassword && (
             <p className="text-xs text-brand mt-1">Passwords do not match</p>
           )}
+        </div>
+
+        {/* Programme and Year / Level */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-1">Programme</label>
+            <select
+              value={programme}
+              onChange={e => setProgramme(e.target.value)}
+              className="w-full bg-[#111] border border-[#333] rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-brand transition-colors text-xs"
+            >
+              {HEALTH_PROGRAMMES.map(p => (
+                <option key={p} value={p}>{p === "other" ? "Other Health Programme..." : p}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-1">Year / Level</label>
+            <select
+              value={level}
+              onChange={e => setLevel(e.target.value)}
+              className="w-full bg-[#111] border border-[#333] rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-brand transition-colors text-xs"
+            >
+              {ACADEMIC_LEVELS.map(l => (
+                <option key={l} value={l}>{l}</option>
+              ))}
+            </select>
+          </div>
         </div>
 
         {/* Mailing list checkbox */}

@@ -3,10 +3,30 @@ import { useEffect, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
 import { LogOut, Loader2, Save, Lock, ChevronDown } from "lucide-react"
+import { HEALTH_PROGRAMMES, ACADEMIC_LEVELS, deriveProgramId, deriveAcademicLevel } from "@/lib/curriculum-engine"
 
-const universities = ["University of Cape Town (UCT)","University of the Witwatersrand (Wits)","Makerere University","University of Nairobi (UoN)","University of Ibadan (UI)","University of Lagos (UNILAG)","University of Ghana","KNUST","Addis Ababa University","Cairo University","University of Pretoria","Stellenbosch University","University of Rwanda","University of Zambia (UNZA)","Muhimbili University (MUHAS)","University of Zimbabwe","University of Botswana","University of Malawi","University of Auckland","University of Otago","AUT"]
-const programmes = ["Medicine (MBChB / MBBS)","Nursing (BSc Nursing / BNurs)","Pharmacy (BPharm / PharmD)","Dentistry (BDS / BChD)","Physiotherapy (BSc / BPT)","Public Health (BSc / MPH)","Medical Laboratory Science (BMLS)","Radiography / Medical Imaging","Biomedical Science (BSc)","Clinical Officer / Medical Assistant","Midwifery","Nutrition & Dietetics","Optometry","Veterinary Medicine (DVM)"]
-const levels = ["Year 1 (Pre-clinical / Basic Sciences)","Year 2","Year 3 (Pre-clinical)","Year 4 (Clinical Rotations)","Year 5","Year 6 (Final Year)","Year 7","Internship / Housemanship","Post-graduate / Residency"]
+const universities = [
+  "University of Zimbabwe (UZ)",
+  "National University of Science and Technology (NUST)",
+  "Midlands State University (MSU)",
+  "Africa University",
+  "Great Zimbabwe University (GZU)",
+  "University of Cape Town (UCT)",
+  "University of the Witwatersrand (Wits)",
+  "Stellenbosch University",
+  "University of Pretoria",
+  "University of KwaZulu-Natal (UKZN)",
+  "Makerere University",
+  "University of Nairobi (UoN)",
+  "University of Zambia (UNZA)",
+  "Muhimbili University (MUHAS)",
+  "University of Botswana",
+  "University of Malawi",
+  "Other Institution",
+]
+
+const programmes = HEALTH_PROGRAMMES
+const levels = ACADEMIC_LEVELS
 
 export default function ProfilePage() {
   const supabase = createClient()
@@ -33,8 +53,25 @@ export default function ProfilePage() {
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault()
     setError(""); setSuccess(""); setSaving(true)
-    const { error: err } = await supabase.auth.updateUser({ data: form })
-    if (err) { setError(err.message) } else { setSuccess("Profile saved successfully!") }
+    const { data: { user }, error: err } = await supabase.auth.updateUser({ data: form })
+    if (err) {
+      setError(err.message)
+    } else {
+      if (user) {
+        const program_id = deriveProgramId(form.programme)
+        const academic_level = deriveAcademicLevel(form.level)
+        await supabase.from("student_profiles").upsert({
+          user_id: user.id,
+          full_name: form.full_name,
+          programme: form.programme,
+          level: form.level,
+          program_id,
+          academic_level,
+          bio: form.bio,
+        }, { onConflict: "user_id" })
+      }
+      setSuccess("Profile saved successfully!")
+    }
     setSaving(false)
     setTimeout(() => setSuccess(""), 3000)
   }

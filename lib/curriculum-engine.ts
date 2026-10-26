@@ -39,47 +39,110 @@ export interface StudentCurriculumContext {
 }
 
 // ─────────────────────────────────────────────────────────────────
+// SHARED LISTS FOR PROGRAMMES & ACADEMIC LEVELS (UZ & Health Sciences)
+// ─────────────────────────────────────────────────────────────────
+
+export const HEALTH_PROGRAMMES = [
+  "Medicine and Surgery (MBChB)",
+  "Dental Surgery (BDS)",
+  "Pharmacy (BPharm)",
+  "Medical Laboratory Sciences (BMLS)",
+  "Nursing Science (BSc Nursing)",
+  "Physiotherapy (BSc Physiotherapy)",
+  "Occupational Therapy (BSc Occupational Therapy)",
+  "Speech-Language Therapy (BSc)",
+  "Audiology (BSc)",
+  "Diagnostic Radiography (BSc)",
+  "Therapeutic Radiography (BSc)",
+  "Health Information Systems / Health Informatics",
+  "Biomedical Sciences (BSc)",
+  "Nutrition and Dietetics (BSc)",
+  "Clinical Pharmacology (MSc / Postgrad)",
+  "Master of Public Health (MPH)",
+  "Master of Medicine / Residency (MMed)",
+  "Pre-Medical / Post High School Health Sciences",
+  "other",
+]
+
+export const ACADEMIC_LEVELS = [
+  "Post High School",
+  "Year 1",
+  "Year 2",
+  "Year 3",
+  "Year 4",
+  "Year 5",
+  "Year 6",
+  "Internship / Housemanship",
+  "Registrar / Residency",
+  "Practicing Professional",
+]
+
+// ─────────────────────────────────────────────────────────────────
 // PROGRAM MAPPING — from onboarding dropdown values → program_id
 // ─────────────────────────────────────────────────────────────────
 
 const PROGRAMME_MAP: Record<string, ProgramId> = {
+  "medicine and surgery (mbchb)": "medicine",
   "medicine (mbchb / mbbs)": "medicine",
-  "nursing (bsc nursing / bnurs)": "nursing",
-  "pharmacy (bpharm / pharmd)": "pharmacy",
+  "dental surgery (bds)": "dentistry",
   "dentistry (bds / bchd)": "dentistry",
-  "physiotherapy (bsc / bpt)": "physiotherapy",
-  "public health (bsc / mph)": "public_health",
+  "pharmacy (bpharm)": "pharmacy",
+  "pharmacy (bpharm / pharmd)": "pharmacy",
+  "medical laboratory sciences (bmls)": "mls",
   "medical laboratory science (bmls)": "mls",
+  "nursing science (bsc nursing)": "nursing",
+  "nursing (bsc nursing / bnurs)": "nursing",
+  "physiotherapy (bsc physiotherapy)": "physiotherapy",
+  "physiotherapy (bsc / bpt)": "physiotherapy",
+  "occupational therapy (bsc occupational therapy)": "generic",
+  "occupational therapy": "generic",
+  "speech-language therapy (bsc)": "generic",
+  "audiology (bsc)": "generic",
+  "diagnostic radiography (bsc)": "generic",
+  "therapeutic radiography (bsc)": "generic",
+  "radiography / medical imaging": "generic",
+  "health information systems / health informatics": "generic",
+  "biomedical sciences (bsc)": "bms",
   "biomedical science (bsc)": "bms",
   "biomedical sciences": "bms",
-  "occupational therapy": "generic",
-  "radiography / medical imaging": "generic",
+  "nutrition and dietetics (bsc)": "generic",
+  "nutrition & dietetics": "generic",
+  "clinical pharmacology (msc / postgrad)": "pharmacy",
+  "master of public health (mph)": "public_health",
+  "public health (bsc / mph)": "public_health",
+  "master of medicine / residency (mmed)": "medicine",
+  "pre-medical / post high school health sciences": "bms",
   "clinical officer / medical assistant": "generic",
   "midwifery": "nursing",
-  "nutrition & dietetics": "generic",
   "optometry": "generic",
   "veterinary medicine (dvm)": "generic",
 }
 
 const LEVEL_MAP: Record<string, string> = {
-  "year 1 (pre-clinical / basic sciences)": "Part 1",
-  "year 2": "Part 2",
-  "year 3 (pre-clinical)": "Part 3",
-  "year 4 (clinical rotations)": "Year 4",
-  "year 6 (final year)": "Year 6",
-  "internship / housemanship": "Internship",
-  "post-graduate / residency": "Postgraduate",
-  // Already normalised (from new onboarding or promotion)
-  "part 1": "Part 1",
-  "part 2": "Part 2",
-  "part 3": "Part 3",
-  "part 4": "Part 4",
+  "post high school": "Post High School",
+  "year 1": "Year 1",
+  "year 2": "Year 2",
+  "year 3": "Year 3",
   "year 4": "Year 4",
   "year 5": "Year 5",
   "year 6": "Year 6",
-  "year 7": "Year 7",
-  "internship": "Internship",
-  "postgraduate": "Postgraduate",
+  "internship / housemanship": "Internship",
+  "registrar / residency": "Residency",
+  "practicing professional": "Professional",
+  // Legacy mappings for backwards compatibility
+  "year 1 (pre-clinical / basic sciences)": "Year 1",
+  "year 2 (pre-clinical)": "Year 2",
+  "year 3 (pre-clinical)": "Year 3",
+  "year 4 (clinical rotations)": "Year 4",
+  "year 5 (clinical rotations)": "Year 5",
+  "year 6 (final year)": "Year 6",
+  "year 6 (final year / senior clerkship)": "Year 6",
+  "year 7": "Year 6",
+  "post-graduate / residency": "Residency",
+  "part 1": "Year 1",
+  "part 2": "Year 2",
+  "part 3": "Year 3",
+  "part 4": "Year 4",
 }
 
 /**

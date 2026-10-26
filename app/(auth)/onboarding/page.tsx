@@ -4,50 +4,27 @@ import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import { Loader2, LogIn } from "lucide-react"
 import Link from "next/link"
-import { deriveProgramId, deriveAcademicLevel } from "@/lib/curriculum-engine"
+import { deriveProgramId, deriveAcademicLevel, HEALTH_PROGRAMMES, ACADEMIC_LEVELS } from "@/lib/curriculum-engine"
 
 const INSTITUTIONS = [
+  "University of Zimbabwe (UZ)",
+  "National University of Science and Technology (NUST)",
+  "Midlands State University (MSU)",
+  "Africa University",
+  "Great Zimbabwe University (GZU)",
   "University of Cape Town (UCT)",
   "University of the Witwatersrand (Wits)",
   "Stellenbosch University",
-  "University of KwaZulu-Natal (UKZN)",
   "University of Pretoria",
-  "University of the Free State",
-  "Walter Sisulu University",
-  "Sefako Makgatho Health Sciences University",
-  "University of Zimbabwe",
-  "University of Nairobi",
+  "University of KwaZulu-Natal (UKZN)",
   "Makerere University",
-  "University of Auckland",
-  "University of Otago",
+  "University of Nairobi",
+  "University of Zambia (UNZA)",
   "other"
 ]
 
-const PROGRAMMES = [
-  "Medicine (MBChB / MBBS)",
-  "Dental Surgery (BDS)",
-  "Nursing Science (BNurs / BSc)",
-  "Pharmacy (BPharm)",
-  "Physiotherapy (BSc)",
-  "Occupational Therapy (BSc)",
-  "Medical Laboratory Science (BMLS)",
-  "Radiography (BSc)",
-  "Clinical Medicine / Associate (BSc)",
-  "Biomedical Science (BSc)",
-  "Public Health (BPH / MPH)",
-  "other"
-]
-
-const LEVELS = [
-  "Year 1 (Pre-clinical / Basic Sciences)",
-  "Year 2 (Pre-clinical)",
-  "Year 3 (Pre-clinical)",
-  "Year 4 (Clinical Rotations)",
-  "Year 5 (Clinical Rotations)",
-  "Year 6 (Final Year / Senior Clerkship)",
-  "Internship / Housemanship",
-  "Post-graduate / Residency",
-]
+const PROGRAMMES = HEALTH_PROGRAMMES
+const LEVELS = ACADEMIC_LEVELS
 
 export default function OnboardingPage() {
   const router = useRouter()
@@ -173,8 +150,8 @@ export default function OnboardingPage() {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-semibold text-gray-300 mb-2 flex items-center gap-2">
-                <span className="text-brand">🏛️</span> University or College
+              <label className="block text-sm font-semibold text-gray-300 mb-2">
+                University or Institution
               </label>
               <select
                 value={institution}
@@ -198,8 +175,8 @@ export default function OnboardingPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-300 mb-2 flex items-center gap-2">
-                <span className="text-brand">🎓</span> Programme of Study
+              <label className="block text-sm font-semibold text-gray-300 mb-2">
+                Programme of Study
               </label>
               <select
                 value={programme}
@@ -223,8 +200,8 @@ export default function OnboardingPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-300 mb-2 flex items-center gap-2">
-                <span className="text-brand">📖</span> Year / Level
+              <label className="block text-sm font-semibold text-gray-300 mb-2">
+                Year / Level
               </label>
               <select
                 value={level}

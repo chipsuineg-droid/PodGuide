@@ -2,10 +2,11 @@
 import { useState, useEffect } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { Loader2, Upload, FileText, CheckCircle, AlertTriangle } from "lucide-react"
+import { HEALTH_PROGRAMMES, ACADEMIC_LEVELS } from "@/lib/curriculum-engine"
 
-const universities = ["University of Cape Town (UCT)","University of the Witwatersrand (Wits)","Makerere University","University of Nairobi (UoN)","University of Ibadan (UI)","University of Lagos (UNILAG)","University of Ghana","KNUST","Addis Ababa University","Cairo University","University of Pretoria","Stellenbosch University","University of Rwanda","University of Zambia (UNZA)","Muhimbili University (MUHAS)","University of Zimbabwe","University of Botswana","University of Malawi","University of Auckland","University of Otago","AUT"]
-const programmes = ["Medicine (MBChB / MBBS)","Nursing (BSc Nursing / BNurs)","Pharmacy (BPharm / PharmD)","Dentistry (BDS / BChD)","Physiotherapy (BSc / BPT)","Public Health (BSc / MPH)","Medical Laboratory Science (BMLS)","Radiography / Medical Imaging","Biomedical Science (BSc)","Clinical Officer / Medical Assistant","Midwifery","Nutrition & Dietetics","Optometry","Veterinary Medicine (DVM)"]
-const levels = ["Year 1 (Pre-clinical / Basic Sciences)","Year 2","Year 3 (Pre-clinical)","Year 4 (Clinical Rotations)","Year 5","Year 6 (Final Year)","Year 7","Internship / Housemanship","Post-graduate / Residency"]
+const universities = ["University of Zimbabwe (UZ)","University of Cape Town (UCT)","University of the Witwatersrand (Wits)","Makerere University","University of Nairobi (UoN)","University of Pretoria","Stellenbosch University","University of Zambia (UNZA)","Muhimbili University (MUHAS)","University of Botswana","University of Malawi"]
+const programmes = HEALTH_PROGRAMMES
+const levels = ACADEMIC_LEVELS
 
 export default function AdminMaterials() {
   const supabase = createClient()
