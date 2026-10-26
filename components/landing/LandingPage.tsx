@@ -445,18 +445,18 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
         </p>
 
         {/* ── ORGANIC FLOATING BADGES (3 SPREAD LINES ON DESKTOP, COMPACT GRID ON MOBILE) ── */}
-        <div className="hidden sm:flex flex-col gap-3.5 items-center w-full mt-12 relative z-10">
-          <div className="flex items-center justify-center gap-3.5 flex-wrap">
+        <div className="hidden sm:flex flex-col gap-5 items-center w-full mt-14 py-4 relative z-10">
+          <div className="flex items-center justify-center gap-5 flex-wrap">
             {ALL_FLOATING_BADGES.slice(0, 4).map((badge, idx) => (
               <InteractiveFloatingCard key={`row1-${idx}`} {...badge} />
             ))}
           </div>
-          <div className="flex items-center justify-center gap-3.5 flex-wrap -ml-4">
+          <div className="flex items-center justify-center gap-5 flex-wrap -ml-8">
             {ALL_FLOATING_BADGES.slice(4, 8).map((badge, idx) => (
               <InteractiveFloatingCard key={`row2-${idx}`} {...badge} />
             ))}
           </div>
-          <div className="flex items-center justify-center gap-3.5 flex-wrap ml-4">
+          <div className="flex items-center justify-center gap-5 flex-wrap ml-8">
             {ALL_FLOATING_BADGES.slice(8, 12).map((badge, idx) => (
               <InteractiveFloatingCard key={`row3-${idx}`} {...badge} />
             ))}
