@@ -1,306 +1,493 @@
 "use client"
+
 import { useEffect, useState, useMemo } from "react"
 import { createClient } from "@/lib/supabase/client"
 import {
-  Search, ExternalLink, Eye, X, Check, Folder, Link2, HardDrive, Sparkles, RotateCcw
+  Search,
+  ExternalLink,
+  Eye,
+  X,
+  Check,
+  Folder,
+  Link2,
+  RotateCcw,
+  ChevronDown,
+  ChevronRight,
+  Stethoscope,
+  Baby,
+  Scissors,
+  HeartPulse,
+  Building2,
+  Brain,
+  Pill,
+  Bone,
+  Activity,
+  Microscope,
+  Droplets,
+  FlaskConical,
+  Bug,
+  Shield,
+  Compass,
+  Dna,
+  Scale,
+  PawPrint,
+  HeartHandshake,
+  LucideIcon,
 } from "lucide-react"
 import { toast } from "sonner"
 
-export interface LibraryShelf {
+export interface LibraryFolderItem {
   id: string
   name: string
-  icon: string
+  iconName: string
+  description: string
+  programme: string
+  level?: string
   itemCount: number
   driveUrl?: string
   folderId?: string
-  description?: string
-  programme?: string
-  level?: string
 }
 
-const INITIAL_SHELVES: LibraryShelf[] = [
+export interface ProgrammeShelfGroup {
+  id: string
+  name: string
+  programmeKey: string
+  folders: LibraryFolderItem[]
+}
+
+const ICON_MAP: Record<string, LucideIcon> = {
+  Stethoscope,
+  Baby,
+  Scissors,
+  HeartPulse,
+  Building2,
+  Brain,
+  Pill,
+  Bone,
+  Activity,
+  Microscope,
+  Droplets,
+  FlaskConical,
+  Bug,
+  Shield,
+  Compass,
+  Dna,
+  Scale,
+  PawPrint,
+  HeartHandshake,
+  Folder,
+}
+
+function FolderIcon({
+  name,
+  size = 13,
+  className = "",
+}: {
+  name: string
+  size?: number
+  className?: string
+}) {
+  const IconComponent = ICON_MAP[name] || Folder
+  return <IconComponent size={size} className={className} />
+}
+
+const INITIAL_PROGRAMME_SHELVES: ProgrammeShelfGroup[] = [
+  // ── 1. Biomedical Sciences / MBChB / MBBS ──
   {
-    id: "internal-medicine",
-    name: "Internal Medicine",
-    icon: "🫀",
-    itemCount: 0,
-    description: "Cardiology, pulmonology, endocrinology, gastroenterology, nephrology, and acute medical admissions.",
-    programme: "Medicine (MBChB / MBBS)",
-    level: "Year 4 & 5"
+    id: "biomedical-medicine",
+    name: "Biomedical Sciences / MBChB / MBBS",
+    programmeKey: "Biomedical Sciences / MBChB / MBBS",
+    folders: [
+      {
+        id: "bms-internal-med",
+        name: "Internal Medicine",
+        iconName: "Stethoscope",
+        description: "Cardiology, pulmonology, gastroenterology, nephrology and acute medical admissions.",
+        programme: "Biomedical Sciences / MBChB / MBBS",
+        itemCount: 0,
+      },
+      {
+        id: "bms-paediatrics",
+        name: "Paediatrics",
+        iconName: "Baby",
+        description: "Neonatal care, developmental milestones, childhood infections and pediatric resuscitation.",
+        programme: "Biomedical Sciences / MBChB / MBBS",
+        itemCount: 0,
+      },
+      {
+        id: "bms-surgery",
+        name: "Surgery",
+        iconName: "Scissors",
+        description: "General operative surgery, acute abdomen algorithms, trauma resuscitation and post-op care.",
+        programme: "Biomedical Sciences / MBChB / MBBS",
+        itemCount: 0,
+      },
+      {
+        id: "bms-obs-gyn",
+        name: "Obstetrics and Gynaecology",
+        iconName: "HeartPulse",
+        description: "Antenatal bookings, partograms, obstetric emergencies, pelvic masses and contraception.",
+        programme: "Biomedical Sciences / MBChB / MBBS",
+        itemCount: 0,
+      },
+      {
+        id: "bms-community-med",
+        name: "Community Medicine",
+        iconName: "Building2",
+        description: "District health administration, disease outbreak control, maternal programs and sanitation.",
+        programme: "Biomedical Sciences / MBChB / MBBS",
+        itemCount: 0,
+      },
+      {
+        id: "bms-psychiatry",
+        name: "Psychiatry",
+        iconName: "Brain",
+        description: "Mental state examinations, mood disorders, psychosis, substance use and emergencies.",
+        programme: "Biomedical Sciences / MBChB / MBBS",
+        itemCount: 0,
+      },
+      {
+        id: "bms-pharmacology",
+        name: "Pharmacology",
+        iconName: "Pill",
+        description: "Pharmacokinetics, pharmacodynamics, autonomic agents, drug interactions and therapeutics.",
+        programme: "Biomedical Sciences / MBChB / MBBS",
+        itemCount: 0,
+      },
+      {
+        id: "bms-anatomy",
+        name: "Anatomy",
+        iconName: "Bone",
+        description: "Gross regional anatomy, cadaveric dissections, osteology, viscera and neuroanatomy.",
+        programme: "Biomedical Sciences / MBChB / MBBS",
+        itemCount: 0,
+      },
+      {
+        id: "bms-physiology",
+        name: "Physiology",
+        iconName: "Activity",
+        description: "Membrane transport, cardiac output, respiratory mechanics, nephron dynamics and reflexes.",
+        programme: "Biomedical Sciences / MBChB / MBBS",
+        itemCount: 0,
+      },
+      {
+        id: "bms-histopathology",
+        name: "Histopathology",
+        iconName: "Microscope",
+        description: "Surgical tissue biopsy evaluation, cellular injury, inflammation, dysplasia and neoplasia.",
+        programme: "Biomedical Sciences / MBChB / MBBS",
+        itemCount: 0,
+      },
+      {
+        id: "bms-haematology",
+        name: "Haematology",
+        iconName: "Droplets",
+        description: "Blood film morphology, anaemia classifications, leukaemia, coagulation and transfusion.",
+        programme: "Biomedical Sciences / MBChB / MBBS",
+        itemCount: 0,
+      },
+      {
+        id: "bms-chemical-path",
+        name: "Chemical Pathology",
+        iconName: "FlaskConical",
+        description: "Electrolytes, arterial blood gases, liver and renal profiles, cardiac biomarkers and assays.",
+        programme: "Biomedical Sciences / MBChB / MBBS",
+        itemCount: 0,
+      },
+      {
+        id: "bms-microbiology",
+        name: "Medical Microbiology",
+        iconName: "Bug",
+        description: "Bacterial classification, viral replication, fungal pathogens and antimicrobial susceptibility.",
+        programme: "Biomedical Sciences / MBChB / MBBS",
+        itemCount: 0,
+      },
+      {
+        id: "bms-immunology",
+        name: "Immunology",
+        iconName: "Shield",
+        description: "Innate and adaptive immunity, MHC presentation, hypersensitivity reactions and autoimmunity.",
+        programme: "Biomedical Sciences / MBChB / MBBS",
+        itemCount: 0,
+      },
+      {
+        id: "bms-behavioural",
+        name: "Behavioural Sciences",
+        iconName: "Compass",
+        description: "Doctor-patient communication, medical sociology, clinical psychology and health habits.",
+        programme: "Biomedical Sciences / MBChB / MBBS",
+        itemCount: 0,
+      },
+      {
+        id: "bms-genetics",
+        name: "Medical Genetics",
+        iconName: "Dna",
+        description: "Patterns of inheritance, karyotyping, chromosomal abnormalities and clinical pedigrees.",
+        programme: "Biomedical Sciences / MBChB / MBBS",
+        itemCount: 0,
+      },
+      {
+        id: "bms-forensic",
+        name: "Forensic Medicine",
+        iconName: "Scale",
+        description: "Post-mortem examination, mechanical wounds, forensic toxicology and medical jurisprudence.",
+        programme: "Biomedical Sciences / MBChB / MBBS",
+        itemCount: 0,
+      },
+    ],
   },
+
+  // ── 2. Pharmacy (Exact 8 Folders) ──
   {
-    id: "paediatrics",
-    name: "Paediatrics",
-    icon: "👶",
-    itemCount: 0,
-    description: "Neonatal resuscitation, developmental milestones, paediatric infectious disease, and IMCI guidelines.",
-    programme: "Medicine (MBChB / MBBS)",
-    level: "Year 4 & 5"
+    id: "pharmacy",
+    name: "Pharmacy",
+    programmeKey: "Pharmacy",
+    folders: [
+      {
+        id: "pharm-1-1",
+        name: "Pharmacy 1.1",
+        iconName: "Pill",
+        description: "Pharmaceutical chemistry, cellular biology, organic reactions and calculations.",
+        programme: "Pharmacy",
+        itemCount: 0,
+      },
+      {
+        id: "pharm-1-2",
+        name: "Pharmacy 1.2",
+        iconName: "Pill",
+        description: "Physiology for pharmacy, physical pharmaceutics and pharmaceutical analysis.",
+        programme: "Pharmacy",
+        itemCount: 0,
+      },
+      {
+        id: "pharm-2-1",
+        name: "Pharmacy 2.1",
+        iconName: "Pill",
+        description: "General pharmacology, pharmaceutical microbiology and solid dosage formulation.",
+        programme: "Pharmacy",
+        itemCount: 0,
+      },
+      {
+        id: "pharm-2-2",
+        name: "Pharmacy 2.2",
+        iconName: "Pill",
+        description: "Biopharmaceutics, pharmacokinetics, medicinal chemistry and drug distribution.",
+        programme: "Pharmacy",
+        itemCount: 0,
+      },
+      {
+        id: "pharm-3-1",
+        name: "Pharmacy 3.1",
+        iconName: "Pill",
+        description: "Clinical pharmacokinetics, sterile manufacturing, antibiotics and pharmacotherapy.",
+        programme: "Pharmacy",
+        itemCount: 0,
+      },
+      {
+        id: "pharm-3-2",
+        name: "Pharmacy 3.2",
+        iconName: "Pill",
+        description: "Hospital pharmacy practice, disease-directed pharmacotherapy and patient counselling.",
+        programme: "Pharmacy",
+        itemCount: 0,
+      },
+      {
+        id: "pharm-4-1",
+        name: "Pharmacy 4.1",
+        iconName: "Pill",
+        description: "Advanced therapeutics, clinical toxicology, drug surveillance and biotechnology.",
+        programme: "Pharmacy",
+        itemCount: 0,
+      },
+      {
+        id: "pharm-4-4",
+        name: "Pharmacy 4.4",
+        iconName: "Pill",
+        description: "Pharmacy law and ethics, healthcare supply chain and clinical research project.",
+        programme: "Pharmacy",
+        itemCount: 0,
+      },
+    ],
   },
+
+  // ── 3. Veterinary Sciences ──
   {
-    id: "surgery",
-    name: "Surgery",
-    icon: "🔪",
-    itemCount: 0,
-    description: "General surgery operative manuals, acute abdomen algorithms, trauma ATLS protocols, and surgical oncology.",
-    programme: "Medicine (MBChB / MBBS)",
-    level: "Year 4 & 5"
+    id: "veterinary-sciences",
+    name: "Veterinary Sciences",
+    programmeKey: "Veterinary Sciences",
+    folders: [
+      {
+        id: "vet-anatomy",
+        name: "Veterinary Anatomy",
+        iconName: "PawPrint",
+        description: "Comparative animal osteology, myology, arthrology and neuroanatomy.",
+        programme: "Veterinary Sciences",
+        itemCount: 0,
+      },
+      {
+        id: "vet-physiology",
+        name: "Veterinary Physiology",
+        iconName: "Activity",
+        description: "Animal digestion, rumen mechanics, cardiovascular dynamics and endocrinology.",
+        programme: "Veterinary Sciences",
+        itemCount: 0,
+      },
+      {
+        id: "vet-pathology",
+        name: "Veterinary Pathology",
+        iconName: "Microscope",
+        description: "Gross necropsy, histopathological animal lesions and systemic diseases.",
+        programme: "Veterinary Sciences",
+        itemCount: 0,
+      },
+      {
+        id: "vet-medicine",
+        name: "Veterinary Medicine",
+        iconName: "Stethoscope",
+        description: "Small and large animal clinical medicine, herd diagnostics and zoonoses.",
+        programme: "Veterinary Sciences",
+        itemCount: 0,
+      },
+      {
+        id: "vet-surgery",
+        name: "Veterinary Surgery",
+        iconName: "Scissors",
+        description: "Aseptic technique, soft-tissue surgery, orthopaedics and animal anaesthesia.",
+        programme: "Veterinary Sciences",
+        itemCount: 0,
+      },
+      {
+        id: "vet-pharmacology",
+        name: "Veterinary Pharmacology",
+        iconName: "Pill",
+        description: "Veterinary therapeutics, dosage regimens, withdrawal periods and toxicology.",
+        programme: "Veterinary Sciences",
+        itemCount: 0,
+      },
+    ],
   },
+
+  // ── 4. Nursing ──
   {
-    id: "obs-gyn",
-    name: "Obstetrics & Gynecology",
-    icon: "🤰",
-    itemCount: 0,
-    description: "Antenatal care, intrapartum management, obstetric emergencies, gynaecological oncology, and family planning.",
-    programme: "Medicine (MBChB / MBBS)",
-    level: "Year 4 & 5"
+    id: "nursing",
+    name: "Nursing",
+    programmeKey: "Nursing",
+    folders: [
+      {
+        id: "nurs-fundamentals",
+        name: "Fundamentals of Nursing",
+        iconName: "HeartHandshake",
+        description: "Systematic nursing process, vital signs, bed-side ethics, infection control and wound care.",
+        programme: "Nursing",
+        itemCount: 0,
+      },
+      {
+        id: "nurs-med-surg",
+        name: "Medical-Surgical Nursing",
+        iconName: "Activity",
+        description: "Adult inpatient care, perioperative management, cardiac monitoring and post-op nursing.",
+        programme: "Nursing",
+        itemCount: 0,
+      },
+      {
+        id: "nurs-paediatric",
+        name: "Paediatric Nursing",
+        iconName: "Baby",
+        description: "Neonatal nursing care, IMCI guidelines, pediatric medications and growth monitoring.",
+        programme: "Nursing",
+        itemCount: 0,
+      },
+      {
+        id: "nurs-midwifery",
+        name: "Midwifery",
+        iconName: "HeartPulse",
+        description: "Antenatal nursing support, intrapartum labor stages and newborn resuscitation.",
+        programme: "Nursing",
+        itemCount: 0,
+      },
+      {
+        id: "nurs-community",
+        name: "Community Health Nursing",
+        iconName: "Building2",
+        description: "Primary healthcare clinics, immunization schedules, home visits and rural outreach.",
+        programme: "Nursing",
+        itemCount: 0,
+      },
+      {
+        id: "nurs-mental-health",
+        name: "Mental Health Nursing",
+        iconName: "Brain",
+        description: "Therapeutic relationships, psychiatric ward interventions and crisis de-escalation.",
+        programme: "Nursing",
+        itemCount: 0,
+      },
+    ],
   },
-  {
-    id: "dermatology",
-    name: "Dermatology",
-    icon: "💊",
-    itemCount: 0,
-    description: "Primary and secondary skin lesions, inflammatory dermatoses, skin infections, and melanoma screening.",
-    programme: "Medicine (MBChB / MBBS)",
-    level: "Year 4"
-  },
-  {
-    id: "community-medicine",
-    name: "Community Medicine",
-    icon: "🏥",
-    itemCount: 0,
-    description: "Public health epidemiology, biostatistics, primary healthcare delivery, maternal & child health outreach.",
-    programme: "Medicine & Health Sciences",
-    level: "All Levels"
-  },
-  {
-    id: "psychiatry",
-    name: "Psychiatry",
-    icon: "🧠",
-    itemCount: 0,
-    description: "DSM-5 diagnostic criteria, mood and psychotic disorders, psychopharmacology, and psychiatric emergencies.",
-    programme: "Medicine (MBChB / MBBS)",
-    level: "Year 4"
-  },
-  {
-    id: "pharmacology",
-    name: "Pharmacology",
-    icon: "💊",
-    itemCount: 0,
-    description: "Pharmacokinetics, pharmacodynamics, clinical toxicology, antimicrobial regimens, and hospital formularies.",
-    programme: "All Programmes",
-    level: "Parts 2 & 3"
-  },
-  {
-    id: "anatomy",
-    name: "Anatomy",
-    icon: "🦴",
-    itemCount: 0,
-    description: "Gross anatomy, cadaveric dissection manuals, regional osteology, histology, and embryology archives.",
-    programme: "Biomedical & Medicine",
-    level: "Parts 1 & 2"
-  },
-  {
-    id: "physiology",
-    name: "Physiology",
-    icon: "⚡",
-    itemCount: 0,
-    description: "Cell physiology, cardiovascular haemodynamics, renal clearance, respiratory mechanics, and neurophysiology.",
-    programme: "Biomedical & Medicine",
-    level: "Parts 1 & 2"
-  },
-  {
-    id: "histopathology",
-    name: "Histopathology",
-    icon: "🔬",
-    itemCount: 0,
-    description: "Microscopic slide atlases, cell injury, inflammation, neoplasia, and diagnostic biopsy specimens.",
-    programme: "Biomedical Science (HBMLS)",
-    level: "Parts 2 & 3"
-  },
-  {
-    id: "radiology",
-    name: "Radiology",
-    icon: "💀",
-    itemCount: 0,
-    description: "Systematic chest X-ray interpretation, emergency CT head scans, abdominal ultrasonography, and MRI basics.",
-    programme: "Medicine (MBChB / MBBS)",
-    level: "Clinical Years"
-  },
-  {
-    id: "anaesthetics",
-    name: "Anaesthetics",
-    icon: "💉",
-    itemCount: 0,
-    description: "Pre-operative evaluation, airway management, general & regional anaesthesia, and post-op recovery.",
-    programme: "Medicine (MBChB / MBBS)",
-    level: "Year 5"
-  },
-  {
-    id: "emergency-medicine",
-    name: "Emergency Medicine",
-    icon: "🚑",
-    itemCount: 0,
-    description: "Advanced cardiac life support (ACLS), major trauma management, toxicology triage, and shock resuscitation.",
-    programme: "Medicine (MBChB / MBBS)",
-    level: "Year 5 / Final Year"
-  },
-  {
-    id: "haematology",
-    name: "Haematology",
-    icon: "🩸",
-    itemCount: 0,
-    description: "Blood film morphology, anaemia workups, leukaemia classification, coagulation cascades, and blood transfusion.",
-    programme: "Biomedical Science (HBMLS)",
-    level: "Part 3"
-  },
-  {
-    id: "chemical-pathology",
-    name: "Chemical Pathology",
-    icon: "🧪",
-    itemCount: 0,
-    description: "Electrolytes & blood gases, liver & renal function test interpretation, endocrinology assays, and laboratory QA.",
-    programme: "Biomedical Science (HBMLS)",
-    level: "Part 3"
-  },
-  {
-    id: "medical-microbiology",
-    name: "Medical Microbiology",
-    icon: "🦠",
-    itemCount: 0,
-    description: "Bacteriology, virology, mycology, parasitology, antimicrobial sensitivity testing, and infection control.",
-    programme: "All Programmes",
-    level: "Parts 2 & 3"
-  },
-  {
-    id: "immunology",
-    name: "Immunology",
-    icon: "🛡️",
-    itemCount: 0,
-    description: "Innate & adaptive immunity, hypersensitivity reactions, autoimmune disorders, and immunodeficiency workups.",
-    programme: "All Programmes",
-    level: "Parts 2 & 3"
-  },
-  {
-    id: "behavioural-sciences",
-    name: "Behavioural Sciences",
-    icon: "🧩",
-    itemCount: 0,
-    description: "Medical sociology, doctor-patient communication, health psychology, and behavioural determinants of health.",
-    programme: "Medicine & Health Sciences",
-    level: "Parts 1 & 2"
-  },
-  {
-    id: "ophthalmology",
-    name: "Ophthalmology",
-    icon: "👁️",
-    itemCount: 0,
-    description: "Slit-lamp examination, red eye differentials, cataracts, glaucoma, retinal emergencies, and visual acuity.",
-    programme: "Medicine (MBChB / MBBS)",
-    level: "Year 4"
-  },
-  {
-    id: "ent",
-    name: "ENT / Otorhinolaryngology",
-    icon: "👂",
-    itemCount: 0,
-    description: "Otoscopy, epistaxis management, hearing loss evaluation, tonsillitis, and head & neck emergencies.",
-    programme: "Medicine (MBChB / MBBS)",
-    level: "Year 4"
-  },
-  {
-    id: "orthopaedics",
-    name: "Orthopaedics & Trauma",
-    icon: "🦿",
-    itemCount: 0,
-    description: "Fracture classifications, reduction and splinting, joint dislocations, compartment syndrome, and sports injuries.",
-    programme: "Medicine (MBChB / MBBS)",
-    level: "Year 4 & 5"
-  },
-  {
-    id: "oncology",
-    name: "Clinical Oncology",
-    icon: "🎗️",
-    itemCount: 0,
-    description: "TNM staging, chemotherapy protocols, radiotherapy principles, palliative care, and cancer biology.",
-    programme: "Medicine (MBChB / MBBS)",
-    level: "Year 4 & 5"
-  },
-  {
-    id: "medical-genetics",
-    name: "Medical Genetics",
-    icon: "🧬",
-    itemCount: 0,
-    description: "Mendelian inheritance, chromosomal anomalies, cytogenetics, pedigree analysis, and genetic counselling.",
-    programme: "Biomedical & Medicine",
-    level: "Parts 1 & 2"
-  },
-  {
-    id: "forensic-medicine",
-    name: "Forensic Medicine & Toxicology",
-    icon: "🔍",
-    itemCount: 0,
-    description: "Post-mortem examination, wound ballistics, asphyxial deaths, clinical forensic examination, and court testimony.",
-    programme: "Medicine (MBChB / MBBS)",
-    level: "Year 3 & 4"
-  },
-  {
-    id: "critical-care",
-    name: "Critical Care & ICU",
-    icon: "🩺",
-    itemCount: 0,
-    description: "Mechanical ventilation, inotropic support, sepsis resuscitation protocols, and arterial line monitoring.",
-    programme: "Medicine (MBChB / MBBS)",
-    level: "Year 5 / Final Year"
-  },
-  {
-    id: "medical-ethics",
-    name: "Medical Ethics & Law",
-    icon: "⚖️",
-    itemCount: 0,
-    description: "Informed consent, patient confidentiality, medical negligence, Zimbabwean health laws, and ethical dilemmas.",
-    programme: "All Programmes",
-    level: "All Levels"
-  },
-  {
-    id: "epidemiology",
-    name: "Epidemiology & Biostatistics",
-    icon: "📊",
-    itemCount: 0,
-    description: "Study designs, odds ratios & relative risks, outbreak investigations, diagnostic testing validity, and p-values.",
-    programme: "All Programmes",
-    level: "Parts 1 & 2"
-  }
 ]
 
 export default function LibraryPage() {
   const supabase = createClient()
-  const [shelves, setShelves] = useState<LibraryShelf[]>(INITIAL_SHELVES)
+  const [shelves, setShelves] = useState<ProgrammeShelfGroup[]>(INITIAL_PROGRAMME_SHELVES)
   const [search, setSearch] = useState("")
-  const [selectedShelf, setSelectedShelf] = useState<LibraryShelf | null>(null)
-  const [editingShelf, setEditingShelf] = useState<LibraryShelf | null>(null)
+  const [selectedFolder, setSelectedFolder] = useState<LibraryFolderItem | null>(null)
+  const [editingFolder, setEditingFolder] = useState<LibraryFolderItem | null>(null)
   const [driveUrlInput, setDriveUrlInput] = useState("")
   const [itemCountInput, setItemCountInput] = useState<number | string>("")
   const [user, setUser] = useState<any>(null)
 
+  // Collapsed state map: { [shelfId]: boolean }
+  const [collapsedShelves, setCollapsedShelves] = useState<Record<string, boolean>>({})
+
   useEffect(() => {
+    // 1. Load collapsed shelves from localStorage
+    try {
+      const storedCollapsed = localStorage.getItem("podguide_library_collapsed_shelves")
+      if (storedCollapsed) {
+        setCollapsedShelves(JSON.parse(storedCollapsed))
+      }
+    } catch {}
+
+    // 2. Load cached folder links from localStorage & Supabase
     const init = async () => {
       const { data: authData } = await supabase.auth.getUser()
       if (authData?.user) setUser(authData.user)
 
-      // Load cached customized shelves from localStorage (clean slate v2)
       try {
-        const stored = localStorage.getItem("podguide_library_shelves_v2")
-        if (stored) {
-          const parsed: Record<string, Partial<LibraryShelf>> = JSON.parse(stored)
-          setShelves(prev =>
-            prev.map(shelf => (parsed[shelf.id] ? { ...shelf, ...parsed[shelf.id] } : shelf))
+        const storedV3 = localStorage.getItem("podguide_library_shelves_v3")
+        const storedV2 = localStorage.getItem("podguide_library_shelves_v2")
+        const parsed: Record<string, Partial<LibraryFolderItem>> = storedV3
+          ? JSON.parse(storedV3)
+          : storedV2
+          ? JSON.parse(storedV2)
+          : {}
+
+        if (parsed && Object.keys(parsed).length > 0) {
+          setShelves(prevShelves =>
+            prevShelves.map(group => ({
+              ...group,
+              folders: group.folders.map(f => {
+                // Check direct match or legacy match
+                const match = parsed[f.id] || parsed[f.name.toLowerCase().replace(/[^a-z0-9]/g, "-")]
+                return match ? { ...f, ...match } : f
+              }),
+            }))
           )
         }
       } catch {}
     }
+
     init()
   }, [])
+
+  const toggleShelf = (shelfId: string) => {
+    setCollapsedShelves(prev => {
+      const next = { ...prev, [shelfId]: !prev[shelfId] }
+      try {
+        localStorage.setItem("podguide_library_collapsed_shelves", JSON.stringify(next))
+      } catch {}
+      return next
+    })
+  }
 
   const extractFolderId = (url: string) => {
     const trimmed = url.trim()
@@ -315,274 +502,400 @@ export default function LibraryPage() {
 
   const handleSaveDriveLink = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!editingShelf || !driveUrlInput.trim()) return
+    if (!editingFolder || !driveUrlInput.trim()) return
 
     const folderId = extractFolderId(driveUrlInput)
-    const count = itemCountInput !== "" ? parseInt(itemCountInput.toString(), 10) : editingShelf.itemCount
-    const updatedShelf: LibraryShelf = {
-      ...editingShelf,
+    const count =
+      itemCountInput !== ""
+        ? parseInt(itemCountInput.toString(), 10)
+        : editingFolder.itemCount
+    const updatedFolder: LibraryFolderItem = {
+      ...editingFolder,
       driveUrl: driveUrlInput.trim(),
       folderId: folderId,
-      itemCount: isNaN(count) ? 0 : Math.max(0, count)
+      itemCount: isNaN(count) ? 0 : Math.max(0, count),
     }
 
     // Update state
-    setShelves(prev => prev.map(s => (s.id === updatedShelf.id ? updatedShelf : s)))
+    setShelves(prevShelves =>
+      prevShelves.map(group => ({
+        ...group,
+        folders: group.folders.map(f =>
+          f.id === updatedFolder.id ? updatedFolder : f
+        ),
+      }))
+    )
 
     // Save to localStorage
     try {
-      const stored = localStorage.getItem("podguide_library_shelves")
+      const stored = localStorage.getItem("podguide_library_shelves_v3")
       const currentMap: Record<string, any> = stored ? JSON.parse(stored) : {}
-      currentMap[updatedShelf.id] = {
-        driveUrl: updatedShelf.driveUrl,
-        folderId: updatedShelf.folderId,
-        itemCount: updatedShelf.itemCount
+      currentMap[updatedFolder.id] = {
+        driveUrl: updatedFolder.driveUrl,
+        folderId: updatedFolder.folderId,
+        itemCount: updatedFolder.itemCount,
       }
-      localStorage.setItem("podguide_library_shelves_v2", JSON.stringify(currentMap))
+      localStorage.setItem("podguide_library_shelves_v3", JSON.stringify(currentMap))
     } catch {}
 
-    // Save to Supabase curated_drive_folders if user is authenticated
+    // Save to Supabase curated_drive_folders if authenticated
     try {
       if (user) {
         await supabase.from("curated_drive_folders").upsert({
-          title: updatedShelf.name,
-          drive_url: updatedShelf.driveUrl,
-          folder_id: updatedShelf.folderId,
-          category: updatedShelf.name,
-          programme: updatedShelf.programme || "All",
-          level: updatedShelf.level || "All",
-          description: updatedShelf.description || "",
-          icon: updatedShelf.icon,
-          item_count: updatedShelf.itemCount,
-          created_by: user.id
+          title: updatedFolder.name,
+          drive_url: updatedFolder.driveUrl,
+          folder_id: updatedFolder.folderId,
+          category: updatedFolder.programme,
+          programme: updatedFolder.programme,
+          description: updatedFolder.description || "",
+          icon: "📁",
+          item_count: updatedFolder.itemCount,
+          created_by: user.id,
         })
       }
     } catch (err) {
-      console.warn("Supabase drive shelf sync notice:", err)
+      console.warn("Supabase drive sync notice:", err)
     }
 
-    toast.success(`${updatedShelf.name} Google Drive connected!`)
-    setEditingShelf(null)
+    toast.success(`${updatedFolder.name} folder link saved!`)
+    setEditingFolder(null)
     setDriveUrlInput("")
   }
 
   const totalFiles = useMemo(() => {
-    return shelves.reduce((acc, curr) => acc + (curr.itemCount || 0), 0)
+    return shelves.reduce(
+      (sum, group) =>
+        sum + group.folders.reduce((sub, f) => sub + (f.itemCount || 0), 0),
+      0
+    )
   }, [shelves])
 
+  const totalFoldersCount = useMemo(() => {
+    return shelves.reduce((sum, group) => sum + group.folders.length, 0)
+  }, [shelves])
+
+  // Filter shelves and folders by search query
   const filteredShelves = useMemo(() => {
-    if (!search.trim()) return shelves
-    const q = search.toLowerCase()
-    return shelves.filter(
-      s => s.name.toLowerCase().includes(q) || s.description?.toLowerCase().includes(q)
-    )
+    const q = search.trim().toLowerCase()
+    if (!q) return shelves
+
+    return shelves
+      .map(group => {
+        const matchingFolders = group.folders.filter(
+          f =>
+            f.name.toLowerCase().includes(q) ||
+            f.description.toLowerCase().includes(q) ||
+            group.name.toLowerCase().includes(q)
+        )
+        return {
+          ...group,
+          folders: matchingFolders,
+        }
+      })
+      .filter(group => group.folders.length > 0)
   }, [shelves, search])
 
   const handleResetToZero = () => {
-    if (!confirm("Wipe all connected drive links and start clean from zero?")) return
+    if (!confirm("Clear all connected folder links and reset to clean zero?")) return
     try {
+      localStorage.removeItem("podguide_library_shelves_v3")
       localStorage.removeItem("podguide_library_shelves_v2")
       localStorage.removeItem("podguide_library_shelves")
-      localStorage.removeItem("podguide_custom_drive_folders")
     } catch {}
-    setShelves(INITIAL_SHELVES)
-    toast.success("All folders reset to zero. Ready for fresh connections.")
+    setShelves(INITIAL_PROGRAMME_SHELVES)
+    toast.success("All folders reset to default. Ready for fresh connections.")
   }
 
-  const openShelf = (shelf: LibraryShelf) => {
-    if (shelf.folderId && shelf.driveUrl) {
-      setSelectedShelf(shelf)
+  const openFolder = (folder: LibraryFolderItem) => {
+    if (folder.folderId && folder.driveUrl) {
+      setSelectedFolder(folder)
     } else {
-      setEditingShelf(shelf)
+      setEditingFolder(folder)
       setDriveUrlInput("")
-      setItemCountInput(shelf.itemCount > 0 ? shelf.itemCount : "")
+      setItemCountInput(folder.itemCount > 0 ? folder.itemCount : "")
     }
   }
 
   return (
     <div className="max-w-7xl mx-auto space-y-6 pb-20">
+      
       {/* ── TOP HEADER BAR ── */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#181818] pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#181818] pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xs font-black uppercase tracking-[0.2em] text-gray-400">
+            <h1 className="text-xs font-bold uppercase tracking-wider text-gray-400">
               LIBRARY SHELVES
             </h1>
-            <span className="w-1 h-1 rounded-full bg-brand" />
-            <span className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider">
-              Subject Folders
+            <span className="w-1 h-1 rounded-full bg-red-600" />
+            <span className="text-[10px] text-gray-500 font-medium uppercase tracking-wider">
+              {shelves.length} Programmes • {totalFoldersCount} Folders
             </span>
           </div>
-          <p className="text-xl sm:text-2xl font-display font-bold text-white mt-1">
+          <p className="text-xl sm:text-2xl font-bold text-white mt-0.5 tracking-tight">
             Curated Academic Shelves
           </p>
         </div>
 
         <div className="flex items-center gap-2.5 flex-wrap sm:flex-nowrap">
-          <div className="relative w-full sm:w-64">
-            <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500" />
+          <div className="relative w-full sm:w-60">
+            <Search
+              size={13}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
+            />
             <input
               type="text"
-              placeholder="Filter shelves..."
+              placeholder="Search folders or subjects..."
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full bg-[#0d0d0d] border border-[#222] focus:border-brand rounded-xl pl-9 pr-3.5 py-2 text-xs text-white placeholder:text-gray-600 outline-none transition-colors"
+              className="w-full bg-[#0d0d0d] border border-[#222] focus:border-red-600 rounded-lg pl-8 pr-3 py-1.5 text-xs text-white placeholder:text-gray-500 outline-none transition-colors"
             />
           </div>
-          <div className="px-3 py-2 bg-[#111] border border-[#222] rounded-xl text-xs font-bold text-gray-400 whitespace-nowrap">
-            {totalFiles} files total
+
+          <div className="px-3 py-1.5 bg-[#111] border border-[#222] rounded-lg text-xs font-semibold text-gray-400 whitespace-nowrap">
+            {totalFiles} files
           </div>
+
           <button
             onClick={handleResetToZero}
-            title="Wipe connections & start clean from zero"
-            className="flex items-center gap-1.5 px-3 py-2 bg-[#141414] hover:bg-[#1f1f1f] border border-[#222] hover:border-brand/40 text-gray-400 hover:text-white rounded-xl text-xs font-semibold transition-colors whitespace-nowrap"
+            title="Reset connected links to zero"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-[#141414] hover:bg-[#1a1a1a] border border-[#222] hover:border-red-600/40 text-gray-400 hover:text-white rounded-lg text-xs font-medium transition-colors whitespace-nowrap"
           >
-            <RotateCcw size={12} className="text-brand" /> Wipe & Start Zero
+            <RotateCcw size={11} className="text-red-500" /> Reset
           </button>
         </div>
       </div>
 
-      {/* ── SHELVES GRID ── */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {/* ── PROGRAMME SHELVES (COLLAPSIBLE) ── */}
+      <div className="space-y-6">
         {filteredShelves.map(shelf => {
-          const isConnected = Boolean(shelf.folderId && shelf.driveUrl)
+          // If searching, keep shelf open so results are visible; otherwise use collapsed state
+          const isCollapsed = search.trim() ? false : Boolean(collapsedShelves[shelf.id])
 
           return (
             <div
               key={shelf.id}
-              onClick={() => openShelf(shelf)}
-              className="bg-[#0c0c0c] border border-[#1a1a1a] hover:border-brand/40 hover:bg-[#121212] rounded-2xl p-5 flex flex-col justify-between transition-all duration-150 cursor-pointer group shadow-sm relative overflow-hidden"
+              className="bg-[#0b0b0b] border border-[#1a1a1a] rounded-xl overflow-hidden transition-all duration-150"
             >
-              {/* Top Row: Icon on Left, Folder Icon on Right */}
-              <div className="flex items-start justify-between">
-                <div className="w-10 h-10 rounded-xl bg-[#161616] border border-[#262626] flex items-center justify-center text-xl flex-shrink-0 group-hover:scale-105 transition-transform">
-                  {shelf.icon}
-                </div>
+              {/* Shelf Header with Expand/Collapse Control */}
+              <div className="flex items-center justify-between p-3 sm:px-4 bg-[#101010] border-b border-[#181818] select-none">
+                <button
+                  type="button"
+                  onClick={() => toggleShelf(shelf.id)}
+                  className="flex items-center gap-2.5 text-left group flex-1 focus:outline-none"
+                  aria-expanded={!isCollapsed}
+                >
+                  <div className="w-5 h-5 rounded flex items-center justify-center bg-[#181818] border border-[#262626] text-gray-400 group-hover:text-white transition-colors flex-shrink-0">
+                    {isCollapsed ? (
+                      <ChevronRight size={12} />
+                    ) : (
+                      <ChevronDown size={12} />
+                    )}
+                  </div>
 
-                <div className="flex items-center gap-1.5">
-                  {isConnected && (
-                    <span
-                      title="Google Drive connected"
-                      className="w-2 h-2 rounded-full bg-brand animate-pulse"
-                    />
-                  )}
-                  <button
-                    onClick={e => {
-                      e.stopPropagation()
-                      setEditingShelf(shelf)
-                      setDriveUrlInput(shelf.driveUrl || "")
-                      setItemCountInput(shelf.itemCount > 0 ? shelf.itemCount : "")
-                    }}
-                    title={isConnected ? "Edit Google Drive Link" : "Connect Google Drive Link"}
-                    className="p-1.5 text-gray-500 hover:text-white rounded-lg transition-colors"
-                  >
-                    <Folder
-                      size={18}
-                      className={
-                        isConnected
-                          ? "text-brand group-hover:text-red-400"
-                          : "text-gray-500 group-hover:text-gray-300"
-                      }
-                    />
-                  </button>
-                </div>
+                  <h2 className="text-xs sm:text-sm font-bold text-white tracking-tight group-hover:text-red-400 transition-colors">
+                    {shelf.name}
+                  </h2>
+
+                  <span className="text-[10px] font-semibold text-gray-400 bg-[#161616] border border-[#242424] px-2 py-0.2 rounded-full">
+                    {shelf.folders.length} {shelf.folders.length === 1 ? "folder" : "folders"}
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => toggleShelf(shelf.id)}
+                  className="text-[11px] font-medium text-gray-400 hover:text-white transition-colors px-2 py-1"
+                >
+                  {isCollapsed ? "Expand" : "Collapse"}
+                </button>
               </div>
 
-              {/* Bottom: Shelf Name & Item Count */}
-              <div className="mt-5">
-                <h3 className="text-sm font-bold text-white group-hover:text-brand transition-colors line-clamp-1">
-                  {shelf.name}
-                </h3>
-                <p className="text-xs text-gray-500 mt-1 font-medium">
-                  {shelf.itemCount} items
-                </p>
-              </div>
+              {/* Shelf Folders Grid (Visible when Expanded) */}
+              {!isCollapsed && (
+                <div className="p-3 sm:p-4">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5">
+                    {shelf.folders.map(folder => {
+                      const isConnected = Boolean(
+                        folder.folderId && folder.driveUrl
+                      )
+
+                      return (
+                        <div
+                          key={folder.id}
+                          onClick={() => openFolder(folder)}
+                          className="bg-[#0e0e0e] hover:bg-[#141414] border border-[#1c1c1c] hover:border-[#333] rounded-lg p-2.5 flex flex-col justify-between transition-all duration-150 cursor-pointer group relative"
+                        >
+                          <div>
+                            {/* Card Top: Small Icon & Connection Status */}
+                            <div className="flex items-center justify-between gap-1.5">
+                              <div className="w-6 h-6 rounded bg-[#161616] border border-[#242424] flex items-center justify-center text-red-500 group-hover:bg-red-600/10 transition-colors flex-shrink-0">
+                                <FolderIcon name={folder.iconName} size={12} />
+                              </div>
+
+                              <div className="flex items-center gap-1">
+                                {isConnected && (
+                                  <span
+                                    title="Drive connected"
+                                    className="w-1.5 h-1.5 rounded-full bg-red-600"
+                                  />
+                                )}
+                                <button
+                                  type="button"
+                                  onClick={e => {
+                                    e.stopPropagation()
+                                    setEditingFolder(folder)
+                                    setDriveUrlInput(folder.driveUrl || "")
+                                    setItemCountInput(
+                                      folder.itemCount > 0
+                                        ? folder.itemCount
+                                        : ""
+                                    )
+                                  }}
+                                  title={
+                                    isConnected
+                                      ? "Edit Drive link"
+                                      : "Connect Drive link"
+                                  }
+                                  className="text-gray-500 hover:text-white p-0.5 transition-colors"
+                                >
+                                  <Folder
+                                    size={13}
+                                    className={
+                                      isConnected
+                                        ? "text-red-500"
+                                        : "text-gray-600 hover:text-gray-300"
+                                    }
+                                  />
+                                </button>
+                              </div>
+                            </div>
+
+                            {/* Card Middle: Folder Name */}
+                            <h3 className="text-xs font-bold text-white group-hover:text-red-400 transition-colors line-clamp-1 mt-2 leading-snug">
+                              {folder.name}
+                            </h3>
+
+                            {/* Card Subtitle */}
+                            <p className="text-[10px] text-gray-400 line-clamp-1 mt-0.5 leading-tight">
+                              {folder.description}
+                            </p>
+                          </div>
+
+                          {/* Card Bottom: File count */}
+                          <div className="pt-2 mt-2 border-t border-[#181818] flex items-center justify-between text-[10px] text-gray-500">
+                            <span>{folder.itemCount} files</span>
+                            <span
+                              className={
+                                isConnected
+                                  ? "text-red-500 font-medium"
+                                  : "text-gray-600"
+                              }
+                            >
+                              {isConnected ? "Linked" : "Connect"}
+                            </span>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
           )
         })}
+
+        {filteredShelves.length === 0 && (
+          <div className="text-center py-16 bg-[#0c0c0c] border border-[#1a1a1a] rounded-xl space-y-2">
+            <p className="text-sm font-bold text-white">
+              No matching shelves or folders found
+            </p>
+            <p className="text-xs text-gray-500">
+              Try searching with another keyword or subject name.
+            </p>
+          </div>
+        )}
       </div>
 
-      {filteredShelves.length === 0 && (
-        <div className="text-center py-16 bg-[#0c0c0c] border border-[#1a1a1a] rounded-2xl space-y-2">
-          <p className="text-sm font-bold text-white">No matching shelves found</p>
-          <p className="text-xs text-gray-500">Try searching with a different term.</p>
-        </div>
-      )}
-
-      {/* ── MODAL: PREVIEW CONNECTED SHELF ── */}
-      {selectedShelf && (
-        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-          <div className="bg-[#0e0e0e] border border-[#222] rounded-2xl w-full max-w-3xl my-6 p-6 sm:p-7 space-y-5 relative shadow-2xl animate-in fade-in zoom-in-95 duration-150">
+      {/* ── MODAL: PREVIEW CONNECTED FOLDER ── */}
+      {selectedFolder && (
+        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+          <div className="bg-[#0e0e0e] border border-[#222] rounded-xl w-full max-w-3xl my-6 p-5 sm:p-6 space-y-4 relative shadow-2xl animate-in fade-in zoom-in-95 duration-150">
             <button
-              onClick={() => setSelectedShelf(null)}
-              className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
+              onClick={() => setSelectedFolder(null)}
+              className="absolute top-4 right-4 p-1.5 text-gray-400 hover:text-white transition-colors"
             >
-              <X size={18} />
+              <X size={16} />
             </button>
 
-            <div className="flex items-start gap-4 pr-8">
-              <div className="w-12 h-12 rounded-xl bg-[#161616] border border-[#262626] flex items-center justify-center text-2xl flex-shrink-0">
-                {selectedShelf.icon}
+            <div className="flex items-start gap-3 pr-8">
+              <div className="w-10 h-10 rounded-lg bg-[#161616] border border-[#262626] flex items-center justify-center text-red-500 flex-shrink-0">
+                <FolderIcon name={selectedFolder.iconName} size={18} />
               </div>
-              <div className="space-y-1">
+              <div className="space-y-0.5">
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-brand bg-brand/10 px-2.5 py-0.5 rounded border border-brand/20">
-                    Live Shelf
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-red-400 bg-red-600/10 px-2 py-0.5 rounded border border-red-600/20">
+                    {selectedFolder.programme}
                   </span>
-                  <span className="text-[10px] font-semibold text-gray-400">
-                    {selectedShelf.itemCount} items
+                  <span className="text-[10px] text-gray-400 font-medium">
+                    {selectedFolder.itemCount} files
                   </span>
                 </div>
-                <h2 className="text-xl font-bold text-white leading-tight mt-1">
-                  {selectedShelf.name}
+                <h2 className="text-lg font-bold text-white leading-tight">
+                  {selectedFolder.name}
                 </h2>
-                <p className="text-xs text-gray-400">{selectedShelf.description}</p>
+                <p className="text-xs text-gray-400">
+                  {selectedFolder.description}
+                </p>
               </div>
             </div>
 
             {/* Embedded Live Google Drive View */}
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400 flex items-center gap-1.5">
-                  <Eye size={12} className="text-brand" /> Live Folder Contents Preview
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between text-[11px] text-gray-400">
+                <span className="font-semibold flex items-center gap-1.5 text-white">
+                  <Eye size={12} className="text-red-500" /> Drive Preview
                 </span>
-                <span className="text-[10px] text-gray-500">Google Drive Embedded Viewer</span>
+                <span className="text-[10px] text-gray-500">
+                  Google Drive Embedded Viewer
+                </span>
               </div>
-              <div className="w-full h-80 rounded-xl overflow-hidden border border-[#222] bg-[#080808]">
+              <div className="w-full h-80 rounded-lg overflow-hidden border border-[#222] bg-[#080808]">
                 <iframe
-                  src={`https://drive.google.com/embeddedfolderview?id=${selectedShelf.folderId}#grid`}
+                  src={`https://drive.google.com/embeddedfolderview?id=${selectedFolder.folderId}#grid`}
                   className="w-full h-full border-0"
-                  title={selectedShelf.name}
+                  title={selectedFolder.name}
                   allow="fullscreen"
                 />
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-3 pt-1">
+            <div className="flex flex-col sm:flex-row items-center gap-2.5 pt-1">
               <a
-                href={selectedShelf.driveUrl}
+                href={selectedFolder.driveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:flex-1 py-2.5 bg-brand hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-md shadow-brand/25"
+                className="w-full sm:flex-1 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold transition-colors flex items-center justify-center gap-2"
               >
-                <ExternalLink size={14} /> Open in Google Drive
+                <ExternalLink size={13} /> Open in Google Drive
               </a>
               <button
                 type="button"
                 onClick={() => {
-                  setEditingShelf(selectedShelf)
-                  setDriveUrlInput(selectedShelf.driveUrl || "")
-                  setItemCountInput(selectedShelf.itemCount > 0 ? selectedShelf.itemCount : "")
-                  setSelectedShelf(null)
+                  setEditingFolder(selectedFolder)
+                  setDriveUrlInput(selectedFolder.driveUrl || "")
+                  setItemCountInput(
+                    selectedFolder.itemCount > 0 ? selectedFolder.itemCount : ""
+                  )
+                  setSelectedFolder(null)
                 }}
-                className="w-full sm:w-auto px-4 py-2.5 bg-[#161616] hover:bg-[#202020] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-xl text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
+                className="w-full sm:w-auto px-4 py-2 bg-[#161616] hover:bg-[#202020] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-lg text-xs font-medium transition-colors flex items-center justify-center gap-1.5"
               >
-                <Link2 size={13} /> Update Drive Link
+                <Link2 size={12} /> Edit Link
               </button>
               <button
                 type="button"
-                onClick={() => setSelectedShelf(null)}
-                className="w-full sm:w-auto px-5 py-2.5 bg-[#181818] hover:bg-[#222] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-xl text-xs font-bold transition-colors"
+                onClick={() => setSelectedFolder(null)}
+                className="w-full sm:w-auto px-4 py-2 bg-[#181818] hover:bg-[#222] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-lg text-xs font-medium transition-colors"
               >
                 Close
               </button>
@@ -592,38 +905,40 @@ export default function LibraryPage() {
       )}
 
       {/* ── MODAL: CONNECT / EDIT DRIVE LINK ── */}
-      {editingShelf && (
-        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-          <div className="bg-[#0e0e0e] border border-[#222] rounded-2xl w-full max-w-lg p-6 sm:p-7 space-y-5 relative shadow-2xl animate-in fade-in zoom-in-95 duration-150">
+      {editingFolder && (
+        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+          <div className="bg-[#0e0e0e] border border-[#222] rounded-xl w-full max-w-md p-5 sm:p-6 space-y-4 relative shadow-2xl animate-in fade-in zoom-in-95 duration-150">
             <button
               onClick={() => {
-                setEditingShelf(null)
+                setEditingFolder(null)
                 setDriveUrlInput("")
               }}
-              className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
+              className="absolute top-4 right-4 p-1.5 text-gray-400 hover:text-white transition-colors"
             >
-              <X size={18} />
+              <X size={16} />
             </button>
 
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-[#161616] border border-[#262626] flex items-center justify-center text-2xl flex-shrink-0">
-                {editingShelf.icon}
+              <div className="w-10 h-10 rounded-lg bg-[#161616] border border-[#262626] flex items-center justify-center text-red-500 flex-shrink-0">
+                <FolderIcon name={editingFolder.iconName} size={18} />
               </div>
               <div>
-                <span className="text-[10px] font-black uppercase tracking-widest text-brand">
-                  Connect Library Shelf
+                <span className="text-[10px] font-bold uppercase tracking-wider text-red-500">
+                  {editingFolder.programme}
                 </span>
-                <h3 className="text-lg font-bold text-white mt-0.5">{editingShelf.name}</h3>
+                <h3 className="text-base font-bold text-white mt-0.5 leading-snug">
+                  {editingFolder.name}
+                </h3>
               </div>
             </div>
 
             <p className="text-xs text-gray-400 leading-relaxed">
-              Paste the Google Drive folder share link for this subject. Ensure the sharing settings in Google Drive are set to <strong>&quot;Anyone with the link can view&quot;</strong>.
+              Paste the Google Drive folder share link for this folder. Ensure sharing is set to <strong>&quot;Anyone with the link can view&quot;</strong>.
             </p>
 
-            <form onSubmit={handleSaveDriveLink} className="space-y-4">
+            <form onSubmit={handleSaveDriveLink} className="space-y-3.5">
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
+                <label className="block text-xs font-semibold text-gray-300 mb-1">
                   Google Drive Folder Link
                 </label>
                 <input
@@ -632,38 +947,38 @@ export default function LibraryPage() {
                   placeholder="https://drive.google.com/drive/folders/1aBcD_XyZ..."
                   value={driveUrlInput}
                   onChange={e => setDriveUrlInput(e.target.value)}
-                  className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-brand rounded-xl px-4 py-2.5 text-xs text-white placeholder:text-gray-600 outline-none transition-colors"
+                  className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-red-600 rounded-lg px-3.5 py-2 text-xs text-white placeholder:text-gray-600 outline-none transition-colors"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                  Actual File Count (Optional)
+                <label className="block text-xs font-semibold text-gray-300 mb-1">
+                  File Count (Optional)
                 </label>
                 <input
                   type="number"
                   min="0"
-                  placeholder="e.g. 15 (leave empty or 0 if empty)"
+                  placeholder="e.g. 12 (leave empty or 0 if empty)"
                   value={itemCountInput}
                   onChange={e => setItemCountInput(e.target.value)}
-                  className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-brand rounded-xl px-4 py-2.5 text-xs text-white placeholder:text-gray-600 outline-none transition-colors"
+                  className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-red-600 rounded-lg px-3.5 py-2 text-xs text-white placeholder:text-gray-600 outline-none transition-colors"
                 />
               </div>
 
-              <div className="flex gap-3 pt-2">
+              <div className="flex gap-2.5 pt-1">
                 <button
                   type="submit"
-                  className="flex-1 py-2.5 bg-brand hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-md shadow-brand/25"
+                  className="flex-1 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
                 >
-                  <Check size={14} /> Save Shelf Link
+                  <Check size={13} /> Save Folder Link
                 </button>
                 <button
                   type="button"
                   onClick={() => {
-                    setEditingShelf(null)
+                    setEditingFolder(null)
                     setDriveUrlInput("")
                   }}
-                  className="px-4 py-2.5 bg-[#181818] hover:bg-[#222] border border-[#2b2b2b] text-gray-400 hover:text-white rounded-xl text-xs font-bold transition-colors"
+                  className="px-3.5 py-2 bg-[#181818] hover:bg-[#222] border border-[#2b2b2b] text-gray-400 hover:text-white rounded-lg text-xs font-medium transition-colors"
                 >
                   Cancel
                 </button>
