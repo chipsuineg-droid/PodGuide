@@ -968,17 +968,13 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {/* TANC Official Scrubs (Front Facing Model) */}
+                  {/* TANC Official Scrubs (Lifestyle Showcase) */}
                   <div className="bg-[#101010] rounded-2xl border border-[#202020] overflow-hidden flex flex-col justify-between">
                     <div className="h-40 bg-[#141414] relative flex items-center justify-center overflow-hidden">
                       <img
-                        src="https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Navy_01.avif"
+                        src="/images/tanc-scrubs.jpg"
                         alt="TANC Core Scrubs"
-                        className="w-full h-full object-cover object-top"
-                        onError={e => {
-                          const target = e.target as HTMLImageElement
-                          target.src = "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&auto=format&fit=crop&q=80"
-                        }}
+                        className="w-full h-full object-cover object-center"
                       />
                       <span className="absolute top-2 right-2 bg-red-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-md">$30</span>
                     </div>
