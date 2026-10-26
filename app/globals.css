@@ -318,3 +318,42 @@ html:not(.dark) header .rounded-full.bg-brand,
 html:not(.dark) nav .bg-brand {
   color: #ffffff !important;
 }
+
+/* ========================================================
+   FINAL LANDING PAGE THEME LOCK (PLACED AT END TO WIN CASCADE)
+   The landing page and all its badges and discipline cards
+   MUST strictly preserve pitch black backgrounds and white text.
+   ======================================================== */
+.landing-page,
+html .landing-page,
+html:not(.dark) .landing-page {
+  background-color: #050507 !important;
+  color: #F4F4F5 !important;
+}
+
+.landing-floating-badge,
+html:not(.dark) .landing-floating-badge,
+.landing-discipline-card,
+html:not(.dark) .landing-discipline-card,
+.landing-page .landing-discipline-card,
+html:not(.dark) .landing-page .landing-discipline-card,
+.landing-page .bg-\[\#0e0e0e\],
+html:not(.dark) .landing-page .bg-\[\#0e0e0e\],
+html:not(.dark) .landing-page [class*="bg-[#0e0e0e]"] {
+  background-color: #0e0e0e !important;
+  color: #ffffff !important;
+  border-color: #202020 !important;
+}
+
+.landing-discipline-card:hover,
+html:not(.dark) .landing-discipline-card:hover,
+.landing-page .bg-\[\#0e0e0e\]:hover,
+html:not(.dark) .landing-page .bg-\[\#0e0e0e\]:hover {
+  background-color: #151515 !important;
+}
+
+html:not(.dark) .landing-page .text-white,
+html:not(.dark) .landing-discipline-card .text-white,
+html:not(.dark) .landing-discipline-card h3 {
+  color: #ffffff !important;
+}

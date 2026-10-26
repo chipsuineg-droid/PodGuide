@@ -1223,71 +1223,101 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
 
         {/* Compact Space-Efficient Side-by-Side Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
-          <div className="bg-[#0e0e0e] hover:bg-[#151515] p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0">
+          <div
+            className="landing-discipline-card p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5 cursor-default group"
+            style={{ backgroundColor: "#0e0e0e", color: "#ffffff" }}
+          >
+            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors">
               <Stethoscope size={15} />
             </div>
-            <h3 className="text-xs font-semibold text-white truncate">Medicine & Surgery</h3>
+            <h3 className="text-xs font-semibold text-white truncate">Medicine &amp; Surgery</h3>
           </div>
 
-          <div className="bg-[#0e0e0e] hover:bg-[#151515] p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0">
+          <div
+            className="landing-discipline-card p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5 cursor-default group"
+            style={{ backgroundColor: "#0e0e0e", color: "#ffffff" }}
+          >
+            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors">
               <Dna size={15} />
             </div>
             <h3 className="text-xs font-semibold text-white truncate">Biomedical Sciences</h3>
           </div>
 
-          <div className="bg-[#0e0e0e] hover:bg-[#151515] p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0">
+          <div
+            className="landing-discipline-card p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5 cursor-default group"
+            style={{ backgroundColor: "#0e0e0e", color: "#ffffff" }}
+          >
+            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors">
               <Pill size={15} />
             </div>
             <h3 className="text-xs font-semibold text-white truncate">Pharmacy</h3>
           </div>
 
-          <div className="bg-[#0e0e0e] hover:bg-[#151515] p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0">
+          <div
+            className="landing-discipline-card p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5 cursor-default group"
+            style={{ backgroundColor: "#0e0e0e", color: "#ffffff" }}
+          >
+            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors">
               <Activity size={15} />
             </div>
             <h3 className="text-xs font-semibold text-white truncate">Nursing Science</h3>
           </div>
 
-          <div className="bg-[#0e0e0e] hover:bg-[#151515] p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0">
+          <div
+            className="landing-discipline-card p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5 cursor-default group"
+            style={{ backgroundColor: "#0e0e0e", color: "#ffffff" }}
+          >
+            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors">
               <HeartHandshake size={15} />
             </div>
             <h3 className="text-xs font-semibold text-white truncate">Occupational Therapy</h3>
           </div>
 
-          <div className="bg-[#0e0e0e] hover:bg-[#151515] p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0">
+          <div
+            className="landing-discipline-card p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5 cursor-default group"
+            style={{ backgroundColor: "#0e0e0e", color: "#ffffff" }}
+          >
+            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors">
               <Activity size={15} />
             </div>
             <h3 className="text-xs font-semibold text-white truncate">Physiotherapy</h3>
           </div>
 
-          <div className="bg-[#0e0e0e] hover:bg-[#151515] p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0">
+          <div
+            className="landing-discipline-card p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5 cursor-default group"
+            style={{ backgroundColor: "#0e0e0e", color: "#ffffff" }}
+          >
+            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors">
               <Scan size={15} />
             </div>
             <h3 className="text-xs font-semibold text-white truncate">Radiography</h3>
           </div>
 
-          <div className="bg-[#0e0e0e] hover:bg-[#151515] p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0">
+          <div
+            className="landing-discipline-card p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5 cursor-default group"
+            style={{ backgroundColor: "#0e0e0e", color: "#ffffff" }}
+          >
+            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors">
               <Settings size={15} />
             </div>
             <h3 className="text-xs font-semibold text-white truncate">Biomedical Engineering</h3>
           </div>
 
-          <div className="bg-[#0e0e0e] hover:bg-[#151515] p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0">
+          <div
+            className="landing-discipline-card p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5 cursor-default group"
+            style={{ backgroundColor: "#0e0e0e", color: "#ffffff" }}
+          >
+            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors">
               <TestTube size={15} />
             </div>
             <h3 className="text-xs font-semibold text-white truncate">Medical Laboratory</h3>
           </div>
 
           {/* Plus 20 Badge Pill */}
-          <div className="bg-red-600/10 hover:bg-red-600/20 p-3 rounded-xl border border-red-600/40 transition-colors flex items-center gap-2.5">
+          <div
+            className="p-3 rounded-xl border border-red-600/40 transition-colors flex items-center gap-2.5 cursor-default"
+            style={{ backgroundColor: "rgba(220, 38, 38, 0.12)", color: "#ffffff" }}
+          >
             <span className="text-sm font-black text-red-500">+20</span>
             <h3 className="text-xs font-bold text-white truncate">Other Health Disciplines</h3>
           </div>
@@ -1346,7 +1376,10 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
 
         {/* ── SEND US A MESSAGE PANEL (PLACED DIRECTLY BELOW OUR STORY) ── */}
         <div id="contact" className="mt-16 max-w-2xl mx-auto scroll-responsive">
-          <div className="bg-[#0e0e0e] p-6 sm:p-8 rounded-3xl border border-[#222] relative shadow-2xl">
+          <div
+            className="bg-[#0e0e0e] p-6 sm:p-8 rounded-3xl border border-[#222] relative shadow-2xl"
+            style={{ backgroundColor: "#0e0e0e", color: "#ffffff" }}
+          >
             <div className="text-center mb-6">
               <h3 className="text-xl font-bold text-white">Get in touch with us</h3>
               <p className="text-xs text-gray-400 mt-1">Have questions or want to introduce PodGuide to your university or clinical faculty?</p>
@@ -1497,6 +1530,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
           <div
             onClick={e => e.stopPropagation()}
             className="bg-[#0e0e0e] w-full max-w-md p-6 sm:p-8 rounded-3xl border border-[#222] relative shadow-2xl animate-in zoom-in-95"
+            style={{ backgroundColor: "#0e0e0e", color: "#ffffff" }}
           >
             <button
               type="button"
