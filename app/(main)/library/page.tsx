@@ -9,10 +9,12 @@ import {
   X,
   Check,
   Folder,
-  Link2,
-  RotateCcw,
   ChevronDown,
   ChevronRight,
+  Settings,
+  Clock,
+  ShieldCheck,
+  RotateCcw,
   Stethoscope,
   Baby,
   Scissors,
@@ -434,6 +436,7 @@ export default function LibraryPage() {
   const [driveUrlInput, setDriveUrlInput] = useState("")
   const [itemCountInput, setItemCountInput] = useState<number | string>("")
   const [user, setUser] = useState<any>(null)
+  const [isAdmin, setIsAdmin] = useState(false)
 
   // Collapsed state map: { [shelfId]: boolean }
   const [collapsedShelves, setCollapsedShelves] = useState<Record<string, boolean>>({})
@@ -447,33 +450,55 @@ export default function LibraryPage() {
       }
     } catch {}
 
-    // 2. Load cached folder links from localStorage & Supabase
+    // 2. Load connected folder links from Supabase database (Admin curated)
     const init = async () => {
       const { data: authData } = await supabase.auth.getUser()
-      if (authData?.user) setUser(authData.user)
+      if (authData?.user) {
+        setUser(authData.user)
+        // Check if user is an admin
+        const { data: profile } = await supabase
+          .from("student_profiles")
+          .select("is_admin")
+          .eq("user_id", authData.user.id)
+          .maybeSingle()
+
+        const isUserAdmin = !!profile?.is_admin || authData.user.email === "admin@podguide.com"
+        setIsAdmin(isUserAdmin)
+      }
 
       try {
-        const storedV3 = localStorage.getItem("podguide_library_shelves_v3")
-        const storedV2 = localStorage.getItem("podguide_library_shelves_v2")
-        const parsed: Record<string, Partial<LibraryFolderItem>> = storedV3
-          ? JSON.parse(storedV3)
-          : storedV2
-          ? JSON.parse(storedV2)
-          : {}
+        // Fetch official curated folders from database
+        const { data: dbFolders, error } = await supabase
+          .from("curated_drive_folders")
+          .select("*")
 
-        if (parsed && Object.keys(parsed).length > 0) {
+        if (!error && dbFolders && dbFolders.length > 0) {
           setShelves(prevShelves =>
             prevShelves.map(group => ({
               ...group,
               folders: group.folders.map(f => {
-                // Check direct match or legacy match
-                const match = parsed[f.id] || parsed[f.name.toLowerCase().replace(/[^a-z0-9]/g, "-")]
-                return match ? { ...f, ...match } : f
+                const match = dbFolders.find(
+                  (df: any) =>
+                    df.title === f.name ||
+                    df.category === f.name ||
+                    df.id === f.id
+                )
+                if (match && match.drive_url) {
+                  return {
+                    ...f,
+                    driveUrl: match.drive_url,
+                    folderId: match.folder_id || extractFolderId(match.drive_url),
+                    itemCount: match.item_count || f.itemCount || 0,
+                  }
+                }
+                return f
               }),
             }))
           )
         }
-      } catch {}
+      } catch (err) {
+        console.warn("Notice: Curated drive folders fetch error:", err)
+      }
     }
 
     init()
@@ -500,8 +525,13 @@ export default function LibraryPage() {
     return trimmed
   }
 
+  // Admin-only: Save or update Google Drive link for a shelf folder
   const handleSaveDriveLink = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!isAdmin) {
+      toast.error("Only administrators can connect or edit shelf links.")
+      return
+    }
     if (!editingFolder || !driveUrlInput.trim()) return
 
     const folderId = extractFolderId(driveUrlInput)
@@ -516,7 +546,7 @@ export default function LibraryPage() {
       itemCount: isNaN(count) ? 0 : Math.max(0, count),
     }
 
-    // Update state
+    // Update state locally
     setShelves(prevShelves =>
       prevShelves.map(group => ({
         ...group,
@@ -526,19 +556,7 @@ export default function LibraryPage() {
       }))
     )
 
-    // Save to localStorage
-    try {
-      const stored = localStorage.getItem("podguide_library_shelves_v3")
-      const currentMap: Record<string, any> = stored ? JSON.parse(stored) : {}
-      currentMap[updatedFolder.id] = {
-        driveUrl: updatedFolder.driveUrl,
-        folderId: updatedFolder.folderId,
-        itemCount: updatedFolder.itemCount,
-      }
-      localStorage.setItem("podguide_library_shelves_v3", JSON.stringify(currentMap))
-    } catch {}
-
-    // Save to Supabase curated_drive_folders if authenticated
+    // Save to Supabase curated_drive_folders so ALL users see it
     try {
       if (user) {
         await supabase.from("curated_drive_folders").upsert({
@@ -557,9 +575,16 @@ export default function LibraryPage() {
       console.warn("Supabase drive sync notice:", err)
     }
 
-    toast.success(`${updatedFolder.name} folder link saved!`)
+    toast.success(`${updatedFolder.name} folder link saved by Admin!`)
     setEditingFolder(null)
     setDriveUrlInput("")
+  }
+
+  // Admin-only reset
+  const handleAdminResetToDefault = () => {
+    if (!confirm("Admin Action: Reset all folders to default state?")) return
+    setShelves(INITIAL_PROGRAMME_SHELVES)
+    toast.success("All folders reset to default.")
   }
 
   const totalFiles = useMemo(() => {
@@ -595,25 +620,8 @@ export default function LibraryPage() {
       .filter(group => group.folders.length > 0)
   }, [shelves, search])
 
-  const handleResetToZero = () => {
-    if (!confirm("Clear all connected folder links and reset to clean zero?")) return
-    try {
-      localStorage.removeItem("podguide_library_shelves_v3")
-      localStorage.removeItem("podguide_library_shelves_v2")
-      localStorage.removeItem("podguide_library_shelves")
-    } catch {}
-    setShelves(INITIAL_PROGRAMME_SHELVES)
-    toast.success("All folders reset to default. Ready for fresh connections.")
-  }
-
   const openFolder = (folder: LibraryFolderItem) => {
-    if (folder.folderId && folder.driveUrl) {
-      setSelectedFolder(folder)
-    } else {
-      setEditingFolder(folder)
-      setDriveUrlInput("")
-      setItemCountInput(folder.itemCount > 0 ? folder.itemCount : "")
-    }
+    setSelectedFolder(folder)
   }
 
   return (
@@ -630,6 +638,11 @@ export default function LibraryPage() {
             <span className="text-[10px] text-gray-500 font-medium uppercase tracking-wider">
               {shelves.length} Programmes • {totalFoldersCount} Folders
             </span>
+            {isAdmin && (
+              <span className="text-[10px] font-bold uppercase tracking-wider text-red-500 bg-red-600/10 px-2 py-0.5 rounded border border-red-600/20 flex items-center gap-1 ml-1">
+                <ShieldCheck size={10} /> Admin Mode
+              </span>
+            )}
           </div>
           <p className="text-xl sm:text-2xl font-bold text-white mt-0.5 tracking-tight">
             Curated Academic Shelves
@@ -637,7 +650,7 @@ export default function LibraryPage() {
         </div>
 
         <div className="flex items-center gap-2.5 flex-wrap sm:flex-nowrap">
-          <div className="relative w-full sm:w-60">
+          <div className="relative w-full sm:w-64">
             <Search
               size={13}
               className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
@@ -652,16 +665,19 @@ export default function LibraryPage() {
           </div>
 
           <div className="px-3 py-1.5 bg-[#111] border border-[#222] rounded-lg text-xs font-semibold text-gray-400 whitespace-nowrap">
-            {totalFiles} files
+            {totalFiles} files available
           </div>
 
-          <button
-            onClick={handleResetToZero}
-            title="Reset connected links to zero"
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-[#141414] hover:bg-[#1a1a1a] border border-[#222] hover:border-red-600/40 text-gray-400 hover:text-white rounded-lg text-xs font-medium transition-colors whitespace-nowrap"
-          >
-            <RotateCcw size={11} className="text-red-500" /> Reset
-          </button>
+          {/* Admin-only reset control */}
+          {isAdmin && (
+            <button
+              onClick={handleAdminResetToDefault}
+              title="Admin: Reset all shelf links"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-[#141414] hover:bg-[#1a1a1a] border border-[#222] hover:border-red-600/40 text-gray-400 hover:text-white rounded-lg text-xs font-medium transition-colors whitespace-nowrap"
+            >
+              <RotateCcw size={11} className="text-red-500" /> Reset
+            </button>
+          )}
         </div>
       </div>
 
@@ -726,7 +742,7 @@ export default function LibraryPage() {
                           className="bg-[#0e0e0e] hover:bg-[#141414] border border-[#1c1c1c] hover:border-[#333] rounded-lg p-2.5 flex flex-col justify-between transition-all duration-150 cursor-pointer group relative"
                         >
                           <div>
-                            {/* Card Top: Small Icon & Connection Status */}
+                            {/* Card Top: Small Icon & Admin Edit Button (Admin Only) */}
                             <div className="flex items-center justify-between gap-1.5">
                               <div className="w-6 h-6 rounded bg-[#161616] border border-[#242424] flex items-center justify-center text-red-500 group-hover:bg-red-600/10 transition-colors flex-shrink-0">
                                 <FolderIcon name={folder.iconName} size={12} />
@@ -735,38 +751,31 @@ export default function LibraryPage() {
                               <div className="flex items-center gap-1">
                                 {isConnected && (
                                   <span
-                                    title="Drive connected"
+                                    title="Drive resources available"
                                     className="w-1.5 h-1.5 rounded-full bg-red-600"
                                   />
                                 )}
-                                <button
-                                  type="button"
-                                  onClick={e => {
-                                    e.stopPropagation()
-                                    setEditingFolder(folder)
-                                    setDriveUrlInput(folder.driveUrl || "")
-                                    setItemCountInput(
-                                      folder.itemCount > 0
-                                        ? folder.itemCount
-                                        : ""
-                                    )
-                                  }}
-                                  title={
-                                    isConnected
-                                      ? "Edit Drive link"
-                                      : "Connect Drive link"
-                                  }
-                                  className="text-gray-500 hover:text-white p-0.5 transition-colors"
-                                >
-                                  <Folder
-                                    size={13}
-                                    className={
-                                      isConnected
-                                        ? "text-red-500"
-                                        : "text-gray-600 hover:text-gray-300"
-                                    }
-                                  />
-                                </button>
+
+                                {/* Admin-only gear/configure button */}
+                                {isAdmin && (
+                                  <button
+                                    type="button"
+                                    onClick={e => {
+                                      e.stopPropagation()
+                                      setEditingFolder(folder)
+                                      setDriveUrlInput(folder.driveUrl || "")
+                                      setItemCountInput(
+                                        folder.itemCount > 0
+                                          ? folder.itemCount
+                                          : ""
+                                      )
+                                    }}
+                                    title="Admin: Connect / Edit Drive link"
+                                    className="text-gray-500 hover:text-white p-0.5 transition-colors"
+                                  >
+                                    <Settings size={12} className="text-gray-500 hover:text-red-400" />
+                                  </button>
+                                )}
                               </div>
                             </div>
 
@@ -781,9 +790,13 @@ export default function LibraryPage() {
                             </p>
                           </div>
 
-                          {/* Card Bottom: File count */}
+                          {/* Card Bottom: File count or status */}
                           <div className="pt-2 mt-2 border-t border-[#181818] flex items-center justify-between text-[10px] text-gray-500">
-                            <span>{folder.itemCount} files</span>
+                            <span>
+                              {isConnected
+                                ? `${folder.itemCount} files`
+                                : "In preparation"}
+                            </span>
                             <span
                               className={
                                 isConnected
@@ -791,7 +804,7 @@ export default function LibraryPage() {
                                   : "text-gray-600"
                               }
                             >
-                              {isConnected ? "Linked" : "Connect"}
+                              {isConnected ? "Available" : "Coming soon"}
                             </span>
                           </div>
                         </div>
@@ -816,7 +829,7 @@ export default function LibraryPage() {
         )}
       </div>
 
-      {/* ── MODAL: PREVIEW CONNECTED FOLDER ── */}
+      {/* ── MODAL: PREVIEW FOLDER ── */}
       {selectedFolder && (
         <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
           <div className="bg-[#0e0e0e] border border-[#222] rounded-xl w-full max-w-3xl my-6 p-5 sm:p-6 space-y-4 relative shadow-2xl animate-in fade-in zoom-in-95 duration-150">
@@ -836,9 +849,11 @@ export default function LibraryPage() {
                   <span className="text-[10px] font-bold uppercase tracking-wider text-red-400 bg-red-600/10 px-2 py-0.5 rounded border border-red-600/20">
                     {selectedFolder.programme}
                   </span>
-                  <span className="text-[10px] text-gray-400 font-medium">
-                    {selectedFolder.itemCount} files
-                  </span>
+                  {selectedFolder.driveUrl && (
+                    <span className="text-[10px] text-gray-400 font-medium">
+                      {selectedFolder.itemCount} files
+                    </span>
+                  )}
                 </div>
                 <h2 className="text-lg font-bold text-white leading-tight">
                   {selectedFolder.name}
@@ -849,63 +864,109 @@ export default function LibraryPage() {
               </div>
             </div>
 
-            {/* Embedded Live Google Drive View */}
-            <div className="space-y-1.5">
-              <div className="flex items-center justify-between text-[11px] text-gray-400">
-                <span className="font-semibold flex items-center gap-1.5 text-white">
-                  <Eye size={12} className="text-red-500" /> Drive Preview
-                </span>
-                <span className="text-[10px] text-gray-500">
-                  Google Drive Embedded Viewer
-                </span>
-              </div>
-              <div className="w-full h-80 rounded-lg overflow-hidden border border-[#222] bg-[#080808]">
-                <iframe
-                  src={`https://drive.google.com/embeddedfolderview?id=${selectedFolder.folderId}#grid`}
-                  className="w-full h-full border-0"
-                  title={selectedFolder.name}
-                  allow="fullscreen"
-                />
-              </div>
-            </div>
+            {/* Folder Contents View */}
+            {selectedFolder.folderId && selectedFolder.driveUrl ? (
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between text-[11px] text-gray-400">
+                  <span className="font-semibold flex items-center gap-1.5 text-white">
+                    <Eye size={12} className="text-red-500" /> Curated Resources Preview
+                  </span>
+                  <span className="text-[10px] text-gray-500">
+                    Google Drive Viewer
+                  </span>
+                </div>
+                <div className="w-full h-80 rounded-lg overflow-hidden border border-[#222] bg-[#080808]">
+                  <iframe
+                    src={`https://drive.google.com/embeddedfolderview?id=${selectedFolder.folderId}#grid`}
+                    className="w-full h-full border-0"
+                    title={selectedFolder.name}
+                    allow="fullscreen"
+                  />
+                </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-2.5 pt-1">
-              <a
-                href={selectedFolder.driveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:flex-1 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold transition-colors flex items-center justify-center gap-2"
-              >
-                <ExternalLink size={13} /> Open in Google Drive
-              </a>
-              <button
-                type="button"
-                onClick={() => {
-                  setEditingFolder(selectedFolder)
-                  setDriveUrlInput(selectedFolder.driveUrl || "")
-                  setItemCountInput(
-                    selectedFolder.itemCount > 0 ? selectedFolder.itemCount : ""
-                  )
-                  setSelectedFolder(null)
-                }}
-                className="w-full sm:w-auto px-4 py-2 bg-[#161616] hover:bg-[#202020] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-lg text-xs font-medium transition-colors flex items-center justify-center gap-1.5"
-              >
-                <Link2 size={12} /> Edit Link
-              </button>
-              <button
-                type="button"
-                onClick={() => setSelectedFolder(null)}
-                className="w-full sm:w-auto px-4 py-2 bg-[#181818] hover:bg-[#222] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-lg text-xs font-medium transition-colors"
-              >
-                Close
-              </button>
-            </div>
+                <div className="flex flex-col sm:flex-row items-center gap-2.5 pt-2">
+                  <a
+                    href={selectedFolder.driveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:flex-1 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold transition-colors flex items-center justify-center gap-2"
+                  >
+                    <ExternalLink size={13} /> Open in Google Drive
+                  </a>
+
+                  {isAdmin && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setEditingFolder(selectedFolder)
+                        setDriveUrlInput(selectedFolder.driveUrl || "")
+                        setItemCountInput(
+                          selectedFolder.itemCount > 0 ? selectedFolder.itemCount : ""
+                        )
+                        setSelectedFolder(null)
+                      }}
+                      className="w-full sm:w-auto px-4 py-2 bg-[#161616] hover:bg-[#202020] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-lg text-xs font-medium transition-colors flex items-center justify-center gap-1.5"
+                    >
+                      <Settings size={12} /> Admin: Edit Link
+                    </button>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => setSelectedFolder(null)}
+                    className="w-full sm:w-auto px-4 py-2 bg-[#181818] hover:bg-[#222] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-lg text-xs font-medium transition-colors"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            ) : (
+              /* Empty state for students when admin has not yet attached materials */
+              <div className="py-10 px-4 text-center space-y-3 bg-[#090909] border border-[#1a1a1a] rounded-lg">
+                <div className="w-10 h-10 rounded-lg bg-[#141414] border border-[#242424] flex items-center justify-center text-gray-400 mx-auto">
+                  <Clock size={18} />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-sm font-bold text-white">
+                    Curated Materials Coming Soon
+                  </h3>
+                  <p className="text-xs text-gray-400 max-w-md mx-auto leading-relaxed">
+                    Our academic team is currently verifying and curating textbooks, clinical rotation guides, and revision decks for {selectedFolder.name}.
+                  </p>
+                </div>
+
+                <div className="pt-2 flex items-center justify-center gap-2">
+                  {isAdmin ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setEditingFolder(selectedFolder)
+                        setDriveUrlInput("")
+                        setItemCountInput("")
+                        setSelectedFolder(null)
+                      }}
+                      className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5"
+                    >
+                      <Settings size={12} /> Admin: Connect Drive Folder
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => setSelectedFolder(null)}
+                      className="px-4 py-1.5 bg-[#161616] hover:bg-[#202020] border border-[#262626] text-gray-300 hover:text-white rounded-lg text-xs font-medium transition-colors"
+                    >
+                      Close
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
 
-      {/* ── MODAL: CONNECT / EDIT DRIVE LINK ── */}
-      {editingFolder && (
+      {/* ── ADMIN MODAL: CONNECT / EDIT DRIVE LINK (ADMIN ONLY) ── */}
+      {isAdmin && editingFolder && (
         <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
           <div className="bg-[#0e0e0e] border border-[#222] rounded-xl w-full max-w-md p-5 sm:p-6 space-y-4 relative shadow-2xl animate-in fade-in zoom-in-95 duration-150">
             <button
@@ -924,7 +985,7 @@ export default function LibraryPage() {
               </div>
               <div>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-red-500">
-                  {editingFolder.programme}
+                  Admin Configuration
                 </span>
                 <h3 className="text-base font-bold text-white mt-0.5 leading-snug">
                   {editingFolder.name}
@@ -933,7 +994,7 @@ export default function LibraryPage() {
             </div>
 
             <p className="text-xs text-gray-400 leading-relaxed">
-              Paste the Google Drive folder share link for this folder. Ensure sharing is set to <strong>&quot;Anyone with the link can view&quot;</strong>.
+              Attach the official Google Drive share link for this shelf folder. Changes will save to the database and become immediately accessible to all students.
             </p>
 
             <form onSubmit={handleSaveDriveLink} className="space-y-3.5">
@@ -953,12 +1014,12 @@ export default function LibraryPage() {
 
               <div>
                 <label className="block text-xs font-semibold text-gray-300 mb-1">
-                  File Count (Optional)
+                  Verified File Count
                 </label>
                 <input
                   type="number"
                   min="0"
-                  placeholder="e.g. 12 (leave empty or 0 if empty)"
+                  placeholder="e.g. 15"
                   value={itemCountInput}
                   onChange={e => setItemCountInput(e.target.value)}
                   className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-red-600 rounded-lg px-3.5 py-2 text-xs text-white placeholder:text-gray-600 outline-none transition-colors"
@@ -970,7 +1031,7 @@ export default function LibraryPage() {
                   type="submit"
                   className="flex-1 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
                 >
-                  <Check size={13} /> Save Folder Link
+                  <Check size={13} /> Save to Library
                 </button>
                 <button
                   type="button"
