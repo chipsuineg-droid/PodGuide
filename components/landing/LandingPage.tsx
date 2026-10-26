@@ -203,44 +203,168 @@ const ALL_FLOATING_BADGES: FloatingBadgeData[] = [
 ]
 
 /**
- * Interactive Floating Badge with Touch & Click Ripple Physics (Strict Dark Canvas)
+ * FreefloatingBadgeField
+ * Renders all badges as absolutely-positioned DOM nodes driven by a
+ * requestAnimationFrame physics loop.  Each badge has its own velocity vector
+ * (dx, dy) and gentle rotation wobble.  On collision with the container walls
+ * the component reflects the velocity so badges bounce and intermingle freely.
+ * Click / touch triggers an expanding ripple ring + scale pop.
  */
-function InteractiveFloatingBadge({
-  href,
-  icon: Icon,
-  title,
-  subtitle,
-  animationClass,
-}: FloatingBadgeData) {
-  const [rippling, setRippling] = useState(false)
+function FreefloatingBadgeField({ badges }: { badges: FloatingBadgeData[] }) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  // Per-badge physics state stored in refs so the rAF loop never triggers re-renders
+  const stateRef = useRef<
+    Array<{
+      x: number
+      y: number
+      dx: number
+      dy: number
+      rot: number
+      rotDir: number
+      el: HTMLDivElement | null
+    }>
+  >([])
+  const rafRef = useRef<number | null>(null)
+  const [ripplingIdx, setRipplingIdx] = useState<number | null>(null)
+  const [poppingIdx, setPoppingIdx] = useState<number | null>(null)
 
-  const triggerRipple = () => {
-    setRippling(true)
-    setTimeout(() => setRippling(false), 600)
+  // Seed physics on first render (positions spread across the full container)
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
+
+    const W = container.clientWidth  || 800
+    const H = container.clientHeight || 340
+
+    stateRef.current = badges.map((_, i) => {
+      // Spread initial positions evenly + random jitter so they don't all stack
+      const cols = 4
+      const col  = i % cols
+      const row  = Math.floor(i / cols)
+      const cellW = W / cols
+      const cellH = H / Math.ceil(badges.length / cols)
+
+      const x = col * cellW + cellW * 0.15 + Math.random() * cellW * 0.65
+      const y = row * cellH + cellH * 0.1  + Math.random() * cellH * 0.7
+
+      // Random velocity: slow enough to be graceful, different per badge
+      const speed = 0.28 + Math.random() * 0.38
+      const angle = Math.random() * Math.PI * 2
+      return {
+        x,
+        y,
+        dx: Math.cos(angle) * speed,
+        dy: Math.sin(angle) * speed,
+        rot: (Math.random() - 0.5) * 6,
+        rotDir: (Math.random() > 0.5 ? 1 : -1) * (0.004 + Math.random() * 0.006),
+        el: null,
+      }
+    })
+
+    // rAF physics loop — runs entirely off React render cycle
+    const tick = () => {
+      const container = containerRef.current
+      if (!container) return
+
+      const W = container.clientWidth
+      const H = container.clientHeight
+
+      stateRef.current.forEach((s) => {
+        if (!s.el) return
+        const bW = s.el.offsetWidth
+        const bH = s.el.offsetHeight
+
+        s.x += s.dx
+        s.y += s.dy
+        s.rot += s.rotDir
+
+        // Clamp rotation to a gentle wobble range (±6°)
+        if (Math.abs(s.rot) > 6) s.rotDir *= -1
+
+        // Wall bounce with a tiny random nudge so they don't lock into perfect repeats
+        if (s.x < 0)        { s.x = 0;        s.dx = Math.abs(s.dx) + (Math.random() - 0.5) * 0.06 }
+        if (s.x + bW > W)   { s.x = W - bW;   s.dx = -(Math.abs(s.dx) + (Math.random() - 0.5) * 0.06) }
+        if (s.y < 0)        { s.y = 0;         s.dy = Math.abs(s.dy) + (Math.random() - 0.5) * 0.06 }
+        if (s.y + bH > H)   { s.y = H - bH;   s.dy = -(Math.abs(s.dy) + (Math.random() - 0.5) * 0.06) }
+
+        s.el.style.transform = `translate(${s.x}px, ${s.y}px) rotate(${s.rot}deg)`
+      })
+
+      rafRef.current = requestAnimationFrame(tick)
+    }
+
+    rafRef.current = requestAnimationFrame(tick)
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
+  }, [badges.length])
+
+  const handleClick = (idx: number) => {
+    // Ripple ring
+    setRipplingIdx(idx)
+    setPoppingIdx(idx)
+    setTimeout(() => setRipplingIdx(null), 700)
+    setTimeout(() => setPoppingIdx(null), 350)
+
+    // Give that badge a random velocity kick on click
+    const s = stateRef.current[idx]
+    if (s) {
+      const kickAngle = Math.random() * Math.PI * 2
+      const kickSpeed = 1.4 + Math.random() * 0.8
+      s.dx = Math.cos(kickAngle) * kickSpeed
+      s.dy = Math.sin(kickAngle) * kickSpeed
+    }
   }
 
   return (
-    <Link
-      href={href}
-      onClick={triggerRipple}
-      onMouseEnter={triggerRipple}
-      className={`landing-floating-badge ${animationClass} relative group bg-[#0e0e0e] hover:bg-[#161616] px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl flex items-center gap-2.5 sm:gap-3 cursor-pointer border border-[#242424] hover:border-red-600 transition-all duration-300 shadow-xl hover:scale-105 active:scale-95 shrink-0`}
+    <div
+      ref={containerRef}
+      className="relative w-full overflow-hidden"
+      style={{ height: "340px" }}
+      aria-hidden="true"
     >
-      {rippling && (
-        <span className="absolute inset-0 rounded-2xl border-2 border-red-600 click-ripple-ring pointer-events-none" />
-      )}
-      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-red-600/15 text-red-500 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors duration-200">
-        <Icon size={14} />
-      </div>
-      <div className="text-left truncate">
-        <div className="text-xs font-bold text-white group-hover:text-red-400 transition-colors truncate">
-          {title}
-        </div>
-        <div className="text-[10px] text-gray-400 truncate">
-          {subtitle}
-        </div>
-      </div>
-    </Link>
+      {badges.map((badge, idx) => {
+        const Icon = badge.icon
+        const isRippling = ripplingIdx === idx
+        const isPopping  = poppingIdx  === idx
+        return (
+          <div
+            key={idx}
+            ref={(el) => {
+              if (el && stateRef.current[idx]) stateRef.current[idx].el = el
+            }}
+            onClick={() => handleClick(idx)}
+            className="absolute top-0 left-0 landing-floating-badge cursor-pointer"
+            style={{ willChange: "transform" }}
+          >
+            <Link
+              href={badge.href}
+              className={`relative flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl bg-[#0e0e0e] border border-[#242424] hover:border-red-600 shadow-xl transition-colors duration-300 select-none
+                ${isPopping ? "scale-110" : "scale-100"}`}
+              style={{ transition: "border-color 0.25s, scale 0.15s" }}
+              onClick={(e) => { e.preventDefault(); handleClick(idx) }}
+              onTouchStart={() => handleClick(idx)}
+            >
+              {/* Expanding ripple ring on click */}
+              {isRippling && (
+                <span className="absolute inset-0 rounded-2xl border-2 border-red-500 click-ripple-ring pointer-events-none" />
+              )}
+
+              {/* Icon */}
+              <div className="w-8 h-8 rounded-xl bg-red-600/15 text-red-500 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors duration-200">
+                <Icon size={14} />
+              </div>
+
+              {/* Text */}
+              <div className="text-left" style={{ minWidth: "120px", maxWidth: "180px" }}>
+                <div className="text-xs font-bold text-white truncate">{badge.title}</div>
+                <div className="text-[10px] text-gray-400 truncate">{badge.subtitle}</div>
+              </div>
+            </Link>
+          </div>
+        )
+      })}
+    </div>
   )
 }
 
@@ -451,9 +575,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
     setContactForm({ name: "", email: "", message: "" })
   }
 
-  // Split badges into two lanes for continuous drifting on desktop
-  const lane1Badges = ALL_FLOATING_BADGES.slice(0, 6)
-  const lane2Badges = ALL_FLOATING_BADGES.slice(6, 12)
+  // (badges passed directly to FreefloatingBadgeField — no lane split needed)
 
   return (
     <div className="landing-page min-h-screen bg-[#050507] text-[#F4F4F5] font-sans antialiased selection:bg-red-600 selection:text-white">
@@ -503,28 +625,10 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
           A cohesive environment designed specifically for health science students, health tutors, and healthcare professionals to access curated academic shelves, clinical diagnostic tools, adaptive question banks, professional gear, and global growth opportunities.
         </p>
 
-        {/* ── CONTINUOUS INTERMINGLING FLOATING BADGES (DESKTOP / TABLET) ── */}
-        <div className="hidden sm:block mt-12 w-full overflow-hidden relative py-3">
-          {/* Lane 1: Drifts Left, Intermingles with Bobbing */}
-          <div className="animate-drift-left gap-4 py-2">
-            {[...lane1Badges, ...lane1Badges].map((badge, idx) => (
-              <InteractiveFloatingBadge key={`lane1-${idx}`} {...badge} />
-            ))}
-          </div>
-
-          {/* Lane 2: Drifts Right, Intermingles in Reverse */}
-          <div className="animate-drift-right gap-4 py-2 mt-2">
-            {[...lane2Badges, ...lane2Badges].map((badge, idx) => (
-              <InteractiveFloatingBadge key={`lane2-${idx}`} {...badge} />
-            ))}
-          </div>
-        </div>
-
-        {/* ── COMPACT 2-COLUMN GROUPED BADGES (MOBILE OPTIMIZED) ── */}
-        <div className="sm:hidden mt-8 w-full grid grid-cols-2 gap-2 text-left">
-          {ALL_FLOATING_BADGES.slice(0, 8).map((badge, idx) => (
-            <InteractiveFloatingBadge key={`mobile-${idx}`} {...badge} animationClass="" />
-          ))}
+        {/* ── FREE-FLOATING BADGE PARTICLE FIELD ── */}
+        {/* Physics-driven: each badge moves freely in all directions, bounces walls, intermingles */}
+        <div className="mt-12 w-full">
+          <FreefloatingBadgeField badges={ALL_FLOATING_BADGES} />
         </div>
       </section>
 

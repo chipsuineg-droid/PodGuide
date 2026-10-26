@@ -47,48 +47,6 @@
   .font-display { font-family: var(--font-outfit, system-ui, sans-serif); }
   .card-hover { transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease; }
   .card-hover:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
-
-  .animate-float-1 { animation: float1 7s ease-in-out infinite; }
-  .animate-float-2 { animation: float2 9s ease-in-out infinite; }
-  .animate-float-3 { animation: float3 8s ease-in-out infinite; }
-  .animate-float-4 { animation: float4 10s ease-in-out infinite; }
-  .animate-float-5 { animation: float5 6.5s ease-in-out infinite; }
-  .animate-float-6 { animation: float6 8.5s ease-in-out infinite; }
-  .animate-float-7 { animation: float7 7.5s ease-in-out infinite; }
-  .animate-float-8 { animation: float8 9.5s ease-in-out infinite; }
-}
-
-@keyframes float1 {
-  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
-  50% { transform: translate(8px, -12px) rotate(1.5deg); }
-}
-@keyframes float2 {
-  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
-  50% { transform: translate(-10px, -8px) rotate(-2deg); }
-}
-@keyframes float3 {
-  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
-  50% { transform: translate(10px, 6px) rotate(1deg); }
-}
-@keyframes float4 {
-  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
-  50% { transform: translate(-8px, 10px) rotate(-1.5deg); }
-}
-@keyframes float5 {
-  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
-  50% { transform: translate(6px, -8px) rotate(2deg); }
-}
-@keyframes float6 {
-  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
-  50% { transform: translate(-12px, -6px) rotate(1deg); }
-}
-@keyframes float7 {
-  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
-  50% { transform: translate(6px, 10px) rotate(-2deg); }
-}
-@keyframes float8 {
-  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
-  50% { transform: translate(-8px, -10px) rotate(2.5deg); }
 }
 
 @keyframes pulseRipple {
@@ -97,30 +55,6 @@
 }
 .click-ripple-ring {
   animation: pulseRipple 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Continuous intermingling drifting tracks */
-@keyframes marqueeLeft {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
-}
-@keyframes marqueeRight {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0%); }
-}
-.animate-drift-left {
-  display: flex;
-  width: max-content;
-  animation: marqueeLeft 42s linear infinite;
-}
-.animate-drift-right {
-  display: flex;
-  width: max-content;
-  animation: marqueeRight 46s linear infinite;
-}
-.animate-drift-left:hover,
-.animate-drift-right:hover {
-  animation-play-state: paused;
 }
 
 /* Scroll pop-out animation */
