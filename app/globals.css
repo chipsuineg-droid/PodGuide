@@ -84,6 +84,91 @@
    - Red brand identity and white text on red remain intact
    ======================================================== */
 
+/* ========================================================
+   LANDING PAGE THEME PRESERVATION
+   The landing page is strictly designed with our signature
+   deep black (#050507), red and white identity.
+   ======================================================== */
+.landing-page {
+  background-color: #050507 !important;
+  color: #F4F4F5 !important;
+}
+
+html:not(.dark) .landing-page,
+html:not(.dark) .landing-page.bg-black,
+html:not(.dark) .landing-page.bg-\[\#050507\],
+html:not(.dark) .landing-page .bg-black,
+html:not(.dark) .landing-page .bg-\[\#050507\],
+html:not(.dark) .landing-page .bg-\[\#080808\],
+html:not(.dark) .landing-page .bg-\[\#0d0d0d\],
+html:not(.dark) .landing-page .bg-\[\#101010\],
+html:not(.dark) .landing-page .bg-\[\#121212\],
+html:not(.dark) .landing-page .bg-\[\#161616\],
+html:not(.dark) .landing-page .bg-\[\#181818\],
+html:not(.dark) .landing-page .bg-\[\#1c1c1c\],
+html:not(.dark) .landing-page .bg-\[\#202020\],
+html:not(.dark) .landing-page .bg-\[\#222\] {
+  background-color: #050507 !important;
+}
+
+html:not(.dark) .landing-page .bg-\[\#101010\] {
+  background-color: #101010 !important;
+}
+
+html:not(.dark) .landing-page .bg-\[\#121212\] {
+  background-color: #121212 !important;
+}
+
+html:not(.dark) .landing-page .bg-\[\#0d0d0d\] {
+  background-color: #0d0d0d !important;
+}
+
+html:not(.dark) .landing-page .bg-\[\#080808\] {
+  background-color: #080808 !important;
+}
+
+html:not(.dark) .landing-page .bg-\[\#161616\] {
+  background-color: #161616 !important;
+}
+
+html:not(.dark) .landing-page .text-white {
+  color: #ffffff !important;
+}
+
+html:not(.dark) .landing-page .text-gray-300 {
+  color: #d1d5db !important;
+}
+
+html:not(.dark) .landing-page .text-gray-400 {
+  color: #9ca3af !important;
+}
+
+html:not(.dark) .landing-page .text-gray-500 {
+  color: #6b7280 !important;
+}
+
+html:not(.dark) .landing-page header {
+  background-color: rgba(0, 0, 0, 0.92) !important;
+  border-color: #1f1f1f !important;
+}
+
+html:not(.dark) .landing-page aside {
+  background-color: #0d0d0d !important;
+  border-color: #1f1f1f !important;
+}
+
+html:not(.dark) .landing-page main {
+  background-color: #050507 !important;
+}
+
+html:not(.dark) .landing-page .border-\[\#1f1f1f\],
+html:not(.dark) .landing-page .border-\[\#202020\],
+html:not(.dark) .landing-page .border-\[\#222\],
+html:not(.dark) .landing-page .border-\[\#242424\],
+html:not(.dark) .landing-page .border-\[\#2c2c2c\] {
+  border-color: #222222 !important;
+}
+
 html:not(.dark) {
   background-color: #ffffff !important;
   color: #0a0a0a !important;

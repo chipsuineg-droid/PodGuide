@@ -78,6 +78,11 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
     setActiveTab(tabId)
   }
 
+  // Ensure landing page always enforces its signature black theme
+  useEffect(() => {
+    document.documentElement.classList.add("dark")
+  }, [])
+
   // Automated cursor tour
   useEffect(() => {
     const runTour = () => {
@@ -130,20 +135,18 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-black text-[#F4F4F5] font-sans antialiased selection:bg-red-600 selection:text-white">
+    <div className="landing-page min-h-screen bg-[#050507] text-[#F4F4F5] font-sans antialiased selection:bg-red-600 selection:text-white">
       {/* ── TOP NAVIGATION BAR ── */}
       <header className="fixed top-0 left-0 right-0 z-40 px-4 py-4 sm:px-8 bg-black/90 backdrop-blur-md border-b border-[#1f1f1f]">
         <nav className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Brand Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-9 h-9 rounded-xl bg-red-600 flex items-center justify-center text-white font-bold text-xl transition-transform group-hover:scale-105">
-              P
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="w-7 h-7 rounded-md bg-red-600 flex items-center justify-center">
+              <span className="text-white text-xs font-black">P</span>
             </div>
-            <div className="flex flex-col">
-              <span className="font-extrabold text-lg tracking-tight text-white flex items-center gap-1.5">
-                PodGuide <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#1c1c1c] text-gray-300 font-semibold border border-[#2c2c2c]">ZW</span>
-              </span>
-            </div>
+            <span className="font-display text-xl font-bold tracking-tight text-white">
+              Pod<span className="text-red-600">Guide</span>
+            </span>
           </Link>
 
           {/* Nav Links */}
@@ -717,7 +720,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
               <div className="space-y-6 animate-in fade-in duration-200">
                 <div className="flex items-center justify-between border-b border-[#1f1f1f] pb-4">
                   <div>
-                    <h2 className="text-lg font-bold text-white">MedStore Zimbabwe</h2>
+                    <h2 className="text-lg font-bold text-white">MedStore</h2>
                     <p className="text-xs text-gray-400">Authentic equipment and gear delivered directly to campus</p>
                   </div>
                   <span className="text-xs text-red-500 font-semibold">Verified Gear</span>
@@ -938,7 +941,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                 <input
                   type="email"
                   required
-                  placeholder="genius@podguide.org.zw"
+                  placeholder="student@medical.edu"
                   value={contactForm.email}
                   onChange={e => setContactForm({ ...contactForm, email: e.target.value })}
                   className="w-full bg-[#121212] border border-[#222] rounded-xl px-4 py-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-red-600"
@@ -988,21 +991,20 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
       {/* ── ULTRA-CLEAN FOOTER ── */}
       <footer className="border-t border-[#1f1f1f] py-12 px-4 sm:px-8 bg-black">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
-            <div className="w-7 h-7 rounded-lg bg-red-600 flex items-center justify-center text-white font-bold text-xs">
-              P
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 rounded-md bg-red-600 flex items-center justify-center">
+              <span className="text-white text-xs font-black">P</span>
             </div>
-            <span className="text-sm font-bold text-white">PodGuide Zimbabwe</span>
+            <span className="font-display text-base font-bold text-white">
+              Pod<span className="text-red-600">Guide</span>
+            </span>
           </div>
 
           <p className="text-xs text-gray-500 text-center">
-            &copy; 2026 PodGuide ZW. All rights reserved. Designed for medical excellence.
+            &copy; 2026 PodGuide. All rights reserved. Designed for medical excellence.
           </p>
 
           <div className="flex items-center gap-6 text-xs text-gray-400">
-            <a href="https://podguide.org.zw" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
-              podguide.org.zw
-            </a>
             <Link href="/login" className="hover:text-white transition font-medium">
               App Login
             </Link>
