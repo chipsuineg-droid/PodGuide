@@ -54,59 +54,6 @@ type TabKey = "dashboard" | "learn" | "library" | "practise" | "network" | "meds
 
 const TABS_SEQUENCE: TabKey[] = ["dashboard", "learn", "library", "practise", "network", "medstore", "grow"]
 
-// ── TOUR STEP DEFINITION ──
-// Each step moves the cursor to a target element (by id), optionally clicks it,
-// and waits `dwellMs` before moving to the next step.
-interface TourStep {
-  targetId: string           // id of the DOM element to navigate to
-  action?: "click" | "hover" // what to do when arrived (default hover)
-  switchTab?: TabKey         // if set, switches the active tab after arriving
-  highlightId?: string       // if set, pulse-highlights a secondary element in the panel
-  dwellMs: number            // time to wait at this position before next step
-}
-
-const TOUR_STEPS: TourStep[] = [
-  // 1. Dashboard tab – land and hover
-  { targetId: "tab-btn-dashboard", action: "click", switchTab: "dashboard", dwellMs: 2200 },
-  // 2. Move to first subject card inside dashboard panel
-  { targetId: "tour-dashboard-card-1", action: "hover", dwellMs: 1400 },
-  // 3. Move to progress bar area on second card
-  { targetId: "tour-dashboard-card-2", action: "hover", dwellMs: 1000 },
-
-  // 4. Learn tab click
-  { targetId: "tab-btn-learn", action: "click", switchTab: "learn", dwellMs: 2000 },
-  // 5. Click the New Notebook button in Learn panel
-  { targetId: "tour-learn-new-notebook", action: "click", highlightId: "tour-learn-new-notebook", dwellMs: 1400 },
-
-  // 6. Library tab click
-  { targetId: "tab-btn-library", action: "click", switchTab: "library", dwellMs: 1800 },
-  // 7. Hover over a folder in library
-  { targetId: "tour-library-folder-1", action: "hover", dwellMs: 1200 },
-
-  // 8. Practise tab click
-  { targetId: "tab-btn-practise", action: "click", switchTab: "practise", dwellMs: 2200 },
-  // 9. Click the Start Quiz button in Practise panel
-  { targetId: "tour-practise-start-quiz", action: "click", highlightId: "tour-practise-start-quiz", dwellMs: 1800 },
-
-  // 10. Network tab click
-  { targetId: "tab-btn-network", action: "click", switchTab: "network", dwellMs: 2000 },
-  // 11. Hover over a post in the network feed
-  { targetId: "tour-network-post-1", action: "hover", dwellMs: 1200 },
-
-  // 12. MedStore tab click
-  { targetId: "tab-btn-medstore", action: "click", switchTab: "medstore", dwellMs: 2000 },
-  // 13. Click Order Now on scrubs
-  { targetId: "tour-medstore-order-1", action: "click", highlightId: "tour-medstore-order-1", dwellMs: 1600 },
-
-  // 14. Grow tab click
-  { targetId: "tab-btn-grow", action: "click", switchTab: "grow", dwellMs: 2200 },
-  // 15. Click Apply button on first opportunity
-  { targetId: "tour-grow-apply-1", action: "click", highlightId: "tour-grow-apply-1", dwellMs: 1600 },
-
-  // 16. Loop back to Dashboard
-  { targetId: "tab-btn-dashboard", action: "click", switchTab: "dashboard", dwellMs: 2000 },
-]
-
 interface FloatingBadgeData {
   href: string
   icon: any
@@ -204,68 +151,59 @@ const ALL_FLOATING_BADGES: FloatingBadgeData[] = [
 
 /**
  * FreefloatingBadgeField
- * Renders all badges as absolutely-positioned DOM nodes driven by a
- * requestAnimationFrame physics loop.  Each badge has its own velocity vector
- * (dx, dy) and gentle rotation wobble.  On collision with the container walls
- * the component reflects the velocity so badges bounce and intermingle freely.
- * Click / touch triggers an expanding ripple ring + scale pop.
+ * Physics-driven free-floating badge particle system.
+ * Each badge drifts slowly in its own direction, bounces off walls,
+ * and interchanges positions organically.
+ * Hover → ripple glow. Click/touch → velocity kick + expanding ripple ring.
  */
 function FreefloatingBadgeField({ badges }: { badges: FloatingBadgeData[] }) {
   const containerRef = useRef<HTMLDivElement>(null)
-  // Per-badge physics state stored in refs so the rAF loop never triggers re-renders
   const stateRef = useRef<
     Array<{
-      x: number
-      y: number
-      dx: number
-      dy: number
-      rot: number
-      rotDir: number
+      x: number; y: number
+      dx: number; dy: number
+      rot: number; rotDir: number
       el: HTMLDivElement | null
     }>
   >([])
   const rafRef = useRef<number | null>(null)
   const [ripplingIdx, setRipplingIdx] = useState<number | null>(null)
-  const [poppingIdx, setPoppingIdx] = useState<number | null>(null)
+  const [poppingIdx,  setPoppingIdx]  = useState<number | null>(null)
+  const [hoveringIdx, setHoveringIdx] = useState<number | null>(null)
 
-  // Seed physics on first render (positions spread across the full container)
   useEffect(() => {
     const container = containerRef.current
     if (!container) return
 
     const W = container.clientWidth  || 800
-    const H = container.clientHeight || 340
+    const H = container.clientHeight || 320
 
     stateRef.current = badges.map((_, i) => {
-      // Spread initial positions evenly + random jitter so they don't all stack
-      const cols = 4
-      const col  = i % cols
-      const row  = Math.floor(i / cols)
+      const cols  = 4
+      const col   = i % cols
+      const row   = Math.floor(i / cols)
       const cellW = W / cols
       const cellH = H / Math.ceil(badges.length / cols)
 
-      const x = col * cellW + cellW * 0.15 + Math.random() * cellW * 0.65
-      const y = row * cellH + cellH * 0.1  + Math.random() * cellH * 0.7
+      const x = col * cellW + cellW * 0.1 + Math.random() * cellW * 0.6
+      const y = row * cellH + cellH * 0.1 + Math.random() * cellH * 0.6
 
-      // Random velocity: slow enough to be graceful, different per badge
-      const speed = 0.28 + Math.random() * 0.38
+      // Very slow drift — 0.07 to 0.18 px per frame (~4–11 px/sec at 60fps)
+      const speed = 0.07 + Math.random() * 0.11
       const angle = Math.random() * Math.PI * 2
       return {
-        x,
-        y,
+        x, y,
         dx: Math.cos(angle) * speed,
         dy: Math.sin(angle) * speed,
-        rot: (Math.random() - 0.5) * 6,
-        rotDir: (Math.random() > 0.5 ? 1 : -1) * (0.004 + Math.random() * 0.006),
+        rot: (Math.random() - 0.5) * 4,
+        rotDir: (Math.random() > 0.5 ? 1 : -1) * (0.002 + Math.random() * 0.003),
         el: null,
       }
     })
 
-    // rAF physics loop — runs entirely off React render cycle
     const tick = () => {
       const container = containerRef.current
       if (!container) return
-
       const W = container.clientWidth
       const H = container.clientHeight
 
@@ -278,14 +216,14 @@ function FreefloatingBadgeField({ badges }: { badges: FloatingBadgeData[] }) {
         s.y += s.dy
         s.rot += s.rotDir
 
-        // Clamp rotation to a gentle wobble range (±6°)
-        if (Math.abs(s.rot) > 6) s.rotDir *= -1
+        // Gentle wobble clamp ±4°
+        if (Math.abs(s.rot) > 4) s.rotDir *= -1
 
-        // Wall bounce with a tiny random nudge so they don't lock into perfect repeats
-        if (s.x < 0)        { s.x = 0;        s.dx = Math.abs(s.dx) + (Math.random() - 0.5) * 0.06 }
-        if (s.x + bW > W)   { s.x = W - bW;   s.dx = -(Math.abs(s.dx) + (Math.random() - 0.5) * 0.06) }
-        if (s.y < 0)        { s.y = 0;         s.dy = Math.abs(s.dy) + (Math.random() - 0.5) * 0.06 }
-        if (s.y + bH > H)   { s.y = H - bH;   s.dy = -(Math.abs(s.dy) + (Math.random() - 0.5) * 0.06) }
+        // Wall bounce with a tiny random nudge to break repetition
+        if (s.x < 0)       { s.x = 0;       s.dx =  Math.abs(s.dx) + (Math.random() - 0.5) * 0.02 }
+        if (s.x + bW > W)  { s.x = W - bW;  s.dx = -(Math.abs(s.dx) + (Math.random() - 0.5) * 0.02) }
+        if (s.y < 0)       { s.y = 0;       s.dy =  Math.abs(s.dy) + (Math.random() - 0.5) * 0.02 }
+        if (s.y + bH > H)  { s.y = H - bH;  s.dy = -(Math.abs(s.dy) + (Math.random() - 0.5) * 0.02) }
 
         s.el.style.transform = `translate(${s.x}px, ${s.y}px) rotate(${s.rot}deg)`
       })
@@ -294,23 +232,19 @@ function FreefloatingBadgeField({ badges }: { badges: FloatingBadgeData[] }) {
     }
 
     rafRef.current = requestAnimationFrame(tick)
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
-    }
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current) }
   }, [badges.length])
 
-  const handleClick = (idx: number) => {
-    // Ripple ring
+  const triggerRipple = (idx: number) => {
     setRipplingIdx(idx)
     setPoppingIdx(idx)
     setTimeout(() => setRipplingIdx(null), 700)
     setTimeout(() => setPoppingIdx(null), 350)
-
-    // Give that badge a random velocity kick on click
+    // Gentle kick on click
     const s = stateRef.current[idx]
     if (s) {
       const kickAngle = Math.random() * Math.PI * 2
-      const kickSpeed = 1.4 + Math.random() * 0.8
+      const kickSpeed = 0.5 + Math.random() * 0.4
       s.dx = Math.cos(kickAngle) * kickSpeed
       s.dy = Math.sin(kickAngle) * kickSpeed
     }
@@ -320,47 +254,90 @@ function FreefloatingBadgeField({ badges }: { badges: FloatingBadgeData[] }) {
     <div
       ref={containerRef}
       className="relative w-full overflow-hidden"
-      style={{ height: "340px" }}
+      style={{ height: "320px" }}
       aria-hidden="true"
     >
       {badges.map((badge, idx) => {
         const Icon = badge.icon
         const isRippling = ripplingIdx === idx
         const isPopping  = poppingIdx  === idx
+        const isHovering = hoveringIdx === idx
         return (
           <div
             key={idx}
-            ref={(el) => {
-              if (el && stateRef.current[idx]) stateRef.current[idx].el = el
-            }}
-            onClick={() => handleClick(idx)}
-            className="absolute top-0 left-0 landing-floating-badge cursor-pointer"
+            ref={(el) => { if (el && stateRef.current[idx]) stateRef.current[idx].el = el }}
+            className="absolute top-0 left-0 cursor-pointer"
             style={{ willChange: "transform" }}
+            onClick={() => triggerRipple(idx)}
+            onTouchStart={() => triggerRipple(idx)}
+            onMouseEnter={() => { setHoveringIdx(idx); triggerRipple(idx) }}
+            onMouseLeave={() => setHoveringIdx(null)}
           >
-            <Link
-              href={badge.href}
-              className={`relative flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl bg-[#0e0e0e] border border-[#242424] hover:border-red-600 shadow-xl transition-colors duration-300 select-none
-                ${isPopping ? "scale-110" : "scale-100"}`}
-              style={{ transition: "border-color 0.25s, scale 0.15s" }}
-              onClick={(e) => { e.preventDefault(); handleClick(idx) }}
-              onTouchStart={() => handleClick(idx)}
+            {/* Force black background inline — bypasses any CSS cascade issues */}
+            <div
+              style={{
+                background: "#0e0e0e",
+                border: `1.5px solid ${isHovering ? "#DC2626" : "#2a2a2a"}`,
+                borderRadius: "16px",
+                padding: "10px 14px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                boxShadow: isHovering
+                  ? "0 0 18px rgba(220,38,38,0.35), 0 4px 20px rgba(0,0,0,0.7)"
+                  : "0 4px 20px rgba(0,0,0,0.6)",
+                transform: isPopping ? "scale(1.1)" : "scale(1)",
+                transition: "border-color 0.2s, box-shadow 0.2s, transform 0.15s",
+                position: "relative",
+                overflow: "hidden",
+                minWidth: "170px",
+                maxWidth: "210px",
+                userSelect: "none",
+              }}
             >
-              {/* Expanding ripple ring on click */}
+              {/* Expanding ripple ring on click/hover */}
               {isRippling && (
-                <span className="absolute inset-0 rounded-2xl border-2 border-red-500 click-ripple-ring pointer-events-none" />
+                <span
+                  className="click-ripple-ring pointer-events-none"
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    borderRadius: "16px",
+                    border: "2px solid #DC2626",
+                  }}
+                />
               )}
 
               {/* Icon */}
-              <div className="w-8 h-8 rounded-xl bg-red-600/15 text-red-500 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors duration-200">
+              <div style={{
+                width: 32, height: 32, borderRadius: 10,
+                background: isHovering ? "#DC2626" : "rgba(220,38,38,0.15)",
+                color: isHovering ? "#fff" : "#ef4444",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                flexShrink: 0,
+                transition: "background 0.2s, color 0.2s",
+              }}>
                 <Icon size={14} />
               </div>
 
               {/* Text */}
-              <div className="text-left" style={{ minWidth: "120px", maxWidth: "180px" }}>
-                <div className="text-xs font-bold text-white truncate">{badge.title}</div>
-                <div className="text-[10px] text-gray-400 truncate">{badge.subtitle}</div>
+              <div style={{ overflow: "hidden" }}>
+                <div style={{
+                  fontSize: "12px", fontWeight: 700,
+                  color: isHovering ? "#ef4444" : "#ffffff",
+                  whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
+                  transition: "color 0.2s",
+                }}>
+                  {badge.title}
+                </div>
+                <div style={{
+                  fontSize: "10px", color: "#9ca3af",
+                  whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
+                }}>
+                  {badge.subtitle}
+                </div>
               </div>
-            </Link>
+            </div>
           </div>
         )
       })}
@@ -386,8 +363,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
   const currentStepRef = useRef(0)
   const isInteractingRef = useRef(false)
   const timerRef = useRef<NodeJS.Timeout | null>(null)
-  const [cursorClicking, setCursorClicking] = useState(false)
-  const [highlightedEl, setHighlightedEl] = useState<string | null>(null)
+  const highlightedEl: string | null = null   // kept for JSX compatibility (simple tour does not highlight)
 
   // Typewriter effect state for Our Story
   const storyRef = useRef<HTMLDivElement>(null)
@@ -486,7 +462,6 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
       isInteractingRef.current = true
       setIsUserInteracting(true)
       if (timerRef.current) clearTimeout(timerRef.current)
-      if ((timerRef as any)._actionTimer) clearTimeout((timerRef as any)._actionTimer)
       if (cursorRef.current) {
         cursorRef.current.style.opacity = "0"
       }
@@ -494,72 +469,48 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
     setActiveTab(tabId)
   }
 
-  // Rich multi-step cursor tour: navigates to tab buttons AND clicks in-panel buttons
+  // Simple, reliable cursor tour — glides through sidebar tab buttons in sequence
   useEffect(() => {
-    const runStep = () => {
+    const runTour = () => {
       if (isInteractingRef.current) return
 
-      const step = TOUR_STEPS[currentStepRef.current]
-      const targetEl = document.getElementById(step.targetId)
-      const cursor = cursorRef.current
+      const cursor    = cursorRef.current
       const workspace = workspaceRef.current
+      if (!cursor || !workspace) { timerRef.current = setTimeout(runTour, 4000); return }
 
-      if (targetEl && cursor && workspace) {
-        const targetRect = targetEl.getBoundingClientRect()
-        const workspaceRect = workspace.getBoundingClientRect()
+      const tabKeys = TABS_SEQUENCE
+      const tabIdx  = currentStepRef.current % tabKeys.length
+      const tabKey  = tabKeys[tabIdx]
+      const btn     = document.getElementById(`tab-btn-${tabKey}`)
 
-        const relX = targetRect.left - workspaceRect.left + targetRect.width / 2 - 12
-        const relY = targetRect.top - workspaceRect.top + targetRect.height / 2 - 12
+      if (btn) {
+        const btnRect  = btn.getBoundingClientRect()
+        const wsRect   = workspace.getBoundingClientRect()
+        const relX     = btnRect.left - wsRect.left + btnRect.width  / 2 - 12
+        const relY     = btnRect.top  - wsRect.top  + btnRect.height / 2 - 12
 
+        cursor.style.opacity   = "1"
         cursor.style.transform = `translate(${relX}px, ${relY}px)`
-        cursor.style.opacity = "1"
 
-        // After travelling (~700ms), perform the action
-        const actionTimer = setTimeout(() => {
+        // After the cursor slides over (~800 ms), visually click the tab
+        const clickTimer = setTimeout(() => {
           if (isInteractingRef.current) return
+          setActiveTab(tabKey)
+          currentStepRef.current = (currentStepRef.current + 1) % tabKeys.length
+        }, 900)
 
-          if (step.action === "click") {
-            // Visual click: shrink cursor briefly
-            setCursorClicking(true)
-            setTimeout(() => setCursorClicking(false), 300)
-
-            // Highlight the target element in the panel
-            if (step.highlightId) {
-              setHighlightedEl(step.highlightId)
-              setTimeout(() => setHighlightedEl(null), 900)
-            }
-          }
-
-          if (step.switchTab) {
-            setActiveTab(step.switchTab)
-          }
-
-          // Advance to next step after dwellMs
-          timerRef.current = setTimeout(() => {
-            currentStepRef.current = (currentStepRef.current + 1) % TOUR_STEPS.length
-            runStep()
-          }, step.dwellMs)
-        }, 700)
-
-        // Store actionTimer so we can clear it on user interaction
-        ;(timerRef as any)._actionTimer = actionTimer
-      } else {
-        // Element not in DOM yet (e.g. panel not rendered) – skip to next step quickly
-        timerRef.current = setTimeout(() => {
-          currentStepRef.current = (currentStepRef.current + 1) % TOUR_STEPS.length
-          runStep()
-        }, 600)
+        ;(timerRef as any)._clickTimer = clickTimer
       }
+
+      timerRef.current = setTimeout(runTour, 4200)
     }
 
-    const initialTimer = setTimeout(() => {
-      runStep()
-    }, 1800)
+    const initialTimer = setTimeout(runTour, 1600)
 
     return () => {
       clearTimeout(initialTimer)
       if (timerRef.current) clearTimeout(timerRef.current)
-      if ((timerRef as any)._actionTimer) clearTimeout((timerRef as any)._actionTimer)
+      if ((timerRef as any)._clickTimer) clearTimeout((timerRef as any)._clickTimer)
     }
   }, [])
 
@@ -655,13 +606,13 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
           <div
             ref={cursorRef}
             id="simulated-cursor"
-            className={`hidden md:flex absolute top-0 left-0 items-center gap-1.5 pointer-events-none transition-all duration-700 z-30 ${cursorClicking ? "scale-75" : "scale-100"}`}
+            className="hidden md:flex absolute top-0 left-0 items-center gap-1.5 pointer-events-none transition-all duration-700 z-30"
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-lg">
               <path d="M3 3L10.07 19.97L13.58 12.58L20.97 9.07L3 3Z" fill="#FFFFFF" stroke="#000000" strokeWidth="2" strokeLinejoin="round" />
             </svg>
-            <div className={`text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg border border-white/20 whitespace-nowrap transition-colors ${cursorClicking ? "bg-white text-red-600" : "bg-red-600"}`}>
-              {cursorClicking ? "clicking..." : "PodGuide Assistant"}
+            <div className="bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg border border-white/20 whitespace-nowrap">
+              PodGuide Assistant
             </div>
           </div>
 
