@@ -99,6 +99,30 @@
   animation: pulseRipple 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Continuous intermingling drifting tracks */
+@keyframes marqueeLeft {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes marqueeRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+.animate-drift-left {
+  display: flex;
+  width: max-content;
+  animation: marqueeLeft 42s linear infinite;
+}
+.animate-drift-right {
+  display: flex;
+  width: max-content;
+  animation: marqueeRight 46s linear infinite;
+}
+.animate-drift-left:hover,
+.animate-drift-right:hover {
+  animation-play-state: paused;
+}
+
 /* Scroll pop-out animation */
 .scroll-pop {
   opacity: 0;
@@ -127,6 +151,13 @@
 .landing-page {
   background-color: #050507 !important;
   color: #F4F4F5 !important;
+}
+
+.landing-floating-badge,
+html:not(.dark) .landing-floating-badge {
+  background-color: #0e0e0e !important;
+  color: #ffffff !important;
+  border-color: #242424 !important;
 }
 
 html:not(.dark) .landing-page,

@@ -42,7 +42,6 @@ import {
   BrainCircuit,
   Mail,
   MapPin,
-  Heart,
   Scissors,
   Baby,
 } from "lucide-react"
@@ -55,8 +54,103 @@ type TabKey = "dashboard" | "learn" | "library" | "practise" | "network" | "meds
 
 const TABS_SEQUENCE: TabKey[] = ["dashboard", "learn", "library", "practise", "network", "medstore", "grow"]
 
+interface FloatingBadgeData {
+  href: string
+  icon: any
+  title: string
+  subtitle: string
+  animationClass: string
+}
+
+const ALL_FLOATING_BADGES: FloatingBadgeData[] = [
+  {
+    href: "/library",
+    icon: BookMarked,
+    title: "Curated Shelves",
+    subtitle: "Medicine, Pharmacy, Vet, Nursing",
+    animationClass: "animate-float-1",
+  },
+  {
+    href: "/practise",
+    icon: BrainCircuit,
+    title: "10,000+ MCQs",
+    subtitle: "Adaptive Question Banks",
+    animationClass: "animate-float-2",
+  },
+  {
+    href: "/medstore",
+    icon: ShoppingBag,
+    title: "MedStore & TANC",
+    subtitle: "Scrubs, Coats & Gear",
+    animationClass: "animate-float-3",
+  },
+  {
+    href: "/learn",
+    icon: Stethoscope,
+    title: "Clinical Handbooks",
+    subtitle: "Ward Rounds & OSCE Checklists",
+    animationClass: "animate-float-4",
+  },
+  {
+    href: "/campus",
+    icon: Users,
+    title: "Campus Feed",
+    subtitle: "Mentorship & Case Discussions",
+    animationClass: "animate-float-5",
+  },
+  {
+    href: "/library",
+    icon: Video,
+    title: "In-App Study Viewer",
+    subtitle: "Full-Screen Video & Live Notes",
+    animationClass: "animate-float-6",
+  },
+  {
+    href: "/grow",
+    icon: TrendingUp,
+    title: "Career Growth",
+    subtitle: "Grants, Electives & Fellowships",
+    animationClass: "animate-float-7",
+  },
+  {
+    href: "/learn",
+    icon: Layers,
+    title: "Spaced Repetition",
+    subtitle: "Flashcards & Clinical Pearls",
+    animationClass: "animate-float-8",
+  },
+  {
+    href: "/library",
+    icon: Microscope,
+    title: "Histopathology",
+    subtitle: "Microscopy & Tissue Slides",
+    animationClass: "animate-float-2",
+  },
+  {
+    href: "/library",
+    icon: Pill,
+    title: "Pharmacology",
+    subtitle: "Monographs & Dosing Protocols",
+    animationClass: "animate-float-4",
+  },
+  {
+    href: "/library",
+    icon: Bone,
+    title: "Anatomy 3D",
+    subtitle: "Osteology & Dissections",
+    animationClass: "animate-float-6",
+  },
+  {
+    href: "/library",
+    icon: Scissors,
+    title: "Surgery & Suturing",
+    subtitle: "Aseptic Skills & Knot Tying",
+    animationClass: "animate-float-1",
+  },
+]
+
 /**
- * Interactive Floating Card with Touch / Click Ripple Physics
+ * Interactive Floating Badge with Touch & Click Ripple Physics (Strict Dark Canvas)
  */
 function InteractiveFloatingBadge({
   href,
@@ -64,13 +158,7 @@ function InteractiveFloatingBadge({
   title,
   subtitle,
   animationClass,
-}: {
-  href: string
-  icon: any
-  title: string
-  subtitle: string
-  animationClass: string
-}) {
+}: FloatingBadgeData) {
   const [rippling, setRippling] = useState(false)
 
   const triggerRipple = () => {
@@ -83,19 +171,19 @@ function InteractiveFloatingBadge({
       href={href}
       onClick={triggerRipple}
       onMouseEnter={triggerRipple}
-      className={`${animationClass} relative group bg-[#0e0e0e] hover:bg-[#151515] px-4 py-2.5 rounded-2xl flex items-center gap-3 cursor-pointer border border-[#202020] hover:border-red-600 transition-all duration-300 shadow-xl hover:scale-105 active:scale-95`}
+      className={`landing-floating-badge ${animationClass} relative group bg-[#0e0e0e] hover:bg-[#161616] px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl flex items-center gap-2.5 sm:gap-3 cursor-pointer border border-[#242424] hover:border-red-600 transition-all duration-300 shadow-xl hover:scale-105 active:scale-95 shrink-0`}
     >
       {rippling && (
         <span className="absolute inset-0 rounded-2xl border-2 border-red-600 click-ripple-ring pointer-events-none" />
       )}
-      <div className="w-8 h-8 rounded-xl bg-red-600/15 text-red-500 flex items-center justify-center flex-shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors duration-200">
-        <Icon size={15} />
+      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-red-600/15 text-red-500 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors duration-200">
+        <Icon size={14} />
       </div>
-      <div className="text-left">
-        <div className="text-xs font-bold text-white group-hover:text-red-400 transition-colors">
+      <div className="text-left truncate">
+        <div className="text-xs font-bold text-white group-hover:text-red-400 transition-colors truncate">
           {title}
         </div>
-        <div className="text-[10px] text-gray-400">
+        <div className="text-[10px] text-gray-400 truncate">
           {subtitle}
         </div>
       </div>
@@ -126,31 +214,46 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
   const storyRef = useRef<HTMLDivElement>(null)
   const [hasStartedTyping, setHasStartedTyping] = useState(false)
   const [typedStory, setTypedStory] = useState("")
+
   const fullStoryText =
-    "PodGuide was born out of direct frustration with the fragmented nature of medical education resources. Students and tutors frequently navigate scattered lecture notes, unverified online files, difficult access to authentic clinical equipment, and isolated study groups. We built PodGuide to unify all these critical touchpoints into a single fluid workspace. From curated academic archives and clinical practice questions to direct equipment procurement and career placement opportunities, PodGuide provides students, educators, and clinicians with everything required to excel."
+    "PodGuide was founded with a clear conviction: healthcare education should be unified, collaborative, and accessible. We built PodGuide as a trusted mentorship network, an academic library hub, an adaptive space to practice clinical examinations, and a launchpad for growth and opportunities. Whether you are a medical student, a health tutor, or a healthcare professional anywhere in the healthcare field, PodGuide gives you the tools to excel."
 
   // Ensure landing page always enforces its signature black theme
   useEffect(() => {
     document.documentElement.classList.add("dark")
   }, [])
 
-  // Scroll pop-out animation observer
+  // Proportional scroll-responsive animation (continuous slide, scale & opacity tracking)
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed")
-          }
-        })
-      },
-      { threshold: 0.12 }
-    )
+    const handleScroll = () => {
+      const scrollElements = document.querySelectorAll<HTMLElement>(".scroll-responsive")
+      const windowHeight = window.innerHeight
 
-    const elements = document.querySelectorAll(".scroll-pop")
-    elements.forEach(el => observer.observe(el))
+      scrollElements.forEach(el => {
+        const rect = el.getBoundingClientRect()
+        const visibleDistance = windowHeight - rect.top
+        const elementHeight = rect.height || 120
 
-    return () => observer.disconnect()
+        if (visibleDistance > 0 && rect.bottom > 0) {
+          // Progress from 0 (just entering bottom) to 1 (well inside view)
+          const progress = Math.min(1, Math.max(0, visibleDistance / (elementHeight * 0.75 + 120)))
+          const opacity = Math.min(1, progress * 1.25)
+          const translateY = (1 - progress) * 26
+          const scale = 0.97 + progress * 0.03
+
+          el.style.opacity = `${opacity}`
+          el.style.transform = `translateY(${translateY}px) scale(${scale})`
+        } else if (visibleDistance <= 0) {
+          el.style.opacity = "0"
+          el.style.transform = "translateY(26px) scale(0.97)"
+        }
+      })
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    handleScroll() // initial call
+
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   // Typewriter intersection trigger
@@ -171,21 +274,31 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
     return () => observer.disconnect()
   }, [hasStartedTyping])
 
-  // Typewriter ticker
+  // Typewriter ticker: calm, natural, readable reading speed with punctuation pauses
   useEffect(() => {
     if (!hasStartedTyping) return
 
-    let currentIndex = 0
-    const interval = setInterval(() => {
-      if (currentIndex <= fullStoryText.length) {
-        setTypedStory(fullStoryText.slice(0, currentIndex))
-        currentIndex += 2
-      } else {
-        clearInterval(interval)
-      }
-    }, 16)
+    let index = 0
+    let isCancelled = false
 
-    return () => clearInterval(interval)
+    const typeNext = () => {
+      if (isCancelled) return
+      if (index <= fullStoryText.length) {
+        setTypedStory(fullStoryText.slice(0, index))
+        const lastChar = fullStoryText[index - 1]
+        index++
+
+        // Punctuation pauses for natural pacing
+        const delay = lastChar === "." || lastChar === ":" ? 320 : lastChar === "," ? 160 : 36
+        setTimeout(typeNext, delay)
+      }
+    }
+
+    typeNext()
+
+    return () => {
+      isCancelled = true
+    }
   }, [hasStartedTyping])
 
   // Switch tab function
@@ -252,6 +365,10 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
     setContactForm({ name: "", email: "", message: "" })
   }
 
+  // Split badges into two lanes for continuous drifting on desktop
+  const lane1Badges = ALL_FLOATING_BADGES.slice(0, 6)
+  const lane2Badges = ALL_FLOATING_BADGES.slice(6, 12)
+
   return (
     <div className="landing-page min-h-screen bg-[#050507] text-[#F4F4F5] font-sans antialiased selection:bg-red-600 selection:text-white">
       {/* ── TOP NAVIGATION BAR (SEAMLESS, BORDERLESS) ── */}
@@ -289,7 +406,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
       </header>
 
       {/* ── MAIN HERO SECTION ── */}
-      <section className="relative min-h-[75vh] pt-32 pb-16 flex flex-col items-center justify-center text-center px-4 max-w-5xl mx-auto">
+      <section className="relative min-h-[72vh] pt-32 pb-12 flex flex-col items-center justify-center text-center px-4 max-w-5xl mx-auto overflow-hidden">
         {/* World-Class Hero Headline */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-display font-light tracking-tight text-white leading-[1.08] max-w-4xl text-balance">
           Your medical journey <span className="font-semibold text-white">unified in one space.</span>
@@ -297,111 +414,36 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
 
         {/* Professional Subtitle */}
         <p className="mt-6 text-base sm:text-lg text-gray-400 max-w-2xl font-normal leading-relaxed text-center text-balance">
-          A cohesive environment designed specifically for health science students and healthcare professionals to access curated academic shelves, clinical diagnostic tools, adaptive question banks, professional gear, and global growth opportunities.
+          A cohesive environment designed specifically for health science students, health tutors, and healthcare professionals to access curated academic shelves, clinical diagnostic tools, adaptive question banks, professional gear, and global growth opportunities.
         </p>
 
-        {/* ── 12 DYNAMIC FLOATING CARDS (TOUCH & CLICK RIPPLE PHYSICS) ── */}
-        <div className="mt-12 w-full max-w-5xl py-4 px-2 relative flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-          <InteractiveFloatingBadge
-            href={isLoggedIn ? "/library" : "/login"}
-            icon={BookMarked}
-            title="Curated Shelves"
-            subtitle="Medicine, Pharmacy, Vet, Nursing"
-            animationClass="animate-float-1"
-          />
+        {/* ── CONTINUOUS INTERMINGLING FLOATING BADGES (DESKTOP / TABLET) ── */}
+        <div className="hidden sm:block mt-12 w-full overflow-hidden relative py-3">
+          {/* Lane 1: Drifts Left, Intermingles with Bobbing */}
+          <div className="animate-drift-left gap-4 py-2">
+            {[...lane1Badges, ...lane1Badges].map((badge, idx) => (
+              <InteractiveFloatingBadge key={`lane1-${idx}`} {...badge} />
+            ))}
+          </div>
 
-          <InteractiveFloatingBadge
-            href={isLoggedIn ? "/practise" : "/login"}
-            icon={BrainCircuit}
-            title="10,000+ MCQs"
-            subtitle="Adaptive Question Banks"
-            animationClass="animate-float-2"
-          />
+          {/* Lane 2: Drifts Right, Intermingles in Reverse */}
+          <div className="animate-drift-right gap-4 py-2 mt-2">
+            {[...lane2Badges, ...lane2Badges].map((badge, idx) => (
+              <InteractiveFloatingBadge key={`lane2-${idx}`} {...badge} />
+            ))}
+          </div>
+        </div>
 
-          <InteractiveFloatingBadge
-            href={isLoggedIn ? "/medstore" : "/login"}
-            icon={ShoppingBag}
-            title="MedStore & TANC"
-            subtitle="Scrubs, Coats & Stethoscopes"
-            animationClass="animate-float-3"
-          />
-
-          <InteractiveFloatingBadge
-            href={isLoggedIn ? "/learn" : "/login"}
-            icon={Stethoscope}
-            title="Clinical Handbooks"
-            subtitle="Ward Rounds & OSCE Guides"
-            animationClass="animate-float-4"
-          />
-
-          <InteractiveFloatingBadge
-            href={isLoggedIn ? "/campus" : "/login"}
-            icon={Users}
-            title="Campus Feed"
-            subtitle="Peer Mentorship Network"
-            animationClass="animate-float-5"
-          />
-
-          <InteractiveFloatingBadge
-            href={isLoggedIn ? "/library" : "/login"}
-            icon={Video}
-            title="In-App Study Viewer"
-            subtitle="Full-Screen Video & Live Notes"
-            animationClass="animate-float-6"
-          />
-
-          <InteractiveFloatingBadge
-            href={isLoggedIn ? "/grow" : "/login"}
-            icon={TrendingUp}
-            title="Career Growth"
-            subtitle="Grants, Electives & Fellowships"
-            animationClass="animate-float-7"
-          />
-
-          <InteractiveFloatingBadge
-            href={isLoggedIn ? "/learn" : "/login"}
-            icon={Layers}
-            title="Spaced Repetition"
-            subtitle="Flashcards & Clinical Pearls"
-            animationClass="animate-float-8"
-          />
-
-          <InteractiveFloatingBadge
-            href={isLoggedIn ? "/library" : "/login"}
-            icon={Microscope}
-            title="Histopathology"
-            subtitle="Microscopy & Tissue Slides"
-            animationClass="animate-float-1"
-          />
-
-          <InteractiveFloatingBadge
-            href={isLoggedIn ? "/library" : "/login"}
-            icon={Pill}
-            title="Pharmacology"
-            subtitle="Monographs & Dosing Protocols"
-            animationClass="animate-float-3"
-          />
-
-          <InteractiveFloatingBadge
-            href={isLoggedIn ? "/library" : "/login"}
-            icon={Bone}
-            title="Anatomy 3D"
-            subtitle="Osteology & Dissections"
-            animationClass="animate-float-5"
-          />
-
-          <InteractiveFloatingBadge
-            href={isLoggedIn ? "/library" : "/login"}
-            icon={Scissors}
-            title="Surgery & Suturing"
-            subtitle="Aseptic Skills & Knot Tying"
-            animationClass="animate-float-2"
-          />
+        {/* ── COMPACT 2-COLUMN GROUPED BADGES (MOBILE OPTIMIZED) ── */}
+        <div className="sm:hidden mt-8 w-full grid grid-cols-2 gap-2 text-left">
+          {ALL_FLOATING_BADGES.slice(0, 8).map((badge, idx) => (
+            <InteractiveFloatingBadge key={`mobile-${idx}`} {...badge} animationClass="" />
+          ))}
         </div>
       </section>
 
-      {/* ── INTERACTIVE WORKSPACE SHOWCASE (SCROLL POP-OUT) ── */}
-      <section id="workspace" className="py-16 px-4 sm:px-6 max-w-7xl mx-auto relative scroll-pop">
+      {/* ── INTERACTIVE WORKSPACE SHOWCASE (SCROLL RESPONSIVE) ── */}
+      <section id="workspace" className="py-16 px-4 sm:px-6 max-w-7xl mx-auto relative scroll-responsive">
         <div className="text-center mb-10">
           <span className="text-xs font-semibold text-red-500 tracking-[0.2em] uppercase">
             Live Workspace Experience
@@ -417,13 +459,13 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
         {/* Main App Mockup Shell */}
         <div
           ref={workspaceRef}
-          className="relative bg-[#080808] rounded-3xl border border-[#222] shadow-2xl overflow-hidden min-h-[620px] flex flex-col md:flex-row"
+          className="relative bg-[#080808] rounded-3xl border border-[#222] shadow-2xl overflow-hidden min-h-[580px] flex flex-col md:flex-row"
         >
-          {/* Virtual Pointer Cursor Overlay */}
+          {/* Virtual Pointer Cursor Overlay (Desktop) */}
           <div
             ref={cursorRef}
             id="simulated-cursor"
-            className="absolute top-0 left-0 flex items-center gap-1.5 pointer-events-none transition-all duration-700 z-30"
+            className="hidden md:flex absolute top-0 left-0 items-center gap-1.5 pointer-events-none transition-all duration-700 z-30"
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-lg">
               <path d="M3 3L10.07 19.97L13.58 12.58L20.97 9.07L3 3Z" fill="#FFFFFF" stroke="#000000" strokeWidth="2" strokeLinejoin="round" />
@@ -433,8 +475,26 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
             </div>
           </div>
 
-          {/* Left App Sidebar */}
-          <aside className="w-full md:w-64 bg-[#0d0d0d] border-b md:border-b-0 md:border-r border-[#1f1f1f] p-5 flex flex-col justify-between shrink-0">
+          {/* Mobile Horizontal Tab Bar (Immediate Access Without Long Scroll) */}
+          <div className="md:hidden flex overflow-x-auto gap-1.5 p-3 bg-[#0d0d0d] border-b border-[#1f1f1f] shrink-0 no-scrollbar">
+            {TABS_SEQUENCE.map(tabKey => (
+              <button
+                key={`mobile-tab-${tabKey}`}
+                type="button"
+                onClick={() => handleSelectTab(tabKey)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold capitalize whitespace-nowrap transition-colors ${
+                  activeTab === tabKey
+                    ? "bg-red-600 text-white"
+                    : "bg-[#161616] text-gray-400 hover:text-white"
+                }`}
+              >
+                {tabKey}
+              </button>
+            ))}
+          </div>
+
+          {/* Desktop Left App Sidebar */}
+          <aside className="w-full md:w-64 bg-[#0d0d0d] border-b md:border-b-0 md:border-r border-[#1f1f1f] p-5 hidden md:flex flex-col justify-between shrink-0">
             <div>
               {/* App Title Header */}
               <div className="flex items-center justify-between mb-6 pb-4 border-b border-[#1f1f1f]">
@@ -588,8 +648,8 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
           </aside>
 
           {/* Main Interactive Content Panel */}
-          <main className="flex-1 p-6 md:p-8 bg-[#050507] overflow-y-auto max-h-[620px] relative">
-            {/* ── TAB 1: DASHBOARD (ELEGANT TITLE CASE GREETING) ── */}
+          <main className="flex-1 p-5 sm:p-7 md:p-8 bg-[#050507] overflow-y-auto max-h-[580px] relative">
+            {/* ── TAB 1: DASHBOARD (TITLE CASE GREETING) ── */}
             {activeTab === "dashboard" && (
               <div className="space-y-6 animate-in fade-in duration-200">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#1f1f1f] pb-4">
@@ -605,7 +665,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                 </div>
 
                 {/* Subject Cards Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
                   <div className="bg-[#101010] p-4 rounded-2xl border border-[#202020] hover:border-red-600/40 transition-colors">
                     <div className="flex items-center justify-between mb-3">
                       <div className="w-8 h-8 rounded-xl bg-[#161616] border border-[#242424] flex items-center justify-center text-red-500">
@@ -754,42 +814,42 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                   <div className="p-3.5 bg-[#101010] rounded-xl border border-[#202020] flex items-center gap-3">
-                    <Folder size={20} className="text-red-500 flex-shrink-0" />
+                    <Folder size={20} className="text-red-500 shrink-0" />
                     <div className="truncate">
                       <div className="text-xs font-semibold text-white truncate">Internal Medicine</div>
                       <div className="text-[10px] text-gray-500">8 Files</div>
                     </div>
                   </div>
                   <div className="p-3.5 bg-[#101010] rounded-xl border border-[#202020] flex items-center gap-3">
-                    <Folder size={20} className="text-red-500 flex-shrink-0" />
+                    <Folder size={20} className="text-red-500 shrink-0" />
                     <div className="truncate">
                       <div className="text-xs font-semibold text-white truncate">Paediatrics</div>
                       <div className="text-[10px] text-gray-500">6 Files</div>
                     </div>
                   </div>
                   <div className="p-3.5 bg-[#101010] rounded-xl border border-[#202020] flex items-center gap-3">
-                    <Folder size={20} className="text-red-500 flex-shrink-0" />
+                    <Folder size={20} className="text-red-500 shrink-0" />
                     <div className="truncate">
                       <div className="text-xs font-semibold text-white truncate">General Surgery</div>
                       <div className="text-[10px] text-gray-500">10 Files</div>
                     </div>
                   </div>
                   <div className="p-3.5 bg-[#101010] rounded-xl border border-[#202020] flex items-center gap-3">
-                    <Folder size={20} className="text-red-500 flex-shrink-0" />
+                    <Folder size={20} className="text-red-500 shrink-0" />
                     <div className="truncate">
                       <div className="text-xs font-semibold text-white truncate">Obstetrics & Gynae</div>
                       <div className="text-[10px] text-gray-500">5 Files</div>
                     </div>
                   </div>
                   <div className="p-3.5 bg-[#101010] rounded-xl border border-[#202020] flex items-center gap-3">
-                    <Folder size={20} className="text-red-500 flex-shrink-0" />
+                    <Folder size={20} className="text-red-500 shrink-0" />
                     <div className="truncate">
                       <div className="text-xs font-semibold text-white truncate">Pharmacology</div>
                       <div className="text-[10px] text-gray-500">4 Files</div>
                     </div>
                   </div>
                   <div className="p-3.5 bg-[#101010] rounded-xl border border-[#202020] flex items-center gap-3">
-                    <Folder size={20} className="text-red-500 flex-shrink-0" />
+                    <Folder size={20} className="text-red-500 shrink-0" />
                     <div className="truncate">
                       <div className="text-xs font-semibold text-white truncate">Histopathology</div>
                       <div className="text-[10px] text-gray-500">4 Files</div>
@@ -865,7 +925,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
               </div>
             )}
 
-            {/* ── TAB 6: MEDSTORE (AUTHENTIC TANC SCRUBS & GEAR PHOTOS) ── */}
+            {/* ── TAB 6: MEDSTORE (ATTRACTIVE FRONT-FACING PHOTOS) ── */}
             {activeTab === "medstore" && (
               <div className="space-y-6 animate-in fade-in duration-200">
                 <div className="flex items-center justify-between border-b border-[#1f1f1f] pb-4">
@@ -877,38 +937,36 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {/* TANC Official Scrubs Card */}
+                  {/* TANC Official Scrubs (Front Facing Model) */}
                   <div className="bg-[#101010] rounded-2xl border border-[#202020] overflow-hidden flex flex-col justify-between">
-                    <div className="h-36 bg-[#161616] relative flex items-center justify-center overflow-hidden">
+                    <div className="h-40 bg-[#141414] relative flex items-center justify-center overflow-hidden">
                       <img
-                        src="https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Summit-Blue_Core_Men_04.avif"
+                        src="https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lerato_Navy_01.avif"
                         alt="TANC Core Scrubs"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-top"
                         onError={e => {
-                          (e.target as HTMLElement).style.display = "none"
+                          const target = e.target as HTMLImageElement
+                          target.src = "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&auto=format&fit=crop&q=80"
                         }}
                       />
                       <span className="absolute top-2 right-2 bg-red-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-md">$30</span>
                     </div>
                     <div className="p-3.5">
-                      <h4 className="text-xs font-bold text-white">TANC Core™ Complete Scrub Set</h4>
-                      <p className="text-[10px] text-gray-400 mt-1">Tailored hospital-grade 4-way stretch poly-viscose.</p>
+                      <h4 className="text-xs font-bold text-white">TANC Core™ Scrub Suit</h4>
+                      <p className="text-[10px] text-gray-400 mt-1">Hospital-grade 4-way stretch poly-viscose.</p>
                       <Link href={isLoggedIn ? "/medstore" : "/login"} className="mt-3 block text-center py-1.5 bg-[#181818] hover:bg-red-600 text-white text-[11px] font-medium rounded-lg transition">
                         Order Now
                       </Link>
                     </div>
                   </div>
 
-                  {/* Diagnostic Stethoscope Card */}
+                  {/* Diagnostic Stethoscope (Crisp Front Acoustic) */}
                   <div className="bg-[#101010] rounded-2xl border border-[#202020] overflow-hidden flex flex-col justify-between">
-                    <div className="h-36 bg-[#161616] relative flex items-center justify-center overflow-hidden">
+                    <div className="h-40 bg-[#141414] relative flex items-center justify-center overflow-hidden">
                       <img
                         src="https://images.unsplash.com/photo-1584982751601-97dcc096659c?w=600&auto=format&fit=crop&q=80"
                         alt="Clinical Diagnostic Stethoscope"
                         className="w-full h-full object-cover"
-                        onError={e => {
-                          (e.target as HTMLElement).style.display = "none"
-                        }}
                       />
                       <span className="absolute top-2 right-2 bg-red-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-md">$180</span>
                     </div>
@@ -921,15 +979,16 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                     </div>
                   </div>
 
-                  {/* TANC Official Lab Coat Card */}
+                  {/* TANC Official Lab Coat (Front Facing) */}
                   <div className="bg-[#101010] rounded-2xl border border-[#202020] overflow-hidden flex flex-col justify-between">
-                    <div className="h-36 bg-[#161616] relative flex items-center justify-center overflow-hidden">
+                    <div className="h-40 bg-[#141414] relative flex items-center justify-center overflow-hidden">
                       <img
                         src="https://bunny-wp-pullzone-rohnewctqa.b-cdn.net/wp-content/uploads/2026/07/Lab-Coats_Mens_01.avif"
                         alt="TANC Clinical Lab Coat"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-top"
                         onError={e => {
-                          (e.target as HTMLElement).style.display = "none"
+                          const target = e.target as HTMLImageElement
+                          target.src = "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=600&auto=format&fit=crop&q=80"
                         }}
                       />
                       <span className="absolute top-2 right-2 bg-red-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-md">$20</span>
@@ -994,76 +1053,95 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
         </div>
       </section>
 
-      {/* ── BUILT FOR EVERY STUDENT, HEALTH TUTOR & HEALTH PROFESSIONAL ── */}
-      <section id="programs" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto border-t border-[#181818] scroll-pop">
-        <div className="text-center mb-14">
+      {/* ── BUILT FOR EVERY STUDENT, HEALTH TUTOR & HEALTHCARE PROFESSIONAL (COMPACT SIDE-BY-SIDE PALETTES) ── */}
+      <section id="programs" className="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-t border-[#181818] scroll-responsive">
+        <div className="text-center mb-10">
           <span className="text-xs font-semibold text-red-500 tracking-[0.2em] uppercase">
             Comprehensive Discipline Support
           </span>
-          <h2 className="text-3xl sm:text-5xl font-display font-light text-white tracking-tight mt-2.5">
+          <h2 className="text-2xl sm:text-4xl font-display font-light text-white tracking-tight mt-2">
             Built for every student, health tutor & healthcare professional.
           </h2>
-          <p className="text-sm text-gray-400 mt-2.5 max-w-xl mx-auto text-center font-normal">
+          <p className="text-xs sm:text-sm text-gray-400 mt-2 max-w-xl mx-auto text-center font-normal">
             Tailored learning materials, clinical shelves, case algorithms, and community networks structured specifically for your discipline.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          <div className="bg-[#101010] p-5 rounded-2xl border border-[#202020] text-center flex flex-col items-center justify-center min-h-[130px] hover:border-red-600/40 transition-colors">
-            <Stethoscope size={24} className="text-red-500 mb-3" />
-            <h3 className="text-xs font-bold text-white">Medicine & Surgery</h3>
+        {/* Compact Space-Efficient Side-by-Side Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
+          <div className="bg-[#0e0e0e] hover:bg-[#151515] p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0">
+              <Stethoscope size={15} />
+            </div>
+            <h3 className="text-xs font-semibold text-white truncate">Medicine & Surgery</h3>
           </div>
 
-          <div className="bg-[#101010] p-5 rounded-2xl border border-[#202020] text-center flex flex-col items-center justify-center min-h-[130px] hover:border-red-600/40 transition-colors">
-            <Dna size={24} className="text-red-500 mb-3" />
-            <h3 className="text-xs font-bold text-white">Biomedical Sciences</h3>
+          <div className="bg-[#0e0e0e] hover:bg-[#151515] p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0">
+              <Dna size={15} />
+            </div>
+            <h3 className="text-xs font-semibold text-white truncate">Biomedical Sciences</h3>
           </div>
 
-          <div className="bg-[#101010] p-5 rounded-2xl border border-[#202020] text-center flex flex-col items-center justify-center min-h-[130px] hover:border-red-600/40 transition-colors">
-            <Pill size={24} className="text-red-500 mb-3" />
-            <h3 className="text-xs font-bold text-white">Pharmacy</h3>
+          <div className="bg-[#0e0e0e] hover:bg-[#151515] p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0">
+              <Pill size={15} />
+            </div>
+            <h3 className="text-xs font-semibold text-white truncate">Pharmacy</h3>
           </div>
 
-          <div className="bg-[#101010] p-5 rounded-2xl border border-[#202020] text-center flex flex-col items-center justify-center min-h-[130px] hover:border-red-600/40 transition-colors">
-            <Activity size={24} className="text-red-500 mb-3" />
-            <h3 className="text-xs font-bold text-white">Nursing Science</h3>
+          <div className="bg-[#0e0e0e] hover:bg-[#151515] p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0">
+              <Activity size={15} />
+            </div>
+            <h3 className="text-xs font-semibold text-white truncate">Nursing Science</h3>
           </div>
 
-          <div className="bg-[#101010] p-5 rounded-2xl border border-[#202020] text-center flex flex-col items-center justify-center min-h-[130px] hover:border-red-600/40 transition-colors">
-            <HeartHandshake size={24} className="text-red-500 mb-3" />
-            <h3 className="text-xs font-bold text-white">Occupational Therapy</h3>
+          <div className="bg-[#0e0e0e] hover:bg-[#151515] p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0">
+              <HeartHandshake size={15} />
+            </div>
+            <h3 className="text-xs font-semibold text-white truncate">Occupational Therapy</h3>
           </div>
 
-          <div className="bg-[#101010] p-5 rounded-2xl border border-[#202020] text-center flex flex-col items-center justify-center min-h-[130px] hover:border-red-600/40 transition-colors">
-            <Activity size={24} className="text-red-500 mb-3" />
-            <h3 className="text-xs font-bold text-white">Physiotherapy</h3>
+          <div className="bg-[#0e0e0e] hover:bg-[#151515] p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0">
+              <Activity size={15} />
+            </div>
+            <h3 className="text-xs font-semibold text-white truncate">Physiotherapy</h3>
           </div>
 
-          <div className="bg-[#101010] p-5 rounded-2xl border border-[#202020] text-center flex flex-col items-center justify-center min-h-[130px] hover:border-red-600/40 transition-colors">
-            <Scan size={24} className="text-red-500 mb-3" />
-            <h3 className="text-xs font-bold text-white">Radiography</h3>
+          <div className="bg-[#0e0e0e] hover:bg-[#151515] p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0">
+              <Scan size={15} />
+            </div>
+            <h3 className="text-xs font-semibold text-white truncate">Radiography</h3>
           </div>
 
-          <div className="bg-[#101010] p-5 rounded-2xl border border-[#202020] text-center flex flex-col items-center justify-center min-h-[130px] hover:border-red-600/40 transition-colors">
-            <Settings size={24} className="text-red-500 mb-3" />
-            <h3 className="text-xs font-bold text-white">Biomedical Engineering</h3>
+          <div className="bg-[#0e0e0e] hover:bg-[#151515] p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0">
+              <Settings size={15} />
+            </div>
+            <h3 className="text-xs font-semibold text-white truncate">Biomedical Engineering</h3>
           </div>
 
-          <div className="bg-[#101010] p-5 rounded-2xl border border-[#202020] text-center flex flex-col items-center justify-center min-h-[130px] hover:border-red-600/40 transition-colors">
-            <TestTube size={24} className="text-red-500 mb-3" />
-            <h3 className="text-xs font-bold text-white">Medical Laboratory Sciences</h3>
+          <div className="bg-[#0e0e0e] hover:bg-[#151515] p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0">
+              <TestTube size={15} />
+            </div>
+            <h3 className="text-xs font-semibold text-white truncate">Medical Laboratory</h3>
           </div>
 
-          {/* Plus 20 Badge Card */}
-          <div className="bg-red-600/10 p-5 rounded-2xl border border-red-600/40 text-center flex flex-col items-center justify-center min-h-[130px] shadow-lg">
-            <span className="text-2xl font-black text-red-500 mb-1">+20</span>
-            <h3 className="text-xs font-bold text-white">Other Health Disciplines</h3>
+          {/* Plus 20 Badge Pill */}
+          <div className="bg-red-600/10 hover:bg-red-600/20 p-3 rounded-xl border border-red-600/40 transition-colors flex items-center gap-2.5">
+            <span className="text-sm font-black text-red-500">+20</span>
+            <h3 className="text-xs font-bold text-white truncate">Other Health Disciplines</h3>
           </div>
         </div>
       </section>
 
-      {/* ── OUR STORY (FULL-WIDTH EDITORIAL WITH TYPEWRITER STREAMING EFFECT) ── */}
-      <section id="story" ref={storyRef} className="py-20 px-4 sm:px-6 max-w-5xl mx-auto border-t border-[#181818] scroll-pop">
+      {/* ── OUR STORY (FULL-WIDTH EDITORIAL WITH NATURAL PACED TYPEWRITER STREAMING) ── */}
+      <section id="story" ref={storyRef} className="py-20 px-4 sm:px-6 max-w-5xl mx-auto border-t border-[#181818] scroll-responsive">
         <div className="space-y-8 text-center max-w-3xl mx-auto">
           <span className="text-xs font-semibold text-red-500 tracking-[0.2em] uppercase">
             Our Mission & Roots
@@ -1072,7 +1150,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
             Built by medical students, <span className="font-semibold text-white">for the future of healthcare.</span>
           </h2>
 
-          {/* Animated Typewriter Paragraph */}
+          {/* Natural Paced Animated Typewriter Paragraph */}
           <div className="min-h-[140px] text-left bg-[#0a0a0a] border border-[#202020] rounded-2xl p-6 sm:p-8 shadow-2xl">
             <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
               {typedStory}
@@ -1113,7 +1191,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
         </div>
 
         {/* ── SEND US A MESSAGE PANEL (PLACED DIRECTLY BELOW OUR STORY) ── */}
-        <div id="contact" className="mt-16 max-w-2xl mx-auto scroll-pop">
+        <div id="contact" className="mt-16 max-w-2xl mx-auto scroll-responsive">
           <div className="bg-[#0e0e0e] p-6 sm:p-8 rounded-3xl border border-[#222] relative shadow-2xl">
             <div className="text-center mb-6">
               <h3 className="text-xl font-bold text-white">Get in touch with us</h3>
@@ -1185,7 +1263,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
         </div>
       </section>
 
-      {/* ── COMPREHENSIVE FOOTER (LOCATION, EMAIL & PODMYTH PURPOSE) ── */}
+      {/* ── COMPREHENSIVE FOOTER (CLEAN SIGN-OFF, LOCATION & PODMYTH PURPOSE) ── */}
       <footer className="border-t border-[#181818] py-14 px-4 sm:px-8 bg-black">
         <div className="max-w-7xl mx-auto space-y-10">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -1202,9 +1280,8 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
               <p className="text-xs text-gray-400 max-w-sm leading-relaxed">
                 The unified digital campus for medical and health sciences students, tutors, and professionals. A proud subsidiary of PodMyth, dedicated to impactful education and healthcare innovation.
               </p>
-              <div className="flex items-center gap-1.5 text-xs text-red-500 font-medium pt-2">
-                <Heart size={13} className="fill-red-500 flex-shrink-0" />
-                <span>Designed with love. Designed for impact. Designed because we love what we do.</span>
+              <div className="text-xs text-red-500 font-medium pt-2">
+                Designed with dedication. Built for impact. Engineered because we love what we do.
               </div>
             </div>
 
@@ -1225,15 +1302,15 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
               <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Contact & Location</span>
               <ul className="space-y-2 text-xs text-gray-400">
                 <li className="flex items-center gap-2">
-                  <MapPin size={13} className="text-red-500 flex-shrink-0" />
+                  <MapPin size={13} className="text-red-500 shrink-0" />
                   <span>Harare, Zimbabwe</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <Mail size={13} className="text-red-500 flex-shrink-0" />
+                  <Mail size={13} className="text-red-500 shrink-0" />
                   <a href="mailto:hello@podmyth.com" className="hover:text-white transition">hello@podmyth.com</a>
                 </li>
                 <li className="flex items-center gap-2">
-                  <Globe size={13} className="text-red-500 flex-shrink-0" />
+                  <Globe size={13} className="text-red-500 shrink-0" />
                   <span>Serving Health Students & Tutors Worldwide</span>
                 </li>
                 <li className="pt-1">
