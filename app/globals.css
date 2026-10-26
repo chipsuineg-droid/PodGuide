@@ -47,6 +47,48 @@
   .font-display { font-family: var(--font-outfit, system-ui, sans-serif); }
   .card-hover { transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease; }
   .card-hover:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+
+  .animate-float-1 { animation: float1 11s ease-in-out infinite; }
+  .animate-float-2 { animation: float2 13s ease-in-out infinite; }
+  .animate-float-3 { animation: float3 12s ease-in-out infinite; }
+  .animate-float-4 { animation: float4 14s ease-in-out infinite; }
+  .animate-float-5 { animation: float5 10s ease-in-out infinite; }
+  .animate-float-6 { animation: float6 12.5s ease-in-out infinite; }
+  .animate-float-7 { animation: float7 11.5s ease-in-out infinite; }
+  .animate-float-8 { animation: float8 13.5s ease-in-out infinite; }
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+  50% { transform: translate(12px, -14px) rotate(1.5deg); }
+}
+@keyframes float2 {
+  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+  50% { transform: translate(-14px, -10px) rotate(-1.5deg); }
+}
+@keyframes float3 {
+  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+  50% { transform: translate(14px, 10px) rotate(1deg); }
+}
+@keyframes float4 {
+  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+  50% { transform: translate(-12px, 12px) rotate(-1.2deg); }
+}
+@keyframes float5 {
+  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+  50% { transform: translate(10px, -12px) rotate(1.5deg); }
+}
+@keyframes float6 {
+  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+  50% { transform: translate(-16px, -8px) rotate(1deg); }
+}
+@keyframes float7 {
+  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+  50% { transform: translate(8px, 14px) rotate(-1.5deg); }
+}
+@keyframes float8 {
+  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+  50% { transform: translate(-10px, -12px) rotate(1.8deg); }
 }
 
 @keyframes pulseRipple {
@@ -88,10 +130,20 @@
 }
 
 .landing-floating-badge,
-html:not(.dark) .landing-floating-badge {
+.landing-discipline-card,
+html:not(.dark) .landing-floating-badge,
+html:not(.dark) .landing-discipline-card,
+html:not(.dark) .landing-page .landing-floating-badge,
+html:not(.dark) .landing-page .landing-discipline-card {
   background-color: #0e0e0e !important;
   color: #ffffff !important;
   border-color: #242424 !important;
+}
+
+html:not(.dark) .landing-discipline-card:hover,
+.landing-discipline-card:hover {
+  background-color: #151515 !important;
+  border-color: #DC2626 !important;
 }
 
 html:not(.dark) .landing-page,
@@ -101,6 +153,7 @@ html:not(.dark) .landing-page .bg-black,
 html:not(.dark) .landing-page .bg-\[\#050507\],
 html:not(.dark) .landing-page .bg-\[\#080808\],
 html:not(.dark) .landing-page .bg-\[\#0d0d0d\],
+html:not(.dark) .landing-page .bg-\[\#0e0e0e\],
 html:not(.dark) .landing-page .bg-\[\#101010\],
 html:not(.dark) .landing-page .bg-\[\#121212\],
 html:not(.dark) .landing-page .bg-\[\#161616\],
@@ -185,7 +238,6 @@ html:not(.dark) .bg-\[\#0A0F1C\],
 html:not(.dark) .bg-\[\#0b0b0b\],
 html:not(.dark) .bg-\[\#0c0c0c\],
 html:not(.dark) .bg-\[\#0d0d0d\],
-html:not(.dark) .bg-\[\#0e0e0e\],
 html:not(.dark) .bg-\[\#0f0f0f\],
 html:not(.dark) .bg-\[\#101010\],
 html:not(.dark) .bg-\[\#111\],
@@ -320,36 +372,31 @@ html:not(.dark) nav .bg-brand {
 }
 
 /* ========================================================
-   FINAL LANDING PAGE THEME LOCK (PLACED AT END TO WIN CASCADE)
+   LANDING PAGE THEME LOCK
    The landing page and all its badges and discipline cards
    MUST strictly preserve pitch black backgrounds and white text.
    ======================================================== */
 .landing-page,
-html .landing-page,
 html:not(.dark) .landing-page {
   background-color: #050507 !important;
   color: #F4F4F5 !important;
 }
 
 .landing-floating-badge,
-html:not(.dark) .landing-floating-badge,
 .landing-discipline-card,
+html:not(.dark) .landing-floating-badge,
 html:not(.dark) .landing-discipline-card,
-.landing-page .landing-discipline-card,
-html:not(.dark) .landing-page .landing-discipline-card,
-.landing-page .bg-\[\#0e0e0e\],
-html:not(.dark) .landing-page .bg-\[\#0e0e0e\],
-html:not(.dark) .landing-page [class*="bg-[#0e0e0e]"] {
+html:not(.dark) .landing-page .landing-floating-badge,
+html:not(.dark) .landing-page .landing-discipline-card {
   background-color: #0e0e0e !important;
   color: #ffffff !important;
-  border-color: #202020 !important;
+  border-color: #242424 !important;
 }
 
 .landing-discipline-card:hover,
-html:not(.dark) .landing-discipline-card:hover,
-.landing-page .bg-\[\#0e0e0e\]:hover,
-html:not(.dark) .landing-page .bg-\[\#0e0e0e\]:hover {
+html:not(.dark) .landing-discipline-card:hover {
   background-color: #151515 !important;
+  border-color: #DC2626 !important;
 }
 
 html:not(.dark) .landing-page .text-white,

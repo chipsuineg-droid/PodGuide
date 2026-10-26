@@ -150,198 +150,66 @@ const ALL_FLOATING_BADGES: FloatingBadgeData[] = [
 ]
 
 /**
- * FreefloatingBadgeField
- * Physics-driven free-floating badge particle system.
- * Each badge drifts slowly in its own direction, bounces off walls,
- * and interchanges positions organically.
- * Hover → ripple glow. Click/touch → velocity kick + expanding ripple ring.
+ * Interactive Floating Card with Touch & Hover Ripple Physics (Deep Pitch-Black)
  */
-function FreefloatingBadgeField({ badges }: { badges: FloatingBadgeData[] }) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const stateRef = useRef<
-    Array<{
-      x: number; y: number
-      dx: number; dy: number
-      rot: number; rotDir: number
-      el: HTMLDivElement | null
-    }>
-  >([])
-  const rafRef = useRef<number | null>(null)
-  const [ripplingIdx, setRipplingIdx] = useState<number | null>(null)
-  const [poppingIdx,  setPoppingIdx]  = useState<number | null>(null)
-  const [hoveringIdx, setHoveringIdx] = useState<number | null>(null)
+function InteractiveFloatingCard({
+  href,
+  icon: Icon,
+  title,
+  subtitle,
+  animationClass,
+}: FloatingBadgeData) {
+  const [rippling, setRippling] = useState(false)
+  const [popped, setPopped] = useState(false)
 
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
-
-    const W = container.clientWidth  || 800
-    const H = container.clientHeight || 320
-
-    stateRef.current = badges.map((_, i) => {
-      const cols  = 4
-      const col   = i % cols
-      const row   = Math.floor(i / cols)
-      const cellW = W / cols
-      const cellH = H / Math.ceil(badges.length / cols)
-
-      const x = col * cellW + cellW * 0.1 + Math.random() * cellW * 0.6
-      const y = row * cellH + cellH * 0.1 + Math.random() * cellH * 0.6
-
-      // Very slow drift — 0.07 to 0.18 px per frame (~4–11 px/sec at 60fps)
-      const speed = 0.07 + Math.random() * 0.11
-      const angle = Math.random() * Math.PI * 2
-      return {
-        x, y,
-        dx: Math.cos(angle) * speed,
-        dy: Math.sin(angle) * speed,
-        rot: (Math.random() - 0.5) * 4,
-        rotDir: (Math.random() > 0.5 ? 1 : -1) * (0.002 + Math.random() * 0.003),
-        el: null,
-      }
-    })
-
-    const tick = () => {
-      const container = containerRef.current
-      if (!container) return
-      const W = container.clientWidth
-      const H = container.clientHeight
-
-      stateRef.current.forEach((s) => {
-        if (!s.el) return
-        const bW = s.el.offsetWidth
-        const bH = s.el.offsetHeight
-
-        s.x += s.dx
-        s.y += s.dy
-        s.rot += s.rotDir
-
-        // Gentle wobble clamp ±4°
-        if (Math.abs(s.rot) > 4) s.rotDir *= -1
-
-        // Wall bounce with a tiny random nudge to break repetition
-        if (s.x < 0)       { s.x = 0;       s.dx =  Math.abs(s.dx) + (Math.random() - 0.5) * 0.02 }
-        if (s.x + bW > W)  { s.x = W - bW;  s.dx = -(Math.abs(s.dx) + (Math.random() - 0.5) * 0.02) }
-        if (s.y < 0)       { s.y = 0;       s.dy =  Math.abs(s.dy) + (Math.random() - 0.5) * 0.02 }
-        if (s.y + bH > H)  { s.y = H - bH;  s.dy = -(Math.abs(s.dy) + (Math.random() - 0.5) * 0.02) }
-
-        s.el.style.transform = `translate(${s.x}px, ${s.y}px) rotate(${s.rot}deg)`
-      })
-
-      rafRef.current = requestAnimationFrame(tick)
-    }
-
-    rafRef.current = requestAnimationFrame(tick)
-    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current) }
-  }, [badges.length])
-
-  const triggerRipple = (idx: number) => {
-    setRipplingIdx(idx)
-    setPoppingIdx(idx)
-    setTimeout(() => setRipplingIdx(null), 700)
-    setTimeout(() => setPoppingIdx(null), 350)
-    // Gentle kick on click
-    const s = stateRef.current[idx]
-    if (s) {
-      const kickAngle = Math.random() * Math.PI * 2
-      const kickSpeed = 0.5 + Math.random() * 0.4
-      s.dx = Math.cos(kickAngle) * kickSpeed
-      s.dy = Math.sin(kickAngle) * kickSpeed
-    }
+  const triggerInteraction = () => {
+    setRippling(true)
+    setPopped(true)
+    setTimeout(() => setRippling(false), 700)
+    setTimeout(() => setPopped(false), 300)
   }
 
   return (
-    <div
-      ref={containerRef}
-      className="relative w-full overflow-hidden"
-      style={{ height: "320px" }}
-      aria-hidden="true"
+    <Link
+      href={href}
+      onClick={triggerInteraction}
+      onMouseEnter={triggerInteraction}
+      onTouchStart={triggerInteraction}
+      className={`landing-floating-badge ${animationClass} relative group cursor-pointer select-none transition-all duration-300 rounded-2xl border border-[#242424] hover:border-red-600 shadow-xl`}
+      style={{
+        backgroundColor: "#0e0e0e",
+        padding: "10px 14px",
+        display: "inline-flex",
+        alignItems: "center",
+        gap: "10px",
+        boxShadow: "0 4px 20px rgba(0,0,0,0.6)",
+        transform: popped ? "scale(1.08)" : undefined,
+        color: "#ffffff",
+      }}
     >
-      {badges.map((badge, idx) => {
-        const Icon = badge.icon
-        const isRippling = ripplingIdx === idx
-        const isPopping  = poppingIdx  === idx
-        const isHovering = hoveringIdx === idx
-        return (
-          <div
-            key={idx}
-            ref={(el) => { if (el && stateRef.current[idx]) stateRef.current[idx].el = el }}
-            className="absolute top-0 left-0 cursor-pointer"
-            style={{ willChange: "transform" }}
-            onClick={() => triggerRipple(idx)}
-            onTouchStart={() => triggerRipple(idx)}
-            onMouseEnter={() => { setHoveringIdx(idx); triggerRipple(idx) }}
-            onMouseLeave={() => setHoveringIdx(null)}
-          >
-            {/* Force black background inline — bypasses any CSS cascade issues */}
-            <div
-              style={{
-                background: "#0e0e0e",
-                border: `1.5px solid ${isHovering ? "#DC2626" : "#2a2a2a"}`,
-                borderRadius: "16px",
-                padding: "10px 14px",
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-                boxShadow: isHovering
-                  ? "0 0 18px rgba(220,38,38,0.35), 0 4px 20px rgba(0,0,0,0.7)"
-                  : "0 4px 20px rgba(0,0,0,0.6)",
-                transform: isPopping ? "scale(1.1)" : "scale(1)",
-                transition: "border-color 0.2s, box-shadow 0.2s, transform 0.15s",
-                position: "relative",
-                overflow: "hidden",
-                minWidth: "170px",
-                maxWidth: "210px",
-                userSelect: "none",
-              }}
-            >
-              {/* Expanding ripple ring on click/hover */}
-              {isRippling && (
-                <span
-                  className="click-ripple-ring pointer-events-none"
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    borderRadius: "16px",
-                    border: "2px solid #DC2626",
-                  }}
-                />
-              )}
-
-              {/* Icon */}
-              <div style={{
-                width: 32, height: 32, borderRadius: 10,
-                background: isHovering ? "#DC2626" : "rgba(220,38,38,0.15)",
-                color: isHovering ? "#fff" : "#ef4444",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                flexShrink: 0,
-                transition: "background 0.2s, color 0.2s",
-              }}>
-                <Icon size={14} />
-              </div>
-
-              {/* Text */}
-              <div style={{ overflow: "hidden" }}>
-                <div style={{
-                  fontSize: "12px", fontWeight: 700,
-                  color: isHovering ? "#ef4444" : "#ffffff",
-                  whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
-                  transition: "color 0.2s",
-                }}>
-                  {badge.title}
-                </div>
-                <div style={{
-                  fontSize: "10px", color: "#9ca3af",
-                  whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
-                }}>
-                  {badge.subtitle}
-                </div>
-              </div>
-            </div>
-          </div>
-        )
-      })}
-    </div>
+      {rippling && (
+        <span
+          className="click-ripple-ring pointer-events-none"
+          style={{
+            position: "absolute",
+            inset: 0,
+            borderRadius: "16px",
+            border: "2px solid #DC2626",
+          }}
+        />
+      )}
+      <div className="w-8 h-8 rounded-xl bg-red-600/15 text-red-500 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors duration-200">
+        <Icon size={15} />
+      </div>
+      <div className="text-left truncate" style={{ minWidth: "120px", maxWidth: "180px" }}>
+        <div className="text-xs font-bold text-white group-hover:text-red-400 transition-colors truncate">
+          {title}
+        </div>
+        <div className="text-[10px] text-gray-400 truncate">
+          {subtitle}
+        </div>
+      </div>
+    </Link>
   )
 }
 
@@ -576,10 +444,30 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
           A cohesive environment designed specifically for health science students, health tutors, and healthcare professionals to access curated academic shelves, clinical diagnostic tools, adaptive question banks, professional gear, and global growth opportunities.
         </p>
 
-        {/* ── FREE-FLOATING BADGE PARTICLE FIELD ── */}
-        {/* Physics-driven: each badge moves freely in all directions, bounces walls, intermingles */}
-        <div className="mt-12 w-full">
-          <FreefloatingBadgeField badges={ALL_FLOATING_BADGES} />
+        {/* ── ORGANIC FLOATING BADGES (3 SPREAD LINES ON DESKTOP, COMPACT GRID ON MOBILE) ── */}
+        <div className="hidden sm:flex flex-col gap-3.5 items-center w-full mt-12 relative z-10">
+          <div className="flex items-center justify-center gap-3.5 flex-wrap">
+            {ALL_FLOATING_BADGES.slice(0, 4).map((badge, idx) => (
+              <InteractiveFloatingCard key={`row1-${idx}`} {...badge} />
+            ))}
+          </div>
+          <div className="flex items-center justify-center gap-3.5 flex-wrap -ml-4">
+            {ALL_FLOATING_BADGES.slice(4, 8).map((badge, idx) => (
+              <InteractiveFloatingCard key={`row2-${idx}`} {...badge} />
+            ))}
+          </div>
+          <div className="flex items-center justify-center gap-3.5 flex-wrap ml-4">
+            {ALL_FLOATING_BADGES.slice(8, 12).map((badge, idx) => (
+              <InteractiveFloatingCard key={`row3-${idx}`} {...badge} />
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile: Space-saving 2-column compact grid */}
+        <div className="sm:hidden mt-8 w-full grid grid-cols-2 gap-2 text-left relative z-10">
+          {ALL_FLOATING_BADGES.slice(0, 8).map((badge, idx) => (
+            <InteractiveFloatingCard key={`mob-${idx}`} {...badge} animationClass="" />
+          ))}
         </div>
       </section>
 
