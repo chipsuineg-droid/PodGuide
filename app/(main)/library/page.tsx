@@ -34,9 +34,18 @@ import {
   Scale,
   PawPrint,
   HeartHandshake,
+  Play,
+  Video,
+  FileText,
+  Plus,
+  BookOpen,
+  HardDrive,
+  Sparkles,
+  Maximize2,
   LucideIcon,
 } from "lucide-react"
 import { toast } from "sonner"
+import { StudyMaterialViewer, StudyMaterial } from "@/components/library/StudyMaterialViewer"
 
 export interface LibraryFolderItem {
   id: string
@@ -441,6 +450,56 @@ export default function LibraryPage() {
   // Collapsed state map: { [shelfId]: boolean }
   const [collapsedShelves, setCollapsedShelves] = useState<Record<string, boolean>>({})
 
+  // Study Viewer & Materials State
+  const [activeViewerMaterial, setActiveViewerMaterial] = useState<StudyMaterial | null>(null)
+  const [folderMaterials, setFolderMaterials] = useState<StudyMaterial[]>([])
+  const [loadingMaterials, setLoadingMaterials] = useState(false)
+  const [activeFolderTab, setActiveFolderTab] = useState<"materials" | "drive_browser">("materials")
+
+  // Quick Play URL launcher state
+  const [quickPlayUrl, setQuickPlayUrl] = useState("")
+
+  // Admin add material to folder state
+  const [isAddingMaterial, setIsAddingMaterial] = useState(false)
+  const [newMatTitle, setNewMatTitle] = useState("")
+  const [newMatUrl, setNewMatUrl] = useState("")
+  const [newMatType, setNewMatType] = useState<"video" | "pdf" | "document" | "drive">("video")
+  const [newMatDesc, setNewMatDesc] = useState("")
+  const [savingNewMat, setSavingNewMat] = useState(false)
+
+  // Fetch verified materials for the selected folder
+  useEffect(() => {
+    if (!selectedFolder) {
+      setFolderMaterials([])
+      setIsAddingMaterial(false)
+      return
+    }
+
+    const fetchMaterialsForFolder = async () => {
+      setLoadingMaterials(true)
+      try {
+        const { data, error } = await supabase
+          .from("materials")
+          .select("*")
+          .or(`subject.eq."${selectedFolder.name}",subject.ilike."%${selectedFolder.name}%"`)
+          .order("created_at", { ascending: false })
+
+        if (!error && data) {
+          setFolderMaterials(data)
+        } else {
+          setFolderMaterials([])
+        }
+      } catch (err) {
+        console.warn("Notice: folder materials fetch error:", err)
+        setFolderMaterials([])
+      } finally {
+        setLoadingMaterials(false)
+      }
+    }
+
+    fetchMaterialsForFolder()
+  }, [selectedFolder?.id, selectedFolder?.name])
+
   useEffect(() => {
     // 1. Load collapsed shelves from localStorage
     try {
@@ -620,8 +679,95 @@ export default function LibraryPage() {
       .filter(group => group.folders.length > 0)
   }, [shelves, search])
 
+  const openInStudyViewer = (mat: StudyMaterial) => {
+    setActiveViewerMaterial(mat)
+  }
+
+  const openDriveFolderInStudyViewer = (folder: LibraryFolderItem) => {
+    if (!folder.driveUrl) return
+    setActiveViewerMaterial({
+      id: folder.id,
+      title: `${folder.name} - Google Drive Archive`,
+      file_url: folder.driveUrl,
+      material_type: "drive",
+      subject: folder.name,
+      programme: folder.programme,
+      description: folder.description,
+    })
+  }
+
+  const handleQuickPlay = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!quickPlayUrl.trim()) return
+
+    const isVideo =
+      quickPlayUrl.toLowerCase().includes("video") ||
+      quickPlayUrl.includes("youtu") ||
+      quickPlayUrl.includes("vimeo") ||
+      /\.(mp4|webm|mov)($|\?)/i.test(quickPlayUrl)
+
+    openInStudyViewer({
+      id: `quick_${Date.now()}`,
+      title: selectedFolder ? `${selectedFolder.name} Resource` : "Study Material",
+      file_url: quickPlayUrl.trim(),
+      material_type: isVideo ? "video" : "drive",
+      subject: selectedFolder?.name || "Curated Resource",
+      description: "Direct in-app study stream",
+    })
+    setQuickPlayUrl("")
+  }
+
+  const handleAddMaterialToFolder = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!isAdmin) {
+      toast.error("Only administrators can add study materials.")
+      return
+    }
+    if (!selectedFolder || !newMatTitle.trim() || !newMatUrl.trim()) {
+      toast.error("Please provide both a title and a valid resource URL.")
+      return
+    }
+
+    setSavingNewMat(true)
+    try {
+      const newEntry = {
+        title: newMatTitle.trim(),
+        description: newMatDesc.trim() || `${selectedFolder.name} study resource`,
+        file_url: newMatUrl.trim(),
+        material_type: newMatType,
+        programme: selectedFolder.programme,
+        level: selectedFolder.level || "All",
+        subject: selectedFolder.name,
+        uploaded_by: user?.id || null,
+      }
+
+      const { data, error } = await supabase
+        .from("materials")
+        .insert(newEntry)
+        .select()
+        .single()
+
+      if (error) throw error
+
+      if (data) {
+        setFolderMaterials(prev => [data, ...prev])
+        toast.success(`"${newMatTitle}" added to ${selectedFolder.name}!`)
+        setNewMatTitle("")
+        setNewMatUrl("")
+        setNewMatDesc("")
+        setIsAddingMaterial(false)
+      }
+    } catch (err: any) {
+      console.error("Add material error:", err)
+      toast.error(err.message || "Failed to add material.")
+    } finally {
+      setSavingNewMat(false)
+    }
+  }
+
   const openFolder = (folder: LibraryFolderItem) => {
     setSelectedFolder(folder)
+    setActiveFolderTab("materials")
   }
 
   return (
@@ -864,103 +1010,348 @@ export default function LibraryPage() {
               </div>
             </div>
 
-            {/* Folder Contents View */}
-            {selectedFolder.folderId && selectedFolder.driveUrl ? (
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between text-[11px] text-gray-400">
-                  <span className="font-semibold flex items-center gap-1.5 text-white">
-                    <Eye size={12} className="text-red-500" /> Curated Resources Preview
+            {/* ── FOLDER VIEW TABS (WHEN DRIVE OR MATERIALS EXIST) ── */}
+            <div className="flex items-center justify-between border-b border-[#1f1f1f] pt-2 pb-1 gap-2 flex-wrap">
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setActiveFolderTab("materials")}
+                  className={`text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
+                    activeFolderTab === "materials"
+                      ? "bg-red-600 text-white"
+                      : "text-gray-400 hover:text-white hover:bg-[#181818]"
+                  }`}
+                >
+                  <BookOpen size={12} />
+                  <span>Curated Materials</span>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${activeFolderTab === "materials" ? "bg-white/20 text-white" : "bg-[#222] text-gray-400"}`}>
+                    {folderMaterials.length}
                   </span>
-                  <span className="text-[10px] text-gray-500">
-                    Google Drive Viewer
+                </button>
+
+                {selectedFolder.folderId && selectedFolder.driveUrl && (
+                  <button
+                    type="button"
+                    onClick={() => setActiveFolderTab("drive_browser")}
+                    className={`text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
+                      activeFolderTab === "drive_browser"
+                        ? "bg-red-600 text-white"
+                        : "text-gray-400 hover:text-white hover:bg-[#181818]"
+                    }`}
+                  >
+                    <HardDrive size={12} />
+                    <span>Google Drive Explorer</span>
+                  </button>
+                )}
+              </div>
+
+              {/* Admin "+ Add Material" Trigger */}
+              {isAdmin && (
+                <button
+                  type="button"
+                  onClick={() => setIsAddingMaterial(!isAddingMaterial)}
+                  className="flex items-center gap-1 px-2.5 py-1 bg-red-600/10 hover:bg-red-600/20 text-red-500 border border-red-600/30 rounded-lg text-xs font-semibold transition-colors ml-auto"
+                >
+                  <Plus size={12} /> {isAddingMaterial ? "Cancel Add" : "Add Material / Video"}
+                </button>
+              )}
+            </div>
+
+            {/* ── ADMIN: INLINE ADD MATERIAL FORM ── */}
+            {isAdmin && isAddingMaterial && (
+              <form onSubmit={handleAddMaterialToFolder} className="bg-[#121212] border border-red-600/30 rounded-xl p-4 space-y-3 animate-in fade-in duration-150">
+                <div className="flex items-center justify-between pb-1 border-b border-[#202020]">
+                  <span className="text-xs font-bold text-white flex items-center gap-1.5">
+                    <Sparkles size={12} className="text-red-500" /> Add Material to {selectedFolder.name}
                   </span>
+                  <span className="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">Admin Tool</span>
                 </div>
-                <div className="w-full h-80 rounded-lg overflow-hidden border border-[#222] bg-[#080808]">
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="sm:col-span-2">
+                    <label className="block text-[11px] font-semibold text-gray-400 mb-1">Title</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Clinical Examination of the Abdomen"
+                      value={newMatTitle}
+                      onChange={e => setNewMatTitle(e.target.value)}
+                      className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-red-600 rounded-lg px-3 py-1.5 text-xs text-white placeholder:text-gray-600 outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] font-semibold text-gray-400 mb-1">Type</label>
+                    <select
+                      value={newMatType}
+                      onChange={e => setNewMatType(e.target.value as any)}
+                      className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-red-600 rounded-lg px-3 py-1.5 text-xs text-white outline-none"
+                    >
+                      <option value="video">Video (MP4 / Lecture)</option>
+                      <option value="pdf">PDF Document</option>
+                      <option value="drive">Google Drive File</option>
+                      <option value="document">Study Guide / Notes</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-semibold text-gray-400 mb-1">
+                    Resource URL (Google Drive Share Link, Video URL, or File Link)
+                  </label>
+                  <input
+                    type="url"
+                    required
+                    placeholder="https://drive.google.com/file/d/... or https://..."
+                    value={newMatUrl}
+                    onChange={e => setNewMatUrl(e.target.value)}
+                    className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-red-600 rounded-lg px-3 py-1.5 text-xs text-white placeholder:text-gray-600 outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-semibold text-gray-400 mb-1">Short Description (Optional)</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. High-yield overview covering inspection, palpation and auscultation."
+                    value={newMatDesc}
+                    onChange={e => setNewMatDesc(e.target.value)}
+                    className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-red-600 rounded-lg px-3 py-1.5 text-xs text-white placeholder:text-gray-600 outline-none"
+                  />
+                </div>
+
+                <div className="flex gap-2 pt-1">
+                  <button
+                    type="submit"
+                    disabled={savingNewMat}
+                    className="flex-1 py-1.5 bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white rounded-lg text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
+                  >
+                    <Check size={12} /> {savingNewMat ? "Saving..." : "Save Material"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setIsAddingMaterial(false)}
+                    className="px-3 py-1.5 bg-[#181818] hover:bg-[#222] border border-[#2b2b2b] text-gray-400 rounded-lg text-xs transition-colors"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            )}
+
+            {/* ── TAB 1: CURATED MATERIALS LIST & IN-APP LAUNCHER ── */}
+            {activeFolderTab === "materials" && (
+              <div className="space-y-3.5">
+                {/* Quick Link In-App Study Launcher */}
+                <form onSubmit={handleQuickPlay} className="flex gap-2 items-center bg-[#111] border border-[#202020] rounded-xl p-2.5">
+                  <div className="flex items-center gap-2 flex-1 min-w-0">
+                    <Video size={14} className="text-red-500 ml-1.5 flex-shrink-0" />
+                    <input
+                      type="url"
+                      placeholder="Paste any Google Drive, Video, or PDF link to study in-app..."
+                      value={quickPlayUrl}
+                      onChange={e => setQuickPlayUrl(e.target.value)}
+                      className="w-full bg-transparent text-xs text-white placeholder:text-gray-500 outline-none"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={!quickPlayUrl.trim()}
+                    className="px-3 py-1.5 bg-red-600 hover:bg-red-700 disabled:opacity-40 text-white rounded-lg text-xs font-semibold flex items-center gap-1 transition-colors whitespace-nowrap"
+                  >
+                    <Play size={11} className="fill-white" /> Play in App
+                  </button>
+                </form>
+
+                {/* Materials List */}
+                {loadingMaterials ? (
+                  <div className="py-8 text-center text-xs text-gray-400 space-y-2">
+                    <div className="w-5 h-5 border-2 border-red-600 border-t-transparent rounded-full animate-spin mx-auto" />
+                    <p>Loading curated resources...</p>
+                  </div>
+                ) : folderMaterials.length > 0 ? (
+                  <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
+                    {folderMaterials.map(mat => {
+                      const isVideo =
+                        mat.material_type === "video" ||
+                        mat.title.toLowerCase().includes("video") ||
+                        mat.file_url.toLowerCase().includes("video")
+
+                      return (
+                        <div
+                          key={mat.id}
+                          className="bg-[#121212] hover:bg-[#161616] border border-[#202020] hover:border-red-600/40 rounded-xl p-3 flex items-center justify-between gap-3 transition-all"
+                        >
+                          <div className="flex items-center gap-3 min-w-0">
+                            <div className="w-9 h-9 rounded-lg bg-red-600/10 border border-red-600/20 text-red-500 flex items-center justify-center flex-shrink-0">
+                              {isVideo ? <Video size={16} /> : <FileText size={16} />}
+                            </div>
+                            <div className="min-w-0">
+                              <div className="flex items-center gap-2">
+                                <span className="text-[9px] font-bold uppercase tracking-wider text-red-500 bg-red-600/10 px-1.5 py-0.2 rounded border border-red-600/20">
+                                  {isVideo ? "Video" : mat.material_type.toUpperCase()}
+                                </span>
+                                <span className="text-[10px] text-gray-500">
+                                  In-app Study Ready
+                                </span>
+                              </div>
+                              <h4 className="text-xs font-bold text-white truncate mt-0.5">
+                                {mat.title}
+                              </h4>
+                              {mat.description && (
+                                <p className="text-[11px] text-gray-400 truncate mt-0.5">
+                                  {mat.description}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-2 flex-shrink-0">
+                            <button
+                              type="button"
+                              onClick={() => openInStudyViewer(mat)}
+                              className="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm"
+                            >
+                              <Play size={11} className="fill-white" />
+                              <span>{isVideo ? "Play Video" : "Study Now"}</span>
+                            </button>
+
+                            <a
+                              href={mat.file_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              title="Open original link in new tab"
+                              className="p-1.5 bg-[#181818] hover:bg-[#222] border border-[#262626] text-gray-400 hover:text-white rounded-lg transition-colors"
+                            >
+                              <ExternalLink size={13} />
+                            </a>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                ) : (
+                  /* Empty state for materials tab */
+                  <div className="py-8 px-4 text-center space-y-3 bg-[#0a0a0a] border border-[#1a1a1a] rounded-xl">
+                    <div className="w-10 h-10 rounded-lg bg-[#141414] border border-[#242424] flex items-center justify-center text-red-500 mx-auto">
+                      <BookOpen size={18} />
+                    </div>
+                    <div className="space-y-1">
+                      <h3 className="text-xs font-bold text-white">
+                        Curated Study Resources in Progress
+                      </h3>
+                      <p className="text-[11px] text-gray-400 max-w-sm mx-auto leading-relaxed">
+                        {selectedFolder.folderId && selectedFolder.driveUrl
+                          ? "You can browse all materials directly through the Google Drive Explorer tab or launch any link via the in-app player above."
+                          : "Our team is actively compiling textbooks, rotation manuals and lecture recordings for this folder."}
+                      </p>
+                    </div>
+
+                    {selectedFolder.folderId && selectedFolder.driveUrl && (
+                      <div className="pt-1 flex items-center justify-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setActiveFolderTab("drive_browser")}
+                          className="px-3.5 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5"
+                        >
+                          <HardDrive size={12} /> Switch to Drive Explorer
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => openDriveFolderInStudyViewer(selectedFolder)}
+                          className="px-3.5 py-1.5 bg-[#161616] hover:bg-[#202020] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5"
+                        >
+                          <Maximize2 size={12} /> Fullscreen Study Mode
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* ── TAB 2: GOOGLE DRIVE LIVE EXPLORER ── */}
+            {activeFolderTab === "drive_browser" && selectedFolder.folderId && selectedFolder.driveUrl && (
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-[11px] text-gray-400 bg-[#121212] px-3 py-2 rounded-lg border border-[#202020]">
+                  <span className="font-semibold flex items-center gap-1.5 text-white">
+                    <Eye size={12} className="text-red-500" /> Embedded Google Drive Explorer
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => openDriveFolderInStudyViewer(selectedFolder)}
+                      className="text-xs text-red-500 hover:text-red-400 font-semibold flex items-center gap-1 transition-colors"
+                      title="Maximize into Fullscreen In-App Study Viewer with Notes"
+                    >
+                      <Maximize2 size={12} /> Fullscreen Study Mode
+                    </button>
+                  </div>
+                </div>
+
+                <div className="w-full h-96 sm:h-[420px] rounded-lg overflow-hidden border border-[#222] bg-[#080808]">
                   <iframe
                     src={`https://drive.google.com/embeddedfolderview?id=${selectedFolder.folderId}#grid`}
                     className="w-full h-full border-0"
                     title={selectedFolder.name}
-                    allow="fullscreen"
+                    allow="autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope"
+                    allowFullScreen
                   />
                 </div>
+              </div>
+            )}
 
-                <div className="flex flex-col sm:flex-row items-center gap-2.5 pt-2">
+            {/* ── MODAL FOOTER CONTROLS ── */}
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-2.5 pt-2 border-t border-[#181818]">
+              <div className="flex items-center gap-2 w-full sm:w-auto">
+                {selectedFolder.driveUrl && (
                   <a
                     href={selectedFolder.driveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full sm:flex-1 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold transition-colors flex items-center justify-center gap-2"
+                    className="py-1.5 px-3 bg-[#161616] hover:bg-[#202020] border border-[#262626] text-gray-300 hover:text-white rounded-lg text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 flex-1 sm:flex-none"
                   >
-                    <ExternalLink size={13} /> Open in Google Drive
+                    <ExternalLink size={12} /> Open in Google Drive
                   </a>
+                )}
 
-                  {isAdmin && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setEditingFolder(selectedFolder)
-                        setDriveUrlInput(selectedFolder.driveUrl || "")
-                        setItemCountInput(
-                          selectedFolder.itemCount > 0 ? selectedFolder.itemCount : ""
-                        )
-                        setSelectedFolder(null)
-                      }}
-                      className="w-full sm:w-auto px-4 py-2 bg-[#161616] hover:bg-[#202020] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-lg text-xs font-medium transition-colors flex items-center justify-center gap-1.5"
-                    >
-                      <Settings size={12} /> Admin: Edit Link
-                    </button>
-                  )}
-
+                {selectedFolder.driveUrl && (
                   <button
                     type="button"
-                    onClick={() => setSelectedFolder(null)}
-                    className="w-full sm:w-auto px-4 py-2 bg-[#181818] hover:bg-[#222] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-lg text-xs font-medium transition-colors"
+                    onClick={() => openDriveFolderInStudyViewer(selectedFolder)}
+                    className="py-1.5 px-3 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 flex-1 sm:flex-none"
                   >
-                    Close
+                    <Maximize2 size={12} /> Fullscreen Viewer
                   </button>
-                </div>
+                )}
               </div>
-            ) : (
-              /* Empty state for students when admin has not yet attached materials */
-              <div className="py-10 px-4 text-center space-y-3 bg-[#090909] border border-[#1a1a1a] rounded-lg">
-                <div className="w-10 h-10 rounded-lg bg-[#141414] border border-[#242424] flex items-center justify-center text-gray-400 mx-auto">
-                  <Clock size={18} />
-                </div>
-                <div className="space-y-1">
-                  <h3 className="text-sm font-bold text-white">
-                    Curated Materials Coming Soon
-                  </h3>
-                  <p className="text-xs text-gray-400 max-w-md mx-auto leading-relaxed">
-                    Our academic team is currently verifying and curating textbooks, clinical rotation guides, and revision decks for {selectedFolder.name}.
-                  </p>
-                </div>
 
-                <div className="pt-2 flex items-center justify-center gap-2">
-                  {isAdmin ? (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setEditingFolder(selectedFolder)
-                        setDriveUrlInput("")
-                        setItemCountInput("")
-                        setSelectedFolder(null)
-                      }}
-                      className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5"
-                    >
-                      <Settings size={12} /> Admin: Connect Drive Folder
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() => setSelectedFolder(null)}
-                      className="px-4 py-1.5 bg-[#161616] hover:bg-[#202020] border border-[#262626] text-gray-300 hover:text-white rounded-lg text-xs font-medium transition-colors"
-                    >
-                      Close
-                    </button>
-                  )}
-                </div>
+              <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+                {isAdmin && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEditingFolder(selectedFolder)
+                      setDriveUrlInput(selectedFolder.driveUrl || "")
+                      setItemCountInput(
+                        selectedFolder.itemCount > 0 ? selectedFolder.itemCount : ""
+                      )
+                      setSelectedFolder(null)
+                    }}
+                    className="px-3.5 py-1.5 bg-[#161616] hover:bg-[#202020] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5"
+                  >
+                    <Settings size={12} /> Admin: Configure Drive Link
+                  </button>
+                )}
+
+                <button
+                  type="button"
+                  onClick={() => setSelectedFolder(null)}
+                  className="px-4 py-1.5 bg-[#181818] hover:bg-[#222] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-lg text-xs font-medium transition-colors"
+                >
+                  Close
+                </button>
               </div>
-            )}
+            </div>
           </div>
         </div>
       )}
@@ -1047,6 +1438,13 @@ export default function LibraryPage() {
             </form>
           </div>
         </div>
+      )}
+      {/* ── IN-APP STUDY MATERIAL VIEWER (FULLSCREEN & STUDY NOTES) ── */}
+      {activeViewerMaterial && (
+        <StudyMaterialViewer
+          material={activeViewerMaterial}
+          onClose={() => setActiveViewerMaterial(null)}
+        />
       )}
     </div>
   )
