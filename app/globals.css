@@ -53,6 +53,9 @@
   .animate-float-3 { animation: float3 8s ease-in-out infinite; }
   .animate-float-4 { animation: float4 10s ease-in-out infinite; }
   .animate-float-5 { animation: float5 6.5s ease-in-out infinite; }
+  .animate-float-6 { animation: float6 8.5s ease-in-out infinite; }
+  .animate-float-7 { animation: float7 7.5s ease-in-out infinite; }
+  .animate-float-8 { animation: float8 9.5s ease-in-out infinite; }
 }
 
 @keyframes float1 {
@@ -74,6 +77,38 @@
 @keyframes float5 {
   0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
   50% { transform: translate(6px, -8px) rotate(2deg); }
+}
+@keyframes float6 {
+  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+  50% { transform: translate(-12px, -6px) rotate(1deg); }
+}
+@keyframes float7 {
+  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+  50% { transform: translate(6px, 10px) rotate(-2deg); }
+}
+@keyframes float8 {
+  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+  50% { transform: translate(-8px, -10px) rotate(2.5deg); }
+}
+
+@keyframes pulseRipple {
+  0% { transform: scale(0.95); opacity: 0.9; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+.click-ripple-ring {
+  animation: pulseRipple 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Scroll pop-out animation */
+.scroll-pop {
+  opacity: 0;
+  transform: translateY(24px) scale(0.97);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.scroll-pop.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 /* ========================================================

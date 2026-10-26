@@ -43,6 +43,8 @@ import {
   Mail,
   MapPin,
   Heart,
+  Scissors,
+  Baby,
 } from "lucide-react"
 
 interface LandingPageProps {
@@ -52,6 +54,54 @@ interface LandingPageProps {
 type TabKey = "dashboard" | "learn" | "library" | "practise" | "network" | "medstore" | "grow"
 
 const TABS_SEQUENCE: TabKey[] = ["dashboard", "learn", "library", "practise", "network", "medstore", "grow"]
+
+/**
+ * Interactive Floating Card with Touch / Click Ripple Physics
+ */
+function InteractiveFloatingBadge({
+  href,
+  icon: Icon,
+  title,
+  subtitle,
+  animationClass,
+}: {
+  href: string
+  icon: any
+  title: string
+  subtitle: string
+  animationClass: string
+}) {
+  const [rippling, setRippling] = useState(false)
+
+  const triggerRipple = () => {
+    setRippling(true)
+    setTimeout(() => setRippling(false), 600)
+  }
+
+  return (
+    <Link
+      href={href}
+      onClick={triggerRipple}
+      onMouseEnter={triggerRipple}
+      className={`${animationClass} relative group bg-[#0e0e0e] hover:bg-[#151515] px-4 py-2.5 rounded-2xl flex items-center gap-3 cursor-pointer border border-[#202020] hover:border-red-600 transition-all duration-300 shadow-xl hover:scale-105 active:scale-95`}
+    >
+      {rippling && (
+        <span className="absolute inset-0 rounded-2xl border-2 border-red-600 click-ripple-ring pointer-events-none" />
+      )}
+      <div className="w-8 h-8 rounded-xl bg-red-600/15 text-red-500 flex items-center justify-center flex-shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors duration-200">
+        <Icon size={15} />
+      </div>
+      <div className="text-left">
+        <div className="text-xs font-bold text-white group-hover:text-red-400 transition-colors">
+          {title}
+        </div>
+        <div className="text-[10px] text-gray-400">
+          {subtitle}
+        </div>
+      </div>
+    </Link>
+  )
+}
 
 export function LandingPage({ isLoggedIn }: LandingPageProps) {
   const router = useRouter()
@@ -72,10 +122,71 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
   const isInteractingRef = useRef(false)
   const timerRef = useRef<NodeJS.Timeout | null>(null)
 
+  // Typewriter effect state for Our Story
+  const storyRef = useRef<HTMLDivElement>(null)
+  const [hasStartedTyping, setHasStartedTyping] = useState(false)
+  const [typedStory, setTypedStory] = useState("")
+  const fullStoryText =
+    "PodGuide was born out of direct frustration with the fragmented nature of medical education resources. Students and tutors frequently navigate scattered lecture notes, unverified online files, difficult access to authentic clinical equipment, and isolated study groups. We built PodGuide to unify all these critical touchpoints into a single fluid workspace. From curated academic archives and clinical practice questions to direct equipment procurement and career placement opportunities, PodGuide provides students, educators, and clinicians with everything required to excel."
+
   // Ensure landing page always enforces its signature black theme
   useEffect(() => {
     document.documentElement.classList.add("dark")
   }, [])
+
+  // Scroll pop-out animation observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed")
+          }
+        })
+      },
+      { threshold: 0.12 }
+    )
+
+    const elements = document.querySelectorAll(".scroll-pop")
+    elements.forEach(el => observer.observe(el))
+
+    return () => observer.disconnect()
+  }, [])
+
+  // Typewriter intersection trigger
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries[0]?.isIntersecting && !hasStartedTyping) {
+          setHasStartedTyping(true)
+        }
+      },
+      { threshold: 0.2 }
+    )
+
+    if (storyRef.current) {
+      observer.observe(storyRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [hasStartedTyping])
+
+  // Typewriter ticker
+  useEffect(() => {
+    if (!hasStartedTyping) return
+
+    let currentIndex = 0
+    const interval = setInterval(() => {
+      if (currentIndex <= fullStoryText.length) {
+        setTypedStory(fullStoryText.slice(0, currentIndex))
+        currentIndex += 2
+      } else {
+        clearInterval(interval)
+      }
+    }, 16)
+
+    return () => clearInterval(interval)
+  }, [hasStartedTyping])
 
   // Switch tab function
   const handleSelectTab = (tabId: TabKey, isManual = true) => {
@@ -143,7 +254,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
 
   return (
     <div className="landing-page min-h-screen bg-[#050507] text-[#F4F4F5] font-sans antialiased selection:bg-red-600 selection:text-white">
-      {/* ── TOP NAVIGATION BAR (SEAMLESS, NO COMPARTMENTALIZING WHITE LINE) ── */}
+      {/* ── TOP NAVIGATION BAR (SEAMLESS, BORDERLESS) ── */}
       <header className="fixed top-0 left-0 right-0 z-40 px-4 py-4 sm:px-8 bg-[#050507]/90 backdrop-blur-md">
         <nav className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Official Brand Logo */}
@@ -159,7 +270,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
           {/* Nav Links */}
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
             <a href="#workspace" className="hover:text-white transition-colors duration-150">Workspace</a>
-            <a href="#programs" className="hover:text-white transition-colors duration-150">Programs</a>
+            <a href="#programs" className="hover:text-white transition-colors duration-150">Disciplines</a>
             <a href="#story" className="hover:text-white transition-colors duration-150">Our Story</a>
             <a href="#contact" className="hover:text-white transition-colors duration-150">Contact</a>
           </div>
@@ -189,116 +300,108 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
           A cohesive environment designed specifically for health science students and healthcare professionals to access curated academic shelves, clinical diagnostic tools, adaptive question banks, professional gear, and global growth opportunities.
         </p>
 
-        {/* ── RICH FLOATING / HOVERING BADGES CANVAS ── */}
-        <div className="mt-14 w-full max-w-4xl py-6 px-2 relative flex flex-wrap items-center justify-center gap-3.5 sm:gap-4.5">
-          <Link
+        {/* ── 12 DYNAMIC FLOATING CARDS (TOUCH & CLICK RIPPLE PHYSICS) ── */}
+        <div className="mt-12 w-full max-w-5xl py-4 px-2 relative flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+          <InteractiveFloatingBadge
             href={isLoggedIn ? "/library" : "/login"}
-            className="animate-float-1 bg-[#101010] hover:bg-[#161616] px-4 py-2.5 rounded-2xl flex items-center gap-3 cursor-pointer border border-[#222] hover:border-red-600 transition-all shadow-lg hover:scale-105"
-          >
-            <div className="w-8 h-8 rounded-xl bg-red-600/15 text-red-500 flex items-center justify-center flex-shrink-0">
-              <BookMarked size={15} />
-            </div>
-            <div className="text-left">
-              <div className="text-xs font-bold text-white">Curated Shelves</div>
-              <div className="text-[10px] text-gray-400">Medicine, Pharmacy, Vet, Nursing</div>
-            </div>
-          </Link>
+            icon={BookMarked}
+            title="Curated Shelves"
+            subtitle="Medicine, Pharmacy, Vet, Nursing"
+            animationClass="animate-float-1"
+          />
 
-          <Link
+          <InteractiveFloatingBadge
             href={isLoggedIn ? "/practise" : "/login"}
-            className="animate-float-2 bg-[#101010] hover:bg-[#161616] px-4 py-2.5 rounded-2xl flex items-center gap-3 cursor-pointer border border-[#222] hover:border-red-600 transition-all shadow-lg hover:scale-105"
-          >
-            <div className="w-8 h-8 rounded-xl bg-red-600/15 text-red-500 flex items-center justify-center flex-shrink-0">
-              <BrainCircuit size={15} />
-            </div>
-            <div className="text-left">
-              <div className="text-xs font-bold text-white">10,000+ MCQs</div>
-              <div className="text-[10px] text-gray-400">Adaptive Question Banks</div>
-            </div>
-          </Link>
+            icon={BrainCircuit}
+            title="10,000+ MCQs"
+            subtitle="Adaptive Question Banks"
+            animationClass="animate-float-2"
+          />
 
-          <Link
+          <InteractiveFloatingBadge
             href={isLoggedIn ? "/medstore" : "/login"}
-            className="animate-float-3 bg-[#101010] hover:bg-[#161616] px-4 py-2.5 rounded-2xl flex items-center gap-3 cursor-pointer border border-[#222] hover:border-red-600 transition-all shadow-lg hover:scale-105"
-          >
-            <div className="w-8 h-8 rounded-xl bg-red-600/15 text-red-500 flex items-center justify-center flex-shrink-0">
-              <ShoppingBag size={15} />
-            </div>
-            <div className="text-left">
-              <div className="text-xs font-bold text-white">MedStore & TANC</div>
-              <div className="text-[10px] text-gray-400">Scrubs, Coats & Stethoscopes</div>
-            </div>
-          </Link>
+            icon={ShoppingBag}
+            title="MedStore & TANC"
+            subtitle="Scrubs, Coats & Stethoscopes"
+            animationClass="animate-float-3"
+          />
 
-          <Link
+          <InteractiveFloatingBadge
             href={isLoggedIn ? "/learn" : "/login"}
-            className="animate-float-4 bg-[#101010] hover:bg-[#161616] px-4 py-2.5 rounded-2xl flex items-center gap-3 cursor-pointer border border-[#222] hover:border-red-600 transition-all shadow-lg hover:scale-105"
-          >
-            <div className="w-8 h-8 rounded-xl bg-red-600/15 text-red-500 flex items-center justify-center flex-shrink-0">
-              <Stethoscope size={15} />
-            </div>
-            <div className="text-left">
-              <div className="text-xs font-bold text-white">Clinical Handbooks</div>
-              <div className="text-[10px] text-gray-400">Ward Rounds & OSCE Guides</div>
-            </div>
-          </Link>
+            icon={Stethoscope}
+            title="Clinical Handbooks"
+            subtitle="Ward Rounds & OSCE Guides"
+            animationClass="animate-float-4"
+          />
 
-          <Link
+          <InteractiveFloatingBadge
             href={isLoggedIn ? "/campus" : "/login"}
-            className="animate-float-5 bg-[#101010] hover:bg-[#161616] px-4 py-2.5 rounded-2xl flex items-center gap-3 cursor-pointer border border-[#222] hover:border-red-600 transition-all shadow-lg hover:scale-105"
-          >
-            <div className="w-8 h-8 rounded-xl bg-red-600/15 text-red-500 flex items-center justify-center flex-shrink-0">
-              <Users size={15} />
-            </div>
-            <div className="text-left">
-              <div className="text-xs font-bold text-white">Campus Feed</div>
-              <div className="text-[10px] text-gray-400">Peer Mentorship Network</div>
-            </div>
-          </Link>
+            icon={Users}
+            title="Campus Feed"
+            subtitle="Peer Mentorship Network"
+            animationClass="animate-float-5"
+          />
 
-          <Link
+          <InteractiveFloatingBadge
             href={isLoggedIn ? "/library" : "/login"}
-            className="animate-float-2 bg-[#101010] hover:bg-[#161616] px-4 py-2.5 rounded-2xl flex items-center gap-3 cursor-pointer border border-[#222] hover:border-red-600 transition-all shadow-lg hover:scale-105"
-          >
-            <div className="w-8 h-8 rounded-xl bg-red-600/15 text-red-500 flex items-center justify-center flex-shrink-0">
-              <Video size={15} />
-            </div>
-            <div className="text-left">
-              <div className="text-xs font-bold text-white">In-App Study Viewer</div>
-              <div className="text-[10px] text-gray-400">Full-Screen Video & Notes</div>
-            </div>
-          </Link>
+            icon={Video}
+            title="In-App Study Viewer"
+            subtitle="Full-Screen Video & Live Notes"
+            animationClass="animate-float-6"
+          />
 
-          <Link
+          <InteractiveFloatingBadge
             href={isLoggedIn ? "/grow" : "/login"}
-            className="animate-float-1 bg-[#101010] hover:bg-[#161616] px-4 py-2.5 rounded-2xl flex items-center gap-3 cursor-pointer border border-[#222] hover:border-red-600 transition-all shadow-lg hover:scale-105"
-          >
-            <div className="w-8 h-8 rounded-xl bg-red-600/15 text-red-500 flex items-center justify-center flex-shrink-0">
-              <TrendingUp size={15} />
-            </div>
-            <div className="text-left">
-              <div className="text-xs font-bold text-white">Career Growth</div>
-              <div className="text-[10px] text-gray-400">Grants, Electives & Fellowships</div>
-            </div>
-          </Link>
+            icon={TrendingUp}
+            title="Career Growth"
+            subtitle="Grants, Electives & Fellowships"
+            animationClass="animate-float-7"
+          />
 
-          <Link
+          <InteractiveFloatingBadge
             href={isLoggedIn ? "/learn" : "/login"}
-            className="animate-float-3 bg-[#101010] hover:bg-[#161616] px-4 py-2.5 rounded-2xl flex items-center gap-3 cursor-pointer border border-[#222] hover:border-red-600 transition-all shadow-lg hover:scale-105"
-          >
-            <div className="w-8 h-8 rounded-xl bg-red-600/15 text-red-500 flex items-center justify-center flex-shrink-0">
-              <Layers size={15} />
-            </div>
-            <div className="text-left">
-              <div className="text-xs font-bold text-white">Spaced Repetition</div>
-              <div className="text-[10px] text-gray-400">Flashcards & Clinical Pearls</div>
-            </div>
-          </Link>
+            icon={Layers}
+            title="Spaced Repetition"
+            subtitle="Flashcards & Clinical Pearls"
+            animationClass="animate-float-8"
+          />
+
+          <InteractiveFloatingBadge
+            href={isLoggedIn ? "/library" : "/login"}
+            icon={Microscope}
+            title="Histopathology"
+            subtitle="Microscopy & Tissue Slides"
+            animationClass="animate-float-1"
+          />
+
+          <InteractiveFloatingBadge
+            href={isLoggedIn ? "/library" : "/login"}
+            icon={Pill}
+            title="Pharmacology"
+            subtitle="Monographs & Dosing Protocols"
+            animationClass="animate-float-3"
+          />
+
+          <InteractiveFloatingBadge
+            href={isLoggedIn ? "/library" : "/login"}
+            icon={Bone}
+            title="Anatomy 3D"
+            subtitle="Osteology & Dissections"
+            animationClass="animate-float-5"
+          />
+
+          <InteractiveFloatingBadge
+            href={isLoggedIn ? "/library" : "/login"}
+            icon={Scissors}
+            title="Surgery & Suturing"
+            subtitle="Aseptic Skills & Knot Tying"
+            animationClass="animate-float-2"
+          />
         </div>
       </section>
 
-      {/* ── INTERACTIVE WORKSPACE SHOWCASE (APPLE-INSPIRED TYPOGRAPHY) ── */}
-      <section id="workspace" className="py-16 px-4 sm:px-6 max-w-7xl mx-auto relative">
+      {/* ── INTERACTIVE WORKSPACE SHOWCASE (SCROLL POP-OUT) ── */}
+      <section id="workspace" className="py-16 px-4 sm:px-6 max-w-7xl mx-auto relative scroll-pop">
         <div className="text-center mb-10">
           <span className="text-xs font-semibold text-red-500 tracking-[0.2em] uppercase">
             Live Workspace Experience
@@ -762,7 +865,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
               </div>
             )}
 
-            {/* ── TAB 6: MEDSTORE (WITH AUTHENTIC TANC SCRUBS & GEAR PHOTOS) ── */}
+            {/* ── TAB 6: MEDSTORE (AUTHENTIC TANC SCRUBS & GEAR PHOTOS) ── */}
             {activeTab === "medstore" && (
               <div className="space-y-6 animate-in fade-in duration-200">
                 <div className="flex items-center justify-between border-b border-[#1f1f1f] pb-4">
@@ -891,17 +994,17 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
         </div>
       </section>
 
-      {/* ── BUILT FOR EVERY HEALTH STUDENT PROGRAMS SECTION ── */}
-      <section id="programs" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto border-t border-[#181818]">
+      {/* ── BUILT FOR EVERY STUDENT, HEALTH TUTOR & HEALTH PROFESSIONAL ── */}
+      <section id="programs" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto border-t border-[#181818] scroll-pop">
         <div className="text-center mb-14">
           <span className="text-xs font-semibold text-red-500 tracking-[0.2em] uppercase">
             Comprehensive Discipline Support
           </span>
           <h2 className="text-3xl sm:text-5xl font-display font-light text-white tracking-tight mt-2.5">
-            Built for every health student.
+            Built for every student, health tutor & healthcare professional.
           </h2>
           <p className="text-sm text-gray-400 mt-2.5 max-w-xl mx-auto text-center font-normal">
-            Tailored learning materials, subject shelves, and community networks structured specifically for your discipline.
+            Tailored learning materials, clinical shelves, case algorithms, and community networks structured specifically for your discipline.
           </p>
         </div>
 
@@ -959,53 +1062,63 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
         </div>
       </section>
 
-      {/* ── OUR STORY & CONTACT SECTION (WITH PODMYTH SUBSIDIARY INSPIRATION) ── */}
-      <section id="story" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto border-t border-[#181818]">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Our Story */}
-          <div className="space-y-6">
-            <span className="text-xs font-semibold text-red-500 tracking-[0.2em] uppercase">Our Mission</span>
-            <h2 className="text-3xl sm:text-4xl font-display font-light text-white leading-tight">
-              Built by medical students, <span className="font-semibold text-white">for the future of healthcare.</span>
-            </h2>
+      {/* ── OUR STORY (FULL-WIDTH EDITORIAL WITH TYPEWRITER STREAMING EFFECT) ── */}
+      <section id="story" ref={storyRef} className="py-20 px-4 sm:px-6 max-w-5xl mx-auto border-t border-[#181818] scroll-pop">
+        <div className="space-y-8 text-center max-w-3xl mx-auto">
+          <span className="text-xs font-semibold text-red-500 tracking-[0.2em] uppercase">
+            Our Mission & Roots
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-display font-light text-white leading-tight">
+            Built by medical students, <span className="font-semibold text-white">for the future of healthcare.</span>
+          </h2>
 
-            <p className="text-sm text-gray-300 leading-relaxed text-justify">
-              PodGuide was born out of direct frustration with the fragmented nature of medical education resources. Students frequently navigate scattered lecture notes, unverified online files, difficult access to authentic clinical equipment, and isolated study groups.
+          {/* Animated Typewriter Paragraph */}
+          <div className="min-h-[140px] text-left bg-[#0a0a0a] border border-[#202020] rounded-2xl p-6 sm:p-8 shadow-2xl">
+            <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
+              {typedStory}
+              {hasStartedTyping && typedStory.length < fullStoryText.length && (
+                <span className="inline-block w-1.5 h-4 ml-1 bg-red-600 animate-pulse align-middle" />
+              )}
             </p>
-
-            <p className="text-sm text-gray-300 leading-relaxed text-justify">
-              We built PodGuide to unify all these critical touchpoints into a single fluid workspace. From curated academic archives and clinical practice questions to direct equipment procurement and career placement opportunities, PodGuide provides students with everything required to excel in their training.
-            </p>
-
-            <div className="bg-[#101010] p-4 rounded-2xl border border-[#202020] space-y-2">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-red-500">
-                A Proud Subsidiary of PodMyth
-              </span>
-              <p className="text-xs text-gray-300 leading-relaxed">
-                As a proud subsidiary of PodMyth, PodGuide is driven by a singular mission: doing impactful work that genuinely elevates other people. We build technology designed to empower students, clinicians, and educators across the continent and beyond. We hope you find this workspace truly impactful, and we invite you to share it with your peers.
-              </p>
-            </div>
-
-            <div className="pt-2 flex items-center gap-6 text-xs text-gray-400 font-medium flex-wrap">
-              <div className="flex items-center gap-2">
-                <ShieldCheck size={16} className="text-red-500" />
-                <span>Verified Syllabi</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <GraduationCap size={16} className="text-red-500" />
-                <span>Student-Centric</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Globe size={16} className="text-red-500" />
-                <span>Global Health Network</span>
-              </div>
-            </div>
           </div>
 
-          {/* Contact Form */}
-          <div id="contact" className="bg-[#0e0e0e] p-6 sm:p-8 rounded-3xl border border-[#222] relative">
-            <h3 className="text-xl font-bold text-white mb-1">Get in touch with us</h3>
-            <p className="text-xs text-gray-400 mb-6">Have questions or want to introduce PodGuide to your university or institution?</p>
+          {/* PodMyth Subsidiary Highlight Card */}
+          <div className="bg-[#101010] p-6 sm:p-8 rounded-2xl border border-red-600/30 text-left space-y-3 shadow-xl">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-red-600" />
+              <span className="text-xs font-bold uppercase tracking-wider text-red-500">
+                A Proud Subsidiary of PodMyth
+              </span>
+            </div>
+            <p className="text-sm text-gray-300 leading-relaxed">
+              As a proud subsidiary of PodMyth, PodGuide is driven by a singular mission: doing impactful work that genuinely elevates other people. We build technology designed to empower students, tutors, clinicians, and educators across the continent and beyond. We hope you find this workspace truly impactful, and we invite you to share it with your peers.
+            </p>
+          </div>
+
+          {/* Trust Badges */}
+          <div className="pt-2 flex items-center justify-center gap-6 sm:gap-10 text-xs text-gray-400 font-medium flex-wrap">
+            <div className="flex items-center gap-2">
+              <ShieldCheck size={16} className="text-red-500" />
+              <span>Verified Syllabi</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <GraduationCap size={16} className="text-red-500" />
+              <span>Student & Tutor Centric</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Globe size={16} className="text-red-500" />
+              <span>Global Health Network</span>
+            </div>
+          </div>
+        </div>
+
+        {/* ── SEND US A MESSAGE PANEL (PLACED DIRECTLY BELOW OUR STORY) ── */}
+        <div id="contact" className="mt-16 max-w-2xl mx-auto scroll-pop">
+          <div className="bg-[#0e0e0e] p-6 sm:p-8 rounded-3xl border border-[#222] relative shadow-2xl">
+            <div className="text-center mb-6">
+              <h3 className="text-xl font-bold text-white">Get in touch with us</h3>
+              <p className="text-xs text-gray-400 mt-1">Have questions or want to introduce PodGuide to your university or clinical faculty?</p>
+            </div>
 
             <form onSubmit={handleContactSubmit} className="space-y-4">
               <div>
@@ -1037,7 +1150,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                 <textarea
                   rows={4}
                   required
-                  placeholder="Tell us about your faculty, program, or inquiry..."
+                  placeholder="Tell us about your faculty, program, or partnership inquiry..."
                   value={contactForm.message}
                   onChange={e => setContactForm({ ...contactForm, message: e.target.value })}
                   className="w-full bg-[#121212] border border-[#222] rounded-xl px-4 py-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-red-600 resize-none"
@@ -1087,10 +1200,10 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                 </span>
               </div>
               <p className="text-xs text-gray-400 max-w-sm leading-relaxed">
-                The unified digital campus for medical and health sciences students. A proud subsidiary of PodMyth, dedicated to impactful education and healthcare innovation.
+                The unified digital campus for medical and health sciences students, tutors, and professionals. A proud subsidiary of PodMyth, dedicated to impactful education and healthcare innovation.
               </p>
               <div className="flex items-center gap-1.5 text-xs text-red-500 font-medium pt-2">
-                <Heart size={13} className="fill-red-500" />
+                <Heart size={13} className="fill-red-500 flex-shrink-0" />
                 <span>Designed with love. Designed for impact. Designed because we love what we do.</span>
               </div>
             </div>
@@ -1121,7 +1234,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                 </li>
                 <li className="flex items-center gap-2">
                   <Globe size={13} className="text-red-500 flex-shrink-0" />
-                  <span>Serving Health Students Worldwide</span>
+                  <span>Serving Health Students & Tutors Worldwide</span>
                 </li>
                 <li className="pt-1">
                   <Link href="/login" className="text-red-500 font-semibold hover:underline">
@@ -1138,7 +1251,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
             </p>
             <div className="flex items-center gap-6">
               <Link href="/login" className="hover:text-white transition">App Login</Link>
-              <Link href="/register" className="hover:text-white transition">Student Registration</Link>
+              <Link href="/register" className="hover:text-white transition">Registration</Link>
             </div>
           </div>
         </div>
@@ -1167,12 +1280,12 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                 P
               </div>
               <h3 className="text-xl font-bold text-white">Welcome to PodGuide Workspace</h3>
-              <p className="text-xs text-gray-400 mt-1">Sign in to access your medical learning dashboard.</p>
+              <p className="text-xs text-gray-400 mt-1">Sign in to access your learning dashboard.</p>
             </div>
 
             <form onSubmit={handleLoginSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-gray-300 mb-1.5">Student Email or Registration ID</label>
+                <label className="block text-xs font-medium text-gray-300 mb-1.5">Student or Faculty Email</label>
                 <input
                   type="text"
                   required
