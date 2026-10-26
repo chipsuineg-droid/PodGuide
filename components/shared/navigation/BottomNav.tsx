@@ -62,24 +62,24 @@ export function BottomNav() {
       {/* Mobile Drawer Overlay */}
       {menuOpen && (
         <div
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 lg:hidden flex flex-col justify-end animate-in fade-in duration-200"
+          className="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm z-50 lg:hidden flex flex-col justify-end animate-in fade-in duration-200"
           onClick={() => setMenuOpen(false)}
         >
           <div
-            className="bg-[#0e0e0e] border-t border-[#222] rounded-t-3xl p-5 max-h-[85vh] overflow-y-auto space-y-5 animate-in slide-in-from-bottom duration-250 shadow-2xl"
+            className="bg-white dark:bg-[#0e0e0e] border-t border-gray-200 dark:border-[#222] rounded-t-3xl p-5 max-h-[85vh] overflow-y-auto space-y-5 animate-in slide-in-from-bottom duration-250 shadow-2xl"
             onClick={e => e.stopPropagation()}
           >
             {/* Grab Handle */}
-            <div className="w-10 h-1 bg-white/20 rounded-full mx-auto" />
+            <div className="w-10 h-1 bg-black/20 dark:bg-white/20 rounded-full mx-auto" />
 
             {/* Header */}
-            <div className="flex items-center justify-between pb-3 border-b border-[#1a1a1a]">
+            <div className="flex items-center justify-between pb-3 border-b border-gray-100 dark:border-[#1a1a1a]">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#1a1a1a] border border-[#2a2a2a] flex items-center justify-center font-bold text-white text-xs">
+                <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] flex items-center justify-center font-bold text-black dark:text-white text-xs">
                   {initials}
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-white leading-tight">
+                  <p className="text-sm font-bold text-black dark:text-white leading-tight">
                     {user?.user_metadata?.full_name || "PodGuide Student"}
                   </p>
                   <p className="text-[11px] text-gray-500">
@@ -89,7 +89,7 @@ export function BottomNav() {
               </div>
               <button
                 onClick={() => setMenuOpen(false)}
-                className="w-8 h-8 rounded-full bg-[#161616] border border-[#262626] flex items-center justify-center text-gray-400 hover:text-white"
+                className="w-8 h-8 rounded-full bg-gray-100 dark:bg-[#161616] border border-gray-200 dark:border-[#262626] flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white"
                 aria-label="Close menu"
               >
                 <X size={16} />
@@ -111,16 +111,16 @@ export function BottomNav() {
                     onClick={() => setMenuOpen(false)}
                     className={`flex items-center justify-between p-3 rounded-2xl border transition-all ${
                       isActive
-                        ? "bg-brand/10 border-brand/40 text-white"
-                        : "bg-[#141414] border-[#1e1e1e] text-gray-300 hover:text-white hover:border-[#333]"
+                        ? "bg-brand/10 border-brand/40 text-black dark:text-white"
+                        : "bg-gray-50 dark:bg-[#141414] border-gray-200 dark:border-[#1e1e1e] text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:border-gray-300 dark:hover:border-[#333]"
                     }`}
                   >
                     <div className="flex items-center gap-3.5 min-w-0">
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isActive ? "bg-brand text-white" : "bg-[#1c1c1c] text-gray-400"}`}>
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isActive ? "bg-brand text-white" : "bg-gray-200 dark:bg-[#1c1c1c] text-gray-600 dark:text-gray-400"}`}>
                         <Icon size={18} />
                       </div>
                       <div className="min-w-0">
-                        <p className={`text-sm font-bold truncate ${isActive ? "text-brand" : "text-white"}`}>
+                        <p className={`text-sm font-bold truncate ${isActive ? "text-brand" : "text-black dark:text-white"}`}>
                           {item.name}
                         </p>
                         <p className="text-[11px] text-gray-500 truncate">
@@ -128,7 +128,7 @@ export function BottomNav() {
                         </p>
                       </div>
                     </div>
-                    <ChevronRight size={16} className={isActive ? "text-brand" : "text-gray-600"} />
+                    <ChevronRight size={16} className={isActive ? "text-brand" : "text-gray-400 dark:text-gray-600"} />
                   </Link>
                 )
               })}
@@ -138,7 +138,7 @@ export function BottomNav() {
             <div className="pt-2">
               <button
                 onClick={handleSignOut}
-                className="w-full flex items-center justify-center gap-2 p-3 bg-[#161616] hover:bg-[#1f1f1f] border border-[#262626] text-gray-400 hover:text-brand rounded-xl text-xs font-bold transition-colors"
+                className="w-full flex items-center justify-center gap-2 p-3 bg-gray-100 dark:bg-[#161616] hover:bg-gray-200 dark:hover:bg-[#1f1f1f] border border-gray-200 dark:border-[#262626] text-gray-600 dark:text-gray-400 hover:text-brand rounded-xl text-xs font-bold transition-colors"
               >
                 <LogOut size={14} /> Sign Out
               </button>
@@ -148,7 +148,7 @@ export function BottomNav() {
       )}
 
       {/* Main Bottom Bar */}
-      <nav className="fixed bottom-0 left-0 right-0 h-16 bg-[#0a0a0a] border-t border-[#1f1f1f] flex items-stretch z-40 lg:hidden">
+      <nav className="fixed bottom-0 left-0 right-0 h-16 bg-white dark:bg-[#0a0a0a] border-t border-gray-200 dark:border-[#1f1f1f] flex items-stretch z-40 lg:hidden">
         {primaryItems.map(item => {
           const isActive = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href))
           return (
@@ -156,7 +156,7 @@ export function BottomNav() {
               key={item.name}
               href={item.href}
               className={`flex flex-col items-center justify-center flex-1 text-[9px] font-bold uppercase tracking-wider gap-1 transition-colors ${
-                isActive ? "text-brand" : "text-gray-600 hover:text-gray-400"
+                isActive ? "text-brand" : "text-gray-500 dark:text-gray-600 hover:text-gray-800 dark:hover:text-gray-400"
               }`}
             >
               <span className={`block w-5 h-0.5 rounded-full ${isActive ? "bg-brand" : "bg-transparent"}`} />
@@ -170,7 +170,7 @@ export function BottomNav() {
           type="button"
           onClick={() => setMenuOpen(prev => !prev)}
           className={`flex flex-col items-center justify-center flex-1 text-[9px] font-bold uppercase tracking-wider gap-1 transition-colors ${
-            menuOpen || isMenuSectionActive ? "text-brand" : "text-gray-600 hover:text-gray-400"
+            menuOpen || isMenuSectionActive ? "text-brand" : "text-gray-500 dark:text-gray-600 hover:text-gray-800 dark:hover:text-gray-400"
           }`}
           aria-label="Open more menu"
         >

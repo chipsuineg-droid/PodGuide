@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-brand: #DC2626;
   --color-brand-light: #EF4444;
@@ -11,12 +13,33 @@
 
 @layer base {
   *, *::before, *::after { box-sizing: border-box; }
-  html { background: #000; color: #fff; color-scheme: dark; }
+
+  /* Light theme */
+  html {
+    background: #ffffff;
+    color: #0a0a0a;
+    color-scheme: light;
+  }
+
+  /* Dark theme */
+  html.dark {
+    background: #000000;
+    color: #ffffff;
+    color-scheme: dark;
+  }
+
   body { font-family: var(--font-inter, system-ui, sans-serif); -webkit-font-smoothing: antialiased; }
+
+  /* Scrollbar — light */
   ::-webkit-scrollbar { width: 4px; height: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: #333; border-radius: 99px; }
-  ::-webkit-scrollbar-thumb:hover { background: #555; }
+  ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 99px; }
+  ::-webkit-scrollbar-thumb:hover { background: #aaa; }
+
+  /* Scrollbar — dark */
+  html.dark ::-webkit-scrollbar-thumb { background: #333; }
+  html.dark ::-webkit-scrollbar-thumb:hover { background: #555; }
+
   ::selection { background: #DC2626; color: #fff; }
 }
 
@@ -24,4 +47,162 @@
   .font-display { font-family: var(--font-outfit, system-ui, sans-serif); }
   .card-hover { transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease; }
   .card-hover:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+}
+
+/* ========================================================
+   GLOBAL LIGHT THEME OVERRIDES
+   Ensures every page flips cleanly from dark to light mode:
+   - Black and dark gray backgrounds become clean white & neutral light gray
+   - White and light text becomes high-contrast dark text
+   - Red brand identity and white text on red remain intact
+   ======================================================== */
+
+html:not(.dark) {
+  background-color: #ffffff !important;
+  color: #0a0a0a !important;
+}
+
+/* Backgrounds: pure black & dark slate -> crisp white */
+html:not(.dark) .bg-black,
+html:not(.dark) .bg-\[\#000\],
+html:not(.dark) .bg-\[\#070707\],
+html:not(.dark) .bg-\[\#080808\],
+html:not(.dark) .bg-\[\#090909\],
+html:not(.dark) .bg-\[\#0a0a0a\],
+html:not(.dark) .bg-\[\#0A0F1C\],
+html:not(.dark) .bg-\[\#0b0b0b\],
+html:not(.dark) .bg-\[\#0c0c0c\],
+html:not(.dark) .bg-\[\#0d0d0d\],
+html:not(.dark) .bg-\[\#0e0e0e\],
+html:not(.dark) .bg-\[\#0f0f0f\],
+html:not(.dark) .bg-\[\#101010\],
+html:not(.dark) .bg-\[\#111\],
+html:not(.dark) .bg-\[\#111111\],
+html:not(.dark) .bg-\[\#121212\],
+html:not(.dark) .bg-\[\#141414\] {
+  background-color: #ffffff !important;
+}
+
+/* Secondary dark surfaces & card backgrounds -> very light neutral gray */
+html:not(.dark) .bg-\[\#151515\],
+html:not(.dark) .bg-\[\#161616\],
+html:not(.dark) .bg-\[\#181818\],
+html:not(.dark) .bg-\[\#1a1a1a\],
+html:not(.dark) .bg-\[\#1c1c1c\],
+html:not(.dark) .bg-\[\#1e1e1e\],
+html:not(.dark) .bg-\[\#222\],
+html:not(.dark) .bg-\[\#222222\],
+html:not(.dark) .bg-\[\#2b2b2b\] {
+  background-color: #f8f9fa !important;
+}
+
+/* Darker borders / tertiary elements */
+html:not(.dark) .bg-\[\#333\],
+html:not(.dark) .bg-\[\#333333\] {
+  background-color: #e9ecef !important;
+}
+
+/* Red-tinted surfaces */
+html:not(.dark) .bg-\[\#0f0a0a\],
+html:not(.dark) .bg-\[\#181111\],
+html:not(.dark) .bg-\[\#1a0f0f\] {
+  background-color: #fef2f2 !important;
+}
+
+/* Hover background states in light mode */
+html:not(.dark) .hover\:bg-\[\#1a1a1a\]:hover,
+html:not(.dark) .hover\:bg-\[\#141414\]:hover,
+html:not(.dark) .hover\:bg-\[\#161616\]:hover {
+  background-color: #f1f5f9 !important;
+}
+html:not(.dark) .hover\:bg-\[\#222\]:hover,
+html:not(.dark) .hover\:bg-\[\#333\]:hover {
+  background-color: #e2e8f0 !important;
+}
+
+/* Text Colors */
+html:not(.dark) .text-white {
+  color: #0f172a !important;
+}
+html:not(.dark) .text-gray-100,
+html:not(.dark) .text-gray-200 {
+  color: #1e293b !important;
+}
+html:not(.dark) .text-gray-300 {
+  color: #334155 !important;
+}
+html:not(.dark) .text-gray-400 {
+  color: #475569 !important;
+}
+html:not(.dark) .hover\:text-white:hover {
+  color: #0f172a !important;
+}
+
+/* Borders */
+html:not(.dark) .border-\[\#141414\],
+html:not(.dark) .border-\[\#181818\],
+html:not(.dark) .border-\[\#1a1a1a\],
+html:not(.dark) .border-\[\#1c1c1c\],
+html:not(.dark) .border-\[\#1e1e1e\],
+html:not(.dark) .border-\[\#1f1f1f\],
+html:not(.dark) .border-\[\#202020\],
+html:not(.dark) .border-\[\#222\],
+html:not(.dark) .border-\[\#222222\],
+html:not(.dark) .border-\[\#242424\],
+html:not(.dark) .border-\[\#262626\],
+html:not(.dark) .border-\[\#2a2a2a\],
+html:not(.dark) .border-\[\#2b2b2b\],
+html:not(.dark) .border-\[\#2c2c2c\],
+html:not(.dark) .border-\[\#333\],
+html:not(.dark) .border-\[\#333333\],
+html:not(.dark) .border-\[\#383838\],
+html:not(.dark) .border-\[\#444\],
+html:not(.dark) .border-\[\#555\] {
+  border-color: #e2e8f0 !important;
+}
+
+/* Form inputs & textareas in light mode */
+html:not(.dark) input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+html:not(.dark) textarea,
+html:not(.dark) select {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+html:not(.dark) input::placeholder,
+html:not(.dark) textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* CRITICAL: Brand & Red elements MUST keep white text and brand red background */
+html:not(.dark) .bg-brand,
+html:not(.dark) [class*="bg-brand"],
+html:not(.dark) .bg-red-600,
+html:not(.dark) .bg-red-700,
+html:not(.dark) .bg-red-800 {
+  background-color: #DC2626 !important;
+  color: #ffffff !important;
+}
+html:not(.dark) .bg-brand.text-white,
+html:not(.dark) .bg-brand .text-white,
+html:not(.dark) [class*="bg-brand"] .text-white,
+html:not(.dark) [class*="bg-brand"].text-white,
+html:not(.dark) .bg-red-600 .text-white,
+html:not(.dark) .bg-red-600.text-white,
+html:not(.dark) .bg-red-700 .text-white,
+html:not(.dark) .bg-red-700.text-white,
+html:not(.dark) [class*="bg-red-"] .text-white,
+html:not(.dark) [class*="bg-red-"].text-white {
+  color: #ffffff !important;
+}
+
+/* Brand text & accents remain red */
+html:not(.dark) .text-brand {
+  color: #DC2626 !important;
+}
+
+/* Header & navigation brand avatar stays crisp white text */
+html:not(.dark) header .rounded-full.bg-brand,
+html:not(.dark) nav .bg-brand {
+  color: #ffffff !important;
 }

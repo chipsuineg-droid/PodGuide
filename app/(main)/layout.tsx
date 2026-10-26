@@ -4,7 +4,7 @@ import { BottomNav } from "@/components/shared/navigation/BottomNav"
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-screen bg-black text-white overflow-hidden">
+    <div className="flex h-screen bg-white dark:bg-black text-black dark:text-white overflow-hidden">
       <div className="hidden lg:flex h-full flex-shrink-0">
         <Sidebar />
       </div>

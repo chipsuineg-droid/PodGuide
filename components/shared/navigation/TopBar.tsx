@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/client"
+import { ThemeToggle } from "@/components/theme/ThemeToggle"
 
 const pageTitles: Record<string, string> = {
   "/dashboard": "Dashboard", "/learn": "Learn", "/practise": "Practise",
@@ -33,31 +34,32 @@ export function TopBar() {
   }, [])
 
   return (
-    <header className="h-16 bg-black border-b border-[#1f1f1f] flex items-center justify-between px-4 lg:px-6 flex-shrink-0 sticky top-0 z-20">
-      <h2 className="hidden lg:block text-base font-semibold text-gray-200">{title}</h2>
-      <Link href="/dashboard" className="lg:hidden font-display text-xl font-bold">Pod<span className="text-brand">Guide</span></Link>
+    <header className="h-16 bg-white dark:bg-black border-b border-gray-200 dark:border-[#1f1f1f] flex items-center justify-between px-4 lg:px-6 flex-shrink-0 sticky top-0 z-20">
+      <h2 className="hidden lg:block text-base font-semibold text-gray-700 dark:text-gray-200">{title}</h2>
+      <Link href="/dashboard" className="lg:hidden font-display text-xl font-bold text-black dark:text-white">Pod<span className="text-brand">Guide</span></Link>
       <div className="flex items-center gap-2">
-        <Link href="/search" className="p-2 text-gray-400 hover:text-white hover:bg-[#1a1a1a] rounded-lg transition-colors">
+        <Link href="/search" className="p-2 text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#1a1a1a] rounded-lg transition-colors">
           <Search size={20} />
         </Link>
+        <ThemeToggle />
         <div className="relative">
           <button onClick={() => setNotifOpen(!notifOpen)}
-            className="p-2 text-gray-400 hover:text-white hover:bg-[#1a1a1a] rounded-lg transition-colors relative">
+            className="p-2 text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#1a1a1a] rounded-lg transition-colors relative">
             <Bell size={20} />
             {unread > 0 && <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-brand rounded-full" />}
           </button>
           {notifOpen && (
-            <div className="absolute right-0 top-12 w-80 bg-[#111] border border-[#333] rounded-xl shadow-2xl z-50 overflow-hidden">
-              <div className="flex items-center justify-between px-4 py-3 border-b border-[#222]">
-                <span className="font-semibold text-white text-sm">Notifications</span>
-                <button onClick={() => setNotifOpen(false)}><X size={16} className="text-gray-400 hover:text-white" /></button>
+            <div className="absolute right-0 top-12 w-80 bg-white dark:bg-[#111] border border-gray-200 dark:border-[#333] rounded-xl shadow-2xl z-50 overflow-hidden">
+              <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-[#222]">
+                <span className="font-semibold text-black dark:text-white text-sm">Notifications</span>
+                <button onClick={() => setNotifOpen(false)}><X size={16} className="text-gray-400 hover:text-black dark:hover:text-white" /></button>
               </div>
               <div className="max-h-80 overflow-y-auto">
                 {mockNotifications.map(n => (
-                  <div key={n.id} className={`px-4 py-3 border-b border-[#1a1a1a] hover:bg-[#1a1a1a] transition-colors cursor-pointer ${!n.read ? "border-l-2 border-l-brand" : ""}`}>
-                    <p className="text-sm font-medium text-white">{n.title}</p>
-                    <p className="text-xs text-gray-400 mt-0.5">{n.body}</p>
-                    <p className="text-xs text-gray-600 mt-1">{n.time}</p>
+                  <div key={n.id} className={`px-4 py-3 border-b border-gray-100 dark:border-[#1a1a1a] hover:bg-gray-50 dark:hover:bg-[#1a1a1a] transition-colors cursor-pointer ${!n.read ? "border-l-2 border-l-brand" : ""}`}>
+                    <p className="text-sm font-medium text-black dark:text-white">{n.title}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{n.body}</p>
+                    <p className="text-xs text-gray-400 dark:text-gray-600 mt-1">{n.time}</p>
                   </div>
                 ))}
               </div>
