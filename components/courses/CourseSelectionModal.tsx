@@ -12,6 +12,7 @@ import {
   Check,
   Loader2,
   CheckCircle2,
+  Folder,
 } from "lucide-react"
 
 interface CourseSelectionModalProps {
@@ -46,8 +47,8 @@ export function CourseSelectionModal({
         const query = searchQuery.toLowerCase().trim()
         const matchTitle = course.title.toLowerCase().includes(query)
         const matchDesc = course.description.toLowerCase().includes(query)
-        const matchCode = course.code.toLowerCase().includes(query)
-        return matchTitle || matchDesc || matchCode
+        const matchTags = course.tags.some((t) => t.toLowerCase().includes(query))
+        return matchTitle || matchDesc || matchTags
       }
 
       return true
@@ -121,7 +122,7 @@ export function CourseSelectionModal({
               Select Your Courses
             </h2>
             <p className="text-xs sm:text-sm text-gray-400 mt-1 max-w-2xl leading-relaxed">
-              Choose the individual courses you want to study. You can select from both Academic and Self-Development categories.
+              Choose the individual course folders you want to study. You can select from both Academic and Self-Development categories.
             </p>
           </div>
           <button
@@ -222,7 +223,7 @@ export function CourseSelectionModal({
           </div>
         </div>
 
-        {/* ── COURSE LISTING GRID (NO YEAR LABELS) ── */}
+        {/* ── COURSE LISTING GRID (NO YEAR LABELS, FOLDER STYLE) ── */}
         <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
           {errorMsg && (
             <div className="p-3 bg-red-950/40 border border-red-600/40 rounded-lg text-xs text-red-300">
@@ -245,7 +246,7 @@ export function CourseSelectionModal({
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
               {displayedCourses.map((course) => {
                 const isSelected = selectedSlugs.includes(course.slug)
 
@@ -253,42 +254,49 @@ export function CourseSelectionModal({
                   <div
                     key={course.id}
                     onClick={() => toggleSelect(course.slug)}
-                    className={`cursor-pointer rounded-xl p-4 border transition-all flex flex-col justify-between select-none ${
+                    className={`cursor-pointer rounded-xl p-3.5 border transition-all flex flex-col justify-between select-none group ${
                       isSelected
                         ? "bg-[#181111] border-red-600 shadow-sm"
                         : "bg-[#121212] border-[#222] hover:border-[#333] hover:bg-[#151515]"
                     }`}
                   >
                     <div>
-                      {/* Top row: Code & Checkbox */}
+                      {/* Top row: Folder icon badge & Checkbox */}
                       <div className="flex items-center justify-between gap-2 mb-2">
-                        <span className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-wider">
-                          {course.code}
-                        </span>
+                        <div className="flex items-center gap-1.5">
+                          <div className={`w-6 h-6 rounded flex items-center justify-center transition-colors ${
+                            isSelected ? "bg-red-600/20 text-red-500" : "bg-[#181818] border border-[#262626] text-gray-400 group-hover:text-white"
+                          }`}>
+                            <Folder size={12} />
+                          </div>
+                          <span className="text-[10px] text-gray-400 font-medium">
+                            {course.totalModules} modules
+                          </span>
+                        </div>
 
                         <div
-                          className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
+                          className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${
                             isSelected
                               ? "bg-red-600 border-red-600 text-white"
                               : "border-[#383838] bg-[#1a1a1a]"
                           }`}
                         >
-                          {isSelected && <Check size={12} strokeWidth={3} />}
+                          {isSelected && <Check size={10} strokeWidth={3} />}
                         </div>
                       </div>
 
-                      {/* Course Title and Description (NO YEAR LABELS) */}
-                      <h4 className="text-sm font-bold text-white">
+                      {/* Course Title and Description (NO course code like ANAT101) */}
+                      <h4 className="text-sm font-bold text-white group-hover:text-red-400 transition-colors line-clamp-1 leading-snug">
                         {course.title}
                       </h4>
-                      <p className="text-xs text-gray-400 mt-1 line-clamp-2 leading-relaxed">
+                      <p className="text-[11px] text-gray-400 mt-1 line-clamp-2 leading-relaxed">
                         {course.description}
                       </p>
                     </div>
 
-                    {/* Bottom metadata: hours and module count only */}
-                    <div className="pt-3 mt-3 border-t border-[#1c1c1c] flex items-center justify-between text-[11px] text-gray-500">
-                      <span>{course.totalModules} modules</span>
+                    {/* Bottom metadata */}
+                    <div className="pt-2.5 mt-2.5 border-t border-[#1c1c1c] flex items-center justify-between text-[10px] text-gray-500">
+                      <span>{course.estimatedHours} hrs</span>
                       <span className={isSelected ? "text-red-500 font-semibold" : "text-gray-400"}>
                         {isSelected ? "Selected" : "Click to select"}
                       </span>

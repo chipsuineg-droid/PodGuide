@@ -13,13 +13,13 @@ import {
   BookOpen,
   Brain,
   Users,
-  PenTool,
   TrendingUp,
   ShoppingBag,
   Plus,
   Trash2,
   ArrowRight,
   Flame,
+  Folder,
 } from "lucide-react"
 
 interface UserCourseItem {
@@ -98,7 +98,6 @@ export function PersonalisedDashboardClient({
   const selfDevCourses = enrolledCourses.filter((c) => c.category === "Self-Development")
 
   const handleModalSuccess = (newSlugs: string[]) => {
-    // Immediately update local state so the dashboard reflects changes without waiting
     setEnrolledSlugs(newSlugs)
     const updatedUserCourses = newSlugs.map((slug) => {
       const existing = userCourses.find((uc) => uc.course_slug === slug)
@@ -117,7 +116,7 @@ export function PersonalisedDashboardClient({
   }
 
   const handleRemoveCourse = async (slug: string) => {
-    if (!confirm("Remove this course from your dashboard? Other courses and data remain untouched.")) {
+    if (!confirm("Remove this course folder from your dashboard? Other courses and data remain untouched.")) {
       return
     }
 
@@ -170,7 +169,7 @@ export function PersonalisedDashboardClient({
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-colors"
+            className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-colors shadow-sm"
           >
             <Plus size={15} />
             {hasCourses ? "Add More Courses" : "Select Courses"}
@@ -230,18 +229,23 @@ export function PersonalisedDashboardClient({
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5">
                 {academicCourses.map((course) => (
                   <div
                     key={course.id}
-                    className="bg-[#111] border border-[#1f1f1f] hover:border-[#333] rounded-xl p-5 flex flex-col justify-between transition-colors"
+                    className="group bg-[#111] hover:bg-[#151515] border border-[#1f1f1f] hover:border-[#333] rounded-xl p-3.5 flex flex-col justify-between transition-all duration-150"
                   >
                     <div>
-                      {/* Top row: Code and Delete action */}
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-wider">
-                          {course.code}
-                        </span>
+                      {/* Top row: Folder icon badge and discreet delete action */}
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <div className="flex items-center gap-1.5">
+                          <div className="w-6 h-6 rounded bg-[#181818] border border-[#262626] flex items-center justify-center text-red-500 group-hover:bg-red-600/10 transition-colors">
+                            <Folder size={13} />
+                          </div>
+                          <span className="text-[10px] text-gray-400 font-medium">
+                            {course.totalModules} modules
+                          </span>
+                        </div>
 
                         <button
                           onClick={() => handleRemoveCourse(course.slug)}
@@ -249,23 +253,24 @@ export function PersonalisedDashboardClient({
                           title="Remove from dashboard"
                           className="text-gray-500 hover:text-red-500 p-1 transition-colors"
                         >
-                          <Trash2 size={13} />
+                          <Trash2 size={12} />
                         </button>
                       </div>
 
-                      <h3 className="text-sm font-bold text-white">
+                      {/* Course Title (NO course codes like ANAT101) */}
+                      <h3 className="text-sm font-bold text-white group-hover:text-red-400 transition-colors line-clamp-1 leading-snug">
                         {course.title}
                       </h3>
-                      <p className="text-xs text-gray-400 mt-1 line-clamp-2 leading-relaxed">
+                      <p className="text-[11px] text-gray-400 mt-1 line-clamp-2 leading-relaxed">
                         {course.description}
                       </p>
                     </div>
 
-                    {/* Progress tracking and Open action */}
-                    <div className="pt-4 mt-4 border-t border-[#1a1a1a] space-y-3">
+                    {/* Progress tracking & Compact Open Link */}
+                    <div className="pt-3 mt-3 border-t border-[#1a1a1a] space-y-2.5">
                       <div>
-                        <div className="flex items-center justify-between text-[11px] text-gray-400 mb-1">
-                          <span>Learning Progress</span>
+                        <div className="flex items-center justify-between text-[10px] text-gray-400 mb-1">
+                          <span>Progress</span>
                           <span className="font-semibold text-white">{course.progress}%</span>
                         </div>
                         <div className="w-full h-1 bg-[#1a1a1a] rounded-full overflow-hidden">
@@ -276,17 +281,13 @@ export function PersonalisedDashboardClient({
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between pt-1">
-                        <span className="text-[11px] text-gray-500">
-                          {course.totalModules} modules
-                        </span>
-                        <Link
-                          href={`/module/${course.code.toLowerCase()}`}
-                          className="text-xs font-semibold text-red-500 hover:text-red-400 transition-colors inline-flex items-center gap-1"
-                        >
-                          Open Course <ArrowRight size={12} />
-                        </Link>
-                      </div>
+                      <Link
+                        href={`/module/${course.slug}`}
+                        className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 bg-[#181818] hover:bg-red-600 text-gray-300 hover:text-white rounded-md text-[11px] font-semibold border border-[#242424] hover:border-red-600 transition-all"
+                      >
+                        <span>Open Folder</span>
+                        <ArrowRight size={11} />
+                      </Link>
                     </div>
                   </div>
                 ))}
@@ -321,18 +322,23 @@ export function PersonalisedDashboardClient({
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5">
                 {selfDevCourses.map((course) => (
                   <div
                     key={course.id}
-                    className="bg-[#111] border border-[#1f1f1f] hover:border-[#333] rounded-xl p-5 flex flex-col justify-between transition-colors"
+                    className="group bg-[#111] hover:bg-[#151515] border border-[#1f1f1f] hover:border-[#333] rounded-xl p-3.5 flex flex-col justify-between transition-all duration-150"
                   >
                     <div>
-                      {/* Top row: Code and Delete action */}
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-wider">
-                          {course.code}
-                        </span>
+                      {/* Top row: Folder icon badge and discreet delete action */}
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <div className="flex items-center gap-1.5">
+                          <div className="w-6 h-6 rounded bg-[#181818] border border-[#262626] flex items-center justify-center text-red-500 group-hover:bg-red-600/10 transition-colors">
+                            <Folder size={13} />
+                          </div>
+                          <span className="text-[10px] text-gray-400 font-medium">
+                            {course.totalModules} modules
+                          </span>
+                        </div>
 
                         <button
                           onClick={() => handleRemoveCourse(course.slug)}
@@ -340,23 +346,24 @@ export function PersonalisedDashboardClient({
                           title="Remove from dashboard"
                           className="text-gray-500 hover:text-red-500 p-1 transition-colors"
                         >
-                          <Trash2 size={13} />
+                          <Trash2 size={12} />
                         </button>
                       </div>
 
-                      <h3 className="text-sm font-bold text-white">
+                      {/* Course Title (NO course codes like COMM-SD1) */}
+                      <h3 className="text-sm font-bold text-white group-hover:text-red-400 transition-colors line-clamp-1 leading-snug">
                         {course.title}
                       </h3>
-                      <p className="text-xs text-gray-400 mt-1 line-clamp-2 leading-relaxed">
+                      <p className="text-[11px] text-gray-400 mt-1 line-clamp-2 leading-relaxed">
                         {course.description}
                       </p>
                     </div>
 
-                    {/* Progress tracking and Open action */}
-                    <div className="pt-4 mt-4 border-t border-[#1a1a1a] space-y-3">
+                    {/* Progress tracking & Compact Open Link */}
+                    <div className="pt-3 mt-3 border-t border-[#1a1a1a] space-y-2.5">
                       <div>
-                        <div className="flex items-center justify-between text-[11px] text-gray-400 mb-1">
-                          <span>Learning Progress</span>
+                        <div className="flex items-center justify-between text-[10px] text-gray-400 mb-1">
+                          <span>Progress</span>
                           <span className="font-semibold text-white">{course.progress}%</span>
                         </div>
                         <div className="w-full h-1 bg-[#1a1a1a] rounded-full overflow-hidden">
@@ -367,17 +374,13 @@ export function PersonalisedDashboardClient({
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between pt-1">
-                        <span className="text-[11px] text-gray-500">
-                          {course.totalModules} modules
-                        </span>
-                        <Link
-                          href={`/module/${course.code.toLowerCase()}`}
-                          className="text-xs font-semibold text-red-500 hover:text-red-400 transition-colors inline-flex items-center gap-1"
-                        >
-                          Open Course <ArrowRight size={12} />
-                        </Link>
-                      </div>
+                      <Link
+                        href={`/module/${course.slug}`}
+                        className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 bg-[#181818] hover:bg-red-600 text-gray-300 hover:text-white rounded-md text-[11px] font-semibold border border-[#242424] hover:border-red-600 transition-all"
+                      >
+                        <span>Open Folder</span>
+                        <ArrowRight size={11} />
+                      </Link>
                     </div>
                   </div>
                 ))}

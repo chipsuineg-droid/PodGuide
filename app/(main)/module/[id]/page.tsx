@@ -108,7 +108,7 @@ export default async function ModuleDetailPage({ params }: ModulePageProps) {
           <ChevronLeft size={15} /> Back to Dashboard
         </Link>
         <span className="text-[10px] font-bold uppercase tracking-wider text-gray-300 bg-[#161616] border border-[#262626] px-2.5 py-1 rounded-md">
-          {catalogCourse?.category || "Course"} : {moduleData.code}
+          {catalogCourse?.category || "Course"} Folder
         </span>
       </div>
 
@@ -117,12 +117,8 @@ export default async function ModuleDetailPage({ params }: ModulePageProps) {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="space-y-2">
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-xs font-mono font-bold text-red-500 uppercase tracking-wider">
-                {moduleData.code}
-              </span>
-              <span className="text-[#333]">|</span>
-              <span className="text-xs text-gray-400">
-                {catalogCourse?.category ?? "Academic"}
+              <span className="text-xs font-semibold text-red-500 uppercase tracking-wider">
+                {catalogCourse?.category ?? "Academic"} Course
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
