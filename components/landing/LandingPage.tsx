@@ -54,6 +54,59 @@ type TabKey = "dashboard" | "learn" | "library" | "practise" | "network" | "meds
 
 const TABS_SEQUENCE: TabKey[] = ["dashboard", "learn", "library", "practise", "network", "medstore", "grow"]
 
+// ── TOUR STEP DEFINITION ──
+// Each step moves the cursor to a target element (by id), optionally clicks it,
+// and waits `dwellMs` before moving to the next step.
+interface TourStep {
+  targetId: string           // id of the DOM element to navigate to
+  action?: "click" | "hover" // what to do when arrived (default hover)
+  switchTab?: TabKey         // if set, switches the active tab after arriving
+  highlightId?: string       // if set, pulse-highlights a secondary element in the panel
+  dwellMs: number            // time to wait at this position before next step
+}
+
+const TOUR_STEPS: TourStep[] = [
+  // 1. Dashboard tab – land and hover
+  { targetId: "tab-btn-dashboard", action: "click", switchTab: "dashboard", dwellMs: 2200 },
+  // 2. Move to first subject card inside dashboard panel
+  { targetId: "tour-dashboard-card-1", action: "hover", dwellMs: 1400 },
+  // 3. Move to progress bar area on second card
+  { targetId: "tour-dashboard-card-2", action: "hover", dwellMs: 1000 },
+
+  // 4. Learn tab click
+  { targetId: "tab-btn-learn", action: "click", switchTab: "learn", dwellMs: 2000 },
+  // 5. Click the New Notebook button in Learn panel
+  { targetId: "tour-learn-new-notebook", action: "click", highlightId: "tour-learn-new-notebook", dwellMs: 1400 },
+
+  // 6. Library tab click
+  { targetId: "tab-btn-library", action: "click", switchTab: "library", dwellMs: 1800 },
+  // 7. Hover over a folder in library
+  { targetId: "tour-library-folder-1", action: "hover", dwellMs: 1200 },
+
+  // 8. Practise tab click
+  { targetId: "tab-btn-practise", action: "click", switchTab: "practise", dwellMs: 2200 },
+  // 9. Click the Start Quiz button in Practise panel
+  { targetId: "tour-practise-start-quiz", action: "click", highlightId: "tour-practise-start-quiz", dwellMs: 1800 },
+
+  // 10. Network tab click
+  { targetId: "tab-btn-network", action: "click", switchTab: "network", dwellMs: 2000 },
+  // 11. Hover over a post in the network feed
+  { targetId: "tour-network-post-1", action: "hover", dwellMs: 1200 },
+
+  // 12. MedStore tab click
+  { targetId: "tab-btn-medstore", action: "click", switchTab: "medstore", dwellMs: 2000 },
+  // 13. Click Order Now on scrubs
+  { targetId: "tour-medstore-order-1", action: "click", highlightId: "tour-medstore-order-1", dwellMs: 1600 },
+
+  // 14. Grow tab click
+  { targetId: "tab-btn-grow", action: "click", switchTab: "grow", dwellMs: 2200 },
+  // 15. Click Apply button on first opportunity
+  { targetId: "tour-grow-apply-1", action: "click", highlightId: "tour-grow-apply-1", dwellMs: 1600 },
+
+  // 16. Loop back to Dashboard
+  { targetId: "tab-btn-dashboard", action: "click", switchTab: "dashboard", dwellMs: 2000 },
+]
+
 interface FloatingBadgeData {
   href: string
   icon: any
@@ -206,9 +259,11 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
   // Cursor tour animation refs
   const workspaceRef = useRef<HTMLDivElement>(null)
   const cursorRef = useRef<HTMLDivElement>(null)
-  const currentTabIndexRef = useRef(0)
+  const currentStepRef = useRef(0)
   const isInteractingRef = useRef(false)
   const timerRef = useRef<NodeJS.Timeout | null>(null)
+  const [cursorClicking, setCursorClicking] = useState(false)
+  const [highlightedEl, setHighlightedEl] = useState<string | null>(null)
 
   // Typewriter effect state for Our Story
   const storyRef = useRef<HTMLDivElement>(null)
@@ -307,6 +362,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
       isInteractingRef.current = true
       setIsUserInteracting(true)
       if (timerRef.current) clearTimeout(timerRef.current)
+      if ((timerRef as any)._actionTimer) clearTimeout((timerRef as any)._actionTimer)
       if (cursorRef.current) {
         cursorRef.current.style.opacity = "0"
       }
@@ -314,42 +370,72 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
     setActiveTab(tabId)
   }
 
-  // Automated cursor tour
+  // Rich multi-step cursor tour: navigates to tab buttons AND clicks in-panel buttons
   useEffect(() => {
-    const runTour = () => {
+    const runStep = () => {
       if (isInteractingRef.current) return
 
-      const nextTab = TABS_SEQUENCE[currentTabIndexRef.current]
-      const targetBtn = document.getElementById(`tab-btn-${nextTab}`)
+      const step = TOUR_STEPS[currentStepRef.current]
+      const targetEl = document.getElementById(step.targetId)
       const cursor = cursorRef.current
       const workspace = workspaceRef.current
 
-      if (targetBtn && cursor && workspace) {
-        const btnRect = targetBtn.getBoundingClientRect()
+      if (targetEl && cursor && workspace) {
+        const targetRect = targetEl.getBoundingClientRect()
         const workspaceRect = workspace.getBoundingClientRect()
 
-        const relX = btnRect.left - workspaceRect.left + btnRect.width / 2 - 12
-        const relY = btnRect.top - workspaceRect.top + btnRect.height / 2 - 12
+        const relX = targetRect.left - workspaceRect.left + targetRect.width / 2 - 12
+        const relY = targetRect.top - workspaceRect.top + targetRect.height / 2 - 12
 
         cursor.style.transform = `translate(${relX}px, ${relY}px)`
+        cursor.style.opacity = "1"
 
-        setTimeout(() => {
+        // After travelling (~700ms), perform the action
+        const actionTimer = setTimeout(() => {
           if (isInteractingRef.current) return
-          setActiveTab(nextTab)
-          currentTabIndexRef.current = (currentTabIndexRef.current + 1) % TABS_SEQUENCE.length
-        }, 900)
-      }
 
-      timerRef.current = setTimeout(runTour, 3800)
+          if (step.action === "click") {
+            // Visual click: shrink cursor briefly
+            setCursorClicking(true)
+            setTimeout(() => setCursorClicking(false), 300)
+
+            // Highlight the target element in the panel
+            if (step.highlightId) {
+              setHighlightedEl(step.highlightId)
+              setTimeout(() => setHighlightedEl(null), 900)
+            }
+          }
+
+          if (step.switchTab) {
+            setActiveTab(step.switchTab)
+          }
+
+          // Advance to next step after dwellMs
+          timerRef.current = setTimeout(() => {
+            currentStepRef.current = (currentStepRef.current + 1) % TOUR_STEPS.length
+            runStep()
+          }, step.dwellMs)
+        }, 700)
+
+        // Store actionTimer so we can clear it on user interaction
+        ;(timerRef as any)._actionTimer = actionTimer
+      } else {
+        // Element not in DOM yet (e.g. panel not rendered) – skip to next step quickly
+        timerRef.current = setTimeout(() => {
+          currentStepRef.current = (currentStepRef.current + 1) % TOUR_STEPS.length
+          runStep()
+        }, 600)
+      }
     }
 
     const initialTimer = setTimeout(() => {
-      runTour()
-    }, 1500)
+      runStep()
+    }, 1800)
 
     return () => {
       clearTimeout(initialTimer)
       if (timerRef.current) clearTimeout(timerRef.current)
+      if ((timerRef as any)._actionTimer) clearTimeout((timerRef as any)._actionTimer)
     }
   }, [])
 
@@ -465,13 +551,13 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
           <div
             ref={cursorRef}
             id="simulated-cursor"
-            className="hidden md:flex absolute top-0 left-0 items-center gap-1.5 pointer-events-none transition-all duration-700 z-30"
+            className={`hidden md:flex absolute top-0 left-0 items-center gap-1.5 pointer-events-none transition-all duration-700 z-30 ${cursorClicking ? "scale-75" : "scale-100"}`}
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-lg">
               <path d="M3 3L10.07 19.97L13.58 12.58L20.97 9.07L3 3Z" fill="#FFFFFF" stroke="#000000" strokeWidth="2" strokeLinejoin="round" />
             </svg>
-            <div className="bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg border border-white/20 whitespace-nowrap">
-              PodGuide Assistant
+            <div className={`text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg border border-white/20 whitespace-nowrap transition-colors ${cursorClicking ? "bg-white text-red-600" : "bg-red-600"}`}>
+              {cursorClicking ? "clicking..." : "PodGuide Assistant"}
             </div>
           </div>
 
@@ -666,7 +752,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
 
                 {/* Subject Cards Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-                  <div className="bg-[#101010] p-4 rounded-2xl border border-[#202020] hover:border-red-600/40 transition-colors">
+                  <div id="tour-dashboard-card-1" className={`bg-[#101010] p-4 rounded-2xl border transition-colors ${highlightedEl === "tour-dashboard-card-1" ? "border-red-600 shadow-[0_0_12px_rgba(220,38,38,0.35)]" : "border-[#202020] hover:border-red-600/40"}`}>
                     <div className="flex items-center justify-between mb-3">
                       <div className="w-8 h-8 rounded-xl bg-[#161616] border border-[#242424] flex items-center justify-center text-red-500">
                         <Bone size={15} />
@@ -680,7 +766,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                     </div>
                   </div>
 
-                  <div className="bg-[#101010] p-4 rounded-2xl border border-[#202020] hover:border-red-600/40 transition-colors">
+                  <div id="tour-dashboard-card-2" className="bg-[#101010] p-4 rounded-2xl border border-[#202020] hover:border-red-600/40 transition-colors">
                     <div className="flex items-center justify-between mb-3">
                       <div className="w-8 h-8 rounded-xl bg-[#161616] border border-[#242424] flex items-center justify-center text-red-500">
                         <HeartPulse size={15} />
@@ -752,6 +838,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                     />
                   </div>
                   <Link
+                    id="tour-learn-new-notebook"
                     href={isLoggedIn ? "/learn" : "/login"}
                     className="w-full sm:w-auto px-4 py-2 bg-red-600 text-white rounded-xl text-xs font-semibold hover:bg-red-700 transition flex items-center justify-center gap-1.5"
                   >
@@ -813,7 +900,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                 </div>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                  <div className="p-3.5 bg-[#101010] rounded-xl border border-[#202020] flex items-center gap-3">
+                  <div id="tour-library-folder-1" className="p-3.5 bg-[#101010] rounded-xl border border-[#202020] flex items-center gap-3">
                     <Folder size={20} className="text-red-500 shrink-0" />
                     <div className="truncate">
                       <div className="text-xs font-semibold text-white truncate">Internal Medicine</div>
@@ -870,8 +957,9 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                       Practice real examination questions with step-by-step rationale, breakdown of distractors, and targeted weakness tracking across every organ system.
                     </p>
                     <Link
+                      id="tour-practise-start-quiz"
                       href={isLoggedIn ? "/practise" : "/login"}
-                      className="mt-4 inline-flex items-center px-5 py-2.5 bg-red-600 text-white rounded-xl text-xs font-semibold hover:bg-red-700 transition shadow-md"
+                      className={`mt-4 inline-flex items-center px-5 py-2.5 rounded-xl text-xs font-semibold transition shadow-md ${highlightedEl === "tour-practise-start-quiz" ? "bg-white text-red-600 scale-105" : "bg-red-600 text-white hover:bg-red-700"}`}
                     >
                       Start Today&apos;s Quiz
                     </Link>
@@ -900,7 +988,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                 </div>
 
                 <div className="space-y-3">
-                  <div className="p-4 bg-[#101010] rounded-xl border border-[#202020]">
+                  <div id="tour-network-post-1" className="p-4 bg-[#101010] rounded-xl border border-[#202020]">
                     <div className="flex items-center gap-3 mb-2">
                       <div className="w-7 h-7 rounded-full bg-[#1c1c1c] text-xs text-white flex items-center justify-center font-bold">TM</div>
                       <div>
@@ -954,7 +1042,11 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                     <div className="p-3.5">
                       <h4 className="text-xs font-bold text-white">TANC Core™ Scrub Suit</h4>
                       <p className="text-[10px] text-gray-400 mt-1">Hospital-grade 4-way stretch poly-viscose.</p>
-                      <Link href={isLoggedIn ? "/medstore" : "/login"} className="mt-3 block text-center py-1.5 bg-[#181818] hover:bg-red-600 text-white text-[11px] font-medium rounded-lg transition">
+                      <Link
+                        id="tour-medstore-order-1"
+                        href={isLoggedIn ? "/medstore" : "/login"}
+                        className={`mt-3 block text-center py-1.5 text-[11px] font-medium rounded-lg transition ${highlightedEl === "tour-medstore-order-1" ? "bg-red-600 text-white scale-105" : "bg-[#181818] hover:bg-red-600 text-white"}`}
+                      >
                         Order Now
                       </Link>
                     </div>
@@ -1020,7 +1112,11 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                       <h4 className="text-xs font-bold text-white mt-0.5">Elton John AIDS Foundation Grant</h4>
                       <p className="text-[10px] text-gray-400">Funding youth-led clinical HIV/AIDS intervention studies across Southern Africa.</p>
                     </div>
-                    <Link href={isLoggedIn ? "/grow" : "/login"} className="px-3 py-1.5 bg-[#181818] hover:bg-red-600 text-white text-[11px] font-semibold rounded-lg shrink-0 transition">
+                    <Link
+                      id="tour-grow-apply-1"
+                      href={isLoggedIn ? "/grow" : "/login"}
+                      className={`px-3 py-1.5 text-[11px] font-semibold rounded-lg shrink-0 transition ${highlightedEl === "tour-grow-apply-1" ? "bg-white text-red-600 scale-105" : "bg-[#181818] hover:bg-red-600 text-white"}`}
+                    >
                       Apply
                     </Link>
                   </div>
@@ -1031,7 +1127,10 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                       <h4 className="text-xs font-bold text-white mt-0.5">WHO AFRO Student Internship</h4>
                       <p className="text-[10px] text-gray-400">Practical public health policy internship at the regional headquarters.</p>
                     </div>
-                    <Link href={isLoggedIn ? "/grow" : "/login"} className="px-3 py-1.5 bg-[#181818] hover:bg-red-600 text-white text-[11px] font-semibold rounded-lg shrink-0 transition">
+                    <Link
+                      href={isLoggedIn ? "/grow" : "/login"}
+                      className="px-3 py-1.5 bg-[#181818] hover:bg-red-600 text-white text-[11px] font-semibold rounded-lg shrink-0 transition"
+                    >
                       Apply
                     </Link>
                   </div>
