@@ -54,6 +54,16 @@ type TabKey = "dashboard" | "learn" | "library" | "practise" | "network" | "meds
 
 const TABS_SEQUENCE: TabKey[] = ["dashboard", "learn", "library", "practise", "network", "medstore", "grow"]
 
+const TAB_ICONS: Record<TabKey, any> = {
+  dashboard: LayoutDashboard,
+  learn: GraduationCap,
+  library: Folder,
+  practise: HelpCircle,
+  network: MessageSquare,
+  medstore: ShoppingBag,
+  grow: TrendingUp,
+}
+
 interface FloatingBadgeData {
   href: string
   icon: any
@@ -150,7 +160,7 @@ const ALL_FLOATING_BADGES: FloatingBadgeData[] = [
 ]
 
 /**
- * Interactive Floating Card with Touch & Hover Ripple Physics (Deep Pitch-Black)
+ * Pure-CSS interactive floating card (Zero-delay, zero double-clicking on mobile)
  */
 function InteractiveFloatingCard({
   href,
@@ -159,57 +169,93 @@ function InteractiveFloatingCard({
   subtitle,
   animationClass,
 }: FloatingBadgeData) {
-  const [rippling, setRippling] = useState(false)
-  const [popped, setPopped] = useState(false)
-
-  const triggerInteraction = () => {
-    setRippling(true)
-    setPopped(true)
-    setTimeout(() => setRippling(false), 700)
-    setTimeout(() => setPopped(false), 300)
-  }
-
   return (
     <Link
       href={href}
-      onClick={triggerInteraction}
-      onMouseEnter={triggerInteraction}
-      onTouchStart={triggerInteraction}
-      className={`landing-floating-badge ${animationClass} relative group cursor-pointer select-none transition-all duration-300 rounded-2xl border border-[#242424] hover:border-red-600 shadow-xl`}
+      className={`landing-floating-badge ${animationClass} relative group cursor-pointer select-none transition-all duration-150 rounded-2xl border border-[#242424] hover:border-red-600 active:scale-95 active:border-red-600 shadow-xl inline-flex items-center gap-2.5 px-3 py-2 sm:px-3.5 sm:py-2.5 shrink-0 bg-[#0e0e0e] text-white`}
       style={{
         backgroundColor: "#0e0e0e",
-        padding: "10px 14px",
-        display: "inline-flex",
-        alignItems: "center",
-        gap: "10px",
         boxShadow: "0 4px 20px rgba(0,0,0,0.6)",
-        transform: popped ? "scale(1.08)" : undefined,
-        color: "#ffffff",
+        willChange: "transform",
       }}
     >
-      {rippling && (
-        <span
-          className="click-ripple-ring pointer-events-none"
-          style={{
-            position: "absolute",
-            inset: 0,
-            borderRadius: "16px",
-            border: "2px solid #DC2626",
-          }}
-        />
-      )}
-      <div className="w-8 h-8 rounded-xl bg-red-600/15 text-red-500 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors duration-200">
+      <div className="w-8 h-8 rounded-xl bg-red-600/15 text-red-500 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors duration-150">
         <Icon size={15} />
       </div>
-      <div className="text-left truncate" style={{ minWidth: "120px", maxWidth: "180px" }}>
-        <div className="text-xs font-bold text-white group-hover:text-red-400 transition-colors truncate">
+      <div className="text-left whitespace-nowrap pr-1">
+        <div className="text-xs font-bold text-white group-hover:text-red-400 transition-colors">
           {title}
         </div>
-        <div className="text-[10px] text-gray-400 truncate">
+        <div className="text-[10px] text-gray-400">
           {subtitle}
         </div>
       </div>
     </Link>
+  )
+}
+
+const FULL_STORY_TEXT =
+  "PodGuide was founded with a clear conviction: healthcare education should be unified, collaborative, and accessible. We built PodGuide as a trusted mentorship network, an academic library hub, an adaptive space to practice clinical examinations, and a launchpad for growth and opportunities. Whether you are a medical student, a health tutor, or a healthcare professional anywhere in the healthcare field, PodGuide gives you the tools to excel."
+
+/**
+ * Isolated Typewriter Component (Prevents whole landing page from re-rendering on every typed character)
+ */
+function OurStoryTypewriter() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [hasStartedTyping, setHasStartedTyping] = useState(false)
+  const [typedStory, setTypedStory] = useState("")
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries[0]?.isIntersecting && !hasStartedTyping) {
+          setHasStartedTyping(true)
+        }
+      },
+      { threshold: 0.15 }
+    )
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [hasStartedTyping])
+
+  useEffect(() => {
+    if (!hasStartedTyping) return
+
+    let index = 0
+    let isCancelled = false
+
+    const typeNext = () => {
+      if (isCancelled) return
+      if (index <= FULL_STORY_TEXT.length) {
+        setTypedStory(FULL_STORY_TEXT.slice(0, index))
+        const lastChar = FULL_STORY_TEXT[index - 1]
+        index++
+
+        const delay = lastChar === "." || lastChar === ":" ? 300 : lastChar === "," ? 150 : 32
+        setTimeout(typeNext, delay)
+      }
+    }
+
+    typeNext()
+
+    return () => {
+      isCancelled = true
+    }
+  }, [hasStartedTyping])
+
+  return (
+    <div ref={containerRef} className="min-h-[140px] text-left bg-[#0a0a0a] border border-[#202020] rounded-2xl p-6 sm:p-8 shadow-2xl">
+      <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
+        {typedStory}
+        {hasStartedTyping && typedStory.length < FULL_STORY_TEXT.length && (
+          <span className="inline-block w-1.5 h-4 ml-1 bg-red-600 animate-pulse align-middle" />
+        )}
+      </p>
+    </div>
   )
 }
 
@@ -233,44 +279,42 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   const highlightedEl: string | null = null   // kept for JSX compatibility (simple tour does not highlight)
 
-  // Typewriter effect state for Our Story
-  const storyRef = useRef<HTMLDivElement>(null)
-  const [hasStartedTyping, setHasStartedTyping] = useState(false)
-  const [typedStory, setTypedStory] = useState("")
-
-  const fullStoryText =
-    "PodGuide was founded with a clear conviction: healthcare education should be unified, collaborative, and accessible. We built PodGuide as a trusted mentorship network, an academic library hub, an adaptive space to practice clinical examinations, and a launchpad for growth and opportunities. Whether you are a medical student, a health tutor, or a healthcare professional anywhere in the healthcare field, PodGuide gives you the tools to excel."
-
   // Ensure landing page always enforces its signature black theme
   useEffect(() => {
     document.documentElement.classList.add("dark")
   }, [])
 
-  // Proportional scroll-responsive animation (continuous slide, scale & opacity tracking)
+  // Proportional scroll-responsive animation with requestAnimationFrame throttling (60fps smooth)
   useEffect(() => {
+    let ticking = false
     const handleScroll = () => {
-      const scrollElements = document.querySelectorAll<HTMLElement>(".scroll-responsive")
-      const windowHeight = window.innerHeight
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollElements = document.querySelectorAll<HTMLElement>(".scroll-responsive")
+          const windowHeight = window.innerHeight
 
-      scrollElements.forEach(el => {
-        const rect = el.getBoundingClientRect()
-        const visibleDistance = windowHeight - rect.top
-        const elementHeight = rect.height || 120
+          scrollElements.forEach(el => {
+            const rect = el.getBoundingClientRect()
+            const visibleDistance = windowHeight - rect.top
+            const elementHeight = rect.height || 120
 
-        if (visibleDistance > 0 && rect.bottom > 0) {
-          // Progress from 0 (just entering bottom) to 1 (well inside view)
-          const progress = Math.min(1, Math.max(0, visibleDistance / (elementHeight * 0.75 + 120)))
-          const opacity = Math.min(1, progress * 1.25)
-          const translateY = (1 - progress) * 26
-          const scale = 0.97 + progress * 0.03
+            if (visibleDistance > 0 && rect.bottom > 0) {
+              const progress = Math.min(1, Math.max(0, visibleDistance / (elementHeight * 0.75 + 120)))
+              const opacity = Math.min(1, progress * 1.25)
+              const translateY = (1 - progress) * 26
+              const scale = 0.97 + progress * 0.03
 
-          el.style.opacity = `${opacity}`
-          el.style.transform = `translateY(${translateY}px) scale(${scale})`
-        } else if (visibleDistance <= 0) {
-          el.style.opacity = "0"
-          el.style.transform = "translateY(26px) scale(0.97)"
-        }
-      })
+              el.style.opacity = `${opacity}`
+              el.style.transform = `translateY(${translateY}px) scale(${scale})`
+            } else if (visibleDistance <= 0) {
+              el.style.opacity = "0"
+              el.style.transform = "translateY(26px) scale(0.97)"
+            }
+          })
+          ticking = false
+        })
+        ticking = true
+      }
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true })
@@ -279,57 +323,13 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Typewriter intersection trigger
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        if (entries[0]?.isIntersecting && !hasStartedTyping) {
-          setHasStartedTyping(true)
-        }
-      },
-      { threshold: 0.2 }
-    )
-
-    if (storyRef.current) {
-      observer.observe(storyRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [hasStartedTyping])
-
-  // Typewriter ticker: calm, natural, readable reading speed with punctuation pauses
-  useEffect(() => {
-    if (!hasStartedTyping) return
-
-    let index = 0
-    let isCancelled = false
-
-    const typeNext = () => {
-      if (isCancelled) return
-      if (index <= fullStoryText.length) {
-        setTypedStory(fullStoryText.slice(0, index))
-        const lastChar = fullStoryText[index - 1]
-        index++
-
-        // Punctuation pauses for natural pacing
-        const delay = lastChar === "." || lastChar === ":" ? 320 : lastChar === "," ? 160 : 36
-        setTimeout(typeNext, delay)
-      }
-    }
-
-    typeNext()
-
-    return () => {
-      isCancelled = true
-    }
-  }, [hasStartedTyping])
-
   // Switch tab function
   const handleSelectTab = (tabId: TabKey, isManual = true) => {
     if (isManual) {
       isInteractingRef.current = true
       setIsUserInteracting(true)
       if (timerRef.current) clearTimeout(timerRef.current)
+      if ((timerRef as any)._clickTimer) clearTimeout((timerRef as any)._clickTimer)
       if (cursorRef.current) {
         cursorRef.current.style.opacity = "0"
       }
@@ -337,30 +337,32 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
     setActiveTab(tabId)
   }
 
-  // Simple, reliable cursor tour — glides through sidebar tab buttons in sequence
+  // Desktop-only simulated cursor tour (Never interrupts or hijacks mobile views)
   useEffect(() => {
     const runTour = () => {
-      if (isInteractingRef.current) return
+      if (isInteractingRef.current || typeof window === "undefined" || window.innerWidth < 768) return
 
-      const cursor    = cursorRef.current
+      const cursor = cursorRef.current
       const workspace = workspaceRef.current
-      if (!cursor || !workspace) { timerRef.current = setTimeout(runTour, 4000); return }
+      if (!cursor || !workspace) {
+        timerRef.current = setTimeout(runTour, 4000)
+        return
+      }
 
       const tabKeys = TABS_SEQUENCE
-      const tabIdx  = currentStepRef.current % tabKeys.length
-      const tabKey  = tabKeys[tabIdx]
-      const btn     = document.getElementById(`tab-btn-${tabKey}`)
+      const tabIdx = currentStepRef.current % tabKeys.length
+      const tabKey = tabKeys[tabIdx]
+      const btn = document.getElementById(`tab-btn-${tabKey}`)
 
       if (btn) {
-        const btnRect  = btn.getBoundingClientRect()
-        const wsRect   = workspace.getBoundingClientRect()
-        const relX     = btnRect.left - wsRect.left + btnRect.width  / 2 - 12
-        const relY     = btnRect.top  - wsRect.top  + btnRect.height / 2 - 12
+        const btnRect = btn.getBoundingClientRect()
+        const wsRect = workspace.getBoundingClientRect()
+        const relX = btnRect.left - wsRect.left + btnRect.width / 2 - 12
+        const relY = btnRect.top - wsRect.top + btnRect.height / 2 - 12
 
-        cursor.style.opacity   = "1"
+        cursor.style.opacity = "1"
         cursor.style.transform = `translate(${relX}px, ${relY}px)`
 
-        // After the cursor slides over (~800 ms), visually click the tab
         const clickTimer = setTimeout(() => {
           if (isInteractingRef.current) return
           setActiveTab(tabKey)
@@ -373,12 +375,14 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
       timerRef.current = setTimeout(runTour, 4200)
     }
 
-    const initialTimer = setTimeout(runTour, 1600)
-
-    return () => {
-      clearTimeout(initialTimer)
-      if (timerRef.current) clearTimeout(timerRef.current)
-      if ((timerRef as any)._clickTimer) clearTimeout((timerRef as any)._clickTimer)
+    // Only start if desktop
+    if (typeof window !== "undefined" && window.innerWidth >= 768) {
+      const initialTimer = setTimeout(runTour, 1600)
+      return () => {
+        clearTimeout(initialTimer)
+        if (timerRef.current) clearTimeout(timerRef.current)
+        if ((timerRef as any)._clickTimer) clearTimeout((timerRef as any)._clickTimer)
+      }
     }
   }, [])
 
@@ -463,15 +467,29 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
           </div>
         </div>
 
-        {/* Mobile: Space-saving 2-column compact grid */}
-        <div className="sm:hidden mt-8 w-full grid grid-cols-2 gap-4 text-left overflow-hidden relative z-10">
-          {ALL_FLOATING_BADGES.slice(0, 8).map((badge, idx) => (
-            <InteractiveFloatingCard
-              key={`mob-${idx}`}
-              {...badge}
-              animationClass={`animate-float-${(idx % 8) + 1}`}
-            />
-          ))}
+        {/* Mobile: 2 Lively Continuous Floating Drift Streams (Active animated floating movement) */}
+        <div className="sm:hidden mt-8 w-full overflow-hidden relative z-10 py-2 space-y-3">
+          {/* Stream 1 (Glides Left with gentle vertical wave bobbing) */}
+          <div className="animate-stream-left flex items-center gap-3">
+            {[...ALL_FLOATING_BADGES.slice(0, 6), ...ALL_FLOATING_BADGES.slice(0, 6)].map((badge, idx) => (
+              <InteractiveFloatingCard
+                key={`mob-s1-${idx}`}
+                {...badge}
+                animationClass={`animate-float-mob-${(idx % 4) + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Stream 2 (Glides Right with gentle vertical wave bobbing) */}
+          <div className="animate-stream-right flex items-center gap-3 -ml-16">
+            {[...ALL_FLOATING_BADGES.slice(6, 12), ...ALL_FLOATING_BADGES.slice(6, 12)].map((badge, idx) => (
+              <InteractiveFloatingCard
+                key={`mob-s2-${idx}`}
+                {...badge}
+                animationClass={`animate-float-mob-${((idx + 2) % 4) + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -492,7 +510,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
         {/* Main App Mockup Shell */}
         <div
           ref={workspaceRef}
-          className="relative bg-[#080808] rounded-3xl border border-[#222] shadow-2xl overflow-hidden min-h-[580px] flex flex-col md:flex-row"
+          className="relative bg-[#080808] rounded-3xl border border-[#222] shadow-2xl overflow-hidden min-h-[400px] md:min-h-[580px] flex flex-col md:flex-row"
         >
           {/* Virtual Pointer Cursor Overlay (Desktop) */}
           <div
@@ -508,23 +526,43 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
             </div>
           </div>
 
-          {/* Mobile Horizontal Tab Bar (Immediate Access Without Long Scroll) */}
-          <div className="md:hidden flex overflow-x-auto gap-1.5 p-3 bg-[#0d0d0d] border-b border-[#1f1f1f] shrink-0 no-scrollbar">
-            {TABS_SEQUENCE.map(tabKey => (
-              <button
-                key={`mobile-tab-${tabKey}`}
-                type="button"
-                onClick={() => handleSelectTab(tabKey)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold capitalize whitespace-nowrap flex-shrink-0 min-w-[80px] truncate transition-colors ${
-                  activeTab === tabKey
-                    ? "bg-red-600 text-white"
-                    : "bg-[#161616] text-gray-400 hover:text-white"
-                }`}
+          {/* Mobile App Header (Realistic native app feel) */}
+          <div className="md:hidden flex items-center justify-between px-4 py-3 bg-[#0d0d0d] border-b border-[#1f1f1f]">
+            <div className="flex items-center gap-2.5">
+              <div className="w-6 h-6 rounded-md bg-red-600 flex items-center justify-center text-white font-bold text-xs">
+                P
+              </div>
+              <div>
+                <h3 className="text-xs font-bold text-white tracking-wide">PodGuide App</h3>
+                <p className="text-[9px] text-gray-400">Interactive Preview</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-[10px] text-gray-400 font-mono bg-[#141414] px-2 py-0.5 rounded border border-[#222]">MBChB Yr 5</span>
+            </div>
+          </div>
 
-              >
-                {tabKey}
-              </button>
-            ))}
+          {/* Mobile Horizontal Tab Bar with Icons */}
+          <div className="md:hidden flex overflow-x-auto gap-2 p-2.5 bg-[#0a0a0a] border-b border-[#1f1f1f] shrink-0 no-scrollbar">
+            {TABS_SEQUENCE.map(tabKey => {
+              const TabIcon = TAB_ICONS[tabKey]
+              return (
+                <button
+                  key={`mobile-tab-${tabKey}`}
+                  type="button"
+                  onClick={() => handleSelectTab(tabKey)}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-semibold capitalize whitespace-nowrap flex items-center gap-1.5 shrink-0 transition-all active:scale-95 ${
+                    activeTab === tabKey
+                      ? "bg-red-600 text-white shadow-md shadow-red-600/30"
+                      : "bg-[#141414] text-gray-400 hover:text-white border border-[#222]"
+                  }`}
+                >
+                  <TabIcon size={13} />
+                  <span>{tabKey}</span>
+                </button>
+              )
+            })}
           </div>
 
           {/* Desktop Left App Sidebar */}
@@ -682,7 +720,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
           </aside>
 
           {/* Main Interactive Content Panel */}
-          <main className="flex-1 p-5 sm:p-7 md:p-8 bg-[#050507] overflow-y-auto max-h-[580px] relative">
+          <main className="flex-1 p-4 sm:p-6 md:p-8 bg-[#050507] overflow-y-auto max-h-none md:max-h-[580px] relative">
             {/* ── TAB 1: DASHBOARD (TITLE CASE GREETING) ── */}
             {activeTab === "dashboard" && (
               <div className="space-y-6 animate-in fade-in duration-200">
@@ -699,8 +737,8 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                 </div>
 
                 {/* Subject Cards Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-                  <div id="tour-dashboard-card-1" className={`bg-[#101010] p-4 rounded-2xl border transition-colors ${highlightedEl === "tour-dashboard-card-1" ? "border-red-600 shadow-[0_0_12px_rgba(220,38,38,0.35)]" : "border-[#202020] hover:border-red-600/40"}`}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  <div id="tour-dashboard-card-1" className={`bg-[#101010] p-3 sm:p-4 rounded-2xl border transition-colors ${highlightedEl === "tour-dashboard-card-1" ? "border-red-600 shadow-[0_0_12px_rgba(220,38,38,0.35)]" : "border-[#202020] hover:border-red-600/40"}`}>
                     <div className="flex items-center justify-between mb-3">
                       <div className="w-8 h-8 rounded-xl bg-[#161616] border border-[#242424] flex items-center justify-center text-red-500">
                         <Bone size={15} />
@@ -847,7 +885,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                   </Link>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                   <div id="tour-library-folder-1" className="p-3.5 bg-[#101010] rounded-xl border border-[#202020] flex items-center gap-3">
                     <Folder size={20} className="text-red-500 shrink-0" />
                     <div className="truncate">
@@ -972,7 +1010,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                   <span className="text-xs text-red-500 font-semibold">Verified Clinical Gear</span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                   {/* TANC Official Scrubs (Lifestyle Showcase) */}
                   <div className="bg-[#101010] rounded-2xl border border-[#202020] overflow-hidden flex flex-col justify-between">
                     <div className="h-40 bg-[#141414] relative flex items-center justify-center overflow-hidden">
@@ -1050,7 +1088,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                 </div>
 
                 <div className="space-y-3">
-                  <div className="p-4 bg-[#101010] rounded-xl border border-[#202020] flex items-center justify-between">
+                  <div className="p-4 bg-[#101010] rounded-xl border border-[#202020] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                       <span className="text-[9px] text-red-500 font-bold uppercase tracking-wider">Research Grant</span>
                       <h4 className="text-xs font-bold text-white mt-0.5">Elton John AIDS Foundation Grant</h4>
@@ -1065,7 +1103,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                     </Link>
                   </div>
 
-                  <div className="p-4 bg-[#101010] rounded-xl border border-[#202020] flex items-center justify-between">
+                  <div className="p-4 bg-[#101010] rounded-xl border border-[#202020] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                       <span className="text-[9px] text-red-500 font-bold uppercase tracking-wider">Elective Placement</span>
                       <h4 className="text-xs font-bold text-white mt-0.5">WHO AFRO Student Internship</h4>
@@ -1079,7 +1117,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                     </Link>
                   </div>
 
-                  <div className="p-4 bg-[#101010] rounded-xl border border-[#202020] flex items-center justify-between">
+                  <div className="p-4 bg-[#101010] rounded-xl border border-[#202020] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                       <span className="text-[9px] text-red-500 font-bold uppercase tracking-wider">Fellowship</span>
                       <h4 className="text-xs font-bold text-white mt-0.5">Commonwealth Medical Fellowship</h4>
@@ -1111,7 +1149,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
         </div>
 
         {/* Compact Space-Efficient Side-by-Side Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5">
           <div
             className="landing-discipline-card p-3 rounded-xl border border-[#202020] hover:border-red-600/40 transition-colors flex items-center gap-2.5 cursor-default group"
             style={{ backgroundColor: "#0e0e0e", color: "#ffffff" }}
@@ -1214,7 +1252,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
       </section>
 
       {/* ── OUR STORY (FULL-WIDTH EDITORIAL WITH NATURAL PACED TYPEWRITER STREAMING) ── */}
-      <section id="story" ref={storyRef} className="py-20 px-4 sm:px-6 max-w-5xl mx-auto border-t border-[#181818] scroll-responsive">
+      <section id="story" className="py-20 px-4 sm:px-6 max-w-5xl mx-auto border-t border-[#181818] scroll-responsive">
         <div className="space-y-8 text-center max-w-3xl mx-auto">
           <span className="text-xs font-semibold text-red-500 tracking-[0.2em] uppercase">
             Our Mission & Roots
@@ -1223,15 +1261,8 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
             Built by medical students, <span className="font-semibold text-white">for the future of healthcare.</span>
           </h2>
 
-          {/* Natural Paced Animated Typewriter Paragraph */}
-          <div className="min-h-[140px] text-left bg-[#0a0a0a] border border-[#202020] rounded-2xl p-6 sm:p-8 shadow-2xl">
-            <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
-              {typedStory}
-              {hasStartedTyping && typedStory.length < fullStoryText.length && (
-                <span className="inline-block w-1.5 h-4 ml-1 bg-red-600 animate-pulse align-middle" />
-              )}
-            </p>
-          </div>
+          {/* Natural Paced Animated Typewriter Paragraph (Isolated Component) */}
+          <OurStoryTypewriter />
 
           {/* PodMyth Subsidiary Highlight Card */}
           <div className="bg-[#101010] p-6 sm:p-8 rounded-2xl border border-red-600/30 text-left space-y-3 shadow-xl">
