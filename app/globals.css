@@ -48,7 +48,7 @@
   .card-hover { transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease; }
   .card-hover:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
 
-  .animate-float-1 { animation: float1 7.5s ease-in-out infinite; }
+  .animate-float-1 { animation: float1 12s ease-in-out infinite; }
   .animate-float-2 { animation: float2 9s ease-in-out infinite; }
   .animate-float-3 { animation: float3 8.2s ease-in-out infinite; }
   .animate-float-4 { animation: float4 9.8s ease-in-out infinite; }

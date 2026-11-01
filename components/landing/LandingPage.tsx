@@ -464,9 +464,13 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
         </div>
 
         {/* Mobile: Space-saving 2-column compact grid */}
-        <div className="sm:hidden mt-8 w-full grid grid-cols-2 gap-2 text-left relative z-10">
+        <div className="sm:hidden mt-8 w-full grid grid-cols-2 gap-4 text-left overflow-hidden relative z-10">
           {ALL_FLOATING_BADGES.slice(0, 8).map((badge, idx) => (
-            <InteractiveFloatingCard key={`mob-${idx}`} {...badge} animationClass="" />
+            <InteractiveFloatingCard
+              key={`mob-${idx}`}
+              {...badge}
+              animationClass={`animate-float-${(idx % 8) + 1}`}
+            />
           ))}
         </div>
       </section>
@@ -511,11 +515,12 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                 key={`mobile-tab-${tabKey}`}
                 type="button"
                 onClick={() => handleSelectTab(tabKey)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold capitalize whitespace-nowrap transition-colors ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold capitalize whitespace-nowrap flex-shrink-0 min-w-[80px] truncate transition-colors ${
                   activeTab === tabKey
                     ? "bg-red-600 text-white"
                     : "bg-[#161616] text-gray-400 hover:text-white"
                 }`}
+
               >
                 {tabKey}
               </button>
