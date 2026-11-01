@@ -194,6 +194,67 @@ function InteractiveFloatingCard({
   )
 }
 
+interface MobileBadgeData {
+  href: string
+  icon: any
+  title: string
+  subtitle: string
+}
+
+/**
+ * Mobile Badge Data: strictly 2-word punchy titles and 2-word subtitles.
+ * Zero truncation dots, zero cutoffs, clean precision on any screen width.
+ */
+const MOBILE_BADGES: MobileBadgeData[] = [
+  { href: "/library", icon: BookMarked, title: "Curated Shelves", subtitle: "Medical Library" },
+  { href: "/practise", icon: BrainCircuit, title: "Question Bank", subtitle: "10,000+ MCQs" },
+  { href: "/medstore", icon: ShoppingBag, title: "TANC MedStore", subtitle: "Clinical Gear" },
+  { href: "/learn", icon: Stethoscope, title: "Clinical Guides", subtitle: "Ward Rounds" },
+  { href: "/campus", icon: Users, title: "Campus Feed", subtitle: "Peer Cases" },
+  { href: "/library", icon: Video, title: "Study Viewer", subtitle: "Video Notes" },
+  { href: "/grow", icon: TrendingUp, title: "Career Growth", subtitle: "Global Grants" },
+  { href: "/learn", icon: Layers, title: "Flashcard Decks", subtitle: "Spaced Recall" },
+  { href: "/library", icon: Microscope, title: "Histology Atlas", subtitle: "Tissue Slides" },
+  { href: "/library", icon: Pill, title: "Pharmacology", subtitle: "Drug Dosing" },
+  { href: "/library", icon: Bone, title: "Anatomy 3D", subtitle: "Dissection Atlas" },
+  { href: "/library", icon: Scissors, title: "Surgical Skills", subtitle: "Suture Lab" },
+]
+
+/**
+ * Mobile-optimized compact floating card (Fits perfectly, 2-word labels, zero truncation dots)
+ */
+function MobileFloatingCard({
+  href,
+  icon: Icon,
+  title,
+  subtitle,
+  animationClass,
+}: MobileBadgeData & { animationClass: string }) {
+  return (
+    <Link
+      href={href}
+      className={`landing-floating-badge ${animationClass} relative group cursor-pointer select-none transition-all duration-150 rounded-xl border border-[#222] hover:border-red-600 active:scale-95 active:border-red-600 shadow-md inline-flex items-center gap-2 px-2.5 py-1.5 shrink-0 bg-[#0c0c0c] text-white`}
+      style={{
+        backgroundColor: "#0c0c0c",
+        boxShadow: "0 2px 10px rgba(0,0,0,0.5)",
+        willChange: "transform",
+      }}
+    >
+      <div className="w-6 h-6 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors duration-150">
+        <Icon size={12} />
+      </div>
+      <div className="text-left whitespace-nowrap leading-tight pr-1">
+        <div className="text-[11px] font-bold text-white tracking-tight">
+          {title}
+        </div>
+        <div className="text-[9px] font-medium text-gray-400">
+          {subtitle}
+        </div>
+      </div>
+    </Link>
+  )
+}
+
 const FULL_STORY_TEXT =
   "PodGuide was founded with a clear conviction: healthcare education should be unified, collaborative, and accessible. We built PodGuide as a trusted mentorship network, an academic library hub, an adaptive space to practice clinical examinations, and a launchpad for growth and opportunities. Whether you are a medical student, a health tutor, or a healthcare professional anywhere in the healthcare field, PodGuide gives you the tools to excel."
 
@@ -323,7 +384,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Switch tab function
+  // Switch tab function (Manual interaction pauses the assistant cursor tour for 8 seconds)
   const handleSelectTab = (tabId: TabKey, isManual = true) => {
     if (isManual) {
       isInteractingRef.current = true
@@ -333,14 +394,19 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
       if (cursorRef.current) {
         cursorRef.current.style.opacity = "0"
       }
+      // Gracefully resume assistant demonstration after 8 seconds of inactivity
+      setTimeout(() => {
+        isInteractingRef.current = false
+        setIsUserInteracting(false)
+      }, 8000)
     }
     setActiveTab(tabId)
   }
 
-  // Desktop-only simulated cursor tour (Never interrupts or hijacks mobile views)
+  // Universal simulated cursor tour (Demonstrates how PodGuide works on BOTH desktop and mobile!)
   useEffect(() => {
     const runTour = () => {
-      if (isInteractingRef.current || typeof window === "undefined" || window.innerWidth < 768) return
+      if (isInteractingRef.current || typeof window === "undefined") return
 
       const cursor = cursorRef.current
       const workspace = workspaceRef.current
@@ -349,16 +415,24 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
         return
       }
 
+      const isMobile = window.innerWidth < 768
       const tabKeys = TABS_SEQUENCE
       const tabIdx = currentStepRef.current % tabKeys.length
       const tabKey = tabKeys[tabIdx]
-      const btn = document.getElementById(`tab-btn-${tabKey}`)
+
+      const btnId = isMobile ? `mobile-tab-${tabKey}` : `tab-btn-${tabKey}`
+      const btn = document.getElementById(btnId)
 
       if (btn) {
+        // On mobile, gently scroll active pill into visible view if needed
+        if (isMobile) {
+          btn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" })
+        }
+
         const btnRect = btn.getBoundingClientRect()
         const wsRect = workspace.getBoundingClientRect()
-        const relX = btnRect.left - wsRect.left + btnRect.width / 2 - 12
-        const relY = btnRect.top - wsRect.top + btnRect.height / 2 - 12
+        const relX = btnRect.left - wsRect.left + btnRect.width / 2 - (isMobile ? 8 : 12)
+        const relY = btnRect.top - wsRect.top + btnRect.height / 2 - (isMobile ? 8 : 12)
 
         cursor.style.opacity = "1"
         cursor.style.transform = `translate(${relX}px, ${relY}px)`
@@ -375,14 +449,11 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
       timerRef.current = setTimeout(runTour, 4200)
     }
 
-    // Only start if desktop
-    if (typeof window !== "undefined" && window.innerWidth >= 768) {
-      const initialTimer = setTimeout(runTour, 1600)
-      return () => {
-        clearTimeout(initialTimer)
-        if (timerRef.current) clearTimeout(timerRef.current)
-        if ((timerRef as any)._clickTimer) clearTimeout((timerRef as any)._clickTimer)
-      }
+    const initialTimer = setTimeout(runTour, 1600)
+    return () => {
+      clearTimeout(initialTimer)
+      if (timerRef.current) clearTimeout(timerRef.current)
+      if ((timerRef as any)._clickTimer) clearTimeout((timerRef as any)._clickTimer)
     }
   }, [])
 
@@ -423,14 +494,15 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
             <a href="#contact" className="hover:text-white transition-colors duration-150">Contact</a>
           </div>
 
-          {/* Launch / Login Button */}
+          {/* Executive Standard Launch / Access Portal CTA */}
           <div className="flex items-center gap-3">
             <Link
               href={isLoggedIn ? "/dashboard" : "/login"}
-              className="inline-flex items-center justify-center px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-all bg-red-600 rounded-xl hover:bg-red-700 active:scale-95 shadow-md"
+              className="group relative inline-flex items-center gap-2 px-4 py-2 sm:px-4.5 sm:py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-semibold tracking-wide transition-all duration-150 border border-white/10 shadow-[0_2px_10px_rgba(220,38,38,0.35),0_0_0_1px_rgba(255,255,255,0.12)_inset] active:scale-95"
             >
-              <Zap size={14} className="mr-1.5 fill-white" />
-              <span>{isLoggedIn ? "Go to Dashboard" : "Launch App"}</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+              <span>{isLoggedIn ? "Open Dashboard" : "Launch App"}</span>
+              <ChevronRight size={13} className="text-white/80 group-hover:translate-x-0.5 group-hover:text-white transition-transform duration-150" />
             </Link>
           </div>
         </nav>
@@ -467,12 +539,12 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
           </div>
         </div>
 
-        {/* Mobile: 2 Lively Continuous Floating Drift Streams (Active animated floating movement) */}
-        <div className="sm:hidden mt-8 w-full overflow-hidden relative z-10 py-2 space-y-3">
+        {/* Mobile: 2 Lively Continuous Floating Drift Streams (Ultra-compact, strictly 2-word labels, zero truncation) */}
+        <div className="sm:hidden mt-8 w-full overflow-hidden relative z-10 py-2 space-y-2.5">
           {/* Stream 1 (Glides Left with gentle vertical wave bobbing) */}
-          <div className="animate-stream-left flex items-center gap-3">
-            {[...ALL_FLOATING_BADGES.slice(0, 6), ...ALL_FLOATING_BADGES.slice(0, 6)].map((badge, idx) => (
-              <InteractiveFloatingCard
+          <div className="animate-stream-left flex items-center gap-2.5">
+            {[...MOBILE_BADGES.slice(0, 6), ...MOBILE_BADGES.slice(0, 6)].map((badge, idx) => (
+              <MobileFloatingCard
                 key={`mob-s1-${idx}`}
                 {...badge}
                 animationClass={`animate-float-mob-${(idx % 4) + 1}`}
@@ -481,9 +553,9 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
           </div>
 
           {/* Stream 2 (Glides Right with gentle vertical wave bobbing) */}
-          <div className="animate-stream-right flex items-center gap-3 -ml-16">
-            {[...ALL_FLOATING_BADGES.slice(6, 12), ...ALL_FLOATING_BADGES.slice(6, 12)].map((badge, idx) => (
-              <InteractiveFloatingCard
+          <div className="animate-stream-right flex items-center gap-2.5 -ml-16">
+            {[...MOBILE_BADGES.slice(6, 12), ...MOBILE_BADGES.slice(6, 12)].map((badge, idx) => (
+              <MobileFloatingCard
                 key={`mob-s2-${idx}`}
                 {...badge}
                 animationClass={`animate-float-mob-${((idx + 2) % 4) + 1}`}
@@ -512,16 +584,16 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
           ref={workspaceRef}
           className="relative bg-[#080808] rounded-3xl border border-[#222] shadow-2xl overflow-hidden min-h-[400px] md:min-h-[580px] flex flex-col md:flex-row"
         >
-          {/* Virtual Pointer Cursor Overlay (Desktop) */}
+          {/* Virtual Pointer Cursor Overlay (Visible on both mobile & desktop) */}
           <div
             ref={cursorRef}
             id="simulated-cursor"
-            className="hidden md:flex absolute top-0 left-0 items-center gap-1.5 pointer-events-none transition-all duration-700 z-30"
+            className="flex absolute top-0 left-0 items-center gap-1.5 pointer-events-none transition-all duration-700 z-30 scale-75 sm:scale-100 origin-top-left"
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-lg">
               <path d="M3 3L10.07 19.97L13.58 12.58L20.97 9.07L3 3Z" fill="#FFFFFF" stroke="#000000" strokeWidth="2" strokeLinejoin="round" />
             </svg>
-            <div className="bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg border border-white/20 whitespace-nowrap">
+            <div className="bg-red-600 text-white text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full shadow-lg border border-white/20 whitespace-nowrap">
               PodGuide Assistant
             </div>
           </div>
@@ -550,6 +622,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
               return (
                 <button
                   key={`mobile-tab-${tabKey}`}
+                  id={`mobile-tab-${tabKey}`}
                   type="button"
                   onClick={() => handleSelectTab(tabKey)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-semibold capitalize whitespace-nowrap flex items-center gap-1.5 shrink-0 transition-all active:scale-95 ${
