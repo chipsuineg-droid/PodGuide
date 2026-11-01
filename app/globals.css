@@ -57,56 +57,109 @@
   .animate-float-7 { animation: float7 8s ease-in-out infinite; will-change: transform; }
   .animate-float-8 { animation: float8 9.4s ease-in-out infinite; will-change: transform; }
 
-  .animate-float-mob-1 { animation: floatMob1 5.5s ease-in-out infinite; will-change: transform; }
-  .animate-float-mob-2 { animation: floatMob2 6.5s ease-in-out infinite; will-change: transform; }
-  .animate-float-mob-3 { animation: floatMob3 6s ease-in-out infinite; will-change: transform; }
-  .animate-float-mob-4 { animation: floatMob4 7s ease-in-out infinite; will-change: transform; }
-
-  .animate-stream-left {
-    display: flex;
-    width: max-content;
-    animation: streamLeft 26s linear infinite;
-    will-change: transform;
-  }
-  .animate-stream-right {
-    display: flex;
-    width: max-content;
-    animation: streamRight 28s linear infinite;
-    will-change: transform;
-  }
-  .animate-stream-left:hover,
-  .animate-stream-right:hover,
-  .animate-stream-left:active,
-  .animate-stream-right:active {
-    animation-play-state: paused;
-  }
+  .animate-float-mob-1 { animation: floatMob1 7.5s ease-in-out infinite; will-change: transform; }
+  .animate-float-mob-2 { animation: floatMob2 8.5s ease-in-out infinite; will-change: transform; }
+  .animate-float-mob-3 { animation: floatMob3 8s ease-in-out infinite; will-change: transform; }
+  .animate-float-mob-4 { animation: floatMob4 9s ease-in-out infinite; will-change: transform; }
+  .animate-float-mob-5 { animation: floatMob5 7s ease-in-out infinite; will-change: transform; }
+  .animate-float-mob-6 { animation: floatMob6 8.2s ease-in-out infinite; will-change: transform; }
+  .animate-float-mob-7 { animation: floatMob7 8.8s ease-in-out infinite; will-change: transform; }
+  .animate-float-mob-8 { animation: floatMob8 9.5s ease-in-out infinite; will-change: transform; }
 }
 
-@keyframes streamLeft {
-  0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-50%, 0, 0); }
+@keyframes vibrate {
+  0% { transform: scale(1.05) translate(0); }
+  20% { transform: scale(1.05) translate(-1.5px, 1.5px); }
+  40% { transform: scale(1.05) translate(-1.5px, -1.5px); }
+  60% { transform: scale(1.05) translate(1.5px, 1.5px); }
+  80% { transform: scale(1.05) translate(1.5px, -1.5px); }
+  100% { transform: scale(1) translate(0); }
+}
+.animate-vibrate {
+  animation: vibrate 0.22s ease-in-out !important;
 }
 
-@keyframes streamRight {
-  0% { transform: translate3d(-50%, 0, 0); }
-  100% { transform: translate3d(0, 0, 0); }
+@keyframes rippleWave {
+  0% { transform: scale(0.95); opacity: 0.9; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+.ripple-wave {
+  animation: rippleWave 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cursorPress {
+  0% { transform: scale(1) translate(0, 0); }
+  40% { transform: scale(0.8) translate(2px, 2px); }
+  100% { transform: scale(1) translate(0, 0); }
+}
+.animate-cursor-click {
+  animation: cursorPress 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes clickBurst {
+  0% { transform: scale(0.2); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+.click-burst {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  border: 2px solid #DC2626;
+  background-color: rgba(220, 38, 38, 0.25);
+  pointer-events: none;
+  animation: clickBurst 0.45s ease-out forwards;
 }
 
 @keyframes floatMob1 {
-  0%, 100% { transform: translate3d(0, 0px, 0); }
-  50% { transform: translate3d(0, -5px, 0); }
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(14px, -10px, 0); }
+  50% { transform: translate3d(20px, 6px, 0); }
+  75% { transform: translate3d(8px, 12px, 0); }
 }
 @keyframes floatMob2 {
-  0%, 100% { transform: translate3d(0, 0px, 0); }
-  50% { transform: translate3d(0, 5px, 0); }
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(-15px, 8px, 0); }
+  50% { transform: translate3d(-20px, -6px, 0); }
+  75% { transform: translate3d(-7px, -12px, 0); }
 }
 @keyframes floatMob3 {
-  0%, 100% { transform: translate3d(0, 0px, 0); }
-  50% { transform: translate3d(0, -4px, 0); }
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(12px, 12px, 0); }
+  50% { transform: translate3d(6px, 18px, 0); }
+  75% { transform: translate3d(-10px, 8px, 0); }
 }
 @keyframes floatMob4 {
-  0%, 100% { transform: translate3d(0, 0px, 0); }
-  50% { transform: translate3d(0, 4px, 0); }
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(-12px, -12px, 0); }
+  50% { transform: translate3d(-18px, 6px, 0); }
+  75% { transform: translate3d(-8px, 14px, 0); }
+}
+@keyframes floatMob5 {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(14px, -14px, 0); }
+  50% { transform: translate3d(-8px, -10px, 0); }
+  75% { transform: translate3d(-16px, 6px, 0); }
+}
+@keyframes floatMob6 {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(-16px, 8px, 0); }
+  50% { transform: translate3d(-6px, -14px, 0); }
+  75% { transform: translate3d(12px, -6px, 0); }
+}
+@keyframes floatMob7 {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(14px, 10px, 0); }
+  50% { transform: translate3d(18px, -6px, 0); }
+  75% { transform: translate3d(6px, -12px, 0); }
+}
+@keyframes floatMob8 {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(-12px, -8px, 0); }
+  50% { transform: translate3d(10px, -14px, 0); }
+  75% { transform: translate3d(16px, 6px, 0); }
 }
 
 @keyframes float1 {

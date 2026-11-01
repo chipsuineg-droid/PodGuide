@@ -160,7 +160,7 @@ const ALL_FLOATING_BADGES: FloatingBadgeData[] = [
 ]
 
 /**
- * Pure-CSS interactive floating card (Zero-delay, zero double-clicking on mobile)
+ * Interactive floating card for Desktop with ripple wave & tactile vibration
  */
 function InteractiveFloatingCard({
   href,
@@ -169,16 +169,34 @@ function InteractiveFloatingCard({
   subtitle,
   animationClass,
 }: FloatingBadgeData) {
+  const [isRippling, setIsRippling] = useState(false)
+  const [isVibrating, setIsVibrating] = useState(false)
+
+  const triggerFeedback = () => {
+    setIsRippling(true)
+    setIsVibrating(true)
+    if (typeof navigator !== "undefined" && navigator.vibrate) {
+      try { navigator.vibrate(20) } catch (e) {}
+    }
+    setTimeout(() => setIsRippling(false), 600)
+    setTimeout(() => setIsVibrating(false), 220)
+  }
+
   return (
     <Link
       href={href}
-      className={`landing-floating-badge ${animationClass} relative group cursor-pointer select-none transition-all duration-150 rounded-2xl border border-[#242424] hover:border-red-600 active:scale-95 active:border-red-600 shadow-xl inline-flex items-center gap-2.5 px-3 py-2 sm:px-3.5 sm:py-2.5 shrink-0 bg-[#0e0e0e] text-white`}
+      onClick={triggerFeedback}
+      onMouseEnter={triggerFeedback}
+      className={`landing-floating-badge ${animationClass} ${isVibrating ? "animate-vibrate" : ""} relative group cursor-pointer select-none transition-all duration-150 rounded-2xl border border-[#242424] hover:border-red-600 active:scale-95 shadow-xl inline-flex items-center gap-2.5 px-3 py-2 sm:px-3.5 sm:py-2.5 shrink-0 bg-[#0e0e0e] text-white`}
       style={{
         backgroundColor: "#0e0e0e",
         boxShadow: "0 4px 20px rgba(0,0,0,0.6)",
         willChange: "transform",
       }}
     >
+      {isRippling && (
+        <span className="pointer-events-none absolute inset-0 rounded-2xl border-2 border-red-500 ripple-wave" />
+      )}
       <div className="w-8 h-8 rounded-xl bg-red-600/15 text-red-500 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors duration-150">
         <Icon size={15} />
       </div>
@@ -221,7 +239,8 @@ const MOBILE_BADGES: MobileBadgeData[] = [
 ]
 
 /**
- * Mobile-optimized compact floating card (Fits perfectly, 2-word labels, zero truncation dots)
+ * Mobile-optimized compact floating card with ripple wave & tactile vibration
+ * Strictly 2-word labels, zero truncation dots, boundary-free hovering.
  */
 function MobileFloatingCard({
   href,
@@ -230,24 +249,42 @@ function MobileFloatingCard({
   subtitle,
   animationClass,
 }: MobileBadgeData & { animationClass: string }) {
+  const [isRippling, setIsRippling] = useState(false)
+  const [isVibrating, setIsVibrating] = useState(false)
+
+  const triggerFeedback = () => {
+    setIsRippling(true)
+    setIsVibrating(true)
+    if (typeof navigator !== "undefined" && navigator.vibrate) {
+      try { navigator.vibrate(25) } catch (e) {}
+    }
+    setTimeout(() => setIsRippling(false), 600)
+    setTimeout(() => setIsVibrating(false), 220)
+  }
+
   return (
     <Link
       href={href}
-      className={`landing-floating-badge ${animationClass} relative group cursor-pointer select-none transition-all duration-150 rounded-xl border border-[#222] hover:border-red-600 active:scale-95 active:border-red-600 shadow-md inline-flex items-center gap-2 px-2.5 py-1.5 shrink-0 bg-[#0c0c0c] text-white`}
+      onClick={triggerFeedback}
+      onMouseEnter={triggerFeedback}
+      className={`landing-floating-badge ${animationClass} ${isVibrating ? "animate-vibrate" : ""} relative group cursor-pointer select-none transition-all duration-150 rounded-xl border border-[#222] hover:border-red-600 active:scale-95 shadow-md inline-flex items-center gap-1.5 px-2.5 py-1.5 shrink-0 bg-[#0c0c0c] text-white`}
       style={{
         backgroundColor: "#0c0c0c",
         boxShadow: "0 2px 10px rgba(0,0,0,0.5)",
         willChange: "transform",
       }}
     >
-      <div className="w-6 h-6 rounded-lg bg-red-600/15 text-red-500 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors duration-150">
-        <Icon size={12} />
+      {isRippling && (
+        <span className="pointer-events-none absolute inset-0 rounded-xl border-2 border-red-500 ripple-wave" />
+      )}
+      <div className="w-5 h-5 rounded-md bg-red-600/15 text-red-500 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors duration-150">
+        <Icon size={11} />
       </div>
-      <div className="text-left whitespace-nowrap leading-tight pr-1">
-        <div className="text-[11px] font-bold text-white tracking-tight">
+      <div className="text-left whitespace-nowrap leading-tight pr-0.5">
+        <div className="text-[10.5px] font-bold text-white tracking-tight group-hover:text-red-400 transition-colors">
           {title}
         </div>
-        <div className="text-[9px] font-medium text-gray-400">
+        <div className="text-[8.5px] font-medium text-gray-400">
           {subtitle}
         </div>
       </div>
@@ -332,12 +369,13 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
   const [contactSubmitted, setContactSubmitted] = useState(false)
   const [contactForm, setContactForm] = useState({ name: "", email: "", message: "" })
 
-  // Cursor tour animation refs
+  // Cursor tour animation refs & click state
   const workspaceRef = useRef<HTMLDivElement>(null)
   const cursorRef = useRef<HTMLDivElement>(null)
   const currentStepRef = useRef(0)
   const isInteractingRef = useRef(false)
   const timerRef = useRef<NodeJS.Timeout | null>(null)
+  const [cursorClicking, setCursorClicking] = useState(false)
   const highlightedEl: string | null = null   // kept for JSX compatibility (simple tour does not highlight)
 
   // Ensure landing page always enforces its signature black theme
@@ -431,17 +469,35 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
 
         const btnRect = btn.getBoundingClientRect()
         const wsRect = workspace.getBoundingClientRect()
-        const relX = btnRect.left - wsRect.left + btnRect.width / 2 - (isMobile ? 8 : 12)
-        const relY = btnRect.top - wsRect.top + btnRect.height / 2 - (isMobile ? 8 : 12)
+
+        // Point the exact tip of the arrow (SVG 3,3) right at the center of the target button!
+        const relX = btnRect.left - wsRect.left + btnRect.width / 2 - 3
+        const relY = btnRect.top - wsRect.top + btnRect.height / 2 - 3
 
         cursor.style.opacity = "1"
         cursor.style.transform = `translate(${relX}px, ${relY}px)`
 
+        // After gliding to the button (~800ms), execute a REAL, VISIBLE CLICK!
         const clickTimer = setTimeout(() => {
           if (isInteractingRef.current) return
+
+          // 1. Visually press down the cursor arrow
+          setCursorClicking(true)
+
+          // 2. Button depression feedback
+          btn.classList.add("scale-95")
+          setTimeout(() => btn.classList.remove("scale-95"), 180)
+
+          // 3. Switch the active tab to display live workspace content
           setActiveTab(tabKey)
+
+          // 4. Release cursor press after 350ms
+          setTimeout(() => {
+            setCursorClicking(false)
+          }, 350)
+
           currentStepRef.current = (currentStepRef.current + 1) % tabKeys.length
-        }, 900)
+        }, 850)
 
         ;(timerRef as any)._clickTimer = clickTimer
       }
@@ -539,26 +595,41 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
           </div>
         </div>
 
-        {/* Mobile: 2 Lively Continuous Floating Drift Streams (Ultra-compact, strictly 2-word labels, zero truncation) */}
-        <div className="sm:hidden mt-8 w-full overflow-hidden relative z-10 py-2 space-y-2.5">
-          {/* Stream 1 (Glides Left with gentle vertical wave bobbing) */}
-          <div className="animate-stream-left flex items-center gap-2.5">
-            {[...MOBILE_BADGES.slice(0, 6), ...MOBILE_BADGES.slice(0, 6)].map((badge, idx) => (
+        {/* Mobile: Organic Boundary-Free Floating Cloud (Hovering in 2D space, no demarcation lines) */}
+        <div className="sm:hidden flex flex-col gap-3 items-center w-full mt-8 py-2 relative z-10">
+          <div className="flex items-center justify-center gap-2 flex-wrap">
+            {MOBILE_BADGES.slice(0, 3).map((badge, idx) => (
               <MobileFloatingCard
-                key={`mob-s1-${idx}`}
+                key={`mob-row1-${idx}`}
+                {...badge}
+                animationClass={`animate-float-mob-${idx + 1}`}
+              />
+            ))}
+          </div>
+          <div className="flex items-center justify-center gap-2 flex-wrap -ml-3">
+            {MOBILE_BADGES.slice(3, 6).map((badge, idx) => (
+              <MobileFloatingCard
+                key={`mob-row2-${idx}`}
+                {...badge}
+                animationClass={`animate-float-mob-${idx + 4}`}
+              />
+            ))}
+          </div>
+          <div className="flex items-center justify-center gap-2 flex-wrap ml-3">
+            {MOBILE_BADGES.slice(6, 9).map((badge, idx) => (
+              <MobileFloatingCard
+                key={`mob-row3-${idx}`}
                 {...badge}
                 animationClass={`animate-float-mob-${(idx % 4) + 1}`}
               />
             ))}
           </div>
-
-          {/* Stream 2 (Glides Right with gentle vertical wave bobbing) */}
-          <div className="animate-stream-right flex items-center gap-2.5 -ml-16">
-            {[...MOBILE_BADGES.slice(6, 12), ...MOBILE_BADGES.slice(6, 12)].map((badge, idx) => (
+          <div className="flex items-center justify-center gap-2 flex-wrap">
+            {MOBILE_BADGES.slice(9, 12).map((badge, idx) => (
               <MobileFloatingCard
-                key={`mob-s2-${idx}`}
+                key={`mob-row4-${idx}`}
                 {...badge}
-                animationClass={`animate-float-mob-${((idx + 2) % 4) + 1}`}
+                animationClass={`animate-float-mob-${(idx % 4) + 5}`}
               />
             ))}
           </div>
@@ -584,16 +655,23 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
           ref={workspaceRef}
           className="relative bg-[#080808] rounded-3xl border border-[#222] shadow-2xl overflow-hidden min-h-[400px] md:min-h-[580px] flex flex-col md:flex-row"
         >
-          {/* Virtual Pointer Cursor Overlay (Visible on both mobile & desktop) */}
+          {/* Virtual Pointer Cursor Overlay (Real Arrow Tip Pointing & Real Click Physics) */}
           <div
             ref={cursorRef}
             id="simulated-cursor"
-            className="flex absolute top-0 left-0 items-center gap-1.5 pointer-events-none transition-all duration-700 z-30 scale-75 sm:scale-100 origin-top-left"
+            className={`flex absolute top-0 left-0 items-start gap-1 pointer-events-none transition-all duration-700 z-30 ${cursorClicking ? "animate-cursor-click" : ""}`}
+            style={{ transformOrigin: "3px 3px" }}
           >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-lg">
-              <path d="M3 3L10.07 19.97L13.58 12.58L20.97 9.07L3 3Z" fill="#FFFFFF" stroke="#000000" strokeWidth="2" strokeLinejoin="round" />
-            </svg>
-            <div className="bg-red-600 text-white text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full shadow-lg border border-white/20 whitespace-nowrap">
+            {/* The Precision Pointer Arrow (Tip is at exactly 3px, 3px) */}
+            <div className="relative shrink-0">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+                <path d="M3 3L10.07 19.97L13.58 12.58L20.97 9.07L3 3Z" fill="#FFFFFF" stroke="#000000" strokeWidth="2" strokeLinejoin="round" />
+              </svg>
+              {cursorClicking && <span className="click-burst" />}
+            </div>
+
+            {/* Assistant Label Badge */}
+            <div className="mt-1 bg-red-600 text-white text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full shadow-lg border border-white/20 whitespace-nowrap">
               PodGuide Assistant
             </div>
           </div>
