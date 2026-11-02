@@ -87,30 +87,36 @@
   animation: rippleWave 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+#simulated-cursor {
+  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+  will-change: transform;
+}
+
 @keyframes cursorPress {
   0% { transform: scale(1) translate(0, 0); }
-  40% { transform: scale(0.8) translate(2px, 2px); }
+  40% { transform: scale(0.76) translate(1.5px, 2px); }
+  70% { transform: scale(0.76) translate(1.5px, 2px); }
   100% { transform: scale(1) translate(0, 0); }
 }
 .animate-cursor-click {
-  animation: cursorPress 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation: cursorPress 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes clickBurst {
-  0% { transform: scale(0.2); opacity: 1; }
-  100% { transform: scale(2.2); opacity: 0; }
+  0% { transform: scale(0.3); opacity: 1; }
+  100% { transform: scale(2.4); opacity: 0; }
 }
 .click-burst {
   position: absolute;
-  top: -6px;
-  left: -6px;
+  top: -7px;
+  left: -7px;
   width: 20px;
   height: 20px;
   border-radius: 9999px;
   border: 2px solid #DC2626;
-  background-color: rgba(220, 38, 38, 0.25);
+  background-color: rgba(220, 38, 38, 0.3);
   pointer-events: none;
-  animation: clickBurst 0.45s ease-out forwards;
+  animation: clickBurst 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes floatMob1 {

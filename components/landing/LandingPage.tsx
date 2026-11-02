@@ -372,6 +372,9 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
   // Cursor tour animation refs & click state
   const workspaceRef = useRef<HTMLDivElement>(null)
   const cursorRef = useRef<HTMLDivElement>(null)
+  const mobileTabsRef = useRef<HTMLDivElement>(null)
+  const isWorkspaceVisibleRef = useRef(false)
+  const [isWorkspaceVisible, setIsWorkspaceVisible] = useState(false)
   const currentStepRef = useRef(0)
   const isInteractingRef = useRef(false)
   const timerRef = useRef<NodeJS.Timeout | null>(null)
@@ -381,6 +384,27 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
   // Ensure landing page always enforces its signature black theme
   useEffect(() => {
     document.documentElement.classList.add("dark")
+  }, [])
+
+  // Track workspace visibility in viewport (Ensures tour NEVER interrupts scrolling or hijacks the page!)
+  useEffect(() => {
+    const el = workspaceRef.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      entries => {
+        const isVis = entries[0]?.isIntersecting ?? false
+        isWorkspaceVisibleRef.current = isVis
+        setIsWorkspaceVisible(isVis)
+        if (!isVis && cursorRef.current) {
+          cursorRef.current.style.opacity = "0"
+        }
+      },
+      { threshold: 0.25 }
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
   }, [])
 
   // Proportional scroll-responsive animation with requestAnimationFrame throttling (60fps smooth)
@@ -422,34 +446,47 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Switch tab function (Manual interaction pauses the assistant cursor tour for 8 seconds)
+  // Switch tab function (Manual user interaction gives full immediate control and pauses auto-tour for 12 seconds)
   const handleSelectTab = (tabId: TabKey, isManual = true) => {
     if (isManual) {
       isInteractingRef.current = true
       setIsUserInteracting(true)
       if (timerRef.current) clearTimeout(timerRef.current)
       if ((timerRef as any)._clickTimer) clearTimeout((timerRef as any)._clickTimer)
+      if ((timerRef as any)._hoverTimer) clearTimeout((timerRef as any)._hoverTimer)
+      if ((timerRef as any)._releaseTimer) clearTimeout((timerRef as any)._releaseTimer)
+      if ((timerRef as any)._resumeTimer) clearTimeout((timerRef as any)._resumeTimer)
       if (cursorRef.current) {
         cursorRef.current.style.opacity = "0"
       }
-      // Gracefully resume assistant demonstration after 8 seconds of inactivity
-      setTimeout(() => {
+      setCursorClicking(false)
+
+      // Give the user full control! Resume auto-tour only after 12s of idle time
+      ;(timerRef as any)._resumeTimer = setTimeout(() => {
         isInteractingRef.current = false
         setIsUserInteracting(false)
-      }, 8000)
+      }, 12000)
     }
     setActiveTab(tabId)
   }
 
-  // Universal simulated cursor tour (Demonstrates how PodGuide works on BOTH desktop and mobile!)
+  // Human-paced simulated cursor tour (Smooth gliding, realistic hover & press, 5.5s dwell, zero scroll hijack)
   useEffect(() => {
     const runTour = () => {
-      if (isInteractingRef.current || typeof window === "undefined") return
+      // 1. NEVER run if user is manually interacting, or if workspace is NOT visible on screen
+      if (
+        isInteractingRef.current ||
+        !isWorkspaceVisibleRef.current ||
+        typeof window === "undefined"
+      ) {
+        timerRef.current = setTimeout(runTour, 2500)
+        return
+      }
 
       const cursor = cursorRef.current
       const workspace = workspaceRef.current
       if (!cursor || !workspace) {
-        timerRef.current = setTimeout(runTour, 4000)
+        timerRef.current = setTimeout(runTour, 2500)
         return
       }
 
@@ -462,9 +499,15 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
       const btn = document.getElementById(btnId)
 
       if (btn) {
-        // On mobile, gently scroll active pill into visible view if needed
-        if (isMobile) {
-          btn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" })
+        // On mobile: smoothly scroll ONLY the internal horizontal tab bar.
+        // NEVER use scrollIntoView() which pulls the whole page back!
+        if (isMobile && mobileTabsRef.current) {
+          const container = mobileTabsRef.current
+          const btnLeft = btn.offsetLeft
+          const btnWidth = btn.offsetWidth
+          const containerWidth = container.clientWidth
+          const targetScroll = btnLeft - containerWidth / 2 + btnWidth / 2
+          container.scrollTo({ left: Math.max(0, targetScroll), behavior: "smooth" })
         }
 
         const btnRect = btn.getBoundingClientRect()
@@ -477,39 +520,48 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
         cursor.style.opacity = "1"
         cursor.style.transform = `translate(${relX}px, ${relY}px)`
 
-        // After gliding to the button (~800ms), execute a REAL, VISIBLE CLICK!
-        const clickTimer = setTimeout(() => {
-          if (isInteractingRef.current) return
+        // Step 1: Cursor glides over ~850ms, then hovers naturally for ~350ms (human hesitation)
+        const hoverTimer = setTimeout(() => {
+          if (isInteractingRef.current || !isWorkspaceVisibleRef.current) return
 
-          // 1. Visually press down the cursor arrow
+          // Step 2: Realistic press down (cursor presses, button depresses)
           setCursorClicking(true)
-
-          // 2. Button depression feedback
           btn.classList.add("scale-95")
-          setTimeout(() => btn.classList.remove("scale-95"), 180)
 
-          // 3. Switch the active tab to display live workspace content
-          setActiveTab(tabKey)
+          // Step 3: Switch tab after human-like tap contact (~140ms)
+          const clickTimer = setTimeout(() => {
+            if (isInteractingRef.current) return
 
-          // 4. Release cursor press after 350ms
-          setTimeout(() => {
-            setCursorClicking(false)
-          }, 350)
+            setActiveTab(tabKey)
+            btn.classList.remove("scale-95")
 
-          currentStepRef.current = (currentStepRef.current + 1) % tabKeys.length
-        }, 850)
+            // Step 4: Release cursor click press
+            const releaseTimer = setTimeout(() => {
+              setCursorClicking(false)
+            }, 180)
 
-        ;(timerRef as any)._clickTimer = clickTimer
+            ;(timerRef as any)._releaseTimer = releaseTimer
+            currentStepRef.current = (currentStepRef.current + 1) % tabKeys.length
+          }, 140)
+
+          ;(timerRef as any)._clickTimer = clickTimer
+        }, 900)
+
+        ;(timerRef as any)._hoverTimer = hoverTimer
       }
 
-      timerRef.current = setTimeout(runTour, 4200)
+      // Step 5: Generous 5.5-second dwell time so user can actually read and explore the active tab!
+      timerRef.current = setTimeout(runTour, 5500)
     }
 
-    const initialTimer = setTimeout(runTour, 1600)
+    const initialTimer = setTimeout(runTour, 2000)
     return () => {
       clearTimeout(initialTimer)
       if (timerRef.current) clearTimeout(timerRef.current)
+      if ((timerRef as any)._hoverTimer) clearTimeout((timerRef as any)._hoverTimer)
       if ((timerRef as any)._clickTimer) clearTimeout((timerRef as any)._clickTimer)
+      if ((timerRef as any)._releaseTimer) clearTimeout((timerRef as any)._releaseTimer)
+      if ((timerRef as any)._resumeTimer) clearTimeout((timerRef as any)._resumeTimer)
     }
   }, [])
 
@@ -688,13 +740,15 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-[10px] text-gray-400 font-mono bg-[#141414] px-2 py-0.5 rounded border border-[#222]">MBChB Yr 5</span>
+              <span className={`w-2 h-2 rounded-full ${isUserInteracting ? "bg-emerald-400" : "bg-emerald-500 animate-pulse"}`} />
+              <span className={`text-[10px] font-mono px-2 py-0.5 rounded border transition-colors ${isUserInteracting ? "text-emerald-400 bg-emerald-950/40 border-emerald-500/30" : "text-gray-400 bg-[#141414] border-[#222]"}`}>
+                {isUserInteracting ? "Manual Control" : "Live Tour"}
+              </span>
             </div>
           </div>
 
           {/* Mobile Horizontal Tab Bar with Icons */}
-          <div className="md:hidden flex overflow-x-auto gap-2 p-2.5 bg-[#0a0a0a] border-b border-[#1f1f1f] shrink-0 no-scrollbar">
+          <div ref={mobileTabsRef} className="md:hidden flex overflow-x-auto gap-2 p-2.5 bg-[#0a0a0a] border-b border-[#1f1f1f] shrink-0 no-scrollbar">
             {TABS_SEQUENCE.map(tabKey => {
               const TabIcon = TAB_ICONS[tabKey]
               return (
