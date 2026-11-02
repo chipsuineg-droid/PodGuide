@@ -296,6 +296,123 @@ function MobileFloatingCard({
 const FULL_STORY_TEXT =
   "PodGuide was founded with a clear conviction: healthcare education should be unified, collaborative, and accessible. We built PodGuide as a trusted mentorship network, an academic library hub, an adaptive space to practice clinical examinations, and a launchpad for growth and opportunities. Whether you are a medical student, a health tutor, or a healthcare professional anywhere in the healthcare field, PodGuide gives you the tools to excel."
 
+// ─── PARTNER DATA ───────────────────────────────────────────────────────────
+
+interface PartnerData {
+  name: string
+  initials: string
+  tagline: string
+  summary: string
+  color: string
+}
+
+const PARTNERS_DATA: PartnerData[] = [
+  {
+    name: "Pharmacy Council ZW",
+    initials: "PCZ",
+    tagline: "Regulatory Body",
+    summary:
+      "The Pharmacy Council of Zimbabwe is the statutory body mandated to regulate pharmacy practice in Zimbabwe. Through PodGuide, pharmacy students access curated drug monographs, dispensing protocols, and clinical pharmacology revision banks aligned with council standards.",
+    color: "#dc2626",
+  },
+  {
+    name: "ZIMRA Health",
+    initials: "ZH",
+    tagline: "Revenue & Health Authority",
+    summary:
+      "ZIMRA Health collaborates with PodGuide to support health-science student welfare programmes, providing bursary information, tax-relief guidelines for medical practitioners, and continuing professional development (CPD) resources.",
+    color: "#b91c1c",
+  },
+  {
+    name: "Med Student Association",
+    initials: "MSA",
+    tagline: "Student-Led Network",
+    summary:
+      "A pan-African student-led organisation dedicated to supporting medical students through mentorship, research opportunities, and wellness initiatives. MSA partners with PodGuide to broadcast campus events, elective placements, and inter-university case competitions.",
+    color: "#991b1b",
+  },
+  {
+    name: "Your Organisation",
+    initials: "YOU",
+    tagline: "Partner With Us",
+    summary:
+      "This space is reserved for your organisation. PodGuide is actively onboarding pharmaceutical companies, teaching hospitals, medical councils, and student bodies across Africa. Contact us at info@podmyth.co.zw to discuss a partnership.",
+    color: "#333",
+  },
+]
+
+// ─── PARTNER BADGE COMPONENT ─────────────────────────────────────────────────
+
+function PartnerBadge({ partner, animClass }: { partner: PartnerData; animClass: string }) {
+  const [open, setOpen] = useState(false)
+  const [isRippling, setIsRippling] = useState(false)
+
+  const handleClick = () => {
+    setIsRippling(true)
+    if (typeof navigator !== "undefined" && navigator.vibrate) {
+      try { navigator.vibrate([20, 10, 20]) } catch (e) {}
+    }
+    setTimeout(() => setIsRippling(false), 600)
+    setOpen(v => !v)
+  }
+
+  return (
+    <div className="relative">
+      {/* Floating badge */}
+      <button
+        onClick={handleClick}
+        className={`landing-floating-badge ${animClass} relative group cursor-pointer select-none transition-all duration-150 rounded-2xl border border-[#242424] hover:border-red-600 active:scale-95 shadow-xl inline-flex items-center gap-2.5 px-3.5 py-2.5 bg-[#0e0e0e] text-white`}
+        style={{ backgroundColor: "#0e0e0e", boxShadow: "0 4px 20px rgba(0,0,0,0.6)", willChange: "transform" }}
+      >
+        {isRippling && (
+          <span className="pointer-events-none absolute inset-0 rounded-2xl border-2 border-red-500 ripple-wave" />
+        )}
+        <div
+          className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 text-white font-black text-[9px] transition-opacity group-hover:opacity-90"
+          style={{ backgroundColor: partner.color }}
+        >
+          {partner.initials}
+        </div>
+        <div className="text-left whitespace-nowrap pr-1">
+          <div className="text-xs font-bold text-white group-hover:text-red-400 transition-colors">
+            {partner.name}
+          </div>
+          <div className="text-[10px] text-gray-400">{partner.tagline}</div>
+        </div>
+        <span className="text-gray-600 text-[10px] ml-1">{open ? "▲" : "▼"}</span>
+      </button>
+
+      {/* Summary popup */}
+      {open && (
+        <div
+          className="absolute z-50 top-full mt-2 left-0 w-72 bg-[#111] border border-[#2a2a2a] rounded-2xl p-4 shadow-2xl animate-in fade-in zoom-in-95 duration-150"
+          style={{ boxShadow: "0 8px 40px rgba(0,0,0,0.8)" }}
+        >
+          <div className="flex items-center gap-2.5 mb-3">
+            <div
+              className="w-9 h-9 rounded-xl flex items-center justify-center text-white font-black text-[9px] shrink-0"
+              style={{ backgroundColor: partner.color }}
+            >
+              {partner.initials}
+            </div>
+            <div>
+              <div className="text-sm font-bold text-white">{partner.name}</div>
+              <div className="text-[10px] text-gray-400">{partner.tagline}</div>
+            </div>
+          </div>
+          <p className="text-xs text-gray-300 leading-relaxed">{partner.summary}</p>
+          <button
+            onClick={() => setOpen(false)}
+            className="mt-3 text-[10px] text-red-500 hover:underline"
+          >
+            Close
+          </button>
+        </div>
+      )}
+    </div>
+  )
+}
+
 /**
  * Isolated Typewriter Component (Prevents whole landing page from re-rendering on every typed character)
  */
@@ -600,6 +717,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
             <a href="#workspace" className="hover:text-white transition-colors duration-150">Workspace</a>
             <a href="#programs" className="hover:text-white transition-colors duration-150">Disciplines</a>
             <a href="#story" className="hover:text-white transition-colors duration-150">Our Story</a>
+            <a href="#partners" className="hover:text-white transition-colors duration-150">Our Partners</a>
             <a href="#contact" className="hover:text-white transition-colors duration-150">Contact</a>
           </div>
 
@@ -1597,23 +1715,19 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
           </div>
 
           {/* Our Partners */}
-          <div className="space-y-4">
+          <div id="partners" className="space-y-6 scroll-mt-24">
             <h2 className="text-sm font-bold uppercase tracking-wider text-white">Our Partners</h2>
-            <div className="flex flex-wrap gap-3">
-              {[1, 2, 3, 4].map((i) => (
-                <div
-                  key={i}
-                  className="flex flex-col items-center gap-1.5 px-4 py-3 bg-[#0e0e0e] rounded-xl border border-[#242424] hover:border-red-600 transition-colors cursor-pointer"
-                >
-                  <div className="w-10 h-10 bg-[#1a1a1a] rounded-full border border-[#333] flex items-center justify-center">
-                    <span className="text-gray-500 text-[9px] font-bold uppercase">Logo</span>
-                  </div>
-                  <span className="text-[10px] text-gray-400 whitespace-nowrap">Your logo here</span>
-                </div>
+            <p className="text-xs text-gray-500 max-w-lg">
+              We collaborate with leading institutions, pharmacy networks, and student organisations across Africa.
+              Click any partner badge to learn more.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              {PARTNERS_DATA.map((partner, i) => (
+                <PartnerBadge key={i} partner={partner} animClass={`animate-float-${(i % 8) + 1}`} />
               ))}
             </div>
             <p className="text-[10px] text-gray-600">
-              Interested in partnering? Reach us at{" "}
+              Interested in partnering?{" "}
               <a href="mailto:info@podmyth.co.zw" className="text-red-500 hover:underline">
                 info@podmyth.co.zw
               </a>
