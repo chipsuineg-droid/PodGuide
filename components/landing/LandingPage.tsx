@@ -306,6 +306,7 @@ interface PartnerData {
   color: string
   logo?: string   // path under /public
   featured?: boolean
+  isPlaceholder?: boolean
 }
 
 const PARTNERS_DATA: PartnerData[] = [
@@ -330,40 +331,35 @@ const PARTNERS_DATA: PartnerData[] = [
     featured: true,
   },
   {
-    name: "Pharmacy Council ZW",
-    initials: "PCZ",
-    tagline: "Statutory Regulatory Body",
+    name: "Your Logo Here",
+    initials: "+",
+    tagline: "Take This Space · Healthcare Bodies",
     summary:
-      "The Pharmacy Council of Zimbabwe is the statutory body mandated to regulate pharmacy practice in Zimbabwe. Through PodGuide, pharmacy students access curated drug monographs, dispensing protocols, and clinical pharmacology revision banks aligned with council standards.",
-    color: "#dc2626",
+      "This space is reserved for your healthcare organisation, teaching hospital, regulatory council, or pharmaceutical partner. Connect your mission directly with thousands of active medical and health sciences students and tutors across Africa. Contact info@podmyth.co.zw to feature your organisation.",
+    color: "#18181b",
+    isPlaceholder: true,
   },
   {
-    name: "ZIMRA Health",
-    initials: "ZH",
-    tagline: "Healthcare & Welfare Programme",
+    name: "Your Logo Here",
+    initials: "+",
+    tagline: "Take This Space · Student Organisations",
     summary:
-      "ZIMRA Health collaborates with PodGuide to support health-science student welfare programmes, providing bursary information, tax-relief guidelines for medical practitioners, and continuing professional development (CPD) resources.",
-    color: "#b91c1c",
+      "Are you a pharmacy, medical, nursing, or allied health students association? Partner with PodGuide to broadcast your campus events, clinical competitions, mentorship hubs, and student initiatives to the broader African digital campus. Contact info@podmyth.co.zw to reserve this space.",
+    color: "#18181b",
+    isPlaceholder: true,
   },
   {
-    name: "Med Student Association",
-    initials: "MSA",
-    tagline: "Student-Led Continental Network",
+    name: "Your Logo Here",
+    initials: "+",
+    tagline: "Take This Space · Corporate & Clinical Sponsors",
     summary:
-      "A pan-African student-led organisation dedicated to supporting medical students through mentorship, research opportunities, and wellness initiatives. MSA partners with PodGuide to broadcast campus events, elective placements, and inter-university case competitions.",
-    color: "#991b1b",
-  },
-  {
-    name: "Take This Space",
-    initials: "YOU",
-    tagline: "Your Logo Could Be Here",
-    summary:
-      "This space is reserved for your healthcare organisation, teaching hospital, or student-led body. PodGuide is actively onboarding pharmaceutical companies, medical councils, and academic student trusts across Africa. Connect with thousands of passionate health students and practitioners. Contact us at info@podmyth.co.zw to partner with us.",
-    color: "#222222",
+      "Partner with PodMyth & PodGuide to sponsor clinical question banks, diagnostic tools, scholarships, or clinical skill gear. Gain direct engagement with the next generation of healthcare professionals. Contact info@podmyth.co.zw to join the network.",
+    color: "#18181b",
+    isPlaceholder: true,
   },
 ]
 
-// ─── PARTNER HORIZONTAL MARQUEE CARD ─────────────────────────────────────────
+// ─── PARTNER HORIZONTAL MARQUEE CARD (LARGER, PURE BRAND PALETTE) ───────────
 
 function PartnerMarqueeCard({
   partner,
@@ -377,43 +373,48 @@ function PartnerMarqueeCard({
       type="button"
       onClick={onClick}
       className={`group relative cursor-pointer select-none transition-all duration-200 rounded-2xl border ${
-        partner.featured ? "border-red-600/50 hover:border-red-500 bg-[#0f0f11]" : "border-[#222222] hover:border-red-600/60 bg-[#0b0b0d]"
-      } hover:bg-[#141417] active:scale-95 shadow-md hover:shadow-xl inline-flex items-center gap-3 px-4 py-2.5 shrink-0 text-white`}
+        partner.featured
+          ? "border-red-600/40 hover:border-red-500 bg-[#0e0e11] shadow-[0_4px_20px_rgba(220,38,38,0.15)]"
+          : "border-[#222226] hover:border-red-600/70 bg-[#0a0a0d]"
+      } hover:bg-[#131317] active:scale-95 shadow-lg hover:shadow-2xl inline-flex items-center gap-3.5 px-5 py-3.5 shrink-0 text-white`}
     >
-      {/* Logo or initials badge */}
+      {/* Larger Logo or Initials badge */}
       {partner.logo ? (
-        <div className="w-9 h-9 rounded-xl overflow-hidden shrink-0 bg-white p-1 flex items-center justify-center border border-white/20 shadow-sm transition-transform group-hover:scale-105">
+        <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 bg-white p-1.5 flex items-center justify-center border border-white/20 shadow-md transition-transform duration-200 group-hover:scale-105">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={partner.logo} alt={partner.name} className="w-full h-full object-contain" />
         </div>
       ) : (
-        <div
-          className="w-9 h-9 rounded-xl shrink-0 flex items-center justify-center font-black text-[10px] text-white shadow-sm transition-transform group-hover:scale-105"
-          style={{ backgroundColor: partner.color }}
-        >
-          {partner.initials}
+        <div className="w-12 h-12 rounded-xl shrink-0 flex items-center justify-center font-bold text-sm text-red-500 bg-red-600/10 border border-dashed border-red-500/40 shadow-sm transition-transform duration-200 group-hover:scale-105 group-hover:border-red-500 group-hover:bg-red-600/20">
+          <Plus size={20} className="text-red-500" />
         </div>
       )}
 
-      {/* Label and tagline */}
-      <div className="text-left whitespace-nowrap pr-1">
+      {/* Label and Tagline */}
+      <div className="text-left whitespace-nowrap pr-2">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-bold text-white group-hover:text-red-400 transition-colors">
+          <span className="text-sm font-bold text-white group-hover:text-red-400 transition-colors">
             {partner.name}
           </span>
           {partner.featured && (
-            <span className="text-[8px] font-bold text-red-500 bg-red-500/10 px-1.5 py-0.5 rounded-full border border-red-500/30">
+            <span className="text-[9px] font-bold text-red-500 bg-red-500/10 px-2 py-0.5 rounded-full border border-red-500/30">
               OFFICIAL
             </span>
           )}
+          {partner.isPlaceholder && (
+            <span className="text-[9px] font-medium text-gray-400 bg-white/5 px-2 py-0.5 rounded-full border border-white/10 group-hover:border-red-500/30 group-hover:text-red-400 transition-colors">
+              OPEN SLOT
+            </span>
+          )}
         </div>
-        <div className="text-[10px] text-gray-400 group-hover:text-gray-300 transition-colors">
+        <div className="text-xs text-gray-400 group-hover:text-gray-300 transition-colors mt-0.5">
           {partner.tagline}
         </div>
       </div>
 
-      <span className="text-[10px] text-gray-500 group-hover:text-red-400 transition-colors ml-1 font-medium">
-        Info →
+      <span className="text-xs text-red-500 group-hover:text-red-400 transition-colors ml-1 font-semibold flex items-center gap-0.5">
+        <span>Info</span>
+        <span>&rarr;</span>
       </span>
     </button>
   )
@@ -1934,10 +1935,9 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                 </div>
               ) : (
                 <div
-                  className="w-14 h-14 rounded-2xl shrink-0 flex items-center justify-center font-black text-sm text-white shadow-md"
-                  style={{ backgroundColor: selectedPartner.color }}
+                  className="w-14 h-14 rounded-2xl shrink-0 flex items-center justify-center font-black text-sm text-red-500 bg-red-600/10 border border-dashed border-red-500/40 shadow-md"
                 >
-                  {selectedPartner.initials}
+                  <Plus size={24} className="text-red-500" />
                 </div>
               )}
               <div className="pr-8">
@@ -1948,6 +1948,11 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                       Official Partner
                     </span>
                   )}
+                  {selectedPartner.isPlaceholder && (
+                    <span className="text-[9px] font-medium text-red-400 bg-red-500/10 px-2 py-0.5 rounded-full border border-red-500/25">
+                      Open Partner Slot
+                    </span>
+                  )}
                 </div>
                 <p className="text-xs text-red-400 font-medium mt-0.5">{selectedPartner.tagline}</p>
               </div>
@@ -1956,7 +1961,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
             {/* Summary Body */}
             <div className="p-4 rounded-2xl bg-[#141418] border border-[#222226] mb-5">
               <h4 className="text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-2">
-                About The Partnership
+                {selectedPartner.isPlaceholder ? "Partnership Opportunity" : "About The Partnership"}
               </h4>
               <p className="text-xs sm:text-sm text-gray-200 leading-relaxed font-normal">
                 {selectedPartner.summary}
@@ -1966,10 +1971,14 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
             {/* Actions */}
             <div className="flex items-center justify-between gap-3 pt-1">
               <a
-                href={`mailto:info@podmyth.co.zw?subject=Inquiry%20regarding%20${encodeURIComponent(selectedPartner.name)}`}
+                href={
+                  selectedPartner.isPlaceholder
+                    ? "mailto:info@podmyth.co.zw?subject=Partner%20Slot%20Reservation%20-%20PodGuide"
+                    : `mailto:info@podmyth.co.zw?subject=Inquiry%20regarding%20${encodeURIComponent(selectedPartner.name)}`
+                }
                 className="px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded-xl shadow-md transition"
               >
-                Connect With Partner
+                {selectedPartner.isPlaceholder ? "Reserve This Partner Space" : "Connect With Partner"}
               </a>
               <button
                 type="button"
