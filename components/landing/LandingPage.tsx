@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import MobileFooter from "./MobileFooter"
 import {
   Zap,
   BookMarked,
@@ -1575,66 +1576,102 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
         </div>
       </section>
 
-      {/* ── COMPREHENSIVE FOOTER (CLEAN SIGN-OFF, LOCATION & PODMYTH PURPOSE) ── */}
+      {/* ── FOOTER ── */}
       <footer className="border-t border-[#181818] py-14 px-4 sm:px-8 bg-black">
         <div className="max-w-7xl mx-auto space-y-10">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* Column 1: Brand & Purpose */}
-            <div className="space-y-3 md:col-span-2">
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-md bg-red-600 flex items-center justify-center">
-                  <span className="text-white text-xs font-black">P</span>
-                </div>
-                <span className="font-display text-xl font-bold text-white">
-                  Pod<span className="text-red-600">Guide</span>
-                </span>
-              </div>
-              <p className="text-xs text-gray-400 max-w-sm leading-relaxed">
-                The unified digital campus for medical and health sciences students, tutors, and professionals. A proud subsidiary of PodMyth, dedicated to impactful education and healthcare innovation.
-              </p>
-              <div className="text-xs text-red-500 font-medium pt-2">
-                Designed with dedication. Built for impact. Engineered because we love what we do.
-              </div>
-            </div>
 
-            {/* Column 2: Navigation Links */}
+          {/* Brand block */}
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-md bg-red-600 flex items-center justify-center">
+              <span className="text-white text-xs font-black">P</span>
+            </div>
+            <span className="font-display text-xl font-bold text-white">
+              Pod<span className="text-red-600">Guide</span>
+            </span>
+          </div>
+          <p className="text-xs text-gray-400 max-w-sm leading-relaxed">
+            The unified digital campus for medical and health sciences students, tutors, and professionals.
+          </p>
+          <div className="text-xs text-red-500 font-medium">
+            Designed with dedication. Built for impact. Engineered because we love what we do.
+          </div>
+
+          {/* Our Partners */}
+          <div className="space-y-4">
+            <h2 className="text-sm font-bold uppercase tracking-wider text-white">Our Partners</h2>
+            <div className="flex flex-wrap gap-3">
+              {[1, 2, 3, 4].map((i) => (
+                <div
+                  key={i}
+                  className="flex flex-col items-center gap-1.5 px-4 py-3 bg-[#0e0e0e] rounded-xl border border-[#242424] hover:border-red-600 transition-colors cursor-pointer"
+                >
+                  <div className="w-10 h-10 bg-[#1a1a1a] rounded-full border border-[#333] flex items-center justify-center">
+                    <span className="text-gray-500 text-[9px] font-bold uppercase">Logo</span>
+                  </div>
+                  <span className="text-[10px] text-gray-400 whitespace-nowrap">Your logo here</span>
+                </div>
+              ))}
+            </div>
+            <p className="text-[10px] text-gray-600">
+              Interested in partnering? Reach us at{" "}
+              <a href="mailto:info@podmyth.co.zw" className="text-red-500 hover:underline">
+                info@podmyth.co.zw
+              </a>
+            </p>
+          </div>
+
+          {/* Platform & Conduct side by side */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {/* Platform */}
             <div className="space-y-2.5">
               <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Platform</span>
               <ul className="space-y-1.5 text-xs text-gray-400">
                 <li><a href="#workspace" className="hover:text-white transition">Workspace</a></li>
                 <li><a href="#programs" className="hover:text-white transition">Disciplines</a></li>
                 <li><Link href={isLoggedIn ? "/library" : "/login"} className="hover:text-white transition">Library Shelves</Link></li>
-                <li><Link href={isLoggedIn ? "/practise" : "/login"} className="hover:text-white transition">MCQ Question Banks</Link></li>
-                <li><Link href={isLoggedIn ? "/medstore" : "/login"} className="hover:text-white transition">MedStore Catalog</Link></li>
+                <li><Link href={isLoggedIn ? "/practise" : "/login"} className="hover:text-white transition">MCQ Banks</Link></li>
+                <li><Link href={isLoggedIn ? "/medstore" : "/login"} className="hover:text-white transition">MedStore</Link></li>
               </ul>
             </div>
 
-            {/* Column 3: Contact & Location */}
+            {/* Conduct */}
             <div className="space-y-2.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Contact & Location</span>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Conduct</span>
               <ul className="space-y-2 text-xs text-gray-400">
                 <li className="flex items-center gap-2">
-                  <MapPin size={13} className="text-red-500 shrink-0" />
-                  <span>Harare, Zimbabwe</span>
+                  <MapPin size={11} className="text-red-500 shrink-0" />
+                  <span>Africa.online</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <Mail size={13} className="text-red-500 shrink-0" />
-                  <a href="mailto:hello@podmyth.com" className="hover:text-white transition">hello@podmyth.com</a>
+                  <Mail size={11} className="text-red-500 shrink-0" />
+                  <a href="mailto:info@podmyth.co.zw" className="hover:text-white transition">
+                    info@podmyth.co.zw
+                  </a>
                 </li>
                 <li className="flex items-center gap-2">
-                  <Globe size={13} className="text-red-500 shrink-0" />
-                  <span>Serving Health Students & Tutors Worldwide</span>
+                  <Globe size={11} className="text-red-500 shrink-0" />
+                  <a href="https://podguide.org.zw" className="hover:text-white transition">
+                    www.podguide.org.zw
+                  </a>
                 </li>
-                <li className="pt-1">
-                  <Link href="/login" className="text-red-500 font-semibold hover:underline">
-                    Access Portal Login &rarr;
-                  </Link>
-                </li>
+              </ul>
+            </div>
+
+            {/* Access */}
+            <div className="space-y-2.5">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Access</span>
+              <ul className="space-y-1.5 text-xs text-gray-400">
+                <li><Link href="/login" className="hover:text-white transition">App Login</Link></li>
+                <li><Link href="/register" className="hover:text-white transition">Register</Link></li>
               </ul>
             </div>
           </div>
 
-          <MobileFooter />
+          {/* Copyright – centered */}
+          <div className="pt-6 border-t border-[#181818] text-center text-xs text-gray-500">
+            &copy; {new Date().getFullYear()} PodGuide &mdash; a subsidiary of PodMyth. All rights reserved.
+          </div>
+
         </div>
       </footer>
 
