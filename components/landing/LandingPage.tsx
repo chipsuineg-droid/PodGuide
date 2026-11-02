@@ -1634,15 +1634,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
             </div>
           </div>
 
-          <div className="pt-6 border-t border-[#181818] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-            <p>
-              &copy; {new Date().getFullYear()} PodGuide. A subsidiary of PodMyth. All rights reserved.
-            </p>
-            <div className="flex items-center gap-6">
-              <Link href="/login" className="hover:text-white transition">App Login</Link>
-              <Link href="/register" className="hover:text-white transition">Registration</Link>
-            </div>
-          </div>
+          <MobileFooter />
         </div>
       </footer>
 
