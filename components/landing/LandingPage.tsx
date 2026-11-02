@@ -304,13 +304,35 @@ interface PartnerData {
   tagline: string
   summary: string
   color: string
+  logo?: string   // path under /public
+  featured?: boolean
 }
 
 const PARTNERS_DATA: PartnerData[] = [
   {
+    name: "PodMyth Scrubs",
+    initials: "PS",
+    tagline: "Official Medical Gear Subsidiary",
+    summary:
+      "PodMyth Scrubs is an official subsidiary of PodMyth dedicated to supplying top-tier, durable, and comfortable medical gear and merchandise. Crafted specifically for medical and health sciences students, doctors, nurses, and allied professionals across Africa — featuring bespoke scrubs, laboratory coats, clinical diagnostic equipment, and stethoscope cases built to excel from preclinical labs to intense hospital wards. Browse the full gear collection inside the PodGuide MedStore.",
+    color: "#dc2626",
+    logo: "/images/podmyth-scrubs.png",
+    featured: true,
+  },
+  {
+    name: "ZIMSA",
+    initials: "ZIMSA",
+    tagline: "Medicine Par Excellence",
+    summary:
+      "Zimbabwe Medical Students Association (ZIMSA) is the premier national student-led organisation representing future medical practitioners across Zimbabwe. Operating under the banner 'Medicine Par Excellence', ZIMSA champions medical student welfare, inter-university clinical symposia, health research development, peer mentorship, and community healthcare outreach across all medical faculties in Zimbabwe.",
+    color: "#002060",
+    logo: "/images/zimsa-logo.png",
+    featured: true,
+  },
+  {
     name: "Pharmacy Council ZW",
     initials: "PCZ",
-    tagline: "Regulatory Body",
+    tagline: "Statutory Regulatory Body",
     summary:
       "The Pharmacy Council of Zimbabwe is the statutory body mandated to regulate pharmacy practice in Zimbabwe. Through PodGuide, pharmacy students access curated drug monographs, dispensing protocols, and clinical pharmacology revision banks aligned with council standards.",
     color: "#dc2626",
@@ -318,7 +340,7 @@ const PARTNERS_DATA: PartnerData[] = [
   {
     name: "ZIMRA Health",
     initials: "ZH",
-    tagline: "Revenue & Health Authority",
+    tagline: "Healthcare & Welfare Programme",
     summary:
       "ZIMRA Health collaborates with PodGuide to support health-science student welfare programmes, providing bursary information, tax-relief guidelines for medical practitioners, and continuing professional development (CPD) resources.",
     color: "#b91c1c",
@@ -326,90 +348,74 @@ const PARTNERS_DATA: PartnerData[] = [
   {
     name: "Med Student Association",
     initials: "MSA",
-    tagline: "Student-Led Network",
+    tagline: "Student-Led Continental Network",
     summary:
       "A pan-African student-led organisation dedicated to supporting medical students through mentorship, research opportunities, and wellness initiatives. MSA partners with PodGuide to broadcast campus events, elective placements, and inter-university case competitions.",
     color: "#991b1b",
   },
   {
-    name: "Your Organisation",
+    name: "Take This Space",
     initials: "YOU",
-    tagline: "Partner With Us",
+    tagline: "Your Logo Could Be Here",
     summary:
-      "This space is reserved for your organisation. PodGuide is actively onboarding pharmaceutical companies, teaching hospitals, medical councils, and student bodies across Africa. Contact us at info@podmyth.co.zw to discuss a partnership.",
-    color: "#333",
+      "This space is reserved for your healthcare organisation, teaching hospital, or student-led body. PodGuide is actively onboarding pharmaceutical companies, medical councils, and academic student trusts across Africa. Connect with thousands of passionate health students and practitioners. Contact us at info@podmyth.co.zw to partner with us.",
+    color: "#222222",
   },
 ]
 
-// ─── PARTNER BADGE COMPONENT ─────────────────────────────────────────────────
+// ─── PARTNER HORIZONTAL MARQUEE CARD ─────────────────────────────────────────
 
-function PartnerBadge({ partner, animClass }: { partner: PartnerData; animClass: string }) {
-  const [open, setOpen] = useState(false)
-  const [isRippling, setIsRippling] = useState(false)
-
-  const handleClick = () => {
-    setIsRippling(true)
-    if (typeof navigator !== "undefined" && navigator.vibrate) {
-      try { navigator.vibrate([20, 10, 20]) } catch (e) {}
-    }
-    setTimeout(() => setIsRippling(false), 600)
-    setOpen(v => !v)
-  }
-
+function PartnerMarqueeCard({
+  partner,
+  onClick,
+}: {
+  partner: PartnerData
+  onClick: () => void
+}) {
   return (
-    <div className="relative">
-      {/* Floating badge */}
-      <button
-        onClick={handleClick}
-        className={`landing-floating-badge ${animClass} relative group cursor-pointer select-none transition-all duration-150 rounded-2xl border border-[#242424] hover:border-red-600 active:scale-95 shadow-xl inline-flex items-center gap-2.5 px-3.5 py-2.5 bg-[#0e0e0e] text-white`}
-        style={{ backgroundColor: "#0e0e0e", boxShadow: "0 4px 20px rgba(0,0,0,0.6)", willChange: "transform" }}
-      >
-        {isRippling && (
-          <span className="pointer-events-none absolute inset-0 rounded-2xl border-2 border-red-500 ripple-wave" />
-        )}
+    <button
+      type="button"
+      onClick={onClick}
+      className={`group relative cursor-pointer select-none transition-all duration-200 rounded-2xl border ${
+        partner.featured ? "border-red-600/50 hover:border-red-500 bg-[#0f0f11]" : "border-[#222222] hover:border-red-600/60 bg-[#0b0b0d]"
+      } hover:bg-[#141417] active:scale-95 shadow-md hover:shadow-xl inline-flex items-center gap-3 px-4 py-2.5 shrink-0 text-white`}
+    >
+      {/* Logo or initials badge */}
+      {partner.logo ? (
+        <div className="w-9 h-9 rounded-xl overflow-hidden shrink-0 bg-white p-1 flex items-center justify-center border border-white/20 shadow-sm transition-transform group-hover:scale-105">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={partner.logo} alt={partner.name} className="w-full h-full object-contain" />
+        </div>
+      ) : (
         <div
-          className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 text-white font-black text-[9px] transition-opacity group-hover:opacity-90"
+          className="w-9 h-9 rounded-xl shrink-0 flex items-center justify-center font-black text-[10px] text-white shadow-sm transition-transform group-hover:scale-105"
           style={{ backgroundColor: partner.color }}
         >
           {partner.initials}
         </div>
-        <div className="text-left whitespace-nowrap pr-1">
-          <div className="text-xs font-bold text-white group-hover:text-red-400 transition-colors">
-            {partner.name}
-          </div>
-          <div className="text-[10px] text-gray-400">{partner.tagline}</div>
-        </div>
-        <span className="text-gray-600 text-[10px] ml-1">{open ? "▲" : "▼"}</span>
-      </button>
-
-      {/* Summary popup */}
-      {open && (
-        <div
-          className="absolute z-50 top-full mt-2 left-0 w-72 bg-[#111] border border-[#2a2a2a] rounded-2xl p-4 shadow-2xl animate-in fade-in zoom-in-95 duration-150"
-          style={{ boxShadow: "0 8px 40px rgba(0,0,0,0.8)" }}
-        >
-          <div className="flex items-center gap-2.5 mb-3">
-            <div
-              className="w-9 h-9 rounded-xl flex items-center justify-center text-white font-black text-[9px] shrink-0"
-              style={{ backgroundColor: partner.color }}
-            >
-              {partner.initials}
-            </div>
-            <div>
-              <div className="text-sm font-bold text-white">{partner.name}</div>
-              <div className="text-[10px] text-gray-400">{partner.tagline}</div>
-            </div>
-          </div>
-          <p className="text-xs text-gray-300 leading-relaxed">{partner.summary}</p>
-          <button
-            onClick={() => setOpen(false)}
-            className="mt-3 text-[10px] text-red-500 hover:underline"
-          >
-            Close
-          </button>
-        </div>
       )}
-    </div>
+
+      {/* Label and tagline */}
+      <div className="text-left whitespace-nowrap pr-1">
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-bold text-white group-hover:text-red-400 transition-colors">
+            {partner.name}
+          </span>
+          {partner.featured && (
+            <span className="text-[8px] font-bold text-red-500 bg-red-500/10 px-1.5 py-0.5 rounded-full border border-red-500/30">
+              OFFICIAL
+            </span>
+          )}
+        </div>
+        <div className="text-[10px] text-gray-400 group-hover:text-gray-300 transition-colors">
+          {partner.tagline}
+        </div>
+      </div>
+
+      <span className="text-[10px] text-gray-500 group-hover:text-red-400 transition-colors ml-1 font-medium">
+        Info →
+      </span>
+    </button>
   )
 }
 
@@ -482,6 +488,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
   const [loginModalOpen, setLoginModalOpen] = useState(false)
   const [loginEmail, setLoginEmail] = useState("")
   const [loginPassword, setLoginPassword] = useState("")
+  const [selectedPartner, setSelectedPartner] = useState<PartnerData | null>(null)
 
   // Contact form state
   const [contactSubmitted, setContactSubmitted] = useState(false)
@@ -1714,24 +1721,52 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
             Designed with dedication. Built for impact. Engineered because we love what we do.
           </div>
 
-          {/* Our Partners */}
-          <div id="partners" className="space-y-6 scroll-mt-24">
-            <h2 className="text-sm font-bold uppercase tracking-wider text-white">Our Partners</h2>
-            <p className="text-xs text-gray-500 max-w-lg">
-              We collaborate with leading institutions, pharmacy networks, and student organisations across Africa.
-              Click any partner badge to learn more.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              {PARTNERS_DATA.map((partner, i) => (
-                <PartnerBadge key={i} partner={partner} animClass={`animate-float-${(i % 8) + 1}`} />
-              ))}
-            </div>
-            <p className="text-[10px] text-gray-600">
-              Interested in partnering?{" "}
-              <a href="mailto:info@podmyth.co.zw" className="text-red-500 hover:underline">
-                info@podmyth.co.zw
+          {/* Our Partners — Straight Line Horizontal Moving Track */}
+          <div id="partners" className="space-y-4 scroll-mt-24">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+              <div>
+                <div className="flex items-center gap-2">
+                  <h2 className="text-sm font-bold uppercase tracking-wider text-white">Our Partners</h2>
+                  <span className="text-[9px] uppercase tracking-wider font-semibold text-red-500 bg-red-600/10 px-2 py-0.5 rounded-full border border-red-500/20">
+                    Live Network
+                  </span>
+                </div>
+                <p className="text-xs text-gray-400 mt-1 max-w-xl">
+                  Strategic healthcare bodies, official merchandise subsidiaries, and medical student associations. Click any partner to view summary.
+                </p>
+              </div>
+              <a
+                href="mailto:info@podmyth.co.zw?subject=Partner%20With%20PodGuide"
+                className="text-xs text-red-500 hover:text-red-400 font-medium inline-flex items-center gap-1 transition"
+              >
+                <span>Partner with PodGuide</span>
+                <span>&rarr;</span>
               </a>
-            </p>
+            </div>
+
+            {/* Straight-line marquee banner with edge gradients */}
+            <div className="relative w-full overflow-hidden py-3 -mx-2 px-2">
+              {/* Left edge shadow fade */}
+              <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-black via-black/80 to-transparent z-10" />
+              {/* Right edge shadow fade */}
+              <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-black via-black/80 to-transparent z-10" />
+
+              {/* Straight line moving horizontally */}
+              <div className="animate-marquee-horizontal flex items-center gap-4">
+                {[...PARTNERS_DATA, ...PARTNERS_DATA].map((partner, idx) => (
+                  <PartnerMarqueeCard
+                    key={`partner-card-${idx}`}
+                    partner={partner}
+                    onClick={() => {
+                      if (typeof navigator !== "undefined" && navigator.vibrate) {
+                        try { navigator.vibrate([20, 10, 20]) } catch (e) {}
+                      }
+                      setSelectedPartner(partner)
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Platform & Conduct side by side */}
@@ -1864,6 +1899,85 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
               <Link href="/register" className="text-white hover:underline font-semibold">
                 Register your institution
               </Link>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── INTERACTIVE PARTNER SUMMARY MODAL ── */}
+      {selectedPartner && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-in fade-in"
+          onClick={() => setSelectedPartner(null)}
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            className="bg-[#0e0e11] w-full max-w-lg p-6 sm:p-7 rounded-3xl border border-[#26262a] relative shadow-2xl animate-in zoom-in-95 text-white"
+            style={{ backgroundColor: "#0e0e11", color: "#ffffff" }}
+          >
+            {/* Close Button */}
+            <button
+              type="button"
+              onClick={() => setSelectedPartner(null)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-white p-2 rounded-xl hover:bg-white/5 transition"
+              aria-label="Close modal"
+            >
+              <X size={18} />
+            </button>
+
+            {/* Partner Header */}
+            <div className="flex items-center gap-3.5 mb-5">
+              {selectedPartner.logo ? (
+                <div className="w-14 h-14 rounded-2xl overflow-hidden shrink-0 bg-white p-1.5 flex items-center justify-center border border-white/20 shadow-md">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={selectedPartner.logo} alt={selectedPartner.name} className="w-full h-full object-contain" />
+                </div>
+              ) : (
+                <div
+                  className="w-14 h-14 rounded-2xl shrink-0 flex items-center justify-center font-black text-sm text-white shadow-md"
+                  style={{ backgroundColor: selectedPartner.color }}
+                >
+                  {selectedPartner.initials}
+                </div>
+              )}
+              <div className="pr-8">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h3 className="text-lg font-bold text-white tracking-tight">{selectedPartner.name}</h3>
+                  {selectedPartner.featured && (
+                    <span className="text-[9px] font-bold text-red-500 bg-red-500/10 px-2 py-0.5 rounded-full border border-red-500/30">
+                      Official Partner
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs text-red-400 font-medium mt-0.5">{selectedPartner.tagline}</p>
+              </div>
+            </div>
+
+            {/* Summary Body */}
+            <div className="p-4 rounded-2xl bg-[#141418] border border-[#222226] mb-5">
+              <h4 className="text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-2">
+                About The Partnership
+              </h4>
+              <p className="text-xs sm:text-sm text-gray-200 leading-relaxed font-normal">
+                {selectedPartner.summary}
+              </p>
+            </div>
+
+            {/* Actions */}
+            <div className="flex items-center justify-between gap-3 pt-1">
+              <a
+                href={`mailto:info@podmyth.co.zw?subject=Inquiry%20regarding%20${encodeURIComponent(selectedPartner.name)}`}
+                className="px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded-xl shadow-md transition"
+              >
+                Connect With Partner
+              </a>
+              <button
+                type="button"
+                onClick={() => setSelectedPartner(null)}
+                className="px-4 py-2.5 bg-[#1b1b20] hover:bg-[#25252b] text-gray-300 hover:text-white text-xs font-medium rounded-xl transition"
+              >
+                Close
+              </button>
             </div>
           </div>
         </div>

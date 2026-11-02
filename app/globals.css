@@ -67,6 +67,22 @@
   .animate-float-mob-8 { animation: floatMob8 9.5s ease-in-out infinite; will-change: transform; }
 }
 
+@keyframes marqueeHorizontal {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee-horizontal {
+  display: flex;
+  width: max-content;
+  animation: marqueeHorizontal 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-horizontal:hover {
+  animation-play-state: paused;
+}
+
 @keyframes vibrate {
   0% { transform: scale(1.05) translate(0); }
   20% { transform: scale(1.05) translate(-1.5px, 1.5px); }
