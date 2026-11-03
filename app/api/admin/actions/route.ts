@@ -156,6 +156,94 @@ export async function POST(req: NextRequest) {
       }
 
       // ──────────────────────────────────────────
+      // LIBRARY & MATERIALS MANAGEMENT
+      // ──────────────────────────────────────────
+      case "create_material": {
+        const { title, description, file_url, material_type, programme, level, subject } = payload
+        const { data: matData, error: matErr } = await supabase
+          .from("materials")
+          .insert({
+            title: title.trim(),
+            description: description?.trim() || "",
+            file_url: file_url.trim(),
+            material_type: material_type || "pdf",
+            programme: programme || "All",
+            level: level || "All",
+            subject: subject?.trim() || "General",
+            uploaded_by: user.id
+          })
+          .select()
+          .single()
+
+        if (matErr) return NextResponse.json({ error: matErr.message }, { status: 400 })
+        return NextResponse.json({ success: true, material: matData })
+      }
+
+      case "update_material": {
+        const { materialId, updates } = payload
+        if (!materialId) return NextResponse.json({ error: "Missing material ID" }, { status: 400 })
+
+        const { data: updatedMat, error: updateErr } = await supabase
+          .from("materials")
+          .update(updates)
+          .eq("id", materialId)
+          .select()
+          .single()
+
+        if (updateErr) return NextResponse.json({ error: updateErr.message }, { status: 400 })
+        return NextResponse.json({ success: true, material: updatedMat })
+      }
+
+      case "delete_material": {
+        const { materialId } = payload
+        if (!materialId) return NextResponse.json({ error: "Missing material ID" }, { status: 400 })
+
+        const { error: delErr } = await supabase
+          .from("materials")
+          .delete()
+          .eq("id", materialId)
+
+        if (delErr) return NextResponse.json({ error: delErr.message }, { status: 400 })
+        return NextResponse.json({ success: true, message: "Material deleted successfully" })
+      }
+
+      case "create_drive_folder": {
+        const { title, description, drive_url, programme, level, category, icon, color, item_count } = payload
+        const { data: folderData, error: folderErr } = await supabase
+          .from("curated_drive_folders")
+          .insert({
+            title: title.trim(),
+            description: description?.trim() || "",
+            drive_url: drive_url.trim(),
+            programme: programme || "All",
+            level: level || "All",
+            category: category || "General",
+            icon: icon || "📁",
+            color: color || "brand",
+            item_count: Number(item_count) || 0,
+            created_by: user.id
+          })
+          .select()
+          .single()
+
+        if (folderErr) return NextResponse.json({ error: folderErr.message }, { status: 400 })
+        return NextResponse.json({ success: true, folder: folderData })
+      }
+
+      case "delete_drive_folder": {
+        const { folderId } = payload
+        if (!folderId) return NextResponse.json({ error: "Missing folder ID" }, { status: 400 })
+
+        const { error: delErr } = await supabase
+          .from("curated_drive_folders")
+          .delete()
+          .eq("id", folderId)
+
+        if (delErr) return NextResponse.json({ error: delErr.message }, { status: 400 })
+        return NextResponse.json({ success: true, message: "Curated folder deleted successfully" })
+      }
+
+      // ──────────────────────────────────────────
       // MEDSTORE MERCHANDISE MANAGEMENT
       // ──────────────────────────────────────────
       case "create_merch": {

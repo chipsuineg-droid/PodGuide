@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { LayoutDashboard, Users, FileText, Database, LogOut, ShieldCheck, Loader2 } from "lucide-react"
+import { LayoutDashboard, Users, FileText, Database, LogOut, ShieldCheck, Loader2, ShoppingBag, BookOpen, ExternalLink } from "lucide-react"
 import { useEffect, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
 
@@ -42,8 +42,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const items = [
     { name: "Overview", href: "/admin", icon: LayoutDashboard },
-    { name: "Users", href: "/admin/users", icon: Users },
-    { name: "Materials", href: "/admin/materials", icon: FileText },
+    { name: "MedStore Supervisor", href: "/admin/store", icon: ShoppingBag },
+    { name: "Library & Materials", href: "/admin/materials", icon: FileText },
+    { name: "Users & Staff", href: "/admin/users", icon: Users },
     { name: "MCQ Database", href: "/admin/mcqs", icon: Database },
   ]
 
