@@ -288,7 +288,7 @@ export default function CampusPage() {
                         </div>
                       ))}
                       {(comments[post.id] || []).length === 0 && (
-                        <p className="text-xs text-gray-600 text-center py-1">No comments yet — be the first!</p>
+                        <p className="text-xs text-gray-600 text-center py-1">No comments yet. Be the first to share your thoughts!</p>
                       )}
                       <div className="flex gap-2 pt-1">
                         <input

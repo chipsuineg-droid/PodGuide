@@ -678,7 +678,7 @@ export function IntegratedAdminDashboard({
             </h1>
             <p className="text-xs text-gray-500 max-w-lg leading-relaxed">
               Logged in as <span className="text-white font-bold">{currentAdminName}</span>.
-              Full clearance — manage users, curriculum, quizzes, store, and library.
+              Full clearance: manage users, curriculum, quizzes, store, and library.
             </p>
           </div>
           <button
@@ -857,7 +857,7 @@ export function IntegratedAdminDashboard({
 
                       <td className="py-4 px-4">
                         <p className="text-gray-300 font-medium">
-                          {p.program_id?.toUpperCase() || p.programme || "—"}
+                          {p.program_id?.toUpperCase() || p.programme || "N/A"}
                         </p>
                         <p className="text-[10px] text-gray-600">
                           {p.academic_level || p.level || "Not onboarded"}

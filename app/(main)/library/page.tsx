@@ -575,7 +575,7 @@ export default function LibraryPage() {
           placeholder="Search every document, book, slide, past paper or recording in PodGuide Library..."
           value={searchQuery}
           onChange={e => setSearchQuery(e.target.value)}
-          className="w-full bg-[#0d0d0d] border border-[#1f1f1f] focus:border-red-600 rounded-full pl-11 pr-10 py-2.5 text-xs sm:text-sm text-white placeholder:text-gray-500 outline-none transition-all shadow-sm"
+          className="w-full bg-[#0d0d0d] border border-[#1f1f1f] focus:border-red-600 rounded-xl pl-11 pr-10 py-2.5 text-xs sm:text-sm text-white placeholder:text-gray-500 outline-none transition-all shadow-sm"
         />
         {searchQuery && (
           <button
@@ -721,7 +721,7 @@ export default function LibraryPage() {
                 PODGUIDE DIGITAL LIBRARY
               </h1>
               <p className="text-xs text-gray-500 mt-0.5">
-                Academic directory system — expand a category to view subjects and curated learning materials
+                Academic directory system: expand a category to view subjects and curated learning materials
               </p>
             </div>
             <div className="flex items-center gap-3">
@@ -799,7 +799,7 @@ export default function LibraryPage() {
                       {/* Right Stats and Actions */}
                       <div className="flex items-center gap-3 text-xs text-gray-500 flex-shrink-0 ml-2">
                         <span className="hidden sm:inline font-medium">{subjectCount} subjects</span>
-                        <span className="text-[11px] font-semibold text-gray-400 bg-[#141414] border border-[#222] px-2 py-0.5 rounded-full">
+                        <span className="text-[11px] font-semibold text-gray-400 bg-[#141414] border border-[#222] px-2 py-0.5 rounded-md">
                           {filesCount} {filesCount === 1 ? "file" : "files"}
                         </span>
                       </div>
@@ -1001,7 +1001,7 @@ export default function LibraryPage() {
               </p>
             </div>
             <div className="text-right">
-              <span className="text-xs font-bold px-3 py-1 bg-[#141414] border border-[#222] rounded-full text-white">
+              <span className="text-xs font-bold px-3 py-1 bg-[#141414] border border-[#222] rounded-lg text-white">
                 {currentSubjectDriveData?.totalFiles || 0} total files
               </span>
             </div>

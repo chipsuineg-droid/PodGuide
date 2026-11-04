@@ -9,7 +9,7 @@ type Review = { rating: number; reviewed_at: string }
 
 const opportunities = [
   {
-    title: "Elton John AIDS Foundation — Student Research Grant",
+    title: "Elton John AIDS Foundation: Student Research Grant",
     org: "EJAF Global",
     type: "Research",
     description: "Open to medical students researching HIV/AIDS, sexual health, or infectious disease in sub-Saharan Africa.",

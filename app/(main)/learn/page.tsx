@@ -556,7 +556,7 @@ export default function LearnPage() {
             {myMaterials.length > 0 && (
               <div>
                 <p className="text-xs font-bold text-brand uppercase tracking-widest mb-3">
-                  Your Programme — {programme.split("(")[0].trim()}
+                  Your Programme: {programme.split("(")[0].trim()}
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {myMaterials.map(m => (

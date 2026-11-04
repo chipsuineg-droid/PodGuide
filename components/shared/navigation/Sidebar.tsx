@@ -82,6 +82,18 @@ export function Sidebar() {
             <LogOut size={16} />
           </button>
         </div>
+
+        <div className="flex items-center justify-between px-2 pt-2 text-[10px] text-gray-400 border-t border-gray-100 dark:border-[#161616] mt-2">
+          <Link href="/terms" className="hover:text-black dark:hover:text-white transition-colors">
+            Terms
+          </Link>
+          <span>·</span>
+          <Link href="/privacy" className="hover:text-black dark:hover:text-white transition-colors">
+            Privacy
+          </Link>
+          <span>·</span>
+          <span>PodGuide</span>
+        </div>
       </div>
     </div>
   )

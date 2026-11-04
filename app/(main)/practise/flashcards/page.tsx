@@ -6,7 +6,7 @@ import { createClient } from "@/lib/supabase/client"
 
 const deckData = [
   { id: "1", front: "What is the normal resting heart rate in adults?", back: "60–100 bpm. Bradycardia < 60 bpm. Tachycardia > 100 bpm.", subject: "Physiology" },
-  { id: "2", front: "What are the 4 components of Virchow's Triad?", back: "Stasis of blood flow, Endothelial injury, Hypercoagulability. (Note: Virchow's Triad has 3 components, not 4 — this is a trick question!)", subject: "Pathology" },
+  { id: "2", front: "What are the 4 components of Virchow's Triad?", back: "Stasis of blood flow, Endothelial injury, Hypercoagulability. Note: Virchow's Triad has 3 components, not 4 (this is a test question).", subject: "Pathology" },
   { id: "3", front: "What is the mechanism of action of beta-blockers?", back: "Competitive antagonism of β-adrenergic receptors → ↓ HR, ↓ BP, ↓ myocardial contractility.", subject: "Pharmacology" },
   { id: "4", front: "Describe the Frank-Starling Law of the Heart.", back: "Increased venous return → increased end-diastolic volume → increased stroke volume. The heart pumps what it receives.", subject: "Physiology" },
   { id: "5", front: "What electrolyte abnormality causes prolonged QT interval?", back: "Hypocalcaemia, Hypokalaemia, Hypomagnesaemia. Remember: hypO-calcaemia, hypO-kalaemia, hypO-magnesaemia.", subject: "Cardiology" },

@@ -315,7 +315,7 @@ const PARTNERS_DATA: PartnerData[] = [
     initials: "PS",
     tagline: "Official Medical Gear Subsidiary",
     summary:
-      "PodMyth Scrubs is an official subsidiary of PodMyth dedicated to supplying top-tier, durable, and comfortable medical gear and merchandise. Crafted specifically for medical and health sciences students, doctors, nurses, and allied professionals across Africa — featuring bespoke scrubs, laboratory coats, clinical diagnostic equipment, and stethoscope cases built to excel from preclinical labs to intense hospital wards. Browse the full gear collection inside the PodGuide MedStore.",
+      "PodMyth Scrubs is an official subsidiary of PodMyth dedicated to supplying top-tier, durable, and comfortable medical gear and merchandise. Crafted specifically for medical and health sciences students, doctors, nurses, and allied professionals across Africa, featuring bespoke scrubs, laboratory coats, clinical diagnostic equipment, and stethoscope cases built to excel from preclinical labs to intense hospital wards. Browse the full gear collection inside the PodGuide MedStore.",
     color: "#dc2626",
     logo: "/images/podmyth-scrubs.png",
     featured: true,
@@ -1770,7 +1770,7 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
             </div>
           </div>
 
-          {/* Platform & Conduct side by side */}
+          {/* Platform, Conduct, Access & Legal in 4 responsive columns */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {/* Platform */}
             <div className="space-y-2.5">
@@ -1784,7 +1784,28 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
               </ul>
             </div>
 
-            {/* Conduct */}
+            {/* Legal & Policies */}
+            <div className="space-y-2.5">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Legal & Policies</span>
+              <ul className="space-y-1.5 text-xs text-gray-400">
+                <li><Link href="/terms" className="hover:text-white transition">Terms and Conditions</Link></li>
+                <li><Link href="/privacy" className="hover:text-white transition">Privacy Policy</Link></li>
+                <li><Link href="/terms" className="hover:text-white transition">Clinical Disclaimer</Link></li>
+                <li><Link href="/terms" className="hover:text-white transition">Fair Dealing Notice</Link></li>
+              </ul>
+            </div>
+
+            {/* Access */}
+            <div className="space-y-2.5">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Access</span>
+              <ul className="space-y-1.5 text-xs text-gray-400">
+                <li><Link href="/login" className="hover:text-white transition">App Login</Link></li>
+                <li><Link href="/register" className="hover:text-white transition">Register Account</Link></li>
+                <li><Link href="/forgot-password" className="hover:text-white transition">Password Recovery</Link></li>
+              </ul>
+            </div>
+
+            {/* Conduct & Contact */}
             <div className="space-y-2.5">
               <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Conduct</span>
               <ul className="space-y-2 text-xs text-gray-400">
@@ -1806,20 +1827,11 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                 </li>
               </ul>
             </div>
-
-            {/* Access */}
-            <div className="space-y-2.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Access</span>
-              <ul className="space-y-1.5 text-xs text-gray-400">
-                <li><Link href="/login" className="hover:text-white transition">App Login</Link></li>
-                <li><Link href="/register" className="hover:text-white transition">Register</Link></li>
-              </ul>
-            </div>
           </div>
 
-          {/* Copyright – centered */}
+          {/* Copyright */}
           <div className="pt-6 border-t border-[#181818] text-center text-xs text-gray-500">
-            &copy; {new Date().getFullYear()} PodGuide &mdash; a subsidiary of PodMyth. All rights reserved.
+            &copy; {new Date().getFullYear()} PodGuide (a subsidiary of PodMyth Group). All rights reserved.
           </div>
 
         </div>

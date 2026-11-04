@@ -794,7 +794,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
 
   const addDriveSource = async () => {
     if (!driveUrl.trim()) return
-    const name = "Google Drive — " + (driveUrl.split("/").filter(Boolean).pop() || "Document").substring(0, 35)
+    const name = "Google Drive: " + (driveUrl.split("/").filter(Boolean).pop() || "Document").substring(0, 35)
     const { data: doc } = await supabase.from("notebook_documents").insert({
       notebook_id: id, file_name: name, file_url: driveUrl, file_type: "drive", processing_status: "ready"
     }).select().single()
@@ -806,7 +806,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
 
   const addPasteSource = async () => {
     if (!pasteText.trim()) return
-    const title = "Pasted Notes — " + pasteText.slice(0, 25).replace(/\n/g, " ") + "…"
+    const title = "Pasted Notes: " + pasteText.slice(0, 25).replace(/\n/g, " ") + "…"
     const { data: doc } = await supabase.from("notebook_documents").insert({
       notebook_id: id, file_name: title, file_url: "", file_type: "text",
       file_size: pasteText.length, processing_status: "ready", text_content: pasteText, extracted_text: pasteText
@@ -821,7 +821,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
 
   // ── Save AI Output directly to Sources ──
   const saveAsSource = async (content: string) => {
-    const title = "AI Study Notes — " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+    const title = "AI Study Notes: " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
     const { data: doc, error } = await supabase.from("notebook_documents").insert({
       notebook_id: id,
       file_name: title,
