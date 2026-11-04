@@ -890,10 +890,11 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
 
   const addToNotes = (content: string) => {
     const updated = noteContent ? `${noteContent}\n\n---\n\n${content}` : content
-    handleNoteChange(updated)
+    setNoteContent(updated)
+    autoSave(updated, noteTitle)
     setActiveTool("notes")
     if (window.innerWidth < 1024) setMobilePanel("studio")
-    toast.success("Appended to your notes")
+    toast.success("Saved to your notes! Visible on your Learn Dashboard.")
   }
 
   const deleteSource = async (sourceId: string) => {
