@@ -49,7 +49,7 @@ export function TopBar() {
             {unread > 0 && <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-brand rounded-full" />}
           </button>
           {notifOpen && (
-            <div className="absolute right-0 top-12 w-80 bg-white dark:bg-[#111] border border-gray-200 dark:border-[#333] rounded-xl shadow-2xl z-50 overflow-hidden">
+            <div className="fixed sm:absolute right-2 sm:right-0 top-16 sm:top-12 w-[calc(100vw-1rem)] sm:w-80 max-w-sm bg-white dark:bg-[#111] border border-gray-200 dark:border-[#222] rounded-2xl shadow-2xl z-50 overflow-hidden">
               <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-[#222]">
                 <span className="font-semibold text-black dark:text-white text-sm">Notifications</span>
                 <button onClick={() => setNotifOpen(false)}><X size={16} className="text-gray-400 hover:text-black dark:hover:text-white" /></button>

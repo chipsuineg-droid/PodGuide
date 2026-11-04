@@ -66,7 +66,7 @@ export function BottomNav() {
           onClick={() => setMenuOpen(false)}
         >
           <div
-            className="bg-white dark:bg-[#0e0e0e] border-t border-gray-200 dark:border-[#222] rounded-t-3xl p-5 max-h-[85vh] overflow-y-auto space-y-5 animate-in slide-in-from-bottom duration-250 shadow-2xl"
+            className="bg-white dark:bg-[#0e0e0e] border-t border-gray-200 dark:border-[#222] rounded-t-3xl p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom,0px))] max-h-[85dvh] overflow-y-auto space-y-5 animate-in slide-in-from-bottom duration-250 shadow-2xl"
             onClick={e => e.stopPropagation()}
           >
             {/* Grab Handle */}
@@ -148,7 +148,7 @@ export function BottomNav() {
       )}
 
       {/* Main Bottom Bar */}
-      <nav className="fixed bottom-0 left-0 right-0 h-16 bg-white dark:bg-[#0a0a0a] border-t border-gray-200 dark:border-[#1f1f1f] flex items-stretch z-40 lg:hidden">
+      <nav className="fixed bottom-0 left-0 right-0 h-16 bg-white dark:bg-[#0a0a0a] border-t border-gray-200 dark:border-[#1f1f1f] flex items-stretch z-40 lg:hidden pb-[env(safe-area-inset-bottom,0px)]">
         {primaryItems.map(item => {
           const isActive = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href))
           return (

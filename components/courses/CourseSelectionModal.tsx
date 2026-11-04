@@ -112,16 +112,16 @@ export function CourseSelectionModal({
   ).length
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-sm animate-in fade-in duration-150">
-      <div className="bg-[#0c0c0c] border border-[#222] w-full max-w-5xl h-[90vh] rounded-2xl flex flex-col overflow-hidden shadow-2xl relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-6 bg-black/85 backdrop-blur-sm animate-in fade-in duration-150">
+      <div className="bg-[#0c0c0c] border border-[#222] w-full max-w-5xl h-[92dvh] max-h-[92dvh] rounded-2xl flex flex-col overflow-hidden shadow-2xl relative">
         
         {/* ── MODAL HEADER ── */}
-        <div className="p-5 sm:p-6 border-b border-[#1f1f1f] bg-[#111] flex items-start justify-between gap-4">
+        <div className="p-4 sm:p-6 border-b border-[#1f1f1f] bg-[#111] flex items-start justify-between gap-3">
           <div>
-            <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+            <h2 className="text-lg sm:text-2xl font-bold text-white tracking-tight">
               Select Your Courses
             </h2>
-            <p className="text-xs sm:text-sm text-gray-400 mt-1 max-w-2xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-gray-400 mt-0.5 sm:mt-1 max-w-2xl leading-relaxed">
               Choose the individual course folders you want to study. You can select from both Academic and Self-Development categories.
             </p>
           </div>
@@ -135,13 +135,13 @@ export function CourseSelectionModal({
         </div>
 
         {/* ── CATEGORY TABS & SEARCH BAR ── */}
-        <div className="p-4 sm:p-5 border-b border-[#1a1a1a] bg-[#101010] space-y-3">
+        <div className="p-3 sm:p-5 border-b border-[#1a1a1a] bg-[#101010] space-y-3">
           {/* Distinct Category Tabs */}
-          <div className="flex items-center gap-2 border-b border-[#222] pb-3">
+          <div className="flex items-center gap-2 border-b border-[#222] pb-2 overflow-x-auto no-scrollbar">
             <button
               type="button"
               onClick={() => setActiveTab("Academic")}
-              className={`pb-2 px-3 text-xs sm:text-sm font-semibold transition-all relative ${
+              className={`pb-2 px-2.5 sm:px-3 text-xs sm:text-sm font-semibold transition-all relative flex-shrink-0 whitespace-nowrap ${
                 activeTab === "Academic"
                   ? "text-white"
                   : "text-gray-400 hover:text-gray-200"
@@ -149,8 +149,8 @@ export function CourseSelectionModal({
             >
               Academic Courses ({academicTotal})
               {academicSelectedCount > 0 && (
-                <span className="ml-2 text-[10px] bg-red-600/20 text-red-400 border border-red-600/30 px-1.5 py-0.2 rounded-full">
-                  {academicSelectedCount} selected
+                <span className="ml-1.5 text-[10px] bg-red-600/20 text-red-400 border border-red-600/30 px-1.5 py-0.2 rounded-full">
+                  {academicSelectedCount}
                 </span>
               )}
               {activeTab === "Academic" && (
@@ -161,7 +161,7 @@ export function CourseSelectionModal({
             <button
               type="button"
               onClick={() => setActiveTab("Self-Development")}
-              className={`pb-2 px-3 text-xs sm:text-sm font-semibold transition-all relative ${
+              className={`pb-2 px-2.5 sm:px-3 text-xs sm:text-sm font-semibold transition-all relative flex-shrink-0 whitespace-nowrap ${
                 activeTab === "Self-Development"
                   ? "text-white"
                   : "text-gray-400 hover:text-gray-200"
@@ -169,8 +169,8 @@ export function CourseSelectionModal({
             >
               Self-Development ({selfDevTotal})
               {selfDevSelectedCount > 0 && (
-                <span className="ml-2 text-[10px] bg-red-600/20 text-red-400 border border-red-600/30 px-1.5 py-0.2 rounded-full">
-                  {selfDevSelectedCount} selected
+                <span className="ml-1.5 text-[10px] bg-red-600/20 text-red-400 border border-red-600/30 px-1.5 py-0.2 rounded-full">
+                  {selfDevSelectedCount}
                 </span>
               )}
               {activeTab === "Self-Development" && (
@@ -309,11 +309,11 @@ export function CourseSelectionModal({
         </div>
 
         {/* ── STICKY FOOTER ACTION BAR ── */}
-        <div className="p-4 sm:p-5 border-t border-[#1f1f1f] bg-[#111] flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="p-3.5 sm:p-5 border-t border-[#1f1f1f] bg-[#111] flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-3 w-full sm:w-auto">
             <p className="text-xs text-gray-300">
               <strong className="text-white font-bold">{selectedSlugs.length}</strong> total {selectedSlugs.length === 1 ? "course" : "courses"} selected
-              {" "}({academicSelectedCount} Academic, {selfDevSelectedCount} Self-Development)
+              {" "}<span className="hidden sm:inline">({academicSelectedCount} Academic, {selfDevSelectedCount} Self-Development)</span>
             </p>
           </div>
 
@@ -322,7 +322,7 @@ export function CourseSelectionModal({
               type="button"
               onClick={onClose}
               disabled={isSaving}
-              className="px-4 py-2 rounded-lg border border-[#333] hover:bg-[#1a1a1a] text-xs font-semibold text-gray-300 hover:text-white transition-colors"
+              className="flex-1 sm:flex-initial px-4 py-2.5 rounded-lg border border-[#333] hover:bg-[#1a1a1a] text-xs font-semibold text-gray-300 hover:text-white transition-colors"
             >
               Cancel
             </button>
@@ -330,7 +330,7 @@ export function CourseSelectionModal({
               type="button"
               onClick={handleSave}
               disabled={isSaving || selectedSlugs.length === 0}
-              className="px-5 py-2 rounded-lg bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white text-xs font-bold transition-all flex items-center gap-2"
+              className="flex-1 sm:flex-initial px-4 sm:px-5 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 sm:gap-2 shadow-sm"
             >
               {isSaving ? (
                 <>
@@ -338,7 +338,7 @@ export function CourseSelectionModal({
                 </>
               ) : (
                 <>
-                  <CheckCircle2 size={14} /> Add Selected Courses to Dashboard
+                  <CheckCircle2 size={14} /> Add to Dashboard
                 </>
               )}
             </button>

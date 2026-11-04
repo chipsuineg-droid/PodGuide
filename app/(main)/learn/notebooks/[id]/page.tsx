@@ -125,27 +125,27 @@ function parseFlashcards(text: string): Flashcard[] {
 // ─── Custom Rich Medical Markdown Renderer ──────────────────
 function RichMedicalMarkdown({ content }: { content: string }) {
   return (
-    <div className="prose prose-invert prose-sm max-w-none text-gray-200 leading-relaxed font-sans">
+    <div className="prose prose-invert prose-sm max-w-none text-gray-200 leading-relaxed font-sans break-words overflow-hidden">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
           h1: ({ children }) => (
             <div className="my-4 pb-2 border-b border-[#222] flex items-center gap-2">
-              <span className="w-1.5 h-5 bg-brand rounded-full inline-block" />
-              <h1 className="text-base font-bold text-white tracking-wide m-0">{children}</h1>
+              <span className="w-1.5 h-5 bg-brand rounded-full inline-block flex-shrink-0" />
+              <h1 className="text-base font-bold text-white tracking-wide m-0 break-words">{children}</h1>
             </div>
           ),
           h2: ({ children }) => (
             <div className="mt-5 mb-2.5 pb-1 border-b border-[#1a1a1a] flex items-center gap-2">
-              <span className="w-1 h-4 bg-brand rounded-full inline-block" />
-              <h2 className="text-sm font-bold text-white tracking-wide uppercase text-xs m-0">{children}</h2>
+              <span className="w-1 h-4 bg-brand rounded-full inline-block flex-shrink-0" />
+              <h2 className="text-sm font-bold text-white tracking-wide uppercase text-xs m-0 break-words">{children}</h2>
             </div>
           ),
           h3: ({ children }) => (
-            <h3 className="text-xs font-bold text-gray-300 mt-4 mb-1.5 uppercase tracking-wider">{children}</h3>
+            <h3 className="text-xs font-bold text-gray-300 mt-4 mb-1.5 uppercase tracking-wider break-words">{children}</h3>
           ),
           p: ({ children }) => (
-            <p className="text-xs text-gray-300 my-2 leading-relaxed">{children}</p>
+            <p className="text-xs text-gray-300 my-2 leading-relaxed break-words">{children}</p>
           ),
           strong: ({ children }) => (
             <strong className="text-white font-semibold">{children}</strong>
@@ -157,29 +157,29 @@ function RichMedicalMarkdown({ content }: { content: string }) {
             <ol className="my-2.5 pl-4 space-y-1 text-xs text-gray-300 list-decimal marker:text-brand font-medium">{children}</ol>
           ),
           li: ({ children }) => (
-            <li className="leading-relaxed pl-1">{children}</li>
+            <li className="leading-relaxed pl-1 break-words">{children}</li>
           ),
           blockquote: ({ children }) => (
-            <div className="my-3 p-3.5 bg-[#0d0d0d] border-l-2 border-brand rounded-r-xl text-xs text-gray-300 italic shadow-sm">
+            <div className="my-3 p-3.5 bg-[#0d0d0d] border-l-2 border-brand rounded-r-xl text-xs text-gray-300 italic shadow-sm break-words">
               {children}
             </div>
           ),
           table: ({ children }) => (
-            <div className="my-4 overflow-x-auto rounded-xl border border-[#222] bg-[#0c0c0c]">
-              <table className="w-full text-left border-collapse text-xs">{children}</table>
+            <div className="my-4 overflow-x-auto rounded-xl border border-[#222] bg-[#0c0c0c] -mx-1 sm:mx-0">
+              <table className="w-full min-w-full text-left border-collapse text-xs">{children}</table>
             </div>
           ),
           thead: ({ children }) => (
             <thead className="bg-[#181818] text-white border-b border-[#2a2a2a] text-[11px] uppercase tracking-wider font-bold">{children}</thead>
           ),
           th: ({ children }) => (
-            <th className="px-3.5 py-2.5 font-bold text-white border-r border-[#222] last:border-0">{children}</th>
+            <th className="px-3 py-2 font-bold text-white border-r border-[#222] last:border-0 whitespace-nowrap">{children}</th>
           ),
           td: ({ children }) => (
-            <td className="px-3.5 py-2 text-gray-300 border-t border-[#1a1a1a] border-r border-[#1a1a1a] last:border-r-0">{children}</td>
+            <td className="px-3 py-2 text-gray-300 border-t border-[#1a1a1a] border-r border-[#1a1a1a] last:border-r-0 whitespace-normal break-words">{children}</td>
           ),
           code: ({ children }) => (
-            <code className="px-1.5 py-0.5 rounded bg-[#1c1c1c] text-brand font-mono text-[11px] border border-[#2c2c2c]">{children}</code>
+            <code className="px-1.5 py-0.5 rounded bg-[#1c1c1c] text-brand font-mono text-[11px] border border-[#2c2c2c] break-all">{children}</code>
           ),
           hr: () => (
             <hr className="my-4 border-[#222]" />
@@ -448,7 +448,7 @@ function AIMessage({
         <RichMedicalMarkdown content={message.content} />
 
         {/* Action buttons */}
-        <div className="flex items-center gap-3 mt-4 pt-3 border-t border-[#181818]">
+        <div className="flex items-center flex-wrap gap-2.5 sm:gap-3 mt-4 pt-3 border-t border-[#181818]">
           <button
             onClick={handleCopy}
             className="flex items-center gap-1.5 text-[10px] font-bold text-gray-400 hover:text-white transition-colors"
@@ -456,14 +456,14 @@ function AIMessage({
             {copiedMsg ? <Check size={11} className="text-brand" /> : <Clipboard size={11} />}
             {copiedMsg ? "Copied" : "Copy Text"}
           </button>
-          <span className="text-[#252525]">·</span>
+          <span className="text-[#252525] hidden sm:inline">·</span>
           <button
             onClick={() => onSendToNotes(message.content)}
             className="flex items-center gap-1.5 text-[10px] font-bold text-gray-400 hover:text-white transition-colors"
           >
             <PenLine size={11} /> Add to Notes
           </button>
-          <span className="text-[#252525]">·</span>
+          <span className="text-[#252525] hidden sm:inline">·</span>
           <button
             onClick={() => onSaveAsSource(message.content)}
             className="flex items-center gap-1.5 text-[10px] font-bold text-gray-400 hover:text-brand transition-colors"
@@ -1070,7 +1070,7 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
   const noteWordCount = noteContent.trim() ? noteContent.trim().split(/\s+/).length : 0
 
   return (
-    <div className={`flex flex-col bg-[#0a0a0a] ${isFullscreen ? "fixed inset-0 z-[200]" : "h-[calc(100vh-4rem)] -mx-4 lg:-mx-8 -mt-4 lg:-mt-8"}`}>
+    <div className={`flex flex-col bg-[#0a0a0a] overflow-hidden ${isFullscreen ? "fixed inset-0 z-[200]" : "h-[calc(100dvh-8rem)] lg:h-[calc(100dvh-4rem)] -mx-4 lg:-mx-8 -mt-4 lg:-mt-8 -mb-20 lg:-mb-8"}`}>
 
       {/* Hidden Native File Input for 100% Reliable Mobile & PC Upload */}
       <input
@@ -1083,9 +1083,9 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
       />
 
       {/* ── TOP NAV BAR ── */}
-      <div className="h-12 bg-[#0a0a0a] border-b border-[#181818] flex items-center px-4 gap-3 flex-shrink-0">
+      <div className="h-12 bg-[#0a0a0a] border-b border-[#181818] flex items-center px-3 sm:px-4 gap-2 sm:gap-3 flex-shrink-0">
         {!isFullscreen && (
-          <Link href="/learn" className="text-gray-500 hover:text-white transition-colors flex-shrink-0">
+          <Link href="/learn" className="text-gray-500 hover:text-white transition-colors flex-shrink-0 p-1">
             <ChevronLeft size={18} />
           </Link>
         )}
@@ -1093,27 +1093,29 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
         <input
           value={noteTitle}
           onChange={e => handleTitleChange(e.target.value)}
-          className="font-bold text-white text-sm bg-transparent border-none outline-none min-w-0 flex-1 placeholder:text-gray-600"
+          className="font-bold text-white text-xs sm:text-sm bg-transparent border-none outline-none min-w-0 flex-1 placeholder:text-gray-600 truncate focus:truncate-none"
           placeholder="Untitled Notebook"
         />
 
         {saving ? (
           <span className="text-[10px] text-gray-400 flex-shrink-0 flex items-center gap-1">
-            <Loader2 size={10} className="animate-spin text-brand" /> auto-saving
+            <Loader2 size={10} className="animate-spin text-brand" /> <span className="hidden sm:inline">auto-saving</span>
           </span>
         ) : lastSavedTime ? (
-          <span className="text-[10px] text-gray-500 flex-shrink-0 hidden sm:inline">
+          <span className="text-[10px] text-gray-500 flex-shrink-0 hidden md:inline">
             Saved {lastSavedTime}
           </span>
         ) : null}
 
-        <div className="flex items-center gap-2 flex-shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
           <button
             onClick={manualSaveNotes}
             disabled={saving}
-            className="flex items-center gap-1.5 text-[10px] font-bold px-3 py-1.5 rounded-xl bg-brand text-white hover:bg-red-700 transition-all shadow-sm"
+            className="flex items-center gap-1 sm:gap-1.5 text-[10px] font-bold px-2.5 sm:px-3 py-1.5 rounded-xl bg-brand text-white hover:bg-red-700 transition-all shadow-sm flex-shrink-0"
           >
-            <Save size={11} /> Save Notes
+            <Save size={11} />
+            <span className="hidden sm:inline">Save Notes</span>
+            <span className="sm:hidden">Save</span>
           </button>
 
           <button
@@ -1140,11 +1142,11 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
             <Share2 size={11} /> Share
           </button>
 
-          <button onClick={handleDelete} disabled={deleting} className="p-1.5 text-gray-500 hover:text-brand transition-colors" title="Delete notebook">
+          <button onClick={handleDelete} disabled={deleting} className="p-1 sm:p-1.5 text-gray-500 hover:text-brand transition-colors" title="Delete notebook">
             {deleting ? <Loader2 size={13} className="animate-spin" /> : <Trash2 size={13} />}
           </button>
 
-          <button onClick={toggleFullscreen} className="p-1.5 text-gray-500 hover:text-white transition-colors" title={isFullscreen ? "Exit Fullscreen" : "Fullscreen Focus"}>
+          <button onClick={toggleFullscreen} className="p-1 sm:p-1.5 text-gray-500 hover:text-white transition-colors" title={isFullscreen ? "Exit Fullscreen" : "Fullscreen Focus"}>
             {isFullscreen ? <Minimize2 size={13} /> : <Maximize2 size={13} />}
           </button>
         </div>
@@ -1160,8 +1162,8 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
           <button
             key={p.id}
             onClick={() => setMobilePanel(p.id)}
-            className={`flex-1 py-2.5 text-xs font-bold transition-colors border-b-2 ${
-              mobilePanel === p.id ? "text-white border-brand" : "text-gray-500 border-transparent"
+            className={`flex-1 py-2.5 px-1 text-[11px] sm:text-xs font-bold transition-colors border-b-2 text-center truncate ${
+              mobilePanel === p.id ? "text-white border-brand" : "text-gray-500 border-transparent hover:text-gray-300"
             }`}
           >
             {p.label}{p.count !== undefined ? ` (${p.count})` : ""}
@@ -1505,7 +1507,7 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
               ))}
             </div>
 
-            <div className="p-3.5">
+            <div className="p-2.5 sm:p-3.5">
               <div className="relative flex items-end bg-[#0f0f0f] border border-[#1f1f1f] focus-within:border-brand/60 rounded-2xl shadow-inner">
                 <textarea
                   value={input}
@@ -1513,23 +1515,24 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
                   onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage() } }}
                   placeholder="Ask any medical question, request a summary, or quiz yourself…"
                   rows={1}
-                  className="flex-1 bg-transparent py-3 pl-4 pr-24 text-xs text-white placeholder:text-gray-600 outline-none resize-none leading-relaxed"
-                  style={{ minHeight: "46px", maxHeight: "150px" }}
+                  className="flex-1 bg-transparent py-2.5 sm:py-3 pl-3.5 pr-12 sm:pr-24 text-xs text-white placeholder:text-gray-600 outline-none resize-none leading-relaxed"
+                  style={{ minHeight: "44px", maxHeight: "150px" }}
                 />
-                <div className="absolute right-2 bottom-2 flex items-center gap-2">
+                <div className="absolute right-2 bottom-1.5 sm:bottom-2 flex items-center gap-2">
                   <span className="text-[10px] text-gray-500 font-mono hidden sm:inline">
                     {sources.length} source{sources.length === 1 ? "" : "s"}
                   </span>
                   <button
                     onClick={() => sendMessage()}
                     disabled={!input.trim() || aiLoading}
-                    className="w-8 h-8 rounded-xl bg-brand hover:bg-red-700 disabled:opacity-30 flex items-center justify-center text-white transition-all shadow-md"
+                    className="w-8 h-8 rounded-xl bg-brand hover:bg-red-700 disabled:opacity-30 flex items-center justify-center text-white transition-all shadow-md flex-shrink-0"
+                    aria-label="Send message"
                   >
                     <Send size={13} />
                   </button>
                 </div>
               </div>
-              <p className="text-center text-[10px] text-gray-600 mt-2">
+              <p className="text-center text-[9px] sm:text-[10px] text-gray-500 line-clamp-1 sm:line-clamp-none mt-1 sm:mt-2">
                 Referenced with standard medical textbooks (Snell, Guyton, Robbins, Katzung, SRB, Materials) & NCBI / UpToDate.
               </p>
             </div>

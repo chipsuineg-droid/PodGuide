@@ -149,7 +149,7 @@ export function PersonalisedDashboardClient({
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider">
             {getGreeting()}
           </p>
-          <h1 className="text-3xl sm:text-4xl font-bold mt-1 text-white tracking-tight">
+          <h1 className="text-2xl sm:text-4xl font-bold mt-1 text-white tracking-tight break-words">
             {userName}.
           </h1>
           <p className="text-xs text-gray-400 mt-1">
@@ -159,19 +159,19 @@ export function PersonalisedDashboardClient({
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap">
           {stats.streak > 0 && (
-            <div className="flex items-center gap-2 bg-[#111] border border-[#222] px-3.5 py-2 rounded-lg">
-              <Flame size={15} className="text-red-500" />
+            <div className="flex items-center gap-2 bg-[#111] border border-[#222] px-3 py-2 rounded-lg">
+              <Flame size={14} className="text-red-500" />
               <span className="font-semibold text-white text-xs">{stats.streak} day streak</span>
             </div>
           )}
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-colors shadow-sm"
+            className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold text-xs px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-lg transition-colors shadow-sm"
           >
-            <Plus size={15} />
+            <Plus size={14} />
             {hasCourses ? "Add More Courses" : "Select Courses"}
           </button>
         </div>

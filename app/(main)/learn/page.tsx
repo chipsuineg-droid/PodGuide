@@ -184,9 +184,9 @@ export default function LearnPage() {
             </span>
           </div>
 
-          <div className="flex items-center gap-2 flex-wrap">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full sm:w-auto pb-1 sm:pb-0">
             {/* Filter Tabs */}
-            <div className="flex items-center gap-1 bg-[#111] border border-[#222] p-1 rounded-xl">
+            <div className="flex items-center gap-1 bg-[#111] border border-[#222] p-1 rounded-xl flex-shrink-0">
               {[
                 { id: "all" as const, label: `All (${notebooks.length})` },
                 { id: "published" as const, label: `Published (${notebooks.filter(n => n.is_shared).length})` },
@@ -195,7 +195,7 @@ export default function LearnPage() {
                 <button
                   key={f.id}
                   onClick={() => setNotebookFilter(f.id)}
-                  className={`px-2.5 py-1 text-[11px] font-bold rounded-lg transition-colors ${
+                  className={`px-2.5 py-1 text-[11px] font-bold rounded-lg transition-colors flex-shrink-0 ${
                     notebookFilter === f.id
                       ? "bg-brand text-white shadow-sm"
                       : "text-gray-400 hover:text-white"
@@ -207,7 +207,7 @@ export default function LearnPage() {
             </div>
 
             {/* Note search */}
-            <div className="relative w-36 sm:w-44">
+            <div className="relative w-32 sm:w-44 flex-shrink-0">
               <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-500" size={12} />
               <input
                 type="text"
@@ -220,9 +220,9 @@ export default function LearnPage() {
 
             <Link
               href="/learn/notebooks/new"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-brand hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-brand/20"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-brand hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-brand/20 flex-shrink-0"
             >
-              <Plus size={13} /> New Notebook
+              <Plus size={13} /> <span className="hidden sm:inline">New Notebook</span><span className="sm:hidden">New</span>
             </Link>
           </div>
         </div>
@@ -277,7 +277,7 @@ export default function LearnPage() {
                         disabled={isBusy}
                         className={`text-[9px] font-bold px-2 py-0.5 rounded-full border flex items-center gap-1 transition-all ${
                           nb.is_shared
-                            ? "bg-emerald-950/70 border-emerald-800/50 text-emerald-400 hover:bg-emerald-900/60"
+                            ? "bg-brand/10 border-brand/40 text-brand hover:bg-brand/20"
                             : "bg-[#161616] border-[#252525] text-gray-400 hover:text-white hover:border-[#333]"
                         }`}
                         title={nb.is_shared ? "Click to set private" : "Click to publish to community"}
@@ -370,19 +370,19 @@ export default function LearnPage() {
 
       {/* ── NOTE VIEW MODAL ── */}
       {viewingNotebook && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#0c0c0c] border border-[#222] rounded-3xl max-w-3xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-2.5 sm:p-4">
+          <div className="bg-[#0c0c0c] border border-[#222] rounded-2xl sm:rounded-3xl max-w-3xl w-full max-h-[90dvh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
             {/* Modal Header */}
-            <div className="px-6 py-4 border-b border-[#1c1c1c] flex items-center justify-between gap-3 bg-[#0f0f0f]">
+            <div className="px-4 py-3 sm:px-6 sm:py-4 border-b border-[#1c1c1c] flex items-center justify-between gap-3 bg-[#0f0f0f]">
               <div className="flex items-center gap-2 min-w-0">
                 <div className="w-8 h-8 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center text-brand flex-shrink-0">
                   <FileText size={16} />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="font-bold text-white text-base truncate">
+                  <h3 className="font-bold text-white text-sm sm:text-base truncate">
                     {viewingNotebook.title || "Untitled Note"}
                   </h3>
-                  <div className="flex items-center gap-2 mt-0.5 text-[10px] text-gray-400">
+                  <div className="flex items-center gap-1.5 sm:gap-2 mt-0.5 text-[10px] text-gray-400 flex-wrap">
                     {viewingNotebook.subject_area && (
                       <span className="text-brand font-bold uppercase tracking-wider">
                         {viewingNotebook.subject_area}
@@ -396,19 +396,19 @@ export default function LearnPage() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 flex-shrink-0">
+              <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
                 {/* Publish Toggle Button */}
                 <button
                   onClick={() => handleTogglePublish(viewingNotebook)}
-                  className={`text-xs font-bold px-3 py-1.5 rounded-xl border flex items-center gap-1.5 transition-all ${
+                  className={`text-xs font-bold px-2.5 sm:px-3 py-1.5 rounded-xl border flex items-center gap-1.5 transition-all ${
                     viewingNotebook.is_shared
-                      ? "bg-emerald-950/70 border-emerald-800/50 text-emerald-400 hover:bg-emerald-900/60"
+                      ? "bg-brand/10 border-brand/40 text-brand hover:bg-brand/20"
                       : "bg-[#181818] border-[#2b2b2b] text-gray-300 hover:text-white hover:border-[#383838]"
                   }`}
                   title={viewingNotebook.is_shared ? "Click to set private" : "Click to publish to community"}
                 >
                   {viewingNotebook.is_shared ? <Globe size={12} /> : <Lock size={12} />}
-                  <span>{viewingNotebook.is_shared ? "Published" : "Private"}</span>
+                  <span className="hidden sm:inline">{viewingNotebook.is_shared ? "Published" : "Private"}</span>
                 </button>
 
                 <button
@@ -421,9 +421,9 @@ export default function LearnPage() {
             </div>
 
             {/* Modal Body */}
-            <div className="flex-1 overflow-y-auto p-6 space-y-4">
+            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 break-words">
               {viewingNotebook.content ? (
-                <div className="prose prose-invert prose-sm max-w-none text-gray-200 leading-relaxed font-sans">
+                <div className="prose prose-invert prose-sm max-w-none text-gray-200 leading-relaxed font-sans break-words [&_table]:overflow-x-auto [&_table]:block [&_table]:w-full">
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>
                     {viewingNotebook.content}
                   </ReactMarkdown>
@@ -442,13 +442,13 @@ export default function LearnPage() {
             </div>
 
             {/* Modal Footer Actions */}
-            <div className="px-6 py-3.5 border-t border-[#1c1c1c] bg-[#0a0a0a] flex items-center justify-between gap-3">
-              <div className="flex items-center gap-2">
+            <div className="p-3.5 sm:px-6 sm:py-3.5 border-t border-[#1c1c1c] bg-[#0a0a0a] flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
+              <div className="flex items-center justify-between sm:justify-start gap-2">
                 <button
                   onClick={() => handleCopyNote(viewingNotebook.content || "", viewingNotebook.id)}
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-300 hover:text-white bg-[#141414] hover:bg-[#1e1e1e] border border-[#262626] px-3 py-1.5 rounded-xl transition-colors"
                 >
-                  {copiedId === viewingNotebook.id ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+                  {copiedId === viewingNotebook.id ? <Check size={12} className="text-brand" /> : <Copy size={12} />}
                   <span>{copiedId === viewingNotebook.id ? "Copied" : "Copy"}</span>
                 </button>
 
@@ -457,12 +457,12 @@ export default function LearnPage() {
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-300 hover:text-white bg-[#141414] hover:bg-[#1e1e1e] border border-[#262626] px-3 py-1.5 rounded-xl transition-colors"
                 >
                   <Download size={12} />
-                  <span>Download .md</span>
+                  <span>Download</span>
                 </button>
 
                 <button
                   onClick={() => handleDeleteNotebook(viewingNotebook.id, viewingNotebook.title)}
-                  className="inline-flex items-center gap-1 text-xs font-bold text-red-400 hover:text-red-300 px-2.5 py-1.5 transition-colors"
+                  className="inline-flex items-center gap-1 text-xs font-bold text-red-400 hover:text-red-300 px-2 py-1.5 transition-colors"
                 >
                   <Trash2 size={12} />
                   <span>Delete</span>
@@ -471,9 +471,9 @@ export default function LearnPage() {
 
               <Link
                 href={`/learn/notebooks/${viewingNotebook.id}`}
-                className="inline-flex items-center gap-1.5 px-4 py-2 bg-brand hover:bg-red-700 text-white font-bold rounded-xl text-xs transition-all shadow-md shadow-brand/20"
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-brand hover:bg-red-700 text-white font-bold rounded-xl text-xs transition-all shadow-md shadow-brand/20 w-full sm:w-auto text-center"
               >
-                <Sparkles size={13} /> Open in Full AI Workspace ↗
+                <Sparkles size={13} /> Open in Workspace ↗
               </Link>
             </div>
           </div>
