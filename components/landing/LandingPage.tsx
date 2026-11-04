@@ -45,6 +45,9 @@ import {
   MapPin,
   Scissors,
   Baby,
+  Scale,
+  ChevronDown,
+  Menu,
 } from "lucide-react"
 
 interface LandingPageProps {
@@ -490,6 +493,8 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
   const [loginEmail, setLoginEmail] = useState("")
   const [loginPassword, setLoginPassword] = useState("")
   const [selectedPartner, setSelectedPartner] = useState<PartnerData | null>(null)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [legalDropdownOpen, setLegalDropdownOpen] = useState(false)
 
   // Contact form state
   const [contactSubmitted, setContactSubmitted] = useState(false)
@@ -703,16 +708,16 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
     setContactForm({ name: "", email: "", message: "" })
   }
 
-  // (badges passed directly to FreefloatingBadgeField — no lane split needed)
+  // (badges passed directly to FreefloatingBadgeField: no lane split needed)
 
   return (
     <div className="landing-page min-h-screen bg-[#050507] text-[#F4F4F5] font-sans antialiased selection:bg-red-600 selection:text-white">
-      {/* ── TOP NAVIGATION BAR (SEAMLESS, BORDERLESS) ── */}
-      <header className="fixed top-0 left-0 right-0 z-40 px-4 py-4 sm:px-8 bg-[#050507]/90 backdrop-blur-md">
+      {/* ── TOP NAVIGATION BAR (WITH PROMINENT LEGAL & POLICIES ACCESS) ── */}
+      <header className="fixed top-0 left-0 right-0 z-40 px-4 py-3.5 sm:px-8 bg-[#050507]/95 backdrop-blur-md border-b border-white/[0.06]">
         <nav className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Official Brand Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-7 h-7 rounded-md bg-red-600 flex items-center justify-center transition-transform group-hover:scale-105">
+            <div className="w-7 h-7 rounded-md bg-red-600 flex items-center justify-center transition-transform group-hover:scale-105 shadow-sm">
               <span className="text-white text-xs font-black">P</span>
             </div>
             <span className="font-display text-xl font-bold tracking-tight text-white">
@@ -720,27 +725,175 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
             </span>
           </Link>
 
-          {/* Nav Links */}
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
+          {/* Desktop Nav Links */}
+          <div className="hidden lg:flex items-center gap-7 text-xs font-semibold text-gray-400">
             <a href="#workspace" className="hover:text-white transition-colors duration-150">Workspace</a>
             <a href="#programs" className="hover:text-white transition-colors duration-150">Disciplines</a>
             <a href="#story" className="hover:text-white transition-colors duration-150">Our Story</a>
             <a href="#partners" className="hover:text-white transition-colors duration-150">Our Partners</a>
+
+            {/* Prominent Legal & Policies Dropdown */}
+            <div className="relative group/legal">
+              <button
+                type="button"
+                className="flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors duration-150 py-1"
+              >
+                <Scale size={13} className="text-red-500" />
+                <span>Legal & Policies</span>
+                <ChevronDown size={11} className="text-gray-500 group-hover/legal:text-white group-hover/legal:rotate-180 transition-transform duration-150" />
+              </button>
+
+              {/* Hover Menu */}
+              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 hidden group-hover/legal:block z-50">
+                <div className="w-64 p-2 bg-[#0c0c0e] border border-[#222226] rounded-xl shadow-2xl backdrop-blur-lg space-y-1">
+                  <Link
+                    href="/terms"
+                    className="flex items-start gap-2.5 p-2 rounded-lg hover:bg-[#16161a] transition-colors group/item"
+                  >
+                    <Scale size={14} className="text-red-500 shrink-0 mt-0.5" />
+                    <div className="text-left">
+                      <p className="text-xs font-bold text-white group-hover/item:text-red-400 transition-colors">
+                        Terms and Conditions
+                      </p>
+                      <p className="text-[10px] text-gray-400 leading-tight mt-0.5">
+                        Statutory terms, acceptable use & educational disclaimers
+                      </p>
+                    </div>
+                  </Link>
+
+                  <Link
+                    href="/privacy"
+                    className="flex items-start gap-2.5 p-2 rounded-lg hover:bg-[#16161a] transition-colors group/item"
+                  >
+                    <ShieldCheck size={14} className="text-red-500 shrink-0 mt-0.5" />
+                    <div className="text-left">
+                      <p className="text-xs font-bold text-white group-hover/item:text-red-400 transition-colors">
+                        Privacy Policy
+                      </p>
+                      <p className="text-[10px] text-gray-400 leading-tight mt-0.5">
+                        Data protection, privacy rights & security measures
+                      </p>
+                    </div>
+                  </Link>
+
+                  <div className="border-t border-[#1a1a1f] pt-1.5 mt-1 px-2 pb-1">
+                    <Link
+                      href="/terms#disclaimer"
+                      className="text-[10px] font-medium text-gray-400 hover:text-red-400 flex items-center justify-between"
+                    >
+                      <span>Mandatory Clinical Disclaimer</span>
+                      <span>&rarr;</span>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <a href="#contact" className="hover:text-white transition-colors duration-150">Contact</a>
           </div>
 
-          {/* Executive Standard Launch / Access Portal CTA */}
-          <div className="flex items-center gap-3">
+          {/* Right Action Buttons */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Quick Mobile/Tablet Legal Access Link */}
+            <Link
+              href="/terms"
+              title="View Legal and Policies"
+              className="lg:hidden flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-[#222] bg-[#0c0c0e] hover:bg-[#141417] text-gray-300 hover:text-white text-xs font-medium transition-colors"
+            >
+              <Scale size={12} className="text-red-500" />
+              <span>Legal</span>
+            </Link>
+
             <Link
               href={isLoggedIn ? "/dashboard" : "/login"}
-              className="group relative inline-flex items-center gap-2 px-4 py-2 sm:px-4.5 sm:py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-semibold tracking-wide transition-all duration-150 border border-white/10 shadow-[0_2px_10px_rgba(220,38,38,0.35),0_0_0_1px_rgba(255,255,255,0.12)_inset] active:scale-95"
+              className="group relative inline-flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-semibold tracking-wide transition-all duration-150 border border-white/10 shadow-[0_2px_10px_rgba(220,38,38,0.35),0_0_0_1px_rgba(255,255,255,0.12)_inset] active:scale-95"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
               <span>{isLoggedIn ? "Open Dashboard" : "Launch App"}</span>
               <ChevronRight size={13} className="text-white/80 group-hover:translate-x-0.5 group-hover:text-white transition-transform duration-150" />
             </Link>
+
+            {/* Mobile Navigation Toggle */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden p-2 rounded-lg bg-[#0e0e11] border border-[#222] text-gray-300 hover:text-white transition-colors"
+              aria-label="Toggle navigation menu"
+            >
+              {mobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
+            </button>
           </div>
         </nav>
+
+        {/* Mobile Navigation Drawer */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden border-t border-[#1a1a1f] mt-3 pt-3 pb-2 space-y-2.5 animate-in fade-in slide-in-from-top-2 duration-150">
+            <div className="grid grid-cols-2 gap-2 text-xs font-medium text-gray-300">
+              <a
+                href="#workspace"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 rounded-lg bg-[#0d0d10] border border-[#1f1f24] hover:text-white text-center"
+              >
+                Workspace
+              </a>
+              <a
+                href="#programs"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 rounded-lg bg-[#0d0d10] border border-[#1f1f24] hover:text-white text-center"
+              >
+                Disciplines
+              </a>
+              <a
+                href="#story"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 rounded-lg bg-[#0d0d10] border border-[#1f1f24] hover:text-white text-center"
+              >
+                Our Story
+              </a>
+              <a
+                href="#partners"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 rounded-lg bg-[#0d0d10] border border-[#1f1f24] hover:text-white text-center"
+              >
+                Our Partners
+              </a>
+            </div>
+
+            {/* Mobile Legal and Policies Section */}
+            <div className="p-3 rounded-xl bg-[#0e0e12] border border-[#24242a] space-y-2">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-white uppercase tracking-wider">
+                <Scale size={13} className="text-red-500" />
+                <span>Legal & Governance</span>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                <Link
+                  href="/terms"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-2 rounded-lg bg-[#141418] border border-[#222228] text-gray-200 hover:text-white text-center font-medium"
+                >
+                  Terms & Conditions
+                </Link>
+                <Link
+                  href="/privacy"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-2 rounded-lg bg-[#141418] border border-[#222228] text-gray-200 hover:text-white text-center font-medium"
+                >
+                  Privacy Policy
+                </Link>
+              </div>
+            </div>
+
+            <div>
+              <a
+                href="#contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block text-center p-2 rounded-lg bg-[#0c0c0e] text-xs text-gray-400 hover:text-white"
+              >
+                Contact Administration
+              </a>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* ── MAIN HERO SECTION ── */}

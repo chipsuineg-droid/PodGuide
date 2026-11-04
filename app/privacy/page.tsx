@@ -1,18 +1,18 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowLeft, ShieldCheck, Lock, Eye, Database, Cookie, UserCheck, Mail } from "lucide-react"
+import { ArrowLeft, ShieldCheck, Lock, Eye, Database, UserCheck, Mail, Scale } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Privacy Policy",
+  title: "Privacy Policy and Data Protection",
   description:
-    "Privacy policy explaining how PodGuide collects, protects, processes, and respects student and educator personal data.",
+    "Official statutory privacy policy detailing the collection, processing, storage, and protection of personal data across the PodGuide platform.",
 }
 
 export default function PrivacyPage() {
   return (
     <div className="min-h-screen bg-[#070707] text-gray-200">
       {/* ── TOP NAVIGATION BAR ── */}
-      <header className="border-b border-[#1a1a1a] bg-[#0c0c0c]/80 backdrop-blur-md sticky top-0 z-30">
+      <header className="border-b border-[#1a1a1a] bg-[#0c0c0c]/90 backdrop-blur-md sticky top-0 z-30">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <Link
             href="/"
@@ -26,7 +26,7 @@ export default function PrivacyPage() {
             </span>
           </Link>
 
-          <div className="flex items-center gap-3 text-xs">
+          <div className="flex items-center gap-2 sm:gap-3 text-xs">
             <Link
               href="/terms"
               className="text-gray-400 hover:text-white px-3 py-1.5 rounded-lg border border-[#222] hover:border-[#333] transition-colors"
@@ -38,284 +38,259 @@ export default function PrivacyPage() {
               className="flex items-center gap-1.5 bg-[#141414] hover:bg-[#1c1c1c] text-white px-3 py-1.5 rounded-lg border border-[#262626] transition-colors"
             >
               <ArrowLeft size={13} />
-              <span>Back to Home</span>
+              <span className="hidden sm:inline">Back to</span> Home
             </Link>
           </div>
         </div>
       </header>
 
-      {/* ── HEADER HERO ── */}
+      {/* ── STATUTORY HEADER ── */}
       <section className="border-b border-[#161616] bg-[#0a0a0a] py-12 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-red-600/10 border border-red-600/20 text-red-400 text-xs font-semibold">
             <ShieldCheck size={13} />
-            <span>Data Protection and Privacy</span>
+            <span>Statutory Privacy Policy</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-            Privacy Policy
+            Data Protection and Privacy Policy
           </h1>
           <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
-            This policy outlines our commitments regarding the collection, use, storage, and protection of personal data across the PodGuide platform.
+            This Policy sets forth the mandatory principles, legal bases, and technical safeguards governing the acquisition, processing, security, and retention of personal data by PodMyth Group across the PodGuide digital architecture.
           </p>
-          <div className="flex items-center gap-4 text-[11px] text-gray-500 pt-1">
+          <div className="flex items-center gap-3 sm:gap-4 text-[11px] text-gray-500 pt-1 flex-wrap">
             <span>Effective Date: 1 January 2026</span>
             <span>·</span>
-            <span>Last Updated: 4 November 2026</span>
+            <span>Version: 2.1 (Statutory Compliance)</span>
             <span>·</span>
-            <span>Scope: Web and Mobile Platforms</span>
+            <span>Data Controller: PodMyth Group</span>
           </div>
         </div>
       </section>
 
-      {/* ── MAIN CONTENT ── */}
+      {/* ── MAIN LEGAL DOCUMENT ── */}
       <main className="max-w-3xl mx-auto px-4 sm:px-6 py-10 space-y-10 text-xs sm:text-sm leading-relaxed text-gray-300">
 
-        {/* Commitment Highlight */}
-        <div className="p-4 sm:p-5 rounded-xl bg-[#0e0e0e] border border-[#1f1f1f] text-gray-300 space-y-2">
+        {/* STATUTORY COMMITMENT */}
+        <div className="p-4 sm:p-5 rounded-xl bg-[#0c0c0c] border border-[#1f1f1f] text-gray-300 space-y-2">
           <div className="flex items-center gap-2 text-white font-bold text-xs uppercase tracking-wider">
             <Lock size={15} className="text-red-500" />
-            <span>Our Core Privacy Principle</span>
+            <span>Mandatory Non-Commercialization Guarantee</span>
           </div>
           <p className="text-xs leading-relaxed text-gray-300">
-            PodGuide is built to empower medical and health sciences students. We believe your learning records, study notes, and personal academic progress belong to you. We do not sell your personal information to third-party data brokers, and we do not serve behavioral tracking advertisements.
+            PodMyth Group maintains a strict policy of zero commercialization regarding user personal data. Under no circumstances does the Data Controller sell, lease, license, trade, or distribute Personal Data or academic performance telemetry to commercial third-party brokers, marketing consortiums, or behavioral advertising platforms.
           </p>
         </div>
 
-        {/* Section 1 */}
+        {/* CLAUSE 1 */}
         <section className="space-y-3">
           <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2 border-b border-[#1a1a1a] pb-2">
-            <span className="text-red-500 font-mono text-sm">01.</span> Information We Collect
+            <span className="text-red-500 font-mono text-sm">1.</span> Regulatory Framework and Data Controller
           </h2>
           <p>
-            We collect only the information necessary to provide, personalize, and secure your academic experience on PodGuide:
+            1.1 The Data Controller responsible for the processing of Personal Data under this Policy is PodMyth Group, an incorporated entity operating under the laws of Zimbabwe, with registered corporate offices in Harare, Zimbabwe.
           </p>
-          <div className="space-y-3 pt-1">
-            <div className="p-3.5 rounded-lg bg-[#0c0c0c] border border-[#1a1a1a]">
-              <h3 className="text-xs font-bold text-white flex items-center gap-2 mb-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
-                Account and Profile Information
-              </h3>
-              <p className="text-xs text-gray-400">
-                When you create an account, we collect your full name, email address (typically your institutional or university address), password hash (securely encrypted), academic programme (such as BMS, MBChB / MBBS, Pharmacy, Nursing, or Veterinary Science), and your current academic year or level.
-              </p>
-            </div>
-
-            <div className="p-3.5 rounded-lg bg-[#0c0c0c] border border-[#1a1a1a]">
-              <h3 className="text-xs font-bold text-white flex items-center gap-2 mb-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
-                Academic Progress and Activity
-              </h3>
-              <p className="text-xs text-gray-400">
-                To help you track your learning journey, our systems record your study progress, modules completed, flashcards reviewed, quiz and MCQ scores, study streak counters, and library resource engagement (such as materials viewed or marked as liked).
-              </p>
-            </div>
-
-            <div className="p-3.5 rounded-lg bg-[#0c0c0c] border border-[#1a1a1a]">
-              <h3 className="text-xs font-bold text-white flex items-center gap-2 mb-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
-                User-Generated Study Content
-              </h3>
-              <p className="text-xs text-gray-400">
-                Personal notes authored in your Learn notebooks, study summaries, custom tags, and uploaded revision prompts are stored securely in your private workspace.
-              </p>
-            </div>
-
-            <div className="p-3.5 rounded-lg bg-[#0c0c0c] border border-[#1a1a1a]">
-              <h3 className="text-xs font-bold text-white flex items-center gap-2 mb-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
-                Technical and Device Information
-              </h3>
-              <p className="text-xs text-gray-400">
-                We automatically receive standard technical diagnostic data, including your IP address, browser type, operating system version, and timestamps, to protect platform integrity, diagnose errors, and prevent malicious access.
-              </p>
-            </div>
-          </div>
+          <p>
+            1.2 This Policy is formulated in adherence to the Cyber and Data Protection Act (Chapter 12:07) of Zimbabwe and recognized international principles of lawful, fair, transparent, and proportional data processing.
+          </p>
         </section>
 
-        {/* Section 2 */}
+        {/* CLAUSE 2 */}
         <section className="space-y-3">
           <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2 border-b border-[#1a1a1a] pb-2">
-            <span className="text-red-500 font-mono text-sm">02.</span> How We Collect Your Information
+            <span className="text-red-500 font-mono text-sm">2.</span> Categories of Personal Data Processed
           </h2>
           <p>
-            We gather information through transparent, direct methods:
-          </p>
-          <ul className="space-y-2 list-disc pl-5 text-gray-400">
-            <li>
-              <strong className="text-gray-200">Direct User Input:</strong> When you complete registration, update your profile, submit answers to revision questions, or create notebooks.
-            </li>
-            <li>
-              <strong className="text-gray-200">Platform Interactions:</strong> Telemetry captured when you navigate through curriculum shelves, view documents, or download resources.
-            </li>
-            <li>
-              <strong className="text-gray-200">Session Technologies:</strong> Secure authentication cookies that identify your active session across pages.
-            </li>
-          </ul>
-        </section>
-
-        {/* Section 3 */}
-        <section className="space-y-3">
-          <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2 border-b border-[#1a1a1a] pb-2">
-            <span className="text-red-500 font-mono text-sm">03.</span> How We Use Your Information
-          </h2>
-          <p>
-            Your information is processed strictly for the following purposes:
-          </p>
-          <ul className="space-y-1.5 list-disc pl-5 text-gray-400">
-            <li>Authenticating your identity and maintaining your session security.</li>
-            <li>Calculating and presenting your personal study statistics and progress dashboards.</li>
-            <li>Enabling search, organization, and download of Google Drive academic resources.</li>
-            <li>Facilitating MCQ practice tests, case studies, and automated answer scoring.</li>
-            <li>Delivering important service notifications, security advisories, and administrative updates.</li>
-            <li>Protecting the platform against abuse, automated scraping, or unauthorized access.</li>
-          </ul>
-        </section>
-
-        {/* Section 4 */}
-        <section className="space-y-3">
-          <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2 border-b border-[#1a1a1a] pb-2">
-            <span className="text-red-500 font-mono text-sm">04.</span> Information Sharing and Third Parties
-          </h2>
-          <p>
-            We do not sell, rent, or trade your personal information. We share data only with trusted infrastructure providers that are strictly necessary to deliver the PodGuide platform:
+            The Data Controller restricts data collection strictly to information required for platform authentication, academic tracking, and systems security:
           </p>
           <div className="space-y-2.5 pt-1">
             <div className="p-3 rounded-lg bg-[#0e0e0e] border border-[#1a1a1a]">
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-white text-xs">Supabase Inc.</span>
-                <span className="text-[10px] text-gray-500">Database & Authentication</span>
-              </div>
-              <p className="text-xs text-gray-400 mt-1">
-                Provides PostgreSQL database hosting, encrypted password authentication, and Row-Level Security (RLS) enforcement.
+              <h3 className="text-xs font-bold text-white mb-1">
+                2.1 Identity and Contact Data
+              </h3>
+              <p className="text-xs text-gray-400">
+                Full legal name, institutional or student email address, cryptographic password hash, academic institution, affiliated faculty programme (e.g. Biomedical Sciences, MBChB, Pharmacy, Nursing, Veterinary Science), and matriculated academic year level.
               </p>
             </div>
 
             <div className="p-3 rounded-lg bg-[#0e0e0e] border border-[#1a1a1a]">
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-white text-xs">Google Cloud / Google Drive API</span>
-                <span className="text-[10px] text-gray-500">File Storage & Streaming</span>
-              </div>
-              <p className="text-xs text-gray-400 mt-1">
-                Used to host and stream medical educational resources, textbooks, and past papers. No personal student profile data is shared with Google Drive.
+              <h3 className="text-xs font-bold text-white mb-1">
+                2.2 Academic Telemetry and Performance Records
+              </h3>
+              <p className="text-xs text-gray-400">
+                Objective logs of questions attempted, multiple-choice assessment scoring, flashcard repetition intervals, module progress metrics, curriculum bookmarks, and platform engagement history (such as views recorded and study assets downloaded).
               </p>
             </div>
 
             <div className="p-3 rounded-lg bg-[#0e0e0e] border border-[#1a1a1a]">
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-white text-xs">Vercel Inc.</span>
-                <span className="text-[10px] text-gray-500">Application Hosting</span>
-              </div>
-              <p className="text-xs text-gray-400 mt-1">
-                Hosts our web application edge routers and handles secure SSL/TLS web traffic.
+              <h3 className="text-xs font-bold text-white mb-1">
+                2.3 User-Authored Study Artifacts
+              </h3>
+              <p className="text-xs text-gray-400">
+                Personalized notes authored within workspace notebooks, custom tags, study summaries, and self-generated annotations retained within private, row-isolated database tables.
+              </p>
+            </div>
+
+            <div className="p-3 rounded-lg bg-[#0e0e0e] border border-[#1a1a1a]">
+              <h3 className="text-xs font-bold text-white mb-1">
+                2.4 Technical Diagnostics and Access Logs
+              </h3>
+              <p className="text-xs text-gray-400">
+                Internet Protocol (IP) addresses, user-agent device strings, browser types, operating system environments, access timestamps, and error diagnostics required for server load management and security audit trails.
               </p>
             </div>
           </div>
-          <p className="text-xs text-gray-400 pt-1">
-            We may disclose information if required to do so by applicable law, regulation, or legal process issued by a court of competent jurisdiction.
-          </p>
         </section>
 
-        {/* Section 5 */}
+        {/* CLAUSE 3 */}
         <section className="space-y-3">
           <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2 border-b border-[#1a1a1a] pb-2">
-            <span className="text-red-500 font-mono text-sm">05.</span> Cookies and Local Storage Technologies
+            <span className="text-red-500 font-mono text-sm">3.</span> Legal Bases and Purposes of Processing
           </h2>
-          <p>
-            PodGuide uses cookies and browser local storage strictly for essential operational functionality:
-          </p>
-          <ul className="space-y-2 list-disc pl-5 text-gray-400">
+          <p>The processing of Personal Data is executed exclusively pursuant to the following lawful grounds:</p>
+          <ul className="space-y-2 pl-4 text-gray-400 list-disc">
             <li>
-              <strong className="text-gray-200">Authentication Tokens:</strong> Secure HTTP-only cookies that verify your active sign-in status and protect against cross-site request forgery.
+              <strong className="text-gray-200">Contractual Necessity:</strong> To fulfill our obligations in providing authentication, verifying academic levels, calculating study milestones, and maintaining private account access.
             </li>
             <li>
-              <strong className="text-gray-200">Study Preferences:</strong> Browser local storage used to remember your theme selection, recent search queries, and working drafts of study notes.
+              <strong className="text-gray-200">Legitimate Operational Interests:</strong> To protect platform integrity, prevent brute-force attacks, mitigate unauthorized automated scraping, and ensure server stability.
             </li>
             <li>
-              <strong className="text-gray-200">No Advertising Cookies:</strong> We do not use third-party marketing or cross-site tracking cookies.
+              <strong className="text-gray-200">Statutory Compliance:</strong> To satisfy lawful mandates, judicial summonses, or statutory regulatory obligations issued by competent public authorities.
             </li>
           </ul>
         </section>
 
-        {/* Section 6 */}
+        {/* CLAUSE 4 */}
         <section className="space-y-3">
           <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2 border-b border-[#1a1a1a] pb-2">
-            <span className="text-red-500 font-mono text-sm">06.</span> Data Security and Protection Standards
+            <span className="text-red-500 font-mono text-sm">4.</span> Third-Party Service Processors and Infrastructure
           </h2>
           <p>
-            We implement comprehensive technical and organizational safeguards to ensure data security:
+            Personal data is never disclosed to external parties except to designated infrastructure processors operating under strict contractual data protection covenants:
+          </p>
+          <div className="space-y-2 pt-1">
+            <div className="p-3 rounded-lg bg-[#0c0c0c] border border-[#1a1a1a] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <span className="text-xs font-bold text-white">Supabase Inc.</span>
+                <p className="text-[11px] text-gray-400">PostgreSQL relational database infrastructure, identity management, and encrypted credential storage.</p>
+              </div>
+              <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider shrink-0 bg-[#141414] px-2 py-0.5 rounded border border-[#222]">Primary Database</span>
+            </div>
+
+            <div className="p-3 rounded-lg bg-[#0c0c0c] border border-[#1a1a1a] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <span className="text-xs font-bold text-white">Google Cloud / Google Drive API</span>
+                <p className="text-[11px] text-gray-400">File storage and streaming endpoints for public academic documents. No private user telemetry is transmitted.</p>
+              </div>
+              <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider shrink-0 bg-[#141414] px-2 py-0.5 rounded border border-[#222]">Storage API</span>
+            </div>
+
+            <div className="p-3 rounded-lg bg-[#0c0c0c] border border-[#1a1a1a] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <span className="text-xs font-bold text-white">Vercel Inc.</span>
+                <p className="text-[11px] text-gray-400">Application edge routing, serverless execution environments, and TLS web traffic termination.</p>
+              </div>
+              <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider shrink-0 bg-[#141414] px-2 py-0.5 rounded border border-[#222]">Edge Routing</span>
+            </div>
+          </div>
+        </section>
+
+        {/* CLAUSE 5 */}
+        <section className="space-y-3">
+          <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2 border-b border-[#1a1a1a] pb-2">
+            <span className="text-red-500 font-mono text-sm">5.</span> Storage Technologies and Session Management
+          </h2>
+          <p>
+            5.1 PodGuide implements browser storage mechanisms strictly for operational and functional execution:
+          </p>
+          <ul className="space-y-1.5 pl-4 text-gray-400 list-disc">
+            <li>
+              <strong className="text-gray-200">Cryptographic Session Cookies:</strong> Encrypted, secure, SameSite-compliant tokens deployed to authenticate active sessions and safeguard against cross-site scripting (XSS).
+            </li>
+            <li>
+              <strong className="text-gray-200">Local Browser Storage:</strong> Client-side storage utilized to preserve user interface theme states, study note drafts, and client-side folder filter parameters.
+            </li>
+          </ul>
+          <p>
+            5.2 The Platform does not deploy third-party advertising cookies, fingerprinting pixels, or behavioral cross-site analytics beacons.
+          </p>
+        </section>
+
+        {/* CLAUSE 6 */}
+        <section className="space-y-3">
+          <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2 border-b border-[#1a1a1a] pb-2">
+            <span className="text-red-500 font-mono text-sm">6.</span> Security Architecture and Data Integrity
+          </h2>
+          <p>
+            6.1 The Data Controller maintains robust administrative, physical, and technical controls to safeguard Personal Data against accidental loss, unauthorized destruction, alteration, or disclosure:
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
-            <div className="p-3 rounded-lg bg-[#0e0e0e] border border-[#1a1a1a]">
-              <h4 className="text-xs font-bold text-white flex items-center gap-1.5 mb-1">
-                <Lock size={13} className="text-red-500" />
-                Encryption in Transit
-              </h4>
+            <div className="p-3 rounded-lg bg-[#0c0c0c] border border-[#1a1a1a]">
+              <h4 className="text-xs font-bold text-white mb-1">Row-Level Security (RLS)</h4>
               <p className="text-xs text-gray-400">
-                All network communications between your browser and PodGuide are encrypted using Transport Layer Security (TLS 1.3 / HTTPS).
+                Database access rules enforced at the engine level ensuring data partitions are strictly queryable only by the authenticated profile owner.
               </p>
             </div>
-
-            <div className="p-3 rounded-lg bg-[#0e0e0e] border border-[#1a1a1a]">
-              <h4 className="text-xs font-bold text-white flex items-center gap-1.5 mb-1">
-                <Database size={13} className="text-red-500" />
-                Row-Level Security (RLS)
-              </h4>
+            <div className="p-3 rounded-lg bg-[#0c0c0c] border border-[#1a1a1a]">
+              <h4 className="text-xs font-bold text-white mb-1">Cryptographic In-Transit Security</h4>
               <p className="text-xs text-gray-400">
-                Database policies ensure each student can strictly access only their own private notebooks, study progress, and profile records.
+                All communications between client devices and edge servers are encrypted using modern Transport Layer Security (TLS 1.3 / HTTPS).
               </p>
             </div>
           </div>
         </section>
 
-        {/* Section 7 */}
+        {/* CLAUSE 7 */}
         <section className="space-y-3">
           <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2 border-b border-[#1a1a1a] pb-2">
-            <span className="text-red-500 font-mono text-sm">07.</span> Data Retention and Deletion
+            <span className="text-red-500 font-mono text-sm">7.</span> Data Retention, Archival, and Erasure Schedules
           </h2>
           <p>
-            We retain your profile data, progress metrics, and study notes for as long as your account remains active. If you choose to close your account, we will permanently delete or anonymize your personal information within 30 days of receiving your verified request, except where retention is required by law.
+            7.1 Personal Data is retained for the active duration of the User&apos;s educational account on the Platform.
+          </p>
+          <p>
+            7.2 Upon receipt of a verified account cancellation request, the Data Controller shall permanently delete or anonymize all associated Personal Data and study records within thirty (30) calendar days, except where retention is mandated by law or for the resolution of active dispute claims.
           </p>
         </section>
 
-        {/* Section 8 */}
+        {/* CLAUSE 8 */}
         <section className="space-y-3">
           <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2 border-b border-[#1a1a1a] pb-2">
-            <span className="text-red-500 font-mono text-sm">08.</span> Your Privacy Rights
+            <span className="text-red-500 font-mono text-sm">8.</span> Statutory Data Subject Rights
           </h2>
-          <p>
-            Depending on your jurisdiction and institutional policies, you possess the following rights regarding your personal data:
+          <p>Pursuant to applicable data protection legislation, the User possesses the following enforceable statutory rights:</p>
+          <div className="space-y-1.5 pl-4 text-gray-400 list-disc">
+            <li>
+              <strong className="text-gray-200">Right of Access:</strong> The right to obtain formal confirmation and an electronic transcript of Personal Data held by the Controller.
+            </li>
+            <li>
+              <strong className="text-gray-200">Right to Rectification:</strong> The right to demand immediate correction of inaccurate or incomplete profile records.
+            </li>
+            <li>
+              <strong className="text-gray-200">Right to Erasure (&quot;Right to be Forgotten&quot;):</strong> The right to request permanent deletion of user profile data from active databases.
+            </li>
+            <li>
+              <strong className="text-gray-200">Right to Restriction and Objection:</strong> The right to object to processing activities conducted under legitimate interest grounds.
+            </li>
+          </div>
+          <p className="pt-1 text-xs text-gray-400">
+            To invoke any statutory right, the User must submit a formal written demand to info@podmyth.co.zw. Requests shall be adjudicated and responded to within twenty-one (21) business days without fee.
           </p>
-          <ul className="space-y-1.5 list-disc pl-5 text-gray-400">
-            <li>
-              <strong className="text-gray-200">Right to Access:</strong> You can request a summary of the personal data we hold about you.
-            </li>
-            <li>
-              <strong className="text-gray-200">Right to Rectification:</strong> You can edit inaccurate or outdated profile information at any time.
-            </li>
-            <li>
-              <strong className="text-gray-200">Right to Erasure:</strong> You can request the permanent deletion of your account and associated study records.
-            </li>
-            <li>
-              <strong className="text-gray-200">Right to Data Portability:</strong> You can export personal notes authored in your study workspace.
-            </li>
-          </ul>
         </section>
 
-        {/* Section 9 */}
+        {/* CLAUSE 9 */}
         <section className="space-y-3">
           <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2 border-b border-[#1a1a1a] pb-2">
-            <span className="text-red-500 font-mono text-sm">09.</span> Contact for Privacy Enquiries
+            <span className="text-red-500 font-mono text-sm">9.</span> Data Protection Inquiries and Supervisory Notice
           </h2>
           <p>
-            If you have questions, concerns, or requests regarding this Privacy Policy or how your data is handled, please contact our privacy compliance team:
+            Formal communications, compliance inquiries, or regulatory notices concerning this Policy must be addressed to the designated Data Compliance Officer:
           </p>
-          <div className="p-4 rounded-xl bg-[#0e0e0e] border border-[#1f1f1f] space-y-2 mt-4">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-white">Privacy and Compliance Office</h3>
-            <div className="pt-1 text-xs space-y-1 text-gray-300">
-              <p>Email: <a href="mailto:info@podmyth.co.zw" className="text-red-400 hover:underline">info@podmyth.co.zw</a></p>
-              <p>Platform: PodGuide Digital Campus</p>
-              <p>Operating Entity: PodMyth Group, Harare, Zimbabwe</p>
-            </div>
+          <div className="p-4 rounded-xl bg-[#0c0c0c] border border-[#1f1f1f] space-y-1.5 mt-3 text-xs text-gray-300">
+            <p className="font-bold text-white">Office of Data Compliance, PodMyth Group</p>
+            <p>Email: <a href="mailto:info@podmyth.co.zw" className="text-red-400 hover:underline">info@podmyth.co.zw</a></p>
+            <p>Subject Line: Formal Data Protection Inquiry / PodGuide</p>
+            <p>Location: Harare, Zimbabwe</p>
           </div>
         </section>
       </main>
