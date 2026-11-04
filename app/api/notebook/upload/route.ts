@@ -126,7 +126,7 @@ export async function POST(req: NextRequest) {
       file_type: normalizedType,
       file_size: fileSize,
       processing_status: "ready",
-      text_content: textContent ? textContent.slice(0, 150000) : null,
+      extracted_text: textContent ? textContent.slice(0, 150000) : null,
     }
 
     const { data: doc, error: dbError } = await supabase
@@ -147,6 +147,7 @@ export async function POST(req: NextRequest) {
           file_size: fileSize,
           created_at: new Date().toISOString(),
           text_content: textContent ? textContent.slice(0, 150000) : "",
+          extracted_text: textContent ? textContent.slice(0, 150000) : "",
         },
         publicUrl,
         extractedChars: textContent.length,
@@ -158,6 +159,7 @@ export async function POST(req: NextRequest) {
       doc: {
         ...doc,
         text_content: textContent ? textContent.slice(0, 150000) : doc.text_content,
+        extracted_text: textContent ? textContent.slice(0, 150000) : doc.extracted_text,
       },
       publicUrl,
       extractedChars: textContent.length,

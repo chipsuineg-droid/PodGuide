@@ -557,7 +557,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
           name: d.file_name,
           type: d.file_type === "link" ? "link" : d.file_type === "drive" ? "drive" : d.file_type === "text" ? "text" : "pdf",
           url: d.file_url,
-          content: d.text_content,
+          content: d.text_content || d.extracted_text,
           size: d.file_size,
           created_at: d.created_at
         })))
@@ -679,7 +679,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
             name: file.name,
             type: docType,
             url: data.publicUrl || doc.file_url || "",
-            content: doc.text_content || "",
+            content: doc.text_content || doc.extracted_text || "",
             size: file.size,
             created_at: new Date().toISOString()
           }
@@ -731,7 +731,8 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
             file_type: docType,
             file_size: file.size,
             processing_status: "ready",
-            text_content: clientText ? clientText.slice(0, 150000) : null
+            text_content: clientText ? clientText.slice(0, 150000) : null,
+            extracted_text: clientText ? clientText.slice(0, 150000) : null
           }).select().single()
 
           const fallbackSource: Source = {
@@ -807,7 +808,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
     const title = "Pasted Notes — " + pasteText.slice(0, 25).replace(/\n/g, " ") + "…"
     const { data: doc } = await supabase.from("notebook_documents").insert({
       notebook_id: id, file_name: title, file_url: "", file_type: "text",
-      file_size: pasteText.length, processing_status: "ready", text_content: pasteText
+      file_size: pasteText.length, processing_status: "ready", text_content: pasteText, extracted_text: pasteText
     }).select().single()
     if (doc) setSources(prev => [{
       id: doc.id, name: title, type: "paste", content: pasteText, size: pasteText.length, created_at: doc.created_at
@@ -827,7 +828,8 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
       file_type: "text",
       file_size: content.length,
       processing_status: "ready",
-      text_content: content
+      text_content: content,
+      extracted_text: content
     }).select().single()
 
     if (error) {

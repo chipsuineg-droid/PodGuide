@@ -158,69 +158,95 @@ A: [Answer]
     }
 
     // ── 1. Try Gemini API ──
-    const GEMINI_KEY = process.env.GOOGLE_GENERATIVE_AI_API_KEY || process.env.GEMINI_API_KEY
+    const GEMINI_KEY =
+      process.env.GOOGLE_GENERATIVE_AI_API_KEY ||
+      process.env.GEMINI_API_KEY ||
+      process.env.GOOGLE_API_KEY ||
+      process.env.NEXT_PUBLIC_GEMINI_API_KEY
     if (GEMINI_KEY) {
+      // Models ordered by reliability — gemini-3.5-flash is confirmed working
       const candidateModels = [
         "gemini-3.5-flash",
-        "gemini-flash-latest",
-        "gemini-3.7-flash",
+        "gemini-3.5-flash-lite",
         "gemini-3.8-flash",
+        "gemini-3.7-flash",
       ]
 
       for (const model of candidateModels) {
-        try {
-          // Construct conversation contents with system prompt
-          const contents = [
-            {
-              role: "user",
-              parts: [{ text: `${taskPrompt}\n\nSTUDENT REQUEST:\n${lastUserMessage || "Please analyze my uploaded notes and provide high-yield guidance."}` }]
-            }
-          ]
+        // Retry up to 2 times on 503 (overloaded) errors
+        for (let attempt = 0; attempt < 2; attempt++) {
+          try {
+            // Build conversation contents (user messages only — system goes in systemInstruction)
+            const contents: { role: string; parts: { text: string }[] }[] = []
 
-          // If there's an ongoing chat history, include previous turns
-          if (messages && messages.length > 1) {
-            const history = messages.slice(-8, -1).map((m: any) => ({
-              role: m.role === "user" ? "user" : "model",
-              parts: [{ text: m.content }]
-            }))
-            // Prepend system prompt to the first user message or as separate turn
-            contents.splice(0, 1,
-              { role: "user", parts: [{ text: `INSTRUCTIONS & NOTEBOOK CONTEXT:\n${taskPrompt}` }] },
-              { role: "model", parts: [{ text: "Understood. I am PodGuide AI. I will analyze your uploaded materials, summarize and answer any clinical questions, and reference authoritative evidence." }] },
-              ...history,
-              { role: "user", parts: [{ text: lastUserMessage }] }
+            if (messages && messages.length > 1) {
+              // Multi-turn: include recent conversation history
+              const history = messages.slice(-8, -1).map((m: any) => ({
+                role: m.role === "user" ? "user" : "model",
+                parts: [{ text: m.content }]
+              }))
+              contents.push(...history)
+              contents.push({ role: "user", parts: [{ text: lastUserMessage }] })
+            } else {
+              // Single turn
+              contents.push({
+                role: "user",
+                parts: [{ text: lastUserMessage || "Please analyze my uploaded notes and provide high-yield guidance." }]
+              })
+            }
+
+            const payload = {
+              systemInstruction: {
+                parts: [{ text: taskPrompt }]
+              },
+              contents,
+              generationConfig: {
+                temperature: mode === "mindmap" || mode === "flashcards" ? 0.3 : 0.6,
+                maxOutputTokens: 4096,
+              }
+            }
+
+            const res = await fetch(
+              `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_KEY}`,
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+              }
             )
-          }
 
-          const payload = {
-            contents,
-            generationConfig: {
-              temperature: mode === "mindmap" || mode === "flashcards" ? 0.3 : 0.6,
-              maxOutputTokens: 4096,
+            if (res.ok) {
+              const data = await res.json()
+              const text = data.candidates?.[0]?.content?.parts?.[0]?.text
+              if (text) return NextResponse.json({ text })
+              // If no text in response (e.g. safety block), try next model
+              console.warn(`Gemini model ${model} returned empty text (safety filter or empty candidates)`)
+              break
+            } else {
+              const errData = await res.json().catch(() => ({}))
+              const status = res.status
+              const errMsg = errData?.error?.message || `HTTP ${status}`
+              console.warn(`Gemini model ${model} attempt ${attempt + 1}: ${errMsg}`)
+
+              if (status === 503 && attempt === 0) {
+                // Model overloaded — wait briefly and retry once
+                await new Promise(r => setTimeout(r, 1500))
+                continue
+              }
+              // 404 = model not available, 429 = quota — skip to next model
+              break
             }
+          } catch (e) {
+            console.warn(`Gemini model ${model} fetch exception (attempt ${attempt + 1}):`, e)
+            break
           }
-
-          const res = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_KEY}`,
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(payload)
-            }
-          )
-
-          if (res.ok) {
-            const data = await res.json()
-            const text = data.candidates?.[0]?.content?.parts?.[0]?.text
-            if (text) return NextResponse.json({ text })
-          } else {
-            const errData = await res.json().catch(() => ({}))
-            console.warn(`Gemini model ${model} responded with ${res.status}:`, errData?.error?.message)
-          }
-        } catch (e) {
-          console.warn(`Gemini model ${model} fetch exception:`, e)
         }
       }
+
+      // If all Gemini models failed, log it clearly
+      console.error("All Gemini candidate models failed. Falling through to OpenAI or static fallback.")
+    } else {
+      console.warn("No Gemini API key found in environment variables (checked GOOGLE_GENERATIVE_AI_API_KEY, GEMINI_API_KEY, GOOGLE_API_KEY, NEXT_PUBLIC_GEMINI_API_KEY)")
     }
 
     // ── 2. Try OpenAI Fallback ──

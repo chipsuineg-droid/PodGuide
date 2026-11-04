@@ -55,7 +55,7 @@ Format your response as a valid JSON array of objects with this EXACT structure 
 Ensure each question has exactly one correct answer and 3 distinct plausible clinical distractors.`
 
     if (apiKey) {
-      const models = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash", "gemini-flash-latest"]
+      const models = ["gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3.8-flash", "gemini-3.7-flash"]
       for (const model of models) {
         try {
           const res = await fetch(
