@@ -533,28 +533,51 @@ export default function LibraryPage() {
       }
 
       try {
-        // Fetch official curated folders from database
-        const { data: dbFolders, error } = await supabase
-          .from("curated_drive_folders")
-          .select("*")
+        // Fetch official curated folders from auto-sync API or database
+        const driveApiRes = await fetch("/api/library/sync-drive")
+          .then(r => (r.ok ? r.json() : null))
+          .catch(() => null)
 
-        if (!error && dbFolders && dbFolders.length > 0) {
+        let foldersToMap: any[] = []
+        if (driveApiRes?.folders && driveApiRes.folders.length > 0) {
+          foldersToMap = driveApiRes.folders
+        } else {
+          const { data: dbFolders } = await supabase
+            .from("curated_drive_folders")
+            .select("*")
+          if (dbFolders) foldersToMap = dbFolders
+        }
+
+        if (foldersToMap.length > 0) {
           setShelves(prevShelves =>
             prevShelves.map(group => ({
               ...group,
               folders: group.folders.map(f => {
-                const match = dbFolders.find(
-                  (df: any) =>
-                    df.title === f.name ||
-                    df.category === f.name ||
+                const fName = f.name.toLowerCase().trim()
+                const match = foldersToMap.find((df: any) => {
+                  const dfName = (df.name || df.title || "").toLowerCase().trim()
+                  const dfCat = (df.category || "").toLowerCase().trim()
+                  return (
+                    dfName === fName ||
+                    dfCat === fName ||
+                    dfName.includes(fName) ||
+                    fName.includes(dfName) ||
                     df.id === f.id
-                )
-                if (match && match.drive_url) {
+                  )
+                })
+                if (match) {
                   return {
                     ...f,
-                    driveUrl: match.drive_url,
-                    folderId: match.folder_id || extractFolderId(match.drive_url),
-                    itemCount: match.item_count || f.itemCount || 0,
+                    driveUrl: match.driveUrl || match.drive_url,
+                    folderId:
+                      match.id ||
+                      match.folder_id ||
+                      extractFolderId(match.driveUrl || match.drive_url || ""),
+                    itemCount:
+                      match.itemCount ??
+                      match.item_count ??
+                      f.itemCount ??
+                      0,
                   }
                 }
                 return f

@@ -17,6 +17,14 @@ interface SyncedFolder {
   programme?: string
 }
 
+// In-memory cache for fast repeated reads (TTL: 2 minutes)
+let cachedResult: {
+  timestamp: number
+  data: any
+} | null = null
+
+const CACHE_TTL_MS = 2 * 60 * 1000
+
 // Extract folder ID from any Google Drive link or bare ID
 function extractFolderId(input: string): string {
   const trimmed = input.trim()
@@ -56,6 +64,150 @@ async function fetchFolderChildren(
   return data.files || []
 }
 
+async function performDriveSync(rootFolderInput: string, apiKey: string, authToken?: string, forceRefresh = false) {
+  const rootFolderId = extractFolderId(rootFolderInput)
+  if (!rootFolderId || rootFolderId.length < 5) {
+    throw new Error("Invalid Google Drive folder ID or URL format.")
+  }
+
+  const now = Date.now()
+  if (!forceRefresh && cachedResult && now - cachedResult.timestamp < CACHE_TTL_MS) {
+    return cachedResult.data
+  }
+
+  // 1. Fetch top-level items in Master Root Folder
+  const topItems = await fetchFolderChildren(rootFolderId, apiKey, authToken)
+  const isFolder = (item: GoogleDriveItem) => item.mimeType === "application/vnd.google-apps.folder"
+
+  const topFolders = topItems.filter(isFolder)
+  const topFiles = topItems.filter(i => !isFolder(i))
+
+  const discoveredFolders: SyncedFolder[] = []
+
+  // 2. Discover subfolders
+  for (const item of topFolders) {
+    try {
+      const subChildren = await fetchFolderChildren(item.id, apiKey, authToken)
+      const subFolders = subChildren.filter(isFolder)
+      const subFiles = subChildren.filter(i => !isFolder(i))
+
+      if (subFolders.length > 0) {
+        for (const sub of subFolders) {
+          try {
+            const leafChildren = await fetchFolderChildren(sub.id, apiKey, authToken)
+            discoveredFolders.push({
+              id: sub.id,
+              name: sub.name,
+              driveUrl: sub.webViewLink || `https://drive.google.com/drive/folders/${sub.id}`,
+              itemCount: leafChildren.length,
+              programme: item.name,
+            })
+          } catch {
+            discoveredFolders.push({
+              id: sub.id,
+              name: sub.name,
+              driveUrl: sub.webViewLink || `https://drive.google.com/drive/folders/${sub.id}`,
+              itemCount: 0,
+              programme: item.name,
+            })
+          }
+        }
+      } else {
+        discoveredFolders.push({
+          id: item.id,
+          name: item.name,
+          driveUrl: item.webViewLink || `https://drive.google.com/drive/folders/${item.id}`,
+          itemCount: subFiles.length,
+        })
+      }
+    } catch (err: any) {
+      console.warn(`Could not inspect subfolder ${item.name}:`, err.message)
+      discoveredFolders.push({
+        id: item.id,
+        name: item.name,
+        driveUrl: item.webViewLink || `https://drive.google.com/drive/folders/${item.id}`,
+        itemCount: 0,
+      })
+    }
+  }
+
+  // 3. Upsert into Supabase `curated_drive_folders` if table exists
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  let dbSavedCount = 0
+  if (supabaseUrl && supabaseKey && discoveredFolders.length > 0) {
+    try {
+      const supabase = createClient(supabaseUrl, supabaseKey)
+      const { data: existingRecords } = await supabase.from("curated_drive_folders").select("id, title, folder_id")
+      const existingMap = new Map((existingRecords || []).map(r => [r.title.toLowerCase().trim(), r.id]))
+
+      const upsertRows = discoveredFolders.map(df => {
+        const existingId = existingMap.get(df.name.toLowerCase().trim())
+        return {
+          ...(existingId ? { id: existingId } : {}),
+          title: df.name,
+          category: df.name,
+          drive_url: df.driveUrl,
+          folder_id: df.id,
+          programme: df.programme || "All",
+          item_count: df.itemCount,
+          icon: "📁",
+          color: "brand",
+        }
+      })
+
+      const { error: upsertErr } = await supabase.from("curated_drive_folders").upsert(upsertRows, { onConflict: "id" })
+      if (!upsertErr) {
+        dbSavedCount = upsertRows.length
+      }
+    } catch (dbErr: any) {
+      // Table might not be migrated in Supabase yet — graceful fallback
+      console.warn("Notice: curated_drive_folders table not ready, serving from live Google Drive:", dbErr.message)
+    }
+  }
+
+  const result = {
+    success: true,
+    rootFolderId,
+    foldersFound: discoveredFolders.length,
+    topLevelFilesCount: topFiles.length,
+    dbSavedCount,
+    folders: discoveredFolders,
+  }
+
+  cachedResult = {
+    timestamp: now,
+    data: result,
+  }
+
+  return result
+}
+
+export async function GET(req: NextRequest) {
+  try {
+    const rootFolderInput = process.env.GOOGLE_DRIVE_ROOT_FOLDER_ID
+    const apiKey = process.env.GOOGLE_DRIVE_API_KEY || process.env.GEMINI_API_KEY
+    const authToken = process.env.GOOGLE_DRIVE_ACCESS_TOKEN
+
+    if (!rootFolderInput || (!apiKey && !authToken)) {
+      return NextResponse.json(
+        { error: "Google Drive credentials not set in environment." },
+        { status: 400 }
+      )
+    }
+
+    const { searchParams } = new URL(req.url)
+    const refresh = searchParams.get("refresh") === "true"
+
+    const result = await performDriveSync(rootFolderInput, apiKey!, authToken, refresh)
+    return NextResponse.json(result)
+  } catch (err: any) {
+    console.error("GET sync-drive error:", err)
+    return NextResponse.json({ error: err.message || "Failed to fetch Google Drive folders" }, { status: 500 })
+  }
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json().catch(() => ({}))
@@ -80,119 +232,10 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    const rootFolderId = extractFolderId(rootFolderInput)
-    if (!rootFolderId || rootFolderId.length < 5) {
-      return NextResponse.json(
-        { error: "Invalid Google Drive folder ID or URL format." },
-        { status: 400 }
-      )
-    }
-
-    // 1. Fetch top-level items in Master Root Folder
-    const topItems = await fetchFolderChildren(rootFolderId, apiKey, authToken)
-    const isFolder = (item: GoogleDriveItem) => item.mimeType === "application/vnd.google-apps.folder"
-
-    const topFolders = topItems.filter(isFolder)
-    const topFiles = topItems.filter(i => !isFolder(i))
-
-    const discoveredFolders: SyncedFolder[] = []
-
-    // 2. Discover subfolders (supports 1 or 2 levels of hierarchy)
-    // Level 1 could be Subject folders directly (e.g. "Internal Medicine")
-    // OR Programme folders (e.g. "Medicine") containing Subject folders.
-    for (const item of topFolders) {
-      try {
-        const subChildren = await fetchFolderChildren(item.id, apiKey, authToken)
-        const subFolders = subChildren.filter(isFolder)
-        const subFiles = subChildren.filter(i => !isFolder(i))
-
-        if (subFolders.length > 0) {
-          // This is a Programme or Parent category folder (e.g. "Pharmacy" or "Biomedical Sciences")
-          for (const sub of subFolders) {
-            try {
-              const leafChildren = await fetchFolderChildren(sub.id, apiKey, authToken)
-              discoveredFolders.push({
-                id: sub.id,
-                name: sub.name,
-                driveUrl: sub.webViewLink || `https://drive.google.com/drive/folders/${sub.id}`,
-                itemCount: leafChildren.length,
-                programme: item.name,
-              })
-            } catch {
-              discoveredFolders.push({
-                id: sub.id,
-                name: sub.name,
-                driveUrl: sub.webViewLink || `https://drive.google.com/drive/folders/${sub.id}`,
-                itemCount: 0,
-                programme: item.name,
-              })
-            }
-          }
-        } else {
-          // Direct subject folder
-          discoveredFolders.push({
-            id: item.id,
-            name: item.name,
-            driveUrl: item.webViewLink || `https://drive.google.com/drive/folders/${item.id}`,
-            itemCount: subFiles.length,
-          })
-        }
-      } catch (err: any) {
-        console.warn(`Could not inspect subfolder ${item.name}:`, err.message)
-        discoveredFolders.push({
-          id: item.id,
-          name: item.name,
-          driveUrl: item.webViewLink || `https://drive.google.com/drive/folders/${item.id}`,
-          itemCount: 0,
-        })
-      }
-    }
-
-    // 3. Upsert into Supabase `curated_drive_folders`
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-
-    let dbSavedCount = 0
-    if (supabaseUrl && supabaseKey && discoveredFolders.length > 0) {
-      const supabase = createClient(supabaseUrl, supabaseKey)
-
-      // Fetch existing records to match or update
-      const { data: existingRecords } = await supabase.from("curated_drive_folders").select("id, title, folder_id")
-      const existingMap = new Map((existingRecords || []).map(r => [r.title.toLowerCase().trim(), r.id]))
-
-      const upsertRows = discoveredFolders.map(df => {
-        const existingId = existingMap.get(df.name.toLowerCase().trim())
-        return {
-          ...(existingId ? { id: existingId } : {}),
-          title: df.name,
-          category: df.name,
-          drive_url: df.driveUrl,
-          folder_id: df.id,
-          programme: df.programme || "All",
-          item_count: df.itemCount,
-          icon: "📁",
-          color: "brand",
-        }
-      })
-
-      const { error: upsertErr } = await supabase.from("curated_drive_folders").upsert(upsertRows, { onConflict: "id" })
-      if (!upsertErr) {
-        dbSavedCount = upsertRows.length
-      } else {
-        console.warn("Supabase upsert warning:", upsertErr.message)
-      }
-    }
-
-    return NextResponse.json({
-      success: true,
-      rootFolderId,
-      foldersFound: discoveredFolders.length,
-      topLevelFilesCount: topFiles.length,
-      dbSavedCount,
-      folders: discoveredFolders,
-    })
+    const result = await performDriveSync(rootFolderInput, apiKey, authToken, true)
+    return NextResponse.json(result)
   } catch (err: any) {
-    console.error("Sync drive route error:", err)
+    console.error("POST sync-drive error:", err)
     return NextResponse.json(
       { error: err.message || "An unexpected error occurred while syncing with Google Drive." },
       { status: 500 }
