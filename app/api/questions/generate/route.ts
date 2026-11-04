@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 
+export const maxDuration = 60
+
 const TEXTBOOK_MAP: Record<string, string> = {
   anatomy: "Snell's Clinical Anatomy by Regions (10th ed.)",
   physiology: "Guyton & Hall Textbook of Medical Physiology (14th ed.)",

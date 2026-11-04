@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
 
+// Allow up to 60 seconds for Gemini to respond (Vercel defaults to 10s which is too short)
+export const maxDuration = 60
+
 // ── Standard Textbook Catalog ──
 const TEXTBOOK_CATALOG: Record<string, string> = {
   anatomy: "Snell's Clinical Anatomy by Regions (10th ed.)",
@@ -273,125 +276,49 @@ A: [Answer]
       }
     }
 
-    // ── 3. Dynamic Fallback Grounded in Student's Topic & Context ──
+    // ── 3. Intelligent Fallback — tell the user what went wrong ──
+    // If we reach here, BOTH Gemini and OpenAI failed. Provide diagnostic info.
+    const hasGeminiKey = !!(
+      process.env.GOOGLE_GENERATIVE_AI_API_KEY ||
+      process.env.GEMINI_API_KEY ||
+      process.env.GOOGLE_API_KEY ||
+      process.env.NEXT_PUBLIC_GEMINI_API_KEY
+    )
+    const hasOpenAIKey = !!(process.env.OPENAI_API_KEY && process.env.OPENAI_API_KEY.startsWith("sk-"))
+
+    let diagnosticNote = ""
+    if (!hasGeminiKey && !hasOpenAIKey) {
+      diagnosticNote = "\n\n> ⚠️ **Configuration Issue:** No AI API key was found in the server environment. Please add `GOOGLE_GENERATIVE_AI_API_KEY` to your Vercel Environment Variables (Settings → Environment Variables) and redeploy."
+    } else if (hasGeminiKey) {
+      diagnosticNote = "\n\n> ⚠️ **Service Issue:** The Gemini API key is configured but all model requests failed (likely due to high demand or timeout). Please try again in a moment."
+    }
+
     const topicHeading = lastUserMessage.length > 5 && lastUserMessage.length < 60
       ? lastUserMessage.replace(/[^\w\s-]/g, "")
       : "Clinical Topic Synthesis"
 
-    if (mode === "mindmap") {
-      return NextResponse.json({
-        text: `# ${topicHeading}
-
-## 1. Overview & Core Definition
-### Fundamental Principles
-- Key clinical definition and diagnostic criteria
-- Underlying pathophysiology and aetiological triggers
-
-## 2. Pathophysiological Mechanisms
-### Molecular & Cellular Cascade
-- Primary insults and organ-level cellular response
-- Compensatory autoregulatory mechanisms
-
-## 3. Clinical Presentation & Differential Diagnosis
-### Hallmark Symptoms & Signs
-- Presenting clinical manifestations and red-flag symptoms
-- Differential diagnostic considerations and exclusionary criteria
-
-## 4. Diagnostic & Laboratory Workup
-### First-Line Investigations
-- Bedside evaluation and initial blood / biochemical panels
-- Confirmatory imaging and specialized diagnostic markers
-
-## 5. Evidence-Based Management Protocol
-### Acute & Long-Term Interventions
-- Immediate resuscitation and stabilization (ABCDE framework)
-- Guideline-directed pharmacotherapy and definitive management
-
-## 📚 Evidence-Based References
-- Synthesized from your uploaded notebook sources
-- Core Textbooks: ${textbooks.slice(0, 2).join(", ")}`
-      })
-    }
-
-    if (mode === "flashcards") {
-      return NextResponse.json({
-        text: `🃏 Card 1
-Q: What are the primary diagnostic criteria and hallmark features of ${topicHeading}?
-A: Definitive diagnosis relies on structured clinical criteria, history, and objective laboratory confirmation. (Ref: Clinical Guidelines).
-
-🃏 Card 2
-Q: What is the primary underlying pathophysiology and mechanism of injury in this condition?
-A: Cellular insult leads to downstream disruption of normal homeostatic pathways and compensatory mechanisms.
-
-🃏 Card 3
-Q: Which initial bedside and laboratory investigations are mandatory upon clinical presentation?
-A: Baseline blood work, organ function panels, relevant biomarker assays, and targeted imaging.
-
-🃏 Card 4
-Q: What are the top high-yield differential diagnoses to distinguish from this presentation?
-A: Differentiation requires evaluating clinical onset, biomarker thresholds, and specific organ involvement.
-
-🃏 Card 5
-Q: What is the first-line evidence-based pharmacotherapeutic management protocol?
-A: Immediate stabilization, cessation of offending agents, and guideline-recommended targeted medical therapy.`
-      })
-    }
-
-    if (mode === "quiz") {
-      return NextResponse.json({
-        text: `---
-**Question 1**
-A patient presents with acute onset symptoms characteristic of ${topicHeading}. Vital signs demonstrate hemodynamic instability. What is the immediate priority in initial management?
-
-**A.** Obtain routine outpatient elective imaging
-**B.** Immediate stabilization (ABCDE approach) and targeted resuscitation
-**C.** Initiate high-dose immunosuppression prior to blood cultures
-**D.** Discharge with scheduled follow-up in 4 weeks
-
-✅ **Correct Answer: B** — Immediate patient stabilization, airway/breathing/circulation optimization, and targeted resuscitation take precedence before detailed secondary investigations.
-
----
-**Question 2**
-Which diagnostic test is regarded as the first-line investigation for confirming the diagnosis in this clinical presentation?
-
-**A.** Targeted biochemical and organ-specific laboratory panel
-**B.** Plain abdominal radiography without contrast
-**C.** Random exploratory biopsy
-**D.** Routine urine culture alone
-
-✅ **Correct Answer: A** — First-line evaluation requires targeted biochemical testing and organ-specific functional assays to establish the diagnosis and assess severity.`
-      })
-    }
-
+    // Return a helpful response that acknowledges the issue
     return NextResponse.json({
-      text: `## Clinical Synthesis: ${topicHeading}
+      text: `## ⚠️ AI Service Temporarily Unavailable
 
-### 1. Overview & Core Principles
-Reviewing the uploaded materials and evidence-based consensus for **${topicHeading}**:
+**Your question:** "${lastUserMessage}"
 
-| Dimension | Physiological Feature | Clinical Relevance |
+The PodGuide AI tutor could not connect to the Gemini AI service to analyze your uploaded materials and answer your question.
+${diagnosticNote}
+
+### While you wait, here's a study framework for: **${topicHeading}**
+
+| Step | Action | Purpose |
 |---|---|---|
-| **Mechanism** | Primary functional or cellular alteration | Dictates clinical progression and presentation |
-| **Biomarker** | Characteristic elevation in specific diagnostic markers | Provides rapid risk stratification |
-| **Response** | Organ-level compensatory pathways | Guides timely therapeutic interventions |
+| **1** | Review your uploaded source materials | Ground your understanding in primary sources |
+| **2** | Identify key definitions & diagnostic criteria | Build foundational clinical knowledge |
+| **3** | Map pathophysiology to clinical presentation | Connect mechanisms to symptoms |
+| **4** | Outline the evidence-based management protocol | Prepare for clinical decision-making |
 
-> **Clinical Pearl:** Always establish baseline hemodynamic parameters and evaluate for acute complications before initiating intensive interventions.
-
-### 2. Evidence-Based Diagnostic Algorithm
-1. **Initial Assessment:** Comprehensive history and physical examination targeting key signs.
-2. **Laboratory Investigations:** Urea & electrolytes, complete blood count, and targeted biochemical assays.
-3. **Targeted Imaging:** Modality selected based on anatomical region and diagnostic urgency.
-
-### 3. Therapeutic Management
-1. **First-Line Medical Therapy:** Guideline-recommended pharmacotherapy based on patient risk profile.
-2. **Monitoring & Titration:** Continuous assessment of clinical response and biomarker resolution.
+> **Tip:** Try asking your question again — the AI service may recover shortly.
 
 ---
-
-## 📚 Evidence-Based References
-1. **NCBI / PubMed:** Evidence Synthesis & International Consensus.
-2. **UpToDate:** Clinical Practice Decision Support.
-3. **Core Textbooks:** ${textbooks.slice(0, 3).join(", ")}`
+📚 Referenced textbooks: ${textbooks.slice(0, 3).join(", ")}`
     })
   } catch (error) {
     console.error("notebook-ai error:", error)
