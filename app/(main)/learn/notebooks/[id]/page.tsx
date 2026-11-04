@@ -15,7 +15,7 @@ import {
   BookOpen, FlaskConical, ChevronRight, ChevronDown, Wand2,
   HardDrive, ChevronUp, RotateCcw, ArrowRight, ArrowLeft,
   Save, Clipboard, Table as TableIcon, FileText, Eye, CheckCircle2,
-  LockKeyhole, SplitSquareVertical
+  LockKeyhole, SplitSquareVertical, CheckSquare, Square, SlidersHorizontal, Target, ShieldCheck, Filter
 } from "lucide-react"
 import { toast } from "sonner"
 
@@ -495,8 +495,12 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
   const [notePreview, setNotePreview] = useState(true)
   const saveTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  // Sources
+  // Sources & Focus Control
   const [sources, setSources] = useState<Source[]>([])
+  const [selectedSourceIds, setSelectedSourceIds] = useState<string[]>([])
+  const [focusMode, setFocusMode] = useState<"strict" | "hybrid" | "guidelines" | "board_exam">("strict")
+  const [specialtyFilter, setSpecialtyFilter] = useState<string>("all")
+  const [showFocusSettings, setShowFocusSettings] = useState<boolean>(false)
   const [uploading, setUploading] = useState(false)
   const [pasteText, setPasteText] = useState("")
   const [pasteUrl, setPasteUrl] = useState("")
@@ -505,6 +509,21 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
   const [sourcesCollapsed, setSourcesCollapsed] = useState(false)
   const [viewingSource, setViewingSource] = useState<Source | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  // Quick source selection helpers
+  const toggleSourceSelection = (sourceId: string) => {
+    setSelectedSourceIds(prev =>
+      prev.includes(sourceId) ? prev.filter(id => id !== sourceId) : [...prev, sourceId]
+    )
+  }
+
+  const selectAllSources = () => {
+    setSelectedSourceIds(sources.map(s => s.id))
+  }
+
+  const deselectAllSources = () => {
+    setSelectedSourceIds([])
+  }
 
   // Chat
   const [messages, setMessages] = useState<Message[]>([])
@@ -552,7 +571,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
         .from("notebook_documents").select("*")
         .eq("notebook_id", id).order("created_at", { ascending: false })
       if (srcData) {
-        setSources(srcData.map((d: any) => ({
+        const loadedSources: Source[] = srcData.map((d: any) => ({
           id: d.id,
           name: d.file_name,
           type: d.file_type === "link" ? "link" : d.file_type === "drive" ? "drive" : d.file_type === "text" ? "text" : "pdf",
@@ -560,7 +579,9 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
           content: d.text_content || d.extracted_text,
           size: d.file_size,
           created_at: d.created_at
-        })))
+        }))
+        setSources(loadedSources)
+        setSelectedSourceIds(loadedSources.map(s => s.id))
       }
       setLoading(false)
     }
@@ -685,6 +706,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
           }
 
           setSources(prev => [newSource, ...prev])
+          setSelectedSourceIds(prev => [newSource.id, ...prev])
           const charsCount = data.extractedChars || doc.text_content?.length || 0
           const wordCount = charsCount ? Math.round(charsCount / 5) : 0
           toast.success(`Uploaded "${file.name}"${wordCount > 0 ? ` (~${wordCount.toLocaleString()} words indexed)` : ""}`)
@@ -746,6 +768,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
           }
 
           setSources(prev => [fallbackSource, ...prev])
+          setSelectedSourceIds(prev => [fallbackSource.id, ...prev])
           toast.success(`Uploaded "${file.name}" to sources`)
           registered = true
         } catch (err: any) {
@@ -785,7 +808,10 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
     const { data: doc } = await supabase.from("notebook_documents").insert({
       notebook_id: id, file_name: pasteUrl, file_url: pasteUrl, file_type: "link", processing_status: "ready"
     }).select().single()
-    if (doc) setSources(prev => [{ id: doc.id, name: pasteUrl, type: "link", url: pasteUrl, created_at: doc.created_at }, ...prev])
+    if (doc) {
+      setSources(prev => [{ id: doc.id, name: pasteUrl, type: "link", url: pasteUrl, created_at: doc.created_at }, ...prev])
+      setSelectedSourceIds(prev => [doc.id, ...prev])
+    }
     setPasteUrl("")
     setAddingSource(null)
     toast.success("Web link added to sources")
@@ -797,7 +823,10 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
     const { data: doc } = await supabase.from("notebook_documents").insert({
       notebook_id: id, file_name: name, file_url: driveUrl, file_type: "drive", processing_status: "ready"
     }).select().single()
-    if (doc) setSources(prev => [{ id: doc.id, name, type: "drive", url: driveUrl, created_at: doc.created_at }, ...prev])
+    if (doc) {
+      setSources(prev => [{ id: doc.id, name, type: "drive", url: driveUrl, created_at: doc.created_at }, ...prev])
+      setSelectedSourceIds(prev => [doc.id, ...prev])
+    }
     setDriveUrl("")
     setAddingSource(null)
     toast.success("Google Drive resource linked")
@@ -810,9 +839,12 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
       notebook_id: id, file_name: title, file_url: "", file_type: "text",
       file_size: pasteText.length, processing_status: "ready", text_content: pasteText, extracted_text: pasteText
     }).select().single()
-    if (doc) setSources(prev => [{
-      id: doc.id, name: title, type: "paste", content: pasteText, size: pasteText.length, created_at: doc.created_at
-    }, ...prev])
+    if (doc) {
+      setSources(prev => [{
+        id: doc.id, name: title, type: "paste", content: pasteText, size: pasteText.length, created_at: doc.created_at
+      }, ...prev])
+      setSelectedSourceIds(prev => [doc.id, ...prev])
+    }
     setPasteText("")
     setAddingSource(null)
     toast.success("Text saved to sources")
@@ -845,6 +877,7 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
       size: content.length,
       created_at: doc.created_at
     }, ...prev])
+    setSelectedSourceIds(prev => [doc.id, ...prev])
 
     toast.success("Saved into your Sources panel")
     if (window.innerWidth < 1024) setMobilePanel("sources")
@@ -866,30 +899,47 @@ export default function NotebookPage({ params }: { params: Promise<{ id: string 
   const deleteSource = async (sourceId: string) => {
     await supabase.from("notebook_documents").delete().eq("id", sourceId)
     setSources(prev => prev.filter(s => s.id !== sourceId))
+    setSelectedSourceIds(prev => prev.filter(id => id !== sourceId))
     toast.success("Source removed")
   }
 
-  // ── Build Context with Full Extracted Source Text ──
+  // ── Build Context with Filtered Active Source Text & Focus Mode ──
   const buildContext = (): string => {
-    const sourcesSummary = sources.map(s => {
-      const contentSnippet = s.content ? s.content.slice(0, 15000) : (s.url ? `URL: ${s.url}` : "")
-      return `=== SOURCE: ${s.name} (${s.type.toUpperCase()}) ===\n${contentSnippet}`
+    // If specific sources are checked, use only those; otherwise use all sources
+    const activeSources = sources.filter(s =>
+      selectedSourceIds.length === 0 ? true : selectedSourceIds.includes(s.id)
+    )
+
+    const sourcesSummary = activeSources.map(s => {
+      const contentSnippet = s.content ? s.content.slice(0, 20000) : (s.url ? `URL: ${s.url}` : "")
+      return `=== ACTIVE SOURCE: "${s.name}" (${s.type.toUpperCase()}) ===\n${contentSnippet}`
     }).join("\n\n")
 
     return `NOTEBOOK TITLE: "${noteTitle || "Medical Study Notebook"}"
 SUBJECT AREA: "${notebook?.subject_area || "Clinical Medicine"}"
+RESOURCE FOCUS MODE: "${focusMode.toUpperCase()}"
+SPECIALTY LENS: "${specialtyFilter.toUpperCase()}"
+ACTIVE SOURCES COUNT: ${activeSources.length} of ${sources.length} attached (${activeSources.map(s => s.name).join(", ")})
 
 ${noteContent ? `STUDENT'S EXISTING NOTES:\n${noteContent.slice(0, 10000)}\n\n` : ""}
-${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummary}` : "No uploaded source files attached yet."}`
+${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummary}` : "No specific uploaded source files selected."}`
   }
 
   // ── AI Request ──
   const callAI = async (prompt: string, mode?: string): Promise<string> => {
     const context = buildContext()
+    const activeCount = selectedSourceIds.length > 0 ? selectedSourceIds.length : sources.length
     const res = await fetch("/api/notebook-ai", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages: [{ role: "user", content: prompt }], context, mode })
+      body: JSON.stringify({
+        messages: [{ role: "user", content: prompt }],
+        context,
+        mode,
+        focusMode,
+        specialtyFilter,
+        selectedSourcesCount: activeCount
+      })
     })
     if (!res.ok) throw new Error("AI call failed")
     const { text } = await res.json()
@@ -907,12 +957,16 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
 
     try {
       const context = buildContext()
+      const activeCount = selectedSourceIds.length > 0 ? selectedSourceIds.length : sources.length
       const res = await fetch("/api/notebook-ai", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           messages: [...messages, userMessage].map(m => ({ role: m.role, content: m.content })),
-          context
+          context,
+          focusMode,
+          specialtyFilter,
+          selectedSourcesCount: activeCount
         })
       })
       const { text } = await res.json()
@@ -945,8 +999,13 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
     setStudioMode(tool)
     setStudioLoading(true)
 
-    const sourceNames = sources.map(s => s.name).join(", ")
-    const sourceConstraint = `Base your generation strictly on the attached sources (${sourceNames}) and student notes provided in the context.`
+    const activeSources = sources.filter(s =>
+      selectedSourceIds.length === 0 ? true : selectedSourceIds.includes(s.id)
+    )
+    const sourceNames = activeSources.length > 0
+      ? activeSources.map(s => s.name).join(", ")
+      : sources.map(s => s.name).join(", ")
+    const sourceConstraint = `Base your generation strictly on the active selected sources (${sourceNames}) and student notes provided in the context.`
 
     const prompts: Record<string, string> = {
       mindmap: `Create an extensive, structured hierarchical mind map outline based on: "${noteTitle || "the notebook content"}". ${sourceConstraint} Include clinical mechanisms, diagnostic criteria, and management algorithms.`,
@@ -1329,6 +1388,30 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
 
               {/* Source List */}
               <div className="px-3 pb-4 space-y-2">
+                {sources.length > 0 && (
+                  <div className="flex items-center justify-between px-1 py-1 text-[10px] text-gray-400 border-b border-[#181818] pb-1.5 mb-1.5">
+                    <span className="flex items-center gap-1.5 font-bold text-gray-300">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      {selectedSourceIds.length} of {sources.length} in AI focus
+                    </span>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={selectAllSources}
+                        className="hover:text-brand text-[10px] font-semibold transition-colors"
+                      >
+                        Select All
+                      </button>
+                      <span className="text-gray-700">·</span>
+                      <button
+                        onClick={deselectAllSources}
+                        className="hover:text-brand text-[10px] font-semibold transition-colors"
+                      >
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+                )}
+
                 {sources.length === 0 && !addingSource && (
                   <div className="text-center py-8 space-y-2">
                     <div className="w-8 h-8 rounded-xl bg-[#111] border border-[#1f1f1f] flex items-center justify-center mx-auto text-sm">
@@ -1344,13 +1427,40 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
                 {sources.map(s => {
                   const hasContent = Boolean(s.content && s.content.trim().length > 0)
                   const wordCount = hasContent ? Math.round(s.content!.trim().split(/\s+/).length) : 0
+                  const isSelected = selectedSourceIds.length === 0 ? true : selectedSourceIds.includes(s.id)
 
                   return (
-                    <div key={s.id} className="p-2.5 bg-[#0c0c0c] border border-[#1a1a1a] rounded-xl hover:border-[#2b2b2b] transition-colors space-y-1.5">
+                    <div
+                      key={s.id}
+                      className={`p-2.5 rounded-xl border transition-all space-y-1.5 ${
+                        isSelected
+                          ? "bg-[#0d0d0d] border-brand/40 shadow-sm shadow-brand/5"
+                          : "bg-[#070707] border-[#181818] opacity-50 hover:opacity-90"
+                      }`}
+                    >
                       <div className="flex items-start gap-2">
+                        {/* Checkbox for quick AI focus inclusion/exclusion */}
+                        <button
+                          type="button"
+                          onClick={() => toggleSourceSelection(s.id)}
+                          className="mt-0.5 text-gray-400 hover:text-white transition-colors flex-shrink-0"
+                          title={isSelected ? "Uncheck to exclude from AI scope" : "Check to include in AI scope"}
+                        >
+                          {isSelected ? (
+                            <CheckSquare size={15} className="text-brand" />
+                          ) : (
+                            <Square size={15} className="text-gray-600" />
+                          )}
+                        </button>
                         <span className="text-sm flex-shrink-0 mt-0.5">{sourceIcon(s.type)}</span>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-[11px] font-bold text-white truncate" title={s.name}>{s.name}</p>
+                        <div
+                          className="flex-1 min-w-0 cursor-pointer"
+                          onClick={() => toggleSourceSelection(s.id)}
+                          title="Click to toggle AI scope"
+                        >
+                          <p className={`text-[11px] font-bold truncate ${isSelected ? "text-white" : "text-gray-400"}`} title={s.name}>
+                            {s.name}
+                          </p>
                           <div className="flex items-center gap-1.5 mt-0.5">
                             <span className="text-[9px] font-bold text-brand uppercase tracking-wider">{s.type}</span>
                             {hasContent ? (
@@ -1358,6 +1468,13 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
                             ) : s.size ? (
                               <span className="text-[9px] text-gray-500">· {Math.round(s.size / 1024)} KB</span>
                             ) : null}
+                            <span className={`text-[8px] font-bold ml-auto px-1.5 py-0.2 rounded uppercase tracking-wider ${
+                              isSelected
+                                ? "bg-emerald-950/70 text-emerald-400 border border-emerald-800/40"
+                                : "bg-[#141414] text-gray-500 border border-[#222]"
+                            }`}>
+                              {isSelected ? "Active" : "Excluded"}
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -1482,6 +1599,81 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
             </div>
           )}
 
+          {/* Resource Focus & Scope Toolbar */}
+          <div className="border-t border-[#181818] bg-[#0c0c0c] px-3.5 pt-2.5 pb-2 flex flex-wrap items-center justify-between gap-2 text-[11px] flex-shrink-0">
+            {/* Left: Focus Mode Buttons */}
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="text-[10px] font-black text-gray-400 uppercase tracking-wider flex items-center gap-1 mr-1">
+                <Target size={11} className="text-brand" /> Focus:
+              </span>
+              {[
+                { id: "strict" as const, label: "🎯 Strict Uploads", desc: "Answers ONLY from your checked notes & PDFs (zero hallucination)" },
+                { id: "hybrid" as const, label: "⚖️ Hybrid (Notes + Books)", desc: "Primary upload synthesis + Snell, Guyton, Robbins, Katzung" },
+                { id: "guidelines" as const, label: "🏥 Guidelines", desc: "WHO, NICE, NCBI & UpToDate clinical protocols" },
+                { id: "board_exam" as const, label: "⚡ Board Exam", desc: "High-yield recall, hallmark triads, & exam traps" },
+              ].map(mode => (
+                <button
+                  key={mode.id}
+                  onClick={() => setFocusMode(mode.id)}
+                  title={mode.desc}
+                  className={`px-2.5 py-1 rounded-lg font-bold text-[10px] transition-all flex items-center gap-1 ${
+                    focusMode === mode.id
+                      ? "bg-brand text-white shadow-sm shadow-brand/20 border border-brand"
+                      : "bg-[#141414] text-gray-400 hover:text-white border border-[#222]"
+                  }`}
+                >
+                  {mode.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Right: Specialty Lens & Active Sources Summary */}
+            <div className="flex items-center gap-2 ml-auto">
+              {/* Specialty Dropdown */}
+              <div className="flex items-center gap-1 bg-[#141414] border border-[#222] rounded-lg px-2 py-0.5">
+                <Filter size={10} className="text-brand" />
+                <select
+                  value={specialtyFilter}
+                  onChange={e => setSpecialtyFilter(e.target.value)}
+                  className="bg-transparent text-[10px] text-gray-300 font-bold outline-none cursor-pointer"
+                  title="Narrow clinical lens to a specific medical specialty"
+                >
+                  <option value="all" className="bg-[#111] text-white">All Specialties</option>
+                  <option value="paediatrics" className="bg-[#111] text-white">Paediatrics</option>
+                  <option value="cardiology" className="bg-[#111] text-white">Cardiology</option>
+                  <option value="internal_medicine" className="bg-[#111] text-white">Internal Medicine</option>
+                  <option value="surgery" className="bg-[#111] text-white">Surgery</option>
+                  <option value="pharmacology" className="bg-[#111] text-white">Pharmacology</option>
+                  <option value="anatomy" className="bg-[#111] text-white">Anatomy</option>
+                  <option value="pathology" className="bg-[#111] text-white">Pathology</option>
+                  <option value="obs_gynae" className="bg-[#111] text-white">Obs & Gynae</option>
+                </select>
+              </div>
+
+              {/* Active Source Count Chip */}
+              <button
+                onClick={() => {
+                  if (selectedSourceIds.length === sources.length) {
+                    deselectAllSources()
+                  } else {
+                    selectAllSources()
+                  }
+                }}
+                className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-colors ${
+                  (selectedSourceIds.length === 0 ? sources.length : selectedSourceIds.length) > 0
+                    ? "bg-emerald-950/40 border-emerald-800/40 text-emerald-400 hover:bg-emerald-950/70"
+                    : "bg-amber-950/30 border-amber-800/40 text-amber-400"
+                }`}
+                title="Click to toggle all sources active / clear"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>
+                  {selectedSourceIds.length === 0 ? sources.length : selectedSourceIds.length}/{sources.length} active
+                </span>
+              </button>
+            </div>
+          </div>
+
           {/* Chat Input Bar */}
           <div className="border-t border-[#181818] bg-[#0a0a0a] flex-shrink-0">
             <div className="flex items-center gap-2 px-4 pt-2.5 pb-1 overflow-x-auto">
@@ -1509,14 +1701,20 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
                   value={input}
                   onChange={e => setInput(e.target.value)}
                   onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage() } }}
-                  placeholder="Ask any medical question, request a summary, or quiz yourself…"
+                  placeholder={
+                    focusMode === "strict"
+                      ? "Ask anything grounded STRICTLY in your active sources…"
+                      : "Ask any medical question, request a summary, or quiz yourself…"
+                  }
                   rows={1}
-                  className="flex-1 bg-transparent py-3 pl-4 pr-24 text-xs text-white placeholder:text-gray-600 outline-none resize-none leading-relaxed"
+                  className="flex-1 bg-transparent py-3 pl-4 pr-32 text-xs text-white placeholder:text-gray-600 outline-none resize-none leading-relaxed"
                   style={{ minHeight: "46px", maxHeight: "150px" }}
                 />
                 <div className="absolute right-2 bottom-2 flex items-center gap-2">
-                  <span className="text-[10px] text-gray-500 font-mono hidden sm:inline">
-                    {sources.length} source{sources.length === 1 ? "" : "s"}
+                  <span className="text-[9px] font-mono hidden sm:inline px-2 py-1 rounded bg-[#161616] text-gray-300 border border-[#222]">
+                    {focusMode === "strict" ? "🎯 Strict" : focusMode === "guidelines" ? "🏥 Guidelines" : focusMode === "board_exam" ? "⚡ Exam" : "⚖️ Hybrid"}
+                    {" · "}
+                    {(selectedSourceIds.length === 0 ? sources.length : selectedSourceIds.length)} active
                   </span>
                   <button
                     onClick={() => sendMessage()}
@@ -1527,8 +1725,14 @@ ${sourcesSummary ? `ATTACHED SOURCE MATERIALS & EXTRACTED TEXT:\n${sourcesSummar
                   </button>
                 </div>
               </div>
-              <p className="text-center text-[10px] text-gray-600 mt-2">
-                Referenced with standard medical textbooks (Snell, Guyton, Robbins, Katzung, SRB, Materials) & NCBI / UpToDate.
+              <p className="text-center text-[10px] text-gray-500 mt-2">
+                {focusMode === "strict"
+                  ? "🔒 Strict Grounding: AI answers strictly from your active uploaded documents without external hallucination."
+                  : focusMode === "guidelines"
+                    ? "🏥 Clinical Protocol Focus: Prioritizes WHO, NICE, NCBI & UpToDate international management algorithms."
+                    : focusMode === "board_exam"
+                      ? "⚡ Board Exam Mode: Focuses on high-yield recall, hallmark triads, and exam distractor traps."
+                      : "⚖️ Hybrid Mode: Synthesizes active uploaded notes with standard medical textbooks (Snell, Guyton, Robbins, Katzung, SRB)."}
               </p>
             </div>
           </div>

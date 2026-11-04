@@ -55,23 +55,77 @@ function getRelevantTextbooks(context: string, subject: string): string[] {
 
 export async function POST(req: NextRequest) {
   try {
-    const { messages, context, mode } = await req.json()
+    const {
+      messages,
+      context,
+      mode,
+      focusMode = "hybrid",
+      specialtyFilter = "all",
+      selectedSourcesCount = 0
+    } = await req.json()
     const lastUserMessage = messages?.[messages.length - 1]?.content || ""
     const textbooks = getRelevantTextbooks(context || "", lastUserMessage)
 
+    // Build specialized focus directives based on student's selection
+    let focusDirective = ""
+    if (focusMode === "strict") {
+      focusDirective = `
+===================================================
+🔒 STRICT RESOURCE FOCUS: UPLOADED SOURCES ONLY
+===================================================
+You are operating in STRICT GROUNDING MODE.
+1. Answer ONLY using the facts, mechanisms, clinical signs, and instructions explicitly stated in the student's active uploaded source documents above.
+2. Do NOT introduce external medications, dosages, diagnostic criteria, or guidelines that are not mentioned in their uploaded notes.
+3. If the student's question is partially or fully absent from the uploaded source text, explicitly declare:
+   "⚠️ **Not covered in your uploaded document:** [Explain specifically what information is missing from the uploaded file]."
+4. Directly cite or quote the relevant sections, tables, or headings from the uploaded source.`
+    } else if (focusMode === "guidelines") {
+      focusDirective = `
+===================================================
+🏥 CLINICAL GUIDELINES & PROTOCOL FOCUS
+===================================================
+1. Ground your answer in the student's uploaded notes, while cross-referencing and prioritizing authoritative international guidelines (WHO, NICE, UpToDate, AHA/ESC/AAP).
+2. Highlight clinical staging, triage algorithms, first-line vs second-line therapies, and life-threatening red flags.`
+    } else if (focusMode === "board_exam") {
+      focusDirective = `
+===================================================
+⚡ RAPID BOARD EXAM & HIGH-YIELD RECALL FOCUS
+===================================================
+1. Format your response for high-yield medical school and licensing board exams (MBChB, USMLE, PLAB).
+2. Emphasize classical triads/tetrads, diagnostic buzzwords, pathognomonic physical signs, first-line vs gold-standard investigations, and classic distractor traps.`
+    } else {
+      focusDirective = `
+===================================================
+⚖️ HYBRID SYNTHESIS FOCUS (Primary Sources + Core Textbooks)
+===================================================
+1. Synthesize the student's active uploaded sources as the primary authority.
+2. Where the student's notes leave clinical or mechanistic gaps, seamlessly augment and ground in standard medical consensus and core textbooks.`
+    }
+
+    let specialtyDirective = ""
+    if (specialtyFilter && specialtyFilter !== "all") {
+      specialtyDirective = `
+===================================================
+🎯 SPECIALTY LENS: ${specialtyFilter.toUpperCase()}
+===================================================
+Frame all physiological mechanisms, diagnostic criteria, normal reference intervals, and clinical approaches specifically through the specialty of ${specialtyFilter.toUpperCase()}.`
+    }
+
     const baseSystemPrompt = `You are PodGuide AI — an expert medical tutor, clinical academic mentor, and study co-pilot for healthcare students.
 
-STUDENT'S UPLOADED SOURCES & NOTEBOOK CONTEXT:
+STUDENT'S ACTIVE UPLOADED SOURCES & NOTEBOOK CONTEXT:
 ===================================================
 ${context || "No specific sources attached yet. Rely on authoritative medical knowledge."}
 ===================================================
+${focusDirective}
+${specialtyDirective}
 
 CORE MENTOR GUIDELINES:
 1. UPLOADED SOURCES PRIORITY:
-   - When the student has uploaded sources (PDFs, lecture slides, documents, notes, links), you MUST directly analyze, reference, and synthesize information from those materials.
+   - When the student has active uploaded sources (PDFs, lecture slides, documents, notes, links), you MUST directly analyze, reference, and synthesize information from those materials.
    - Summarize, explain, answer questions, compare findings, or extract clinical pearls directly from what the student provided.
    - If the student asks a question about their uploaded notes or materials, give direct, accurate answers grounded in their materials.
-   - When the material leaves gaps, augment seamlessly with evidence-based medical consensus.
+   - When in strict mode, never hallucinate beyond the provided text.
 
 2. VERSATILE & NON-RIGID ASSISTANCE:
    - You are NOT limited to any predefined topics or scripts.
