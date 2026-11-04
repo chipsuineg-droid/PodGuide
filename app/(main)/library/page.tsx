@@ -4,6 +4,7 @@ import { useEffect, useState, useMemo } from "react"
 import {
   Search,
   Folder,
+  ChevronDown,
   ChevronRight,
   BookOpen,
   Video,
@@ -15,9 +16,10 @@ import {
   Newspaper,
   ArrowLeft,
   Loader2,
-  Sparkles,
   RotateCcw,
   Eye,
+  Heart,
+  Download,
   Play,
   X,
   Stethoscope,
@@ -40,8 +42,8 @@ import {
   Layers,
   Zap,
   Bone,
-  CheckCircle2,
   LucideIcon,
+  FolderOpen,
 } from "lucide-react"
 import { toast } from "sonner"
 import { StudyMaterialViewer, StudyMaterial } from "@/components/library/StudyMaterialViewer"
@@ -90,7 +92,7 @@ const RESOURCE_SUBFOLDERS: ResourceCategoryDef[] = [
   {
     key: "textbooks",
     title: "Textbooks / Books",
-    subtitle: "Core reference books & manuals",
+    subtitle: "Core reference books & clinical manuals",
     icon: BookOpen,
     colorClass: "text-red-500",
     bgClass: "bg-red-500/10 border-red-500/20",
@@ -98,7 +100,7 @@ const RESOURCE_SUBFOLDERS: ResourceCategoryDef[] = [
   {
     key: "revision_documents",
     title: "Revision Materials",
-    subtitle: "Summaries, cheat sheets & OSCEs",
+    subtitle: "Summaries, cheat sheets & OSCE guides",
     icon: FileSpreadsheet,
     colorClass: "text-gray-300",
     bgClass: "bg-[#181818] border-[#262626]",
@@ -106,7 +108,7 @@ const RESOURCE_SUBFOLDERS: ResourceCategoryDef[] = [
   {
     key: "past_papers",
     title: "Question Papers / Past Papers",
-    subtitle: "Previous examinations & spotters",
+    subtitle: "Previous examinations, spotters & answers",
     icon: Clock,
     colorClass: "text-red-500",
     bgClass: "bg-red-500/10 border-red-500/20",
@@ -122,7 +124,7 @@ const RESOURCE_SUBFOLDERS: ResourceCategoryDef[] = [
   {
     key: "slides",
     title: "Slides",
-    subtitle: "PowerPoint presentations",
+    subtitle: "PowerPoint & lecture presentations",
     icon: Presentation,
     colorClass: "text-gray-300",
     bgClass: "bg-[#181818] border-[#262626]",
@@ -130,7 +132,7 @@ const RESOURCE_SUBFOLDERS: ResourceCategoryDef[] = [
   {
     key: "practice_questions",
     title: "MCQs",
-    subtitle: "Practice questions & question banks",
+    subtitle: "Practice questions & test banks",
     icon: HelpCircle,
     colorClass: "text-red-500",
     bgClass: "bg-red-500/10 border-red-500/20",
@@ -138,7 +140,7 @@ const RESOURCE_SUBFOLDERS: ResourceCategoryDef[] = [
   {
     key: "journals",
     title: "Journals",
-    subtitle: "Articles & clinical research papers",
+    subtitle: "Articles & peer-reviewed research papers",
     icon: Newspaper,
     colorClass: "text-gray-300",
     bgClass: "bg-[#181818] border-[#262626]",
@@ -146,14 +148,14 @@ const RESOURCE_SUBFOLDERS: ResourceCategoryDef[] = [
   {
     key: "videos",
     title: "Videos",
-    subtitle: "Recorded lectures & clinical audio",
+    subtitle: "Recorded lectures & clinical tutorials",
     icon: Video,
     colorClass: "text-red-500",
     bgClass: "bg-red-500/10 border-red-500/20",
   },
 ]
 
-// ── The 5 Main Academic Categories & Strict Hierarchy ──
+// ── Strict Main Academic Categories Order (1: BMS, 2: MBChB, 3: Pharmacy, 4: Nursing, 5: Veterinary Science) ──
 const MAIN_ACADEMIC_CATEGORIES: MainCategory[] = [
   // 1. Biomedical Sciences (BMS)
   {
@@ -219,24 +221,7 @@ const MAIN_ACADEMIC_CATEGORIES: MainCategory[] = [
     ],
   },
 
-  // 4. Veterinary Science
-  {
-    id: "veterinary-science",
-    name: "Veterinary Science",
-    shortCode: "VET",
-    desc: "Veterinary medicine, animal anatomy, surgery and clinical care",
-    icon: PawPrint,
-    subjects: [
-      { id: "vet-anatomy", name: "Veterinary Anatomy", driveKey: "VETERINARY ANATOMY", desc: "Comparative animal osteology, myology, neuroanatomy", icon: Bone },
-      { id: "vet-physiology", name: "Veterinary Physiology", driveKey: "VETERINARY PHYSIOLOGY", desc: "Rumen mechanics, animal digestion, cardiovascular dynamics", icon: Activity },
-      { id: "vet-pathology", name: "Veterinary Pathology", driveKey: "VETERINARY PATHOLOGY", desc: "Gross necropsy, histopathological animal lesions", icon: Microscope },
-      { id: "vet-medicine", name: "Veterinary Medicine", driveKey: "VETERINARY MEDICINE", desc: "Small and large animal clinical medicine, herd diagnostics", icon: Stethoscope },
-      { id: "vet-surgery", name: "Veterinary Surgery", driveKey: "VETERINARY SURGERY", desc: "Aseptic technique, animal soft-tissue surgery & orthopaedics", icon: Scissors },
-      { id: "vet-pharmacology", name: "Veterinary Pharmacology", driveKey: "VETERINARY PHARMACOLOGY", desc: "Veterinary therapeutics, dosage regimens, withdrawal periods", icon: Pill },
-    ],
-  },
-
-  // 5. Nursing
+  // 4. Nursing
   {
     id: "nursing",
     name: "Nursing",
@@ -250,6 +235,23 @@ const MAIN_ACADEMIC_CATEGORIES: MainCategory[] = [
       { id: "nurs-midwifery", name: "Midwifery", driveKey: "MIDWIFERY", desc: "Antenatal nursing support, intrapartum labor stages, newborn resuscitation", icon: HeartPulse },
       { id: "nurs-community", name: "Community Health Nursing", driveKey: "COMMUNITY HEALTH NURSING", desc: "Primary healthcare clinics, immunization schedules, home visits", icon: Globe },
       { id: "nurs-mental-health", name: "Mental Health Nursing", driveKey: "MENTAL HEALTH NURSING", desc: "Therapeutic communication, psychiatric interventions", icon: Brain },
+    ],
+  },
+
+  // 5. Veterinary Science
+  {
+    id: "veterinary-science",
+    name: "Veterinary Science",
+    shortCode: "VET",
+    desc: "Veterinary medicine, animal anatomy, surgery and clinical care",
+    icon: PawPrint,
+    subjects: [
+      { id: "vet-anatomy", name: "Veterinary Anatomy", driveKey: "VETERINARY ANATOMY", desc: "Comparative animal osteology, myology, neuroanatomy", icon: Bone },
+      { id: "vet-physiology", name: "Veterinary Physiology", driveKey: "VETERINARY PHYSIOLOGY", desc: "Rumen mechanics, animal digestion, cardiovascular dynamics", icon: Activity },
+      { id: "vet-pathology", name: "Veterinary Pathology", driveKey: "VETERINARY PATHOLOGY", desc: "Gross necropsy, histopathological animal lesions", icon: Microscope },
+      { id: "vet-medicine", name: "Veterinary Medicine", driveKey: "VETERINARY MEDICINE", desc: "Small and large animal clinical medicine, herd diagnostics", icon: Stethoscope },
+      { id: "vet-surgery", name: "Veterinary Surgery", driveKey: "VETERINARY SURGERY", desc: "Aseptic technique, animal soft-tissue surgery & orthopaedics", icon: Scissors },
+      { id: "vet-pharmacology", name: "Veterinary Pharmacology", driveKey: "VETERINARY PHARMACOLOGY", desc: "Veterinary therapeutics, dosage regimens, withdrawal periods", icon: Pill },
     ],
   },
 ]
@@ -286,7 +288,34 @@ function formatBytes(bytesStr?: string): string {
   if (isNaN(b) || b <= 0) return ""
   if (b < 1024) return `${b} B`
   if (b < 1024 * 1024) return `${(b / 1024).toFixed(1)} KB`
-  return `${(b / (1024 * 1024)).toFixed(1)} MB`
+  if (b < 1024 * 1024 * 1024) return `${(b / (1024 * 1024)).toFixed(1)} MB`
+  return `${(b / (1024 * 1024 * 1024)).toFixed(2)} GB`
+}
+
+function getFileTypeBadge(name: string, mimeType?: string): { label: string; color: string } {
+  const ext = name.split(".").pop()?.toUpperCase() || ""
+  if (ext === "PDF" || mimeType?.includes("pdf")) {
+    return { label: "PDF", color: "bg-red-500/10 text-red-400 border-red-500/25" }
+  }
+  if (["DOC", "DOCX"].includes(ext) || mimeType?.includes("word") || mimeType?.includes("wordprocessingml")) {
+    return { label: "DOCX", color: "bg-blue-500/10 text-blue-400 border-blue-500/25" }
+  }
+  if (["PPT", "PPTX"].includes(ext) || mimeType?.includes("presentation") || mimeType?.includes("powerpoint")) {
+    return { label: "PPTX", color: "bg-orange-500/10 text-orange-400 border-orange-500/25" }
+  }
+  if (["MP4", "MOV", "WEBM", "MKV"].includes(ext) || mimeType?.startsWith("video/")) {
+    return { label: "MP4", color: "bg-red-500/20 text-red-400 border-red-500/35" }
+  }
+  if (["MP3", "M4A", "WAV", "OGG"].includes(ext) || mimeType?.startsWith("audio/")) {
+    return { label: "AUDIO", color: "bg-purple-500/10 text-purple-400 border-purple-500/25" }
+  }
+  if (["XLS", "XLSX", "CSV"].includes(ext)) {
+    return { label: "SHEET", color: "bg-emerald-500/10 text-emerald-400 border-emerald-500/25" }
+  }
+  if (["ZIP", "RAR", "7Z"].includes(ext)) {
+    return { label: "ARCHIVE", color: "bg-amber-500/10 text-amber-400 border-amber-500/25" }
+  }
+  return { label: ext || "FILE", color: "bg-[#181818] text-gray-400 border-[#262626]" }
 }
 
 export default function LibraryPage() {
@@ -294,8 +323,14 @@ export default function LibraryPage() {
   const [driveData, setDriveData] = useState<Record<string, SubjectLibraryData>>({})
   const [totalDriveFiles, setTotalDriveFiles] = useState(0)
 
+  // ── Vertical Collapsible Directory State ──
+  // Multiple categories can be expanded or collapsed independently
+  const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({
+    bms: true, // Default open BMS for immediate discovery
+  })
+
   // ── 4 Dedicated Navigation Levels ──
-  // Level 1: null (Main Library Dashboard with 5 Categories)
+  // Level 1: selectedMainCat === null (Main Directory with collapsible categories)
   // Level 2: activeCategory (Category Dashboard with Subjects)
   // Level 3: activeSubject (Subject Dashboard with 8 Resource Subfolders)
   // Level 4: activeResourceFolder (Resource Folder View with Actual Documents)
@@ -310,6 +345,17 @@ export default function LibraryPage() {
   // In-App Viewer Modal
   const [activeViewerMaterial, setActiveViewerMaterial] = useState<StudyMaterial | null>(null)
   const [isSyncing, setIsSyncing] = useState(false)
+
+  // Real engagement tracking (views & likes)
+  const [engagement, setEngagement] = useState<Record<string, { views: number; likes: number; userLiked?: boolean }>>({})
+
+  // Toggle category expansion
+  const toggleCategoryExpand = (catId: string) => {
+    setExpandedCategories(prev => ({
+      ...prev,
+      [catId]: !prev[catId],
+    }))
+  }
 
   // Fetch Drive Files from recursive API
   const fetchDriveCatalog = async (forceRefresh = false) => {
@@ -379,6 +425,64 @@ export default function LibraryPage() {
     )
   }, [currentSubjectDriveData, selectedResourceFolder, folderFileSearch])
 
+  // Fetch engagement metadata (views and likes) for current visible files
+  useEffect(() => {
+    const fileIds = currentFolderFiles.map(f => f.id)
+    if (fileIds.length === 0) return
+
+    fetch(`/api/library/engagement?fileIds=${encodeURIComponent(fileIds.slice(0, 80).join(","))}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.engagement) {
+          setEngagement(prev => ({ ...prev, ...data.engagement }))
+        }
+      })
+      .catch(() => {})
+  }, [currentFolderFiles])
+
+  // Handle like toggle
+  const handleToggleLike = async (e: React.MouseEvent, fileId: string) => {
+    e.stopPropagation()
+    const current = engagement[fileId] || { views: 0, likes: 0, userLiked: false }
+    const nextLiked = !current.userLiked
+    const nextLikes = nextLiked ? current.likes + 1 : Math.max(0, current.likes - 1)
+
+    // Optimistic UI update
+    setEngagement(prev => ({
+      ...prev,
+      [fileId]: {
+        ...current,
+        likes: nextLikes,
+        userLiked: nextLiked,
+      },
+    }))
+
+    try {
+      const res = await fetch("/api/library/engagement", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fileId,
+          action: nextLiked ? "like" : "unlike",
+        }),
+      })
+      const data = await res.json()
+      if (res.ok && data.success) {
+        setEngagement(prev => ({
+          ...prev,
+          [fileId]: {
+            views: data.views,
+            likes: data.likes,
+            userLiked: data.userLiked,
+          },
+        }))
+      }
+    } catch {
+      // Revert on network failure
+      setEngagement(prev => ({ ...prev, [fileId]: current }))
+    }
+  }
+
   // Global search across all documents
   const globalSearchResults = useMemo(() => {
     if (!searchQuery.trim()) return null
@@ -413,6 +517,15 @@ export default function LibraryPage() {
       file.mimeType.startsWith("audio/") ||
       /\.(mp4|m4a|webm|mov|ogg|mp3)$/i.test(file.name)
 
+    // Increment local view count
+    setEngagement(prev => {
+      const cur = prev[file.id] || { views: 0, likes: 0 }
+      return {
+        ...prev,
+        [file.id]: { ...cur, views: cur.views + 1 },
+      }
+    })
+
     setActiveViewerMaterial({
       id: file.id,
       title: file.name,
@@ -443,6 +556,14 @@ export default function LibraryPage() {
     setFolderFileSearch("")
   }
 
+  // Direct subject navigation from collapsible directory
+  const navigateToSubject = (cat: MainCategory, subj: SubjectDef) => {
+    setSelectedMainCat(cat)
+    setSelectedSubject(subj)
+    setSelectedResourceFolder(null)
+    setFolderFileSearch("")
+  }
+
   return (
     <div className="max-w-7xl mx-auto space-y-6 pb-24">
 
@@ -451,7 +572,7 @@ export default function LibraryPage() {
         <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
         <input
           type="text"
-          placeholder="Search every document in PodGuide Library..."
+          placeholder="Search every document, book, slide, past paper or recording in PodGuide Library..."
           value={searchQuery}
           onChange={e => setSearchQuery(e.target.value)}
           className="w-full bg-[#0d0d0d] border border-[#1f1f1f] focus:border-red-600 rounded-full pl-11 pr-10 py-2.5 text-xs sm:text-sm text-white placeholder:text-gray-500 outline-none transition-all shadow-sm"
@@ -489,54 +610,123 @@ export default function LibraryPage() {
               <p className="text-gray-600 text-[11px]">Try checking the spelling or searching by a broader medical term.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
-              {globalSearchResults.map(f => (
-                <div
-                  key={f.id}
-                  onClick={() => openResource(f, f.subjectName)}
-                  className="p-3 bg-[#0e0e0e] hover:bg-[#141414] border border-[#1c1c1c] hover:border-red-600/40 rounded-xl flex items-center justify-between gap-3 transition-colors cursor-pointer group shadow-sm"
-                >
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="w-8 h-8 rounded-lg bg-[#161616] border border-[#242424] flex items-center justify-center text-red-500 flex-shrink-0">
-                      {f.category === "videos" ? <Video size={14} /> : <FileText size={14} />}
+            <div className="space-y-2">
+              {globalSearchResults.map(f => {
+                const badge = getFileTypeBadge(f.name, f.mimeType)
+                const isVid = f.category === "videos" || /\.(mp4|m4a|webm|mov|ogg|mp3)$/i.test(f.name)
+                const eg = engagement[f.id] || { views: 0, likes: 0, userLiked: false }
+
+                return (
+                  <div
+                    key={f.id}
+                    onClick={() => openResource(f, f.subjectName)}
+                    className="p-3 sm:p-3.5 bg-[#0e0e0e] hover:bg-[#131313] border border-[#1c1c1c] hover:border-red-600/40 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-colors cursor-pointer group shadow-sm"
+                  >
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="w-8 h-8 rounded-lg bg-[#141414] border border-[#242424] flex items-center justify-center text-red-500 flex-shrink-0 group-hover:scale-105 transition-transform">
+                        {isVid ? <Play size={13} className="fill-current" /> : <FileText size={14} />}
+                      </div>
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <p className="text-xs sm:text-sm font-bold text-white truncate group-hover:text-red-400 transition-colors">
+                            {f.name}
+                          </p>
+                          <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border uppercase ${badge.color}`}>
+                            {badge.label}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2 mt-1 text-[10px] text-gray-500 flex-wrap">
+                          <span className="text-gray-400 font-semibold">{f.subjectName}</span>
+                          <span>·</span>
+                          <span>{f.categoryName}</span>
+                          {formatBytes(f.size) && (
+                            <>
+                              <span>·</span>
+                              <span>{formatBytes(f.size)}</span>
+                            </>
+                          )}
+                          {f.formattedDate && (
+                            <>
+                              <span>·</span>
+                              <span>{f.formattedDate}</span>
+                            </>
+                          )}
+                          {isVid && f.formattedDuration && (
+                            <>
+                              <span>·</span>
+                              <span className="text-red-400 font-medium flex items-center gap-1">
+                                <Clock size={10} /> {f.formattedDuration}
+                              </span>
+                            </>
+                          )}
+                        </div>
+                      </div>
                     </div>
-                    <div className="min-w-0">
-                      <p className="text-xs font-bold text-white truncate group-hover:text-red-400 transition-colors">
-                        {f.name}
-                      </p>
-                      <p className="text-[10px] text-gray-500 mt-0.5 truncate">
-                        {f.subjectName} · {f.categoryName} {formatBytes(f.size) ? `· ${formatBytes(f.size)}` : ""}
-                      </p>
+
+                    <div className="flex items-center justify-end gap-2 flex-shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-[#181818]">
+                      {/* Views */}
+                      <span className="text-[10px] text-gray-500 flex items-center gap-1 px-1.5 py-1">
+                        <Eye size={12} />
+                        <span>{eg.views}</span>
+                      </span>
+
+                      {/* Like Button */}
+                      <button
+                        onClick={e => handleToggleLike(e, f.id)}
+                        title="Like resource"
+                        className={`text-[10px] flex items-center gap-1 px-2 py-1 rounded border transition-colors ${
+                          eg.userLiked
+                            ? "bg-red-500/15 border-red-500/30 text-red-400"
+                            : "bg-[#141414] border-[#222] text-gray-400 hover:text-white"
+                        }`}
+                      >
+                        <Heart size={11} className={eg.userLiked ? "fill-current text-red-500" : ""} />
+                        <span>{eg.likes}</span>
+                      </button>
+
+                      {/* Download Button */}
+                      <a
+                        href={f.downloadUrl}
+                        download={f.name}
+                        onClick={e => e.stopPropagation()}
+                        title="Download file"
+                        className="p-1.5 rounded-lg bg-[#141414] hover:bg-[#1f1f1f] border border-[#242424] text-gray-400 hover:text-white transition-colors"
+                      >
+                        <Download size={13} />
+                      </a>
+
+                      {/* Open Action */}
+                      <button className="px-3 py-1.5 rounded-lg bg-[#161616] group-hover:bg-red-600 text-gray-300 group-hover:text-white text-[11px] font-semibold transition-colors flex items-center gap-1.5 shadow-sm">
+                        {isVid ? <Play size={10} className="fill-current" /> : <Eye size={11} />}
+                        <span>{isVid ? "Watch" : "Study"}</span>
+                      </button>
                     </div>
                   </div>
-                  <button className="px-2.5 py-1 rounded bg-[#181818] group-hover:bg-red-600 text-gray-300 group-hover:text-white text-[10px] font-semibold transition-colors flex items-center gap-1 flex-shrink-0">
-                    <Eye size={11} /> Open
-                  </button>
-                </div>
-              ))}
+                )
+              })}
             </div>
           )}
         </div>
       ) : selectedMainCat === null ? (
 
         /* ═══════════════════════════════════════════════════════════════ */
-        /* LEVEL 1: MAIN LIBRARY DASHBOARD (The 5 Academic Categories)    */
+        /* LEVEL 1: VERTICAL COLLAPSIBLE DIRECTORY (Academic Explorer)   */
         /* ═══════════════════════════════════════════════════════════════ */
         <div className="space-y-4 animate-in fade-in duration-150">
           
           {/* Header */}
-          <div className="flex items-center justify-between pb-2 border-b border-[#181818]">
+          <div className="flex items-center justify-between pb-3 border-b border-[#181818]">
             <div>
               <h1 className="text-xs font-black uppercase tracking-widest text-gray-400">
                 PODGUIDE DIGITAL LIBRARY
               </h1>
               <p className="text-xs text-gray-500 mt-0.5">
-                Select your academic category to browse curated subjects & materials
+                Academic directory system — expand a category to view subjects and curated learning materials
               </p>
             </div>
             <div className="flex items-center gap-3">
-              <span className="text-xs font-semibold text-gray-400">
-                {totalDriveFiles > 0 ? `${totalDriveFiles.toLocaleString()} files total` : "Connecting archive..."}
+              <span className="text-xs font-semibold text-gray-400 hidden sm:inline">
+                {totalDriveFiles > 0 ? `${totalDriveFiles.toLocaleString()} files indexed` : "Connecting archive..."}
               </span>
               <button
                 onClick={handleManualSync}
@@ -553,52 +743,129 @@ export default function LibraryPage() {
             <div className="py-20 flex flex-col items-center justify-center gap-2.5">
               <Loader2 size={24} className="animate-spin text-red-500" />
               <p className="text-xs text-gray-500 font-semibold tracking-wide">
-                Loading academic categories and curriculum folders...
+                Synchronising academic directory and Google Drive folders...
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+            /* Vertical Expandable Rows Layout */
+            <div className="space-y-2.5">
               {MAIN_ACADEMIC_CATEGORIES.map(cat => {
                 const IconComp = cat.icon
                 const filesCount = getCategoryTotalFiles(cat)
                 const subjectCount = cat.subjects.length
+                const isExpanded = Boolean(expandedCategories[cat.id])
 
                 return (
                   <div
                     key={cat.id}
-                    onClick={() => {
-                      setSelectedMainCat(cat)
-                      setSelectedSubject(null)
-                      setSelectedResourceFolder(null)
-                    }}
-                    className="p-4 sm:p-5 bg-[#0e0e0e] hover:bg-[#121212] border border-[#1f1f1f] hover:border-red-600/50 rounded-xl flex flex-col justify-between h-40 transition-all duration-150 cursor-pointer group shadow-sm select-none"
+                    className="border border-[#1c1c1c] hover:border-[#2a2a2a] rounded-xl overflow-hidden bg-[#0d0d0d] transition-all duration-150 shadow-sm"
                   >
-                    {/* Top Row: Category Icon & Folder Arrow */}
-                    <div className="flex items-center justify-between">
-                      <div className="w-9 h-9 rounded-lg bg-[#161616] border border-[#262626] flex items-center justify-center text-red-500 group-hover:scale-105 transition-transform">
-                        <IconComp size={18} />
-                      </div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 bg-[#161616] border border-[#242424] px-2 py-0.5 rounded">
-                        {cat.shortCode}
-                      </span>
-                    </div>
+                    {/* Horizontal Expandable Category Row */}
+                    <div
+                      onClick={() => toggleCategoryExpand(cat.id)}
+                      className="w-full px-3.5 sm:px-4 py-3 sm:py-3.5 flex items-center justify-between cursor-pointer hover:bg-[#121212] transition-colors group select-none"
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        {/* Chevron Indicator */}
+                        <div className="w-5 h-5 rounded flex items-center justify-center text-gray-500 group-hover:text-red-500 transition-colors flex-shrink-0">
+                          {isExpanded ? (
+                            <ChevronDown size={15} className="text-red-500 transition-transform duration-150" />
+                          ) : (
+                            <ChevronRight size={15} className="transition-transform duration-150" />
+                          )}
+                        </div>
 
-                    {/* Bottom: Title, Description & Stats */}
-                    <div>
-                      <h3 className="text-sm sm:text-base font-bold text-white group-hover:text-red-500 transition-colors leading-snug">
-                        {cat.name}
-                      </h3>
-                      <p className="text-[11px] text-gray-400 mt-1 line-clamp-1 leading-relaxed">
-                        {cat.desc}
-                      </p>
-                      <div className="flex items-center justify-between mt-3 pt-2.5 border-t border-[#181818] text-[11px] text-gray-500 font-medium">
-                        <span>{subjectCount} subjects</span>
-                        <span className="flex items-center gap-1 text-gray-400 group-hover:text-red-400 font-semibold">
-                          <span>{filesCount} files</span>
-                          <ChevronRight size={13} />
+                        {/* Category Icon */}
+                        <div className="w-8 h-8 rounded-lg bg-[#141414] border border-[#222] flex items-center justify-center text-red-500 flex-shrink-0 group-hover:border-red-500/30">
+                          <IconComp size={16} />
+                        </div>
+
+                        {/* Title and Description */}
+                        <div className="min-w-0 text-left">
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs sm:text-sm font-bold text-white group-hover:text-red-400 transition-colors truncate">
+                              {cat.name}
+                            </span>
+                            <span className="text-[10px] font-semibold text-gray-500 bg-[#161616] px-1.5 py-0.5 rounded border border-[#222]">
+                              {cat.shortCode}
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-gray-400 truncate hidden sm:block mt-0.5">
+                            {cat.desc}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Right Stats and Actions */}
+                      <div className="flex items-center gap-3 text-xs text-gray-500 flex-shrink-0 ml-2">
+                        <span className="hidden sm:inline font-medium">{subjectCount} subjects</span>
+                        <span className="text-[11px] font-semibold text-gray-400 bg-[#141414] border border-[#222] px-2 py-0.5 rounded-full">
+                          {filesCount} {filesCount === 1 ? "file" : "files"}
                         </span>
                       </div>
                     </div>
+
+                    {/* Vertically Expanded Subjects Listing with Indentation */}
+                    {isExpanded && (
+                      <div className="border-t border-[#181818] bg-[#090909] px-3 sm:px-6 py-3 transition-all animate-in fade-in duration-150">
+                        <div className="pl-3 sm:pl-4 border-l-2 border-[#1f1f1f] space-y-1.5 my-1">
+                          <div className="flex items-center justify-between text-[11px] text-gray-500 pb-1.5">
+                            <span className="font-semibold uppercase tracking-wider text-[10px] text-gray-400">
+                              {cat.name} Curriculum Folders
+                            </span>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                setSelectedMainCat(cat)
+                                setSelectedSubject(null)
+                                setSelectedResourceFolder(null)
+                              }}
+                              className="text-red-400 hover:text-red-300 font-semibold flex items-center gap-1 text-[11px] transition-colors"
+                            >
+                              <span>Open Category Dashboard</span>
+                              <ChevronRight size={11} />
+                            </button>
+                          </div>
+
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 pt-1">
+                            {cat.subjects.map(subj => {
+                              const data = resolveSubjectData(subj)
+                              const count = data?.totalFiles || 0
+                              const SubjIcon = subj.icon
+
+                              return (
+                                <div
+                                  key={subj.id}
+                                  onClick={() => navigateToSubject(cat, subj)}
+                                  className="p-2.5 bg-[#0e0e0e] hover:bg-[#141414] border border-[#1a1a1a] hover:border-red-600/40 rounded-lg flex items-center justify-between gap-2.5 transition-colors cursor-pointer group shadow-sm select-none"
+                                >
+                                  <div className="flex items-center gap-2.5 min-w-0">
+                                    <div className="w-7 h-7 rounded bg-[#161616] border border-[#242424] flex items-center justify-center text-red-500 group-hover:scale-105 transition-transform flex-shrink-0">
+                                      <SubjIcon size={14} />
+                                    </div>
+                                    <div className="min-w-0">
+                                      <p className="text-xs font-bold text-white group-hover:text-red-400 transition-colors truncate">
+                                        {subj.name}
+                                      </p>
+                                      <p className="text-[10px] text-gray-500 truncate">
+                                        {subj.desc}
+                                      </p>
+                                    </div>
+                                  </div>
+
+                                  <div className="flex items-center gap-1.5 text-[10px] font-semibold text-gray-400 flex-shrink-0">
+                                    <span className={count > 0 ? "text-gray-300" : "text-gray-600"}>
+                                      {count}
+                                    </span>
+                                    <ChevronRight size={12} className="text-gray-600 group-hover:text-red-400 transition-colors" />
+                                  </div>
+                                </div>
+                              )
+                            })}
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )
               })}
@@ -845,7 +1112,7 @@ export default function LibraryPage() {
             </div>
           </div>
 
-          {/* Actual Documents List */}
+          {/* Actual Documents List with Rich Metadata */}
           {currentFolderFiles.length === 0 ? (
             <div className="py-16 bg-[#0e0e0e] border border-[#1f1f1f] rounded-xl text-center space-y-2">
               <div className="w-10 h-10 rounded-lg bg-[#161616] border border-[#262626] flex items-center justify-center mx-auto text-gray-500">
@@ -864,37 +1131,99 @@ export default function LibraryPage() {
                 const isVid =
                   selectedResourceFolder.key === "videos" ||
                   /\.(mp4|m4a|mov|webm|mp3)$/i.test(file.name)
+                const badge = getFileTypeBadge(file.name, file.mimeType)
+                const eg = engagement[file.id] || { views: 0, likes: 0, userLiked: false }
 
                 return (
                   <div
                     key={file.id}
                     onClick={() => openResource(file, selectedSubject.name)}
-                    className="p-3 bg-[#0e0e0e] hover:bg-[#131313] border border-[#1c1c1c] hover:border-red-600/40 rounded-xl flex items-center justify-between gap-3 transition-colors cursor-pointer group shadow-sm"
+                    className="p-3 sm:p-3.5 bg-[#0e0e0e] hover:bg-[#131313] border border-[#1c1c1c] hover:border-red-600/40 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-colors cursor-pointer group shadow-sm"
                   >
+                    {/* Left: Icon, File Name, Badges & Metadata */}
                     <div className="flex items-center gap-3 min-w-0">
                       <div className="w-8 h-8 rounded-lg bg-[#161616] border border-[#242424] flex items-center justify-center text-red-500 group-hover:scale-105 transition-all flex-shrink-0">
                         {isVid ? <Play size={13} className="fill-current" /> : <FileText size={13} />}
                       </div>
+
                       <div className="min-w-0">
-                        <p className="text-xs font-bold text-white truncate group-hover:text-red-400 transition-colors">
-                          {file.name}
-                        </p>
-                        <div className="flex items-center gap-2 mt-0.5 text-[10px] text-gray-500 truncate">
-                          {file.path && file.path.length > 0 && <span>{file.path.join(" / ")}</span>}
-                          {formatBytes(file.size) && (
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <p className="text-xs sm:text-sm font-bold text-white truncate group-hover:text-red-400 transition-colors">
+                            {file.name}
+                          </p>
+                          <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border uppercase ${badge.color}`}>
+                            {badge.label}
+                          </span>
+                        </div>
+
+                        {/* File Details: Size, Upload Date, Duration, Path */}
+                        <div className="flex items-center gap-2 mt-1 text-[10px] text-gray-500 flex-wrap">
+                          {formatBytes(file.size) && <span>{formatBytes(file.size)}</span>}
+                          {file.formattedDate && (
                             <>
                               <span>·</span>
-                              <span>{formatBytes(file.size)}</span>
+                              <span>Uploaded {file.formattedDate}</span>
+                            </>
+                          )}
+                          {isVid && file.formattedDuration && (
+                            <>
+                              <span>·</span>
+                              <span className="text-red-400 font-medium flex items-center gap-1">
+                                <Clock size={10} /> {file.formattedDuration}
+                              </span>
+                            </>
+                          )}
+                          {file.path && file.path.length > 1 && (
+                            <>
+                              <span>·</span>
+                              <span className="truncate max-w-[200px] text-gray-500">
+                                {file.path.slice(1).join(" / ")}
+                              </span>
                             </>
                           )}
                         </div>
                       </div>
                     </div>
 
-                    <button className="px-3 py-1.5 rounded-lg bg-[#161616] group-hover:bg-red-600 text-gray-300 group-hover:text-white text-[11px] font-semibold transition-colors flex items-center gap-1.5 flex-shrink-0 shadow-sm">
-                      {isVid ? <Play size={10} className="fill-current" /> : <Eye size={11} />}
-                      <span>{isVid ? "Watch" : "Study"}</span>
-                    </button>
+                    {/* Right: Views, Likes, Download & Action Button */}
+                    <div className="flex items-center justify-end gap-2 flex-shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-[#181818]">
+                      {/* Views Count */}
+                      <span className="text-[10px] text-gray-500 flex items-center gap-1 px-1.5 py-1">
+                        <Eye size={12} />
+                        <span>{eg.views}</span>
+                      </span>
+
+                      {/* Interactive Likes Count */}
+                      <button
+                        onClick={e => handleToggleLike(e, file.id)}
+                        title="Like resource"
+                        className={`text-[10px] flex items-center gap-1 px-2 py-1 rounded border transition-colors ${
+                          eg.userLiked
+                            ? "bg-red-500/15 border-red-500/30 text-red-400"
+                            : "bg-[#141414] border-[#222] text-gray-400 hover:text-white"
+                        }`}
+                      >
+                        <Heart size={11} className={eg.userLiked ? "fill-current text-red-500" : ""} />
+                        <span>{eg.likes}</span>
+                      </button>
+
+                      {/* Direct Download Button */}
+                      <a
+                        href={file.downloadUrl}
+                        download={file.name}
+                        onClick={e => e.stopPropagation()}
+                        title="Download file"
+                        className="p-1.5 rounded-lg bg-[#141414] hover:bg-[#1f1f1f] border border-[#242424] text-gray-400 hover:text-white transition-colors"
+                      >
+                        <Download size={13} />
+                      </a>
+
+                      {/* In-App Viewer Action */}
+                      <button className="px-3 py-1.5 rounded-lg bg-[#161616] group-hover:bg-red-600 text-gray-300 group-hover:text-white text-[11px] font-semibold transition-colors flex items-center gap-1.5 flex-shrink-0 shadow-sm">
+                        {isVid ? <Play size={10} className="fill-current" /> : <Eye size={11} />}
+                        <span>{isVid ? "Watch" : "Study"}</span>
+                      </button>
+                    </div>
                   </div>
                 )
               })}

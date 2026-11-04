@@ -6,6 +6,13 @@ interface GoogleDriveRawFile {
   mimeType: string
   size?: string
   webViewLink?: string
+  createdTime?: string
+  modifiedTime?: string
+  videoMediaMetadata?: {
+    durationMillis?: string
+    width?: number
+    height?: number
+  }
 }
 
 export interface LibraryResourceFile {
@@ -15,6 +22,11 @@ export interface LibraryResourceFile {
   size?: string
   driveUrl: string
   embedUrl: string
+  downloadUrl: string
+  createdTime?: string
+  formattedDate?: string
+  durationMs?: number
+  formattedDuration?: string
   category:
     | "textbooks"
     | "revision_documents"
@@ -73,6 +85,33 @@ function extractFolderId(input: string): string {
   return trimmed
 }
 
+// Format duration in minutes / seconds
+function formatDuration(msStr?: string): string | undefined {
+  if (!msStr) return undefined
+  const ms = parseInt(msStr, 10)
+  if (isNaN(ms) || ms <= 0) return undefined
+  const totalSeconds = Math.floor(ms / 1000)
+  const minutes = Math.floor(totalSeconds / 60)
+  const seconds = totalSeconds % 60
+  if (minutes >= 60) {
+    const hours = Math.floor(minutes / 60)
+    const remMins = minutes % 60
+    return `${hours} hr ${remMins} min`
+  }
+  return `${minutes}:${seconds.toString().padStart(2, "0")}`
+}
+
+function formatDate(isoStr?: string): string | undefined {
+  if (!isoStr) return undefined
+  try {
+    const d = new Date(isoStr)
+    if (isNaN(d.getTime())) return undefined
+    return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })
+  } catch {
+    return undefined
+  }
+}
+
 // Fetch all files in a folder handling pagination
 async function fetchFolderFiles(folderId: string, apiKey: string): Promise<GoogleDriveRawFile[]> {
   let allFiles: GoogleDriveRawFile[] = []
@@ -80,7 +119,9 @@ async function fetchFolderFiles(folderId: string, apiKey: string): Promise<Googl
 
   do {
     const q = encodeURIComponent(`'${folderId}' in parents and trashed = false`)
-    const fields = encodeURIComponent("nextPageToken, files(id, name, mimeType, webViewLink, size)")
+    const fields = encodeURIComponent(
+      "nextPageToken, files(id, name, mimeType, webViewLink, size, createdTime, modifiedTime, videoMediaMetadata)"
+    )
     let url = `https://www.googleapis.com/drive/v3/files?q=${q}&fields=${fields}&pageSize=1000&key=${encodeURIComponent(apiKey)}`
     if (pageToken) url += `&pageToken=${encodeURIComponent(pageToken)}`
 
@@ -288,6 +329,10 @@ export async function GET(req: NextRequest) {
 
           rawFiles.forEach(f => {
             const cat = categorizeFile(f.name, f.mimeType, f.path, f.size)
+            const durationMs = f.videoMediaMetadata?.durationMillis
+              ? parseInt(f.videoMediaMetadata.durationMillis, 10)
+              : undefined
+
             resources[cat].push({
               id: f.id,
               name: f.name,
@@ -295,6 +340,11 @@ export async function GET(req: NextRequest) {
               size: f.size,
               driveUrl: f.webViewLink || `https://drive.google.com/file/d/${f.id}/view`,
               embedUrl: `https://drive.google.com/file/d/${f.id}/preview`,
+              downloadUrl: `/api/library/download?fileId=${f.id}&fileName=${encodeURIComponent(f.name)}`,
+              createdTime: f.createdTime,
+              formattedDate: formatDate(f.createdTime || f.modifiedTime),
+              durationMs,
+              formattedDuration: formatDuration(f.videoMediaMetadata?.durationMillis),
               category: cat,
               path: f.path,
             })

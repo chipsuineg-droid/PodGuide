@@ -148,6 +148,17 @@ export function StudyMaterialViewer({ material, onClose }: StudyMaterialViewerPr
     }
   }, [])
 
+  // Auto-record view for resource engagement
+  useEffect(() => {
+    if (material?.id) {
+      fetch("/api/library/engagement", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fileId: material.id, action: "view" }),
+      }).catch(() => {})
+    }
+  }, [material?.id])
+
   // Load notes from localStorage for this specific material
   useEffect(() => {
     if (!material?.id) return
@@ -311,6 +322,18 @@ export function StudyMaterialViewer({ material, onClose }: StudyMaterialViewerPr
             >
               {isTrueFullscreen ? <Shrink size={15} /> : <Expand size={15} />}
             </button>
+
+            {/* Direct Download Button */}
+            {material.id && (
+              <a
+                href={`/api/library/download?fileId=${material.id}&fileName=${encodeURIComponent(material.title)}`}
+                download={material.title}
+                title="Download resource"
+                className="p-1.5 bg-[#181818] hover:bg-[#222] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-lg transition-colors flex items-center justify-center"
+              >
+                <Download size={15} />
+              </a>
+            )}
 
             {/* External Link */}
             {material.file_url && (
