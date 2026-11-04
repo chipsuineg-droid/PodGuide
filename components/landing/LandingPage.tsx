@@ -731,65 +731,47 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
             <a href="#programs" className="hover:text-white transition-colors duration-150">Disciplines</a>
             <a href="#story" className="hover:text-white transition-colors duration-150">Our Story</a>
             <a href="#partners" className="hover:text-white transition-colors duration-150">Our Partners</a>
+            <a href="#contact" className="hover:text-white transition-colors duration-150">Contact</a>
 
-            {/* Prominent Legal & Policies Dropdown */}
+            {/* Legal & Policies (Placed last after Contact, clean text without red icon) */}
             <div className="relative group/legal">
               <button
                 type="button"
-                className="flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors duration-150 py-1"
+                className="flex items-center gap-1 hover:text-white transition-colors duration-150 py-1"
               >
-                <Scale size={13} className="text-red-500" />
                 <span>Legal & Policies</span>
                 <ChevronDown size={11} className="text-gray-500 group-hover/legal:text-white group-hover/legal:rotate-180 transition-transform duration-150" />
               </button>
 
               {/* Hover Menu */}
-              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 hidden group-hover/legal:block z-50">
-                <div className="w-64 p-2 bg-[#0c0c0e] border border-[#222226] rounded-xl shadow-2xl backdrop-blur-lg space-y-1">
+              <div className="absolute top-full right-0 pt-2 hidden group-hover/legal:block z-50">
+                <div className="w-60 p-2 bg-[#0c0c0e] border border-[#222226] rounded-xl shadow-2xl backdrop-blur-lg space-y-1">
                   <Link
                     href="/terms"
-                    className="flex items-start gap-2.5 p-2 rounded-lg hover:bg-[#16161a] transition-colors group/item"
+                    className="block p-2 rounded-lg hover:bg-[#16161a] transition-colors group/item"
                   >
-                    <Scale size={14} className="text-red-500 shrink-0 mt-0.5" />
-                    <div className="text-left">
-                      <p className="text-xs font-bold text-white group-hover/item:text-red-400 transition-colors">
-                        Terms and Conditions
-                      </p>
-                      <p className="text-[10px] text-gray-400 leading-tight mt-0.5">
-                        Statutory terms, acceptable use & educational disclaimers
-                      </p>
-                    </div>
+                    <p className="text-xs font-bold text-white group-hover/item:text-red-400 transition-colors">
+                      Terms and Conditions
+                    </p>
+                    <p className="text-[10px] text-gray-400 leading-tight mt-0.5">
+                      Statutory terms, acceptable use & educational disclaimers
+                    </p>
                   </Link>
 
                   <Link
                     href="/privacy"
-                    className="flex items-start gap-2.5 p-2 rounded-lg hover:bg-[#16161a] transition-colors group/item"
+                    className="block p-2 rounded-lg hover:bg-[#16161a] transition-colors group/item"
                   >
-                    <ShieldCheck size={14} className="text-red-500 shrink-0 mt-0.5" />
-                    <div className="text-left">
-                      <p className="text-xs font-bold text-white group-hover/item:text-red-400 transition-colors">
-                        Privacy Policy
-                      </p>
-                      <p className="text-[10px] text-gray-400 leading-tight mt-0.5">
-                        Data protection, privacy rights & security measures
-                      </p>
-                    </div>
+                    <p className="text-xs font-bold text-white group-hover/item:text-red-400 transition-colors">
+                      Privacy Policy
+                    </p>
+                    <p className="text-[10px] text-gray-400 leading-tight mt-0.5">
+                      Data protection, privacy rights & security measures
+                    </p>
                   </Link>
-
-                  <div className="border-t border-[#1a1a1f] pt-1.5 mt-1 px-2 pb-1">
-                    <Link
-                      href="/terms#disclaimer"
-                      className="text-[10px] font-medium text-gray-400 hover:text-red-400 flex items-center justify-between"
-                    >
-                      <span>Mandatory Clinical Disclaimer</span>
-                      <span>&rarr;</span>
-                    </Link>
-                  </div>
                 </div>
               </div>
             </div>
-
-            <a href="#contact" className="hover:text-white transition-colors duration-150">Contact</a>
           </div>
 
           {/* Right Action Buttons */}
@@ -798,9 +780,8 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
             <Link
               href="/terms"
               title="View Legal and Policies"
-              className="lg:hidden flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-[#222] bg-[#0c0c0e] hover:bg-[#141417] text-gray-300 hover:text-white text-xs font-medium transition-colors"
+              className="lg:hidden flex items-center px-2.5 py-1.5 rounded-lg border border-[#222] bg-[#0c0c0e] hover:bg-[#141417] text-gray-300 hover:text-white text-xs font-medium transition-colors"
             >
-              <Scale size={12} className="text-red-500" />
               <span>Legal</span>
             </Link>
 
@@ -861,9 +842,8 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
 
             {/* Mobile Legal and Policies Section */}
             <div className="p-3 rounded-xl bg-[#0e0e12] border border-[#24242a] space-y-2">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-white uppercase tracking-wider">
-                <Scale size={13} className="text-red-500" />
-                <span>Legal & Governance</span>
+              <div className="text-xs font-bold text-white uppercase tracking-wider">
+                Legal & Governance
               </div>
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <Link
