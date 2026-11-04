@@ -4,1649 +4,606 @@ import { useEffect, useState, useMemo } from "react"
 import { createClient } from "@/lib/supabase/client"
 import {
   Search,
-  ExternalLink,
-  Eye,
-  X,
-  Check,
   Folder,
-  ChevronDown,
   ChevronRight,
-  Settings,
-  Clock,
-  ShieldCheck,
-  RotateCcw,
-  Stethoscope,
-  Baby,
-  Scissors,
-  HeartPulse,
-  Building2,
-  Brain,
-  Pill,
-  Bone,
-  Activity,
-  Microscope,
-  Droplets,
-  FlaskConical,
-  Bug,
-  Shield,
-  Compass,
-  Dna,
-  Scale,
-  PawPrint,
-  HeartHandshake,
-  Play,
+  BookOpen,
   Video,
   FileText,
-  Plus,
-  BookOpen,
-  HardDrive,
-  Sparkles,
-  Maximize2,
-  LucideIcon,
+  FileSpreadsheet,
+  Clock,
+  HelpCircle,
+  Presentation,
+  Newspaper,
+  ArrowLeft,
   Loader2,
+  Sparkles,
+  Download,
+  Eye,
+  Play,
+  RotateCcw,
+  CheckCircle2,
+  Filter,
+  X,
+  FileUp,
 } from "lucide-react"
 import { toast } from "sonner"
 import { StudyMaterialViewer, StudyMaterial } from "@/components/library/StudyMaterialViewer"
+import { LibraryResourceFile, SubjectLibraryData } from "@/app/api/library/drive-files/route"
 
-export interface LibraryFolderItem {
-  id: string
-  name: string
-  iconName: string
-  description: string
-  programme: string
-  level?: string
-  itemCount: number
-  driveUrl?: string
-  folderId?: string
+// ── Types ──
+export type ResourceCategoryKey =
+  | "textbooks"
+  | "revision_documents"
+  | "past_papers"
+  | "notes"
+  | "journals"
+  | "slides"
+  | "videos"
+  | "practice_questions"
+
+interface CategoryDef {
+  key: ResourceCategoryKey
+  title: string
+  subtitle: string
+  icon: any
+  colorClass: string
+  bgClass: string
 }
 
-export interface ProgrammeShelfGroup {
-  id: string
-  name: string
-  programmeKey: string
-  folders: LibraryFolderItem[]
-}
-
-const ICON_MAP: Record<string, LucideIcon> = {
-  Stethoscope,
-  Baby,
-  Scissors,
-  HeartPulse,
-  Building2,
-  Brain,
-  Pill,
-  Bone,
-  Activity,
-  Microscope,
-  Droplets,
-  FlaskConical,
-  Bug,
-  Shield,
-  Compass,
-  Dna,
-  Scale,
-  PawPrint,
-  HeartHandshake,
-  Folder,
-}
-
-function FolderIcon({
-  name,
-  size = 13,
-  className = "",
-}: {
-  name: string
-  size?: number
-  className?: string
-}) {
-  const IconComponent = ICON_MAP[name] || Folder
-  return <IconComponent size={size} className={className} />
-}
-
-const INITIAL_PROGRAMME_SHELVES: ProgrammeShelfGroup[] = [
-  // ── 1. Biomedical Sciences / MBChB / MBBS ──
+const RESOURCE_CATEGORIES: CategoryDef[] = [
   {
-    id: "biomedical-medicine",
-    name: "Biomedical Sciences / MBChB / MBBS",
-    programmeKey: "Biomedical Sciences / MBChB / MBBS",
-    folders: [
-      {
-        id: "bms-internal-med",
-        name: "Internal Medicine",
-        iconName: "Stethoscope",
-        description: "Cardiology, pulmonology, gastroenterology, nephrology and acute medical admissions.",
-        programme: "Biomedical Sciences / MBChB / MBBS",
-        itemCount: 0,
-      },
-      {
-        id: "bms-paediatrics",
-        name: "Paediatrics",
-        iconName: "Baby",
-        description: "Neonatal care, developmental milestones, childhood infections and pediatric resuscitation.",
-        programme: "Biomedical Sciences / MBChB / MBBS",
-        itemCount: 0,
-      },
-      {
-        id: "bms-surgery",
-        name: "Surgery",
-        iconName: "Scissors",
-        description: "General operative surgery, acute abdomen algorithms, trauma resuscitation and post-op care.",
-        programme: "Biomedical Sciences / MBChB / MBBS",
-        itemCount: 0,
-      },
-      {
-        id: "bms-obs-gyn",
-        name: "Obstetrics and Gynaecology",
-        iconName: "HeartPulse",
-        description: "Antenatal bookings, partograms, obstetric emergencies, pelvic masses and contraception.",
-        programme: "Biomedical Sciences / MBChB / MBBS",
-        itemCount: 0,
-      },
-      {
-        id: "bms-community-med",
-        name: "Community Medicine",
-        iconName: "Building2",
-        description: "District health administration, disease outbreak control, maternal programs and sanitation.",
-        programme: "Biomedical Sciences / MBChB / MBBS",
-        itemCount: 0,
-      },
-      {
-        id: "bms-psychiatry",
-        name: "Psychiatry",
-        iconName: "Brain",
-        description: "Mental state examinations, mood disorders, psychosis, substance use and emergencies.",
-        programme: "Biomedical Sciences / MBChB / MBBS",
-        itemCount: 0,
-      },
-      {
-        id: "bms-pharmacology",
-        name: "Pharmacology",
-        iconName: "Pill",
-        description: "Pharmacokinetics, pharmacodynamics, autonomic agents, drug interactions and therapeutics.",
-        programme: "Biomedical Sciences / MBChB / MBBS",
-        itemCount: 0,
-      },
-      {
-        id: "bms-anatomy",
-        name: "Anatomy",
-        iconName: "Bone",
-        description: "Gross regional anatomy, cadaveric dissections, osteology, viscera and neuroanatomy.",
-        programme: "Biomedical Sciences / MBChB / MBBS",
-        itemCount: 0,
-      },
-      {
-        id: "bms-physiology",
-        name: "Physiology",
-        iconName: "Activity",
-        description: "Membrane transport, cardiac output, respiratory mechanics, nephron dynamics and reflexes.",
-        programme: "Biomedical Sciences / MBChB / MBBS",
-        itemCount: 0,
-      },
-      {
-        id: "bms-histopathology",
-        name: "Histopathology",
-        iconName: "Microscope",
-        description: "Surgical tissue biopsy evaluation, cellular injury, inflammation, dysplasia and neoplasia.",
-        programme: "Biomedical Sciences / MBChB / MBBS",
-        itemCount: 0,
-      },
-      {
-        id: "bms-haematology",
-        name: "Haematology",
-        iconName: "Droplets",
-        description: "Blood film morphology, anaemia classifications, leukaemia, coagulation and transfusion.",
-        programme: "Biomedical Sciences / MBChB / MBBS",
-        itemCount: 0,
-      },
-      {
-        id: "bms-chemical-path",
-        name: "Chemical Pathology",
-        iconName: "FlaskConical",
-        description: "Electrolytes, arterial blood gases, liver and renal profiles, cardiac biomarkers and assays.",
-        programme: "Biomedical Sciences / MBChB / MBBS",
-        itemCount: 0,
-      },
-      {
-        id: "bms-microbiology",
-        name: "Medical Microbiology",
-        iconName: "Bug",
-        description: "Bacterial classification, viral replication, fungal pathogens and antimicrobial susceptibility.",
-        programme: "Biomedical Sciences / MBChB / MBBS",
-        itemCount: 0,
-      },
-      {
-        id: "bms-immunology",
-        name: "Immunology",
-        iconName: "Shield",
-        description: "Innate and adaptive immunity, MHC presentation, hypersensitivity reactions and autoimmunity.",
-        programme: "Biomedical Sciences / MBChB / MBBS",
-        itemCount: 0,
-      },
-      {
-        id: "bms-behavioural",
-        name: "Behavioural Sciences",
-        iconName: "Compass",
-        description: "Doctor-patient communication, medical sociology, clinical psychology and health habits.",
-        programme: "Biomedical Sciences / MBChB / MBBS",
-        itemCount: 0,
-      },
-      {
-        id: "bms-genetics",
-        name: "Medical Genetics",
-        iconName: "Dna",
-        description: "Patterns of inheritance, karyotyping, chromosomal abnormalities and clinical pedigrees.",
-        programme: "Biomedical Sciences / MBChB / MBBS",
-        itemCount: 0,
-      },
-      {
-        id: "bms-forensic",
-        name: "Forensic Medicine",
-        iconName: "Scale",
-        description: "Post-mortem examination, mechanical wounds, forensic toxicology and medical jurisprudence.",
-        programme: "Biomedical Sciences / MBChB / MBBS",
-        itemCount: 0,
-      },
-    ],
+    key: "textbooks",
+    title: "Textbooks",
+    subtitle: "Core reference books",
+    icon: BookOpen,
+    colorClass: "text-emerald-500",
+    bgClass: "bg-emerald-500/10 border-emerald-500/20",
   },
-
-  // ── 2. Pharmacy (Exact 8 Folders) ──
   {
-    id: "pharmacy",
-    name: "Pharmacy",
-    programmeKey: "Pharmacy",
-    folders: [
-      {
-        id: "pharm-1-1",
-        name: "Pharmacy 1.1",
-        iconName: "Pill",
-        description: "Pharmaceutical chemistry, cellular biology, organic reactions and calculations.",
-        programme: "Pharmacy",
-        itemCount: 0,
-      },
-      {
-        id: "pharm-1-2",
-        name: "Pharmacy 1.2",
-        iconName: "Pill",
-        description: "Physiology for pharmacy, physical pharmaceutics and pharmaceutical analysis.",
-        programme: "Pharmacy",
-        itemCount: 0,
-      },
-      {
-        id: "pharm-2-1",
-        name: "Pharmacy 2.1",
-        iconName: "Pill",
-        description: "General pharmacology, pharmaceutical microbiology and solid dosage formulation.",
-        programme: "Pharmacy",
-        itemCount: 0,
-      },
-      {
-        id: "pharm-2-2",
-        name: "Pharmacy 2.2",
-        iconName: "Pill",
-        description: "Biopharmaceutics, pharmacokinetics, medicinal chemistry and drug distribution.",
-        programme: "Pharmacy",
-        itemCount: 0,
-      },
-      {
-        id: "pharm-3-1",
-        name: "Pharmacy 3.1",
-        iconName: "Pill",
-        description: "Clinical pharmacokinetics, sterile manufacturing, antibiotics and pharmacotherapy.",
-        programme: "Pharmacy",
-        itemCount: 0,
-      },
-      {
-        id: "pharm-3-2",
-        name: "Pharmacy 3.2",
-        iconName: "Pill",
-        description: "Hospital pharmacy practice, disease-directed pharmacotherapy and patient counselling.",
-        programme: "Pharmacy",
-        itemCount: 0,
-      },
-      {
-        id: "pharm-4-1",
-        name: "Pharmacy 4.1",
-        iconName: "Pill",
-        description: "Advanced therapeutics, clinical toxicology, drug surveillance and biotechnology.",
-        programme: "Pharmacy",
-        itemCount: 0,
-      },
-      {
-        id: "pharm-4-4",
-        name: "Pharmacy 4.4",
-        iconName: "Pill",
-        description: "Pharmacy law and ethics, healthcare supply chain and clinical research project.",
-        programme: "Pharmacy",
-        itemCount: 0,
-      },
-    ],
+    key: "revision_documents",
+    title: "Revision documents",
+    subtitle: "Summaries & cheat sheets",
+    icon: FileSpreadsheet,
+    colorClass: "text-blue-500",
+    bgClass: "bg-blue-500/10 border-blue-500/20",
   },
-
-  // ── 3. Veterinary Sciences ──
   {
-    id: "veterinary-sciences",
-    name: "Veterinary Sciences",
-    programmeKey: "Veterinary Sciences",
-    folders: [
-      {
-        id: "vet-anatomy",
-        name: "Veterinary Anatomy",
-        iconName: "PawPrint",
-        description: "Comparative animal osteology, myology, arthrology and neuroanatomy.",
-        programme: "Veterinary Sciences",
-        itemCount: 0,
-      },
-      {
-        id: "vet-physiology",
-        name: "Veterinary Physiology",
-        iconName: "Activity",
-        description: "Animal digestion, rumen mechanics, cardiovascular dynamics and endocrinology.",
-        programme: "Veterinary Sciences",
-        itemCount: 0,
-      },
-      {
-        id: "vet-pathology",
-        name: "Veterinary Pathology",
-        iconName: "Microscope",
-        description: "Gross necropsy, histopathological animal lesions and systemic diseases.",
-        programme: "Veterinary Sciences",
-        itemCount: 0,
-      },
-      {
-        id: "vet-medicine",
-        name: "Veterinary Medicine",
-        iconName: "Stethoscope",
-        description: "Small and large animal clinical medicine, herd diagnostics and zoonoses.",
-        programme: "Veterinary Sciences",
-        itemCount: 0,
-      },
-      {
-        id: "vet-surgery",
-        name: "Veterinary Surgery",
-        iconName: "Scissors",
-        description: "Aseptic technique, soft-tissue surgery, orthopaedics and animal anaesthesia.",
-        programme: "Veterinary Sciences",
-        itemCount: 0,
-      },
-      {
-        id: "vet-pharmacology",
-        name: "Veterinary Pharmacology",
-        iconName: "Pill",
-        description: "Veterinary therapeutics, dosage regimens, withdrawal periods and toxicology.",
-        programme: "Veterinary Sciences",
-        itemCount: 0,
-      },
-    ],
+    key: "past_papers",
+    title: "Past papers",
+    subtitle: "Previous exams",
+    icon: Clock,
+    colorClass: "text-amber-500",
+    bgClass: "bg-amber-500/10 border-amber-500/20",
   },
-
-  // ── 4. Nursing ──
   {
-    id: "nursing",
-    name: "Nursing",
-    programmeKey: "Nursing",
-    folders: [
-      {
-        id: "nurs-fundamentals",
-        name: "Fundamentals of Nursing",
-        iconName: "HeartHandshake",
-        description: "Systematic nursing process, vital signs, bed-side ethics, infection control and wound care.",
-        programme: "Nursing",
-        itemCount: 0,
-      },
-      {
-        id: "nurs-med-surg",
-        name: "Medical-Surgical Nursing",
-        iconName: "Activity",
-        description: "Adult inpatient care, perioperative management, cardiac monitoring and post-op nursing.",
-        programme: "Nursing",
-        itemCount: 0,
-      },
-      {
-        id: "nurs-paediatric",
-        name: "Paediatric Nursing",
-        iconName: "Baby",
-        description: "Neonatal nursing care, IMCI guidelines, pediatric medications and growth monitoring.",
-        programme: "Nursing",
-        itemCount: 0,
-      },
-      {
-        id: "nurs-midwifery",
-        name: "Midwifery",
-        iconName: "HeartPulse",
-        description: "Antenatal nursing support, intrapartum labor stages and newborn resuscitation.",
-        programme: "Nursing",
-        itemCount: 0,
-      },
-      {
-        id: "nurs-community",
-        name: "Community Health Nursing",
-        iconName: "Building2",
-        description: "Primary healthcare clinics, immunization schedules, home visits and rural outreach.",
-        programme: "Nursing",
-        itemCount: 0,
-      },
-      {
-        id: "nurs-mental-health",
-        name: "Mental Health Nursing",
-        iconName: "Brain",
-        description: "Therapeutic relationships, psychiatric ward interventions and crisis de-escalation.",
-        programme: "Nursing",
-        itemCount: 0,
-      },
-    ],
+    key: "notes",
+    title: "Notes",
+    subtitle: "Lecture & study notes",
+    icon: FileText,
+    colorClass: "text-purple-500",
+    bgClass: "bg-purple-500/10 border-purple-500/20",
+  },
+  {
+    key: "journals",
+    title: "Journals",
+    subtitle: "Articles & papers",
+    icon: Newspaper,
+    colorClass: "text-red-500",
+    bgClass: "bg-red-500/10 border-red-500/20",
+  },
+  {
+    key: "slides",
+    title: "Slides",
+    subtitle: "Presentations",
+    icon: Presentation,
+    colorClass: "text-orange-500",
+    bgClass: "bg-orange-500/10 border-orange-500/20",
+  },
+  {
+    key: "videos",
+    title: "Videos",
+    subtitle: "Recorded lectures",
+    icon: Video,
+    colorClass: "text-teal-500",
+    bgClass: "bg-teal-500/10 border-teal-500/20",
+  },
+  {
+    key: "practice_questions",
+    title: "Practice questions",
+    subtitle: "MCQs & question banks",
+    icon: HelpCircle,
+    colorClass: "text-pink-500",
+    bgClass: "bg-pink-500/10 border-pink-500/20",
   },
 ]
 
+interface ShelfItem {
+  key: string
+  name: string
+  emoji: string
+  color: string
+}
+
+const DEFAULT_SHELVES: ShelfItem[] = [
+  { key: "INTERNAL MEDICINE", name: "Internal Medicine", emoji: "🫀", color: "from-red-500/20 to-rose-500/5" },
+  { key: "PAEDIATRICS", name: "Paediatrics", emoji: "👶", color: "from-amber-500/20 to-yellow-500/5" },
+  { key: "SURGERY", name: "Surgery", emoji: "🔪", color: "from-indigo-500/20 to-blue-500/5" },
+  { key: "OBSTETRICS & GYNECOLOGY", name: "Obstetrics & Gynecology", emoji: "🤰", color: "from-purple-500/20 to-pink-500/5" },
+  { key: "DERMATOLOGY", name: "Dermatology", emoji: "💊", color: "from-sky-500/20 to-cyan-500/5" },
+  { key: "COMMUNITY MEDICINE", name: "Community Medicine", emoji: "🏥", color: "from-emerald-500/20 to-teal-500/5" },
+  { key: "BEHAVIORAL SCIENCE", name: "Psychiatry & Behavioral Science", emoji: "🧠", color: "from-pink-500/20 to-rose-500/5" },
+  { key: "PHARMACOLOGY", name: "Pharmacology", emoji: "💊", color: "from-red-500/20 to-amber-500/5" },
+  { key: "ANATOMY", name: "Anatomy", emoji: "🦴", color: "from-slate-500/20 to-zinc-500/5" },
+  { key: "PHYSIOLOGY", name: "Physiology", emoji: "⚡", color: "from-amber-500/20 to-orange-500/5" },
+  { key: "HISTOPATHOLOGY", name: "Histopathology", emoji: "🔬", color: "from-teal-500/20 to-emerald-500/5" },
+  { key: "HISTOLOGY", name: "Histology", emoji: "🧬", color: "from-cyan-500/20 to-sky-500/5" },
+  { key: "EMBROLOGY", name: "Embryology", emoji: "🌱", color: "from-emerald-500/20 to-lime-500/5" },
+  { key: "BIOCHEMISTRY", name: "Biochemistry", emoji: "🧪", color: "from-violet-500/20 to-purple-500/5" },
+  { key: "BIOPHYSICS", name: "Biophysics", emoji: "⚛️", color: "from-blue-500/20 to-indigo-500/5" },
+  { key: "INFECTIOUS DISEASE", name: "Infectious Disease", emoji: "🦠", color: "from-yellow-500/20 to-amber-500/5" },
+  { key: "COMMUNICATION SKILLS", name: "Communication Skills", emoji: "💬", color: "from-blue-500/20 to-cyan-500/5" },
+  { key: "SIGN LANGUAGE", name: "Sign Language", emoji: "🤲", color: "from-rose-500/20 to-pink-500/5" },
+  { key: "ROBOTICS", name: "Robotics", emoji: "🤖", color: "from-slate-500/20 to-gray-500/5" },
+  { key: "MED MICROBIOLOGY", name: "Medical Microbiology", emoji: "🧫", color: "from-teal-500/20 to-green-500/5" },
+  { key: "IMMUNOLOGY", name: "Immunology", emoji: "🛡️", color: "from-indigo-500/20 to-violet-500/5" },
+  { key: "HEAMATOLOGY", name: "Haematology", emoji: "🩸", color: "from-red-500/20 to-crimson-500/5" },
+  { key: "CHEMICAL PATHOLOGY", name: "Chemical Pathology", emoji: "🧪", color: "from-purple-500/20 to-indigo-500/5" },
+]
+
+function formatBytes(bytesStr?: string): string {
+  if (!bytesStr) return ""
+  const b = parseInt(bytesStr, 10)
+  if (isNaN(b) || b <= 0) return ""
+  if (b < 1024) return `${b} B`
+  if (b < 1024 * 1024) return `${(b / 1024).toFixed(1)} KB`
+  return `${(b / (1024 * 1024)).toFixed(1)} MB`
+}
+
 export default function LibraryPage() {
   const supabase = createClient()
-  const [shelves, setShelves] = useState<ProgrammeShelfGroup[]>(INITIAL_PROGRAMME_SHELVES)
-  const [search, setSearch] = useState("")
-  const [selectedFolder, setSelectedFolder] = useState<LibraryFolderItem | null>(null)
-  const [editingFolder, setEditingFolder] = useState<LibraryFolderItem | null>(null)
-  const [driveUrlInput, setDriveUrlInput] = useState("")
-  const [itemCountInput, setItemCountInput] = useState<number | string>("")
-  const [user, setUser] = useState<any>(null)
-  const [isAdmin, setIsAdmin] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [libraryData, setLibraryData] = useState<Record<string, SubjectLibraryData>>({})
+  const [totalFilesCount, setTotalFilesCount] = useState(0)
 
-  // Collapsed state map: { [shelfId]: boolean }
-  const [collapsedShelves, setCollapsedShelves] = useState<Record<string, boolean>>({})
+  // Navigation states: null = shelf grid; string = active shelf name
+  const [activeShelf, setActiveShelf] = useState<ShelfItem | null>(null)
+  const [activeCategory, setActiveCategory] = useState<ResourceCategoryKey | null>(null)
 
-  // Study Viewer & Materials State
+  // Search states
+  const [searchQuery, setSearchQuery] = useState("")
+  const [categorySearch, setCategorySearch] = useState("")
+
+  // Active in-app viewer material
   const [activeViewerMaterial, setActiveViewerMaterial] = useState<StudyMaterial | null>(null)
-  const [folderMaterials, setFolderMaterials] = useState<StudyMaterial[]>([])
-  const [loadingMaterials, setLoadingMaterials] = useState(false)
-  const [activeFolderTab, setActiveFolderTab] = useState<"materials" | "drive_browser">("materials")
 
-  // Quick Play URL launcher state
-  const [quickPlayUrl, setQuickPlayUrl] = useState("")
+  // Admin sync trigger
+  const [isSyncing, setIsSyncing] = useState(false)
 
-  // Admin add material to folder state
-  const [isAddingMaterial, setIsAddingMaterial] = useState(false)
-  const [newMatTitle, setNewMatTitle] = useState("")
-  const [newMatUrl, setNewMatUrl] = useState("")
-  const [newMatType, setNewMatType] = useState<"video" | "pdf" | "document" | "drive">("video")
-  const [newMatDesc, setNewMatDesc] = useState("")
-  const [savingNewMat, setSavingNewMat] = useState(false)
-
-  // Master Google Drive Auto-Sync State (Option 1)
-  const [masterSyncModalOpen, setMasterSyncModalOpen] = useState(false)
-  const [masterDriveUrl, setMasterDriveUrl] = useState("")
-  const [masterApiKey, setMasterApiKey] = useState("")
-  const [isSyncingMaster, setIsSyncingMaster] = useState(false)
-
-  // Fetch verified materials for the selected folder
-  useEffect(() => {
-    if (!selectedFolder) {
-      setFolderMaterials([])
-      setIsAddingMaterial(false)
-      return
-    }
-
-    const fetchMaterialsForFolder = async () => {
-      setLoadingMaterials(true)
-      try {
-        const { data, error } = await supabase
-          .from("materials")
-          .select("*")
-          .or(`subject.eq."${selectedFolder.name}",subject.ilike."%${selectedFolder.name}%"`)
-          .order("created_at", { ascending: false })
-
-        if (!error && data) {
-          setFolderMaterials(data)
-        } else {
-          setFolderMaterials([])
-        }
-      } catch (err) {
-        console.warn("Notice: folder materials fetch error:", err)
-        setFolderMaterials([])
-      } finally {
-        setLoadingMaterials(false)
-      }
-    }
-
-    fetchMaterialsForFolder()
-  }, [selectedFolder?.id, selectedFolder?.name])
-
-  useEffect(() => {
-    // 1. Load collapsed shelves from localStorage
+  // ── Load Drive Files ──
+  const fetchLibrary = async (forceRefresh = false) => {
     try {
-      const storedCollapsed = localStorage.getItem("podguide_library_collapsed_shelves")
-      if (storedCollapsed) {
-        setCollapsedShelves(JSON.parse(storedCollapsed))
+      setLoading(true)
+      const res = await fetch(`/api/library/drive-files${forceRefresh ? "?refresh=true" : ""}`)
+      const data = await res.json()
+      if (res.ok && data.subjects) {
+        setLibraryData(data.subjects)
+        setTotalFilesCount(data.totalFiles || 0)
+      } else {
+        console.warn("Drive files API notice:", data.error)
       }
-    } catch {}
-
-    // 2. Load connected folder links from Supabase database (Admin curated)
-    const init = async () => {
-      const { data: authData } = await supabase.auth.getUser()
-      if (authData?.user) {
-        setUser(authData.user)
-        // Check if user is an admin
-        const { data: profile } = await supabase
-          .from("student_profiles")
-          .select("is_admin")
-          .eq("user_id", authData.user.id)
-          .maybeSingle()
-
-        const isUserAdmin = !!profile?.is_admin || authData.user.email === "admin@podguide.com"
-        setIsAdmin(isUserAdmin)
-      }
-
-      try {
-        // Fetch official curated folders from auto-sync API or database
-        const driveApiRes = await fetch("/api/library/sync-drive")
-          .then(r => (r.ok ? r.json() : null))
-          .catch(() => null)
-
-        let foldersToMap: any[] = []
-        if (driveApiRes?.folders && driveApiRes.folders.length > 0) {
-          foldersToMap = driveApiRes.folders
-        } else {
-          const { data: dbFolders } = await supabase
-            .from("curated_drive_folders")
-            .select("*")
-          if (dbFolders) foldersToMap = dbFolders
-        }
-
-        if (foldersToMap.length > 0) {
-          setShelves(prevShelves =>
-            prevShelves.map(group => ({
-              ...group,
-              folders: group.folders.map(f => {
-                const fName = f.name.toLowerCase().trim()
-                const match = foldersToMap.find((df: any) => {
-                  const dfName = (df.name || df.title || "").toLowerCase().trim()
-                  const dfCat = (df.category || "").toLowerCase().trim()
-                  return (
-                    dfName === fName ||
-                    dfCat === fName ||
-                    dfName.includes(fName) ||
-                    fName.includes(dfName) ||
-                    df.id === f.id
-                  )
-                })
-                if (match) {
-                  return {
-                    ...f,
-                    driveUrl: match.driveUrl || match.drive_url,
-                    folderId:
-                      match.id ||
-                      match.folder_id ||
-                      extractFolderId(match.driveUrl || match.drive_url || ""),
-                    itemCount:
-                      match.itemCount ??
-                      match.item_count ??
-                      f.itemCount ??
-                      0,
-                  }
-                }
-                return f
-              }),
-            }))
-          )
-        }
-      } catch (err) {
-        console.warn("Notice: Curated drive folders fetch error:", err)
-      }
+    } catch (err: any) {
+      console.error("Fetch library error:", err)
+      toast.error("Could not load library from Google Drive.")
+    } finally {
+      setLoading(false)
     }
+  }
 
-    init()
+  useEffect(() => {
+    fetchLibrary()
   }, [])
 
-  const toggleShelf = (shelfId: string) => {
-    setCollapsedShelves(prev => {
-      const next = { ...prev, [shelfId]: !prev[shelfId] }
-      try {
-        localStorage.setItem("podguide_library_collapsed_shelves", JSON.stringify(next))
-      } catch {}
-      return next
-    })
+  const handleRefresh = async () => {
+    setIsSyncing(true)
+    await fetchLibrary(true)
+    setIsSyncing(false)
+    toast.success("Synchronised full Google Drive repository!")
   }
 
-  const extractFolderId = (url: string) => {
-    const trimmed = url.trim()
-    const folderMatch = trimmed.match(/folders\/([a-zA-Z0-9_-]+)/)
-    if (folderMatch) return folderMatch[1]
-    const idMatch = trimmed.match(/[?&]id=([a-zA-Z0-9_-]+)/)
-    if (idMatch) return idMatch[1]
-    const fileMatch = trimmed.match(/file\/d\/([a-zA-Z0-9_-]+)/)
-    if (fileMatch) return fileMatch[1]
-    return trimmed
-  }
+  // ── Helper to find Drive data for a shelf ──
+  const getSubjectData = (shelf: ShelfItem): SubjectLibraryData | null => {
+    const direct = libraryData[shelf.key]
+    if (direct) return direct
 
-  // Admin-only: Auto-discover all shelf folders from one Master Google Drive folder
-  const handleMasterDriveSync = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!isAdmin) {
-      toast.error("Only administrators can run library synchronization.")
-      return
-    }
-    if (!masterDriveUrl.trim()) {
-      toast.error("Please enter your Master Google Drive folder link or ID.")
-      return
-    }
-
-    setIsSyncingMaster(true)
-    try {
-      const res = await fetch("/api/library/sync-drive", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          rootFolderId: masterDriveUrl.trim(),
-          apiKey: masterApiKey.trim() || undefined,
-        }),
-      })
-
-      const data = await res.json()
-      if (!res.ok) {
-        throw new Error(data.error || "Failed to sync with Google Drive")
+    // Fuzzy fallback match
+    const shelfWords = shelf.name.toLowerCase().split(/\s+/)
+    for (const [k, v] of Object.entries(libraryData)) {
+      const lowerK = k.toLowerCase()
+      if (shelfWords.some(w => w.length > 3 && lowerK.includes(w))) {
+        return v
       }
-
-      if (data.folders && data.folders.length > 0) {
-        // Map discovered subfolders onto shelves by matching folder name to subject shelf name
-        setShelves(prevShelves =>
-          prevShelves.map(group => ({
-            ...group,
-            folders: group.folders.map(f => {
-              const match = data.folders.find(
-                (df: any) =>
-                  df.name.toLowerCase().trim() === f.name.toLowerCase().trim() ||
-                  df.id === f.id
-              )
-              if (match) {
-                return {
-                  ...f,
-                  driveUrl: match.driveUrl,
-                  folderId: match.id,
-                  itemCount: match.itemCount || f.itemCount || 0,
-                }
-              }
-              return f
-            }),
-          }))
-        )
-
-        toast.success(`Synced ${data.foldersFound} folders from Master Drive!`)
-        setMasterSyncModalOpen(false)
-      } else {
-        toast.info("No subfolders were discovered inside this master folder.")
-      }
-    } catch (err: any) {
-      console.error("Master drive sync error:", err)
-      toast.error(err.message || "Failed to auto-sync Google Drive.")
-    } finally {
-      setIsSyncingMaster(false)
     }
+    return null
   }
 
-  // Admin-only: Save or update Google Drive link for a shelf folder
-  const handleSaveDriveLink = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!isAdmin) {
-      toast.error("Only administrators can connect or edit shelf links.")
-      return
-    }
-    if (!editingFolder || !driveUrlInput.trim()) return
+  // Active subject's data
+  const currentSubjectData = activeShelf ? getSubjectData(activeShelf) : null
 
-    const folderId = extractFolderId(driveUrlInput)
-    const count =
-      itemCountInput !== ""
-        ? parseInt(itemCountInput.toString(), 10)
-        : editingFolder.itemCount
-    const updatedFolder: LibraryFolderItem = {
-      ...editingFolder,
-      driveUrl: driveUrlInput.trim(),
-      folderId: folderId,
-      itemCount: isNaN(count) ? 0 : Math.max(0, count),
-    }
+  // Active category's file list
+  const currentCategoryFiles = useMemo(() => {
+    if (!currentSubjectData || !activeCategory) return []
+    const files = currentSubjectData.resources[activeCategory] || []
+    if (!categorySearch.trim()) return files
 
-    // Update state locally
-    setShelves(prevShelves =>
-      prevShelves.map(group => ({
-        ...group,
-        folders: group.folders.map(f =>
-          f.id === updatedFolder.id ? updatedFolder : f
-        ),
-      }))
+    const q = categorySearch.toLowerCase()
+    return files.filter(
+      f =>
+        f.name.toLowerCase().includes(q) ||
+        (f.path && f.path.some(p => p.toLowerCase().includes(q)))
     )
+  }, [currentSubjectData, activeCategory, categorySearch])
 
-    // Save to Supabase curated_drive_folders so ALL users see it
-    try {
-      if (user) {
-        await supabase.from("curated_drive_folders").upsert({
-          title: updatedFolder.name,
-          drive_url: updatedFolder.driveUrl,
-          folder_id: updatedFolder.folderId,
-          category: updatedFolder.programme,
-          programme: updatedFolder.programme,
-          description: updatedFolder.description || "",
-          icon: "📁",
-          item_count: updatedFolder.itemCount,
-          created_by: user.id,
+  // Global search across all subjects and files
+  const globalSearchResults = useMemo(() => {
+    if (!searchQuery.trim()) return null
+    const q = searchQuery.toLowerCase().trim()
+    const results: Array<LibraryResourceFile & { subjectName: string }> = []
+
+    Object.values(libraryData).forEach(subj => {
+      Object.values(subj.resources).forEach(fileList => {
+        fileList.forEach(file => {
+          if (
+            file.name.toLowerCase().includes(q) ||
+            subj.name.toLowerCase().includes(q) ||
+            (file.path && file.path.some(p => p.toLowerCase().includes(q)))
+          ) {
+            results.push({ ...file, subjectName: subj.name })
+          }
         })
-      }
-    } catch (err) {
-      console.warn("Supabase drive sync notice:", err)
-    }
-
-    toast.success(`${updatedFolder.name} folder link saved by Admin!`)
-    setEditingFolder(null)
-    setDriveUrlInput("")
-  }
-
-  // Admin-only reset
-  const handleAdminResetToDefault = () => {
-    if (!confirm("Admin Action: Reset all folders to default state?")) return
-    setShelves(INITIAL_PROGRAMME_SHELVES)
-    toast.success("All folders reset to default.")
-  }
-
-  const totalFiles = useMemo(() => {
-    return shelves.reduce(
-      (sum, group) =>
-        sum + group.folders.reduce((sub, f) => sub + (f.itemCount || 0), 0),
-      0
-    )
-  }, [shelves])
-
-  const totalFoldersCount = useMemo(() => {
-    return shelves.reduce((sum, group) => sum + group.folders.length, 0)
-  }, [shelves])
-
-  // Filter shelves and folders by search query
-  const filteredShelves = useMemo(() => {
-    const q = search.trim().toLowerCase()
-    if (!q) return shelves
-
-    return shelves
-      .map(group => {
-        const matchingFolders = group.folders.filter(
-          f =>
-            f.name.toLowerCase().includes(q) ||
-            f.description.toLowerCase().includes(q) ||
-            group.name.toLowerCase().includes(q)
-        )
-        return {
-          ...group,
-          folders: matchingFolders,
-        }
       })
-      .filter(group => group.folders.length > 0)
-  }, [shelves, search])
-
-  const openInStudyViewer = (mat: StudyMaterial) => {
-    setActiveViewerMaterial(mat)
-  }
-
-  const openDriveFolderInStudyViewer = (folder: LibraryFolderItem) => {
-    if (!folder.driveUrl) return
-    setActiveViewerMaterial({
-      id: folder.id,
-      title: `${folder.name} - Google Drive Archive`,
-      file_url: folder.driveUrl,
-      material_type: "drive",
-      subject: folder.name,
-      programme: folder.programme,
-      description: folder.description,
     })
-  }
 
-  const handleQuickPlay = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!quickPlayUrl.trim()) return
+    return results
+  }, [searchQuery, libraryData])
 
+  // Open resource natively in in-app viewer
+  const openResource = (file: LibraryResourceFile, subjectName: string) => {
     const isVideo =
-      quickPlayUrl.toLowerCase().includes("video") ||
-      quickPlayUrl.includes("youtu") ||
-      quickPlayUrl.includes("vimeo") ||
-      /\.(mp4|webm|mov)($|\?)/i.test(quickPlayUrl)
+      file.mimeType.startsWith("video/") ||
+      file.mimeType.startsWith("audio/") ||
+      /\.(mp4|m4a|webm|mov|ogg|mp3)$/i.test(file.name)
 
-    openInStudyViewer({
-      id: `quick_${Date.now()}`,
-      title: selectedFolder ? `${selectedFolder.name} Resource` : "Study Material",
-      file_url: quickPlayUrl.trim(),
+    setActiveViewerMaterial({
+      id: file.id,
+      title: file.name,
+      file_url: file.driveUrl,
       material_type: isVideo ? "video" : "drive",
-      subject: selectedFolder?.name || "Curated Resource",
-      description: "Direct in-app study stream",
+      subject: subjectName,
+      programme: "Academic Library",
+      description: file.path ? file.path.join(" / ") : "Google Drive Study Material",
     })
-    setQuickPlayUrl("")
-  }
-
-  const handleAddMaterialToFolder = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!isAdmin) {
-      toast.error("Only administrators can add study materials.")
-      return
-    }
-    if (!selectedFolder || !newMatTitle.trim() || !newMatUrl.trim()) {
-      toast.error("Please provide both a title and a valid resource URL.")
-      return
-    }
-
-    setSavingNewMat(true)
-    try {
-      const newEntry = {
-        title: newMatTitle.trim(),
-        description: newMatDesc.trim() || `${selectedFolder.name} study resource`,
-        file_url: newMatUrl.trim(),
-        material_type: newMatType,
-        programme: selectedFolder.programme,
-        level: selectedFolder.level || "All",
-        subject: selectedFolder.name,
-        uploaded_by: user?.id || null,
-      }
-
-      const { data, error } = await supabase
-        .from("materials")
-        .insert(newEntry)
-        .select()
-        .single()
-
-      if (error) throw error
-
-      if (data) {
-        setFolderMaterials(prev => [data, ...prev])
-        toast.success(`"${newMatTitle}" added to ${selectedFolder.name}!`)
-        setNewMatTitle("")
-        setNewMatUrl("")
-        setNewMatDesc("")
-        setIsAddingMaterial(false)
-      }
-    } catch (err: any) {
-      console.error("Add material error:", err)
-      toast.error(err.message || "Failed to add material.")
-    } finally {
-      setSavingNewMat(false)
-    }
-  }
-
-  const openFolder = (folder: LibraryFolderItem) => {
-    setSelectedFolder(folder)
-    setActiveFolderTab("materials")
   }
 
   return (
-    <div className="max-w-7xl mx-auto space-y-6 pb-20">
+    <div className="max-w-7xl mx-auto space-y-6 pb-24">
       
-      {/* ── TOP HEADER BAR ── */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#181818] pb-4">
-        <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-xs font-bold uppercase tracking-wider text-gray-400">
-              LIBRARY SHELVES
-            </h1>
-            <span className="w-1 h-1 rounded-full bg-red-600" />
-            <span className="text-[10px] text-gray-500 font-medium uppercase tracking-wider">
-              {shelves.length} Programmes • {totalFoldersCount} Folders
-            </span>
-            {isAdmin && (
-              <span className="text-[10px] font-bold uppercase tracking-wider text-red-500 bg-red-600/10 px-2 py-0.5 rounded border border-red-600/20 flex items-center gap-1 ml-1">
-                <ShieldCheck size={10} /> Admin Mode
-              </span>
-            )}
-          </div>
-          <p className="text-xl sm:text-2xl font-bold text-white mt-0.5 tracking-tight">
-            Curated Academic Shelves
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2.5 flex-wrap sm:flex-nowrap">
-          <div className="relative w-full sm:w-64">
-            <Search
-              size={13}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
-            />
-            <input
-              type="text"
-              placeholder="Search folders or subjects..."
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-              className="w-full bg-[#0d0d0d] border border-[#222] focus:border-red-600 rounded-lg pl-8 pr-3 py-1.5 text-xs text-white placeholder:text-gray-500 outline-none transition-colors"
-            />
-          </div>
-
-          <div className="px-3 py-1.5 bg-[#111] border border-[#222] rounded-lg text-xs font-semibold text-gray-400 whitespace-nowrap">
-            {totalFiles} files available
-          </div>
-
-          {/* Admin-only Master Drive Auto-Sync button */}
-          {isAdmin && (
-            <button
-              onClick={() => setMasterSyncModalOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-bold transition-all shadow-sm whitespace-nowrap"
-              title="Auto-discover and link all shelf folders from one Master Google Drive folder"
-            >
-              <Sparkles size={11} /> Auto-Sync Master Drive
-            </button>
-          )}
-
-          {/* Admin-only reset control */}
-          {isAdmin && (
-            <button
-              onClick={handleAdminResetToDefault}
-              title="Admin: Reset all shelf links"
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-[#141414] hover:bg-[#1a1a1a] border border-[#222] hover:border-red-600/40 text-gray-400 hover:text-white rounded-lg text-xs font-medium transition-colors whitespace-nowrap"
-            >
-              <RotateCcw size={11} className="text-red-500" /> Reset
-            </button>
-          )}
-        </div>
-      </div>
-
-      {/* ── PROGRAMME SHELVES (COLLAPSIBLE) ── */}
-      <div className="space-y-6">
-        {filteredShelves.map(shelf => {
-          // If searching, keep shelf open so results are visible; otherwise use collapsed state
-          const isCollapsed = search.trim() ? false : Boolean(collapsedShelves[shelf.id])
-
-          return (
-            <div
-              key={shelf.id}
-              className="bg-[#0b0b0b] border border-[#1a1a1a] rounded-xl overflow-hidden transition-all duration-150"
-            >
-              {/* Shelf Header with Expand/Collapse Control */}
-              <div className="flex items-center justify-between p-3 sm:px-4 bg-[#101010] border-b border-[#181818] select-none">
-                <button
-                  type="button"
-                  onClick={() => toggleShelf(shelf.id)}
-                  className="flex items-center gap-2.5 text-left group flex-1 focus:outline-none"
-                  aria-expanded={!isCollapsed}
-                >
-                  <div className="w-5 h-5 rounded flex items-center justify-center bg-[#181818] border border-[#262626] text-gray-400 group-hover:text-white transition-colors flex-shrink-0">
-                    {isCollapsed ? (
-                      <ChevronRight size={12} />
-                    ) : (
-                      <ChevronDown size={12} />
-                    )}
-                  </div>
-
-                  <h2 className="text-xs sm:text-sm font-bold text-white tracking-tight group-hover:text-red-400 transition-colors">
-                    {shelf.name}
-                  </h2>
-
-                  <span className="text-[10px] font-semibold text-gray-400 bg-[#161616] border border-[#242424] px-2 py-0.2 rounded-full">
-                    {shelf.folders.length} {shelf.folders.length === 1 ? "folder" : "folders"}
-                  </span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => toggleShelf(shelf.id)}
-                  className="text-[11px] font-medium text-gray-400 hover:text-white transition-colors px-2 py-1"
-                >
-                  {isCollapsed ? "Expand" : "Collapse"}
-                </button>
-              </div>
-
-              {/* Shelf Folders Grid (Visible when Expanded) */}
-              {!isCollapsed && (
-                <div className="p-3 sm:p-4">
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5">
-                    {shelf.folders.map(folder => {
-                      const isConnected = Boolean(
-                        folder.folderId && folder.driveUrl
-                      )
-
-                      return (
-                        <div
-                          key={folder.id}
-                          onClick={() => openFolder(folder)}
-                          className="bg-[#0e0e0e] hover:bg-[#141414] border border-[#1c1c1c] hover:border-[#333] rounded-lg p-2.5 flex flex-col justify-between transition-all duration-150 cursor-pointer group relative"
-                        >
-                          <div>
-                            {/* Card Top: Small Icon & Admin Edit Button (Admin Only) */}
-                            <div className="flex items-center justify-between gap-1.5">
-                              <div className="w-6 h-6 rounded bg-[#161616] border border-[#242424] flex items-center justify-center text-red-500 group-hover:bg-red-600/10 transition-colors flex-shrink-0">
-                                <FolderIcon name={folder.iconName} size={12} />
-                              </div>
-
-                              <div className="flex items-center gap-1">
-                                {isConnected && (
-                                  <span
-                                    title="Drive resources available"
-                                    className="w-1.5 h-1.5 rounded-full bg-red-600"
-                                  />
-                                )}
-
-                                {/* Admin-only gear/configure button */}
-                                {isAdmin && (
-                                  <button
-                                    type="button"
-                                    onClick={e => {
-                                      e.stopPropagation()
-                                      setEditingFolder(folder)
-                                      setDriveUrlInput(folder.driveUrl || "")
-                                      setItemCountInput(
-                                        folder.itemCount > 0
-                                          ? folder.itemCount
-                                          : ""
-                                      )
-                                    }}
-                                    title="Admin: Connect / Edit Drive link"
-                                    className="text-gray-500 hover:text-white p-0.5 transition-colors"
-                                  >
-                                    <Settings size={12} className="text-gray-500 hover:text-red-400" />
-                                  </button>
-                                )}
-                              </div>
-                            </div>
-
-                            {/* Card Middle: Folder Name */}
-                            <h3 className="text-xs font-bold text-white group-hover:text-red-400 transition-colors line-clamp-1 mt-2 leading-snug">
-                              {folder.name}
-                            </h3>
-
-                            {/* Card Subtitle */}
-                            <p className="text-[10px] text-gray-400 line-clamp-1 mt-0.5 leading-tight">
-                              {folder.description}
-                            </p>
-                          </div>
-
-                          {/* Card Bottom: File count or status */}
-                          <div className="pt-2 mt-2 border-t border-[#181818] flex items-center justify-between text-[10px] text-gray-500">
-                            <span>
-                              {isConnected
-                                ? `${folder.itemCount} files`
-                                : "In preparation"}
-                            </span>
-                            <span
-                              className={
-                                isConnected
-                                  ? "text-red-500 font-medium"
-                                  : "text-gray-600"
-                              }
-                            >
-                              {isConnected ? "Available" : "Coming soon"}
-                            </span>
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-              )}
-            </div>
-          )
-        })}
-
-        {filteredShelves.length === 0 && (
-          <div className="text-center py-16 bg-[#0c0c0c] border border-[#1a1a1a] rounded-xl space-y-2">
-            <p className="text-sm font-bold text-white">
-              No matching shelves or folders found
-            </p>
-            <p className="text-xs text-gray-500">
-              Try searching with another keyword or subject name.
-            </p>
-          </div>
+      {/* ── TOP SEARCH BAR (Exactly matching reference Image 2) ── */}
+      <div className="relative w-full">
+        <Search
+          size={18}
+          className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+        />
+        <input
+          type="text"
+          placeholder="Search every document in PodGuide Library..."
+          value={searchQuery}
+          onChange={e => setSearchQuery(e.target.value)}
+          className="w-full bg-[#111] dark:bg-[#0d0d0d] border border-gray-200 dark:border-[#222] focus:border-red-600 rounded-full pl-11 pr-12 py-3 text-sm text-black dark:text-white placeholder:text-gray-500 outline-none transition-all shadow-sm"
+        />
+        {searchQuery && (
+          <button
+            onClick={() => setSearchQuery("")}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
+          >
+            <X size={16} />
+          </button>
         )}
       </div>
 
-      {/* ── MODAL: PREVIEW FOLDER ── */}
-      {selectedFolder && (
-        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-          <div className="bg-[#0e0e0e] border border-[#222] rounded-xl w-full max-w-3xl my-6 p-5 sm:p-6 space-y-4 relative shadow-2xl animate-in fade-in zoom-in-95 duration-150">
-            <button
-              onClick={() => setSelectedFolder(null)}
-              className="absolute top-4 right-4 p-1.5 text-gray-400 hover:text-white transition-colors"
-            >
-              <X size={16} />
-            </button>
+      {/* ── VIEW 1: GLOBAL SEARCH RESULTS (When user searches at the top) ── */}
+      {globalSearchResults !== null ? (
+        <div className="space-y-4 animate-in fade-in duration-150">
+          <div className="flex items-center justify-between">
+            <h2 className="text-base font-bold text-white flex items-center gap-2">
+              <span>Search Results for</span>
+              <span className="text-red-500 font-mono">&quot;{searchQuery}&quot;</span>
+            </h2>
+            <span className="text-xs text-gray-400 font-semibold bg-[#161616] border border-[#222] px-3 py-1 rounded-full">
+              {globalSearchResults.length} files found
+            </span>
+          </div>
 
-            <div className="flex items-start gap-3 pr-8">
-              <div className="w-10 h-10 rounded-lg bg-[#161616] border border-[#262626] flex items-center justify-center text-red-500 flex-shrink-0">
-                <FolderIcon name={selectedFolder.iconName} size={18} />
-              </div>
-              <div className="space-y-0.5">
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-red-400 bg-red-600/10 px-2 py-0.5 rounded border border-red-600/20">
-                    {selectedFolder.programme}
-                  </span>
-                  {selectedFolder.driveUrl && (
-                    <span className="text-[10px] text-gray-400 font-medium">
-                      {selectedFolder.itemCount} files
-                    </span>
-                  )}
+          {globalSearchResults.length === 0 ? (
+            <div className="p-12 bg-[#0e0e0e] border border-[#1f1f1f] rounded-2xl text-center space-y-2">
+              <p className="text-gray-400 text-sm font-semibold">No materials found matching your search.</p>
+              <p className="text-gray-600 text-xs">Try searching by topic, author, disease, or medical keyword.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {globalSearchResults.map(f => (
+                <div
+                  key={f.id}
+                  onClick={() => openResource(f, f.subjectName)}
+                  className="p-3.5 bg-[#0e0e0e] hover:bg-[#141414] border border-[#1e1e1e] hover:border-red-600/40 rounded-xl flex items-center justify-between gap-3 transition-all cursor-pointer group shadow-sm"
+                >
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="w-9 h-9 rounded-lg bg-[#181818] border border-[#262626] flex items-center justify-center text-red-500 group-hover:scale-105 transition-all flex-shrink-0">
+                      {f.category === "videos" ? <Video size={16} /> : <FileText size={16} />}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-xs font-bold text-white truncate group-hover:text-red-400 transition-colors">
+                        {f.name}
+                      </p>
+                      <p className="text-[10px] text-gray-500 mt-0.5 truncate">
+                        {f.subjectName} · {f.category.replace("_", " ").toUpperCase()} {formatBytes(f.size) ? `· ${formatBytes(f.size)}` : ""}
+                      </p>
+                    </div>
+                  </div>
+                  <button className="px-3 py-1 rounded-lg bg-[#1a1a1a] group-hover:bg-red-600 text-gray-300 group-hover:text-white text-[11px] font-semibold transition-colors flex items-center gap-1 flex-shrink-0">
+                    <Eye size={12} /> Open
+                  </button>
                 </div>
-                <h2 className="text-lg font-bold text-white leading-tight">
-                  {selectedFolder.name}
-                </h2>
-                <p className="text-xs text-gray-400">
-                  {selectedFolder.description}
-                </p>
-              </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ) : activeShelf === null ? (
+
+        /* ── VIEW 2: LIBRARY SHELVES GRID (Matches Reference Image 1 exactly) ── */
+        <div className="space-y-4">
+          <div className="flex items-center justify-between pb-1 border-b border-[#181818]">
+            <h2 className="text-xs font-bold uppercase tracking-widest text-gray-400">
+              LIBRARY SHELVES
+            </h2>
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-semibold text-gray-400">
+                {totalFilesCount > 0 ? `${totalFilesCount.toLocaleString()} files total` : "Checking Drive archive..."}
+              </span>
+              <button
+                onClick={handleRefresh}
+                disabled={isSyncing}
+                title="Deep scan and update all Google Drive resources"
+                className="p-1.5 rounded-lg bg-[#141414] hover:bg-[#1f1f1f] border border-[#222] text-gray-400 hover:text-white transition-colors"
+              >
+                <RotateCcw size={13} className={isSyncing ? "animate-spin text-red-500" : ""} />
+              </button>
+            </div>
+          </div>
+
+          {loading ? (
+            <div className="py-20 flex flex-col items-center justify-center gap-3">
+              <Loader2 size={28} className="animate-spin text-red-500" />
+              <p className="text-xs text-gray-500 font-semibold tracking-wide">
+                Retrieving all curriculum folders from Google Drive...
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {DEFAULT_SHELVES.map(shelf => {
+                const data = getSubjectData(shelf)
+                const count = data ? data.totalFiles : 0
+
+                return (
+                  <div
+                    key={shelf.key}
+                    onClick={() => {
+                      setActiveShelf(shelf)
+                      setActiveCategory(null)
+                    }}
+                    className="p-5 bg-white dark:bg-[#0e0e0e] border border-gray-100 dark:border-[#1f1f1f] hover:border-gray-300 dark:hover:border-red-600/40 rounded-2xl flex flex-col justify-between h-32 transition-all duration-200 cursor-pointer group shadow-sm hover:shadow-md hover:-translate-y-0.5 select-none relative"
+                  >
+                    {/* Top Row: Soft Emoji/Icon Badge & Subtle Folder Icon */}
+                    <div className="flex items-center justify-between">
+                      <div className="w-10 h-10 rounded-xl bg-gray-50 dark:bg-[#161616] border border-gray-100 dark:border-[#262626] flex items-center justify-center text-lg shadow-inner group-hover:scale-105 transition-transform">
+                        {shelf.emoji}
+                      </div>
+                      <Folder size={16} className="text-gray-400 dark:text-gray-600 group-hover:text-red-500 transition-colors" />
+                    </div>
+
+                    {/* Bottom Row: Subject Title and Item Count */}
+                    <div>
+                      <h3 className="text-sm font-bold text-gray-900 dark:text-white group-hover:text-red-500 transition-colors line-clamp-1 leading-snug">
+                        {shelf.name}
+                      </h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                        {count} {count === 1 ? "item" : "items"}
+                      </p>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          )}
+        </div>
+      ) : (
+
+        /* ── VIEW 3: SHELF VIEW — BOOK-STYLE CATEGORIES (Matches Reference Image 2 exactly) ── */
+        <div className="space-y-6 animate-in fade-in duration-150">
+          
+          {/* Breadcrumb Header */}
+          <div className="flex items-center justify-between border-b border-[#181818] pb-4">
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => {
+                  if (activeCategory) {
+                    setActiveCategory(null)
+                  } else {
+                    setActiveShelf(null)
+                  }
+                }}
+                className="flex items-center gap-1.5 text-xs font-bold text-gray-400 hover:text-white transition-colors p-1"
+              >
+                <ArrowLeft size={16} />
+                <span>All shelves</span>
+              </button>
+
+              <span className="text-gray-600">/</span>
+
+              <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-center gap-2.5">
+                <span>{activeShelf.emoji}</span>
+                <span>{activeShelf.name}</span>
+              </h2>
+
+              <span className="text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 dark:bg-[#181818] border border-gray-200 dark:border-[#262626] text-gray-700 dark:text-gray-300">
+                {currentSubjectData?.totalFiles || 0} files
+              </span>
             </div>
 
-            {/* ── FOLDER VIEW TABS (WHEN DRIVE OR MATERIALS EXIST) ── */}
-            <div className="flex items-center justify-between border-b border-[#1f1f1f] pt-2 pb-1 gap-2 flex-wrap">
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => setActiveFolderTab("materials")}
-                  className={`text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
-                    activeFolderTab === "materials"
-                      ? "bg-red-600 text-white"
-                      : "text-gray-400 hover:text-white hover:bg-[#181818]"
+            <button
+              onClick={handleRefresh}
+              disabled={isSyncing}
+              title="Rescan Drive"
+              className="p-2 rounded-lg bg-[#141414] hover:bg-[#1f1f1f] border border-[#222] text-gray-400 hover:text-white transition-colors"
+            >
+              <RotateCcw size={13} className={isSyncing ? "animate-spin text-red-500" : ""} />
+            </button>
+          </div>
+
+          {/* ── 8 BOOK CATEGORY CARDS (Grid 4 cols) ── */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {RESOURCE_CATEGORIES.map(cat => {
+              const count = currentSubjectData?.counts[cat.key] || 0
+              const isSelected = activeCategory === cat.key
+              const IconComp = cat.icon
+
+              return (
+                <div
+                  key={cat.key}
+                  onClick={() => setActiveCategory(isSelected ? null : cat.key)}
+                  className={`p-5 rounded-2xl border transition-all duration-200 cursor-pointer flex flex-col justify-between h-36 select-none relative group shadow-sm ${
+                    isSelected
+                      ? "bg-[#181212] border-red-600 shadow-md ring-1 ring-red-600/30"
+                      : "bg-white dark:bg-[#0e0e0e] border-gray-100 dark:border-[#1f1f1f] hover:border-gray-300 dark:hover:border-red-600/40 hover:-translate-y-0.5"
                   }`}
                 >
-                  <BookOpen size={12} />
-                  <span>Curated Materials</span>
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${activeFolderTab === "materials" ? "bg-white/20 text-white" : "bg-[#222] text-gray-400"}`}>
-                    {folderMaterials.length}
-                  </span>
-                </button>
-
-                {selectedFolder.folderId && selectedFolder.driveUrl && (
-                  <button
-                    type="button"
-                    onClick={() => setActiveFolderTab("drive_browser")}
-                    className={`text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
-                      activeFolderTab === "drive_browser"
-                        ? "bg-red-600 text-white"
-                        : "text-gray-400 hover:text-white hover:bg-[#181818]"
-                    }`}
-                  >
-                    <HardDrive size={12} />
-                    <span>Google Drive Explorer</span>
-                  </button>
-                )}
-              </div>
-
-              {/* Admin "+ Add Material" Trigger */}
-              {isAdmin && (
-                <button
-                  type="button"
-                  onClick={() => setIsAddingMaterial(!isAddingMaterial)}
-                  className="flex items-center gap-1 px-2.5 py-1 bg-red-600/10 hover:bg-red-600/20 text-red-500 border border-red-600/30 rounded-lg text-xs font-semibold transition-colors ml-auto"
-                >
-                  <Plus size={12} /> {isAddingMaterial ? "Cancel Add" : "Add Material / Video"}
-                </button>
-              )}
-            </div>
-
-            {/* ── ADMIN: INLINE ADD MATERIAL FORM ── */}
-            {isAdmin && isAddingMaterial && (
-              <form onSubmit={handleAddMaterialToFolder} className="bg-[#121212] border border-red-600/30 rounded-xl p-4 space-y-3 animate-in fade-in duration-150">
-                <div className="flex items-center justify-between pb-1 border-b border-[#202020]">
-                  <span className="text-xs font-bold text-white flex items-center gap-1.5">
-                    <Sparkles size={12} className="text-red-500" /> Add Material to {selectedFolder.name}
-                  </span>
-                  <span className="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">Admin Tool</span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <div className="sm:col-span-2">
-                    <label className="block text-[11px] font-semibold text-gray-400 mb-1">Title</label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="e.g. Clinical Examination of the Abdomen"
-                      value={newMatTitle}
-                      onChange={e => setNewMatTitle(e.target.value)}
-                      className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-red-600 rounded-lg px-3 py-1.5 text-xs text-white placeholder:text-gray-600 outline-none"
-                    />
+                  {/* Top: Icon and Folder Symbol */}
+                  <div className="flex items-center justify-between">
+                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center border transition-all ${
+                      isSelected
+                        ? "bg-red-600 text-white border-red-600 shadow-sm"
+                        : `${cat.bgClass} ${cat.colorClass}`
+                    }`}>
+                      <IconComp size={18} />
+                    </div>
+                    <Folder size={16} className={isSelected ? "text-red-500" : "text-gray-400 dark:text-gray-600 group-hover:text-red-500 transition-colors"} />
                   </div>
+
+                  {/* Bottom: Title, Subtitle, and Item Count */}
                   <div>
-                    <label className="block text-[11px] font-semibold text-gray-400 mb-1">Type</label>
-                    <select
-                      value={newMatType}
-                      onChange={e => setNewMatType(e.target.value as any)}
-                      className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-red-600 rounded-lg px-3 py-1.5 text-xs text-white outline-none"
-                    >
-                      <option value="video">Video (MP4 / Lecture)</option>
-                      <option value="pdf">PDF Document</option>
-                      <option value="drive">Google Drive File</option>
-                      <option value="document">Study Guide / Notes</option>
-                    </select>
+                    <h4 className={`text-sm font-bold truncate leading-snug transition-colors ${
+                      isSelected ? "text-red-500" : "text-gray-900 dark:text-white group-hover:text-red-400"
+                    }`}>
+                      {cat.title}
+                    </h4>
+                    <p className="text-[11px] text-gray-500 dark:text-gray-400 line-clamp-1 mt-0.5">
+                      {cat.subtitle}
+                    </p>
+                    <p className={`text-xs font-semibold mt-1 ${isSelected ? "text-red-400" : "text-gray-400 dark:text-gray-500"}`}>
+                      {count} {count === 1 ? "item" : "items"}
+                    </p>
                   </div>
                 </div>
+              )
+            })}
+          </div>
 
-                <div>
-                  <label className="block text-[11px] font-semibold text-gray-400 mb-1">
-                    Resource URL (Google Drive Share Link, Video URL, or File Link)
-                  </label>
-                  <input
-                    type="url"
-                    required
-                    placeholder="https://drive.google.com/file/d/... or https://..."
-                    value={newMatUrl}
-                    onChange={e => setNewMatUrl(e.target.value)}
-                    className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-red-600 rounded-lg px-3 py-1.5 text-xs text-white placeholder:text-gray-600 outline-none"
-                  />
+          {/* ── RESOURCE FILE LIST (When user clicks on any of the 8 categories) ── */}
+          {activeCategory && (
+            <div className="p-5 bg-[#0a0a0a] border border-[#1f1f1f] rounded-2xl space-y-4 animate-in fade-in duration-150">
+              
+              {/* Category Subheader */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#181818] pb-3">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2 h-2 rounded-full bg-red-600" />
+                  <h3 className="text-sm font-bold text-white uppercase tracking-wider">
+                    {RESOURCE_CATEGORIES.find(c => c.key === activeCategory)?.title}
+                  </h3>
+                  <span className="text-xs text-gray-500">
+                    ({currentCategoryFiles.length} available)
+                  </span>
                 </div>
 
-                <div>
-                  <label className="block text-[11px] font-semibold text-gray-400 mb-1">Short Description (Optional)</label>
+                {/* Filter within this category */}
+                <div className="relative w-full sm:w-64">
+                  <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
                   <input
                     type="text"
-                    placeholder="e.g. High-yield overview covering inspection, palpation and auscultation."
-                    value={newMatDesc}
-                    onChange={e => setNewMatDesc(e.target.value)}
-                    className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-red-600 rounded-lg px-3 py-1.5 text-xs text-white placeholder:text-gray-600 outline-none"
+                    placeholder="Filter in this folder..."
+                    value={categorySearch}
+                    onChange={e => setCategorySearch(e.target.value)}
+                    className="w-full bg-[#111] border border-[#222] focus:border-red-600 rounded-lg pl-8 pr-3 py-1.5 text-xs text-white placeholder:text-gray-500 outline-none"
                   />
                 </div>
+              </div>
 
-                <div className="flex gap-2 pt-1">
-                  <button
-                    type="submit"
-                    disabled={savingNewMat}
-                    className="flex-1 py-1.5 bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white rounded-lg text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
-                  >
-                    <Check size={12} /> {savingNewMat ? "Saving..." : "Save Material"}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setIsAddingMaterial(false)}
-                    className="px-3 py-1.5 bg-[#181818] hover:bg-[#222] border border-[#2b2b2b] text-gray-400 rounded-lg text-xs transition-colors"
-                  >
-                    Cancel
-                  </button>
+              {/* Files Table / Cards */}
+              {currentCategoryFiles.length === 0 ? (
+                <div className="py-12 text-center space-y-2">
+                  <p className="text-sm text-gray-400 font-semibold">
+                    No resources stored under this category yet.
+                  </p>
+                  <p className="text-xs text-gray-600 max-w-sm mx-auto">
+                    Drop your slides, past papers, or video recordings into the {activeShelf.name} Google Drive folder to automatically populate this section.
+                  </p>
                 </div>
-              </form>
-            )}
+              ) : (
+                <div className="space-y-2 max-h-[60vh] overflow-y-auto pr-1">
+                  {currentCategoryFiles.map((file, idx) => {
+                    const isVid = activeCategory === "videos" || /\.(mp4|m4a|mov|webm)$/i.test(file.name)
 
-            {/* ── TAB 1: CURATED MATERIALS LIST & IN-APP LAUNCHER ── */}
-            {activeFolderTab === "materials" && (
-              <div className="space-y-3.5">
-                {/* Quick Link In-App Study Launcher */}
-                <form onSubmit={handleQuickPlay} className="flex gap-2 items-center bg-[#111] border border-[#202020] rounded-xl p-2.5">
-                  <div className="flex items-center gap-2 flex-1 min-w-0">
-                    <Video size={14} className="text-red-500 ml-1.5 flex-shrink-0" />
-                    <input
-                      type="url"
-                      placeholder="Paste any Google Drive, Video, or PDF link to study in-app..."
-                      value={quickPlayUrl}
-                      onChange={e => setQuickPlayUrl(e.target.value)}
-                      className="w-full bg-transparent text-xs text-white placeholder:text-gray-500 outline-none"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    disabled={!quickPlayUrl.trim()}
-                    className="px-3 py-1.5 bg-red-600 hover:bg-red-700 disabled:opacity-40 text-white rounded-lg text-xs font-semibold flex items-center gap-1 transition-colors whitespace-nowrap"
-                  >
-                    <Play size={11} className="fill-white" /> Play in App
-                  </button>
-                </form>
-
-                {/* Materials List */}
-                {loadingMaterials ? (
-                  <div className="py-8 text-center text-xs text-gray-400 space-y-2">
-                    <div className="w-5 h-5 border-2 border-red-600 border-t-transparent rounded-full animate-spin mx-auto" />
-                    <p>Loading curated resources...</p>
-                  </div>
-                ) : folderMaterials.length > 0 ? (
-                  <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
-                    {folderMaterials.map(mat => {
-                      const isVideo =
-                        mat.material_type === "video" ||
-                        mat.title.toLowerCase().includes("video") ||
-                        mat.file_url.toLowerCase().includes("video")
-
-                      return (
-                        <div
-                          key={mat.id}
-                          className="bg-[#121212] hover:bg-[#161616] border border-[#202020] hover:border-red-600/40 rounded-xl p-3 flex items-center justify-between gap-3 transition-all"
-                        >
-                          <div className="flex items-center gap-3 min-w-0">
-                            <div className="w-9 h-9 rounded-lg bg-red-600/10 border border-red-600/20 text-red-500 flex items-center justify-center flex-shrink-0">
-                              {isVideo ? <Video size={16} /> : <FileText size={16} />}
-                            </div>
-                            <div className="min-w-0">
-                              <div className="flex items-center gap-2">
-                                <span className="text-[9px] font-bold uppercase tracking-wider text-red-500 bg-red-600/10 px-1.5 py-0.2 rounded border border-red-600/20">
-                                  {isVideo ? "Video" : mat.material_type.toUpperCase()}
-                                </span>
-                                <span className="text-[10px] text-gray-500">
-                                  In-app Study Ready
-                                </span>
-                              </div>
-                              <h4 className="text-xs font-bold text-white truncate mt-0.5">
-                                {mat.title}
-                              </h4>
-                              {mat.description && (
-                                <p className="text-[11px] text-gray-400 truncate mt-0.5">
-                                  {mat.description}
-                                </p>
+                    return (
+                      <div
+                        key={file.id}
+                        onClick={() => openResource(file, activeShelf.name)}
+                        className="p-3 bg-[#111] hover:bg-[#151515] border border-[#1f1f1f] hover:border-red-600/40 rounded-xl flex items-center justify-between gap-3 transition-colors cursor-pointer group shadow-sm"
+                      >
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="w-8 h-8 rounded-lg bg-[#181818] border border-[#262626] flex items-center justify-center text-red-500 group-hover:scale-105 transition-all flex-shrink-0">
+                            {isVid ? <Play size={14} className="fill-current" /> : <FileText size={14} />}
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-xs font-bold text-white truncate group-hover:text-red-400 transition-colors">
+                              {file.name}
+                            </p>
+                            <div className="flex items-center gap-2 mt-0.5 text-[10px] text-gray-500 truncate">
+                              {file.path && file.path.length > 0 && (
+                                <span>{file.path.join(" / ")}</span>
+                              )}
+                              {formatBytes(file.size) && (
+                                <>
+                                  <span>·</span>
+                                  <span>{formatBytes(file.size)}</span>
+                                </>
                               )}
                             </div>
                           </div>
-
-                          <div className="flex items-center gap-2 flex-shrink-0">
-                            <button
-                              type="button"
-                              onClick={() => openInStudyViewer(mat)}
-                              className="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm"
-                            >
-                              <Play size={11} className="fill-white" />
-                              <span>{isVideo ? "Play Video" : "Study Now"}</span>
-                            </button>
-
-                            <a
-                              href={mat.file_url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              title="Open original link in new tab"
-                              className="p-1.5 bg-[#181818] hover:bg-[#222] border border-[#262626] text-gray-400 hover:text-white rounded-lg transition-colors"
-                            >
-                              <ExternalLink size={13} />
-                            </a>
-                          </div>
                         </div>
-                      )
-                    })}
-                  </div>
-                ) : (
-                  /* Empty state for materials tab */
-                  <div className="py-8 px-4 text-center space-y-3 bg-[#0a0a0a] border border-[#1a1a1a] rounded-xl">
-                    <div className="w-10 h-10 rounded-lg bg-[#141414] border border-[#242424] flex items-center justify-center text-red-500 mx-auto">
-                      <BookOpen size={18} />
-                    </div>
-                    <div className="space-y-1">
-                      <h3 className="text-xs font-bold text-white">
-                        Curated Study Resources in Progress
-                      </h3>
-                      <p className="text-[11px] text-gray-400 max-w-sm mx-auto leading-relaxed">
-                        {selectedFolder.folderId && selectedFolder.driveUrl
-                          ? "You can browse all materials directly through the Google Drive Explorer tab or launch any link via the in-app player above."
-                          : "Our team is actively compiling textbooks, rotation manuals and lecture recordings for this folder."}
-                      </p>
-                    </div>
 
-                    {selectedFolder.folderId && selectedFolder.driveUrl && (
-                      <div className="pt-1 flex items-center justify-center gap-2">
-                        <button
-                          type="button"
-                          onClick={() => setActiveFolderTab("drive_browser")}
-                          className="px-3.5 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5"
-                        >
-                          <HardDrive size={12} /> Switch to Drive Explorer
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => openDriveFolderInStudyViewer(selectedFolder)}
-                          className="px-3.5 py-1.5 bg-[#161616] hover:bg-[#202020] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5"
-                        >
-                          <Maximize2 size={12} /> Fullscreen Study Mode
+                        <button className="px-3 py-1.5 rounded-lg bg-[#181818] group-hover:bg-red-600 text-gray-300 group-hover:text-white text-[11px] font-semibold transition-colors flex items-center gap-1.5 flex-shrink-0 shadow-sm">
+                          {isVid ? <Play size={11} className="fill-current" /> : <Eye size={11} />}
+                          <span>{isVid ? "Watch" : "Study"}</span>
                         </button>
                       </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* ── TAB 2: GOOGLE DRIVE LIVE EXPLORER ── */}
-            {activeFolderTab === "drive_browser" && selectedFolder.folderId && selectedFolder.driveUrl && (
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-[11px] text-gray-400 bg-[#121212] px-3 py-2 rounded-lg border border-[#202020]">
-                  <span className="font-semibold flex items-center gap-1.5 text-white">
-                    <Eye size={12} className="text-red-500" /> Embedded Google Drive Explorer
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => openDriveFolderInStudyViewer(selectedFolder)}
-                      className="text-xs text-red-500 hover:text-red-400 font-semibold flex items-center gap-1 transition-colors"
-                      title="Maximize into Fullscreen In-App Study Viewer with Notes"
-                    >
-                      <Maximize2 size={12} /> Fullscreen Study Mode
-                    </button>
-                  </div>
+                    )
+                  })}
                 </div>
-
-                <div className="w-full h-96 sm:h-[420px] rounded-lg overflow-hidden border border-[#222] bg-[#080808]">
-                  <iframe
-                    src={`https://drive.google.com/embeddedfolderview?id=${selectedFolder.folderId}#grid`}
-                    className="w-full h-full border-0"
-                    title={selectedFolder.name}
-                    allow="autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope"
-                    allowFullScreen
-                  />
-                </div>
-              </div>
-            )}
-
-            {/* ── MODAL FOOTER CONTROLS ── */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-2.5 pt-2 border-t border-[#181818]">
-              <div className="flex items-center gap-2 w-full sm:w-auto">
-                {selectedFolder.driveUrl && (
-                  <a
-                    href={selectedFolder.driveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="py-1.5 px-3 bg-[#161616] hover:bg-[#202020] border border-[#262626] text-gray-300 hover:text-white rounded-lg text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 flex-1 sm:flex-none"
-                  >
-                    <ExternalLink size={12} /> Open in Google Drive
-                  </a>
-                )}
-
-                {selectedFolder.driveUrl && (
-                  <button
-                    type="button"
-                    onClick={() => openDriveFolderInStudyViewer(selectedFolder)}
-                    className="py-1.5 px-3 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 flex-1 sm:flex-none"
-                  >
-                    <Maximize2 size={12} /> Fullscreen Viewer
-                  </button>
-                )}
-              </div>
-
-              <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
-                {isAdmin && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setEditingFolder(selectedFolder)
-                      setDriveUrlInput(selectedFolder.driveUrl || "")
-                      setItemCountInput(
-                        selectedFolder.itemCount > 0 ? selectedFolder.itemCount : ""
-                      )
-                      setSelectedFolder(null)
-                    }}
-                    className="px-3.5 py-1.5 bg-[#161616] hover:bg-[#202020] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5"
-                  >
-                    <Settings size={12} /> Admin: Configure Drive Link
-                  </button>
-                )}
-
-                <button
-                  type="button"
-                  onClick={() => setSelectedFolder(null)}
-                  className="px-4 py-1.5 bg-[#181818] hover:bg-[#222] border border-[#2b2b2b] text-gray-300 hover:text-white rounded-lg text-xs font-medium transition-colors"
-                >
-                  Close
-                </button>
-              </div>
+              )}
             </div>
-          </div>
+          )}
         </div>
       )}
 
-      {/* ── ADMIN MODAL: MASTER GOOGLE DRIVE AUTO-SYNC (OPTION 1) ── */}
-      {isAdmin && masterSyncModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-          <div className="bg-[#0e0e0e] border border-[#222] rounded-2xl w-full max-w-lg p-5 sm:p-6 space-y-4 relative shadow-2xl animate-in fade-in zoom-in-95 duration-150">
-            <button
-              onClick={() => setMasterSyncModalOpen(false)}
-              className="absolute top-4 right-4 p-1.5 text-gray-400 hover:text-white transition-colors"
-            >
-              <X size={16} />
-            </button>
-
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-red-600/10 border border-red-600/20 flex items-center justify-center text-red-500 flex-shrink-0">
-                <Sparkles size={20} />
-              </div>
-              <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-red-500">
-                  Option 1 · One Master Folder Architecture
-                </span>
-                <h3 className="text-base sm:text-lg font-bold text-white mt-0.5 leading-snug">
-                  Master Google Drive Auto-Sync
-                </h3>
-              </div>
-            </div>
-
-            <p className="text-xs text-gray-400 leading-relaxed">
-              Instead of pasting individual links for each shelf, paste your single <strong>Master Google Drive root folder</strong>. PodGuide will scan its subfolders, count items, and automatically map them to all subject shelves in one step.
-            </p>
-
-            {/* Quick 3-step guide badge */}
-            <div className="p-3 bg-[#121212] border border-[#1f1f1f] rounded-xl space-y-2 text-[11px] text-gray-300">
-              <div className="flex items-start gap-2">
-                <span className="w-4 h-4 rounded-full bg-red-600 text-white flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">1</span>
-                <span>In Google Drive, ensure the Master Folder is set to <strong>&quot;Anyone with the link can view&quot;</strong>.</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <span className="w-4 h-4 rounded-full bg-red-600 text-white flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">2</span>
-                <span>Name your subfolders inside Drive to match your subjects (e.g. <em>Internal Medicine, Surgery, Anatomy</em>).</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <span className="w-4 h-4 rounded-full bg-red-600 text-white flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">3</span>
-                <span>Paste the Master folder link below and click <strong>Auto-Sync</strong>.</span>
-              </div>
-            </div>
-
-            <form onSubmit={handleMasterDriveSync} className="space-y-3.5 pt-1">
-              <div>
-                <label className="block text-xs font-semibold text-gray-300 mb-1">
-                  Master Google Drive Folder Link or ID <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="https://drive.google.com/drive/folders/1A2B3C4D5E6F..."
-                  value={masterDriveUrl}
-                  onChange={e => setMasterDriveUrl(e.target.value)}
-                  className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-red-600 rounded-lg px-3.5 py-2.5 text-xs text-white placeholder:text-gray-600 outline-none transition-colors"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-gray-300 mb-1">
-                  Google Drive API Key <span className="text-gray-500 font-normal">(Optional if set in environment)</span>
-                </label>
-                <input
-                  type="password"
-                  placeholder="AIzaSy... (leave blank to use server environment key)"
-                  value={masterApiKey}
-                  onChange={e => setMasterApiKey(e.target.value)}
-                  className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-red-600 rounded-lg px-3.5 py-2 text-xs text-white placeholder:text-gray-600 outline-none transition-colors"
-                />
-              </div>
-
-              <div className="flex gap-2.5 pt-2">
-                <button
-                  type="submit"
-                  disabled={isSyncingMaster}
-                  className="flex-1 py-2.5 bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-sm"
-                >
-                  {isSyncingMaster ? (
-                    <>
-                      <Loader2 size={14} className="animate-spin" /> Scanning & Mapping Drive...
-                    </>
-                  ) : (
-                    <>
-                      <Sparkles size={14} /> Discover & Auto-Sync All Shelves
-                    </>
-                  )}
-                </button>
-                <button
-                  type="button"
-                  disabled={isSyncingMaster}
-                  onClick={() => setMasterSyncModalOpen(false)}
-                  className="px-4 py-2.5 bg-[#181818] hover:bg-[#222] border border-[#2b2b2b] text-gray-400 hover:text-white rounded-lg text-xs font-medium transition-colors"
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-      {isAdmin && editingFolder && (
-        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-          <div className="bg-[#0e0e0e] border border-[#222] rounded-xl w-full max-w-md p-5 sm:p-6 space-y-4 relative shadow-2xl animate-in fade-in zoom-in-95 duration-150">
-            <button
-              onClick={() => {
-                setEditingFolder(null)
-                setDriveUrlInput("")
-              }}
-              className="absolute top-4 right-4 p-1.5 text-gray-400 hover:text-white transition-colors"
-            >
-              <X size={16} />
-            </button>
-
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-[#161616] border border-[#262626] flex items-center justify-center text-red-500 flex-shrink-0">
-                <FolderIcon name={editingFolder.iconName} size={18} />
-              </div>
-              <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-red-500">
-                  Admin Configuration
-                </span>
-                <h3 className="text-base font-bold text-white mt-0.5 leading-snug">
-                  {editingFolder.name}
-                </h3>
-              </div>
-            </div>
-
-            <p className="text-xs text-gray-400 leading-relaxed">
-              Attach the official Google Drive share link for this shelf folder. Changes will save to the database and become immediately accessible to all students.
-            </p>
-
-            <form onSubmit={handleSaveDriveLink} className="space-y-3.5">
-              <div>
-                <label className="block text-xs font-semibold text-gray-300 mb-1">
-                  Google Drive Folder Link
-                </label>
-                <input
-                  type="url"
-                  required
-                  placeholder="https://drive.google.com/drive/folders/1aBcD_XyZ..."
-                  value={driveUrlInput}
-                  onChange={e => setDriveUrlInput(e.target.value)}
-                  className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-red-600 rounded-lg px-3.5 py-2 text-xs text-white placeholder:text-gray-600 outline-none transition-colors"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-gray-300 mb-1">
-                  Verified File Count
-                </label>
-                <input
-                  type="number"
-                  min="0"
-                  placeholder="e.g. 15"
-                  value={itemCountInput}
-                  onChange={e => setItemCountInput(e.target.value)}
-                  className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-red-600 rounded-lg px-3.5 py-2 text-xs text-white placeholder:text-gray-600 outline-none transition-colors"
-                />
-              </div>
-
-              <div className="flex gap-2.5 pt-1">
-                <button
-                  type="submit"
-                  className="flex-1 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
-                >
-                  <Check size={13} /> Save to Library
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setEditingFolder(null)
-                    setDriveUrlInput("")
-                  }}
-                  className="px-3.5 py-2 bg-[#181818] hover:bg-[#222] border border-[#2b2b2b] text-gray-400 hover:text-white rounded-lg text-xs font-medium transition-colors"
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-      {/* ── IN-APP STUDY MATERIAL VIEWER (FULLSCREEN & STUDY NOTES) ── */}
+      {/* ── IN-APP STUDY MATERIAL VIEWER & NATIVE PLAYER ── */}
       {activeViewerMaterial && (
         <StudyMaterialViewer
           material={activeViewerMaterial}
