@@ -43,6 +43,7 @@ import {
   Sparkles,
   Maximize2,
   LucideIcon,
+  Loader2,
 } from "lucide-react"
 import { toast } from "sonner"
 import { StudyMaterialViewer, StudyMaterial } from "@/components/library/StudyMaterialViewer"
@@ -467,6 +468,12 @@ export default function LibraryPage() {
   const [newMatDesc, setNewMatDesc] = useState("")
   const [savingNewMat, setSavingNewMat] = useState(false)
 
+  // Master Google Drive Auto-Sync State (Option 1)
+  const [masterSyncModalOpen, setMasterSyncModalOpen] = useState(false)
+  const [masterDriveUrl, setMasterDriveUrl] = useState("")
+  const [masterApiKey, setMasterApiKey] = useState("")
+  const [isSyncingMaster, setIsSyncingMaster] = useState(false)
+
   // Fetch verified materials for the selected folder
   useEffect(() => {
     if (!selectedFolder) {
@@ -582,6 +589,71 @@ export default function LibraryPage() {
     const fileMatch = trimmed.match(/file\/d\/([a-zA-Z0-9_-]+)/)
     if (fileMatch) return fileMatch[1]
     return trimmed
+  }
+
+  // Admin-only: Auto-discover all shelf folders from one Master Google Drive folder
+  const handleMasterDriveSync = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!isAdmin) {
+      toast.error("Only administrators can run library synchronization.")
+      return
+    }
+    if (!masterDriveUrl.trim()) {
+      toast.error("Please enter your Master Google Drive folder link or ID.")
+      return
+    }
+
+    setIsSyncingMaster(true)
+    try {
+      const res = await fetch("/api/library/sync-drive", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          rootFolderId: masterDriveUrl.trim(),
+          apiKey: masterApiKey.trim() || undefined,
+        }),
+      })
+
+      const data = await res.json()
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to sync with Google Drive")
+      }
+
+      if (data.folders && data.folders.length > 0) {
+        // Map discovered subfolders onto shelves by matching folder name to subject shelf name
+        setShelves(prevShelves =>
+          prevShelves.map(group => ({
+            ...group,
+            folders: group.folders.map(f => {
+              const match = data.folders.find(
+                (df: any) =>
+                  df.name.toLowerCase().trim() === f.name.toLowerCase().trim() ||
+                  df.id === f.id
+              )
+              if (match) {
+                return {
+                  ...f,
+                  driveUrl: match.driveUrl,
+                  folderId: match.id,
+                  itemCount: match.itemCount || f.itemCount || 0,
+                }
+              }
+              return f
+            }),
+          }))
+        )
+
+        toast.success(`Synced ${data.foldersFound} folders from Master Drive!`)
+        setMasterSyncModalOpen(false)
+      } else {
+        toast.info("No subfolders were discovered inside this master folder.")
+      }
+    } catch (err: any) {
+      console.error("Master drive sync error:", err)
+      toast.error(err.message || "Failed to auto-sync Google Drive.")
+    } finally {
+      setIsSyncingMaster(false)
+    }
   }
 
   // Admin-only: Save or update Google Drive link for a shelf folder
@@ -813,6 +885,17 @@ export default function LibraryPage() {
           <div className="px-3 py-1.5 bg-[#111] border border-[#222] rounded-lg text-xs font-semibold text-gray-400 whitespace-nowrap">
             {totalFiles} files available
           </div>
+
+          {/* Admin-only Master Drive Auto-Sync button */}
+          {isAdmin && (
+            <button
+              onClick={() => setMasterSyncModalOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-bold transition-all shadow-sm whitespace-nowrap"
+              title="Auto-discover and link all shelf folders from one Master Google Drive folder"
+            >
+              <Sparkles size={11} /> Auto-Sync Master Drive
+            </button>
+          )}
 
           {/* Admin-only reset control */}
           {isAdmin && (
@@ -1356,7 +1439,108 @@ export default function LibraryPage() {
         </div>
       )}
 
-      {/* ── ADMIN MODAL: CONNECT / EDIT DRIVE LINK (ADMIN ONLY) ── */}
+      {/* ── ADMIN MODAL: MASTER GOOGLE DRIVE AUTO-SYNC (OPTION 1) ── */}
+      {isAdmin && masterSyncModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+          <div className="bg-[#0e0e0e] border border-[#222] rounded-2xl w-full max-w-lg p-5 sm:p-6 space-y-4 relative shadow-2xl animate-in fade-in zoom-in-95 duration-150">
+            <button
+              onClick={() => setMasterSyncModalOpen(false)}
+              className="absolute top-4 right-4 p-1.5 text-gray-400 hover:text-white transition-colors"
+            >
+              <X size={16} />
+            </button>
+
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-red-600/10 border border-red-600/20 flex items-center justify-center text-red-500 flex-shrink-0">
+                <Sparkles size={20} />
+              </div>
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-red-500">
+                  Option 1 · One Master Folder Architecture
+                </span>
+                <h3 className="text-base sm:text-lg font-bold text-white mt-0.5 leading-snug">
+                  Master Google Drive Auto-Sync
+                </h3>
+              </div>
+            </div>
+
+            <p className="text-xs text-gray-400 leading-relaxed">
+              Instead of pasting individual links for each shelf, paste your single <strong>Master Google Drive root folder</strong>. PodGuide will scan its subfolders, count items, and automatically map them to all subject shelves in one step.
+            </p>
+
+            {/* Quick 3-step guide badge */}
+            <div className="p-3 bg-[#121212] border border-[#1f1f1f] rounded-xl space-y-2 text-[11px] text-gray-300">
+              <div className="flex items-start gap-2">
+                <span className="w-4 h-4 rounded-full bg-red-600 text-white flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">1</span>
+                <span>In Google Drive, ensure the Master Folder is set to <strong>&quot;Anyone with the link can view&quot;</strong>.</span>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="w-4 h-4 rounded-full bg-red-600 text-white flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">2</span>
+                <span>Name your subfolders inside Drive to match your subjects (e.g. <em>Internal Medicine, Surgery, Anatomy</em>).</span>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="w-4 h-4 rounded-full bg-red-600 text-white flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">3</span>
+                <span>Paste the Master folder link below and click <strong>Auto-Sync</strong>.</span>
+              </div>
+            </div>
+
+            <form onSubmit={handleMasterDriveSync} className="space-y-3.5 pt-1">
+              <div>
+                <label className="block text-xs font-semibold text-gray-300 mb-1">
+                  Master Google Drive Folder Link or ID <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="https://drive.google.com/drive/folders/1A2B3C4D5E6F..."
+                  value={masterDriveUrl}
+                  onChange={e => setMasterDriveUrl(e.target.value)}
+                  className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-red-600 rounded-lg px-3.5 py-2.5 text-xs text-white placeholder:text-gray-600 outline-none transition-colors"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-gray-300 mb-1">
+                  Google Drive API Key <span className="text-gray-500 font-normal">(Optional if set in environment)</span>
+                </label>
+                <input
+                  type="password"
+                  placeholder="AIzaSy... (leave blank to use server environment key)"
+                  value={masterApiKey}
+                  onChange={e => setMasterApiKey(e.target.value)}
+                  className="w-full bg-[#0a0a0a] border border-[#2b2b2b] focus:border-red-600 rounded-lg px-3.5 py-2 text-xs text-white placeholder:text-gray-600 outline-none transition-colors"
+                />
+              </div>
+
+              <div className="flex gap-2.5 pt-2">
+                <button
+                  type="submit"
+                  disabled={isSyncingMaster}
+                  className="flex-1 py-2.5 bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-sm"
+                >
+                  {isSyncingMaster ? (
+                    <>
+                      <Loader2 size={14} className="animate-spin" /> Scanning & Mapping Drive...
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles size={14} /> Discover & Auto-Sync All Shelves
+                    </>
+                  )}
+                </button>
+                <button
+                  type="button"
+                  disabled={isSyncingMaster}
+                  onClick={() => setMasterSyncModalOpen(false)}
+                  className="px-4 py-2.5 bg-[#181818] hover:bg-[#222] border border-[#2b2b2b] text-gray-400 hover:text-white rounded-lg text-xs font-medium transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
       {isAdmin && editingFolder && (
         <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
           <div className="bg-[#0e0e0e] border border-[#222] rounded-xl w-full max-w-md p-5 sm:p-6 space-y-4 relative shadow-2xl animate-in fade-in zoom-in-95 duration-150">
