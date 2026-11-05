@@ -769,37 +769,37 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
 
       {/* ── MOBILE NAVBAR (Premier League-inspired) ── */}
       <header className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-[#050507]/95 backdrop-blur-md border-b border-white/[0.06]">
-        <nav className="flex items-center justify-between h-[52px] px-4">
-          {/* Left: Hamburger */}
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(true)}
-            className="flex items-center justify-center w-9 h-9 -ml-1"
-            aria-label="Open navigation menu"
-          >
-            <div className="flex flex-col gap-[5px]">
-              <span className="block w-[18px] h-[2px] bg-white rounded-full" />
-              <span className="block w-[18px] h-[2px] bg-white rounded-full" />
-              <span className="block w-[18px] h-[2px] bg-white rounded-full" />
-            </div>
-          </button>
-
-          {/* Center: Brand Name (no red P logo) */}
-          <Link href="/" className="font-display text-[17px] font-bold tracking-tight text-white">
-            Pod<span className="text-red-600">Guide</span>
-          </Link>
+        <nav className="flex items-center justify-between h-[54px] px-4">
+          {/* Left: Hamburger + Brand Name */}
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(true)}
+              className="flex items-center justify-center w-9 h-9 -ml-1 text-white hover:text-red-500 transition-colors"
+              aria-label="Open navigation menu"
+            >
+              <div className="flex flex-col gap-[4.5px]">
+                <span className="block w-5 h-[2px] bg-white rounded-full" />
+                <span className="block w-5 h-[2px] bg-white rounded-full" />
+                <span className="block w-5 h-[2px] bg-white rounded-full" />
+              </div>
+            </button>
+            <Link href="/" className="font-display text-[18px] font-bold tracking-tight text-white">
+              Pod<span className="text-red-600">Guide</span>
+            </Link>
+          </div>
 
           {/* Right: Join Pod + Sign In */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-3.5 sm:gap-4">
             <Link
               href="/register"
-              className="px-3 py-1.5 text-[11px] font-semibold text-white bg-transparent border border-white/20 rounded-lg hover:border-white/40 transition-colors"
+              className="px-3.5 py-1.5 text-xs font-semibold text-white border border-white/20 hover:border-white/40 rounded-lg hover:bg-white/5 transition-all whitespace-nowrap"
             >
               Join Pod
             </Link>
             <Link
               href="/login"
-              className="text-[11px] font-semibold text-gray-300 hover:text-white transition-colors"
+              className="text-xs font-semibold text-gray-200 hover:text-white transition-colors whitespace-nowrap px-1 py-1"
             >
               Sign In
             </Link>
@@ -834,9 +834,9 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
             <Link
               href="/login"
               onClick={() => setMobileMenuOpen(false)}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-[#0a0a0a] text-white text-sm font-semibold rounded-full hover:bg-[#1a1a1a] transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#0a0a0a] text-white text-sm font-semibold rounded-xl hover:bg-[#1a1a1a] transition-colors"
             >
-              <div className="w-5 h-5 rounded-full bg-red-600 flex items-center justify-center">
+              <div className="w-5 h-5 rounded-md bg-red-600 flex items-center justify-center">
                 <span className="text-white text-[9px] font-black">P</span>
               </div>
               Sign In
