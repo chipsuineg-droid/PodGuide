@@ -494,7 +494,6 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
   const [loginPassword, setLoginPassword] = useState("")
   const [selectedPartner, setSelectedPartner] = useState<PartnerData | null>(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [legalDropdownOpen, setLegalDropdownOpen] = useState(false)
 
   // Contact form state
   const [contactSubmitted, setContactSubmitted] = useState(false)
@@ -712,10 +711,10 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
 
   return (
     <div className="landing-page min-h-screen bg-[#050507] text-[#F4F4F5] font-sans antialiased selection:bg-red-600 selection:text-white">
-      {/* ── TOP NAVIGATION BAR (WITH PROMINENT LEGAL & POLICIES ACCESS) ── */}
-      <header className="fixed top-0 left-0 right-0 z-40 px-4 py-3.5 sm:px-8 bg-[#050507]/95 backdrop-blur-md border-b border-white/[0.06]">
+      {/* ── TOP NAVIGATION BAR ── */}
+      {/* Desktop Navbar (unchanged, hidden on mobile) */}
+      <header className="hidden lg:block fixed top-0 left-0 right-0 z-40 px-8 py-3.5 bg-[#050507]/95 backdrop-blur-md border-b border-white/[0.06]">
         <nav className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* Official Brand Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             <div className="w-7 h-7 rounded-md bg-red-600 flex items-center justify-center transition-transform group-hover:scale-105 shadow-sm">
               <span className="text-white text-xs font-black">P</span>
@@ -725,15 +724,13 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
             </span>
           </Link>
 
-          {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center gap-7 text-xs font-semibold text-gray-400">
+          <div className="flex items-center gap-7 text-xs font-semibold text-gray-400">
             <a href="#workspace" className="hover:text-white transition-colors duration-150">Workspace</a>
             <a href="#programs" className="hover:text-white transition-colors duration-150">Disciplines</a>
             <a href="#story" className="hover:text-white transition-colors duration-150">Our Story</a>
             <a href="#partners" className="hover:text-white transition-colors duration-150">Our Partners</a>
             <a href="#contact" className="hover:text-white transition-colors duration-150">Contact</a>
 
-            {/* Legal & Policies (Placed last after Contact, clean text without red icon) */}
             <div className="relative group/legal">
               <button
                 type="button"
@@ -742,139 +739,262 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                 <span>Legal & Policies</span>
                 <ChevronDown size={11} className="text-gray-500 group-hover/legal:text-white group-hover/legal:rotate-180 transition-transform duration-150" />
               </button>
-
-              {/* Hover Menu */}
               <div className="absolute top-full right-0 pt-2 hidden group-hover/legal:block z-50">
                 <div className="w-60 p-2 bg-[#0c0c0e] border border-[#222226] rounded-xl shadow-2xl backdrop-blur-lg space-y-1">
-                  <Link
-                    href="/terms"
-                    className="block p-2 rounded-lg hover:bg-[#16161a] transition-colors group/item"
-                  >
-                    <p className="text-xs font-bold text-white group-hover/item:text-red-400 transition-colors">
-                      Terms and Conditions
-                    </p>
-                    <p className="text-[10px] text-gray-400 leading-tight mt-0.5">
-                      Statutory terms, acceptable use & educational disclaimers
-                    </p>
+                  <Link href="/terms" className="block p-2 rounded-lg hover:bg-[#16161a] transition-colors group/item">
+                    <p className="text-xs font-bold text-white group-hover/item:text-red-400 transition-colors">Terms and Conditions</p>
+                    <p className="text-[10px] text-gray-400 leading-tight mt-0.5">Statutory terms, acceptable use & educational disclaimers</p>
                   </Link>
-
-                  <Link
-                    href="/privacy"
-                    className="block p-2 rounded-lg hover:bg-[#16161a] transition-colors group/item"
-                  >
-                    <p className="text-xs font-bold text-white group-hover/item:text-red-400 transition-colors">
-                      Privacy Policy
-                    </p>
-                    <p className="text-[10px] text-gray-400 leading-tight mt-0.5">
-                      Data protection, privacy rights & security measures
-                    </p>
+                  <Link href="/privacy" className="block p-2 rounded-lg hover:bg-[#16161a] transition-colors group/item">
+                    <p className="text-xs font-bold text-white group-hover/item:text-red-400 transition-colors">Privacy Policy</p>
+                    <p className="text-[10px] text-gray-400 leading-tight mt-0.5">Data protection, privacy rights & security measures</p>
                   </Link>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Action Buttons */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            {/* Quick Mobile/Tablet Legal Access Link */}
-            <Link
-              href="/terms"
-              title="View Legal and Policies"
-              className="lg:hidden flex items-center px-2.5 py-1.5 rounded-lg border border-[#222] bg-[#0c0c0e] hover:bg-[#141417] text-gray-300 hover:text-white text-xs font-medium transition-colors"
-            >
-              <span>Legal</span>
-            </Link>
-
+          <div className="flex items-center gap-3">
             <Link
               href={isLoggedIn ? "/dashboard" : "/login"}
-              className="group relative inline-flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-semibold tracking-wide transition-all duration-150 border border-white/10 shadow-[0_2px_10px_rgba(220,38,38,0.35),0_0_0_1px_rgba(255,255,255,0.12)_inset] active:scale-95"
+              className="group relative inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-semibold tracking-wide transition-all duration-150 border border-white/10 shadow-[0_2px_10px_rgba(220,38,38,0.35),0_0_0_1px_rgba(255,255,255,0.12)_inset] active:scale-95"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
               <span>{isLoggedIn ? "Open Dashboard" : "Launch App"}</span>
               <ChevronRight size={13} className="text-white/80 group-hover:translate-x-0.5 group-hover:text-white transition-transform duration-150" />
             </Link>
-
-            {/* Mobile Navigation Toggle */}
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg bg-[#0e0e11] border border-[#222] text-gray-300 hover:text-white transition-colors"
-              aria-label="Toggle navigation menu"
-            >
-              {mobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
-            </button>
           </div>
         </nav>
+      </header>
 
-        {/* Mobile Navigation Drawer */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-[#1a1a1f] mt-3 pt-3 pb-2 space-y-2.5 animate-in fade-in slide-in-from-top-2 duration-150">
-            <div className="grid grid-cols-2 gap-2 text-xs font-medium text-gray-300">
-              <a
-                href="#workspace"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 rounded-lg bg-[#0d0d10] border border-[#1f1f24] hover:text-white text-center"
-              >
-                Workspace
-              </a>
-              <a
-                href="#programs"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 rounded-lg bg-[#0d0d10] border border-[#1f1f24] hover:text-white text-center"
-              >
-                Disciplines
-              </a>
-              <a
-                href="#story"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 rounded-lg bg-[#0d0d10] border border-[#1f1f24] hover:text-white text-center"
-              >
-                Our Story
-              </a>
-              <a
-                href="#partners"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 rounded-lg bg-[#0d0d10] border border-[#1f1f24] hover:text-white text-center"
-              >
-                Our Partners
-              </a>
+      {/* ── MOBILE NAVBAR (Premier League-inspired) ── */}
+      <header className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-[#050507]/95 backdrop-blur-md border-b border-white/[0.06]">
+        <nav className="flex items-center justify-between h-[52px] px-4">
+          {/* Left: Hamburger */}
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(true)}
+            className="flex items-center justify-center w-9 h-9 -ml-1"
+            aria-label="Open navigation menu"
+          >
+            <div className="flex flex-col gap-[5px]">
+              <span className="block w-[18px] h-[2px] bg-white rounded-full" />
+              <span className="block w-[18px] h-[2px] bg-white rounded-full" />
+              <span className="block w-[18px] h-[2px] bg-white rounded-full" />
             </div>
+          </button>
 
-            {/* Mobile Legal and Policies Section */}
-            <div className="p-3 rounded-xl bg-[#0e0e12] border border-[#24242a] space-y-2">
-              <div className="text-xs font-bold text-white uppercase tracking-wider">
-                Legal & Governance
+          {/* Center: Brand Name (no red P logo) */}
+          <Link href="/" className="font-display text-[17px] font-bold tracking-tight text-white">
+            Pod<span className="text-red-600">Guide</span>
+          </Link>
+
+          {/* Right: Join Pod + Sign In */}
+          <div className="flex items-center gap-2.5">
+            <Link
+              href="/register"
+              className="px-3 py-1.5 text-[11px] font-semibold text-white bg-transparent border border-white/20 rounded-lg hover:border-white/40 transition-colors"
+            >
+              Join Pod
+            </Link>
+            <Link
+              href="/login"
+              className="text-[11px] font-semibold text-gray-300 hover:text-white transition-colors"
+            >
+              Sign In
+            </Link>
+          </div>
+        </nav>
+      </header>
+
+      {/* ── MOBILE FULL-SCREEN NAVIGATION DRAWER (Premier League-inspired) ── */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden fixed inset-0 z-50 bg-white overflow-y-auto" style={{ WebkitOverflowScrolling: "touch" }}>
+          {/* Drawer Header: Brand + Close */}
+          <div className="flex items-center justify-between px-5 pt-6 pb-4">
+            <Link
+              href="/"
+              onClick={() => setMobileMenuOpen(false)}
+              className="font-display text-xl font-bold tracking-tight text-[#0a0a0a]"
+            >
+              Pod<span className="text-red-600">Guide</span>
+            </Link>
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center justify-center w-9 h-9 text-[#333] hover:text-black transition-colors"
+              aria-label="Close navigation menu"
+            >
+              <X size={22} strokeWidth={1.5} />
+            </button>
+          </div>
+
+          {/* Sign In / Login — prominently first */}
+          <div className="px-5 pb-4">
+            <Link
+              href="/login"
+              onClick={() => setMobileMenuOpen(false)}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[#0a0a0a] text-white text-sm font-semibold rounded-full hover:bg-[#1a1a1a] transition-colors"
+            >
+              <div className="w-5 h-5 rounded-full bg-red-600 flex items-center justify-center">
+                <span className="text-white text-[9px] font-black">P</span>
               </div>
-              <div className="grid grid-cols-2 gap-2 text-xs">
+              Sign In
+            </Link>
+          </div>
+
+          {/* Primary Navigation Links */}
+          <nav className="px-5">
+            <ul className="space-y-0">
+              <li>
+                <a
+                  href="#workspace"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between py-3.5 text-[#0a0a0a] text-[17px] font-bold tracking-tight border-b border-gray-100"
+                >
+                  Workspace
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#programs"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between py-3.5 text-[#0a0a0a] text-[17px] font-bold tracking-tight border-b border-gray-100"
+                >
+                  Disciplines
+                </a>
+              </li>
+              <li>
+                <Link
+                  href={isLoggedIn ? "/library" : "/login"}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between py-3.5 text-[#0a0a0a] text-[17px] font-bold tracking-tight border-b border-gray-100"
+                >
+                  <span>Library</span>
+                  <ChevronRight size={16} className="text-gray-300" />
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={isLoggedIn ? "/practise" : "/login"}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between py-3.5 text-[#0a0a0a] text-[17px] font-bold tracking-tight border-b border-gray-100"
+                >
+                  <span>Practise</span>
+                  <ChevronRight size={16} className="text-gray-300" />
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={isLoggedIn ? "/learn" : "/login"}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between py-3.5 text-[#0a0a0a] text-[17px] font-bold tracking-tight border-b border-gray-100"
+                >
+                  <span>Learn</span>
+                  <ChevronRight size={16} className="text-gray-300" />
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={isLoggedIn ? "/medstore" : "/login"}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between py-3.5 text-[#0a0a0a] text-[17px] font-bold tracking-tight border-b border-gray-100"
+                >
+                  <span>MedStore</span>
+                  <ChevronRight size={16} className="text-gray-300" />
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="#story"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between py-3.5 text-[#0a0a0a] text-[17px] font-bold tracking-tight border-b border-gray-100"
+                >
+                  Our Story
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#partners"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between py-3.5 text-[#0a0a0a] text-[17px] font-bold tracking-tight border-b border-gray-100"
+                >
+                  Our Partners
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          {/* Divider */}
+          <div className="mx-5 my-4 border-t border-gray-200" />
+
+          {/* Secondary Navigation: More from PodGuide */}
+          <div className="px-5">
+            <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-3">
+              More from PodGuide
+            </p>
+            <ul className="space-y-0">
+              <li>
+                <Link
+                  href="/register"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between py-3 text-[#0a0a0a] text-[15px] font-semibold border-b border-gray-100"
+                >
+                  Join Pod
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between py-3 text-[#0a0a0a] text-[15px] font-semibold border-b border-gray-100"
+                >
+                  Contact Us
+                </a>
+              </li>
+              <li>
                 <Link
                   href="/terms"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 rounded-lg bg-[#141418] border border-[#222228] text-gray-200 hover:text-white text-center font-medium"
+                  className="flex items-center justify-between py-3 text-[#0a0a0a] text-[15px] font-semibold border-b border-gray-100"
                 >
-                  Terms & Conditions
+                  Terms and Conditions
                 </Link>
+              </li>
+              <li>
                 <Link
                   href="/privacy"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 rounded-lg bg-[#141418] border border-[#222228] text-gray-200 hover:text-white text-center font-medium"
+                  className="flex items-center justify-between py-3 text-[#0a0a0a] text-[15px] font-semibold border-b border-gray-100"
                 >
                   Privacy Policy
                 </Link>
-              </div>
-            </div>
+              </li>
+            </ul>
+          </div>
 
-            <div>
-              <a
-                href="#contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block text-center p-2 rounded-lg bg-[#0c0c0e] text-xs text-gray-400 hover:text-white"
-              >
-                Contact Administration
+          {/* Social Channels at Bottom */}
+          <div className="px-5 pt-6 pb-10">
+            <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-3">
+              PodGuide Channels
+            </p>
+            <div className="flex items-center gap-4">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 hover:text-black transition-colors">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 hover:text-black transition-colors">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 hover:text-black transition-colors">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1 0-5.78 2.92 2.92 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.57 6.33 6.33 0 0 0 9.37 22a6.33 6.33 0 0 0 6.37-6.22V9.4a8.16 8.16 0 0 0 3.85.96V7.04a4.85 4.85 0 0 1-0-.35z"/></svg>
+              </a>
+              <a href="mailto:info@podmyth.co.zw" className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 hover:text-black transition-colors">
+                <Mail size={15} />
               </a>
             </div>
           </div>
-        )}
-      </header>
+        </div>
+      )}
 
       {/* ── MAIN HERO SECTION ── */}
       <section className="relative min-h-[72vh] pt-32 pb-12 flex flex-col items-center justify-center text-center px-4 max-w-5xl mx-auto overflow-hidden">
