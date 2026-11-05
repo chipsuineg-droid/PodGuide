@@ -74,6 +74,9 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent",
     title: "PodGuide",
   },
+  verification: {
+    google: "GekTjDQBJI9rg5HEDiPM0DzjkioiDlMqGHQrTqzzh98",
+  },
 }
 
 export const viewport: Viewport = {
