@@ -422,52 +422,82 @@ export default function MedStorePage({ isAdmin: initialIsAdmin = false }: MedSto
     return getCartSubtotal() + getCartEmbroideryTotal()
   }
 
-  const handleWhatsAppCheckout = () => {
+  const handleWhatsAppCheckout = async () => {
     if (cart.length === 0) {
       toast.error("Your cart is empty. Please select products first.")
       return
     }
 
-    const totalUSD = getCartTotalAmount()
-    const totalItemsCount = cart.reduce((acc, it) => acc + it.quantity, 0)
+    try {
+      // Authoritative server-side price recalculation (rechecks prices against DB)
+      const res = await fetch("/api/medstore/validate-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: cart.map(item => ({
+            productId: item.product.id,
+            name: item.product.name,
+            quantity: item.quantity,
+            chosenColor: item.selectedColor,
+            chosenSize: item.selectedSize,
+          })),
+        }),
+      })
 
-    let message = `🩺 *NEW PODGUIDE / TANC ORDER*\n`
-    message += `────────────────────────────\n`
-    message += `📦 *Order Summary (${totalItemsCount} total item${totalItemsCount > 1 ? "s" : ""}):*\n\n`
-
-    cart.forEach((item, idx) => {
-      const embCost = item.withEmbroidery ? 4 : 0
-      const unitTotal = item.product.priceUSD + embCost
-      const itemSubtotal = unitTotal * item.quantity
-
-      message += `${idx + 1}️⃣ *${item.product.name}*\n`
-      message += `   • *Collection:* ${item.product.collection.toUpperCase()}\n`
-      message += `   • *Colour:* ${item.selectedColor.name}\n`
-      message += `   • *Size:* ${item.selectedSize}\n`
-      message += `   • *Quantity:* ${item.quantity}\n`
-      if (item.withEmbroidery && item.embroideryName) {
-        message += `   • *Custom Embroidery:* "${item.embroideryName}" (+$4.00)\n`
-      } else if (item.withEmbroidery) {
-        message += `   • *Custom Embroidery:* Medical Embroidery (+$4.00)\n`
+      const validation = await res.json()
+      if (!res.ok || !validation.success) {
+        toast.error(validation.error || "Price verification failed. Please try again.")
+        return
       }
-      message += `   • *Unit Price:* $${item.product.priceUSD.toFixed(2)} USD\n`
-      message += `   • *Item Total:* $${itemSubtotal.toFixed(2)} USD\n`
-      if (item.product.fabricTech) {
-        message += `   • *Material:* ${item.product.fabricTech}\n`
-      }
-      message += `\n`
-    })
 
-    message += `────────────────────────────\n`
-    message += `💰 *TOTAL AMOUNT:* $${totalUSD.toFixed(2)} USD\n`
-    message += `🚚 *Campus Delivery:* FREE Drop\n`
-    message += `📞 *Order Destination:* ${WHATSAPP_ORDER_NUMBER}\n`
-    message += `────────────────────────────\n`
-    message += `Hi! I would like to place this order from PodGuide MedStore. Please confirm stock availability and send payment details. Thank you!`
+      const embroideryTotal = getCartEmbroideryTotal()
+      const totalUSD = validation.subtotal_usd + embroideryTotal
+      const totalItemsCount = validation.itemCount
 
-    const encoded = encodeURIComponent(message)
-    const waUrl = `https://wa.me/${WHATSAPP_INTL_NUMBER}?text=${encoded}`
-    window.open(waUrl, "_blank")
+      let message = `🩺 *NEW PODGUIDE / TANC ORDER*\n`
+      message += `────────────────────────────\n`
+      message += `📦 *Order Summary (${totalItemsCount} total item${totalItemsCount > 1 ? "s" : ""}):*\n\n`
+
+      cart.forEach((item, idx) => {
+        const validatedItem = validation.verifiedItems?.[idx]
+        const unitPrice = validatedItem ? validatedItem.unit_price_usd : item.product.priceUSD
+        const embCost = item.withEmbroidery ? 4 : 0
+        const unitTotal = unitPrice + embCost
+        const itemSubtotal = unitTotal * item.quantity
+
+        message += `${idx + 1}️⃣ *${item.product.name}*\n`
+        message += `   • *Collection:* ${item.product.collection.toUpperCase()}\n`
+        message += `   • *Colour:* ${item.selectedColor.name}\n`
+        message += `   • *Size:* ${item.selectedSize}\n`
+        message += `   • *Quantity:* ${item.quantity}\n`
+        if (item.withEmbroidery && item.embroideryName) {
+          message += `   • *Custom Embroidery:* "${item.embroideryName}" (+$4.00)\n`
+        } else if (item.withEmbroidery) {
+          message += `   • *Custom Embroidery:* Medical Embroidery (+$4.00)\n`
+        }
+        message += `   • *Unit Price (Server Verified):* $${unitPrice.toFixed(2)} USD\n`
+        message += `   • *Item Total:* $${itemSubtotal.toFixed(2)} USD\n`
+        if (item.product.fabricTech) {
+          message += `   • *Material:* ${item.product.fabricTech}\n`
+        }
+        message += `\n`
+      })
+
+      message += `────────────────────────────\n`
+      message += `💰 *TOTAL AMOUNT (Server Verified):* $${totalUSD.toFixed(2)} USD\n`
+      message += `🚚 *Campus Delivery:* FREE Drop\n`
+      message += `📞 *Order Destination:* ${WHATSAPP_ORDER_NUMBER}\n`
+      message += `🔒 *Security Check:* Server-Validated Pricing\n`
+      message += `────────────────────────────\n`
+      message += `Hi! I would like to place this order from PodGuide MedStore. Please confirm stock availability and send payment details. Thank you!`
+
+      const encoded = encodeURIComponent(message)
+      const waUrl = `https://wa.me/${WHATSAPP_INTL_NUMBER}?text=${encoded}`
+      window.open(waUrl, "_blank")
+    } catch (err: any) {
+      console.error("Checkout price validation error:", err)
+      toast.error("Could not verify prices with the server. Please check your connection.")
+    }
   }
 
   // Open Admin Add Modal

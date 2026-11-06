@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
+import { createClient as createServerSupabase } from "@/lib/supabase/server"
 import { createClient } from "@supabase/supabase-js"
 
 interface GoogleDriveItem {
@@ -210,6 +211,23 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
+    // 1. Lock: verify user is authenticated and is admin
+    const supabaseUser = await createServerSupabase()
+    const { data: { user }, error: authErr } = await supabaseUser.auth.getUser()
+    if (authErr || !user) {
+      return NextResponse.json({ error: "Unauthorized. Please log in as an administrator." }, { status: 401 })
+    }
+
+    const { data: profile } = await supabaseUser
+      .from("student_profiles")
+      .select("is_admin")
+      .eq("user_id", user.id)
+      .single()
+
+    if (!profile?.is_admin) {
+      return NextResponse.json({ error: "Forbidden: Administrator clearance required." }, { status: 403 })
+    }
+
     const body = await req.json().catch(() => ({}))
     const rootFolderInput = body.rootFolderId || body.rootUrl || process.env.GOOGLE_DRIVE_ROOT_FOLDER_ID
     const apiKey = body.apiKey || process.env.GOOGLE_DRIVE_API_KEY || process.env.GEMINI_API_KEY

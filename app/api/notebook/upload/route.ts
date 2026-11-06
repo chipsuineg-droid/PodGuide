@@ -3,7 +3,20 @@ import { createClient } from "@/lib/supabase/server"
 
 export const runtime = "nodejs"
 
-// Resilient load of pure pdf-parse lib (avoiding test file bugs or web worker crashes)
+const MAX_DOCUMENT_SIZE_BYTES = 15 * 1024 * 1024 // 15 MB
+
+const ALLOWED_DOCUMENT_MIMES = new Set([
+  "application/pdf",
+  "text/plain",
+  "text/markdown",
+  "text/csv",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+])
+
+const ALLOWED_EXTENSIONS = new Set(["pdf", "txt", "md", "csv", "doc", "docx"])
+
+// Resilient load of pure pdf-parse lib
 let pdfParserLib: any = null
 try {
   pdfParserLib = require("pdf-parse/lib/pdf-parse.js")
@@ -15,9 +28,9 @@ export async function POST(req: NextRequest) {
   try {
     const supabase = await createClient()
 
-    // Verify authentication
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) {
+    // 1. Verify authentication
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) {
       return NextResponse.json({ error: "Unauthorized. Please log in.", success: false }, { status: 401 })
     }
 
@@ -27,7 +40,7 @@ export async function POST(req: NextRequest) {
     } catch (e: any) {
       return NextResponse.json({
         error: `Could not parse upload payload: ${e?.message || "File too large"}`,
-        success: false
+        success: false,
       }, { status: 400 })
     }
 
@@ -38,8 +51,41 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing file or notebook ID", success: false }, { status: 400 })
     }
 
+    // 2. Lock: verify user owns this notebook before permitting upload
+    const { data: notebook, error: nbError } = await supabase
+      .from("notebooks")
+      .select("id")
+      .eq("id", notebookId)
+      .eq("user_id", user.id)
+      .single()
+
+    if (nbError || !notebook) {
+      return NextResponse.json(
+        { error: "Forbidden: You do not have permission to modify this notebook.", success: false },
+        { status: 403 }
+      )
+    }
+
+    // 3. File size limit validation (15MB)
+    if (file.size > MAX_DOCUMENT_SIZE_BYTES) {
+      return NextResponse.json(
+        { error: `File exceeds 15MB limit (${(file.size / (1024 * 1024)).toFixed(1)}MB). Please upload a smaller document.`, success: false },
+        { status: 400 }
+      )
+    }
+
+    // 4. File extension & MIME type whitelist validation
     const fileName = file.name || "Uploaded_Document"
-    const fileType = file.type || "application/octet-stream"
+    const extension = fileName.split(".").pop()?.toLowerCase() || ""
+    const fileType = file.type?.toLowerCase() || "application/octet-stream"
+
+    if (!ALLOWED_EXTENSIONS.has(extension) && !ALLOWED_DOCUMENT_MIMES.has(fileType)) {
+      return NextResponse.json(
+        { error: "Unsupported file type. Permitted formats: PDF, TXT, Markdown, CSV, and Word documents.", success: false },
+        { status: 400 }
+      )
+    }
+
     const fileSize = file.size || 0
     const timestamp = Date.now()
     const cleanFileName = fileName.replace(/[^a-zA-Z0-9._-]/g, "_")
@@ -57,7 +103,7 @@ export async function POST(req: NextRequest) {
     let publicUrl: string = ""
     let textContent: string = ""
 
-    // ── 1. Text Extraction Based on File Type ──
+    // ── 5. Text Extraction Based on File Type ──
     const lowerName = fileName.toLowerCase()
     const isPdf = fileType.includes("pdf") || lowerName.endsWith(".pdf")
     const isText = fileType.startsWith("text/") ||
@@ -81,7 +127,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // ── 2. Storage Upload (Supabase Storage) ──
+    // ── 6. Storage Upload (Supabase Storage) ──
     let uploadedSuccessfully = false
     const bucketsToTry = ["notebooks", "materials"]
 
@@ -118,15 +164,16 @@ export async function POST(req: NextRequest) {
     // Normalized Document Type
     const normalizedType: "pdf" | "text" = isPdf ? "pdf" : "text"
 
-    // ── 3. Save Record in Supabase notebook_documents ──
+    // ── 7. Save Record in Supabase notebook_documents ──
     const docPayload: any = {
       notebook_id: notebookId,
-      file_name: fileName,
+      file_name: cleanFileName,
       file_url: publicUrl.length > 200000 ? "" : publicUrl,
       file_type: normalizedType,
       file_size: fileSize,
       processing_status: "ready",
       extracted_text: textContent ? textContent.slice(0, 150000) : null,
+      text_content: textContent ? textContent.slice(0, 150000) : null,
     }
 
     const { data: doc, error: dbError } = await supabase
@@ -141,7 +188,7 @@ export async function POST(req: NextRequest) {
         doc: {
           id: `doc-${Date.now()}`,
           notebook_id: notebookId,
-          file_name: fileName,
+          file_name: cleanFileName,
           file_url: publicUrl,
           file_type: normalizedType,
           file_size: fileSize,
@@ -169,7 +216,7 @@ export async function POST(req: NextRequest) {
     console.error("Upload route error:", err)
     return NextResponse.json({
       error: err?.message || "Upload failed. Please retry.",
-      success: false
+      success: false,
     }, { status: 500 })
   }
 }

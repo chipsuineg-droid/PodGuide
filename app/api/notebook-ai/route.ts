@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
+import { createClient } from "@/lib/supabase/server"
 
 // Allow up to 60 seconds for Gemini to respond (Vercel defaults to 10s which is too short)
 export const maxDuration = 60
@@ -55,6 +56,14 @@ function getRelevantTextbooks(context: string, subject: string): string[] {
 
 export async function POST(req: NextRequest) {
   try {
+    // 1. Enforce Authentication
+    const supabase = await createClient()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+
+    if (authError || !user) {
+      return NextResponse.json({ error: "Unauthorized. Please sign in to access Notebook AI." }, { status: 401 })
+    }
+
     const { messages, context, mode } = await req.json()
     const lastUserMessage = messages?.[messages.length - 1]?.content || ""
     const textbooks = getRelevantTextbooks(context || "", lastUserMessage)
@@ -164,8 +173,7 @@ A: [Answer]
     const GEMINI_KEY =
       process.env.GOOGLE_GENERATIVE_AI_API_KEY ||
       process.env.GEMINI_API_KEY ||
-      process.env.GOOGLE_API_KEY ||
-      process.env.NEXT_PUBLIC_GEMINI_API_KEY
+      process.env.GOOGLE_API_KEY
     if (GEMINI_KEY) {
       // Models ordered by reliability — gemini-3.5-flash is confirmed working
       const candidateModels = [
@@ -281,8 +289,7 @@ A: [Answer]
     const hasGeminiKey = !!(
       process.env.GOOGLE_GENERATIVE_AI_API_KEY ||
       process.env.GEMINI_API_KEY ||
-      process.env.GOOGLE_API_KEY ||
-      process.env.NEXT_PUBLIC_GEMINI_API_KEY
+      process.env.GOOGLE_API_KEY
     )
     const hasOpenAIKey = !!(process.env.OPENAI_API_KEY && process.env.OPENAI_API_KEY.startsWith("sk-"))
 

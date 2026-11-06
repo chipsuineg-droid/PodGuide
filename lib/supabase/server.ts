@@ -2,10 +2,12 @@ import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://bltbfrgfsjppwhrevlql.supabase.co'
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJsdGJmcmdmc2pwcHdocmV2bHFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgyODQ4MTQsImV4cCI6MjEwMzg2MDgxNH0.GU5mkT3O5Iuru2Hbl6hvc8ZpGlRJiGy0UoDymhKQL1E'
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
 
 export async function createClient() {
   const cookieStore = await cookies()
+  const isProduction = process.env.NODE_ENV === 'production'
+
   return createServerClient(
     SUPABASE_URL,
     SUPABASE_ANON_KEY,
@@ -15,7 +17,13 @@ export async function createClient() {
         setAll(cookiesToSet) {
           try {
             cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options)
+              cookieStore.set(name, value, {
+                ...options,
+                httpOnly: options?.httpOnly ?? true,
+                secure: options?.secure ?? isProduction,
+                sameSite: options?.sameSite ?? 'lax',
+                path: options?.path ?? '/',
+              })
             )
           } catch {}
         },

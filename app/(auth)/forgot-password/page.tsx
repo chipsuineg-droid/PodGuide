@@ -19,7 +19,7 @@ export default function ForgotPasswordPage() {
     const isLocal = typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
     const redirectUrl = isLocal
       ? `${window.location.origin}/login`
-      : "https://www.podguide.org.zw/login"
+      : "https://podguide.org.zw/login"
     const { error: err } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: redirectUrl,
     })

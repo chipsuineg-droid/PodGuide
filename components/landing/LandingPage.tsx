@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { createClient } from "@/lib/supabase/client"
 import MobileFooter from "./MobileFooter"
 import {
   Zap,
@@ -492,6 +493,8 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
   const [loginModalOpen, setLoginModalOpen] = useState(false)
   const [loginEmail, setLoginEmail] = useState("")
   const [loginPassword, setLoginPassword] = useState("")
+  const [loginLoading, setLoginLoading] = useState(false)
+  const [loginError, setLoginError] = useState("")
   const [selectedPartner, setSelectedPartner] = useState<PartnerData | null>(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
@@ -695,10 +698,35 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
     }
   }, [])
 
-  const handleLoginSubmit = (e: React.FormEvent) => {
+  const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setLoginModalOpen(false)
-    router.push("/login")
+    setLoginError("")
+    if (!loginEmail || !loginPassword) {
+      setLoginError("Please enter your email and password.")
+      return
+    }
+
+    setLoginLoading(true)
+    try {
+      const supabase = createClient()
+      const { data, error: err } = await supabase.auth.signInWithPassword({
+        email: loginEmail.trim(),
+        password: loginPassword,
+      })
+
+      if (err) {
+        setLoginError(err.message)
+        setLoginLoading(false)
+        return
+      }
+
+      setLoginModalOpen(false)
+      router.push("/dashboard")
+      router.refresh()
+    } catch (err: any) {
+      setLoginError(err?.message || "Authentication failed. Please try again.")
+      setLoginLoading(false)
+    }
   }
 
   const handleContactSubmit = (e: React.FormEvent) => {
@@ -2117,11 +2145,17 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
               <p className="text-xs text-gray-400 mt-1">Sign in to access your learning dashboard.</p>
             </div>
 
+            {loginError && (
+              <div className="mb-4 p-3 bg-red-600/10 border border-red-500/30 rounded-xl text-xs text-red-400 font-medium">
+                {loginError}
+              </div>
+            )}
+
             <form onSubmit={handleLoginSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-medium text-gray-300 mb-1.5">Student or Faculty Email</label>
                 <input
-                  type="text"
+                  type="email"
                   required
                   placeholder="student@uz.ac.zw"
                   value={loginEmail}
@@ -2147,16 +2181,24 @@ export function LandingPage({ isLoggedIn }: LandingPageProps) {
                   <input type="checkbox" className="accent-red-600 rounded" />
                   <span>Remember me</span>
                 </label>
-                <Link href="/login" className="text-red-500 hover:underline">
+                <Link href="/forgot-password" className="text-red-500 hover:underline">
                   Forgot password?
                 </Link>
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-xl shadow-md transition"
+                disabled={loginLoading}
+                className="w-full py-3 bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white text-xs font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2"
               >
-                Launch Interactive App
+                {loginLoading ? (
+                  <>
+                    <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <span>Signing in securely...</span>
+                  </>
+                ) : (
+                  <span>Sign In to PodGuide</span>
+                )}
               </button>
             </form>
 

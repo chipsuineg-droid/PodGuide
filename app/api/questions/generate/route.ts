@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
+import { createClient } from "@/lib/supabase/server"
 
 export const maxDuration = 60
 
@@ -17,6 +18,13 @@ const TEXTBOOK_MAP: Record<string, string> = {
 
 export async function POST(req: NextRequest) {
   try {
+    const supabase = await createClient()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+
+    if (authError || !user) {
+      return NextResponse.json({ error: "Unauthorized. Please sign in." }, { status: 401 })
+    }
+
     const {
       program_id = "medicine",
       academic_level = "Year 4",
@@ -27,8 +35,7 @@ export async function POST(req: NextRequest) {
 
     const apiKey =
       process.env.GOOGLE_GENERATIVE_AI_API_KEY ||
-      process.env.GEMINI_API_KEY ||
-      process.env.NEXT_PUBLIC_GEMINI_API_KEY
+      process.env.GEMINI_API_KEY
 
     const prompt = `You are an expert medical educator creating board-style MCQ exam questions for ${program_id} students at level "${academic_level}" focusing on "${subject}" (${topic}).
 Generate EXACTLY ${count} authentic, high-yield, clinical scenario multiple-choice questions.
