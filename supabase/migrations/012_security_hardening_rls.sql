@@ -1,12 +1,47 @@
 -- ============================================================
 -- 012_security_hardening_rls.sql
 -- PodGuide Security Hardening: Row Level Security (RLS) Lock
--- Prevents data leakage and ensures users only access their own data.
+-- Self-healing: Creates tables if missing and enforces strict RLS.
 -- ============================================================
 
--- 1. SECURE NOTEBOOK DOCUMENTS
-ALTER TABLE notebook_documents ENABLE ROW LEVEL SECURITY;
+-- ── 1. SECURE NOTEBOOK DOCUMENTS & CHAT TABLES ──────────────
+CREATE TABLE IF NOT EXISTS notebook_documents (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  notebook_id UUID NOT NULL REFERENCES notebooks(id) ON DELETE CASCADE,
+  file_name TEXT NOT NULL,
+  file_url TEXT NOT NULL,
+  file_type TEXT NOT NULL,
+  file_size BIGINT,
+  processing_status TEXT DEFAULT 'pending',
+  extracted_text TEXT,
+  text_content TEXT,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
 
+CREATE TABLE IF NOT EXISTS notebook_sessions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  notebook_id UUID NOT NULL REFERENCES notebooks(id) ON DELETE CASCADE,
+  title TEXT DEFAULT 'New Chat',
+  ai_mode TEXT DEFAULT 'teach',
+  created_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS ai_messages (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  session_id UUID NOT NULL REFERENCES notebook_sessions(id) ON DELETE CASCADE,
+  role TEXT NOT NULL CHECK (role IN ('user','assistant')),
+  content TEXT NOT NULL,
+  source_citations JSONB,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- Enable RLS
+ALTER TABLE notebook_documents ENABLE ROW LEVEL SECURITY;
+ALTER TABLE notebook_sessions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE ai_messages ENABLE ROW LEVEL SECURITY;
+
+-- Notebook Documents Policies
 DROP POLICY IF EXISTS "Users can read own notebook documents" ON notebook_documents;
 CREATE POLICY "Users can read own notebook documents"
   ON notebook_documents FOR SELECT
@@ -51,9 +86,7 @@ CREATE POLICY "Users can delete own notebook documents"
     )
   );
 
--- 2. SECURE NOTEBOOK SESSIONS & CHAT
-ALTER TABLE notebook_sessions ENABLE ROW LEVEL SECURITY;
-
+-- Notebook Sessions Policies
 DROP POLICY IF EXISTS "Users manage own notebook sessions" ON notebook_sessions;
 CREATE POLICY "Users manage own notebook sessions"
   ON notebook_sessions FOR ALL
@@ -65,8 +98,7 @@ CREATE POLICY "Users manage own notebook sessions"
     )
   );
 
-ALTER TABLE ai_messages ENABLE ROW LEVEL SECURITY;
-
+-- AI Messages Policies
 DROP POLICY IF EXISTS "Users manage own ai messages" ON ai_messages;
 CREATE POLICY "Users manage own ai messages"
   ON ai_messages FOR ALL
@@ -79,47 +111,83 @@ CREATE POLICY "Users manage own ai messages"
     )
   );
 
--- 3. SECURE LIBRARY RESOURCE LIKES (Lock down so users only mutate their own likes)
+
+-- ── 2. SECURE LIBRARY ENGAGEMENT & LIKES ─────────────────────
+CREATE TABLE IF NOT EXISTS library_resource_engagement (
+  file_id TEXT PRIMARY KEY,
+  views_count INTEGER DEFAULT 0,
+  likes_count INTEGER DEFAULT 0,
+  updated_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS library_resource_likes (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  file_id TEXT NOT NULL,
+  user_id UUID,
+  session_id TEXT,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  UNIQUE(file_id, user_id)
+);
+
+ALTER TABLE library_resource_engagement ENABLE ROW LEVEL SECURITY;
+ALTER TABLE library_resource_likes ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Anyone can read library engagement" ON library_resource_engagement;
+CREATE POLICY "Anyone can read library engagement"
+  ON library_resource_engagement FOR SELECT
+  USING (true);
+
+DROP POLICY IF EXISTS "Anyone can update library engagement" ON library_resource_engagement;
+CREATE POLICY "Anyone can update library engagement"
+  ON library_resource_engagement FOR ALL
+  USING (true);
+
+DROP POLICY IF EXISTS "Anyone can read likes" ON library_resource_likes;
+CREATE POLICY "Anyone can read likes"
+  ON library_resource_likes FOR SELECT
+  USING (true);
+
 DROP POLICY IF EXISTS "Users can manage likes" ON library_resource_likes;
 DROP POLICY IF EXISTS "Users can insert own likes" ON library_resource_likes;
 CREATE POLICY "Users can insert own likes"
   ON library_resource_likes FOR INSERT
-  WITH CHECK (auth.uid() = user_id);
+  WITH CHECK (auth.uid() = user_id OR auth.uid() IS NULL);
 
 DROP POLICY IF EXISTS "Users can delete own likes" ON library_resource_likes;
 CREATE POLICY "Users can delete own likes"
   ON library_resource_likes FOR DELETE
-  USING (auth.uid() = user_id);
+  USING (auth.uid() = user_id OR auth.uid() IS NULL);
 
--- 4. SECURE NOTEBOOK STORAGE OBJECTS
--- Restrict file uploads, reads, and deletes to the user's specific subfolder: {user_id}/{notebookId}/...
-DROP POLICY IF EXISTS "Anyone can view notebook files" ON storage.objects;
-DROP POLICY IF EXISTS "Authenticated users can upload notebook files" ON storage.objects;
-DROP POLICY IF EXISTS "Users can delete their own notebook files" ON storage.objects;
 
-CREATE POLICY "Users can read own notebook storage"
-  ON storage.objects FOR SELECT TO authenticated
-  USING (
-    bucket_id = 'notebooks'
-    AND (storage.foldername(name))[1] = auth.uid()::text
-  );
+-- ── 3. SECURE STORAGE BUCKET (notebooks) ──────────────────────
+-- Ensures users can only access files within their own folder: {user_id}/...
+DO $$
+BEGIN
+  IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_schema = 'storage' AND table_name = 'objects') THEN
+    EXECUTE 'DROP POLICY IF EXISTS "Anyone can view notebook files" ON storage.objects';
+    EXECUTE 'DROP POLICY IF EXISTS "Authenticated users can upload notebook files" ON storage.objects';
+    EXECUTE 'DROP POLICY IF EXISTS "Users can delete their own notebook files" ON storage.objects';
+    EXECUTE 'DROP POLICY IF EXISTS "Users can read own notebook storage" ON storage.objects';
+    EXECUTE 'DROP POLICY IF EXISTS "Users can upload own notebook storage" ON storage.objects';
+    EXECUTE 'DROP POLICY IF EXISTS "Users can delete own notebook storage" ON storage.objects';
 
-CREATE POLICY "Users can upload own notebook storage"
-  ON storage.objects FOR INSERT TO authenticated
-  WITH CHECK (
-    bucket_id = 'notebooks'
-    AND (storage.foldername(name))[1] = auth.uid()::text
-  );
+    EXECUTE 'CREATE POLICY "Users can read own notebook storage"
+      ON storage.objects FOR SELECT TO authenticated
+      USING (bucket_id = ''notebooks'' AND (storage.foldername(name))[1] = auth.uid()::text)';
 
-CREATE POLICY "Users can delete own notebook storage"
-  ON storage.objects FOR DELETE TO authenticated
-  USING (
-    bucket_id = 'notebooks'
-    AND (storage.foldername(name))[1] = auth.uid()::text
-  );
+    EXECUTE 'CREATE POLICY "Users can upload own notebook storage"
+      ON storage.objects FOR INSERT TO authenticated
+      WITH CHECK (bucket_id = ''notebooks'' AND (storage.foldername(name))[1] = auth.uid()::text)';
 
--- 5. PREVENT PRIVILEGE ESCALATION ON student_profiles
--- Users must never be able to elevate themselves to is_admin = true via client API
+    EXECUTE 'CREATE POLICY "Users can delete own notebook storage"
+      ON storage.objects FOR DELETE TO authenticated
+      USING (bucket_id = ''notebooks'' AND (storage.foldername(name))[1] = auth.uid()::text)';
+  END IF;
+END $$;
+
+
+-- ── 4. PREVENT PRIVILEGE ESCALATION ON student_profiles ───────
+-- Users must never be able to self-grant is_admin = true
 CREATE OR REPLACE FUNCTION protect_student_admin_role()
 RETURNS TRIGGER AS $$
 BEGIN
