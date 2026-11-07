@@ -2,20 +2,24 @@
 import { useState, useEffect, useRef, useMemo } from "react"
 import {
   Stethoscope, Clock, CheckCircle, ArrowLeft, RotateCcw,
-  FileText, MessageSquare, ChevronRight, Check,
+  FileText, MessageSquare, ChevronDown, Check,
   AlertCircle, HelpCircle, User, Award, Sliders, Play,
-  CheckSquare, Lightbulb, Star, ShieldAlert
+  CheckSquare, Lightbulb, Star, ShieldAlert, X, ChevronRight,
+  Sparkles, BookOpen
 } from "lucide-react"
 import { toast } from "sonner"
+import { createClient } from "@/lib/supabase/client"
 import {
   OSCE_MODULES,
   VIGNETTE_CASES,
   EXAM_STATIONS,
   HISTORY_STATIONS,
+  gradeStudentAnswer,
   type ClinicalVignetteCase,
   type ExamStation,
   type HistoryStation,
-  type ExaminerQuestion
+  type ExaminerQuestion,
+  type EvaluationResult
 } from "@/lib/data/osce-bank"
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -24,11 +28,18 @@ type ViewState = "hub" | "config" | "briefing" | "active" | "results"
 type StationType = "vignette" | "exam" | "history"
 type StationTime = 8 | 10 | 15 | 0 // 0 = untimed
 
+interface QuestionEvaluationState {
+  isEvaluated: boolean
+  evaluations: EvaluationResult[]
+  earnedMarks: number
+  maxMarks: number
+}
+
 export default function OSCEPractisePage() {
   const [view, setView] = useState<ViewState>("hub")
   const [stationType, setStationType] = useState<StationType>("vignette")
 
-  // Configuration (Module -> Topic, no Level as requested)
+  // Configuration (Clean Dropdown based)
   const [selectedModule, setSelectedModule] = useState<string>("Pediatrics")
   const [selectedTopic, setSelectedTopic] = useState<string>("Febrile Rash")
   const [selectedTime, setSelectedTime] = useState<StationTime>(8)
@@ -41,13 +52,12 @@ export default function OSCEPractisePage() {
   const [activeHistory, setActiveHistory] = useState<HistoryStation | null>(null)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0)
   const [userAnswers, setUserAnswers] = useState<Record<string, string>>({})
-  const [revealedQuestions, setRevealedQuestions] = useState<Record<string, boolean>>({})
+  const [questionEvaluations, setQuestionEvaluations] = useState<Record<string, QuestionEvaluationState>>({})
   const [showHint, setShowHint] = useState<Record<string, boolean>>({})
-  const [awardedMarks, setAwardedMarks] = useState<Record<string, boolean>>({})
   const [checkedExamItems, setCheckedExamItems] = useState<Record<string, boolean>>({})
   const [revealedHistoryInquiries, setRevealedHistoryInquiries] = useState<Record<string, boolean>>({})
 
-  // Station Timer
+  // Timer
   const [secondsRemaining, setSecondsRemaining] = useState<number>(0)
   const timerRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -56,7 +66,7 @@ export default function OSCEPractisePage() {
     return OSCE_MODULES.find(m => m.name.toLowerCase() === selectedModule.toLowerCase()) || OSCE_MODULES[0]
   }, [selectedModule])
 
-  // Available topics for current module
+  // Topics for selected module
   const availableTopics = currentModuleConfig.topics
 
   // Synchronize topic when module changes
@@ -66,27 +76,7 @@ export default function OSCEPractisePage() {
     }
   }, [availableTopics, selectedTopic])
 
-  // Filtered stations for current selection
-  const matchingVignettes = useMemo(() => {
-    return VIGNETTE_CASES.filter(
-      c => c.module.toLowerCase() === selectedModule.toLowerCase() &&
-           c.topic.toLowerCase() === selectedTopic.toLowerCase()
-    )
-  }, [selectedModule, selectedTopic])
-
-  const matchingExams = useMemo(() => {
-    return EXAM_STATIONS.filter(
-      e => e.module.toLowerCase() === selectedModule.toLowerCase()
-    )
-  }, [selectedModule])
-
-  const matchingHistories = useMemo(() => {
-    return HISTORY_STATIONS.filter(
-      h => h.module.toLowerCase() === selectedModule.toLowerCase()
-    )
-  }, [selectedModule])
-
-  // Timer logic
+  // Timer countdown
   useEffect(() => {
     if (view !== "active" || selectedTime === 0) return
     timerRef.current = setInterval(() => {
@@ -130,29 +120,36 @@ export default function OSCEPractisePage() {
   const handleStartStation = () => {
     setCurrentQuestionIndex(0)
     setUserAnswers({})
-    setRevealedQuestions({})
+    setQuestionEvaluations({})
     setShowHint({})
-    setAwardedMarks({})
     setCheckedExamItems({})
     setRevealedHistoryInquiries({})
     setSecondsRemaining(selectedTime > 0 ? selectedTime * 60 : 0)
 
     if (stationType === "vignette") {
-      const match = matchingVignettes[0] ||
-        VIGNETTE_CASES.find(c => c.module.toLowerCase() === selectedModule.toLowerCase()) ||
-        VIGNETTE_CASES[0]
+      const match = VIGNETTE_CASES.find(
+        c => c.module.toLowerCase() === selectedModule.toLowerCase() &&
+             c.topic.toLowerCase() === selectedTopic.toLowerCase()
+      ) || VIGNETTE_CASES.find(c => c.module.toLowerCase() === selectedModule.toLowerCase()) || VIGNETTE_CASES[0]
+
       setActiveCase(match)
       setActiveExam(null)
       setActiveHistory(null)
       setView("briefing")
     } else if (stationType === "exam") {
-      const match = matchingExams[0] || EXAM_STATIONS[0]
+      const match = EXAM_STATIONS.find(
+        e => e.module.toLowerCase() === selectedModule.toLowerCase()
+      ) || EXAM_STATIONS[0]
+
       setActiveExam(match)
       setActiveCase(null)
       setActiveHistory(null)
       setView("active")
     } else {
-      const match = matchingHistories[0] || HISTORY_STATIONS[0]
+      const match = HISTORY_STATIONS.find(
+        h => h.module.toLowerCase() === selectedModule.toLowerCase()
+      ) || HISTORY_STATIONS[0]
+
       setActiveHistory(match)
       setActiveCase(null)
       setActiveExam(null)
@@ -160,7 +157,7 @@ export default function OSCEPractisePage() {
     }
   }
 
-  // Cycle to another case in the bank
+  // Cycle to next case in bank
   const handleNextCaseInBank = () => {
     if (activeCase) {
       const currentIdx = VIGNETTE_CASES.findIndex(c => c.id === activeCase.id)
@@ -170,21 +167,49 @@ export default function OSCEPractisePage() {
       setSelectedTopic(nextCase.topic)
       setCurrentQuestionIndex(0)
       setUserAnswers({})
-      setRevealedQuestions({})
+      setQuestionEvaluations({})
       setShowHint({})
-      setAwardedMarks({})
       setSecondsRemaining(selectedTime > 0 ? selectedTime * 60 : 0)
       toast.info(`Loaded scenario: ${nextCase.title}`)
     }
   }
 
-  // Calculate current score
+  // Automated System "Mark Me" evaluation for current question
+  const handleMarkMyAnswer = () => {
+    if (!activeCase) return
+    const q = activeCase.questions[currentQuestionIndex]
+    const userText = userAnswers[q.id] || ""
+
+    if (!userText.trim()) {
+      toast.error("Please type your clinical response first before submitting for marking.")
+      return
+    }
+
+    const result = gradeStudentAnswer(userText, q)
+    setQuestionEvaluations(prev => ({
+      ...prev,
+      [q.id]: {
+        isEvaluated: true,
+        evaluations: result.evaluations,
+        earnedMarks: result.totalEarned,
+        maxMarks: result.totalPossible
+      }
+    }))
+
+    if (result.totalEarned > 0) {
+      toast.success(`Marked: +${result.totalEarned} / ${result.totalPossible} Marks awarded!`)
+    } else {
+      toast.info(`Marked: 0 / ${result.totalPossible} Marks. Review the teaching model answer below.`)
+    }
+  }
+
+  // Calculate total cumulative score
   const calculateScore = () => {
     if (activeCase) {
       const totalPossible = activeCase.questions.reduce((sum, q) =>
         sum + q.rubricItems.reduce((sub, item) => sub + item.marks, 0), 0
       )
-      const earned = Object.keys(awardedMarks).filter(k => awardedMarks[k]).length
+      const earned = Object.values(questionEvaluations).reduce((sum, ev) => sum + ev.earnedMarks, 0)
       return { earned, total: totalPossible }
     }
     if (activeExam) {
@@ -202,6 +227,36 @@ export default function OSCEPractisePage() {
       return { earned, total: totalPossible }
     }
     return { earned: 0, total: 20 }
+  }
+
+  // Save station XP to Supabase on finish
+  const handleFinishStation = async () => {
+    setView("results")
+    const finalScore = calculateScore()
+    if (finalScore.earned > 0) {
+      try {
+        const supabase = createClient()
+        const { data: authData } = await supabase.auth.getUser()
+        if (authData?.user) {
+          const { data: profile } = await supabase
+            .from("student_profiles")
+            .select("xp")
+            .eq("user_id", authData.user.id)
+            .maybeSingle()
+
+          const earnedXP = finalScore.earned * 15
+          const newXP = (profile?.xp || 0) + earnedXP
+          await supabase
+            .from("student_profiles")
+            .update({ xp: newXP })
+            .eq("user_id", authData.user.id)
+
+          toast.success(`Station completed! +${earnedXP} XP added to your campus profile.`)
+        }
+      } catch (err) {
+        console.error("Failed to credit station XP:", err)
+      }
+    }
   }
 
   // ═══════════════════════════════════════════════════════════
@@ -276,7 +331,7 @@ export default function OSCEPractisePage() {
                 Clinical Vignette
               </h2>
               <p className="text-xs text-gray-400 leading-relaxed">
-                Immersive story-mode clinical cases with viva assessment questions, clinical hints, and examiner grading rubrics.
+                Immersive story-mode clinical cases with viva assessment questions, automated system marking, and clinical teaching.
               </p>
             </div>
             <div className="pt-2 flex items-center text-xs font-semibold text-gray-400 group-hover:text-white">
@@ -289,11 +344,11 @@ export default function OSCEPractisePage() {
   }
 
   // ═══════════════════════════════════════════════════════════
-  // VIEW 2: CONFIGURATION SCREEN (Module -> Topic, No Level)
+  // VIEW 2: CONFIGURATION SCREEN (SLEEK DROPDOWNS)
   // ═══════════════════════════════════════════════════════════
   if (view === "config") {
     return (
-      <div className="max-w-3xl mx-auto pb-24 space-y-6">
+      <div className="max-w-2xl mx-auto pb-24 space-y-6">
         {/* Header */}
         <div className="flex items-center gap-3">
           <button
@@ -307,107 +362,89 @@ export default function OSCEPractisePage() {
               Configure {stationType === "vignette" ? "Clinical Vignette" : stationType === "exam" ? "Physical Examination" : "History Taking"}
             </h1>
             <p className="text-xs text-gray-400 mt-0.5">
-              Select module and clinical topic to load matching bank scenarios
+              Choose your course and scenario topic from the dropdown menus below
             </p>
           </div>
         </div>
 
-        {/* Configuration Container */}
-        <div className="bg-[#0e0e0e] border border-[#1f1f1f] rounded-2xl divide-y divide-[#181818] shadow-2xl">
+        {/* Configuration Card with Sleek Dropdowns */}
+        <div className="bg-[#0e0e0e] border border-[#1f1f1f] rounded-2xl p-6 sm:p-7 space-y-6 shadow-2xl">
 
-          {/* 1. Clinical Module Selection */}
-          <div className="p-5 sm:p-6 space-y-3">
-            <div className="flex items-center justify-between">
-              <label className="text-xs font-bold uppercase tracking-wider text-gray-300">
-                Clinical Specialty / Module
-              </label>
-              <span className="text-[11px] text-brand font-medium">8 Core Modules</span>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-              {OSCE_MODULES.map(mod => (
-                <button
-                  key={mod.id}
-                  onClick={() => {
-                    setSelectedModule(mod.name)
-                    setSelectedTopic(mod.topics[0] || "")
-                  }}
-                  className={`p-3 rounded-xl border text-xs font-semibold text-left transition-all ${
-                    selectedModule.toLowerCase() === mod.name.toLowerCase()
-                      ? "bg-brand/10 border-brand text-white"
-                      : "bg-[#141414] border-[#222] text-gray-400 hover:border-[#333]"
-                  }`}
-                >
-                  <p className="font-bold text-white truncate">{mod.name}</p>
-                  <p className="text-[10px] text-gray-500 mt-0.5">{mod.topics.length} Topics</p>
-                </button>
-              ))}
+          {/* 1. Clinical Course / Module Dropdown */}
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-wider text-gray-300 block">
+              Clinical Course / Specialty
+            </label>
+            <div className="relative">
+              <select
+                value={selectedModule}
+                onChange={(e) => {
+                  setSelectedModule(e.target.value)
+                  const found = OSCE_MODULES.find(m => m.name === e.target.value)
+                  if (found) {
+                    setSelectedTopic(found.topics[0] || "")
+                  }
+                }}
+                className="w-full appearance-none bg-[#141414] border border-[#262626] focus:border-brand rounded-xl px-4 py-3.5 text-xs sm:text-sm text-white font-semibold focus:outline-none transition-colors cursor-pointer pr-10"
+              >
+                {OSCE_MODULES.map(mod => (
+                  <option key={mod.id} value={mod.name} className="bg-[#141414] text-white py-2">
+                    {mod.name} ({mod.topics.length} clinical topics)
+                  </option>
+                ))}
+              </select>
+              <ChevronDown size={16} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
             </div>
           </div>
 
-          {/* 2. Clinical Scenario / Topic Selection (Dynamically populated from selected module) */}
-          <div className="p-5 sm:p-6 space-y-3">
+          {/* 2. Clinical Topic Dropdown */}
+          <div className="space-y-2">
             <div className="flex items-center justify-between">
               <label className="text-xs font-bold uppercase tracking-wider text-gray-300">
                 Clinical Topic / Presentation
               </label>
-              <span className="text-[11px] text-gray-500 font-medium">
-                {selectedModule} Syllabus
-              </span>
+              <span className="text-[11px] text-brand font-medium">{selectedModule} Rotation</span>
             </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              {availableTopics.map(topic => (
-                <button
-                  key={topic}
-                  onClick={() => setSelectedTopic(topic)}
-                  className={`p-3.5 rounded-xl border text-left transition-all flex items-center justify-between ${
-                    selectedTopic.toLowerCase() === topic.toLowerCase()
-                      ? "bg-brand/10 border-brand text-white"
-                      : "bg-[#141414] border-[#222] text-gray-400 hover:border-[#333]"
-                  }`}
-                >
-                  <span className="text-xs font-semibold text-white">{topic}</span>
-                  {selectedTopic.toLowerCase() === topic.toLowerCase() && (
-                    <Check size={14} className="text-brand flex-shrink-0" />
-                  )}
-                </button>
-              ))}
+            <div className="relative">
+              <select
+                value={selectedTopic}
+                onChange={(e) => setSelectedTopic(e.target.value)}
+                className="w-full appearance-none bg-[#141414] border border-[#262626] focus:border-brand rounded-xl px-4 py-3.5 text-xs sm:text-sm text-white font-semibold focus:outline-none transition-colors cursor-pointer pr-10"
+              >
+                {availableTopics.map(topic => (
+                  <option key={topic} value={topic} className="bg-[#141414] text-white py-2">
+                    {topic}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown size={16} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
             </div>
           </div>
 
-          {/* 3. Time Allocation */}
-          <div className="p-5 sm:p-6 space-y-3">
+          {/* 3. Time Allocation Dropdown */}
+          <div className="space-y-2">
             <label className="text-xs font-bold uppercase tracking-wider text-gray-300 block">
               Station Time Allocation
             </label>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-              {[
-                { label: "8 Minutes", value: 8, desc: "Standard OSCE station" },
-                { label: "10 Minutes", value: 10, desc: "Extended clinical case" },
-                { label: "15 Minutes", value: 15, desc: "Comprehensive viva" },
-                { label: "Untimed", value: 0, desc: "Self-paced study" },
-              ].map(t => (
-                <button
-                  key={t.value}
-                  onClick={() => setSelectedTime(t.value as StationTime)}
-                  className={`p-3 rounded-xl border text-left transition-all ${
-                    selectedTime === t.value
-                      ? "bg-brand/10 border-brand text-white"
-                      : "bg-[#141414] border-[#222] text-gray-400 hover:border-[#333]"
-                  }`}
-                >
-                  <p className="text-xs font-bold text-white">{t.label}</p>
-                  <p className="text-[10px] text-gray-500 mt-0.5">{t.desc}</p>
-                </button>
-              ))}
+            <div className="relative">
+              <select
+                value={selectedTime}
+                onChange={(e) => setSelectedTime(Number(e.target.value) as StationTime)}
+                className="w-full appearance-none bg-[#141414] border border-[#262626] focus:border-brand rounded-xl px-4 py-3.5 text-xs sm:text-sm text-white font-semibold focus:outline-none transition-colors cursor-pointer pr-10"
+              >
+                <option value={8} className="bg-[#141414] text-white">8 Minutes (Standard OSCE Station)</option>
+                <option value={10} className="bg-[#141414] text-white">10 Minutes (Extended Clinical Case)</option>
+                <option value={15} className="bg-[#141414] text-white">15 Minutes (Comprehensive Consultant Viva)</option>
+                <option value={0} className="bg-[#141414] text-white">Untimed (Self-Paced Clinical Practice)</option>
+              </select>
+              <ChevronDown size={16} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
             </div>
           </div>
 
-          {/* 4. Interactive Assessment Controls (Hints & Mark Me) */}
-          <div className="p-5 sm:p-6 space-y-3.5">
+          {/* 4. Interactive Assessment Controls */}
+          <div className="space-y-3 pt-2 border-t border-[#1a1a1a]">
             <label className="text-xs font-bold uppercase tracking-wider text-gray-300 block">
-              Interactive Assessment Controls
+              Interactive Assessment & Teaching
             </label>
 
             {/* Enable Clinical Hints Toggle */}
@@ -418,7 +455,7 @@ export default function OSCEPractisePage() {
                 </div>
                 <div>
                   <p className="text-xs sm:text-sm font-semibold text-white">Enable Clinical Hints</p>
-                  <p className="text-[11px] text-gray-500">Provide focused diagnostic clues without leaving the station</p>
+                  <p className="text-[11px] text-gray-500">Provide focused diagnostic clues during station execution</p>
                 </div>
               </div>
               <button
@@ -434,15 +471,15 @@ export default function OSCEPractisePage() {
               </button>
             </div>
 
-            {/* Mark Me Scoring Rubric Toggle */}
+            {/* Automated "Mark Me" & Teaching Toggle */}
             <div className="flex items-center justify-between p-3.5 bg-[#121212] border border-[#202020] rounded-xl">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-[#181818] border border-[#262626] flex items-center justify-center text-brand">
-                  <CheckSquare size={16} />
+                  <Sparkles size={16} />
                 </div>
                 <div>
-                  <p className="text-xs sm:text-sm font-semibold text-white">&quot;Mark Me&quot; Scoring Rubric</p>
-                  <p className="text-[11px] text-gray-500">Interactive examiner marking sheet with points awarded out of 20</p>
+                  <p className="text-xs sm:text-sm font-semibold text-white">Automated &quot;Mark Me&quot; &amp; Teaching</p>
+                  <p className="text-[11px] text-gray-500">System evaluates your answer, awards marks, and teaches model clinical reasoning</p>
                 </div>
               </div>
               <button
@@ -458,15 +495,15 @@ export default function OSCEPractisePage() {
               </button>
             </div>
           </div>
-        </div>
 
-        {/* Start Station Action Button */}
-        <button
-          onClick={handleStartStation}
-          className="w-full bg-brand hover:bg-red-700 text-white font-bold py-4 rounded-xl text-sm transition-all shadow-xl shadow-brand/25 flex items-center justify-center gap-2"
-        >
-          <Play size={15} fill="currentColor" /> Begin OSCE Station
-        </button>
+          {/* Start Station Action Button */}
+          <button
+            onClick={handleStartStation}
+            className="w-full bg-brand hover:bg-red-700 text-white font-bold py-4 rounded-xl text-xs sm:text-sm transition-all shadow-xl shadow-brand/25 flex items-center justify-center gap-2"
+          >
+            <Play size={15} fill="currentColor" /> Begin OSCE Station
+          </button>
+        </div>
       </div>
     )
   }
@@ -569,7 +606,7 @@ export default function OSCEPractisePage() {
             </div>
           </div>
 
-          {/* Begin Assessment Questions Button (Screenshot 1) */}
+          {/* Begin Assessment Questions Button */}
           <button
             onClick={() => {
               setView("active")
@@ -595,17 +632,19 @@ export default function OSCEPractisePage() {
   if (view === "active") {
     const score = calculateScore()
 
-    // ─── ACTIVE VIGNETTE (Inspired directly by Screenshot 2) ───
+    // ─── ACTIVE VIGNETTE (Inspired by Screenshot 2 with Automated "Mark Me") ───
     if (stationType === "vignette" && activeCase) {
       const q = activeCase.questions[currentQuestionIndex]
       const userText = userAnswers[q.id] || ""
       const isHintVisible = showHint[q.id]
+      const evalState = questionEvaluations[q.id]
+      const isEvaluated = !!evalState?.isEvaluated
 
       const handleNextQuestion = () => {
         if (currentQuestionIndex + 1 < activeCase.questions.length) {
           setCurrentQuestionIndex(i => i + 1)
         } else {
-          setView("results")
+          handleFinishStation()
         }
       }
 
@@ -632,6 +671,9 @@ export default function OSCEPractisePage() {
             </div>
 
             <div className="flex items-center gap-3">
+              <span className="text-xs font-bold text-brand bg-brand/10 border border-brand/20 px-2.5 py-1 rounded-md">
+                Station Score: {score.earned} / {score.total} Marks
+              </span>
               {selectedTime > 0 && (
                 <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#141414] border border-[#222] text-xs font-bold text-white">
                   <Clock size={13} className="text-brand" /> {formatTimer(secondsRemaining)}
@@ -712,7 +754,7 @@ export default function OSCEPractisePage() {
               </div>
             </div>
 
-            {/* Right Column (7 cols): Active Assessment Question (Screenshot 2) */}
+            {/* Right Column (7 cols): Active Assessment & Automated "Mark Me" Evaluation */}
             <div className="lg:col-span-7 space-y-4">
               <div className="bg-[#0e0e0e] border border-[#1f1f1f] rounded-2xl p-6 sm:p-7 space-y-5 shadow-xl">
                 <div className="flex items-center justify-between pb-3 border-b border-[#181818]">
@@ -742,7 +784,7 @@ export default function OSCEPractisePage() {
                   </p>
                 </div>
 
-                {/* Diagnostic Hint Box (strictly brand styled, NO yellow) */}
+                {/* Diagnostic Hint Box (Strictly brand red, NO yellow) */}
                 {hintsEnabled && isHintVisible && (
                   <div className="bg-[#141414] border border-brand/30 rounded-xl p-3.5 space-y-1 animate-in fade-in duration-150">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-brand flex items-center gap-1">
@@ -758,64 +800,85 @@ export default function OSCEPractisePage() {
                 <div className="space-y-2">
                   <textarea
                     rows={4}
+                    disabled={isEvaluated}
                     value={userText}
                     onChange={(e) => setUserAnswers(prev => ({ ...prev, [q.id]: e.target.value }))}
                     placeholder={`Type your answer to Question ${q.number}...`}
-                    className="w-full bg-[#121212] border border-[#262626] focus:border-brand rounded-xl p-3.5 text-xs sm:text-sm text-white placeholder-gray-600 focus:outline-none transition-colors resize-none leading-relaxed"
+                    className="w-full bg-[#121212] border border-[#262626] focus:border-brand rounded-xl p-3.5 text-xs sm:text-sm text-white placeholder-gray-600 focus:outline-none transition-colors resize-none leading-relaxed disabled:opacity-75 disabled:cursor-not-allowed"
                   />
                 </div>
 
-                {/* Examiner "Mark Me" Rubric */}
-                {markMeEnabled && (
-                  <div className="space-y-3 pt-3 border-t border-[#181818]">
+                {/* Automated "Mark Me" Evaluation Breakdown (Once student clicks "Mark My Answer") */}
+                {isEvaluated && evalState && (
+                  <div className="space-y-4 pt-3 border-t border-[#181818] animate-in fade-in duration-200">
+                    {/* Header with Awarded Marks */}
                     <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400 flex items-center gap-1.5">
-                        <CheckSquare size={13} className="text-brand" /> &quot;Mark Me&quot; Scoring Rubric
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-gray-300 flex items-center gap-1.5">
+                        <CheckSquare size={13} className="text-brand" /> Automated System Evaluation
                       </span>
-                      <span className="text-xs font-bold text-brand bg-brand/10 border border-brand/20 px-2 py-0.5 rounded">
-                        Score: {score.earned} / {score.total} Marks
+                      <span className="text-xs font-bold text-white bg-brand/10 border border-brand/30 px-2.5 py-0.5 rounded">
+                        Awarded: {evalState.earnedMarks} / {evalState.maxMarks} Marks
                       </span>
                     </div>
 
+                    {/* Evaluated Rubric Items */}
                     <div className="space-y-2">
-                      {q.rubricItems.map((item, idx) => {
-                        const markKey = `${q.id}-${idx}`
-                        const isChecked = !!awardedMarks[markKey]
-                        return (
-                          <button
-                            key={markKey}
-                            onClick={() => setAwardedMarks(prev => ({ ...prev, [markKey]: !prev[markKey] }))}
-                            className={`w-full text-left p-2.5 rounded-lg border text-xs flex items-center justify-between gap-3 transition-colors ${
-                              isChecked
-                                ? "bg-brand/10 border-brand/50 text-white"
-                                : "bg-[#141414] border-[#222] text-gray-400 hover:border-[#333]"
-                            }`}
-                          >
-                            <span className="flex items-center gap-2 flex-1">
-                              <span className={`w-4 h-4 rounded flex items-center justify-center border text-[10px] ${
-                                isChecked ? "bg-brand border-brand text-white" : "border-[#333] bg-[#1a1a1a]"
-                              }`}>
-                                {isChecked && <Check size={11} strokeWidth={3} />}
-                              </span>
-                              <span>{item.text}</span>
+                      {evalState.evaluations.map(ev => (
+                        <div
+                          key={ev.rubricId}
+                          className={`p-3 rounded-xl border text-xs flex items-start justify-between gap-3 ${
+                            ev.isHit
+                              ? "bg-emerald-950/20 border-emerald-800/50 text-emerald-300"
+                              : "bg-[#141414] border-[#222] text-gray-400"
+                          }`}
+                        >
+                          <div className="flex items-start gap-2.5 flex-1">
+                            {ev.isHit ? (
+                              <CheckCircle size={15} className="text-emerald-400 flex-shrink-0 mt-0.5" />
+                            ) : (
+                              <X size={15} className="text-gray-500 flex-shrink-0 mt-0.5" />
+                            )}
+                            <span className="leading-snug text-gray-200 font-medium">
+                              {ev.text}
                             </span>
-                            <span className="font-bold text-[11px] text-brand flex-shrink-0">
-                              +{item.marks} MK
-                            </span>
-                          </button>
-                        )
-                      })}
+                          </div>
+                          <span className={`text-[11px] font-bold flex-shrink-0 ${
+                            ev.isHit ? "text-emerald-400" : "text-gray-500"
+                          }`}>
+                            {ev.isHit ? `+${ev.marksAwarded} MK` : `0 / ${ev.maxMarks} MK`}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Consultant Teaching Model Answer (Teaches the student clinical reasoning) */}
+                    <div className="bg-[#141414] border border-[#242424] rounded-xl p-4 space-y-2">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-brand flex items-center gap-1">
+                        <BookOpen size={12} /> Consultant Model Answer &amp; Clinical Teaching Rationale
+                      </span>
+                      <p className="text-xs text-gray-300 leading-relaxed">
+                        {q.modelAnswer}
+                      </p>
                     </div>
                   </div>
                 )}
 
-                {/* Next Question Button (Screenshot 2) */}
-                <button
-                  onClick={handleNextQuestion}
-                  className="w-full bg-[#3d5a45] hover:bg-[#2d4533] border border-[#4d6f56] text-white font-bold py-3.5 rounded-xl text-xs sm:text-sm transition-all shadow-md flex items-center justify-center gap-2"
-                >
-                  {currentQuestionIndex + 1 >= activeCase.questions.length ? "Finish Station & Grade" : "Next Question →"}
-                </button>
+                {/* Action Buttons: "Mark My Answer" OR "Next Question →" */}
+                {!isEvaluated ? (
+                  <button
+                    onClick={handleMarkMyAnswer}
+                    className="w-full bg-brand hover:bg-red-700 text-white font-bold py-3.5 rounded-xl text-xs sm:text-sm transition-all shadow-md shadow-brand/20 flex items-center justify-center gap-2"
+                  >
+                    <Sparkles size={15} /> Mark My Answer &amp; Teach Me
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleNextQuestion}
+                    className="w-full bg-[#3d5a45] hover:bg-[#2d4533] border border-[#4d6f56] text-white font-bold py-3.5 rounded-xl text-xs sm:text-sm transition-all shadow-md flex items-center justify-center gap-2"
+                  >
+                    {currentQuestionIndex + 1 >= activeCase.questions.length ? "Finish Station & View Final Report" : "Next Question →"}
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -911,10 +974,10 @@ export default function OSCEPractisePage() {
             </div>
 
             <button
-              onClick={() => setView("results")}
+              onClick={handleFinishStation}
               className="w-full bg-brand hover:bg-red-700 text-white font-bold py-3.5 rounded-xl text-xs sm:text-sm transition-all shadow-md shadow-brand/20"
             >
-              Finish Examination & View Grade
+              Finish Examination &amp; View Final Grade
             </button>
           </div>
         </div>
@@ -1019,10 +1082,10 @@ export default function OSCEPractisePage() {
             </div>
 
             <button
-              onClick={() => setView("results")}
+              onClick={handleFinishStation}
               className="w-full bg-brand hover:bg-red-700 text-white font-bold py-3.5 rounded-xl text-xs sm:text-sm transition-all shadow-md shadow-brand/20"
             >
-              Complete History & View Grade
+              Complete History &amp; View Final Grade
             </button>
           </div>
         </div>
@@ -1031,7 +1094,7 @@ export default function OSCEPractisePage() {
   }
 
   // ═══════════════════════════════════════════════════════════
-  // VIEW 4: RESULTS VIEW
+  // VIEW 4: RESULTS & COMPREHENSIVE CLINICAL TEACHING REPORT
   // ═══════════════════════════════════════════════════════════
   if (view === "results") {
     const score = calculateScore()
@@ -1039,31 +1102,32 @@ export default function OSCEPractisePage() {
     const passed = percentage >= 50
 
     return (
-      <div className="max-w-xl mx-auto pb-24 space-y-6">
-        <div className="bg-[#0e0e0e] border border-[#1f1f1f] rounded-2xl p-8 sm:p-10 text-center space-y-6 shadow-2xl">
-          <div className="w-16 h-16 rounded-2xl bg-brand/10 border border-brand/20 flex items-center justify-center text-brand mx-auto">
-            <Award size={32} />
+      <div className="max-w-3xl mx-auto pb-24 space-y-6">
+        {/* Outcome Card */}
+        <div className="bg-[#0e0e0e] border border-[#1f1f1f] rounded-2xl p-6 sm:p-8 text-center space-y-5 shadow-2xl">
+          <div className="w-14 h-14 rounded-2xl bg-brand/10 border border-brand/20 flex items-center justify-center text-brand mx-auto">
+            <Award size={28} />
           </div>
 
-          <div className="space-y-2">
-            <h2 className="text-2xl font-bold text-white tracking-tight">OSCE Station Complete</h2>
+          <div className="space-y-1.5">
+            <h2 className="text-2xl font-bold text-white tracking-tight">OSCE Station Report</h2>
             <p className="text-xs text-gray-400">
-              {activeCase?.title || activeExam?.title || activeHistory?.title}
+              {activeCase?.title || activeExam?.title || activeHistory?.title} &bull; {selectedModule}
             </p>
           </div>
 
           <div className="grid grid-cols-3 gap-3 max-w-sm mx-auto">
-            <div className="bg-[#141414] border border-[#222] rounded-xl p-3.5">
-              <span className="text-[10px] text-gray-500 uppercase font-bold block">Score</span>
-              <span className="text-lg font-bold text-white">{score.earned} / {score.total}</span>
+            <div className="bg-[#141414] border border-[#222] rounded-xl p-3">
+              <span className="text-[9px] text-gray-500 uppercase font-bold block">Score</span>
+              <span className="text-base sm:text-lg font-bold text-white">{score.earned} / {score.total}</span>
             </div>
-            <div className="bg-[#141414] border border-[#222] rounded-xl p-3.5">
-              <span className="text-[10px] text-gray-500 uppercase font-bold block">Percentage</span>
-              <span className="text-lg font-bold text-brand">{percentage}%</span>
+            <div className="bg-[#141414] border border-[#222] rounded-xl p-3">
+              <span className="text-[9px] text-gray-500 uppercase font-bold block">Percentage</span>
+              <span className="text-base sm:text-lg font-bold text-brand">{percentage}%</span>
             </div>
-            <div className="bg-[#141414] border border-[#222] rounded-xl p-3.5">
-              <span className="text-[10px] text-gray-500 uppercase font-bold block">Outcome</span>
-              <span className={`text-xs font-bold block mt-1.5 ${passed ? "text-emerald-400" : "text-brand"}`}>
+            <div className="bg-[#141414] border border-[#222] rounded-xl p-3">
+              <span className="text-[9px] text-gray-500 uppercase font-bold block">Grade</span>
+              <span className={`text-xs sm:text-sm font-bold block mt-1 ${passed ? "text-emerald-400" : "text-brand"}`}>
                 {percentage >= 80 ? "Distinction" : percentage >= 70 ? "Merit" : passed ? "Pass" : "Review"}
               </span>
             </div>
@@ -1075,18 +1139,98 @@ export default function OSCEPractisePage() {
                 if (stationType === "vignette") setView("briefing")
                 else setView("active")
               }}
-              className="flex-1 bg-brand hover:bg-red-700 text-white font-bold py-3 rounded-xl text-xs transition-all shadow-md shadow-brand/20 flex items-center justify-center gap-1.5"
+              className="flex-1 bg-brand hover:bg-red-700 text-white font-bold py-2.5 rounded-xl text-xs transition-all shadow-md shadow-brand/20 flex items-center justify-center gap-1.5"
             >
               <RotateCcw size={13} /> Retry Station
             </button>
             <button
               onClick={() => setView("hub")}
-              className="flex-1 bg-[#141414] border border-[#242424] hover:bg-[#1a1a1a] text-white font-bold py-3 rounded-xl text-xs transition-colors"
+              className="flex-1 bg-[#141414] border border-[#242424] hover:bg-[#1a1a1a] text-white font-bold py-2.5 rounded-xl text-xs transition-colors"
             >
               Back to OSCE Hub
             </button>
           </div>
         </div>
+
+        {/* Detailed Question-by-Question Clinical Teaching Review (For Vignettes) */}
+        {activeCase && (
+          <div className="space-y-4">
+            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider px-1">
+              Clinical Teaching &amp; Marking Breakdown
+            </h3>
+
+            {activeCase.questions.map((q, idx) => {
+              const evalState = questionEvaluations[q.id]
+              const userAns = userAnswers[q.id]
+              const isHitAll = evalState && evalState.earnedMarks === evalState.maxMarks
+
+              return (
+                <div
+                  key={q.id}
+                  className="bg-[#0e0e0e] border border-[#1f1f1f] rounded-2xl p-5 sm:p-6 space-y-4 shadow-xl"
+                >
+                  <div className="flex items-center justify-between pb-2 border-b border-[#181818]">
+                    <span className="text-xs font-bold text-white">
+                      Question {idx + 1}: {q.prompt}
+                    </span>
+                    <span className="text-xs font-bold text-brand bg-brand/10 px-2 py-0.5 rounded border border-brand/20 flex-shrink-0 ml-3">
+                      {evalState ? `${evalState.earnedMarks} / ${evalState.maxMarks} MK` : `0 / ${q.rubricItems.reduce((s, r) => s + r.marks, 0)} MK`}
+                    </span>
+                  </div>
+
+                  {/* Student Response */}
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500">
+                      Your Answer
+                    </span>
+                    <p className="text-xs text-gray-300 bg-[#121212] p-3 rounded-xl border border-[#202020] leading-relaxed italic">
+                      {userAns || "No answer submitted"}
+                    </p>
+                  </div>
+
+                  {/* Rubric Breakdown */}
+                  {evalState && evalState.evaluations && (
+                    <div className="space-y-1.5">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500">
+                        Criteria Evaluation
+                      </span>
+                      <div className="space-y-1.5">
+                        {evalState.evaluations.map(ev => (
+                          <div
+                            key={ev.rubricId}
+                            className={`p-2.5 rounded-lg border text-xs flex items-center justify-between gap-2 ${
+                              ev.isHit
+                                ? "bg-emerald-950/20 border-emerald-800/40 text-emerald-300"
+                                : "bg-[#141414] border-[#222] text-gray-400"
+                            }`}
+                          >
+                            <span className="flex items-center gap-2">
+                              {ev.isHit ? <Check size={12} className="text-emerald-400" /> : <X size={12} className="text-gray-500" />}
+                              <span>{ev.text}</span>
+                            </span>
+                            <span className="font-bold text-[10px] flex-shrink-0">
+                              {ev.isHit ? `+${ev.marksAwarded} MK` : `0 MK`}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Consultant Model Answer & Teaching */}
+                  <div className="bg-[#141414] border border-[#242424] rounded-xl p-3.5 space-y-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-brand flex items-center gap-1">
+                      <BookOpen size={11} /> Consultant Model Answer &amp; Teaching
+                    </span>
+                    <p className="text-xs text-gray-300 leading-relaxed">
+                      {q.modelAnswer}
+                    </p>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        )}
       </div>
     )
   }
