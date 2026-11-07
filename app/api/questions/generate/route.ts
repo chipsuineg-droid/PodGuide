@@ -3,17 +3,37 @@ import { createClient } from "@/lib/supabase/server"
 
 export const maxDuration = 60
 
+/**
+ * Standard medical textbook mapping requested by user:
+ * - Anatomy: Snell's Clinical Anatomy
+ * - Histology: Junqueira's Basic Histology
+ * - Embryology: Langman's Medical Embryology
+ * - Physiology: Ganong's Review of Medical Physiology
+ * - Histopathology / Pathology: Robbins Basic Pathology
+ * - Surgery: Bailey & Love's Short Practice of Surgery
+ * - Paediatrics: Coovadia's Paediatrics and Child Health
+ * - Internal Medicine: Macleod's Clinical Examination
+ * - WHO Guidelines
+ */
 const TEXTBOOK_MAP: Record<string, string> = {
   anatomy: "Snell's Clinical Anatomy by Regions (10th ed.)",
-  physiology: "Guyton & Hall Textbook of Medical Physiology (14th ed.)",
-  pathology: "Robbins & Cotran Pathologic Basis of Disease (10th ed.)",
-  pharmacology: "Katzung's Basic & Clinical Pharmacology (15th ed.)",
-  surgery: "SRB's Manual of Surgery (6th ed.)",
-  medicine: "Materials / Kumar & Clark's Clinical Medicine (10th ed.)",
-  paediatrics: "Ghai Essential Pediatrics (9th ed.)",
+  physiology: "Ganong's Review of Medical Physiology (26th ed.)",
+  histology: "Junqueira's Basic Histology: Text and Atlas (16th ed.)",
   embryology: "Langman's Medical Embryology (14th ed.)",
-  histology: "Junqueira's Basic Histology: Text & Atlas (16th ed.)",
-  obstetrics: "Williams Obstetrics (26th ed.)",
+  histopathology: "Robbins Basic Pathology (10th ed.)",
+  pathology: "Robbins Basic Pathology (10th ed.)",
+  surgery: "Bailey & Love's Short Practice of Surgery (27th ed.)",
+  paediatrics: "Coovadia's Paediatrics and Child Health (7th ed.)",
+  pediatrics: "Coovadia's Paediatrics and Child Health (7th ed.)",
+  "internal medicine": "Macleod's Clinical Examination (14th ed.)",
+  medicine: "Macleod's Clinical Examination (14th ed.)",
+  "obstetrics & gynaecology": "WHO Guidelines & Clinical Practice in Obstetrics",
+  obstetrics: "WHO Guidelines & Clinical Practice in Obstetrics",
+  gynaecology: "WHO Guidelines & Clinical Practice in Gynaecology",
+  pharmacology: "Katzung's Basic & Clinical Pharmacology (15th ed.)",
+  "community medicine": "WHO Guidelines on Epidemiology, Biostatistics & Public Health",
+  psychiatry: "ICD-11 / DSM-5 Clinical Psychiatry Standards",
+  dermatology: "Rook's Textbook of Dermatology (9th ed.)",
 }
 
 export async function POST(req: NextRequest) {
@@ -29,42 +49,57 @@ export async function POST(req: NextRequest) {
       program_id = "medicine",
       academic_level = "Year 4",
       subject = "Internal Medicine",
-      topic = "High-Yield Clinical Practice",
+      topic = "Clinical Diagnosis & Management",
+      question_type = "sba",
       count = 5
     } = await req.json()
+
+    const textbook = TEXTBOOK_MAP[subject.toLowerCase()] || "Standard Medical Curriculum Reference"
 
     const apiKey =
       process.env.GOOGLE_GENERATIVE_AI_API_KEY ||
       process.env.GEMINI_API_KEY
 
-    const prompt = `You are an expert medical educator creating board-style MCQ exam questions for ${program_id} students at level "${academic_level}" focusing on "${subject}" (${topic}).
-Generate EXACTLY ${count} authentic, high-yield, clinical scenario multiple-choice questions.
+    let typePrompt = ""
+    if (question_type === "true_false") {
+      typePrompt = `Questions must be single True/False statements. Each question must have exactly 2 options: [{"id": "opt-1", "option_text": "True", "is_correct": boolean}, {"id": "opt-2", "option_text": "False", "is_correct": boolean}].`
+    } else if (question_type === "multiple_true_false") {
+      typePrompt = `Questions must be Multiple True/False format. The stem introduces a clinical topic (e.g. "Regarding pulmonary embolism:"), and question_options has 5 sub-statements (A through E). Each sub-statement is independently either True or False. Set "is_correct": true if the sub-statement is factually TRUE, and "is_correct": false if factually FALSE.`
+    } else {
+      typePrompt = `Questions must be Single Best Answer (SBA/ABCDE). Each question must have 5 options (A to E) with exactly one correct option and 4 plausible distractors.`
+    }
 
-Format your response as a valid JSON array of objects with this EXACT structure (NO markdown code blocks around the JSON):
+    const prompt = `You are a distinguished medical professor and examiner creating board-standard examination questions for medical students (${program_id}, ${academic_level}).
+Course / Subject: "${subject}"
+Topic / Region: "${topic}"
+Primary Textbook: "${textbook}"
+Format: "${question_type}"
+
+${typePrompt}
+
+Generate EXACTLY ${count} questions. Reference textbook "${textbook}".
+
+Format your response strictly as a JSON array of objects with this structure (no markdown wrappers):
 [
   {
     "id": "ai-mcq-1",
-    "stem": "Full clinical vignette with patient age, sex, presenting complaints, physical exam findings, and lab/imaging data.",
+    "stem": "Detailed clinical vignette or medical statement",
     "difficulty": "medium",
     "subject": "${subject}",
     "topic": "${topic}",
     "academic_level": "${academic_level}",
     "program_id": "${program_id}",
-    "explanation": "In-depth rationale explaining why the correct choice is accurate and why distractors are incorrect, referencing standard textbooks (Snell, Guyton, Robbins, Katzung, SRB, Kumar & Clark, Ghai) and NCBI/UpToDate.",
-    "reference": "Authoritative textbook name and edition",
+    "question_type": "${question_type}",
+    "explanation": "Clear clinical reasoning citing ${textbook}",
+    "reference": "${textbook}",
     "question_options": [
-      { "id": "opt-1", "option_text": "Option text A", "is_correct": true, "explanation": "Rationale for option A" },
-      { "id": "opt-2", "option_text": "Option text B", "is_correct": false, "explanation": "Rationale for option B" },
-      { "id": "opt-3", "option_text": "Option text C", "is_correct": false, "explanation": "Rationale for option C" },
-      { "id": "opt-4", "option_text": "Option text D", "is_correct": false, "explanation": "Rationale for option D" }
+      { "id": "opt-1", "option_text": "Option text", "is_correct": true, "explanation": "Rationale" }
     ]
   }
-]
-
-Ensure each question has exactly one correct answer and 3 distinct plausible clinical distractors.`
+]`
 
     if (apiKey) {
-      const models = ["gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3.8-flash", "gemini-3.7-flash"]
+      const models = ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-1.5-flash", "gemini-1.5-pro"]
       for (const model of models) {
         try {
           const res = await fetch(
@@ -75,8 +110,8 @@ Ensure each question has exactly one correct answer and 3 distinct plausible cli
               body: JSON.stringify({
                 contents: [{ parts: [{ text: prompt }] }],
                 generationConfig: {
-                  temperature: 0.4,
-                  maxOutputTokens: 3000,
+                  temperature: 0.3,
+                  maxOutputTokens: 3500,
                   responseMimeType: "application/json"
                 }
               })
@@ -95,49 +130,74 @@ Ensure each question has exactly one correct answer and 3 distinct plausible cli
             }
           }
         } catch {
-          // Fall through to next model or fallback generator
+          // Fall through
         }
       }
     }
 
-    // Dynamic fallback generation if API key is not yet configured
-    const fallbackQuestions = Array.from({ length: count }).map((_, i) => ({
-      id: `ai-gen-fallback-${Date.now()}-${i}`,
-      stem: `A patient presents with acute ${subject.toLowerCase()} symptoms requiring clinical evaluation in ${academic_level} ${program_id}. Diagnostic assessment reveals classic physical and laboratory findings for ${topic}. What is the primary management priority?`,
-      difficulty: "medium" as const,
-      subject,
-      topic,
-      academic_level,
-      program_id,
-      explanation: `Clinical management in ${subject} prioritizes immediate stabilization, targeted protocol compliance, and organ protection. Reference: ${TEXTBOOK_MAP[subject.toLowerCase()] || "Standard Medical Curriculum"}.`,
-      reference: TEXTBOOK_MAP[subject.toLowerCase()] || "Standard Medical Curriculum",
-      question_options: [
-        {
-          id: `opt-fb-${i}-1`,
-          option_text: `Standard first-line protocolized intervention for ${topic}`,
-          is_correct: true,
-          explanation: "Gold-standard initial therapy aligned with clinical guidelines."
-        },
-        {
-          id: `opt-fb-${i}-2`,
-          option_text: "Observation without diagnostic confirmation or monitoring",
-          is_correct: false,
-          explanation: "Inadequate for acute presentations."
-        },
-        {
-          id: `opt-fb-${i}-3`,
-          option_text: "High-dose empirical treatment without baseline lab evaluation",
-          is_correct: false,
-          explanation: "Increases risk of toxic drug accumulation."
-        },
-        {
-          id: `opt-fb-${i}-4`,
-          option_text: "Elective outpatient discharge without specialist referral",
-          is_correct: false,
-          explanation: "Contraindicated in progressive clinical pathology."
+    // Dynamic fallback generation conforming to the selected question type and textbook
+    const fallbackQuestions = Array.from({ length: count }).map((_, i) => {
+      if (question_type === "true_false") {
+        return {
+          id: `ai-gen-tf-${Date.now()}-${i}`,
+          stem: `In ${subject} (${topic}), standard first-line diagnostic investigation begins with targeted baseline tests prior to invasive intervention.`,
+          difficulty: "medium" as const,
+          subject,
+          topic,
+          academic_level,
+          program_id,
+          question_type: "true_false",
+          explanation: `Consistent with ${textbook}, non-invasive baseline evaluation is mandatory before invasive staging unless emergency stabilization is required.`,
+          reference: textbook,
+          question_options: [
+            { id: `opt-tf-${i}-1`, option_text: "True", is_correct: true, explanation: "Correct protocol." },
+            { id: `opt-tf-${i}-2`, option_text: "False", is_correct: false, explanation: "Incorrect." }
+          ]
         }
-      ]
-    }))
+      }
+
+      if (question_type === "multiple_true_false") {
+        return {
+          id: `ai-gen-mtf-${Date.now()}-${i}`,
+          stem: `Regarding clinical presentation and management of ${topic} in ${subject}:`,
+          difficulty: "medium" as const,
+          subject,
+          topic,
+          academic_level,
+          program_id,
+          question_type: "multiple_true_false",
+          explanation: `Clinical presentation and pharmacology as outlined in ${textbook}.`,
+          reference: textbook,
+          question_options: [
+            { id: `opt-mtf-${i}-1`, option_text: "Acute clinical presentation usually requires prompt hemodynamic assessment", is_correct: true },
+            { id: `opt-mtf-${i}-2`, option_text: "First-line empirical therapy is contraindicated prior to microbiological confirmation in all cases", is_correct: false },
+            { id: `opt-mtf-${i}-3`, option_text: "Serum biomarkers provide objective prognostic stratification", is_correct: true },
+            { id: `opt-mtf-${i}-4`, option_text: "Routine discharge is recommended when initial vital signs normalize without observation", is_correct: false },
+            { id: `opt-mtf-${i}-5`, option_text: "Long-term follow-up improves recurrence-free survival rates", is_correct: true }
+          ]
+        }
+      }
+
+      return {
+        id: `ai-gen-sba-${Date.now()}-${i}`,
+        stem: `A patient presents with acute ${subject.toLowerCase()} symptoms in ${topic}. Clinical examination reveals characteristic physical and laboratory signs according to ${textbook}. What is the most appropriate initial management step?`,
+        difficulty: "medium" as const,
+        subject,
+        topic,
+        academic_level,
+        program_id,
+        question_type: "sba",
+        explanation: `According to ${textbook}, initial clinical priority is immediate stabilization, protocol adherence, and definitive therapy.`,
+        reference: textbook,
+        question_options: [
+          { id: `opt-sba-${i}-1`, option_text: `Guideline-directed first-line intervention for ${topic}`, is_correct: true, explanation: "Established gold-standard therapy." },
+          { id: `opt-sba-${i}-2`, option_text: "Immediate invasive procedure without pre-procedure stabilization", is_correct: false, explanation: "Premature intervention increases morbidity." },
+          { id: `opt-sba-${i}-3`, option_text: "Empirical discontinuation of all supportive therapies", is_correct: false, explanation: "Dangerous." },
+          { id: `opt-sba-${i}-4`, option_text: "Observation alone without serial monitoring", is_correct: false, explanation: "Unsafe." },
+          { id: `opt-sba-${i}-5`, option_text: "High-dose monotherapy without monitoring serum levels", is_correct: false, explanation: "High toxicity risk." }
+        ]
+      }
+    })
 
     return NextResponse.json({ success: true, questions: fallbackQuestions })
   } catch (error: any) {
