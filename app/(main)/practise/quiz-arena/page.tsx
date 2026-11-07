@@ -2,10 +2,11 @@
 import { useState, useEffect, useRef } from "react"
 import {
   Trophy, Clock, Users, Swords, ChevronRight, ArrowLeft,
-  CheckCircle, XCircle, RotateCcw, Award, Check
+  CheckCircle, XCircle, RotateCcw, Award, Check, Loader2, Sparkles
 } from "lucide-react"
 import Link from "next/link"
 import { getQuestionsByFilter, MCQQuestion } from "@/lib/data/mcq-bank"
+import { createClient } from "@/lib/supabase/client"
 import { toast } from "sonner"
 
 interface ArenaChallenge {
@@ -18,6 +19,14 @@ interface ArenaChallenge {
   participants: number
   rewardPoints: number
   description: string
+}
+
+interface RealScholar {
+  user_id: string
+  full_name: string | null
+  level: string | null
+  programme: string | null
+  xp: number
 }
 
 const ARENA_CHALLENGES: ArenaChallenge[] = [
@@ -79,6 +88,61 @@ export default function QuizArenaPage() {
   const [isFinished, setIsFinished] = useState(false)
   const timerRef = useRef<NodeJS.Timeout | null>(null)
 
+  // Real Database Leaderboard & User State
+  const [scholars, setScholars] = useState<RealScholar[]>([])
+  const [currentRank, setCurrentRank] = useState<number | null>(null)
+  const [currentUserXP, setCurrentUserXP] = useState<number>(0)
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null)
+  const [loadingLeaderboard, setLoadingLeaderboard] = useState(true)
+
+  // Fetch real students and rankings from Supabase
+  useEffect(() => {
+    async function loadLeaderboardData() {
+      try {
+        const supabase = createClient()
+        const { data: authData } = await supabase.auth.getUser()
+        const user = authData?.user
+        if (user) {
+          setCurrentUserId(user.id)
+        }
+
+        const { data, error } = await supabase
+          .from("student_profiles")
+          .select("user_id, full_name, level, programme, xp")
+          .order("xp", { ascending: false })
+          .limit(10)
+
+        if (!error && data) {
+          const activeScholars = data.filter(s => (s.xp || 0) > 0)
+          setScholars(activeScholars)
+
+          if (user) {
+            const userIdx = data.findIndex(s => s.user_id === user.id)
+            if (userIdx !== -1) {
+              setCurrentRank(userIdx + 1)
+              setCurrentUserXP(data[userIdx].xp || 0)
+            } else {
+              const { data: myProfile } = await supabase
+                .from("student_profiles")
+                .select("xp")
+                .eq("user_id", user.id)
+                .maybeSingle()
+              if (myProfile) {
+                setCurrentUserXP(myProfile.xp || 0)
+              }
+            }
+          }
+        }
+      } catch (err) {
+        console.error("Failed to load real leaderboard:", err)
+      } finally {
+        setLoadingLeaderboard(false)
+      }
+    }
+
+    loadLeaderboardData()
+  }, [])
+
   const startChallenge = (challenge: ArenaChallenge) => {
     setActiveChallenge(challenge)
     const fetched = getQuestionsByFilter({
@@ -103,7 +167,7 @@ export default function QuizArenaPage() {
       setTimeLeft(prev => {
         if (prev <= 1) {
           clearInterval(timerRef.current!)
-          setIsFinished(true)
+          handleFinishBattle(score)
           return 0
         }
         return prev - 1
@@ -112,7 +176,7 @@ export default function QuizArenaPage() {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current)
     }
-  }, [isPlaying, isFinished])
+  }, [isPlaying, isFinished, score])
 
   const formatTime = (secs: number) => {
     const m = Math.floor(secs / 60)
@@ -132,121 +196,152 @@ export default function QuizArenaPage() {
   }
 
   const handleNext = () => {
-    if (currentIndex + 1 >= questions.length) {
-      setIsFinished(true)
-    } else {
+    if (currentIndex + 1 < questions.length) {
       setCurrentIndex(i => i + 1)
       setSelectedOption(null)
       setRevealed(false)
+    } else {
+      handleFinishBattle(score)
+    }
+  }
+
+  const handleFinishBattle = async (finalScore: number) => {
+    setIsFinished(true)
+    if (timerRef.current) clearInterval(timerRef.current)
+
+    // Save earned XP to real database
+    if (activeChallenge && currentUserId && finalScore > 0) {
+      try {
+        const earnedXP = Math.round((finalScore / activeChallenge.questionCount) * activeChallenge.rewardPoints)
+        const supabase = createClient()
+        const { data: profile } = await supabase
+          .from("student_profiles")
+          .select("xp")
+          .eq("user_id", currentUserId)
+          .maybeSingle()
+        const newXP = (profile?.xp || 0) + earnedXP
+        await supabase
+          .from("student_profiles")
+          .update({ xp: newXP })
+          .eq("user_id", currentUserId)
+        setCurrentUserXP(newXP)
+        toast.success(`Battle completed! +${earnedXP} XP awarded.`)
+      } catch (err) {
+        console.error("Failed to update user XP:", err)
+      }
     }
   }
 
   // ═══════════════════════════════════════════════════════════
-  // ARENA IN-PROGRESS BATTLE
+  // ACTIVE BATTLE / FINISHED VIEW
   // ═══════════════════════════════════════════════════════════
   if (isPlaying && activeChallenge) {
-    if (isFinished) {
-      const percentage = Math.round((score / Math.max(questions.length, 1)) * 100)
-      return (
-        <div className="max-w-lg mx-auto py-12 space-y-6">
-          <div className="bg-[#0e0e0e] border border-[#1f1f1f] rounded-2xl p-8 text-center space-y-6 shadow-2xl">
+    const currentQ = questions[currentIndex]
+    const progress = ((currentIndex + 1) / questions.length) * 100
+    const earnedPoints = Math.round((score / questions.length) * activeChallenge.rewardPoints)
+
+    return (
+      <div className="max-w-2xl mx-auto space-y-6 pb-24">
+        {/* Battle Header */}
+        <div className="flex items-center justify-between">
+          <button
+            onClick={() => {
+              if (timerRef.current) clearInterval(timerRef.current)
+              setIsPlaying(false)
+            }}
+            className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-white transition-colors bg-[#111] border border-[#222] px-3 py-1.5 rounded-lg"
+          >
+            <ArrowLeft size={13} /> Leave Battle
+          </button>
+
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-bold text-gray-400">
+              Q{currentIndex + 1}/{questions.length}
+            </span>
+            <div className={`flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-md border ${
+              timeLeft < 30 ? "bg-red-950/40 text-brand border-red-900/50" : "bg-[#141414] text-white border-[#242424]"
+            }`}>
+              <Clock size={12} className={timeLeft < 30 ? "animate-pulse" : ""} />
+              {formatTime(timeLeft)}
+            </div>
+          </div>
+        </div>
+
+        {/* Progress Bar */}
+        <div className="w-full h-1 bg-[#161616] rounded-full overflow-hidden">
+          <div
+            className="h-full bg-brand transition-all duration-300"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+
+        {/* Battle Over Card */}
+        {isFinished ? (
+          <div className="bg-[#0e0e0e] border border-[#1f1f1f] rounded-2xl p-8 sm:p-10 text-center space-y-6 shadow-2xl">
             <div className="w-16 h-16 rounded-2xl bg-brand/10 border border-brand/20 flex items-center justify-center text-brand mx-auto">
               <Trophy size={32} />
             </div>
 
-            <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-brand block mb-1">
-                Challenge Complete
-              </span>
-              <h2 className="text-3xl font-display font-bold text-white">{percentage}%</h2>
-              <p className="text-xs text-gray-400 mt-1">
-                {activeChallenge.title} &bull; Score: {score} of {questions.length}
+            <div className="space-y-2">
+              <h2 className="text-2xl font-bold text-white tracking-tight">Challenge Complete</h2>
+              <p className="text-xs text-gray-400 max-w-sm mx-auto">
+                {activeChallenge.title} · {activeChallenge.subject}
               </p>
             </div>
 
-            <div className="bg-[#141414] border border-[#222] rounded-xl p-4 grid grid-cols-2 gap-3 text-center">
-              <div>
-                <span className="text-[10px] uppercase font-bold text-gray-500">Points Earned</span>
-                <p className="text-xl font-bold text-white mt-0.5">+{Math.round((score / questions.length) * activeChallenge.rewardPoints)} PTS</p>
+            <div className="grid grid-cols-3 gap-3 max-w-md mx-auto">
+              <div className="bg-[#141414] border border-[#222] rounded-xl p-3.5">
+                <span className="text-[10px] text-gray-500 uppercase font-bold block">Score</span>
+                <span className="text-lg font-bold text-white">{score} / {questions.length}</span>
               </div>
-              <div>
-                <span className="text-[10px] uppercase font-bold text-gray-500">Time Used</span>
-                <p className="text-xl font-bold text-brand mt-0.5">{formatTime(activeChallenge.timeLimit - timeLeft)}</p>
+              <div className="bg-[#141414] border border-[#222] rounded-xl p-3.5">
+                <span className="text-[10px] text-gray-500 uppercase font-bold block">Accuracy</span>
+                <span className="text-lg font-bold text-brand">
+                  {Math.round((score / questions.length) * 100)}%
+                </span>
+              </div>
+              <div className="bg-[#141414] border border-[#222] rounded-xl p-3.5">
+                <span className="text-[10px] text-gray-500 uppercase font-bold block">Earned</span>
+                <span className="text-lg font-bold text-white">+{earnedPoints} XP</span>
               </div>
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex gap-3 max-w-sm mx-auto pt-2">
               <button
                 onClick={() => startChallenge(activeChallenge)}
-                className="flex-1 bg-brand hover:bg-red-700 text-white font-bold py-3 rounded-xl text-xs transition-colors flex items-center justify-center gap-1.5 shadow-md shadow-brand/20"
+                className="flex-1 bg-brand hover:bg-red-700 text-white font-bold py-3 rounded-xl text-xs transition-all shadow-md shadow-brand/20 flex items-center justify-center gap-2"
               >
-                <RotateCcw size={14} /> Retry Battle
+                <RotateCcw size={14} /> Play Again
               </button>
               <button
-                onClick={() => {
-                  setIsPlaying(false)
-                  setActiveChallenge(null)
-                }}
-                className="flex-1 bg-[#161616] border border-[#242424] hover:bg-[#202020] text-gray-300 hover:text-white font-bold py-3 rounded-xl text-xs transition-colors"
+                onClick={() => setIsPlaying(false)}
+                className="flex-1 bg-[#141414] border border-[#242424] hover:bg-[#1a1a1a] text-white font-bold py-3 rounded-xl text-xs transition-colors"
               >
-                Return to Arena
+                Back to Arena
               </button>
             </div>
           </div>
-        </div>
-      )
-    }
-
-    const currentQ = questions[currentIndex]
-
-    return (
-      <div className="max-w-2xl mx-auto pb-24 space-y-5">
-        {/* Top Battle Header */}
-        <div className="flex items-center justify-between gap-3 bg-[#0e0e0e] border border-[#1f1f1f] rounded-xl px-4 py-3">
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setIsPlaying(false)}
-              className="w-7 h-7 rounded-lg bg-[#141414] border border-[#222] flex items-center justify-center text-gray-400 hover:text-white transition-colors"
-            >
-              <ArrowLeft size={14} />
-            </button>
-            <div>
-              <h2 className="text-xs sm:text-sm font-bold text-white">{activeChallenge.title}</h2>
-              <span className="text-[10px] text-gray-400">Question {currentIndex + 1} of {questions.length}</span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-brand bg-brand/10 border border-brand/20 px-2 py-0.5 rounded-md">
-              Score: {score}
-            </span>
-            <div className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#141414] border border-[#222] text-xs font-bold text-white">
-              <Clock size={12} className="text-brand" /> {formatTime(timeLeft)}
-            </div>
-          </div>
-        </div>
-
-        {/* Question Card */}
-        {currentQ && (
-          <div className="bg-[#0e0e0e] border border-[#1f1f1f] rounded-2xl p-6 sm:p-7 space-y-5 shadow-xl">
-            <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-gray-500 pb-2 border-b border-[#181818]">
-              <span>{currentQ.section}</span>
-              <span>{currentQ.difficulty}</span>
+        ) : (
+          /* Active Question Card */
+          <div className="bg-[#0e0e0e] border border-[#1f1f1f] rounded-2xl p-6 sm:p-7 space-y-6 shadow-xl">
+            <div className="space-y-2">
+              <span className="text-[10px] uppercase font-bold tracking-wider text-brand">
+                {currentQ.section || activeChallenge.subject}
+              </span>
+              <h2 className="text-sm sm:text-base font-semibold text-white leading-relaxed">
+                {currentQ.stem}
+              </h2>
             </div>
 
-            <p className="text-base font-semibold text-white leading-relaxed">
-              {currentQ.stem}
-            </p>
-
-            {/* Options */}
+            {/* Options List */}
             <div className="space-y-2.5">
               {currentQ.options.map((opt, i) => {
                 const isSelected = selectedOption === opt.id
+                let stateClass = "bg-[#141414] border-[#222] text-gray-300 hover:border-[#333]"
 
-                let stateClass = "bg-[#141414] border-[#242424] text-gray-300 hover:border-[#444] hover:text-white cursor-pointer"
                 if (revealed) {
                   if (opt.is_correct) {
-                    stateClass = "bg-brand/10 border-brand/60 text-white font-medium"
+                    stateClass = "bg-brand/10 border-brand text-white font-medium"
                   } else if (isSelected && !opt.is_correct) {
                     stateClass = "bg-red-950/30 border-red-800 text-gray-400"
                   } else {
@@ -320,7 +415,7 @@ export default function QuizArenaPage() {
   }
 
   // ═══════════════════════════════════════════════════════════
-  // ARENA HUB VIEW (No emojis, no AI generic elements, dark theme)
+  // ARENA HUB VIEW (Solid dark theme, real leaderboard)
   // ═══════════════════════════════════════════════════════════
   return (
     <div className="max-w-5xl mx-auto space-y-8 pb-24">
@@ -335,7 +430,10 @@ export default function QuizArenaPage() {
         <div className="flex items-center gap-3">
           <div className="bg-[#141414] border border-[#222] px-4 py-2.5 rounded-xl text-xs font-semibold text-gray-300">
             <span className="text-gray-500">Your Current Rank:</span>
-            <span className="font-bold text-white ml-1.5">#42</span>
+            <span className="font-bold text-white ml-1.5">
+              {currentRank ? `#${currentRank}` : currentUserXP > 0 ? "Active" : "Unranked"}
+            </span>
+            <span className="text-brand ml-2 font-bold">{currentUserXP} XP</span>
           </div>
         </div>
       </div>
@@ -395,41 +493,58 @@ export default function QuizArenaPage() {
           </div>
         </div>
 
-        {/* Right Col: Top Scholars Leaderboard */}
+        {/* Right Col: Real Campus Leaderboard */}
         <div className="space-y-4">
           <div className="flex items-center justify-between pb-1">
             <h2 className="text-sm font-bold uppercase tracking-wider text-gray-300 flex items-center gap-2">
               <Trophy size={16} className="text-brand" /> Top Scholars
             </h2>
-            <span className="text-xs text-gray-500">Weekly</span>
+            <span className="text-xs text-gray-500">Live Campus XP</span>
           </div>
 
           <div className="bg-[#0e0e0e] border border-[#1f1f1f] rounded-2xl p-2 divide-y divide-[#161616]">
-            {[
-              { rank: 1, name: "Dr. T. Chimedza", level: "Part V &bull; Medicine", score: "9,840 PTS" },
-              { rank: 2, name: "K. Ndlovu", level: "Part IV &bull; Medicine", score: "9,210 PTS" },
-              { rank: 3, name: "F. Mutasa", level: "Part III &bull; BMS", score: "8,750 PTS" },
-              { rank: 4, name: "R. Sibanda", level: "Part IV &bull; Pharmacy", score: "8,420 PTS" },
-              { rank: 5, name: "S. Marange", level: "Part V &bull; Medicine", score: "8,190 PTS" },
-            ].map(scholar => (
-              <div key={scholar.rank} className="flex items-center justify-between p-3 rounded-xl hover:bg-[#121212] transition-colors">
-                <div className="flex items-center gap-3">
-                  <span className={`w-5 text-center font-bold text-xs ${
-                    scholar.rank === 1 ? "text-brand" : scholar.rank === 2 ? "text-gray-300" : "text-gray-500"
-                  }`}>
-                    #{scholar.rank}
-                  </span>
-                  <div className="w-7 h-7 rounded-lg bg-[#161616] border border-[#242424] flex items-center justify-center text-xs font-bold text-gray-300">
-                    {scholar.name.charAt(0)}
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-white leading-tight">{scholar.name}</p>
-                    <p className="text-[10px] text-gray-500 mt-0.5" dangerouslySetInnerHTML={{ __html: scholar.level }} />
-                  </div>
-                </div>
-                <span className="text-[11px] font-bold text-gray-300">{scholar.score}</span>
+            {loadingLeaderboard ? (
+              <div className="py-12 flex flex-col items-center justify-center space-y-2">
+                <Loader2 size={20} className="animate-spin text-brand" />
+                <span className="text-xs text-gray-500">Connecting to campus database...</span>
               </div>
-            ))}
+            ) : scholars.length > 0 ? (
+              scholars.map((scholar, idx) => (
+                <div key={scholar.user_id} className="flex items-center justify-between p-3 rounded-xl hover:bg-[#121212] transition-colors">
+                  <div className="flex items-center gap-3">
+                    <span className={`w-5 text-center font-bold text-xs ${
+                      idx === 0 ? "text-brand" : idx === 1 ? "text-gray-300" : "text-gray-500"
+                    }`}>
+                      #{idx + 1}
+                    </span>
+                    <div className="w-7 h-7 rounded-lg bg-[#161616] border border-[#242424] flex items-center justify-center text-xs font-bold text-gray-300">
+                      {(scholar.full_name || "Scholar").charAt(0).toUpperCase()}
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-white leading-tight">
+                        {scholar.full_name || "Medical Scholar"}
+                        {scholar.user_id === currentUserId && (
+                          <span className="ml-1.5 text-[9px] px-1.5 py-0.5 rounded bg-brand/10 text-brand border border-brand/20 font-semibold">
+                            You
+                          </span>
+                        )}
+                      </p>
+                      <p className="text-[10px] text-gray-500 mt-0.5">
+                        {scholar.level || "Part III"} · {scholar.programme || "MBChB"}
+                      </p>
+                    </div>
+                  </div>
+                  <span className="text-[11px] font-bold text-gray-300">{(scholar.xp || 0).toLocaleString()} XP</span>
+                </div>
+              ))
+            ) : (
+              <div className="p-6 text-center space-y-2">
+                <p className="text-xs font-semibold text-gray-300">No ranked scholars yet</p>
+                <p className="text-[11px] text-gray-500 leading-relaxed">
+                  Be the first to complete a quiz or challenge to claim the #1 spot on the campus leaderboard.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

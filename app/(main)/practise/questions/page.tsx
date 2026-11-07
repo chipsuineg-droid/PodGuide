@@ -402,6 +402,8 @@ export default function QuestionsPage() {
   const [inProgressSession, setInProgressSession] = useState<any>(null)
   const [showHistory, setShowHistory] = useState(false)
   const [showLeaderboard, setShowLeaderboard] = useState(false)
+  const [leaderboardScholars, setLeaderboardScholars] = useState<any[]>([])
+  const [loadingLeaderboard, setLoadingLeaderboard] = useState(false)
   const [history, setHistory] = useState<any[]>([])
 
   // Quiz state
@@ -650,6 +652,25 @@ export default function QuestionsPage() {
     setShowHistory(true)
   }
 
+  const loadLeaderboard = async () => {
+    setShowLeaderboard(true)
+    setLoadingLeaderboard(true)
+    try {
+      const { data, error } = await supabase
+        .from("student_profiles")
+        .select("user_id, full_name, level, programme, xp")
+        .order("xp", { ascending: false })
+        .limit(10)
+      if (!error && data) {
+        setLeaderboardScholars(data.filter(s => (s.xp || 0) > 0))
+      }
+    } catch (err) {
+      console.error("Leaderboard error:", err)
+    } finally {
+      setLoadingLeaderboard(false)
+    }
+  }
+
   const correctCount = answers.filter(a => a.isCorrect).length
 
   // ═══════════════════════════════════════════════════════════
@@ -681,7 +702,7 @@ export default function QuestionsPage() {
                 <History size={14} className="text-gray-400" /> History
               </button>
               <button
-                onClick={() => setShowLeaderboard(true)}
+                onClick={loadLeaderboard}
                 className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#141414] hover:bg-[#1a1a1a] border border-[#222] text-xs font-semibold text-gray-300 hover:text-white transition-colors"
               >
                 <Trophy size={14} className="text-brand" /> Leaderboard
@@ -809,22 +830,60 @@ export default function QuestionsPage() {
               <div className="flex items-center justify-between p-5 border-b border-[#1f1f1f]">
                 <div className="flex items-center gap-2">
                   <Trophy size={18} className="text-brand" />
-                  <h2 className="font-bold text-white text-base">MBChB / BDS Leaderboard</h2>
+                  <h2 className="font-bold text-white text-base">Campus Leaderboard</h2>
                 </div>
                 <button onClick={() => setShowLeaderboard(false)} className="text-gray-500 hover:text-white text-2xl leading-none">&times;</button>
               </div>
-              <div className="p-6 text-center space-y-3">
-                <div className="w-12 h-12 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center text-brand mx-auto">
-                  <Award size={24} />
-                </div>
-                <h3 className="text-sm font-bold text-white">Weekly Study Rankings</h3>
-                <p className="text-xs text-gray-400">
-                  Compete with other medical and dental students across Zimbabwe and Southern Africa.
-                  Rankings refresh every Sunday at midnight.
-                </p>
-                <div className="bg-[#141414] border border-[#222] rounded-xl p-3 text-xs text-gray-400">
-                  Complete questions in Quiz Arena or Question Bank to earn points on the leaderboard.
-                </div>
+
+              <div className="p-5 space-y-4">
+                {loadingLeaderboard ? (
+                  <div className="py-12 flex flex-col items-center justify-center space-y-2">
+                    <Loader2 size={22} className="animate-spin text-brand" />
+                    <span className="text-xs text-gray-500">Querying campus rankings...</span>
+                  </div>
+                ) : leaderboardScholars.length > 0 ? (
+                  <div className="divide-y divide-[#181818] border border-[#1c1c1c] rounded-xl overflow-hidden bg-[#121212]">
+                    {leaderboardScholars.map((scholar, idx) => (
+                      <div key={scholar.user_id} className="flex items-center justify-between p-3">
+                        <div className="flex items-center gap-3">
+                          <span className={`w-5 text-center font-bold text-xs ${
+                            idx === 0 ? "text-brand" : idx === 1 ? "text-gray-300" : "text-gray-500"
+                          }`}>
+                            #{idx + 1}
+                          </span>
+                          <div className="w-7 h-7 rounded-lg bg-[#181818] border border-[#262626] flex items-center justify-center text-xs font-bold text-gray-300">
+                            {(scholar.full_name || "Scholar").charAt(0).toUpperCase()}
+                          </div>
+                          <div>
+                            <p className="text-xs font-bold text-white leading-tight">
+                              {scholar.full_name || "Medical Scholar"}
+                              {scholar.user_id === user?.id && (
+                                <span className="ml-1.5 text-[9px] px-1.5 py-0.5 rounded bg-brand/10 text-brand border border-brand/20 font-semibold">
+                                  You
+                                </span>
+                              )}
+                            </p>
+                            <p className="text-[10px] text-gray-500 mt-0.5">
+                              {scholar.level || "Part III"} · {scholar.programme || "MBChB"}
+                            </p>
+                          </div>
+                        </div>
+                        <span className="text-xs font-bold text-gray-200">
+                          {(scholar.xp || 0).toLocaleString()} XP
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="p-6 text-center space-y-2 bg-[#121212] border border-[#1f1f1f] rounded-xl">
+                    <Award size={24} className="text-brand mx-auto" />
+                    <h3 className="text-xs font-bold text-white">No ranked scholars yet</h3>
+                    <p className="text-[11px] text-gray-500 leading-relaxed">
+                      Complete quiz sessions and arena challenges to earn XP and appear at the top of the campus rankings.
+                    </p>
+                  </div>
+                )}
+
                 <button
                   onClick={() => setShowLeaderboard(false)}
                   className="w-full bg-[#161616] hover:bg-[#202020] border border-[#2a2a2a] text-white text-xs font-bold py-2.5 rounded-xl transition-colors"
@@ -1323,13 +1382,6 @@ function SessionConfigView({ course, programme, onBack, onStart }: SessionConfig
             <p className="text-xs text-gray-400 mt-0.5">Configure your practice session · {course.textbook}</p>
           </div>
         </div>
-
-        <button
-          onClick={() => toast.info("Multiplayer group quizzes coming to PodGuide soon!")}
-          className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-white bg-[#111] border border-[#222] px-3.5 py-2 rounded-xl transition-colors"
-        >
-          <Share2 size={13} className="text-brand" /> Group quiz
-        </button>
       </div>
 
       {/* Main Configuration Card */}
