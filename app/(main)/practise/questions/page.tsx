@@ -656,22 +656,18 @@ export default function QuestionsPage() {
   // STEP 1: COURSES GRID (Med Quiz Hub)
   // ═══════════════════════════════════════════════════════════
   if (step === "courses") {
-    const visibleCourses = COURSES.filter(c =>
-      c.programme === "both" || c.programme === programme
-    )
-
     return (
       <div className="max-w-5xl mx-auto pb-24 space-y-6">
         {/* Top Header Card */}
         <div className="bg-[#0e0e0e] border border-[#1f1f1f] rounded-2xl p-6 sm:p-8 space-y-4 shadow-xl">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand/10 border border-brand/20 text-brand text-[11px] font-bold uppercase tracking-wider mb-2">
-                <Sparkles size={12} /> AI-Powered MCQ Bank
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#161616] border border-[#262626] text-gray-300 text-[11px] font-bold uppercase tracking-wider mb-2">
+                Curriculum Question Bank
               </div>
               <h1 className="text-3xl sm:text-4xl font-display font-bold text-white tracking-tight">Med Quiz</h1>
               <p className="text-xs sm:text-sm text-gray-400 mt-1 max-w-2xl leading-relaxed">
-                10,000+ AI-generated MCQs per subject across Medicine ({programme.toUpperCase()}).
+                10,000+ clinical examination questions across core medical subjects and rotations.
                 Pick a difficulty, choose your region or mixed bag, and test your clinical mastery.
               </p>
             </div>
@@ -691,23 +687,6 @@ export default function QuestionsPage() {
                 <Trophy size={14} className="text-brand" /> Leaderboard
               </button>
             </div>
-          </div>
-
-          {/* Programme Switcher */}
-          <div className="flex items-center gap-1 bg-[#141414] border border-[#222] p-1 rounded-xl w-fit">
-            {(["mbchb", "bds"] as Programme[]).map(p => (
-              <button
-                key={p}
-                onClick={() => setProgramme(p)}
-                className={`px-4 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${
-                  programme === p
-                    ? "bg-brand text-white shadow-sm shadow-brand/20"
-                    : "text-gray-400 hover:text-white"
-                }`}
-              >
-                {p === "mbchb" ? "MBChB" : "BDS (Dentistry)"}
-              </button>
-            ))}
           </div>
         </div>
 
@@ -746,7 +725,7 @@ export default function QuestionsPage() {
 
         {/* Course Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-          {visibleCourses.map(course => (
+          {COURSES.map(course => (
             <button
               key={course.id}
               onClick={() => {
@@ -759,9 +738,7 @@ export default function QuestionsPage() {
                 <div className="w-11 h-11 rounded-xl bg-[#161616] group-hover:bg-brand/10 border border-[#242424] group-hover:border-brand/30 flex items-center justify-center text-gray-300 group-hover:text-brand transition-all">
                   {course.icon}
                 </div>
-                <span className="text-[10px] uppercase font-bold text-gray-500 bg-[#141414] border border-[#222] px-2 py-0.5 rounded-md">
-                  {course.programme === "both" ? "Core" : course.programme.toUpperCase()}
-                </span>
+                <ChevronRight size={16} className="text-gray-600 group-hover:text-brand transition-colors mt-1" />
               </div>
 
               <div>
@@ -769,7 +746,7 @@ export default function QuestionsPage() {
                   {course.name}
                 </h3>
                 <p className="text-xs text-gray-400 mt-1">
-                  {course.sections.length} sections · 10,000+ AI MCQs
+                  {course.sections.length} sections · 10,000+ questions
                 </p>
                 <p className="text-[11px] text-gray-500 mt-2 truncate flex items-center gap-1">
                   <BookOpen size={11} className="text-gray-600 flex-shrink-0" />
@@ -1581,7 +1558,7 @@ function SessionConfigView({ course, programme, onBack, onStart }: SessionConfig
         onClick={handleStart}
         className="w-full bg-brand hover:bg-red-700 text-white font-bold py-4 rounded-xl text-sm transition-all shadow-xl shadow-brand/25 flex items-center justify-center gap-2"
       >
-        <Sparkles size={16} /> Start Quiz · {count} Questions
+        <Play size={15} fill="currentColor" /> Start Quiz · {count} Questions
         <ChevronRight size={16} />
       </button>
     </div>
