@@ -131,7 +131,7 @@ export default async function ModuleDetailPage({ params }: ModulePageProps) {
 
           <div className="flex sm:flex-col gap-2 flex-shrink-0 w-full sm:w-auto">
             <Link
-              href="/practise/questions"
+              href={`/practise/questions?course=${encodeURIComponent(catalogCourse?.slug || id)}`}
               className="flex-1 sm:flex-none text-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold transition-colors"
             >
               Practise Questions
@@ -184,7 +184,7 @@ export default async function ModuleDetailPage({ params }: ModulePageProps) {
                 </div>
 
                 <Link
-                  href="/practise/questions"
+                  href={`/practise/questions?course=${encodeURIComponent(catalogCourse?.slug || id)}`}
                   className="px-3 py-1 bg-[#1c1c1c] hover:bg-red-600 text-gray-300 hover:text-white rounded text-xs font-medium transition-colors"
                 >
                   Review
@@ -225,10 +225,10 @@ export default async function ModuleDetailPage({ params }: ModulePageProps) {
           </p>
           <div className="pt-2">
             <Link
-              href="/learn"
+              href={`/library?subject=${encodeURIComponent(catalogCourse?.slug || id)}`}
               className="text-xs font-semibold text-red-500 hover:text-red-400 transition-colors inline-flex items-center gap-1"
             >
-              Explore Library
+              Explore Library Shelf
             </Link>
           </div>
         </div>

@@ -281,6 +281,25 @@ export function PersonalisedDashboardClient({
                         </div>
                       </div>
 
+                      <div className="grid grid-cols-2 gap-1.5 pt-1">
+                        <Link
+                          href={`/practise/questions?course=${encodeURIComponent(course.slug)}`}
+                          className="py-1 px-2 bg-[#161616] hover:bg-[#202020] border border-[#242424] hover:border-red-600/40 text-gray-300 hover:text-white rounded text-[10px] font-semibold flex items-center justify-center gap-1 transition-colors"
+                          title="Practise MCQs for this course"
+                        >
+                          <Brain size={11} className="text-red-500" />
+                          <span>MCQs</span>
+                        </Link>
+                        <Link
+                          href={`/library?subject=${encodeURIComponent(course.slug)}`}
+                          className="py-1 px-2 bg-[#161616] hover:bg-[#202020] border border-[#242424] hover:border-red-600/40 text-gray-300 hover:text-white rounded text-[10px] font-semibold flex items-center justify-center gap-1 transition-colors"
+                          title="Open Library shelf for this course"
+                        >
+                          <BookOpen size={11} className="text-red-500" />
+                          <span>Library</span>
+                        </Link>
+                      </div>
+
                       <Link
                         href={`/module/${course.slug}`}
                         className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 bg-[#181818] hover:bg-red-600 text-gray-300 hover:text-white rounded-md text-[11px] font-semibold border border-[#242424] hover:border-red-600 transition-all"

@@ -1,6 +1,7 @@
 "use client"
 
-import { useEffect, useState, useMemo } from "react"
+import { useEffect, useState, useMemo, Suspense } from "react"
+import { useSearchParams } from "next/navigation"
 import {
   Search,
   Folder,
@@ -318,7 +319,23 @@ function getFileTypeBadge(name: string, mimeType?: string): { label: string; col
   return { label: ext || "FILE", color: "bg-[#181818] text-gray-400 border-[#262626]" }
 }
 
-export default function LibraryPage() {
+export function matchEnrolledToLibrarySubject(enrolledSlugs: string[], subj: SubjectDef): boolean {
+  const cleanSubj = subj.name.toLowerCase().replace(/[^a-z0-9]/g, "")
+  const cleanDriveKey = subj.driveKey.toLowerCase().replace(/[^a-z0-9]/g, "")
+  return enrolledSlugs.some(slug => {
+    const clean = slug.toLowerCase().replace(/[^a-z0-9]/g, "")
+    return (
+      clean === cleanSubj ||
+      clean === cleanDriveKey ||
+      cleanSubj.includes(clean) ||
+      clean.includes(cleanSubj) ||
+      cleanDriveKey.includes(clean) ||
+      clean.includes(cleanDriveKey)
+    )
+  })
+}
+
+function LibraryContent() {
   const [loading, setLoading] = useState(true)
   const [driveData, setDriveData] = useState<Record<string, SubjectLibraryData>>({})
   const [totalDriveFiles, setTotalDriveFiles] = useState(0)
@@ -348,6 +365,70 @@ export default function LibraryPage() {
 
   // Real engagement tracking (views & likes)
   const [engagement, setEngagement] = useState<Record<string, { views: number; likes: number; userLiked?: boolean }>>({})
+
+  // Enrolled courses integration from Dashboard
+  const searchParams = useSearchParams()
+  const [enrolledSlugs, setEnrolledSlugs] = useState<string[]>([])
+
+  useEffect(() => {
+    const loadUserCourses = async () => {
+      try {
+        const { createClient } = await import("@/lib/supabase/client")
+        const supabase = createClient()
+        const { data: { user } } = await supabase.auth.getUser()
+        if (user) {
+          const { data: courses } = await supabase
+            .from("user_courses")
+            .select("course_slug")
+            .eq("user_id", user.id)
+          if (courses && courses.length > 0) {
+            setEnrolledSlugs(courses.map(c => c.course_slug))
+          }
+        }
+      } catch (err) {
+        console.warn("Could not load user courses in library:", err)
+      }
+    }
+    loadUserCourses()
+  }, [])
+
+  // Handle ?subject=... URL param from Dashboard / Course page
+  useEffect(() => {
+    const subjParam = searchParams.get("subject")
+    if (!subjParam) return
+    const cleanParam = subjParam.toLowerCase().replace(/[^a-z0-9]/g, "")
+
+    for (const cat of MAIN_ACADEMIC_CATEGORIES) {
+      for (const s of cat.subjects) {
+        const cleanName = s.name.toLowerCase().replace(/[^a-z0-9]/g, "")
+        const cleanKey = s.driveKey.toLowerCase().replace(/[^a-z0-9]/g, "")
+        if (cleanParam === cleanName || cleanParam === cleanKey || cleanName.includes(cleanParam) || cleanParam.includes(cleanName)) {
+          setSelectedMainCat(cat)
+          setSelectedSubject(s)
+          setSelectedResourceFolder(null)
+          setFolderFileSearch("")
+          return
+        }
+      }
+    }
+  }, [searchParams])
+
+  // Compute matched enrolled subjects for top shelves
+  const enrolledSubjects = useMemo(() => {
+    if (enrolledSlugs.length === 0) return []
+    const results: Array<{ cat: MainCategory; subj: SubjectDef }> = []
+    const seen = new Set<string>()
+
+    for (const cat of MAIN_ACADEMIC_CATEGORIES) {
+      for (const s of cat.subjects) {
+        if (matchEnrolledToLibrarySubject(enrolledSlugs, s) && !seen.has(s.id)) {
+          seen.add(s.id)
+          results.push({ cat, subj: s })
+        }
+      }
+    }
+    return results
+  }, [enrolledSlugs])
 
   // Toggle category expansion
   const toggleCategoryExpand = (catId: string) => {
@@ -1240,5 +1321,18 @@ export default function LibraryPage() {
         />
       )}
     </div>
+  )
+}
+
+
+export default function LibraryPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center py-24">
+        <Loader2 className="animate-spin text-red-600" size={28} />
+      </div>
+    }>
+      <LibraryContent />
+    </Suspense>
   )
 }

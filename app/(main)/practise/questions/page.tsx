@@ -1,5 +1,6 @@
 "use client"
-import { useEffect, useState, useMemo, useCallback, useRef } from "react"
+import { useEffect, useState, useMemo, useCallback, useRef, Suspense } from "react"
+import { useSearchParams } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import {
   ArrowLeft, ChevronDown, ChevronRight, RotateCcw, Trophy,
@@ -152,6 +153,29 @@ const CourseIcons = {
 }
 
 // ─── Course Definitions (with designated textbooks) ───────────────────────────
+
+export function matchEnrolledToMcqCourse(enrolledSlugs: string[], courseId: string): boolean {
+  const map: Record<string, string[]> = {
+    "internal-medicine": ["internal-medicine", "clinical-medicine", "infectious-diseases"],
+    "paediatrics": ["paediatrics"],
+    "surgery": ["surgery", "general-surgery", "orthopaedics-and-trauma"],
+    "obstetrics-gynaecology": ["obstetrics-gynaecology", "obstetrics-and-gynaecology", "reproductive-health"],
+    "anatomy": ["anatomy", "neuroanatomy"],
+    "physiology": ["physiology"],
+    "histology": ["histology"],
+    "embryology": ["embryology"],
+    "histopathology": ["histopathology", "chemical-pathology", "haematology", "forensic-pathology"],
+    "pharmacology": ["pharmacology", "clinical-pharmacology", "pharmacotherapeutics"],
+    "community-medicine": ["community-medicine", "public-health", "epidemiology"],
+    "psychiatry": ["psychiatry"],
+    "dermatology": ["dermatology"],
+  }
+  const targetSlugs = map[courseId] || [courseId]
+  return enrolledSlugs.some(s => {
+    const cleanS = s.toLowerCase().trim()
+    return targetSlugs.includes(cleanS) || cleanS === courseId || cleanS.includes(courseId) || courseId.includes(cleanS)
+  })
+}
 
 export const COURSES: MCQCourse[] = [
   {
@@ -390,7 +414,7 @@ function formatTime(seconds: number): string {
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 
-export default function QuestionsPage() {
+function QuestionsContent() {
   const supabase = createClient()
   const [user, setUser] = useState<any>(null)
   const [step, setStep] = useState<Step>("courses")
@@ -405,6 +429,9 @@ export default function QuestionsPage() {
   const [leaderboardScholars, setLeaderboardScholars] = useState<any[]>([])
   const [loadingLeaderboard, setLoadingLeaderboard] = useState(false)
   const [history, setHistory] = useState<any[]>([])
+  const searchParams = useSearchParams()
+  const [enrolledSlugs, setEnrolledSlugs] = useState<string[]>([])
+  const [courseFilter, setCourseFilter] = useState<"enrolled" | "all">("all")
 
   // Quiz state
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -441,6 +468,18 @@ export default function QuestionsPage() {
     }
     init()
   }, [])
+
+  // Handle ?course=... URL param from Dashboard or Course Folder
+  useEffect(() => {
+    const courseParam = searchParams.get("course")
+    if (courseParam) {
+      const match = COURSES.find(c => matchEnrolledToMcqCourse([courseParam], c.id))
+      if (match) {
+        setSelectedCourse(match)
+        setStep("config")
+      }
+    }
+  }, [searchParams])
 
   // Timer logic
   useEffect(() => {
@@ -1614,5 +1653,17 @@ function SessionConfigView({ course, programme, onBack, onStart }: SessionConfig
         <ChevronRight size={16} />
       </button>
     </div>
+  )
+}
+
+export default function QuestionsPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center py-24">
+        <Loader2 className="animate-spin text-brand" size={28} />
+      </div>
+    }>
+      <QuestionsContent />
+    </Suspense>
   )
 }
