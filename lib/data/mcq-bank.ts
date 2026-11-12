@@ -811,6 +811,289 @@ export const MCQ_QUESTION_BANK: MCQQuestion[] = [
       { id: "sba-derm-infl-001-e", text: "Scabies", is_correct: false },
     ],
   },
+
+  // ═══════════════════════════════════════════════════════════
+  // EXPANDED HIGH-YIELD CLINICAL MCQS (STRICTLY CATEGORISED)
+  // ═══════════════════════════════════════════════════════════
+
+  // ── SURGERY ──
+  {
+    id: "sba-surg-app-002",
+    stem: "A 19-year-old university student presents with 14 hours of central periumbilical colicky abdominal pain that has shifted to the right iliac fossa (RIF) and become continuous. He has anorexia, low-grade pyrexia of 37.9°C, and marked rebound tenderness at McBurney's point with a positive Rovsing sign. What is the MOST appropriate next management step?",
+    question_type: "sba",
+    difficulty: "medium",
+    subject: "Surgery",
+    section: "Lower GI Surgery",
+    programme: "mbchb",
+    explanation: "Classic migratory abdominal pain shifting from periumbilical to RIF with local peritonism in a young male is acute appendicitis (Alvarado score >=7). In young males with unambiguous clinical findings, urgent diagnostic and therapeutic appendicectomy (open or laparoscopic) is the gold standard without delaying for unnecessary CT imaging. Ref: Bailey & Love 27th Ed. (Chapter 71).",
+    reference: "Bailey & Love's Short Practice of Surgery, 27th Ed. (Chapter 71: The Vermiform Appendix)",
+    options: [
+      { id: "sba-surg-app-002-a", text: "Discharge home on oral amoxicillin-clavulanic acid with review in 48 hours", is_correct: false },
+      { id: "sba-surg-app-002-b", text: "Urgent diagnostic laparoscopy / appendicectomy with perioperative intravenous antibiotics", is_correct: true },
+      { id: "sba-surg-app-002-c", text: "Immediate barium enema to confirm appendiceal lumen occlusion", is_correct: false },
+      { id: "sba-surg-app-002-d", text: "Serial abdominal X-rays every 6 hours while observing nil-by-mouth", is_correct: false },
+      { id: "sba-surg-app-002-e", text: "Colonoscopy to rule out Crohn's ileitis before considering surgery", is_correct: false },
+    ],
+  },
+  {
+    id: "sba-surg-trauma-003",
+    stem: "A 32-year-old man involved in a high-speed road traffic collision arrives in the trauma resuscitation bay tachypnoeic (RR 34/min), cyanosed, and hypotensive (BP 75/45 mmHg). Physical examination reveals a trachea deviated to the left side, absent breath sounds over the right hemithorax, and distended neck veins. What is the IMMEDIATE life-saving intervention?",
+    question_type: "sba",
+    difficulty: "easy",
+    subject: "Surgery",
+    section: "General Surgery",
+    programme: "mbchb",
+    explanation: "This patient has a tension pneumothorax: respiratory distress, unilateral absent breath sounds with hyper-resonance, tracheal deviation away from the affected side, and obstructive shock from caval compression. It is a strictly clinical diagnosis requiring immediate needle decompression (ATLS guidelines: 2nd intercostal space midclavicular line or 4th/5th space anterior axillary line) followed immediately by a wide-bore intercostal chest tube. Immediate imaging is contraindicated.",
+    reference: "Bailey & Love's Short Practice of Surgery, 27th Ed. (Chapter 26: Trauma & Critical Care)",
+    options: [
+      { id: "sba-surg-trauma-003-a", text: "Immediate needle thoracocentesis followed by insertion of an intercostal chest tube", is_correct: true },
+      { id: "sba-surg-trauma-003-b", text: "Transfer directly to the radiology suite for a stat portable chest X-ray", is_correct: false },
+      { id: "sba-surg-trauma-003-c", text: "Rapid infusion of 2 units of un-crossmatched whole blood", is_correct: false },
+      { id: "sba-surg-trauma-003-d", text: "Emergency bedside subxiphoid pericardiocentesis", is_correct: false },
+      { id: "sba-surg-trauma-003-e", text: "Immediate endotracheal intubation with high-pressure positive pressure ventilation", is_correct: false },
+    ],
+  },
+  {
+    id: "sba-surg-burn-004",
+    stem: "A 70 kg man sustains deep second-degree and third-degree flame burns involving both anterior and posterior lower limbs and the entire anterior torso. Using the Wallace Rule of Nines and the Parkland formula (4 mL x kg x %TBSA), what volume of Ringer's lactate should be administered in the FIRST 8 hours following the burn?",
+    question_type: "sba",
+    difficulty: "hard",
+    subject: "Surgery",
+    section: "General Surgery",
+    programme: "mbchb",
+    explanation: "Wallace Rule of Nines: Both lower limbs anterior & posterior = 18% + 18% = 36%. Anterior torso = 18%. Total TBSA = 36% + 18% = 54%. Parkland Formula = 4 mL x 70 kg x 54% = 15,120 mL of Ringer's Lactate in 24 hours. Half of this total volume (7,560 mL) must be infused in the first 8 hours calculated from the time of burn injury.",
+    reference: "Bailey & Love's Short Practice of Surgery, 27th Ed. (Chapter 5: Burns)",
+    options: [
+      { id: "sba-surg-burn-004-a", text: "3,780 mL", is_correct: false },
+      { id: "sba-surg-burn-004-b", text: "5,040 mL", is_correct: false },
+      { id: "sba-surg-burn-004-c", text: "7,560 mL", is_correct: true },
+      { id: "sba-surg-burn-004-d", text: "10,080 mL", is_correct: false },
+      { id: "sba-surg-burn-004-e", text: "15,120 mL", is_correct: false },
+    ],
+  },
+  {
+    id: "tf-surg-thyroid-005",
+    stem: "Trousseau's sign (carpopedal spasm elicited by inflating a sphygmomanometer cuff above systolic pressure for 3 minutes) is an early physical sign of acute hypocalcaemia following total thyroidectomy.",
+    question_type: "true_false",
+    difficulty: "easy",
+    subject: "Surgery",
+    section: "Head and Neck Surgery",
+    programme: "mbchb",
+    explanation: "Trousseau's sign is highly specific and more sensitive than Chvostek's sign for latent tetany secondary to acute hypocalcaemia, which occurs if parathyroid glands are devascularized or inadvertently removed during total thyroidectomy. Ref: Bailey & Love 27th Ed.",
+    reference: "Bailey & Love's Short Practice of Surgery, 27th Ed. (Chapter 51: The Thyroid Gland)",
+    options: [
+      { id: "tf-surg-thyroid-005-t", text: "True", is_correct: true },
+      { id: "tf-surg-thyroid-005-f", text: "False", is_correct: false },
+    ],
+  },
+
+  // ── ANATOMY ──
+  {
+    id: "sba-anat-femoral-002",
+    stem: "A 48-year-old multiparous woman presents with an irreducible tender groin lump located below and lateral to the pubic tubercle. A diagnosis of strangulated femoral hernia is made. What structure forms the MEDIAL boundary of the femoral ring, which is divided during surgical release with risk of injury to an aberrant obturator artery?",
+    question_type: "sba",
+    difficulty: "hard",
+    subject: "Anatomy",
+    section: "Lower Limb",
+    programme: "both",
+    explanation: "The boundaries of the femoral ring are: Anterior = Inguinal ligament; Posterior = Pectineal ligament (of Astley Cooper); Lateral = Femoral vein in the femoral sheath; Medial = Lacunar ligament (of Gimbernat). An accessory/aberrant obturator artery (corona mortis) arches over the lacunar ligament in ~20% of individuals and is at risk of severe haemorrhage when the lacunar ligament is incised. Ref: Snell Clinical Anatomy 10th Ed.",
+    reference: "Snell's Clinical Anatomy by Regions, 10th Ed. (Chapter 6: Lower Limb)",
+    options: [
+      { id: "sba-anat-femoral-002-a", text: "Femoral vein", is_correct: false },
+      { id: "sba-anat-femoral-002-b", text: "Lacunar ligament (Gimbernat's ligament)", is_correct: true },
+      { id: "sba-anat-femoral-002-c", text: "Pectineal ligament (Cooper's ligament)", is_correct: false },
+      { id: "sba-anat-femoral-002-d", text: "Inguinal ligament (Poupart's ligament)", is_correct: false },
+      { id: "sba-anat-femoral-002-e", text: "Pectineus muscle fascia", is_correct: false },
+    ],
+  },
+  {
+    id: "sba-anat-circle-003",
+    stem: "A 52-year-old man presents with sudden catastrophic 'thunderclap' headache followed by ptosis and a dilated, non-reactive right pupil with the eye turned 'down and out'. A non-contrast head CT demonstrates subarachnoid haemorrhage. An aneurysm at which arterial junction is the MOST common cause of compressive third cranial nerve (oculomotor) palsy?",
+    question_type: "sba",
+    difficulty: "medium",
+    subject: "Anatomy",
+    section: "Neuroanatomy",
+    programme: "both",
+    explanation: "The oculomotor nerve (CN III) emerges from the midbrain and passes between the posterior cerebral artery and the superior cerebellar artery before running parallel to the posterior communicating artery (PCoA). An aneurysm at the junction of the internal carotid artery and posterior communicating artery compresses the outer parasympathetic pupillary fibers of CN III, producing acute pupillary dilation (mydriasis) accompanied by ptosis and downward-outward deviation. Ref: Snell Clinical Anatomy 10th Ed.",
+    reference: "Snell's Clinical Anatomy by Regions, 10th Ed. (Chapter 11: Cranial Cavity & Blood Supply)",
+    options: [
+      { id: "sba-anat-circle-003-a", text: "Junction of Anterior Communicating Artery and Anterior Cerebral Artery", is_correct: false },
+      { id: "sba-anat-circle-003-b", text: "Junction of Internal Carotid Artery and Posterior Communicating Artery", is_correct: true },
+      { id: "sba-anat-circle-003-c", text: "Bifurcation of the Basilar Artery into Posterior Cerebral Arteries", is_correct: false },
+      { id: "sba-anat-circle-003-d", text: "Origin of Posterior Inferior Cerebellar Artery (PICA)", is_correct: false },
+      { id: "sba-anat-circle-003-e", text: "Middle Cerebral Artery bifurcation in the Sylvian fissure", is_correct: false },
+    ],
+  },
+  {
+    id: "mtf-anat-brachial-004",
+    stem: "Regarding Erb-Duchenne palsy resulting from traction injury to the upper trunk of the brachial plexus (C5-C6 roots):",
+    question_type: "multiple_true_false",
+    difficulty: "medium",
+    subject: "Anatomy",
+    section: "Upper Limb",
+    programme: "both",
+    explanation: "Erb-Duchenne palsy (C5-C6 injury) causes paralysis of abductors/lateral rotators of shoulder (deltoid, supraspinatus, infraspinatus) and flexors/supinators of forearm (biceps brachii, brachialis, supinator). The limb hangs adducted, medially rotated, with forearm pronated ('waiter's tip' posture). The grasp reflex is preserved (supplied by T1 intrinsics). Biceps tendon reflex (C5-C6) is lost.",
+    reference: "Snell's Clinical Anatomy by Regions, 10th Ed. (Chapter 9: The Upper Limb)",
+    options: [
+      { id: "mtf-anat-brachial-004-a", text: "The arm hangs limp by the side in adduction and medial rotation ('waiter's tip' position)", is_correct: true },
+      { id: "mtf-anat-brachial-004-b", text: "The biceps jerk reflex is abolished or markedly diminished", is_correct: true },
+      { id: "mtf-anat-brachial-004-c", text: "The small intrinsic muscles of the hand are paralyzed producing a claw hand", is_correct: false },
+      { id: "mtf-anat-brachial-004-d", text: "It commonly occurs during difficult breech deliveries or motorcycle falls onto shoulder", is_correct: true },
+    ],
+  },
+
+  // ── INTERNAL MEDICINE ──
+  {
+    id: "sba-med-dka-002",
+    stem: "A 22-year-old woman with Type 1 Diabetes Mellitus presents to the acute medical unit with lethargy, deep sighing (Kussmaul) respirations, vomiting, and abdominal pain. Arterial blood gas shows pH 7.15, pCO2 22 mmHg, HCO3- 9 mmol/L, blood glucose 28 mmol/L, and capillary blood ketones 5.4 mmol/L. What is the fundamental priority of initial emergency medical management?",
+    question_type: "sba",
+    difficulty: "medium",
+    subject: "Internal Medicine",
+    section: "Endocrinology & Diabetes",
+    programme: "mbchb",
+    explanation: "The management of Diabetic Ketoacidosis (DKA) requires immediate, aggressive fluid resuscitation with 0.9% Normal Saline (1 L in first hour) combined with a fixed-rate intravenous insulin infusion (0.1 units/kg/hour). Potassium replacement is vital once potassium drops below 5.5 mmol/L. Bicarbonate infusion is contraindicated unless pH is <6.9 due to risk of paradoxical CSF acidosis and hypokalaemia. Ref: Macleod's / Kumar & Clark.",
+    reference: "Kumar and Clark's Clinical Medicine, 10th Ed. (Chapter 21: Diabetes Mellitus)",
+    options: [
+      { id: "sba-med-dka-002-a", text: "Immediate intravenous infusion of 100 mmol 8.4% Sodium Bicarbonate", is_correct: false },
+      { id: "sba-med-dka-002-b", text: "Aggressive intravenous 0.9% Normal Saline fluid replacement and fixed-rate IV soluble insulin", is_correct: true },
+      { id: "sba-med-dka-002-c", text: "Subcutaneous sliding-scale insulin every 4 hours with oral rehydration therapy", is_correct: false },
+      { id: "sba-med-dka-002-d", text: "High-dose intravenous broad-spectrum cephalosporin before any fluid therapy", is_correct: false },
+      { id: "sba-med-dka-002-e", text: "Immediate intravenous push of 50% Dextrose followed by continuous glucagon", is_correct: false },
+    ],
+  },
+  {
+    id: "sba-med-pe-003",
+    stem: "A 64-year-old man who underwent total hip arthroplasty 10 days ago presents with sudden-onset pleuritic chest pain, dyspnoea, and haemoptysis. He is tachycardic (pulse 118 bpm), tachypnoeic (RR 26/min), with oxygen saturation 89% on room air. ECG reveals sinus tachycardia with S1Q3T3 pattern. What is the gold-standard diagnostic imaging investigation of choice?",
+    question_type: "sba",
+    difficulty: "easy",
+    subject: "Internal Medicine",
+    section: "Respiratory Medicine",
+    programme: "mbchb",
+    explanation: "Computed Tomography Pulmonary Angiography (CTPA) is the gold standard imaging modality for confirming acute Pulmonary Embolism (PE) in haemodynamically stable patients. It directly visualizes filling defects in pulmonary arterial branches. D-dimer has high negative predictive value but is non-specific in postoperative patients. Ref: Macleod's Clinical Examination.",
+    reference: "Macleod's Clinical Examination, 14th Ed. (Chapter 8: The Respiratory System)",
+    options: [
+      { id: "sba-med-pe-003-a", text: "Transthoracic echocardiogram alone", is_correct: false },
+      { id: "sba-med-pe-003-b", text: "Computed Tomography Pulmonary Angiography (CTPA)", is_correct: true },
+      { id: "sba-med-pe-003-c", text: "Posterior-anterior erect Chest X-Ray", is_correct: false },
+      { id: "sba-med-pe-003-d", text: "Quantitative D-dimer enzyme-linked immunosorbent assay (ELISA)", is_correct: false },
+      { id: "sba-med-pe-003-e", text: "Standard 12-lead Electrocardiogram", is_correct: false },
+    ],
+  },
+
+  // ── PAEDIATRICS ──
+  {
+    id: "sba-paeds-mal-002",
+    stem: "An 18-month-old girl is brought to the malnutrition clinic with bilateral pitting pedal oedema extending to the shins, generalized abdominal distension, dry scaly 'flaky-paint' dermatosis, and sparse reddish hypopigmented hair. Her weight-for-age is 68% of median. What is the classic clinical diagnosis?",
+    question_type: "sba",
+    difficulty: "easy",
+    subject: "Paediatrics",
+    section: "Nutrition & Growth",
+    programme: "mbchb",
+    explanation: "Bilateral pitting oedema of nutritional origin is the hallmark diagnostic feature that differentiates Kwashiorkor (hypoalbuminaemic severe acute malnutrition from severe protein deficiency with adequate caloric intake) from Marasmus (severe wasting without oedema). Associated signs include flaky-paint dermatosis, flag sign in hair, apathy, and enlarged fatty liver. Ref: Coovadia Paediatrics 7th Ed.",
+    reference: "Coovadia's Paediatrics and Child Health, 7th Ed. (Chapter 14: Nutritional Disorders)",
+    options: [
+      { id: "sba-paeds-mal-002-a", text: "Marasmus", is_correct: false },
+      { id: "sba-paeds-mal-002-b", text: "Kwashiorkor", is_correct: true },
+      { id: "sba-paeds-mal-002-c", text: "Congenital Nephrotic Syndrome", is_correct: false },
+      { id: "sba-paeds-mal-002-d", text: "Protein-Losing Enteropathy", is_correct: false },
+      { id: "sba-paeds-mal-002-e", text: "Congestive Cardiac Failure", is_correct: false },
+    ],
+  },
+  {
+    id: "sba-paeds-malaria-003",
+    stem: "A 4-year-old boy in an endemic rural region presents with 3 days of high-grade fever, repeated unprovoked generalized tonic-clonic convulsions, prostration, deep acidotic breathing, and impaired consciousness (Blantyre Coma Score 2/5). A rapid diagnostic test confirms Plasmodium falciparum. According to WHO guidelines, what is the first-line medication of choice?",
+    question_type: "sba",
+    difficulty: "medium",
+    subject: "Paediatrics",
+    section: "Childhood Infections & Malaria",
+    programme: "mbchb",
+    explanation: "This child has Severe (Cerebral) Malaria fulfilling WHO criteria (impaired consciousness, repetitive seizures, acidotic breathing). WHO guidelines stipulate intravenous or intramuscular Artesunate (2.4 mg/kg at 0, 12, and 24 hours, then daily) as the absolute first-line treatment. Artesunate significantly reduces mortality compared to intravenous Quinine and has a superior safety profile.",
+    reference: "WHO Guidelines for Malaria, Coovadia's Paediatrics and Child Health (Chapter 19)",
+    options: [
+      { id: "sba-paeds-malaria-003-a", text: "Oral Artemether-Lumefantrine (Coartem) crushed in milk", is_correct: false },
+      { id: "sba-paeds-malaria-003-b", text: "Intravenous or intramuscular Artesunate", is_correct: true },
+      { id: "sba-paeds-malaria-003-c", text: "Intravenous Chloramphenicol plus Ceftriaxone monotherapy", is_correct: false },
+      { id: "sba-paeds-malaria-003-d", text: "Oral Chloroquine phosphate syrup", is_correct: false },
+      { id: "sba-paeds-malaria-003-e", text: "Intravenous Dexamethasone bolus for cerebral oedema", is_correct: false },
+    ],
+  },
+
+  // ── PHARMACOLOGY ──
+  {
+    id: "sba-pharma-para-002",
+    stem: "A 21-year-old student is brought to the emergency department 6 hours after ingesting 30 tablets (15 grams) of paracetamol in a suicide gesture. Plasma paracetamol concentration plotted on the Prescott nomogram falls well above the treatment line. What is the specific therapeutic antidote and its mechanism of action?",
+    question_type: "sba",
+    difficulty: "medium",
+    subject: "Pharmacology",
+    section: "Antimicrobials & Toxicology",
+    programme: "both",
+    explanation: "Paracetamol overdose saturates normal glucuronidation/sulfation pathways and is metabolized by CYP2E1 into the toxic reactive electrophile NAPQI. NAPQI depletes hepatic glutathione and causes centrilobular hepatic necrosis. Intravenous N-acetylcysteine (NAC) acts as a glutathione precursor and glutathione substitute, directly conjugating and detoxifying NAPQI. Ref: Katzung 15th Ed.",
+    reference: "Katzung's Basic & Clinical Pharmacology, 15th Ed. (Chapter 58: Heavy Metal Intoxication & Chelators)",
+    options: [
+      { id: "sba-pharma-para-002-a", text: "Flumazenil, which competitively antagonizes central GABA-A receptors", is_correct: false },
+      { id: "sba-pharma-para-002-b", text: "N-acetylcysteine (NAC), which replenishes hepatic glutathione stores", is_correct: true },
+      { id: "sba-pharma-para-002-c", text: "Naloxone, which blocks mu-opioid receptors", is_correct: false },
+      { id: "sba-pharma-para-002-d", text: "Deferoxamine, which chelates free toxic iron ions", is_correct: false },
+      { id: "sba-pharma-para-002-e", text: "Atropine sulfate, which competitively blocks muscarinic receptors", is_correct: false },
+    ],
+  },
+  {
+    id: "sba-pharma-warf-003",
+    stem: "A 68-year-old woman with mechanical mitral valve prosthesis taking Warfarin presents with gross haematuria and epistaxis. Her INR is markedly elevated at 10.5 with no life-threatening major intracranial bleeding. Which agent provides rapid, physiological restoration of Vitamin K-dependent clotting factors (II, VII, IX, X)?",
+    question_type: "sba",
+    difficulty: "medium",
+    subject: "Pharmacology",
+    section: "Cardiovascular Pharmacology",
+    programme: "both",
+    explanation: "Warfarin inhibits Vitamin K epoxide reductase (VKORC1), blocking gamma-carboxylation of clotting factors II, VII, IX, and X, as well as proteins C and S. For major bleeding or severe coagulopathy (INR >8), the fastest reversal is achieved with Prothrombin Complex Concentrate (PCC / Beriplex), which contains concentrated factors II, VII, IX, and X, alongside IV Vitamin K (Phytomenadione) for sustained synthesis. Ref: Katzung 15th Ed.",
+    reference: "Katzung's Basic & Clinical Pharmacology, 15th Ed. (Chapter 34: Drugs Used in Disorders of Coagulation)",
+    options: [
+      { id: "sba-pharma-warf-003-a", text: "Protamine sulfate intravenous infusion", is_correct: false },
+      { id: "sba-pharma-warf-003-b", text: "Four-factor Prothrombin Complex Concentrate (PCC) and IV Vitamin K (Phytomenadione)", is_correct: true },
+      { id: "sba-pharma-warf-003-c", text: "Intravenous Tranexamic Acid monotherapy", is_correct: false },
+      { id: "sba-pharma-warf-003-d", text: "Platelet concentrate transfusion (6 units)", is_correct: false },
+      { id: "sba-pharma-warf-003-e", text: "Idarucizumab humanized monoclonal antibody fragment", is_correct: false },
+    ],
+  },
+
+  // ── OBSTETRICS & GYNAECOLOGY ──
+  {
+    id: "sba-obgyn-pph-001",
+    stem: "A 28-year-old Para 3+0 delivers a 4.2 kg infant vaginally following prolonged obstructed labor. Ten minutes post-delivery, she has sudden brisk vaginal bleeding totaling 750 mL. On abdominal palpation, the uterine fundus is soft, boggy, and palpated 4 cm above the umbilicus. What is the MOST common cause of Primary Postpartum Haemorrhage (PPH) in this clinical setting?",
+    question_type: "sba",
+    difficulty: "easy",
+    subject: "Obstetrics & Gynaecology",
+    section: "Obstetric Emergencies",
+    programme: "mbchb",
+    explanation: "Uterine atony (the failure of the myometrium to contract and compress spiral arterioles) accounts for over 70-80% of all cases of primary postpartum haemorrhage (the 4 Ts: Tone, Trauma, Tissue, Thrombin). Palpation of a soft, boggy, enlarged fundus is pathognomonic. Immediate management is bimanual uterine compression, bladder emptying, and uterotonic administration (Oxytocin, Ergometrine, Misoprostol). Ref: WHO Guidelines.",
+    reference: "WHO Guidelines for the Management of Postpartum Haemorrhage",
+    options: [
+      { id: "sba-obgyn-pph-001-a", text: "Retained succenturiate placental lobe", is_correct: false },
+      { id: "sba-obgyn-pph-001-b", text: "Uterine atony (loss of myometrial tone)", is_correct: true },
+      { id: "sba-obgyn-pph-001-c", text: "Cervical laceration extending into the lower uterine segment", is_correct: false },
+      { id: "sba-obgyn-pph-001-d", text: "Acquired coagulopathy and consumption of fibrinogen", is_correct: false },
+      { id: "sba-obgyn-pph-001-e", text: "Acute complete uterine inversion", is_correct: false },
+    ],
+  },
+  {
+    id: "sba-obgyn-mag-002",
+    stem: "A 24-year-old primigravida at 36 weeks gestation presents with headache, scotomas, BP 165/110 mmHg, and 3+ proteinuria. While awaiting delivery, she develops a generalized tonic-clonic convulsion. What is the drug of choice for arresting and preventing further eclamptic seizures, and what sign indicates impending toxicity?",
+    question_type: "sba",
+    difficulty: "medium",
+    subject: "Obstetrics & Gynaecology",
+    section: "Obstetric Emergencies",
+    programme: "mbchb",
+    explanation: "Magnesium sulphate (MgSO4, Pritchard or Zuspan regimen: 4g IV loading dose + 10g IM, followed by 5g IM every 4 hours) is the global gold standard for seizure control and prophylaxis in severe pre-eclampsia and eclampsia. Magnesium toxicity manifests sequentially: loss of deep patellar tendon reflexes (at 3.5-5.0 mmol/L), followed by respiratory depression (<12/min), and cardiac arrest (>7.0 mmol/L). The antidote is 10% Calcium Gluconate (10 mL IV over 10 min). Ref: WHO / Collaborative Eclampsia Trial.",
+    reference: "WHO Recommendations for Prevention and Treatment of Pre-eclampsia and Eclampsia",
+    options: [
+      { id: "sba-obgyn-mag-002-a", text: "Intravenous Diazepam; toxicity heralded by hypertension", is_correct: false },
+      { id: "sba-obgyn-mag-002-b", text: "Magnesium sulphate (MgSO4); toxicity heralded by loss of deep tendon (patellar) reflexes", is_correct: true },
+      { id: "sba-obgyn-mag-002-c", text: "Intravenous Phenytoin sodium; toxicity heralded by pupillary constriction", is_correct: false },
+      { id: "sba-obgyn-mag-002-d", text: "Sodium Nitroprusside; toxicity heralded by metabolic alkalosis", is_correct: false },
+      { id: "sba-obgyn-mag-002-e", text: "Intravenous Hydralazine; toxicity heralded by hyperreflexia", is_correct: false },
+    ],
+  },
+
 ]
 
 // ─── Course Catalogue ─────────────────────────────────────────────────────────
@@ -1038,52 +1321,53 @@ export function getQuestionsByFilter(params: {
 }): MCQQuestion[] {
   const { courseId, section, questionType, difficulty, programme, count = 20 } = params
 
-  // Get course for section-to-subject mapping
+  const courseSubjectMap: Record<string, string[]> = {
+    "physiology": ["Physiology"],
+    "anatomy": ["Anatomy"],
+    "histology": ["Histology"],
+    "embryology": ["Embryology"],
+    "histopathology": ["Histopathology", "Pathology"],
+    "internal-medicine": ["Internal Medicine", "Medicine"],
+    "surgery": ["Surgery"],
+    "paediatrics": ["Paediatrics", "Pediatrics"],
+    "obstetrics-gynaecology": ["Obstetrics & Gynaecology", "Obstetrics and Gynaecology", "O&G"],
+    "pharmacology": ["Pharmacology"],
+    "community-medicine": ["Community Medicine", "Public Health"],
+    "psychiatry": ["Psychiatry"],
+    "dermatology": ["Dermatology"],
+  }
+
   const course = courseId ? MCQ_COURSES.find(c => c.id === courseId) : null
+  const targetSubjects = courseId ? (courseSubjectMap[courseId] || [courseId]) : []
   const sectionName = section && course
     ? course.sections.find(s => s.id === section)?.name
     : undefined
 
+  // Match subject helper
+  const matchesCourseSubject = (qSubject: string) => {
+    if (targetSubjects.length === 0) return true
+    const cleanQ = qSubject.toLowerCase().trim()
+    return targetSubjects.some(ts => cleanQ.includes(ts.toLowerCase()) || ts.toLowerCase().includes(cleanQ))
+  }
+
+  // 1. Attempt strict match with all filters applied
   let pool = MCQ_QUESTION_BANK.filter(q => {
-    // Filter by programme
     if (programme && programme !== "both" && q.programme !== "both" && q.programme !== programme) {
       return false
     }
 
-    // Filter by course (via subject match)
-    if (courseId && course) {
-      const courseSubjectMap: Record<string, string[]> = {
-        "physiology": ["Physiology"],
-        "anatomy": ["Anatomy"],
-        "histology": ["Histology"],
-        "embryology": ["Embryology"],
-        "histopathology": ["Histopathology"],
-        "internal-medicine": ["Internal Medicine"],
-        "surgery": ["Surgery"],
-        "paediatrics": ["Paediatrics"],
-        "obstetrics-gynaecology": ["Obstetrics & Gynaecology"],
-        "pharmacology": ["Pharmacology"],
-        "community-medicine": ["Community Medicine"],
-        "psychiatry": ["Psychiatry"],
-        "dermatology": ["Dermatology"],
-      }
-      const subjects = courseSubjectMap[courseId] || []
-      if (subjects.length > 0 && !subjects.some(s => q.subject.toLowerCase().includes(s.toLowerCase()))) {
-        return false
-      }
+    if (courseId && !matchesCourseSubject(q.subject)) {
+      return false
     }
 
-    // Filter by section
     if (sectionName && q.section !== sectionName) {
       return false
     }
 
-    // Filter by question type
     if (questionType && q.question_type !== questionType) {
       return false
     }
 
-    // Filter by difficulty
     if (difficulty && difficulty !== "mixed" && q.difficulty !== difficulty) {
       return false
     }
@@ -1091,27 +1375,28 @@ export function getQuestionsByFilter(params: {
     return true
   })
 
-  // Shuffle
+  // 2. If exact sub-filters yielded 0, relax ONLY the section/difficulty/type filters WITHIN THE EXACT SAME SUBJECT!
+  // STRICT SUBJECT QUARANTINE: NEVER EVER pull questions from other subjects!
+  if (pool.length === 0 && courseId) {
+    pool = MCQ_QUESTION_BANK.filter(q => {
+      // Must match subject
+      if (!matchesCourseSubject(q.subject)) return false
+      // Programme match if specified
+      if (programme && programme !== "both" && q.programme !== "both" && q.programme !== programme) {
+        return false
+      }
+      return true
+    })
+  }
+
+  // If no courseId was provided at all (e.g. general mixed mode)
+  if (pool.length === 0 && !courseId) {
+    pool = [...MCQ_QUESTION_BANK]
+  }
+
+  // Shuffle within the isolated subject pool
   pool = [...pool].sort(() => Math.random() - 0.5)
 
-  // If bank is small, repeat questions to fill count
-  if (pool.length === 0) {
-    // Return random subset of full bank as fallback
-    return [...MCQ_QUESTION_BANK]
-      .sort(() => Math.random() - 0.5)
-      .slice(0, count)
-  }
-
-  if (pool.length >= count) {
-    return pool.slice(0, count)
-  }
-
-  // Pad with random questions from full bank to reach count
-  const remaining = count - pool.length
-  const extraPool = MCQ_QUESTION_BANK
-    .filter(q => !pool.includes(q))
-    .sort(() => Math.random() - 0.5)
-    .slice(0, remaining)
-
-  return [...pool, ...extraPool]
+  // Return strictly from this pool up to requested count (NEVER PAD FROM OTHER SUBJECTS)
+  return pool.slice(0, count)
 }
