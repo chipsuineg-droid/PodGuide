@@ -1,3 +1,33 @@
+import { SURGERY_QUESTIONS } from "./questions/surgery"
+import { INTERNAL_MEDICINE_QUESTIONS } from "./questions/internal-medicine"
+import { PAEDIATRICS_QUESTIONS } from "./questions/paediatrics"
+import { OBSTETRICS_GYNAECOLOGY_QUESTIONS } from "./questions/obstetrics-gynaecology"
+import { PHARMACOLOGY_QUESTIONS } from "./questions/pharmacology"
+import { ANATOMY_QUESTIONS } from "./questions/anatomy"
+import { PHYSIOLOGY_QUESTIONS } from "./questions/physiology"
+import { HISTOLOGY_QUESTIONS } from "./questions/histology"
+import { EMBRYOLOGY_QUESTIONS } from "./questions/embryology"
+import { HISTOPATHOLOGY_QUESTIONS } from "./questions/histopathology"
+import { COMMUNITY_MEDICINE_QUESTIONS } from "./questions/community-medicine"
+import { PSYCHIATRY_QUESTIONS } from "./questions/psychiatry"
+import { DERMATOLOGY_QUESTIONS } from "./questions/dermatology"
+
+export {
+  SURGERY_QUESTIONS,
+  INTERNAL_MEDICINE_QUESTIONS,
+  PAEDIATRICS_QUESTIONS,
+  OBSTETRICS_GYNAECOLOGY_QUESTIONS,
+  PHARMACOLOGY_QUESTIONS,
+  ANATOMY_QUESTIONS,
+  PHYSIOLOGY_QUESTIONS,
+  HISTOLOGY_QUESTIONS,
+  EMBRYOLOGY_QUESTIONS,
+  HISTOPATHOLOGY_QUESTIONS,
+  COMMUNITY_MEDICINE_QUESTIONS,
+  PSYCHIATRY_QUESTIONS,
+  DERMATOLOGY_QUESTIONS,
+}
+
 /**
  * lib/data/mcq-bank.ts
  * PodMyth MCQ Question Bank
@@ -46,7 +76,7 @@ export interface MCQCourse {
 
 // ─── Question Bank ────────────────────────────────────────────────────────────
 
-export const MCQ_QUESTION_BANK: MCQQuestion[] = [
+const ORIGINAL_INLINE_MCQ_BANK: MCQQuestion[] = [
 
   // ═══════════════════════════════════
   // PHYSIOLOGY — Cardiovascular
@@ -1930,6 +1960,25 @@ export const MCQ_QUESTION_BANK: MCQQuestion[] = [
 ]
 
 // ─── Course Catalogue ─────────────────────────────────────────────────────────
+
+export const MCQ_QUESTION_BANK: MCQQuestion[] = [
+  ...SURGERY_QUESTIONS,
+  ...INTERNAL_MEDICINE_QUESTIONS,
+  ...PAEDIATRICS_QUESTIONS,
+  ...OBSTETRICS_GYNAECOLOGY_QUESTIONS,
+  ...PHARMACOLOGY_QUESTIONS,
+  ...ANATOMY_QUESTIONS,
+  ...PHYSIOLOGY_QUESTIONS,
+  ...HISTOLOGY_QUESTIONS,
+  ...EMBRYOLOGY_QUESTIONS,
+  ...HISTOPATHOLOGY_QUESTIONS,
+  ...COMMUNITY_MEDICINE_QUESTIONS,
+  ...PSYCHIATRY_QUESTIONS,
+  ...DERMATOLOGY_QUESTIONS,
+  ...ORIGINAL_INLINE_MCQ_BANK,
+]
+
+export const ALL_QUESTIONS: MCQQuestion[] = MCQ_QUESTION_BANK
 
 export const MCQ_COURSES: MCQCourse[] = [
   {
